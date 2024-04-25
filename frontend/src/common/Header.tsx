@@ -1,5 +1,7 @@
+import * as h from '@common/style/HeaderStyle'
+
 const Header = () => {
-  return <div></div>
+  return <h.Container>HEADER</h.Container>
 }
 
 export default Header
