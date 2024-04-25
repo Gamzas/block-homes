@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     #root {
         display: block;
         min-width: 390px;
-        height: 100%;
+        min-height: 100vh;
         font-family: 'Pretendard', sans-serif;
         background-color: white;
     }
