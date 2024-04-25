@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body, html {
+        background-color: #d8d8d8;
         font-family: 'Pretendard', sans-serif;
         font-size: 15px;
         overflow-y: scroll;
@@ -28,9 +29,9 @@ export const GlobalStyle = createGlobalStyle`
 
     #root {
         display: block;
-        width: 100%;
+        min-width: 390px;
         height: 100%;
         font-family: 'Pretendard', sans-serif;
-
+        background-color: white;
     }
 `
