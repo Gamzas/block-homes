@@ -29,6 +29,10 @@ export default defineConfig({
         find: '@fonts',
         replacement: path.resolve(__dirname, 'src/fonts'),
       },
+      {
+        find: '@assets',
+        replacement: path.resolve(__dirname, 'src/assets'),
+      },
     ],
   },
   server: {

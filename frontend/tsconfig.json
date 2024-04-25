@@ -37,6 +37,9 @@
       ],
       "@fonts/*": [
         "src/fonts/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
       ]
     },
     "target": "ES2020",
