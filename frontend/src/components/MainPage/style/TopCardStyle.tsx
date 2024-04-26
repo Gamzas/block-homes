@@ -39,6 +39,39 @@ export const TopCardInfoTextContainer = styled.div`
   }
 `
 
+export const CharacterContainer = styled.div`
+  position: absolute;
+  width: 50%;
+  height: 80%;
+  bottom: -0.5rem;
+  right: -0.5rem;
+
+  .pigCharacter {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: -2rem;
+    z-index: 2;
+  }
+
+  .readingGlasses {
+    position: absolute;
+    width: 6.2rem;
+    bottom: 3rem;
+    right: 1.2rem;
+    z-index: 2;
+    transform: rotate(-5deg);
+  }
+
+  .map {
+    position: absolute;
+    width: 11rem;
+    bottom: -1rem;
+    left: -2.5rem;
+    z-index: 1;
+  }
+`
+
 export const BackgroundWaveContainer = styled.div`
   position: absolute;
   width: 100%;
