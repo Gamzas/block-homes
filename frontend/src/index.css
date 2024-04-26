@@ -57,7 +57,7 @@
 @font-face {
     font-family: "Pretendard";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
     src: url('src/fonts/Pretendard-ExtraBold.woff2') format('woff2');
     font-display: swap;
 }
@@ -65,7 +65,7 @@
 @font-face {
     font-family: "Pretendard";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 900;
     src: url('src/fonts/Pretendard-Black.woff2') format('woff2');
     font-display: swap;
 }
