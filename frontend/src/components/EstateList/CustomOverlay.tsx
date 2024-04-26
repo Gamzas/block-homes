@@ -1,10 +1,21 @@
 import * as c from '@components/EstateList/styles/CustomOverlayStyle'
 
-const CustomOverlay = () => {
+interface PropsType {
+  condition : string
+}
+
+const CustomOverlay = (props : PropsType) => {
+  const {condition} = props
+
+  // switch
   return (
     <div>
       <c.EstateItem>
-        <p>매물</p>
+        <div className="circle">
+          <div className="inner-circle">
+            <span className="estate-sign">보통</span>
+          </div>
+        </div>
       </c.EstateItem>
     </div>
   )

@@ -96,11 +96,12 @@ const EstateListMap = () => {
 
   return (
     <>
-      <e.CurrentLocation>
-        <div className="location-icon"></div>
-        <div className="current-location">{currentPosition}</div>
-      </e.CurrentLocation>
-      <e.EstateMapContainer id="map" />
+      <e.EstateMapContainer id="map">
+        <e.CurrentLocationContainer>
+          <img className="location-icon" src="/icon/icon_gpsLocation.png"></img>
+          <div className="current-location">{currentPosition}</div>
+        </e.CurrentLocationContainer>
+      </e.EstateMapContainer>
     </>
   )
 }
