@@ -1,3 +1,4 @@
+import * as r from '@components/MainPage/style/RealEstateCategoryStyle'
 import { RealEstateCategoryType } from '@/types/realEstate'
 
 const RealEstateCategory = () => {
@@ -28,7 +29,31 @@ const RealEstateCategory = () => {
     },
   ]
 
-  return <div></div>
+  return (
+    <r.RealEstateCategoryContainer>
+      <div className="real-estate-category-info-text">
+        어떤 집을 찾고 계세요?
+      </div>
+      <r.RealEstateCategories>
+        {realEstateCategoryList.map((realEstateCategory, index) => (
+          <r.CategoryContainer key={index}>
+            <div className="category-title">{realEstateCategory.title}</div>
+            <div className="category-transaction-type">
+              {realEstateCategory.transactionType1}
+            </div>
+            <div className="category-transaction-type">
+              {realEstateCategory.transactionType2}
+            </div>
+            <img
+              alt={`${realEstateCategory.title}`}
+              src={`${realEstateCategory.src}`}
+              className="category-img"
+            />
+          </r.CategoryContainer>
+        ))}
+      </r.RealEstateCategories>
+    </r.RealEstateCategoryContainer>
+  )
 }
 
 export default RealEstateCategory
