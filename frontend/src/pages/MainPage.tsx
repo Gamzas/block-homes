@@ -5,11 +5,11 @@ import RealEstateCategory from '@components/MainPage/RealEstateCategory'
 
 const MainPage = () => {
   return (
-    <h.Container>
+    <h.MainPageContainer>
       <TopCard />
       <RealEstateCategory />
       <Footer />
-    </h.Container>
+    </h.MainPageContainer>
   )
 }
 
