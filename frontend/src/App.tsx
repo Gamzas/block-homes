@@ -7,7 +7,7 @@ import SmartContract from './pages/SmartContract'
 
 const HomeRoutes = () => (
   <Routes>
-    <Route path="/" element={<HomePage />} />
+    <Route path="/" element={<MainPage />} />
     <Route path="/smartcontract" element={<SmartContract />} />
   </Routes>
 )
