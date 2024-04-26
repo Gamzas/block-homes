@@ -1,8 +1,8 @@
-import * as h from '@pages/style/HomePageStyle'
+import * as h from '@pages/style/MainPageStyle'
 import Header from '@common/Header'
 import Footer from '@common/Footer'
 
-const HomePage = () => {
+const MainPage = () => {
   return (
     <h.Container>
       <Header />
@@ -11,4 +11,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default MainPage

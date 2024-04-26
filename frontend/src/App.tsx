@@ -1,12 +1,12 @@
 import '@/App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import HomePage from '@pages/HomePage'
+import MainPage from '@pages/MainPage'
 import { GlobalStyle } from '@style/GlobalStyles'
 
 const HomeRoutes = () => (
   <Routes>
-    <Route path="/" element={<HomePage />} />
+    <Route path="/" element={<MainPage />} />
   </Routes>
 )
 
