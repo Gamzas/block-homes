@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const TopCardContainer = styled.div`
   border: 1px black solid;
   width: 100%;
-  height: 25vh;
+  height: 220px;
+  position: relative;
 `
 
 export const TopCardHeader = styled.div`
@@ -35,5 +36,24 @@ export const TopCardInfoTextContainer = styled.div`
     font-size: 9px;
     font-weight: 400;
     text-decoration-line: underline;
+  }
+`
+
+export const BackgroundWaveContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+
+  .big-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .small-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 `
