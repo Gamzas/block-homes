@@ -1,8 +1,10 @@
+// import BoottomSheet from '@/common/BoottomSheet'
 import * as s from './style/SmartContract'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
+import Header from '@/common/Header'
 
-const SmartContract = () => {
+const SmartContractMain = () => {
   const downloadPDF = async () => {
     const element = document.getElementById('paperContainer') as HTMLElement
     // 스크린샷을 캔버스로 생성
@@ -35,11 +37,14 @@ const SmartContract = () => {
   return (
     <div>
       <s.Container>
+        <Header>
+          <button onClick={downloadPDF}>Download as PDF</button>
+        </Header>
         <s.PaperContainer id="paperContainer"></s.PaperContainer>
       </s.Container>
-      <button onClick={downloadPDF}>Download as PDF</button>
+      {/* <BoottomSheet height={25}></BoottomSheet> */}
     </div>
   )
 }
 
-export default SmartContract
+export default SmartContractMain
