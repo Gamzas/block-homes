@@ -10,10 +10,10 @@ const TopCard = () => {
       <t.TopCardInfoTextContainer>
         <div className="mainInfoText">
           로그인하고 <br />
-          안전하고 쉬운 부동산 거래를 <br />
+          안전하고 쉬운 <span className="bold-text">부동산 거래</span>를 <br />
           시작해보세요!
         </div>
-        <div className="infoReport">매물 안전도 리스트란?</div>
+        <div className="infoReport">매물 안전도 레포트란?</div>
       </t.TopCardInfoTextContainer>
       <t.CharacterContainer>
         <img

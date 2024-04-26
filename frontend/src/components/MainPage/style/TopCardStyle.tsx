@@ -26,6 +26,8 @@ export const TopCardHeader = styled.div`
 export const TopCardInfoTextContainer = styled.div`
   width: 100%;
   padding: 0 8%;
+  position: relative;
+  z-index: 10;
 
   .mainInfoText {
     font-size: 1.3rem;
@@ -33,9 +35,13 @@ export const TopCardInfoTextContainer = styled.div`
   }
 
   .infoReport {
-    font-size: 9px;
-    font-weight: 400;
+    font-size: 0.7rem;
     text-decoration-line: underline;
+    margin-top: 1rem;
+  }
+
+  .bold-text {
+    font-weight: 700;
   }
 `
 
