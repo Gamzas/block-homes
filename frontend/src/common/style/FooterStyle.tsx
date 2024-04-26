@@ -7,4 +7,5 @@ export const Container = styled.div`
   position: fixed;
   bottom: 0;
   z-index: 1000;
+  background-color: white;
 `
