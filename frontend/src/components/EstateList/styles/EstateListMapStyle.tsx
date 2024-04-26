@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const EstateMapContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 80vh;
 `
 
@@ -16,5 +16,5 @@ export const CurrentLocation = styled.div`
   }
   .current-location {
     font-weight: 600;
-}
+  }
 `
