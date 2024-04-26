@@ -4,11 +4,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MainPage from '@pages/MainPage'
 import { GlobalStyle } from '@style/GlobalStyles'
 import SmartContract from './pages/SmartContract'
+import RealEstatePage from '@pages/RealEstatePage'
 
 const HomeRoutes = () => (
   <Routes>
     <Route path="/" element={<MainPage />} />
     <Route path="/smart-contract" element={<SmartContract />} />
+    <Route path="/estate" element={<RealEstatePage />} />
+
   </Routes>
 )
 
