@@ -9,25 +9,25 @@ const TopCard = () => {
           className="logo"
           src="public/image/image_main_character.png"
         />
-        <button className="loginBtn">로그인</button>
+        <button className="login-btn">로그인</button>
       </t.TopCardHeader>
       <t.TopCardInfoTextContainer>
-        <div className="mainInfoText">
+        <div className="main-info-text">
           로그인하고 <br />
           안전하고 쉬운 <span className="bold-text">부동산 거래</span>를 <br />
           시작해보세요!
         </div>
-        <div className="infoReport">매물 안전도 레포트란?</div>
+        <div className="info-report">매물 안전도 레포트란?</div>
       </t.TopCardInfoTextContainer>
       <t.CharacterContainer>
         <img
           alt="메인 돼지 캐릭터"
-          className="pigCharacter"
+          className="pig-character"
           src="public/image/image_main_character.png"
         />
         <img
           alt="돋보기 이미지"
-          className="readingGlasses"
+          className="reading-glasses"
           src="public/image/image_reading_glasses.png"
         />
         <img

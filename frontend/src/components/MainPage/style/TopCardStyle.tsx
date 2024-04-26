@@ -18,7 +18,7 @@ export const TopCardHeader = styled.div`
     height: auto;
   }
 
-  .loginBtn {
+  .login-btn {
     height: 2rem;
     font-size: 10px;
   }
@@ -30,12 +30,12 @@ export const TopCardInfoTextContainer = styled.div`
   position: relative;
   z-index: 10;
 
-  .mainInfoText {
+  .main-info-text {
     font-size: 1.3rem;
     line-height: 1.8rem;
   }
 
-  .infoReport {
+  .info-report {
     font-size: 0.7rem;
     text-decoration-line: underline;
     margin-top: 1rem;
@@ -53,7 +53,7 @@ export const CharacterContainer = styled.div`
   bottom: -0.5rem;
   right: -0.5rem;
 
-  .pigCharacter {
+  .pig-character {
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -61,7 +61,7 @@ export const CharacterContainer = styled.div`
     z-index: 2;
   }
 
-  .readingGlasses {
+  .reading-glasses {
     position: absolute;
     width: 6.2rem;
     bottom: 3rem;
