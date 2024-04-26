@@ -21,3 +21,19 @@ export const TopCardHeader = styled.div`
     font-size: 10px;
   }
 `
+
+export const TopCardInfoTextContainer = styled.div`
+  width: 100%;
+  padding: 0 8%;
+
+  .mainInfoText {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+  }
+
+  .infoReport {
+    font-size: 9px;
+    font-weight: 400;
+    text-decoration-line: underline;
+  }
+`
