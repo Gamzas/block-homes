@@ -1,7 +1,8 @@
-import * as h from '@common/style/HeaderStyle'
+import React from 'react'
+import { HeaderPropsType } from '@/types/header'
 
-const Header = () => {
-  return <h.Container>HEADER</h.Container>
+const Header: React.FC<HeaderPropsType> = HeaderProps => {
+  return <div></div>
 }
 
 export default Header
