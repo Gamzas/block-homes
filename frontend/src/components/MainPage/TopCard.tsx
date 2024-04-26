@@ -15,6 +15,24 @@ const TopCard = () => {
         </div>
         <div className="infoReport">매물 안전도 리스트란?</div>
       </t.TopCardInfoTextContainer>
+      <t.CharacterContainer>
+        <img
+          alt="메인 돼지 캐릭터"
+          className="pigCharacter"
+          src="public/image/image_main_character.png"
+        ></img>
+        <img
+          alt="돋보기 이미지"
+          className="readingGlasses"
+          src="public/image/image_reading_glasses.png"
+        ></img>
+        <img
+          alt="지도 이미지"
+          className="map"
+          src="public/image/image_map.png"
+        ></img>
+      </t.CharacterContainer>
+
       <t.BackgroundWaveContainer>
         <svg
           className="big-wave"
