@@ -4,7 +4,11 @@ const TopCard = () => {
   return (
     <t.TopCardContainer>
       <t.TopCardHeader>
-        <image className="logo">로고</image>
+        <img
+          alt="로고"
+          className="logo"
+          src="public/image/image_main_character.png"
+        />
         <button className="loginBtn">로그인</button>
       </t.TopCardHeader>
       <t.TopCardInfoTextContainer>

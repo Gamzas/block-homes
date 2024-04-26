@@ -1,16 +1,17 @@
 import styled from 'styled-components'
 
 export const TopCardContainer = styled.div`
-  border: 1px black solid;
   width: 100%;
   height: 220px;
   position: relative;
+  background-color: #f3f0f7;
 `
 
 export const TopCardHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   .logo {
     width: 20%;
@@ -18,7 +19,7 @@ export const TopCardHeader = styled.div`
   }
 
   .loginBtn {
-    width: 20%;
+    height: 2rem;
     font-size: 10px;
   }
 `
