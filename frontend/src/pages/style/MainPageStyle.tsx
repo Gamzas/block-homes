@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const MainPageContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  padding: 50px 0;
+  padding-bottom: 50px;
 `
