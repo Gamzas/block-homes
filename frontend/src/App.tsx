@@ -8,11 +8,16 @@ import SmartContractStart from './pages/SmartContractStart'
 import SmartContractAgreement from './pages/SmartContractAgreement'
 import SmartContractMain from './pages/SmartContractMain'
 import SmartContractPayment from './pages/SmartContractPayment'
+import RealEstateMapPage from '@pages/RealEstateMapPage'
+import RealEstateListPage from '@pages/RealEstateListPage'
 
 const HomeRoutes = () => (
   <Routes>
     <Route path="/" element={<MainPage />} />
-    <Route path="/estate" element={<RealEstatePage />} />
+    <Route path="/estate" element={<RealEstatePage />}>
+      <Route path="" element={<RealEstateListPage />} />
+      <Route path="map" element={<RealEstateMapPage />} />
+    </Route>
     <Route path="/smart-contract-start" element={<SmartContractStart />} />
     <Route
       path="/smart-contract-agreement"

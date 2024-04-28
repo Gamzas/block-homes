@@ -4,3 +4,8 @@ export interface RealEstateCategoryType {
   transactionType1: string
   transactionType2: string | null
 }
+
+export interface RealEstateStatusType {
+  condition : string
+  color1 : string
+}
