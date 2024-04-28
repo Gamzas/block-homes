@@ -1,7 +1,8 @@
+import Step from '@/components/SmartContract/Step'
 import React from 'react'
 
 const SmartContractPayment = () => {
-  return <div>결제 부분 작성</div>
+  return <Step currentindex={2}></Step>
 }
 
 export default SmartContractPayment

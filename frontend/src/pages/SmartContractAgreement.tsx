@@ -1,7 +1,11 @@
+import Step from '@/components/SmartContract/Step'
 import React from 'react'
 
 const SmartContractAgreement = () => {
-  return <div>거래 동의서 부분</div>
+  return <div>
+    <Step currentindex={0}></Step>
+    
+    </div>
 }
 
 export default SmartContractAgreement
