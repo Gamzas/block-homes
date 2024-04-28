@@ -2,7 +2,7 @@
 import * as s from './style/SmartContract'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
-import Header from '@/common/Header'
+// import Header from '@/common/Header'
 import ContractBoottomSheet from '@/components/SmartContract/ContractBoottomSheet'
 
 const SmartContractMain = () => {
@@ -38,7 +38,7 @@ const SmartContractMain = () => {
   return (
     <div>
       <s.Container>
-        <Header></Header>
+        {/* <Header></Header> */}
         <s.PaperContainer id="paperContainer"></s.PaperContainer>
         <button onClick={downloadPDF}>Download as PDF</button>
       </s.Container>
