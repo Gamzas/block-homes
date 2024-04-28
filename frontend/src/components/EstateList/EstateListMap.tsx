@@ -1,23 +1,82 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import * as e from '@components/EstateList/styles/EstateListMapStyle'
 import { renderToString } from 'react-dom/server'
 import CustomOverlay from '@components/EstateList/CustomOverlay'
+import useCurrentLocation from '@/hooks/useCurrentLocation'
+import CurrentStatus from './CurrentStatus'
 
-const locationList = [
+const EstateList = [
   {
+    condition: 'normal',
+    address: '남동길 30번길 13 3층',
+    infos: ['남향', '교육시설', '역세권'],
+    leaseType: '전세',
+    price: '3억',
+    roomSize: '37',
+    roomCount: '투룸',
+    createDate: '2024년 3월 21일',
     latitude: 35.2057145,
     longitude: 126.8115472,
-    condition: 'normal',
   },
   {
+    condition: 'bad',
+    address: '광주광역시 광산구 오선동',
+    infos: ['남향', '교육시설', '역세권'],
+    leaseType: '매매',
+    price: '3억',
+    roomSize: '37',
+    roomCount: '투룸',
+    createDate: '2024년 3월 21일',
     latitude: 35.205615,
     longitude: 126.812546,
-    condition: 'good',
   },
   {
-    latitude: 35.204615,
+    condition: 'good',
+    address: '광주광역시 광산구 장덕동',
+    infos: ['남향', '교육시설', '역세권'],
+    leaseType: '월세',
+    price: '3억',
+    roomSize: '37',
+    roomCount: '투룸',
+    createDate: '2024년 3월 21일',
+    latitude: 35.204315,
     longitude: 126.812546,
+  },
+  {
+    condition: 'normal',
+    address: '남동길 30번길 13 3층',
+    infos: ['남향', '교육시설', '역세권'],
+    leaseType: '전세',
+    price: '3억',
+    roomSize: '37',
+    roomCount: '투룸',
+    createDate: '2024년 3월 21일',
+    latitude: 35.204615,
+    longitude: 126.813546,
+  },
+  {
     condition: 'bad',
+    address: '광주광역시 광산구 오선동',
+    infos: ['남향', '교육시설', '역세권'],
+    leaseType: '매매',
+    price: '3억',
+    roomSize: '37',
+    roomCount: '투룸',
+    createDate: '2024년 3월 21일',
+    latitude: 35.202615,
+    longitude: 126.814546,
+  },
+  {
+    condition: 'good',
+    address: '광주광역시 광산구 장덕동',
+    infos: ['남향', '교육시설', '역세권'],
+    leaseType: '월세',
+    price: '3억',
+    roomSize: '37',
+    roomCount: '투룸',
+    createDate: '2024년 3월 21일',
+    latitude: 35.204615,
+    longitude: 126.815546,
   },
 ]
 
@@ -29,26 +88,12 @@ declare global {
 const { kakao } = window
 
 const EstateListMap = () => {
-  const [location, setLocation] = useState({
-    latitude: 37.365264512305174,
-    longitude: 127.10676860117488,
-  })
-  const [currentPosition, setCurrentPosition] = useState(null)
-  // 위치권한설정 및 현재위치 설정
+  const { location, currentPosition, getCurrentLocation } = useCurrentLocation()
+
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(successHandler, errorHandler)
+    getCurrentLocation()
   }, [])
 
-  const successHandler = (res: GeolocationPosition) => {
-    // console.log(res)
-    const { latitude, longitude } = res.coords
-    setLocation({ latitude, longitude })
-  }
-  const errorHandler = (err: GeolocationPositionError) => {
-    console.log(err)
-  }
-
-  // 매물 지도
   useEffect(() => {
     // 지도생성
     const container = document.getElementById('map')
@@ -58,20 +103,6 @@ const EstateListMap = () => {
       animate: true,
     }
     const map = new kakao.maps.Map(container, options)
-
-    // 좌표 => 주소 변환
-    const getAddress = (lat, lng) => {
-      const geocoder = new kakao.maps.services.Geocoder()
-      const coord = new kakao.maps.LatLng(lat, lng)
-      const callback = (result, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-          // console.log(result)
-          setCurrentPosition(result[0].address.region_3depth_name)
-        }
-      }
-      geocoder.coord2Address(coord.getLng(), coord.getLat(), callback)
-    }
-    getAddress(location.latitude, location.longitude)
 
     // 지도 줌 컨트롤러
     const zoomControl = new kakao.maps.ZoomControl()
@@ -90,7 +121,7 @@ const EstateListMap = () => {
 
     // 커스텀 오버레이 렌더링
     // 오버레이 위치 리스트에 대해 처리
-    locationList.forEach(({ latitude, longitude, condition }) => {
+    EstateList.forEach(({ latitude, longitude, condition }) => {
       const position = new kakao.maps.LatLng(latitude, longitude)
       const overlayString = renderToString(
         <CustomOverlay condition={condition} />,
@@ -101,20 +132,24 @@ const EstateListMap = () => {
         content: overlayString,
         xAnchor: 0.5,
         yAnchor: 0.91,
+        clickable : true 
       })
 
       customOverlay.setMap(map)
+      kakao.maps.event.addListener(customOverlay, 'click', function () {
+        // 클릭 시 수행할 동작
+        console.log('오버레이 클릭!')
+      })
     })
   }, [location])
 
   return (
     <>
-      <e.EstateMapContainer id="map">
-        <e.CurrentLocationContainer>
-          <img className="location-icon" src="/icon/icon_gpsLocation.png"></img>
-          <div className="current-location">{currentPosition}</div>
-        </e.CurrentLocationContainer>
-      </e.EstateMapContainer>
+      <CurrentStatus
+        getCurrentLocation={getCurrentLocation}
+        currentPosition={currentPosition}
+      />
+      <e.EstateMapContainer id="map"></e.EstateMapContainer>
     </>
   )
 }
