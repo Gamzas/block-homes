@@ -1,8 +1,7 @@
 import { ContractAgreeWrapper } from './style/ContractAgreeStyle'
 
-type Props = {}
 
-const ContractAgree = (props: Props) => {
+const ContractAgree = () => {
   return (
     <ContractAgreeWrapper>
       <div className="card-section">

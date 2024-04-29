@@ -1,3 +1,4 @@
+import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomap'
 import { useEffect, useState } from 'react'
 
 declare global {
@@ -30,10 +31,10 @@ const useCurrentLocation = () => {
 
   useEffect(() => {
     // 좌표 => 주소 변환
-    const getAddress = (lat, lng) => {
+    const getAddress = (lat : number, lng : number) => {
       const geocoder = new kakao.maps.services.Geocoder()
       const coord = new kakao.maps.LatLng(lat, lng)
-      const callback = (result, status) => {
+      const callback = (result : GeocoderResult[], status: KakaoMapsStatus) => {
         if (status === kakao.maps.services.Status.OK) {
           // console.log(result[0].address)
           setCurrentPosition(result[0].address.region_3depth_name)
