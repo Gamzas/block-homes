@@ -1,9 +1,17 @@
+import { Button } from '@/common/style/Button'
+import Step from './Step'
 import { ContractAgreeWrapper } from './style/ContractAgreeStyle'
-
+import { useAtom } from 'jotai'
+import { contractStepAtom } from '@/stores/smartcontract'
 
 const ContractAgree = () => {
+  const [step, setStep] = useAtom(contractStepAtom)
+  const handleNext = () => {
+    setStep(step + 1)
+  }
   return (
     <ContractAgreeWrapper>
+      <Step currentindex={0}></Step>
       <div className="card-section">
         <div style={{ width: '98px', height: '110px', border: '1px solid' }}>
           카드 예정
@@ -25,6 +33,7 @@ const ContractAgree = () => {
           <p>공공마이데이터활용 개인정보 수집이용 등에 관한 동의</p>
         </div>
       </div>
+      <Button onClick={handleNext}>부동산 거래 시작</Button>
     </ContractAgreeWrapper>
   )
 }
