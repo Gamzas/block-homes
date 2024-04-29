@@ -1,4 +1,4 @@
-import { RealEstateStatusType } from '@/types/realEstate'
+import { RealEstateStatusType } from '@/types/realEstateType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
 import { useEffect } from 'react'
 
