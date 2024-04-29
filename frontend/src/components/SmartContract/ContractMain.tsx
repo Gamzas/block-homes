@@ -1,11 +1,9 @@
-// import BoottomSheet from '@/common/BoottomSheet'
-import * as s from '../style/SmartContract'
+import * as c from './style/ContractMainStyle'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
-// import Header from '@/common/Header'
 import ContractBoottomSheet from '@/components/SmartContract/ContractBoottomSheet'
 
-const SmartContractMain = () => {
+const ContractMain = () => {
   const downloadPDF = async () => {
     const element = document.getElementById('paperContainer') as HTMLElement
     // 스크린샷을 캔버스로 생성
@@ -34,17 +32,15 @@ const SmartContractMain = () => {
       console.error('Element not found')
     }
   }
-
   return (
-    <div>
-      <s.Container>
-        {/* <Header></Header> */}
-        <s.PaperContainer id="paperContainer"></s.PaperContainer>
+    <>
+      <c.ContractMainContainer>
+        <c.Contract id="paperContainer"></c.Contract>
         <button onClick={downloadPDF}>Download as PDF</button>
-      </s.Container>
-      <ContractBoottomSheet></ContractBoottomSheet>
-    </div>
+        <ContractBoottomSheet></ContractBoottomSheet>
+      </c.ContractMainContainer>
+    </>
   )
 }
 
-export default SmartContractMain
+export default ContractMain

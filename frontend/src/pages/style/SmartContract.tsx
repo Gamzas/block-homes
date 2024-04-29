@@ -18,22 +18,13 @@ export const PaperContainer = styled.div`
 
 // 컨택트시작
 
-export const ContractStartContainer = styled.div`
+export const ContractContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px 0;
-  .smart-contract-section {
-    margin-top: 21vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border: 1px solid; */
-    height: 70vh;
-    justify-content: space-between;
-  }
 `
 
 // 컨택트동의
