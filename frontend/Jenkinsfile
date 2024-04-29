@@ -1,0 +1,106 @@
+pipeline {
+  agent any
+//     tools {nodejs "Node.js 20.11.0"}
+    environment {
+      AWS_PUBLIC_IP = '3.34.135.180'
+      SSH_CMD = 'ssh -i /root/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no'
+      DOCKER = 'sudo docker'
+      repository = "sejinnnnnn/blockhomes-frontend"  //docker hub id와 repository 이름
+      repo_name = "blockhomes-frontend"
+      DOCKERHUB_CREDENTIALS = credentials('dockerhub-token-s') // jenkins에 등록해 놓은 docker hub credentials 이름
+      dockerImage = ''
+      REPO = "s10-s-project/S10P31C203"
+    }
+    
+  stages {
+
+    //stage('SonarQube') {
+    //
+    //}
+
+    stage('Install') {
+      steps {
+        dir('./frontend') {
+          script {
+            sh 'npm install'
+            sh 'npm run build'
+          }
+        }
+      }
+    }
+
+    stage('Build image') {
+      steps {
+        script {
+          dir('./frontend') {
+            dockerImage = docker.build repository
+          }
+        }
+      }
+    }
+
+    stage('Login'){
+      steps{
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+      }
+    }
+
+    stage('Push image') {
+      steps {
+        script {
+          sh 'docker push $repository' //docker push
+        }
+      }
+    }
+
+    stage('Clean image') {
+      steps {
+        sh 'docker rmi $repository' // jenkins 컨테이너에 있는 docker image 제거
+      }
+    }
+
+    stage('Deployment') {
+      steps {
+        script {
+          try {
+            sh '$SSH_CMD $DOCKER stop $repo_name'
+            sh '$SSH_CMD $DOCKER rm $repo_name'
+          } catch (e) {
+            sh 'echo "fail to stop and remove container"'
+          }
+        }
+        sh '$SSH_CMD $DOCKER pull $repository:latest'
+        sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8090:3000 $repository'
+//         sh '$SSH_CMD $DOCKER compose up'
+      }
+    }
+  }
+
+  post {
+    success {
+      script {
+        def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+        def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+        mattermostSend (color: 'good', 
+        message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
+        endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c', 
+        channel: 'C203_Jenkins'
+        )
+      }
+    }
+
+    failure {
+      script {
+        def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+        def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+        mattermostSend (color: 'danger', 
+        message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
+        endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c', 
+        channel: 'C203_Jenkins'
+        )
+      }
+    }
+  }
+
+}
+
