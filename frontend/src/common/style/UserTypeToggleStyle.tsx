@@ -5,7 +5,6 @@ export const UserTypeToggleContainer = styled.div`
   bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
-
   display: flex;
   justify-content: center;
 
