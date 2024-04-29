@@ -1,6 +1,7 @@
 import React from 'react'
 import * as h from '@common/style/HeaderStyle'
 import { HeaderPropsType } from '@/types/header'
+import SearchBar from '@common/SearchBar'
 
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
   return (
@@ -10,11 +11,13 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
         alt="뒤로가기"
         src="public/icon/icon_back_arrow.png"
       />
+
       {HeaderProps.isSearch ? (
-        <div className="title">{HeaderProps.title}</div>
+        <SearchBar />
       ) : (
-        <h.SearchContainer></h.SearchContainer>
+        <div className="title">{HeaderProps.title}</div>
       )}
+
       {HeaderProps.rightIconSrc && (
         <img
           className="right-icon"
