@@ -1,6 +1,6 @@
 import React from 'react'
 import * as h from '@common/style/HeaderStyle'
-import { HeaderPropsType } from '@/types/headerType'
+import { HeaderPropsType } from '@/types/components/headerType'
 import SearchBar from '@common/SearchBar'
 
 //props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
