@@ -1,5 +1,5 @@
 import * as f from '@common/style/FooterStyle'
-import { FooterComponentType } from '@/types/footer'
+import { FooterComponentType } from '@/types/components/footerType'
 import { useNavigate } from 'react-router-dom'
 
 const Footer = () => {
