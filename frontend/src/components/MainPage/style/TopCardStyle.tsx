@@ -5,6 +5,8 @@ export const TopCardContainer = styled.div`
   height: 220px;
   position: relative;
   background-color: #f3f0f7;
+  overflow-x: hidden;
+  overflow-y: hidden;
 `
 
 export const TopCardHeader = styled.div`
