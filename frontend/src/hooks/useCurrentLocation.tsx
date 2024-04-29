@@ -18,13 +18,7 @@ const useCurrentLocation = () => {
   // 위치 받아오기
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(successHandler, errorHandler)
-    console.log('현재위치로 이동')
   }
-
-  
-  // useEffect(() => {
-  //   getCurrentLocation()
-  // }, [])
 
   const successHandler = (res: GeolocationPosition) => {
     const { latitude, longitude } = res.coords
