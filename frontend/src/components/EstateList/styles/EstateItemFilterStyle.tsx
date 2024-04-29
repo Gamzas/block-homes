@@ -1,5 +1,11 @@
 import styled from 'styled-components'
 
+interface FilterPropsType {
+  $isActive?: boolean
+  $value?: number
+}
+
+// bottom sheet style
 export const FilterContainer = styled.div`
   width: 100%;
   height: 60vh;
@@ -9,6 +15,8 @@ export const FilterContainer = styled.div`
   background: #fff;
   padding: 2rem;
 `
+
+// 거래형태 및 옵션
 export const OptionContainer = styled.div`
   width: 100%;
   height: fit-content;
@@ -54,6 +62,8 @@ export const TransactionContainer = styled.div`
     line-height: 2rem;
   }
 `
+
+// 금액
 export const PriceContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -70,17 +80,19 @@ export const PriceContainer = styled.div`
     line-height: 2.2rem;
   }
 `
+// 상세조건
 
-export const detailContainer = styled.div`
+export const DetailContainer = styled.div`
   display: flex;
   width: 100%;
-  .detail-box {
-    font-size: 0.6rem;
-    padding: 0.5rem;
-    width: fit-content;
-    border-radius: 1rem;
-    border: 1px solid #845bd3;
-    background: #f3f0f7;
-    margin-right: 0.5rem;
-  }
+`
+
+export const DetailOptionBtn = styled.div<FilterPropsType>`
+  font-size: 0.6rem;
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 1rem;
+  border: 1px solid #845bd3;
+  background: ${props => (props.$isActive ? `#FFFFFF` : `#f3f0f7`)};
+  margin-right: 0.5rem;
 `

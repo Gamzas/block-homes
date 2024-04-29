@@ -1,4 +1,5 @@
 import * as f from '@components/EstateList/styles/EstateItemFilterStyle'
+import RangeSlider from './RangeSlider'
 
 const EstateItemFilter = () => {
   return (
@@ -15,16 +16,17 @@ const EstateItemFilter = () => {
         <f.OptionContainer>
           <div className="option-title">금액</div>
           <f.PriceContainer>
-            <input className="price-box"/>
+            <input className="price-box" />
             <div className="price-text">만원</div>
             <span className="price-text">ㅡ</span>
-            <input className="price-box"/>
+            <input className="price-box" />
             <div className="price-text">만원</div>
           </f.PriceContainer>
         </f.OptionContainer>
+        {/* 슬라이더바 */}
         <f.OptionContainer>
           <div className="option-title">면적</div>
-          <input type='range' />
+          <RangeSlider />
         </f.OptionContainer>
         <f.OptionContainer>
           <div className="option-title">옵션</div>
@@ -36,14 +38,14 @@ const EstateItemFilter = () => {
         </f.OptionContainer>
         <f.OptionContainer>
           <div className="option-title">상세조건</div>
-          <f.detailContainer>
-            <div className="detail-box">남향</div>
-            <div className="detail-box">역세권</div>
-            <div className="detail-box">역세권</div>
-            <div className="detail-box">역세권</div>
-            <div className="detail-box">역세권</div>
-            <div className="detail-box">교육시설</div>
-          </f.detailContainer>
+          <f.DetailContainer>
+            <f.DetailOptionBtn $isActive={true}>남향</f.DetailOptionBtn>
+            <f.DetailOptionBtn $isActive={false}>역세권</f.DetailOptionBtn>
+            <f.DetailOptionBtn $isActive={true}>역세권</f.DetailOptionBtn>
+            <f.DetailOptionBtn $isActive={false}>역세권</f.DetailOptionBtn>
+            <f.DetailOptionBtn $isActive={true}>역세권</f.DetailOptionBtn>
+            <f.DetailOptionBtn $isActive={true}>교육시설</f.DetailOptionBtn>
+          </f.DetailContainer>
         </f.OptionContainer>
       </f.FilterContainer>
     </>
