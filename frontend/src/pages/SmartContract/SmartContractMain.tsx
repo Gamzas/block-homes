@@ -1,5 +1,5 @@
 // import BoottomSheet from '@/common/BoottomSheet'
-import * as s from './style/SmartContract'
+import * as s from '../style/SmartContract'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 // import Header from '@/common/Header'
