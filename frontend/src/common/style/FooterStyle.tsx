@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const FooterContainer = styled.div`
   border-top: 1px solid #adadad;
-  width: 390px;
+  max-width: 390px;
   height: 50px;
   position: fixed;
   bottom: 0;

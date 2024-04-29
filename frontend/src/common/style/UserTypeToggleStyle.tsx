@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 
 export const UserTypeToggleContainer = styled.div`
-  bottom: 0.5rem;
-  width: 100%;
-  position: relative;
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: flex;
   justify-content: center;
 

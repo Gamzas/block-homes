@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
   border-bottom: 1px solid #adadad;
-  width: 390px;
+  max-width: 390px;
   height: 50px;
   background-color: white;
   position: fixed;
