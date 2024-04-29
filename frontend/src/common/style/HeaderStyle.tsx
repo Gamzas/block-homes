@@ -9,14 +9,20 @@ export const HeaderContainer = styled.div`
   z-index: 1000;
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.6rem;
+
+  .right-icon {
+    margin: 0.4rem;
+  }
 `
 
 export const HeaderLeftContainer = styled.div`
   display: flex;
+  width: 92%;
 
   .back-arrow {
-    padding-right: 1rem;
+    padding-right: 0.5rem;
+    margin: 0.4rem;
   }
 
   .title {
