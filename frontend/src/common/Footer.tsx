@@ -9,7 +9,7 @@ const Footer = () => {
       routePath: '/',
     },
     {
-      title: '관심 목록',
+      title: '관심 매물',
       iconSrc: 'public/icon/icon_footer_heart.png',
       routePath: '/likes',
     },
