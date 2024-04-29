@@ -7,7 +7,7 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   background: ${props => (props.$secondary ? '#D9D9D9' : '#845BD3')};
-  color: white;
+  color:${props => (props.$secondary ? '#666':'white')};
   width: ${props => (props.$small ? '93px' : '267.84px')};
   height: ${props => (props.$small ? '34px' : '43.52px')};
   flex-shrink: 0;
@@ -26,13 +26,15 @@ export const Button = styled.button<ButtonProps>`
   }
 
   &:disabled {
-    //비활성화 스타일
-  }
+  background: #D9D9D9; 
+  color: #666;         
+  cursor: not-allowed; }
 `
 
 {
   /*
   버튼사용방법
+  <Button disabled>비활성화 버튼</StyledButton>
   <Button>보라색 기본 버튼</StyledButton>
   <Button $small>작은 버튼</Button>
   <Button $secondary>회색 버튼</StyledButton>
