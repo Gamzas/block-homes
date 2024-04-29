@@ -1,7 +1,10 @@
 import * as f from '@common/style/FooterStyle'
 import { FooterComponentType } from '@/types/footer'
+import { useNavigate } from 'react-router-dom'
 
 const Footer = () => {
+  const navigate = useNavigate()
+
   const FooterComponentList: FooterComponentType[] = [
     {
       title: '홈',
@@ -25,7 +28,27 @@ const Footer = () => {
     },
   ]
 
-  return <f.Container>FOOTER</f.Container>
+  const navigateTo = (link: string) => {
+    navigate(link)
+  }
+
+  return (
+    <f.FooterContainer>
+      {FooterComponentList.map((footerComponent, index) => (
+        <f.FooterComponent
+          key={index}
+          onClick={() => navigateTo(footerComponent.routePath)}
+        >
+          <img
+            className="footer-component-icon"
+            alt={`${footerComponent.title}`}
+            src={`${footerComponent.iconSrc}`}
+          />
+          {footerComponent.title}
+        </f.FooterComponent>
+      ))}
+    </f.FooterContainer>
+  )
 }
 
 export default Footer
