@@ -3,12 +3,16 @@ import Footer from '@common/Footer'
 import TopCard from '@components/MainPage/TopCard'
 import RealEstateCategory from '@components/MainPage/RealEstateCategory'
 import UserTypeToggle from '@common/UserTypeToggle'
+import { useAtom } from 'jotai'
+import { userAtom } from '@stores/atoms/userStore'
 
 const MainPage = () => {
+  const [currentUser] = useAtom(userAtom)
   return (
     <h.MainPageContainer>
       <TopCard />
-      <RealEstateCategory />
+      {currentUser.type === 0 && <RealEstateCategory />}
+      {currentUser.type === 1 && <></>}
       <UserTypeToggle />
       <Footer />
     </h.MainPageContainer>
