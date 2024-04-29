@@ -6,7 +6,6 @@ const RangeSlider = () => {
   const [maxValue, setMaxValue] = useState(60)
   const [minPercent, setMinPercent] = useState(0)
   const [maxPercent, setMaxPercent] = useState(0)
-  console.log(minPercent, maxPercent)
   const circles = Array.from({ length: 6 }).map((_, index) => (
     <div key={index} className="range-circle"></div>
   ))
@@ -27,6 +26,11 @@ const RangeSlider = () => {
     setMaxPercent(((60 - value) / 5) * 10)
   }
 
+  // 최댓값, 최솟값 역전 방지
+  const RangeHandler = () => {
+
+  }
+
   return (
     <>
       <r.SliderBar>
@@ -40,14 +44,22 @@ const RangeSlider = () => {
           min={10}
           max={60}
           step={10}
-          onChange={e => areaMinRangeHandler(e)}
+          value={minValue}
+          onChange={e => {
+            areaMinRangeHandler(e)
+            RangeHandler()
+          }}
         />
         <r.RangeInputMax
           type="range"
           min={10}
           max={60}
           step={10}
-          onChange={e => areaMaxRangeHandler(e)}
+          value={maxValue}
+          onChange={e => {
+            areaMaxRangeHandler(e)
+            RangeHandler()
+          }}
         />
       </r.RangeInputContainer>
     </>
