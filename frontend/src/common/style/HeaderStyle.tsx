@@ -7,4 +7,26 @@ export const HeaderContainer = styled.div`
   position: fixed;
   top: 0;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem;
+
+  .right-icon {
+    margin: 0.4rem;
+  }
+`
+
+export const HeaderLeftContainer = styled.div`
+  display: flex;
+  width: 92%;
+
+  .back-arrow {
+    padding-right: 0.5rem;
+    margin: 0.4rem;
+  }
+
+  .title {
+    align-content: center;
+    font-size: 1.2rem;
+  }
 `
