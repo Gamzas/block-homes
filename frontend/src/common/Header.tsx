@@ -6,17 +6,19 @@ import SearchBar from '@common/SearchBar'
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
   return (
     <h.HeaderContainer>
-      <img
-        className="back-arrow"
-        alt="뒤로가기"
-        src="public/icon/icon_back_arrow.png"
-      />
+      <h.HeaderLeftContainer>
+        <img
+          className="back-arrow"
+          alt="뒤로가기"
+          src="public/icon/icon_back_arrow.png"
+        />
 
-      {HeaderProps.isSearch ? (
-        <SearchBar />
-      ) : (
-        <div className="title">{HeaderProps.title}</div>
-      )}
+        {HeaderProps.isSearch ? (
+          <SearchBar />
+        ) : (
+          <div className="title">{HeaderProps.title}</div>
+        )}
+      </h.HeaderLeftContainer>
 
       {HeaderProps.rightIconSrc && (
         <img
