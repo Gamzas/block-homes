@@ -3,6 +3,14 @@ import * as h from '@common/style/HeaderStyle'
 import { HeaderPropsType } from '@/types/header'
 import SearchBar from '@common/SearchBar'
 
+//props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
+// example
+// <Header
+//     title="목록"
+//     isSearch={false}
+//     rightIconSrc="public/icon/icon_map.png"
+// />
+
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
   return (
     <h.HeaderContainer>
