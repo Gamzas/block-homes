@@ -6,11 +6,12 @@ export const ContractStartContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 60vh;
-  border: 1px solid black;
-  .button-box{
+  height: 59.9vh;
+  /* border: 1px solid black; */
+  position: relative;
+  .button-box {
     position: absolute;
-    bottom: 10vh;
+    bottom: 3vh;
     /* margin-bottom: 3vh; */
   }
 `
