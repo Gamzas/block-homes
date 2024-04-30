@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+export const StatusBarContainer = styled.div`
+  position: fixed;
+  width: 100%;
+  max-width: 390px;
+  top: 50px;
+  z-index: 1;
+`
 export const EstateItemListContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -7,5 +14,15 @@ export const EstateItemListContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  /* background-color: #f3f0f7; */
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+`
+
+export const EstateFilterContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  top: 1rem;
+  background: rgba(130, 130, 130, 0.7);
 `

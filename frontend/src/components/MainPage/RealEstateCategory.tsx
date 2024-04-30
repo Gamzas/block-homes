@@ -1,5 +1,5 @@
 import * as r from '@components/MainPage/style/RealEstateCategoryStyle'
-import { RealEstateCategoryType } from '@/types/realEstateType'
+import { RealEstateCategoryType } from '@/types/estateListType'
 
 const RealEstateCategory = () => {
   const realEstateCategoryList: RealEstateCategoryType[] = [

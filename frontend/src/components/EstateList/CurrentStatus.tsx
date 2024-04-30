@@ -1,5 +1,7 @@
-import { RealEstateStatusType } from '@/types/realEstateType'
+import { filterAtom } from '@/stores/atoms/EstateListStore'
+import { RealEstateStatusType } from '@/types/estateListType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
+import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 
 interface PropsType {
@@ -9,6 +11,7 @@ interface PropsType {
 
 const CurrentStatus = (props: PropsType) => {
   const { getCurrentLocation, currentPosition } = props
+  const [filter, setFilter] = useAtom(filterAtom)
   const EstateStatusList: RealEstateStatusType[] = [
     {
       condition: '우수',
@@ -29,6 +32,10 @@ const CurrentStatus = (props: PropsType) => {
   const handleLocationClick = () => {
     getCurrentLocation()
   }
+  // 필터 토글
+  const handlerFilterClick = () => {
+    setFilter(!filter)
+  }
 
   return (
     <c.CurrentStatusContainer>
@@ -47,7 +54,7 @@ const CurrentStatus = (props: PropsType) => {
           </c.EstateStatusButton>
         ))}
       </c.EstateStatusButtonContainer>
-      <c.FilterContainer>
+      <c.FilterContainer onClick={handlerFilterClick}>
         <img className="filter-icon" src="/icon/icon_filter.png" />
         <div className="filter-title">필터</div>
       </c.FilterContainer>
