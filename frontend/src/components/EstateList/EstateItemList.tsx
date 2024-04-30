@@ -5,7 +5,8 @@ import { useEffect } from 'react'
 import EstateItemFilter from './EstateItemFilter'
 import * as l from '@components/EstateList/styles/EstateItemListStyle'
 import { useAtom } from 'jotai'
-import { filterAtom } from '@/stores/atoms/EstateListStore'
+import { filterAtom, mapAtom } from '@/stores/atoms/EstateListStore'
+import EstateListMap from './EstateListMap'
 
 const EstateList = [
   {
@@ -84,7 +85,8 @@ const EstateList = [
 
 const EstateItemList = () => {
   const { currentPosition, getCurrentLocation } = useCurrentLocation()
-  const filter = useAtom(filterAtom)
+  const [filter] = useAtom(filterAtom)
+  const [menu] = useAtom(mapAtom)
   useEffect(() => {
     getCurrentLocation()
   }, [])
@@ -97,10 +99,18 @@ const EstateItemList = () => {
         />
       </l.StatusBarContainer>
       <l.EstateItemListContainer>
-        {EstateList.map((item, index) => (
-          <EstateItemCard key={index} {...item} />
-        ))}
-        {filter[0] && (
+        {menu ? (
+          <>
+            {EstateList.map((item, index) => (
+              <EstateItemCard key={index} {...item} />
+            ))}
+          </>
+        ) : (
+          <l.EstateMapContainer>
+            <EstateListMap />
+          </l.EstateMapContainer>
+        )}
+        {filter && (
           <l.EstateFilterContainer>
             <EstateItemFilter />
           </l.EstateFilterContainer>
