@@ -1,16 +1,20 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ScreenContainer = styled.div`
   position: relative;
-  width: 90%; 
-  height: 80vh; 
+  width: 90%;
+  height: 73vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-`
 
+  .button-box {
+    position: absolute;
+    bottom: 3vh;
+  }
+`
 
 export const Arrow = styled.div`
   position: absolute;
@@ -34,4 +38,4 @@ export const Arrow = styled.div`
       color: #555;
     }
   }
-`;
+`

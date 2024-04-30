@@ -16,7 +16,7 @@ const SmartContract = () => {
       <Header
         title="부동산 시작"
         isSearch={false}
-        rightIconSrc="public/icon/icon_map.png"
+        rightIconSrc={step === 2 ? 'public/icon/icon_download.png' : ''}
       ></Header>
       {step === 0 && <ContractStart />}
       {step === 1 && <ContractAgree />}
