@@ -1,6 +1,6 @@
 pipeline {
-  agent any
-//     tools {nodejs "Node.js 20.11.0"}
+    agent any // 어떤 노드에서도 실행 가능
+
     environment {
       AWS_PUBLIC_IP = '3.34.135.180'
       SSH_CMD = 'ssh -i /root/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no'
@@ -10,97 +10,108 @@ pipeline {
       DOCKERHUB_CREDENTIALS = credentials('dockerhub-token-s') // jenkins에 등록해 놓은 docker hub credentials 이름
       dockerImage = ''
       REPO = "s10-final/S10P31C203"
+        AWS_PUBLIC_IP = '3.34.135.180'
+        SSH_CMD = 'ssh -i /root/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no' // SSH 명령어 설정
+        DOCKER = 'sudo DOCKER_BUILDKIT=1 docker' // Docker BuildKit을 활성화하여 docker 명령어 설정
+        repository = "sejinnnnnn/blockhomes-frontend" // Docker Hub ID와 Repository 이름
+        repo_name = "blockhomes-frontend"
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-token-s') // Jenkins에 등록된 Docker Hub 인증 정보
+        dockerImage = '' // 빌드된 도커 이미지를 저장할 변수
+        REPO = "s10-s-project/S10P31C203"
     }
     
-  stages {
+    stages {
 
-    //stage('SonarQube') {
-    //
-    //}
+        //stage('SonarQube') {
+        //
+        //}
 
-    stage('Install') {
-      steps {
-        dir('./frontend') {
-          script {
-            sh 'npm install'
-            sh 'npm run build'
-          }
+        stage('Install') {
+            steps {
+                dir('./frontend') {
+                    script {
+                        sh 'npm install' // npm 패키지 설치
+                        sh 'npm run build' // 프론트엔드 빌드 실행
+                    }
+                }
+            }
         }
-      }
-    }
 
-    stage('Build image') {
-      steps {
-        script {
-          dir('./frontend') {
-            dockerImage = docker.build repository
-          }
+        stage('Build image') {
+            steps {
+                script {
+                    dir('./frontend') {
+                        dockerImage = docker.build repository // 도커 이미지 빌드
+                    }
+                }
+            }
         }
-      }
-    }
 
-    stage('Login'){
-      steps{
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
-      }
-    }
-
-    stage('Push image') {
-      steps {
-        script {
-          sh 'docker push $repository' //docker push
+        stage('Login') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin' // Docker Hub에 로그인
+                    }
+                }
+            }
         }
-      }
-    }
 
-    stage('Clean image') {
-      steps {
-        sh 'docker rmi $repository' // jenkins 컨테이너에 있는 docker image 제거
-      }
-    }
-
-    stage('Deployment') {
-      steps {
-        script {
-          try {
-            sh '$SSH_CMD $DOCKER stop $repo_name'
-            sh '$SSH_CMD $DOCKER rm $repo_name'
-          } catch (e) {
-            sh 'echo "fail to stop and remove container"'
-          }
+        stage('Push image') {
+            steps {
+                script {
+                    sh 'docker push $repository' // 빌드된 도커 이미지를 Docker Hub에 푸시
+                }
+            }
         }
-        sh '$SSH_CMD $DOCKER pull $repository:latest'
-        sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8090:3000 $repository'
-//         sh '$SSH_CMD $DOCKER compose up'
-      }
-    }
-  }
 
-  post {
-    success {
-      script {
-        def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
-        def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
-        mattermostSend (color: 'good', 
-        message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
-        endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c', 
-        channel: 'C203_Jenkins'
-        )
-      }
+        stage('Clean image') {
+            steps {
+                sh 'docker rmi $repository' // Jenkins 컨테이너에서 도커 이미지 제거
+            }
+        }
+
+
+        stage('Deployment') {
+            steps {
+                script {
+                    try {
+                        sh '$SSH_CMD $DOCKER stop $repo_name' // 기존에 실행 중인 컨테이너 정지
+                        sh '$SSH_CMD $DOCKER rm $repo_name' // 컨테이너 제거
+                        sh '$SSH_CMD $DOCKER pull $repository:latest' // 최신 도커 이미지 다운로드
+                        sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8090:3000 $repository:latest' // 새 컨테이너 실행
+                    } catch (e) {
+                        echo "Deployment failed with error: ${e.getMessage()}" // 배포 실패 시 에러 메시지 출력
+                    }
+                }
+            }
+        }
     }
 
-    failure {
-      script {
-        def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
-        def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
-        mattermostSend (color: 'danger', 
-        message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
-        endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c', 
-        channel: 'C203_Jenkins'
-        )
-      }
-    }
-  }
+    post {
+        success {
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim() // Git 커밋 작성자 ID 추출
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim() // Git 커밋 작성자 이메일 추출
+                mattermostSend (color: 'good',
+                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)",
+                endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c',
+                channel: 'C203_Jenkins'
+                ) // 빌드 성공 시 Mattermost에 메시지 전송
+            }
+        }
 
+        failure {
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim() // Git 커밋 작성자 ID 추출
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim() // Git 커밋 작성자 이메일 추출
+                mattermostSend (color: 'danger',
+                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)",
+                endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c',
+                channel: 'C203_Jenkins'
+                ) // 빌드 실패 시 Mattermost에 메시지 전송
+            }
+        }
+    }
 }
 

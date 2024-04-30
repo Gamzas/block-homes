@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const RealEstatePage = () => {
   return (
     <r.Container>
-      <Header title={'매물 조회하기'} isSearch={true} rightIconSrc={"public/icon/icon_map.png"}/>
+      <Header title={'매물 조회하기'} isSearch={true} rightIconSrc={"/icon/icon_map.png"}/>
       <Outlet />
       <Footer />
     </r.Container>

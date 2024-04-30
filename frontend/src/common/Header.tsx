@@ -2,6 +2,7 @@ import React from 'react'
 import * as h from '@common/style/HeaderStyle'
 import { HeaderPropsType } from '@/types/components/headerType'
 import SearchBar from '@common/SearchBar'
+import useDownloadPDF from '@/hooks/useDownloadPdf'
 
 //props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
 // example
@@ -12,6 +13,7 @@ import SearchBar from '@common/SearchBar'
 // />
 
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
+  const downloadPdf = useDownloadPDF()
   return (
     <h.HeaderContainer>
       <h.HeaderLeftContainer>
@@ -33,6 +35,11 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
           className="right-icon"
           alt="오른쪽 아이콘"
           src={`${HeaderProps.rightIconSrc}`}
+          onClick={() => {
+            if (HeaderProps.rightIconSrc === 'public/icon/icon_download.png') {
+              downloadPdf('paperContainer', 'contract.pdf')
+            }
+          }}
         />
       )}
     </h.HeaderContainer>

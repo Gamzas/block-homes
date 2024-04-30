@@ -1,4 +1,4 @@
-import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomap'
+import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
 import { useEffect, useState } from 'react'
 
 declare global {

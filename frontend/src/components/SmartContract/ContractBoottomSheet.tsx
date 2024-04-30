@@ -1,21 +1,24 @@
 import { useState } from 'react'
 import { ContractBottomContainer } from './style/BoottomSheetStyle'
 import { Button } from '@/common/style/Button'
-import { useNavigate } from 'react-router-dom'
+import { useAtom } from 'jotai'
+import { contractStepAtom } from '@/stores/smartcontract'
 
 const ContractBoottomSheet = () => {
-  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const toggleSheet = () => {
     setIsOpen(!isOpen)
   }
-  const handleUnderstand = () => {
-    navigate('/smart-contract-payment')
+
+  const [step, setStep] = useAtom(contractStepAtom)
+
+  const handleNext = () => {
+    setStep(step + 1)
   }
 
   return (
     <div>
-      <ContractBottomContainer $height={isOpen ? 42 : 23}>
+      <ContractBottomContainer $height={isOpen ? 52 : 28}>
         {isOpen ? (
           <>
             <div className="understand-text">내용을 충분히 이해하셨나요?</div>
@@ -31,7 +34,7 @@ const ContractBoottomSheet = () => {
             >
               닫기
             </Button>
-            <Button onClick={handleUnderstand}>네, 충분히 이해했어요</Button>
+            <Button onClick={handleNext}>네, 충분히 이해했어요</Button>
           </>
         ) : (
           <>

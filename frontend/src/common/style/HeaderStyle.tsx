@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.div`
   border-bottom: 1px solid #adadad;
-  width: 390px;
+  width: 100%;
+  max-width: 390px;
   height: 50px;
   background-color: white;
   position: fixed;
@@ -19,7 +20,7 @@ export const HeaderContainer = styled.div`
 
 export const HeaderLeftContainer = styled.div`
   display: flex;
-  width: 92%;
+  width: 100%;
 
   .back-arrow {
     padding-right: 0.5rem;

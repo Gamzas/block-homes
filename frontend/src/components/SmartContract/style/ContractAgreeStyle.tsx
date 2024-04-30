@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 
 export const ContractAgreeWrapper = styled.div`
+  width: 100%;
+  height: 86vh;
+  border: 1px solid black;
   padding: 0 35px;
-  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   .card-section {
     margin: 20px 0;
   }
@@ -11,6 +17,7 @@ export const ContractAgreeWrapper = styled.div`
       font-size: 20px;
       font-weight: 600;
       margin-bottom: 10px;
+      color: black;
     }
     .agreetext-section2 {
       font-weight: 600;
@@ -25,5 +32,9 @@ export const ContractAgreeWrapper = styled.div`
         margin-bottom: 10px;
       }
     }
+  }
+  .button-box {
+    position: absolute;
+    bottom: 3vh;
   }
 `
