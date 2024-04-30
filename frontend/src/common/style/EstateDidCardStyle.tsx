@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const EstateDidCardContainer = styled.div`
-  width: 13rem;
+  width: 12.5rem;
   height: 17rem;
   border-radius: 1.5rem;
   overflow: hidden;
@@ -66,13 +66,13 @@ export const InfoElement = styled.div`
   margin-left: 1rem;
 
   .element-title {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     font-weight: 500;
     margin-bottom: 0.3rem;
   }
 
   .element-content {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 600;
   }
 `
