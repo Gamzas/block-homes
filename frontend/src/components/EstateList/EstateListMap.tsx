@@ -3,7 +3,6 @@ import * as e from '@components/EstateList/styles/EstateListMapStyle'
 import { renderToString } from 'react-dom/server'
 import CustomOverlay from '@components/EstateList/CustomOverlay'
 import useCurrentLocation from '@/hooks/useCurrentLocation'
-import CurrentStatus from './CurrentStatus'
 
 const EstateList = [
   {
@@ -88,7 +87,7 @@ declare global {
 const { kakao } = window
 
 const EstateListMap = () => {
-  const { location, currentPosition, getCurrentLocation } = useCurrentLocation()
+  const { location, getCurrentLocation } = useCurrentLocation()
 
   useEffect(() => {
     getCurrentLocation()
@@ -132,7 +131,7 @@ const EstateListMap = () => {
         content: overlayString,
         xAnchor: 0.5,
         yAnchor: 0.91,
-        clickable : true 
+        clickable: true,
       })
 
       customOverlay.setMap(map)
@@ -145,10 +144,6 @@ const EstateListMap = () => {
 
   return (
     <>
-      <CurrentStatus
-        getCurrentLocation={getCurrentLocation}
-        currentPosition={currentPosition}
-      />
       <e.EstateMapContainer id="map"></e.EstateMapContainer>
     </>
   )
