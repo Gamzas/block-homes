@@ -6,9 +6,9 @@ export const ContractAgreeWrapper = styled.div`
   border: 1px solid black;
   padding: 0 35px;
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
+  position: relative;
   .card-section {
     margin: 20px 0;
   }
@@ -33,8 +33,8 @@ export const ContractAgreeWrapper = styled.div`
       }
     }
   }
-  .button-box{
+  .button-box {
     position: absolute;
-    bottom: 10vh;
+    bottom: 3vh;
   }
 `
