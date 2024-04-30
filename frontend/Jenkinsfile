@@ -7,7 +7,7 @@ pipeline {
         DOCKER = 'sudo DOCKER_BUILDKIT=1 docker' // Docker BuildKit을 활성화하여 docker 명령어 설정
         repository = "sejinnnnnn/blockhomes-frontend" // Docker Hub ID와 Repository 이름
         repo_name = "blockhomes-frontend"
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-token-s') // Jenkins에 등록된 Docker Hub 인증 정보
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-token') // Jenkins에 등록된 Docker Hub 인증 정보
         dockerImage = '' // 빌드된 도커 이미지를 저장할 변수
         REPO = "s10-final/S10P31C203"
     }
