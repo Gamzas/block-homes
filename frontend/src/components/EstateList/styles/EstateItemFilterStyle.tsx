@@ -5,15 +5,28 @@ interface FilterPropsType {
   $value?: number
 }
 
+export const FilterWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+`
+
 // bottom sheet style
 export const FilterContainer = styled.div`
   width: 100%;
-  height: 60%;
-  flex-shrink: 0;
+  height: fit-content;
+  position: fixed;
+  max-width: 390px;
+  bottom: 50px;
+  z-index: 1;
   border-radius: 30px 30px 0px 0px;
   border-top: 1px solid #cecccc;
   background: #fff;
   padding: 2rem;
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+
 `
 
 // 거래형태 및 옵션
