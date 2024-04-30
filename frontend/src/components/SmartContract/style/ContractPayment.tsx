@@ -6,36 +6,47 @@ export const ScreenContainer = styled.div`
   height: 73vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  border: 1px solid black;
 
   .button-box {
     position: absolute;
     bottom: 3vh;
   }
+  .contract-text {
+    width: 90%;
+    font-size: 23px;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .card-text {
+    color: #606060;
+    font-size: 10px;
+    font-weight: 300;
+    text-align: right;
+  }
 `
 
-export const Arrow = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px; // 오른쪽 끝에서 10px 떨어진 곳에 위치
-  width: 30px; // 화살표 너비 설정
-  height: 30px; // 화살표 높이 설정
-  cursor: pointer;
+export const GridContainer = styled.div`
+  gap: 8px;
+  width: 90%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid;
+  border-bottom: 3px solid;
+`
+export const Cell = styled.div`
+  padding: 20px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-bottom: 2px solid #ddd;
+`
 
-  // 화살표 모양을 CSS로 구현
-  &:before {
-    content: '→';
-    font-size: 30px; // 화살표 크기 설정
-    color: #000; // 화살표 색상 설정
-  }
+export const Label = styled.span`
+  font-weight: bold;
+`
 
-  &:hover {
-    // 마우스 호버 시 화살표 색상 변경
-    &:before {
-      color: #555;
-    }
-  }
+export const Value = styled.span`
+  text-align: center;
 `
