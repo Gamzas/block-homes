@@ -5,43 +5,50 @@ interface colorType {
 }
 
 export const ItemCardContainer = styled.div<colorType>`
-  width: 356px;
-  height: 140px;
+  width: 90%;
+  height: 10rem;
   flex-shrink: 0;
   border-radius: 18.5px;
   background: ${props => props.$color};
   position: relative;
-  margin: 1rem;
+  margin-top: 1rem;
   z-index: 0;
 `
+
 export const BackgroundContainer = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  overflow: hidden;
+
+  .back-wrapper {
+    width: 100%;
+    height: 10rem;
+  }
   .big-wave {
     position: absolute;
     bottom: 0;
     left: 0;
-    border-radius: 18.5px;
+    border-radius: 1.5rem;
   }
 
   .small-wave {
     position: absolute;
     bottom: 0;
     left: 0;
-    border-radius: 18.5px;
+    border-radius: 1.5rem;
   }
 `
 export const ItemStatusContainer = styled.div`
   position: absolute;
   right: 0.2rem;
   top: -0.4rem;
-
   .polygon {
+    /* position: absolute; */
     width: 100%;
     height: auto;
+    /* z-index: 999; */
   }
   .status-title {
     display: flex;
@@ -65,9 +72,9 @@ export const LocationContainer = styled.div<colorType>`
   justify-content: left;
   align-items: center;
   flex-shrink: 0;
-  position: absolute;
   top: 1rem;
   left: 1rem;
+  position: absolute;
   .location-icon {
     margin-right: 0.2rem;
     width: 1rem;
@@ -81,8 +88,8 @@ export const LocationContainer = styled.div<colorType>`
   }
 `
 export const ItemImage = styled.img`
-  width: 90px;
-  height: 90px;
+  width: 7rem;
+  height: 7rem;
   flex-shrink: 0;
   border-radius: 10px;
   position: absolute;
@@ -103,8 +110,8 @@ export const ItemInfoContainer = styled.div<colorType>`
     width: fit-content;
     text-align: center;
     height: 75%;
-    border: 0.06rem solid;  
-    color : ${props => props.$color};
+    border: 0.06rem solid;
+    color: ${props => props.$color};
     border-radius: 0.8rem;
     font-size: 0.7rem;
     font-weight: 400;

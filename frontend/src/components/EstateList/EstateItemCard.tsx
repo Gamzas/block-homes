@@ -92,6 +92,7 @@ const EstateItemCard = (props: PropsType) => {
           <div className="info-text">등록일자 {createDate}</div>
         </c.ItemPriceInfoContainer>
         <c.BackgroundContainer>
+          <div className='back-wrapper'>
           <svg
             className="big-wave"
             xmlns="http://www.w3.org/2000/svg"
@@ -118,6 +119,7 @@ const EstateItemCard = (props: PropsType) => {
               fill={secondColor}
             />
           </svg>
+          </div>
         </c.BackgroundContainer>
       </c.ItemCardContainer>
     </>

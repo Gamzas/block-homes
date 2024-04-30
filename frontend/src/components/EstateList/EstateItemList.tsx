@@ -3,7 +3,7 @@ import CurrentStatus from './CurrentStatus'
 import EstateItemCard from './EstateItemCard'
 import { useEffect } from 'react'
 import EstateItemFilter from './EstateItemFilter'
-
+import * as l from '@components/EstateList/styles/EstateItemListStyle'
 const EstateList = [
   {
     condition: 'normal',
@@ -85,16 +85,18 @@ const EstateItemList = () => {
     getCurrentLocation()
   }, [])
   return (
-    <div>
+    <>
       <CurrentStatus
         getCurrentLocation={getCurrentLocation}
         currentPosition={currentPosition}
       />
-      {EstateList.map((item, index) => (
-        <EstateItemCard key={index} {...item} />
-      ))}
-      <EstateItemFilter />
-    </div>
+      <l.EstateItemListContainer>
+        {EstateList.map((item, index) => (
+          <EstateItemCard key={index} {...item} />
+        ))}
+      </l.EstateItemListContainer>
+        <EstateItemFilter />
+    </>
   )
 }
 
