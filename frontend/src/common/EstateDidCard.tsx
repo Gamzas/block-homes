@@ -1,4 +1,4 @@
-import * as e from '@common/style/EstateDidCardStyle.tsx'
+import * as e from '@common/style/EstateDidCardStyle'
 
 const EstateDidCard = () => {
   return (
@@ -7,12 +7,12 @@ const EstateDidCard = () => {
         <img
           alt="국가교통부"
           className="ministry-of-land-logo"
-          src="public/image/image_ministry_of_land_logo.png"
+          src="/image/image_ministry_of_land_logo.png"
         />
         <img
           alt="건물 3d asset"
           className="building-type-image"
-          src="public/image/image_did_card_villa_or_towroom.png"
+          src="/image/image_did_card_villa_or_towroom.png"
         />
         <e.BackgroundWaveContainer>
           <svg
