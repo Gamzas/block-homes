@@ -26,3 +26,9 @@ export const EstateFilterContainer = styled.div`
   top: 1rem;
   background: rgba(130, 130, 130, 0.7);
 `
+
+export const EstateMapContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: relative;
+`
