@@ -5,7 +5,6 @@ import MainPage from '@pages/MainPage'
 import { GlobalStyle } from '@style/GlobalStyles'
 import RealEstatePage from '@pages/RealEstatePage'
 import SmartContract from './pages/SmartContract/SmartContract'
-import RealEstateMapPage from '@pages/RealEstateMapPage'
 import RealEstateListPage from '@pages/RealEstateListPage'
 import KlipSignInPage from '@pages/KlipSignInPage.tsx'
 
@@ -16,7 +15,6 @@ const HomeRoutes = () => (
     <Route path="/" element={<MainPage />} />
     <Route path="/estate" element={<RealEstatePage />}>
       <Route path="" element={<RealEstateListPage />} />
-      <Route path="map" element={<RealEstateMapPage />} />
     </Route>
     <Route path="/smart-contract" element={<SmartContract />} />
   </Routes>
