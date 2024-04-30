@@ -8,7 +8,7 @@ interface FilterPropsType {
 // bottom sheet style
 export const FilterContainer = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 60%;
   flex-shrink: 0;
   border-radius: 30px 30px 0px 0px;
   border-top: 1px solid #cecccc;
@@ -35,21 +35,21 @@ export const TransactionContainer = styled.div`
   border: 1px solid #d2c5f1;
   color: #845bd3;
   border-radius: 0.8rem;
-  width: fit-content;
+  width: 100%;
   height: 2rem;
   font-size: 0.8rem;
   .option-box {
     background-color: #e8e0f7;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
-    width: 7rem;
-    height: 100%;
+    width: 100%;
+    height: 2rem;
     line-height: 2rem;
   }
   .option-box2 {
     border-right: 1.5px solid #845bd3;
     border-left: 0.1rem solid #845bd3;
-    width: 7rem;
+    width: 100%;
     height: 1.5rem;
     line-height: 1.5rem;
   }
@@ -57,8 +57,8 @@ export const TransactionContainer = styled.div`
     border-top-right-radius: 0.8rem;
     border-bottom-right-radius: 0.8rem;
     background-color: #e8e0f7;
-    width: 7rem;
-    height: 100%;
+    width: 100%;
+    height: 2rem;
     line-height: 2rem;
   }
 `
