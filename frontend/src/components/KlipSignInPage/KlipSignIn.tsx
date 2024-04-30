@@ -1,7 +1,6 @@
 import QRCodeCanvas from 'qrcode.react'
 import { SetStateAction, useEffect, useState } from 'react'
 import axios from 'axios'
-// @ts-expect-error: 타입 선언 파일이 없어서 오류가 예상됩니다.
 import { prepare } from 'klip-sdk'
 import * as k from '@components/KlipSignInPage/style/KlipSignInStyle'
 
