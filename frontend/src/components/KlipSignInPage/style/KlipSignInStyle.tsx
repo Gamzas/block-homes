@@ -3,47 +3,47 @@ import styled from 'styled-components'
 export const KlipSignInContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20% 0;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-`
-
-export const KlipSignInTitle = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
 
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  position: relative;
 `
+
 export const KlipSignInWrapper = styled.div`
   width: 100%;
   height: 50%;
 `
 
-export const KlipSignInQRCode = styled.div`
+export const KlipSignInAccount = styled.div`
   width: 100%;
-  height: fit-content;
-  margin-top: 10%;
-
   display: flex;
   justify-content: center;
-  align-content: center;
-`
-export const KlipSignInInput = styled.input`
-  width: 80%;
-  height: 56px;
-  border-radius: 10px;
-  border: 1px solid #c3c3c3;
-  padding: 10px;
+  align-items: center;
+  flex-direction: column;
+
+  .qr-code {
+    width: 100%;
+    height: fit-content;
+  }
+
+  .account-input {
+    width: 60%;
+    height: 56px;
+    border-radius: 10px;
+    border: 1px solid #c3c3c3;
+    padding: 10px;
+    margin-top: 5%;
+  }
 `
 export const KlipSignInButton = styled.div`
+  position: absolute;
+  bottom: 5%;
   background-color: #216fea;
   height: 56px;
-  width: 80%;
+  width: 60%;
   border-radius: 10px;
   display: flex;
   justify-content: center;
