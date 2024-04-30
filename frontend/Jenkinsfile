@@ -9,7 +9,7 @@ pipeline {
       repo_name = "blockhomes-frontend"
       DOCKERHUB_CREDENTIALS = credentials('dockerhub-token-s') // jenkins에 등록해 놓은 docker hub credentials 이름
       dockerImage = ''
-      REPO = "s10-s-project/S10P31C203"
+      REPO = "s10-final/S10P31C203"
     }
     
   stages {
