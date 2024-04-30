@@ -22,7 +22,6 @@ const SmartContract = () => {
       {step === 1 && <ContractAgree />}
       {step === 2 && <ContractMain />}
       {step === 3 && <ConstractPayment />}
-      <Footer></Footer>
     </s.ContractContainer>
   )
 }
