@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ContractBottomContainer } from './style/BoottomSheetStyle'
 import { Button } from '@/common/style/Button'
 import { useAtom } from 'jotai'
@@ -6,6 +6,12 @@ import { contractStepAtom } from '@/stores/smartcontract'
 
 const ContractBoottomSheet = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setIsVisible(true), 100)
+  })
+
   const toggleSheet = () => {
     setIsOpen(!isOpen)
   }
@@ -18,7 +24,10 @@ const ContractBoottomSheet = () => {
 
   return (
     <div>
-      <ContractBottomContainer $height={isOpen ? 52 : 28}>
+      <ContractBottomContainer
+        $height={isOpen ? 52 : 28}
+        $isVisible={isVisible}
+      >
         {isOpen ? (
           <>
             <div className="understand-text">내용을 충분히 이해하셨나요?</div>
