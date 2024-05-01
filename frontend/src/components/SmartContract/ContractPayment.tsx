@@ -3,10 +3,20 @@ import Step from './Step'
 import * as c from './style/ContractPayment'
 import { Button } from '@/common/style/Button'
 import { useSwipeable } from 'react-swipeable'
+import { contractStepAtom } from '@/stores/smartcontract'
+import { useAtom } from 'jotai'
+import ScreenIndicators from './ScreenIndicator'
 
-const ConstractPayment = () => {
+
+
+const ContractPayment = () => {
+  const [step,setStep] = useAtom(contractStepAtom)
   const [screenIndex, setScreenIndex] = useState(0)
   const totalScreens = 2
+
+  const handleNext = () =>{
+    setStep(step + 1)
+  }
   const nextScreen = () => {
     if (screenIndex < totalScreens - 1) {
       setScreenIndex(screenIndex + 1)
@@ -33,14 +43,11 @@ const ConstractPayment = () => {
     <>
       <Step currentindex={2}></Step>
       <c.ScreenContainer {...swipeHandlers}>
-        {/* {screenIndex > 0 && (
-          <c.Arrow style={{ left: '10px' }} onClick={prevScreen}>
-            &larr;
-          </c.Arrow>
-        )} */}
+    
         <div className="contract-text">
           계약 내용을<br></br>확인해주세요
         </div>
+        <ScreenIndicators totalScreens={totalScreens} currentIndex={screenIndex}></ScreenIndicators>
 
         {screenIndex === 0 && (
           <div>
@@ -81,15 +88,12 @@ const ConstractPayment = () => {
         )}
 
         <div className="button-box">
-          <Button disabled={screenIndex === 0}>결제</Button>
+          <Button disabled={screenIndex === 0} onClick={handleNext}>결제</Button>
         </div>
-        {/* 
-        {screenIndex < totalScreens - 1 && (
-          <c.Arrow onClick={nextScreen}></c.Arrow>
-        )} */}
+     
       </c.ScreenContainer>
     </>
   )
 }
 
-export default ConstractPayment
+export default ContractPayment
