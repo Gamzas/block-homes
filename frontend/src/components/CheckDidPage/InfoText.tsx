@@ -1,11 +1,5 @@
 import * as i from '@components/CheckDidPage/style/InfoTextStyle'
-
-interface InfoTextPropsType {
-  largeText1: string
-  highlightText: string
-  largeText2: string
-  smallText: string
-}
+import { InfoTextPropsType } from '@/types/components/CheckDidInputTextType'
 
 const InfoText = (InfoTextProps: InfoTextPropsType) => {
   const { largeText1, highlightText, largeText2, smallText } = InfoTextProps
