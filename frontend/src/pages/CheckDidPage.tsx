@@ -1,5 +1,7 @@
+import Lottie from 'react-lottie'
 import * as c from '@pages/style/CheckDidPageStyle'
 import InfoText from '@components/CheckDidPage/InfoText'
+import CheckDidCardLoading from '@assets/lotties/CheckDidCardLoading.json'
 
 const CheckDidPage = () => {
 
@@ -10,9 +12,19 @@ const CheckDidPage = () => {
     smallText: '조금만 더 기달려 주세요!',
   }
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: CheckDidCardLoading,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+
   return (
     <c.CheckDidPageContainer>
       <InfoText {...textProps} />
+      <Lottie options={defaultOptions} height={350} width={350} />
     </c.CheckDidPageContainer>
   )
 }
