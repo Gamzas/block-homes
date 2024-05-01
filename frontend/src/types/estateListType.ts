@@ -6,6 +6,14 @@ export interface RealEstateCategoryType {
 }
 
 export interface RealEstateStatusType {
-  condition : string
-  color1 : string
+  condition: string
+  color1: string
+}
+
+export interface CurrentPosition {
+  currentPosition: string
+  location: {
+    latitude: number
+    longitude: number
+  }
 }
