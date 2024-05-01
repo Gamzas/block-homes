@@ -24,6 +24,20 @@ export const StepContainer = styled.div`
     background: #d9d9d9;
     margin: 0 8px;
   }
+  @keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1); 
+    opacity: 0.7;
+  }
+}
+
+  .pulse-animation {
+    animation: pulse 1.5s infinite; 
+  }
 `
 
 export const StepCard = styled.div`
