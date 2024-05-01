@@ -4,7 +4,7 @@ import * as color from '@constants/colors'
 export const InfoTextContainer = styled.div`
   width: 100%;
   height: 20%;
-  padding: 2.7rem;
+  padding: 0 2.7rem;
   color: black;
   display: flex;
   flex-wrap: wrap;
