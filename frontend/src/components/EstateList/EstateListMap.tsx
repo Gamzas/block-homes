@@ -97,7 +97,7 @@ const EstateListMap = () => {
     // 지도생성
     const container = document.getElementById('map')
     const options = {
-      center: new kakao.maps.LatLng(location.latitude, location.longitude),
+      center: new kakao.maps.LatLng(location.location.latitude, location.location.longitude),
       level: 3,
       animate: true,
     }
@@ -109,8 +109,8 @@ const EstateListMap = () => {
 
     // 지도 마커 생성
     const markerPosition = new kakao.maps.LatLng(
-      location.latitude,
-      location.longitude,
+      location.location.latitude,
+      location.location.longitude,
     )
 
     const marker = new kakao.maps.Marker({
