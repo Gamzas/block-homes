@@ -36,7 +36,6 @@ const ContractMain = () => {
     <>
       <c.ContractMainContainer>
         <c.Contract id="paperContainer"></c.Contract>
-        <button onClick={downloadPDF}>Download as PDF</button>
         <ContractBoottomSheet></ContractBoottomSheet>
       </c.ContractMainContainer>
     </>
