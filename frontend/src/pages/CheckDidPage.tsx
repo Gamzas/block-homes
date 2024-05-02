@@ -2,6 +2,7 @@ import Lottie from 'react-lottie'
 import * as c from '@pages/style/CheckDidPageStyle'
 import InfoText from '@components/CheckDidPage/InfoText'
 import CheckDidCardLoading from '@assets/lotties/CheckDidCardLoading.json'
+import WaveContainer from '@common/WaveContainer.tsx'
 
 const CheckDidPage = () => {
 
@@ -25,6 +26,7 @@ const CheckDidPage = () => {
     <c.CheckDidPageContainer>
       <InfoText {...textProps} />
       <Lottie options={defaultOptions} height={350} width={350} />
+      <WaveContainer />
     </c.CheckDidPageContainer>
   )
 }
