@@ -17,3 +17,16 @@ export interface CurrentPosition {
     longitude: number
   }
 }
+
+export interface EstateItem {
+  condition: string;
+  address: string;
+  infos: string[];
+  leaseType: string;
+  price: string;
+  roomSize: string;
+  roomCount: string;
+  createDate: string;
+  latitude: number;
+  longitude: number;
+}

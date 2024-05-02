@@ -7,7 +7,7 @@ const SearchBar = () => {
       <img
         alt="검색"
         className="icon-find"
-        src="public/icon/icon_reading_glass.png"
+        src="/icon/icon_reading_glass.png"
       />
     </s.SearchBarContainer>
   )
