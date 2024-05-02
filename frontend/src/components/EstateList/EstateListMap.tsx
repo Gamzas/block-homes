@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server'
 import CustomOverlay from '@components/EstateList/CustomOverlay'
 import useCurrentLocation from '@/hooks/useCurrentLocation'
 import { useAtom } from 'jotai'
-import { estateItemListAtom } from '@/stores/atoms/EstateListStore'
+import { estateItemListAtom } from '@/stores/atoms/estateListStore'
 
 declare global {
   interface Window {
