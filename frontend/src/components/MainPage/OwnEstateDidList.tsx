@@ -2,24 +2,39 @@ import * as o from '@components/MainPage/style/OwnEstateDidListStyle'
 import EstateDidCard from '@common/EstateDidCard'
 import CustomCarousel from '@components/MainPage/CustomCarousel'
 import EmptyEstateDidCard from '@components/CheckDidPage/EmptyEstateDidCard'
+import { useState } from 'react'
 
 const OwnEstateDidList = () => {
+  const [currentCenterIndex, setCurrentCenterIndex] = useState(0)
+
+  const handleCenterChange = (newIndex: number) => {
+    setCurrentCenterIndex(newIndex)
+  }
+
   const cards = [
     {
+      key: 0,
+      content: (
+        <EstateDidCard index={0} currentCenterIndex={currentCenterIndex} />
+      ),
+    },
+    {
       key: 1,
-      content: <EstateDidCard />,
+      content: (
+        <EstateDidCard index={1} currentCenterIndex={currentCenterIndex} />
+      ),
     },
     {
       key: 2,
-      content: <EstateDidCard />,
+      content: (
+        <EstateDidCard index={2} currentCenterIndex={currentCenterIndex} />
+      ),
     },
     {
       key: 3,
-      content: <EstateDidCard />,
-    },
-    {
-      key: 4,
-      content: <EmptyEstateDidCard />,
+      content: (
+        <EmptyEstateDidCard index={3} currentCenterIndex={currentCenterIndex} />
+      ),
     },
   ]
 
@@ -29,8 +44,8 @@ const OwnEstateDidList = () => {
       <CustomCarousel
         cards={cards}
         offset={100}
-        showArros={false}
-        showNavigation={true}
+        currentCenterIndex={currentCenterIndex}
+        setCurrentCenterIndex={handleCenterChange}
       />
     </o.OwnEstateDidListContainer>
   )
