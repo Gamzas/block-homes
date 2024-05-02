@@ -4,13 +4,19 @@ import ContractPayment from '@/components/SmartContract/ContractPayment'
 import ContractAgree from '@/components/SmartContract/ContractAgree'
 import ContractMain from '@/components/SmartContract/ContractMain'
 import ContractStart from '@/components/SmartContract/ContractStart'
-import { readContractStepAtom } from '@/stores/smartcontract'
+import { contractStepAtom, readContractStepAtom } from '@/stores/smartcontract'
 import { useAtom } from 'jotai'
 import ContractComplete from '../../components/SmartContract/ContractComplete'
 import WaveContainer from '@/common/WaveContainer'
+import { useEffect } from 'react'
 
 const SmartContract = () => {
-  const [step] = useAtom(readContractStepAtom)
+  // const [step] = useAtom(readContractStepAtom)
+  const [step, setStep] = useAtom(contractStepAtom)
+
+  useEffect(() => {
+    setStep(0)
+  }, [])
 
   return (
     <s.ContractContainer>
