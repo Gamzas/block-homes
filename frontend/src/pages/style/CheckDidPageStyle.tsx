@@ -9,4 +9,8 @@ export const CheckDidPageContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   position: relative;
+
+  .lottie-container {
+    z-index: 1;
+  }
 `

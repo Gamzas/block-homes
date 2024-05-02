@@ -5,7 +5,6 @@ import CheckDidCardLoading from '@assets/lotties/CheckDidCardLoading.json'
 import WaveContainer from '@common/WaveContainer.tsx'
 
 const CheckDidPage = () => {
-
   const textProps = {
     largeText1: '블록체인 기술을 이용하여',
     highlightText: '부동산 정보',
@@ -25,7 +24,9 @@ const CheckDidPage = () => {
   return (
     <c.CheckDidPageContainer>
       <InfoText {...textProps} />
-      <Lottie options={defaultOptions} height={350} width={350} />
+      <div className="lottie-container">
+        <Lottie options={defaultOptions} height={350} width={350} />
+      </div>
       <WaveContainer />
     </c.CheckDidPageContainer>
   )
