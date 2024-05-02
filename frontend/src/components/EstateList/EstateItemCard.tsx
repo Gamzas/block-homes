@@ -3,7 +3,7 @@ import * as c from '@components/EstateList/styles/EstateItemCardStyle'
 
 interface PropsType {
   condition: string
-  address : string
+  address: string
   infos: string[]
   leaseType: string
   price: string
@@ -33,7 +33,7 @@ const EstateItemCard = (props: PropsType) => {
       <c.ItemCardContainer $color={fourthColor}>
         <c.LocationContainer $color={mainColor}>
           <svg
-            className="location-icon"
+            className="locationIcon"
             xmlns="http://www.w3.org/2000/svg"
             width="9"
             height="11"
@@ -41,20 +41,20 @@ const EstateItemCard = (props: PropsType) => {
             fill="none"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M4.5 10.3567L4.86808 9.94192C5.28575 9.46358 5.66142 9.00975 5.99567 8.57808L6.27158 8.21408C7.42367 6.66183 8 5.42983 8 4.51925C8 2.57558 6.43317 1 4.5 1C2.56683 1 1 2.57558 1 4.51925C1 5.42983 1.57633 6.66183 2.72842 8.21408L3.00433 8.57808C3.48117 9.18906 3.98006 9.78193 4.5 10.3567Z"
               stroke={mainColor}
-              stroke-width="0.583333"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="0.583333"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <path
               d="M4.49984 5.95866C5.30525 5.95866 5.95817 5.30574 5.95817 4.50033C5.95817 3.69491 5.30525 3.04199 4.49984 3.04199C3.69442 3.04199 3.0415 3.69491 3.0415 4.50033C3.0415 5.30574 3.69442 5.95866 4.49984 5.95866Z"
               stroke={mainColor}
-              stroke-width="0.583333"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="0.583333"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
           <div className="location-text">{address}</div>
@@ -77,8 +77,10 @@ const EstateItemCard = (props: PropsType) => {
           <p className="status-title">{status}</p>
         </c.ItemStatusContainer>
         <c.ItemInfoContainer $color={mainColor}>
-          {infos.map(item => (
-            <div className="info-box">{item}</div>
+          {infos.map((item, index) => (
+            <div key={index} className="info-box">
+              {item}
+            </div>
           ))}
         </c.ItemInfoContainer>
         <c.ItemPriceInfoContainer>
@@ -92,33 +94,33 @@ const EstateItemCard = (props: PropsType) => {
           <div className="info-text">등록일자 {createDate}</div>
         </c.ItemPriceInfoContainer>
         <c.BackgroundContainer>
-          <div className='back-wrapper'>
-          <svg
-            className="big-wave"
-            xmlns="http://www.w3.org/2000/svg"
-            width="356"
-            height="62"
-            viewBox="0 0 356 62"
-            fill="none"
-          >
-            <path
-              d="M108.197 0.0351526C32.6032 1.26792 -13.4318 16.5748 -27 24.0741V61.9817H437.469V13.9038C424.385 18.4673 420.208 43.8243 353.336 45.9817C286.464 48.139 202.69 -1.50581 108.197 0.0351526Z"
-              fill={thirdColor}
-            />
-          </svg>
-          <svg
-            className="small-wave"
-            xmlns="http://www.w3.org/2000/svg"
-            width="356"
-            height="60"
-            viewBox="0 0 356 60"
-            fill="none"
-          >
-            <path
-              d="M146.102 0.48166C70.5073 1.71443 11.5682 39.9823 -2 47.4816V59.9816H462.469V35.4817C449.385 40.0452 443.817 41.3243 376.945 43.4817C310.073 45.639 240.594 -1.0593 146.102 0.48166Z"
-              fill={secondColor}
-            />
-          </svg>
+          <div className="back-wrapper">
+            <svg
+              className="bigWave"
+              xmlns="http://www.w3.org/2000/svg"
+              width="356"
+              height="62"
+              viewBox="0 0 356 62"
+              fill="none"
+            >
+              <path
+                d="M108.197 0.0351526C32.6032 1.26792 -13.4318 16.5748 -27 24.0741V61.9817H437.469V13.9038C424.385 18.4673 420.208 43.8243 353.336 45.9817C286.464 48.139 202.69 -1.50581 108.197 0.0351526Z"
+                fill={thirdColor}
+              />
+            </svg>
+            <svg
+              className="smallWave"
+              xmlns="http://www.w3.org/2000/svg"
+              width="356"
+              height="60"
+              viewBox="0 0 356 60"
+              fill="none"
+            >
+              <path
+                d="M146.102 0.48166C70.5073 1.71443 11.5682 39.9823 -2 47.4816V59.9816H462.469V35.4817C449.385 40.0452 443.817 41.3243 376.945 43.4817C310.073 45.639 240.594 -1.0593 146.102 0.48166Z"
+                fill={secondColor}
+              />
+            </svg>
           </div>
         </c.BackgroundContainer>
       </c.ItemCardContainer>
