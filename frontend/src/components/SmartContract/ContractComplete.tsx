@@ -2,7 +2,7 @@ import CompletePigContainer from '@/common/CompletePigContainer'
 import { Button } from '@/common/style/Button'
 import { useNavigate } from 'react-router-dom'
 import { ContractCompleteContainer } from './style/ContractCompleteStyle'
-// import Gauge from '../Report/Gauge'
+import Gauge from '../Report/Gauge'
 
 const ContractComplete = () => {
   const navigate = useNavigate()
@@ -11,7 +11,7 @@ const ContractComplete = () => {
   }
   return (
     <ContractCompleteContainer>
-      {/* <Gauge steps={3} /> */}
+      <Gauge steps={5} />
       <CompletePigContainer></CompletePigContainer>
       <div className="complete-text">거래가 완료되었습니다</div>
       <div className="button-box">
