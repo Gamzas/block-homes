@@ -2,24 +2,27 @@ import { useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import * as e from '@common/style/EstateDidCardStyle'
 
-const EstateDidCard = () => {
+const EstateDidCard = ({ index, currentCenterIndex }) => {
   const [show, setShown] = useState(false)
+
+  const toggleCard = () => {
+    if (index === currentCenterIndex) {
+      setShown(!show)
+    }
+  }
 
   const springStyle = useSpring({
     opacity: 1,
-    transform: show ? 'scale(1.03)' : 'scale(1)',
+    transform: show ? 'scale(1.15) rotateY(180deg)' : 'scale(1) rotateY(0deg)',
     boxShadow: show
       ? '0 20px 25px rgb(0 0 0 / 25%)'
       : '0 2px 10px rgb(0 0 0 / 8%)',
     borderRadius: '1.5rem',
+    config: { tension: 250, friction: 12 },
   })
 
   return (
-    <animated.div
-      style={springStyle}
-      onMouseEnter={() => setShown(true)}
-      onMouseLeave={() => setShown(false)}
-    >
+    <animated.div style={springStyle} onClick={toggleCard}>
       <e.EstateDidCardContainer>
         <e.TopContainer>
           <img
