@@ -26,6 +26,7 @@
     "react-swipeable": "^7.0.1",
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
+    "vite-plugin-pwa": "^0.20.0",
     "web3": "^4.8.0"
   },
   "devDependencies": {
