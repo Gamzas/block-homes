@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         AWS_PUBLIC_IP = '3.34.135.180'
-        SSH_CMD = 'ssh -i /root/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no' // SSH 명령어 설정
+        SSH_CMD = 'ssh -i /var/jenkins_home/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no' // SSH 명령어 설정
         DOCKER = 'sudo DOCKER_BUILDKIT=1 docker' // Docker BuildKit을 활성화하여 docker 명령어 설정
         repository = "sejinnnnnn/blockhomes-frontend" // Docker Hub ID와 Repository 이름
         repo_name = "blockhomes-frontend"
@@ -17,7 +17,7 @@ pipeline {
         //stage('SonarQube') {
         //
         //}
-
+        
         stage('Install') {
             steps {
                 dir('./frontend') {

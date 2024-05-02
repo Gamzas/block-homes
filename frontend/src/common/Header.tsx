@@ -3,6 +3,8 @@ import * as h from '@common/style/HeaderStyle'
 import { HeaderPropsType } from '@/types/components/headerType'
 import SearchBar from '@common/SearchBar'
 import useDownloadPDF from '@/hooks/useDownloadPdf'
+import { useAtom } from 'jotai'
+import { mapAtom } from '@/stores/atoms/EstateListStore'
 
 //props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
 // example
@@ -14,13 +16,14 @@ import useDownloadPDF from '@/hooks/useDownloadPdf'
 
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
   const downloadPdf = useDownloadPDF()
+  const [menu, setMenu] = useAtom(mapAtom)
   return (
     <h.HeaderContainer>
       <h.HeaderLeftContainer>
         <img
           className="back-arrow"
           alt="뒤로가기"
-          src="public/icon/icon_back_arrow.png"
+          src="/icon/icon_back_arrow.png"
         />
 
         {HeaderProps.isSearch ? (
@@ -36,8 +39,13 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
           alt="오른쪽 아이콘"
           src={`${HeaderProps.rightIconSrc}`}
           onClick={() => {
-            if (HeaderProps.rightIconSrc === 'public/icon/icon_download.png') {
+            if (HeaderProps.rightIconSrc === '/icon/icon_download.png') {
               downloadPdf('paperContainer', 'contract.pdf')
+            } else if (
+              HeaderProps.rightIconSrc == '/icon/icon_map.png' ||
+              HeaderProps.rightIconSrc == '/icon/icon_list.png'
+            ) {
+              setMenu(!menu)
             }
           }}
         />

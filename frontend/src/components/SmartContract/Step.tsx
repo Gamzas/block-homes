@@ -16,10 +16,11 @@ const Step = (props: Props) => {
             {index === props.currentindex ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="30"
+                width="26"
                 height="30"
                 viewBox="0 0 30 30"
                 fill="none"
+                className='pulse-animation'
               >
                 <path
                   fill-rule="evenodd"
@@ -31,7 +32,7 @@ const Step = (props: Props) => {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="30"
+                width="26"
                 height="30"
                 viewBox="0 0 30 30"
                 fill="none"

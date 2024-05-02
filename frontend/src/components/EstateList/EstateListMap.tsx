@@ -3,7 +3,6 @@ import * as e from '@components/EstateList/styles/EstateListMapStyle'
 import { renderToString } from 'react-dom/server'
 import CustomOverlay from '@components/EstateList/CustomOverlay'
 import useCurrentLocation from '@/hooks/useCurrentLocation'
-import CurrentStatus from './CurrentStatus'
 
 const EstateList = [
   {
@@ -88,7 +87,7 @@ declare global {
 const { kakao } = window
 
 const EstateListMap = () => {
-  const { location, currentPosition, getCurrentLocation } = useCurrentLocation()
+  const { location, getCurrentLocation } = useCurrentLocation()
 
   useEffect(() => {
     getCurrentLocation()
@@ -98,7 +97,7 @@ const EstateListMap = () => {
     // 지도생성
     const container = document.getElementById('map')
     const options = {
-      center: new kakao.maps.LatLng(location.latitude, location.longitude),
+      center: new kakao.maps.LatLng(location.location.latitude, location.location.longitude),
       level: 3,
       animate: true,
     }
@@ -110,8 +109,8 @@ const EstateListMap = () => {
 
     // 지도 마커 생성
     const markerPosition = new kakao.maps.LatLng(
-      location.latitude,
-      location.longitude,
+      location.location.latitude,
+      location.location.longitude,
     )
 
     const marker = new kakao.maps.Marker({
@@ -132,7 +131,7 @@ const EstateListMap = () => {
         content: overlayString,
         xAnchor: 0.5,
         yAnchor: 0.91,
-        clickable : true 
+        clickable: true,
       })
 
       customOverlay.setMap(map)
@@ -145,10 +144,6 @@ const EstateListMap = () => {
 
   return (
     <>
-      <CurrentStatus
-        getCurrentLocation={getCurrentLocation}
-        currentPosition={currentPosition}
-      />
       <e.EstateMapContainer id="map"></e.EstateMapContainer>
     </>
   )

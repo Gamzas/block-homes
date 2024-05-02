@@ -8,22 +8,23 @@ const Footer = () => {
   const FooterComponentList: FooterComponentType[] = [
     {
       title: '홈',
-      iconSrc: 'public/icon/icon_footer_home.png',
+      iconSrc: '/icon/icon_footer_home.png',
       routePath: '/',
     },
     {
       title: '관심 매물',
-      iconSrc: 'public/icon/icon_footer_heart.png',
+      iconSrc: '/icon/icon_footer_heart.png',
       routePath: '/likes',
     },
+    // 임시 smart-contract 설정
     {
       title: '채팅',
-      iconSrc: 'public/icon/icon_footer_chat.png',
-      routePath: '/chat',
+      iconSrc: '/icon/icon_footer_chat.png',
+      routePath: '/smart-contract',
     },
     {
       title: '마이페이지',
-      iconSrc: 'public/icon/icon_footer_mypage.png',
+      iconSrc: '/icon/icon_footer_mypage.png',
       routePath: '/mypage',
     },
   ]

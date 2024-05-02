@@ -7,7 +7,7 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   background: ${props => (props.$secondary ? '#D9D9D9' : '#845BD3')};
-  color:${props => (props.$secondary ? '#666':'white')};
+  color: ${props => (props.$secondary ? '#666' : 'white')};
   width: ${props => (props.$small ? '93px' : '267.84px')};
   height: ${props => (props.$small ? '34px' : '43.52px')};
   flex-shrink: 0;
@@ -18,17 +18,27 @@ export const Button = styled.button<ButtonProps>`
   cursor: pointer;
 
   &:hover {
-    // 마우스 호버 시의 스타일
   }
-
+  transition:
+    transform 0.1s ease-in-out,
+    background-color 0.1s ease-in-out,
+    box-shadow 0.1s ease-in-out;
   &:active {
-    // 버튼을 눌렀을 때의 스타일
+    transform: scale(0.96);
+    background-color: ${props => (props.$secondary ? '#bfbfbf' : '#7e57c2')};
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   }
 
   &:disabled {
-  background: #D9D9D9; 
-  color: #666;         
-  cursor: not-allowed; }
+    background: #d9d9d9;
+    color: #666;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
 `
 
 {

@@ -11,4 +11,8 @@ export const OwnEstateDidListContainer = styled.div`
   }
 `
 
-export const DidListCarousel = styled.div``
+export const DidListCarousel = styled.div`
+  height: 35vh;
+  width: 90%;
+  margin: 0 auto;
+`
