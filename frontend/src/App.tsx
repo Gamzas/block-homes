@@ -8,6 +8,7 @@ import SmartContract from './pages/SmartContract/SmartContract'
 import RealEstateListPage from '@pages/RealEstateListPage'
 import KlipSignInPage from '@pages/KlipSignInPage'
 import CheckDidPage from '@pages/CheckDidPage'
+import SelfCheckDidPage from '@pages/SelfCheckDidPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -15,6 +16,7 @@ const HomeRoutes = () => (
     <Route path="/klip-signin" element={<KlipSignInPage />} />
     <Route path="/" element={<MainPage />} />
     <Route path="/check-did" element={<CheckDidPage />} />
+    <Route path="/self-check-did" element={<SelfCheckDidPage />} />
     <Route path="/estate" element={<RealEstatePage />}>
       <Route path="" element={<RealEstateListPage />} />
     </Route>
