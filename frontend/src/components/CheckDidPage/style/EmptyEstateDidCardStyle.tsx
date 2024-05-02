@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const EmptyEstateDidCardContainer = styled.div`
+  cursor: pointer;
   width: 11rem;
   height: 14.5rem;
   border-radius: 1.5rem;
