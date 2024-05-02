@@ -1,26 +1,21 @@
 import * as o from '@components/MainPage/style/OwnEstateDidListStyle'
 import EstateDidCard from '@common/EstateDidCard'
 import Carousel from '@components/MainPage/Carousel'
+import EmptyEstateDidCard from '@components/CheckDidPage/EmptyEstateDidCard'
 
 const OwnEstateDidList = () => {
   const cards = [
     {
       key: 1,
-      content: (
-        <EstateDidCard />
-      ),
+      content: <EstateDidCard />,
     },
     {
       key: 2,
-      content: (
-        <EstateDidCard />
-      ),
+      content: <EstateDidCard />,
     },
     {
       key: 3,
-      content: (
-        <EstateDidCard />
-      ),
+      content: <EstateDidCard />,
     },
     {
       key: 4,
@@ -35,8 +30,8 @@ const OwnEstateDidList = () => {
         <Carousel
           cards={cards}
           offset={50}
-          showArrows={true}
-          showNavigation={true}
+          showArrows={false}
+          showNavigation={false}
         />
       </o.DidListCarousel>
     </o.OwnEstateDidListContainer>
