@@ -4,8 +4,10 @@ import { CurrentPosition, EstateItem } from '@/types/estateListType'
 
 export const filterAtom = atom<boolean>(false) // false 필터 닫힘, true 필터 열림
 
+// Header 지도 or list 아이콘
 export const mapAtom = atom<boolean>(false) // false list true map
 
+// 기본 위치
 const defaultPosition = {
   currentPosition: '정자동',
   location: {
@@ -28,7 +30,7 @@ const EstateList = [
     roomSize: '37',
     roomCount: '투룸',
     createDate: '2024년 3월 21일',
-    latitude: 35.2057245,
+    latitude: 35.2097245,
     longitude: 126.7805472,
   },
   {
@@ -47,7 +49,7 @@ const EstateList = [
     condition: 'good',
     address: '광주광역시 광산구 장덕동',
     infos: ['남향', '교육시설', '역세권'],
-    leaseType: '월세',
+    leaseType: '전세',
     price: '3억',
     roomSize: '37',
     roomCount: '투룸',
@@ -93,5 +95,8 @@ const EstateList = [
   },
 ]
 
+// 전체 부동산 매물
+export const estateItemListAtom = atom<EstateItem[] | null>(EstateList)
 
-export const estateItemListAtom = atom<EstateItem[]>(EstateList)
+// 선택된 부동산 매물
+export const selectedItemAtom = atom<EstateItem | null>(null)
