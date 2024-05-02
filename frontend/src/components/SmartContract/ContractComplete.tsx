@@ -1,17 +1,21 @@
+import CompletePigContainer from '@/common/CompletePigContainer'
 import { Button } from '@/common/style/Button'
 import { useNavigate } from 'react-router-dom'
-
+import { ContractCompleteContainer } from './style/ContractCompleteStyle'
 
 const ContractComplete = () => {
-    const navigate = useNavigate()
-    const hadleHome =()=>{
-        navigate('/')
-    }
+  const navigate = useNavigate()
+  const hadleHome = () => {
+    navigate('/')
+  }
   return (
-    <>
-        <div>부동산 거래 완료</div>
+    <ContractCompleteContainer>
+      <CompletePigContainer></CompletePigContainer>
+      <div className="complete-text">거래가 완료되었습니다</div>
+      <div className="button-box">
         <Button onClick={hadleHome}>결제 완료</Button>
-    </>
+      </div>
+    </ContractCompleteContainer>
   )
 }
 
