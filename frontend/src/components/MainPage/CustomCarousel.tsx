@@ -1,24 +1,61 @@
 import Carousel from 'react-spring-3d-carousel'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { config } from 'react-spring'
 import * as c from '@components/MainPage/style/CustomCarouselStyle'
 
-const CustomCarousel = props => {
-  const table = props.cards.map((element, index) => {
-    return { ...element, onClick: () => setGoToSlide(index) }
-  })
-
+const CustomCarousel = ({
+  cards,
+  offset,
+  currentCenterIndex,
+  setCurrentCenterIndex,
+}) => {
   const [offsetRadius, setOffsetRadius] = useState(4)
   const [showArrows, setShowArrows] = useState(false)
-  const [goToSlide, setGoToSlide] = useState(null)
-  const [cards] = useState(table)
+  const [showNavigation, setShowNavigation] = useState(false)
+  const [goToSlide, setGoToSlide] = useState(currentCenterIndex)
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
 
   useEffect(() => {
-    setOffsetRadius(props.offset)
-    setShowArrows(props.showArrows)
-  }, [props.offset, props.showArrows])
+    setOffsetRadius(offset)
+    setShowArrows(true)
+    setShowNavigation(false)
+  }, [offset, showArrows, showNavigation])
+
+  const handleSelect = index => {
+    if (index !== currentCenterIndex) {
+      setGoToSlide(index)
+      setCurrentCenterIndex(index)
+    }
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true)
+    setStartX(e.touches[0].screenX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging) {
+      const currentX = e.touches[0].screenX
+      const diffX = currentX - startX
+      if (Math.abs(diffX) > 50) {
+        handleSelect(
+          diffX > 0
+            ? goToSlide === 0
+              ? cards.length - 1
+              : goToSlide - 1
+            : goToSlide === cards.length - 1
+              ? 0
+              : goToSlide + 1,
+        )
+        setIsDragging(false)
+      }
+    }
+  }
+
+  const handleTouchEnd = () => {
+    setIsDragging(false)
+  }
 
   const handleMouseDown = e => {
     setIsDragging(true)
@@ -30,11 +67,15 @@ const CustomCarousel = props => {
       const currentX = e.screenX
       const diffX = currentX - startX
       if (Math.abs(diffX) > 50) {
-        if (diffX > 0) {
-          setGoToSlide(prev => (prev === 0 ? cards.length - 1 : prev - 1))
-        } else {
-          setGoToSlide(prev => (prev === cards.length - 1 ? 0 : prev + 1))
-        }
+        handleSelect(
+          diffX > 0
+            ? goToSlide === 0
+              ? cards.length - 1
+              : goToSlide - 1
+            : goToSlide === cards.length - 1
+              ? 0
+              : goToSlide + 1,
+        )
         setIsDragging(false)
       }
     }
@@ -46,6 +87,9 @@ const CustomCarousel = props => {
 
   return (
     <c.CustomCarouselContainer
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -54,7 +98,7 @@ const CustomCarousel = props => {
         slides={cards}
         goToSlide={goToSlide}
         offsetRadius={offsetRadius}
-        showNavigation={showArrows}
+        showNavigation={showNavigation}
         animationConfig={config.gentle}
       />
     </c.CustomCarouselContainer>
