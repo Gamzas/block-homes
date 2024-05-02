@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 
-const EmptyEstateDidCard = () => {
+const EmptyEstateDidCard = ({ index, currentCenterIndex }) => {
   const navigate = useNavigate()
 
   const [show, setShown] = useState(false)
   const checkEstateDid = () => {
-    if (show) navigate('/check-did')
+    if (index === currentCenterIndex) navigate('/check-did')
   }
 
   const springStyle = useSpring({
@@ -25,9 +25,10 @@ const EmptyEstateDidCard = () => {
       style={springStyle}
       onMouseEnter={() => setShown(true)}
       onMouseLeave={() => setShown(false)}
+      onClick={checkEstateDid}
     >
       <e.EmptyEstateDidCardContainer>
-        <div className="plus-container" onClick={checkEstateDid}>
+        <div className="plus-container">
           <div className="plus">+</div>
         </div>
       </e.EmptyEstateDidCardContainer>
