@@ -1,5 +1,5 @@
-import { KlipSignInPageContainer } from '@pages/style/KlipSignInPageStyle.tsx'
-import KlipSignIn from '@components/KlipSignInPage/KlipSignIn.tsx'
+import { KlipSignInPageContainer } from '@pages/style/KlipSignInPageStyle'
+import KlipSignIn from '@components/KlipSignInPage/KlipSignIn'
 
 const KlipSignInPage = () => {
   return (

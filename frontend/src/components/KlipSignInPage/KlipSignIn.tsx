@@ -3,9 +3,9 @@ import QRCodeCanvas from 'qrcode.react'
 import axios from 'axios'
 import { prepare } from 'klip-sdk'
 import * as k from '@components/KlipSignInPage/style/KlipSignInStyle'
-import Header from '@common/Header.tsx'
+import Header from '@common/Header'
 import { useSetAtom } from 'jotai'
-import { accountAtom } from '@stores/atoms/accountStore.ts'
+import { accountAtom } from '@stores/atoms/accountStore'
 
 const KlipSignIn = () => {
   const [qrValue, setQrValue] = useState<string>('')

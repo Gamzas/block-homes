@@ -1,5 +1,5 @@
 import { atomWithStorage } from 'jotai/utils'
-import { AccountType } from '@/types/accountType.ts'
+import { AccountType } from '@/types/accountType'
 
 const currentAccount = {
   account: null,
