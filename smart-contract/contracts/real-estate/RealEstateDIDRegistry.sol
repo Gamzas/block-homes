@@ -5,9 +5,9 @@ import "../structs/DIDStructs.sol";
 
 contract RealEstateDIDRegistry {
 
-    mapping(string => address) private didDocumentAddress;
+    
 
-    event RealEstateDIDDocumentCreated(string did, string id);
+    event RealEstateDIDDocumentCreated(string did);
 
     
 
