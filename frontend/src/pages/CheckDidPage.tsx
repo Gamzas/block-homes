@@ -2,7 +2,7 @@ import Lottie from 'react-lottie'
 import * as c from '@pages/style/CheckDidPageStyle'
 import InfoText from '@components/CheckDidPage/InfoText'
 import CheckDidCardLoading from '@assets/lotties/CheckDidCardLoading.json'
-import WaveContainer from '@common/WaveContainer.tsx'
+import WaveContainer from '@common/WaveContainer'
 
 const CheckDidPage = () => {
   const textProps = {

@@ -1,12 +1,12 @@
-// import { IntroPageContainer } from '@pages/style/IntroPageStyle.tsx'
-// import KlipConection from '@components/IntroPage/KlipConection.tsx'
-//
-// const IntroPage = () => {
-//   return (
-//     <IntroPageContainer>
-//       <KlipConection />
-//     </IntroPageContainer>
-//   )
-// }
-//
-// export default IntroPage
+import { IntroPageContainer } from '@pages/style/IntroPageStyle'
+import Intro from '@components/IntroPage/Intro'
+
+const IntroPage = () => {
+  return (
+    <IntroPageContainer>
+      <Intro />
+    </IntroPageContainer>
+  )
+}
+
+export default IntroPage

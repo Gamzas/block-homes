@@ -1,6 +1,6 @@
 import * as o from '@components/MainPage/style/OwnEstateDidListStyle'
 import EstateDidCard from '@common/EstateDidCard'
-import Carousel from '@components/MainPage/Carousel'
+import CustomCarousel from '@components/MainPage/CustomCarousel'
 import EmptyEstateDidCard from '@components/CheckDidPage/EmptyEstateDidCard'
 
 const OwnEstateDidList = () => {
@@ -26,14 +26,12 @@ const OwnEstateDidList = () => {
   return (
     <o.OwnEstateDidListContainer>
       <div className="estate-did-info-text">내 부동산 DID 목록</div>
-      <o.DidListCarousel>
-        <Carousel
-          cards={cards}
-          offset={50}
-          showArrows={false}
-          showNavigation={false}
-        />
-      </o.DidListCarousel>
+      <CustomCarousel
+        cards={cards}
+        offset={100}
+        showArros={false}
+        showNavigation={true}
+      />
     </o.OwnEstateDidListContainer>
   )
 }

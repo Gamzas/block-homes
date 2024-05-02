@@ -6,14 +6,15 @@ import { GlobalStyle } from '@style/GlobalStyles'
 import RealEstatePage from '@pages/RealEstatePage'
 import SmartContract from './pages/SmartContract/SmartContract'
 import RealEstateListPage from '@pages/RealEstateListPage'
-import KlipSignInPage from '@pages/KlipSignInPage'
+import IntroPage from '@pages/IntroPage'
+import SignInPage from '@pages/SignInPage'
 import CheckDidPage from '@pages/CheckDidPage'
 import SelfCheckDidPage from '@pages/SelfCheckDidPage'
 
 const HomeRoutes = () => (
   <Routes>
-    {/*<Route path="/intro" element={<IntroPage />} />*/}
-    <Route path="/klip-signin" element={<KlipSignInPage />} />
+    <Route path="/intro" element={<IntroPage />} />
+    <Route path="/signin" element={<SignInPage />} />
     <Route path="/" element={<MainPage />} />
     <Route path="/check-did" element={<CheckDidPage />} />
     <Route path="/self-check-did" element={<SelfCheckDidPage />} />
