@@ -16,10 +16,11 @@ const Footer = () => {
       iconSrc: '/icon/icon_footer_heart.png',
       routePath: '/likes',
     },
+    // 임시 smart-contract 설정
     {
       title: '채팅',
       iconSrc: '/icon/icon_footer_chat.png',
-      routePath: '/chat',
+      routePath: '/smart-contract',
     },
     {
       title: '마이페이지',
