@@ -4,7 +4,11 @@ import { renderToString } from 'react-dom/server'
 import CustomOverlay from '@components/EstateList/CustomOverlay'
 import useCurrentLocation from '@/hooks/useCurrentLocation'
 import { useAtom } from 'jotai'
-import { estateItemListAtom } from '@/stores/atoms/estateListStore'
+import {
+  estateItemListAtom,
+  // selectedItemAtom,
+} from '@/stores/atoms/estateListStore'
+// import EstateItemCard from './EstateItemCard'
 
 declare global {
   interface Window {
@@ -15,8 +19,16 @@ const { kakao } = window
 
 const EstateListMap = () => {
   const { location, getCurrentLocation } = useCurrentLocation()
+  // const [openCard, setOpenCard] = useState(false)
   // 부동산 매물 리스트
   const [estateItemList] = useAtom(estateItemListAtom)
+  // 상세보기 선택한 부동산
+  // const [item, setItem] = useAtom(selectedItemAtom)
+
+  // 닫기 버튼
+  // const handleDetailCardClose = () => {
+  //   // setItem(null)
+  // }
 
   useEffect(() => {
     getCurrentLocation()
@@ -36,7 +48,7 @@ const EstateListMap = () => {
     const map = new kakao.maps.Map(container, options)
 
     // 지도 확대 최대 레벨 설정
-    map.setMaxLevel(5)
+    map.setMaxLevel(10)
 
     // 지도 줌 컨트롤러
     const zoomControl = new kakao.maps.ZoomControl()
@@ -55,31 +67,50 @@ const EstateListMap = () => {
 
     // 커스텀 오버레이 렌더링
     // 오버레이 위치 리스트에 대해 처리
-    estateItemList.forEach(({ latitude, longitude, condition }) => {
-      const position = new kakao.maps.LatLng(latitude, longitude)
-      const overlayString = renderToString(
-        <CustomOverlay condition={condition} />,
+    estateItemList.forEach(estateItem => {
+      const position = new kakao.maps.LatLng(
+        estateItem.latitude,
+        estateItem.longitude,
       )
+      const overlayDiv = document.createElement('div')
+      overlayDiv.innerHTML = renderToString(
+        <CustomOverlay condition={estateItem.condition} />,
+      )
+      const handleOverlayClick = () => {
+        // setOpenCard(true)
+        // console.log(typeof setItem)
+        // setItem(estateItem)
+      }
 
       const customOverlay = new kakao.maps.CustomOverlay({
         position: position,
-        content: overlayString,
+        content: overlayDiv,
         xAnchor: 0.5,
         yAnchor: 0.91,
         clickable: true,
+        zIndex: 4,
       })
-
+      overlayDiv
+        .querySelector('.circle')
+        .addEventListener('click', handleOverlayClick)
       customOverlay.setMap(map)
-      kakao.maps.event.addListener(customOverlay, 'click', function () {
-        // 클릭 시 수행할 동작
-        console.log('오버레이 클릭!')
-      })
     })
-  }, [location])
+  }, [location, estateItemList])
 
   return (
     <>
-      <e.EstateMapContainer id="map"></e.EstateMapContainer>
+      <e.EstateMapContainer id="map">
+        {/* {item !== null && (
+          <e.DetailCardContainer>
+            <EstateItemCard {...item} />
+            <e.CloseCardContainer>
+              <div className="closeBtn" onClick={handleDetailCardClose}>
+                닫기
+              </div>
+            </e.CloseCardContainer>
+          </e.DetailCardContainer>
+        )} */}
+      </e.EstateMapContainer>
     </>
   )
 }

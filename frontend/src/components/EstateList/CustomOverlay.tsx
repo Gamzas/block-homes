@@ -7,7 +7,7 @@ interface PropsType {
 const CustomOverlay = (props: PropsType) => {
   const { condition } = props
 
-  const getEstateCondition = (condition : string) => {
+  const getEstateCondition = (condition: string) => {
     switch (condition) {
       case 'good':
         return '우수'
@@ -20,15 +20,13 @@ const CustomOverlay = (props: PropsType) => {
 
   // switch
   return (
-    <div>
-      <c.EstateItem $condition={condition}>
-        <div className="circle">
-          <div className="inner-circle">
-            <span className="estate-sign">{getEstateCondition(condition)}</span>
-          </div>
+    <c.EstateItem $condition={condition}>
+      <div className="circle">
+        <div className="inner-circle">
+          <span className="estate-sign">{getEstateCondition(condition)}</span>
         </div>
-      </c.EstateItem>
-    </div>
+      </div>
+    </c.EstateItem>
   )
 }
 
