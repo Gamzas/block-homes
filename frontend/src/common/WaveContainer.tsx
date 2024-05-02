@@ -1,4 +1,4 @@
-import * as b from '@common/style/WaveContainerStyle.tsx'
+import * as b from '@common/style/WaveContainerStyle'
 
 const WaveContainer = () => {
   return (
