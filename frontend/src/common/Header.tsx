@@ -4,7 +4,7 @@ import { HeaderPropsType } from '@/types/components/headerType'
 import SearchBar from '@common/SearchBar'
 import useDownloadPDF from '@/hooks/useDownloadPdf'
 import { useAtom } from 'jotai'
-import { mapAtom } from '@/stores/atoms/estateListStore'
+import { mapAtom } from '@/stores/atoms/EstateListStore'
 
 //props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
 // example

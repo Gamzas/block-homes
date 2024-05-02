@@ -1,6 +1,6 @@
 import Footer from '@/common/Footer'
 import Header from '@/common/Header'
-import { mapAtom } from '@/stores/atoms/estateListStore'
+import { mapAtom } from '@/stores/atoms/EstateListStore'
 import * as r from '@pages/style/RealEstatePageStyle'
 import { useAtom } from 'jotai'
 import { Outlet } from 'react-router-dom'

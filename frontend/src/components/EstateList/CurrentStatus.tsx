@@ -1,4 +1,4 @@
-import { filterAtom } from '@/stores/atoms/estateListStore'
+import { filterAtom } from '@/stores/atoms/EstateListStore'
 import { RealEstateStatusType } from '@/types/estateListType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
 import { useAtom } from 'jotai'

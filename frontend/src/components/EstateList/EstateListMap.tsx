@@ -7,7 +7,7 @@ import { useAtom } from 'jotai'
 import {
   estateItemListAtom,
   // selectedItemAtom,
-} from '@/stores/atoms/estateListStore'
+} from '@/stores/atoms/EstateListStore'
 // import EstateItemCard from './EstateItemCard'
 
 declare global {
