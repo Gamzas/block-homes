@@ -13,7 +13,6 @@ export const DetailCardContainer = styled.div`
   width: 100%;
   left: 1.2rem;
   bottom: 10rem;
-  justify-content: center;
   z-index: 10;
 `
 
