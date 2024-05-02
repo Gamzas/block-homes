@@ -5,11 +5,11 @@ import MainPage from '@pages/MainPage'
 import { GlobalStyle } from '@style/GlobalStyles'
 import RealEstatePage from '@pages/RealEstatePage'
 import SmartContract from './pages/SmartContract/SmartContract'
-import RealEstateListPage from '@pages/RealEstateListPage'
 import IntroPage from '@pages/IntroPage'
 import SignInPage from '@pages/SignInPage'
 import CheckDidPage from '@pages/CheckDidPage'
 import SelfCheckDidPage from '@pages/SelfCheckDidPage'
+import RealEstateDetailPage from '@pages/RealEstateDetailPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -18,9 +18,8 @@ const HomeRoutes = () => (
     <Route path="/" element={<MainPage />} />
     <Route path="/check-did" element={<CheckDidPage />} />
     <Route path="/self-check-did" element={<SelfCheckDidPage />} />
-    <Route path="/estate" element={<RealEstatePage />}>
-      <Route path="" element={<RealEstateListPage />} />
-    </Route>
+    <Route path="/estate" element={<RealEstatePage />} />
+    <Route path="/estate-detail" element={<RealEstateDetailPage />} />
     <Route path="/smart-contract" element={<SmartContract />} />
   </Routes>
 )
