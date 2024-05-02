@@ -7,7 +7,6 @@ export const ContractStartContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 59.9vh;
-  /* border: 1px solid black; */
   position: relative;
   .button-box {
     position: absolute;
