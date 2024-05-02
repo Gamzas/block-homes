@@ -1,33 +1,40 @@
-// import styled from 'styled-components'
+import styled from 'styled-components'
 
-// export const GaugeContainer = styled.div`
-//   width: 120px; /* 게이지의 너비 */
-//   height: 60px; /* 게이지의 높이 */
-//   /* overflow: hidden; 내부 요소가 범위를 벗어나지 않도록 함 */
-//   position: relative; /* 자식 요소의 위치 기준점 설정 */
-//   background-color: #fff; /* 배경색 설정 */
-//   border-radius: 100px 100px 0 0; /* 상단 둥근 모서리 효과 */
-//   .gauge {
-//     width: 120px;
-//     height: 120px;
-//     border-radius: 50%;
-//     position: absolute;
-//     bottom: -100%;
-//     left: 0;
-//     transform: rotate(-90deg); /* 게이지 시작 각도 */
-//     transition: transform 1s;
-//     border: 10px solid;
-//   }
+export const GaugeContainer = styled.div`
+  width: 120px; 
+  height: 60px; 
+  position: relative; 
+  background-color: #fff; 
+  .pointer {
+    width: 0px; 
+    height: 0px; 
+    border-bottom: 38px solid #845BD3;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    background: linear-gradient(to bottom, #000 50%, #000 50%, #666 80%, transparent 100%);
+    position: absolute; 
+    bottom: 4px;
+    left: 48%; // 중앙 정렬
+    transform-origin: bottom; 
+    transform: rotate(-45deg); 
+    transition: transform 2s;
+  }
 
-//   .pointer {
-//     width: 2px; /* 포인터 너비 */
-//     height: 50px; /* 포인터 높이 */
-//     background-color: black; /* 포인터 색상 */
-//     position: absolute; /* 절대 위치, gauge-container 기준 */
-//     bottom: 0;
-//     left: 50%; /* 중앙 정렬 */
-//     transform-origin: bottom; /* 회전의 기준점을 하단 중심으로 설정 */
-//     transform: rotate(-45deg); /* 초기 포인터 각도 설정 */
-//     transition: transform 2s; /* 회전에 대한 애니메이션 효과 */
-//   }
-// `
+  .status-text{
+    position: absolute;
+    bottom: 27%;
+    left: 42%;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  &:after {
+      content: '';
+      position: absolute;
+      top: 51px; 
+      left: 55.5px; 
+      width: 10px;
+      height: 10px; 
+      background: #845BD3; 
+      border-radius:50%; 
+    }
+`
