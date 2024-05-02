@@ -22,6 +22,10 @@ const OwnEstateDidList = () => {
         <EstateDidCard />
       ),
     },
+    {
+      key: 4,
+      content: <EmptyEstateDidCard />,
+    },
   ]
 
   return (
