@@ -7,12 +7,13 @@ import RealEstatePage from '@pages/RealEstatePage'
 import SmartContract from './pages/SmartContract/SmartContract'
 import RealEstateMapPage from '@pages/RealEstateMapPage'
 import RealEstateListPage from '@pages/RealEstateListPage'
-import KlipSignInPage from '@pages/KlipSignInPage.tsx'
+import IntroPage from '@pages/IntroPage'
+import SignInPage from '@pages/SignInPage'
 
 const HomeRoutes = () => (
   <Routes>
-    {/*<Route path="/intro" element={<IntroPage />} />*/}
-    <Route path="/klip-signin" element={<KlipSignInPage />} />
+    <Route path="/intro" element={<IntroPage />} />
+    <Route path="/signin" element={<SignInPage />} />
     <Route path="/" element={<MainPage />} />
     <Route path="/estate" element={<RealEstatePage />}>
       <Route path="" element={<RealEstateListPage />} />
