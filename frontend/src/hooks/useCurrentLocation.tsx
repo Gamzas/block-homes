@@ -1,4 +1,4 @@
-import { currentPositonAtom } from '@/stores/atoms/EstateListStore'
+import { currentPositonAtom } from '@/stores/atoms/estateListStore'
 import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'

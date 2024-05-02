@@ -9,7 +9,7 @@ import {
   estateItemListAtom,
   filterAtom,
   mapAtom,
-} from '@/stores/atoms/EstateListStore'
+} from '@/stores/atoms/estateListStore'
 import EstateListMap from './EstateListMap'
 
 const EstateItemList = () => {
