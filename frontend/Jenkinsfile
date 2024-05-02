@@ -18,6 +18,20 @@ pipeline {
         //
         //}
 
+        stage('Check Labels') {
+            steps {
+                script {
+                    def mergeRequestID = env.MR_ID
+                    def mergeRequestLabels = getMrLabels(mergeRequestID)
+
+                    if (!mergeRequestLabels.contains("Frontend")) {
+                        echo "No Frontend Label"
+                        return
+                    }
+                }
+            }
+        }
+
         stage('Install') {
             steps {
                 dir('./frontend') {
