@@ -1,15 +1,16 @@
 import * as t from '@components/MainPage/style/TopCardStyle'
+import { useNavigate } from 'react-router-dom'
 
 const TopCard = () => {
+  const navigate = useNavigate()
+
   return (
     <t.TopCardContainer>
       <t.TopCardHeader>
-        <img
-          alt="로고"
-          className="logo"
-          src="/image/image_main_character.png"
-        />
-        <button className="login-btn">로그인</button>
+        <img alt="로고" className="logo" src="/icon/icon_logo.png" />
+        <button className="login-btn" onClick={() => navigate('/signin')}>
+          로그인
+        </button>
       </t.TopCardHeader>
       <t.TopCardInfoTextContainer>
         <div className="main-info-text">
