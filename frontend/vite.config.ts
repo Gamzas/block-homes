@@ -23,12 +23,12 @@ export default defineConfig({
         theme_color: '#ffffff',
         icons: [
           {
-            src: 'pwa-192x192.png', // 192x192 크기의 아이콘
+            src: 'icon/icon_main_character_192x192.png', // 192x192 크기의 아이콘
             type: 'image/png',
             sizes: '192x192',
           },
           {
-            src: 'pwa-512x512.png', // 512x512 크기의 아이콘
+            src: 'icon/icon_main_character_512x512.png', // 512x512 크기의 아이콘
             type: 'image/png',
             sizes: '512x512',
           },
