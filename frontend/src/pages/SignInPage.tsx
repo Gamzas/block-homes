@@ -1,5 +1,5 @@
 import { SignInPageContainer } from '@pages/style/SignInPageStyle'
-import SignIn from '@components/KlipSignInPage/SignIn'
+import SignIn from '@components/SignInPage/SignIn'
 
 const SignInPage = () => {
   return (

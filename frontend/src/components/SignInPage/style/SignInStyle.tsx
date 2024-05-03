@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const KlipSignInContainer = styled.div`
+export const SignInContainer = styled.div`
   width: 100%;
   height: 100%;
 
@@ -12,12 +12,12 @@ export const KlipSignInContainer = styled.div`
   position: relative;
 `
 
-export const KlipSignInWrapper = styled.div`
+export const SignInWrapper = styled.div`
   width: 100%;
   height: 50%;
 `
 
-export const KlipSignInAccount = styled.div`
+export const SignInAccount = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -38,7 +38,7 @@ export const KlipSignInAccount = styled.div`
     margin-top: 5%;
   }
 `
-export const KlipSignInButton = styled.div`
+export const SignInButton = styled.div`
   position: absolute;
   bottom: 5%;
   background-color: #216fea;
