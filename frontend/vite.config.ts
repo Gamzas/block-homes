@@ -21,6 +21,7 @@ export default defineConfig({
         display: 'standalone',
         orientation: 'portrait',
         theme_color: '#ffffff',
+        background_color: '#ffffff',
         icons: [
           {
             src: 'icon/icon_main_character_192x192.png', // 192x192 크기의 아이콘
