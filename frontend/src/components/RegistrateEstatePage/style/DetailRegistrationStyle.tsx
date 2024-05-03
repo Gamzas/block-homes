@@ -93,44 +93,6 @@ export const DetailRegistrationCheckBox = styled.div`
     }
 `
 
-export const DetailRegistrationInputNumber = styled.div`
-    width: 48%;
-    height: fit-content;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .title {
-        font-size: 0.8rem;
-        font-weight: bold;
-        width: fit-content;
-        height: fit-content;
-    }
-
-    .input-wrapper {
-        width: 70%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: 1px solid #C3C3C3;
-        border-radius: 3px;
-    }
-
-    .input-number {
-        width: 80%;
-        height: fit-content;
-        border: none;
-        color: #808080;
-        padding: 5%;
-    }
-
-    .label {
-        width: fit-content;
-        height: fit-content;
-        margin-left: auto;
-        margin-right: 4%;
-    }
-`
 export const DetailRegistrationBigInput = styled.input`
     width: 100%;
     height: fit-content;
