@@ -20,7 +20,7 @@ export const ContractBottomContainer = styled.div<{
   height: ${props => `${props.$height}vh`};
   transform: translateY(${props => (props.$isVisible ? '0' : '100%')});
   transition:
-    transform 0.1s ease-out,
+    transform 0.5s ease-out,
     height 0.3s ease-in-out;
   border-radius: 30px 30px 0px 0px;
   border-top: 1px solid #adadad;
