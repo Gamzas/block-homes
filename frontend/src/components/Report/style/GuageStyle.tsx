@@ -4,13 +4,13 @@ export const GaugeContainer = styled.div`
   width: 120px;
   height: 60px;
   position: relative;
-  background-color: #fff;
+  /* background-color: #fff; */
   .pointer {
     width: 0px;
     height: 0px;
-    border-bottom: 38px solid #845bd3;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+    border-bottom: 34px solid #845bd3;
+    border-right: 3px solid transparent;
+    border-left: 3px solid transparent;
     background: linear-gradient(
       to bottom,
       #000 50%,
@@ -28,7 +28,7 @@ export const GaugeContainer = styled.div`
 
   .status-text {
     position: absolute;
-    bottom: 27%;
+    bottom: 33%;
     left: 42%;
     font-weight: 700;
     font-size: 12px;
