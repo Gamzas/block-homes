@@ -1,26 +1,32 @@
 import styled from 'styled-components'
 
 export const GaugeContainer = styled.div`
-  width: 120px; 
-  height: 60px; 
-  position: relative; 
-  background-color: #fff; 
+  width: 120px;
+  height: 60px;
+  position: relative;
+  background-color: #fff;
   .pointer {
-    width: 0px; 
-    height: 0px; 
-    border-bottom: 38px solid #845BD3;
+    width: 0px;
+    height: 0px;
+    border-bottom: 38px solid #845bd3;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
-    background: linear-gradient(to bottom, #000 50%, #000 50%, #666 80%, transparent 100%);
-    position: absolute; 
+    background: linear-gradient(
+      to bottom,
+      #000 50%,
+      #000 50%,
+      #666 80%,
+      transparent 100%
+    );
+    position: absolute;
     bottom: 4px;
     left: 48%; // 중앙 정렬
-    transform-origin: bottom; 
-    transform: rotate(-45deg); 
+    transform-origin: bottom;
+    transform: rotate(-45deg);
     transition: transform 2s;
   }
 
-  .status-text{
+  .status-text {
     position: absolute;
     bottom: 27%;
     left: 42%;
@@ -28,13 +34,13 @@ export const GaugeContainer = styled.div`
     font-size: 12px;
   }
   &:after {
-      content: '';
-      position: absolute;
-      top: 51px; 
-      left: 55.5px; 
-      width: 10px;
-      height: 10px; 
-      background: #845BD3; 
-      border-radius:50%; 
-    }
+    content: '';
+    position: absolute;
+    top: 51px;
+    left: 55.5px;
+    width: 10px;
+    height: 10px;
+    background: #845bd3;
+    border-radius: 50%;
+  }
 `
