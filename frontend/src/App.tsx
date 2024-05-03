@@ -4,12 +4,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import MainPage from '@pages/MainPage'
 import { GlobalStyle } from '@style/GlobalStyles'
 import RealEstatePage from '@pages/RealEstatePage'
-import SmartContract from './pages/SmartContract/SmartContract'
+import SmartContractPage from './pages/SmartContractPage'
 import IntroPage from '@pages/IntroPage'
 import SignInPage from '@pages/SignInPage'
 import CheckDidPage from '@pages/CheckDidPage'
 import SelfCheckDidPage from '@pages/SelfCheckDidPage'
 import RealEstateDetailPage from '@pages/RealEstateDetailPage'
+import ReportPage from './pages/ReportPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -20,7 +21,8 @@ const HomeRoutes = () => (
     <Route path="/self-check-did" element={<SelfCheckDidPage />} />
     <Route path="/estate" element={<RealEstatePage />} />
     <Route path="/estate-detail" element={<RealEstateDetailPage />} />
-    <Route path="/smart-contract" element={<SmartContract />} />
+    <Route path="/smart-contract" element={<SmartContractPage />} />
+    <Route path="/report" element={<ReportPage />} />
   </Routes>
 )
 
