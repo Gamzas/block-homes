@@ -1,7 +1,7 @@
-import * as r from '@components/SelfCheckDidPage/style/RealEstateTypeInputStyle'
+import * as r from '@components/SelfCheckDidPage/style/RealEstateTypeSelectStyle'
 import React, { useState } from 'react'
 
-const RealEstateTypeInput = () => {
+const RealEstateTypeSelect = () => {
   const [isOpen, setIsOpen] = useState(false)
   // const [estateType, setEstateType] = useAtom()
   const handleToggle = () => {
@@ -15,7 +15,7 @@ const RealEstateTypeInput = () => {
   }
 
   return (
-    <r.RealEstateTypeInputContainer>
+    <r.RealEstateTypeSelectContainer>
       <label htmlFor="estateType" className="select-title">
         분류
       </label>
@@ -34,8 +34,8 @@ const RealEstateTypeInput = () => {
         <option value="apartment">아파트</option>
         <option value="offictel">오피스텔</option>
       </select>
-    </r.RealEstateTypeInputContainer>
+    </r.RealEstateTypeSelectContainer>
   )
 }
 
-export default RealEstateTypeInput
+export default RealEstateTypeSelect

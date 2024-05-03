@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RealEstateTypeInputContainer = styled.div`
+export const RealEstateTypeSelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;

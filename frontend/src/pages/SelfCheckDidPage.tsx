@@ -3,7 +3,7 @@ import Header from '@common/Header'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import AddressInput from '@components/SelfCheckDidPage/AddressInput'
 import SimpleInput from '@components/SelfCheckDidPage/SimpleInput'
-import RealEstateTypeInput from '@components/SelfCheckDidPage/RealEstateTypeInput'
+import RealEstateTypeSelect from '@components/SelfCheckDidPage/RealEstateTypeSelect'
 
 const SelfCheckDidPage = () => {
   return (
@@ -20,7 +20,7 @@ const SelfCheckDidPage = () => {
           placeholder="홍길동"
           unit={null}
         />
-        <RealEstateTypeInput />
+        <RealEstateTypeSelect />
         <SimpleInput
           inputTextEnglish="area"
           inputTextKorean="총 면적"
