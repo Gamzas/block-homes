@@ -63,6 +63,15 @@ export const CharacterContainer = styled.div`
     z-index: 2;
   }
 
+  .hat {
+    position: absolute;
+    width: 6.2rem;
+    top: -0.5rem;
+    right: 1.8rem;
+    z-index: 2;
+    transform: rotate(-10deg);
+  }
+
   .reading-glasses {
     position: absolute;
     width: 6.2rem;
