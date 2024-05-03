@@ -2,6 +2,10 @@
 pragma solidity ^0.8.21;
 
 library BytesUtils {
+
+    /**
+     *  0x... 형식의 hexString을 주소 값으로 변환하는 함수
+     */ 
     function hexStringToAddress(string memory str)
         public
         pure
@@ -21,15 +25,21 @@ library BytesUtils {
         return r;
     }
 
-    function getSinger(string memory did)
+    /**
+     * DID 뒤의 식별자 (Identifier)를 잘라, 주소값으로 변환 후 return
+     */
+    function getSigner(string memory did)
         public
         pure
-        returns (bytes memory bs)
+        returns (bytes memory)
     {
         string memory cid = substring(did, 9, 49);
         return hexStringToAddress(cid);
     }
 
+    /**
+     * string을 자르는 함수
+     */
     function substring(
         string memory str,
         uint256 startIndex,
@@ -43,6 +53,9 @@ library BytesUtils {
         return string(result);
     }
 
+    /**
+     * string을 bytes로 바꾸는 함수
+     */
     function stringToBytes(string memory str)
         public
         pure
@@ -51,16 +64,17 @@ library BytesUtils {
         return bytes(str);
     }
 
-    /* @notice      Convert bytes to address
+    /** 
+     *  @notice      Convert bytes to address
      *  @param _bs   Source bytes: bytes length must be 20
-     *  @return      Converted address from source bytes
+     *  @return addr Converted address from source bytes
      */
     function bytesToAddress(bytes memory _bs)
         public
         pure
         returns (address addr)
     {
-        require(_bs.length == 20, "bytes length does not match address");
+        require(_bs.length == 20, "bytes length does not match address (20)");
         assembly {
             // for _bs, first word store _bs.length, second word store _bs.value
             // load 32 bytes from mem[_bs+20], convert it into Uint160, meaning we take last 20 bytes as addr (address).
@@ -68,9 +82,10 @@ library BytesUtils {
         }
     }
 
-    /* @notice      Convert address to bytes
+    /** 
+     *  @notice      Convert address to bytes
      *  @param _addr Address need to be converted
-     *  @return      Converted bytes from address
+     *  @return bs   Converted bytes from address
      */
     function addressToBytes(address _addr)
         public
