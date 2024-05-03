@@ -27,6 +27,7 @@ export const CategoryContainer = styled.div`
   padding: 1rem;
   position: relative;
   margin-bottom: 0.6rem;
+  cursor: pointer;
 
   .category-img {
     width: 65%;
