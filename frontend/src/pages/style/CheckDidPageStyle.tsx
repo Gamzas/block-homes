@@ -13,4 +13,10 @@ export const CheckDidPageContainer = styled.div`
   .lottie-container {
     z-index: 1;
   }
+
+  .self-check-did-info {
+    position: absolute;
+    bottom: 10rem;
+    z-index: 100;
+  }
 `

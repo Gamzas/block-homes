@@ -16,13 +16,27 @@ export const TopCardHeader = styled.div`
   align-items: center;
 
   .logo {
-    width: 20%;
+    width: 25%;
     height: auto;
+    padding: 1rem;
   }
 
   .login-btn {
     height: 2rem;
     font-size: 10px;
+    background: none;
+    text-decoration-line: underline;
+    z-index: 100;
+
+    &:hover {
+      outline: none;
+      border: none;
+    }
+
+    &:focus {
+      outline: none;
+      border: none;
+    }
   }
 `
 
@@ -61,6 +75,15 @@ export const CharacterContainer = styled.div`
     bottom: 0;
     right: -2rem;
     z-index: 2;
+  }
+
+  .hat {
+    position: absolute;
+    width: 6.2rem;
+    top: -0.5rem;
+    right: 1.8rem;
+    z-index: 2;
+    transform: rotate(-10deg);
   }
 
   .reading-glasses {

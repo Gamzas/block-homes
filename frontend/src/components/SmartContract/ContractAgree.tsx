@@ -1,4 +1,4 @@
-import { Button } from '@/common/style/Button'
+import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import Step from './Step'
 import { ContractAgreeWrapper } from './style/ContractAgreeStyle'
 import { useAtom } from 'jotai'
@@ -41,7 +41,9 @@ const ContractAgree = () => {
         </div>
       </div>
       <div className="button-box">
-        <Button onClick={handleNext}>필수 약관 모두 동의하기</Button>
+        <CustomButtonStyle onClick={handleNext}>
+          필수 약관 모두 동의하기
+        </CustomButtonStyle>
       </div>
     </ContractAgreeWrapper>
   )

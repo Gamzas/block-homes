@@ -1,0 +1,347 @@
+{
+  "contractName": "RealEstateInfo",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/real-estate/RealEstateInfo.sol\":\"RealEstateInfo\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/real-estate/RealEstateInfo.sol\":{\"keccak256\":\"0x5f66b6b191b206e15fd77958b9258fbb046b39bce929216d919aeccd6997dd89\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0749e139c1398afedf69f87fb45289d2d134f84ef5ff55407373efc5ff075521\",\"dweb:/ipfs/QmdFuDHR4g9CfNNhng8zFREZfFuSftL3SvKxJEmgAVv4g9\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600e575f80fd5b50603e80601a5f395ff3fe60806040525f80fdfea2646970667358221220dd13d50223c67d4d717b5a0a5cb77565633798d01374d3a3fcc1df4b2b26425c64736f6c63430008190033",
+  "deployedBytecode": "0x60806040525f80fdfea2646970667358221220dd13d50223c67d4d717b5a0a5cb77565633798d01374d3a3fcc1df4b2b26425c64736f6c63430008190033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "60:283:3:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "60:283:3:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\ncontract RealEstateInfo {\r\n\r\n    string buildingID;\r\n    string buildingName;\r\n    string roadNameAddr;\r\n    string buildingType;\r\n    string completionDate;\r\n    uint8 numberOfFloors;\r\n    uint256 totalArea;\r\n    uint256 ownerID;\r\n    string usageStatus;\r\n    uint256 landArea;\r\n\r\n}",
+  "sourcePath": "C:\\SSAFY\\S10P31C203\\smart-contract\\contracts\\real-estate\\RealEstateInfo.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/real-estate/RealEstateInfo.sol",
+    "exportedSymbols": {
+      "RealEstateInfo": [
+        228
+      ]
+    },
+    "id": 229,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 207,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "RealEstateInfo",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 228,
+        "linearizedBaseContracts": [
+          228
+        ],
+        "name": "RealEstateInfo",
+        "nameLocation": "69:14:3",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 209,
+            "mutability": "mutable",
+            "name": "buildingID",
+            "nameLocation": "100:10:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "93:17:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 208,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "93:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 211,
+            "mutability": "mutable",
+            "name": "buildingName",
+            "nameLocation": "124:12:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "117:19:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 210,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "117:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 213,
+            "mutability": "mutable",
+            "name": "roadNameAddr",
+            "nameLocation": "150:12:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "143:19:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 212,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "143:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 215,
+            "mutability": "mutable",
+            "name": "buildingType",
+            "nameLocation": "176:12:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "169:19:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 214,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "169:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 217,
+            "mutability": "mutable",
+            "name": "completionDate",
+            "nameLocation": "202:14:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "195:21:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 216,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "195:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 219,
+            "mutability": "mutable",
+            "name": "numberOfFloors",
+            "nameLocation": "229:14:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "223:20:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint8",
+              "typeString": "uint8"
+            },
+            "typeName": {
+              "id": 218,
+              "name": "uint8",
+              "nodeType": "ElementaryTypeName",
+              "src": "223:5:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint8",
+                "typeString": "uint8"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 221,
+            "mutability": "mutable",
+            "name": "totalArea",
+            "nameLocation": "258:9:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "250:17:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 220,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "250:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 223,
+            "mutability": "mutable",
+            "name": "ownerID",
+            "nameLocation": "282:7:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "274:15:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 222,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "274:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 225,
+            "mutability": "mutable",
+            "name": "usageStatus",
+            "nameLocation": "303:11:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "296:18:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage",
+              "typeString": "string"
+            },
+            "typeName": {
+              "id": 224,
+              "name": "string",
+              "nodeType": "ElementaryTypeName",
+              "src": "296:6:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_string_storage_ptr",
+                "typeString": "string"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 227,
+            "mutability": "mutable",
+            "name": "landArea",
+            "nameLocation": "329:8:3",
+            "nodeType": "VariableDeclaration",
+            "scope": 228,
+            "src": "321:16:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 226,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "321:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 229,
+        "src": "60:283:3",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "33:310:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.25+commit.b61c2a91.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-05-02T07:19:17.842Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

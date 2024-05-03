@@ -5,6 +5,7 @@ import SearchBar from '@common/SearchBar'
 import useDownloadPDF from '@/hooks/useDownloadPdf'
 import { useAtom } from 'jotai'
 import { mapAtom } from '@/stores/atoms/EstateListStore'
+import { useNavigate } from 'react-router-dom'
 
 //props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
 // example
@@ -17,6 +18,7 @@ import { mapAtom } from '@/stores/atoms/EstateListStore'
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
   const downloadPdf = useDownloadPDF()
   const [menu, setMenu] = useAtom(mapAtom)
+  const navigate = useNavigate()
   return (
     <h.HeaderContainer>
       <h.HeaderLeftContainer>
@@ -24,6 +26,7 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
           className="back-arrow"
           alt="뒤로가기"
           src="/icon/icon_back_arrow.png"
+          onClick={() => navigate(-1)}
         />
 
         {HeaderProps.isSearch ? (

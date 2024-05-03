@@ -1,4 +1,4 @@
-import { Button } from '@/common/style/Button'
+import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { ContractStartContainer } from './style/ContractStart'
 import { useAtom } from 'jotai'
 import { contractStepAtom } from '@/stores/smartcontract'
@@ -14,7 +14,9 @@ const ContractStart = () => {
         카드 예정
       </div>
       <div className="button-box">
-        <Button onClick={handleNext}>부동산 거래 시작</Button>
+        <CustomButtonStyle onClick={handleNext}>
+          부동산 거래 시작
+        </CustomButtonStyle>
       </div>
     </ContractStartContainer>
   )
