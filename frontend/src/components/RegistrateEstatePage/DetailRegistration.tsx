@@ -69,25 +69,6 @@ const DetailRegistration = () => {
                 <div className="title">입주가능일</div>
                 <DetailRegistrationBigInput placeholder="예) 즉시 입주, 날짜 협의, 7월 중"/>
             </d.DetailRegistrationSession>
-            <d.DetailRegistrationSession>
-                <div className="title">층 / 구조</div>
-                <d.DetailRegistrationWrapperInput>
-                    <d.DetailRegistrationInputNumber>
-                        <div className="title">전체층</div>
-                        <div className="input-wrapper">
-                            <input className="input-number" type="number" min="1"/>
-                            <div className="label">층</div>
-                        </div>
-                    </d.DetailRegistrationInputNumber>
-                    <d.DetailRegistrationInputNumber>
-                        <div className="title">해당층</div>
-                        <div className="input-wrapper">
-                            <input className="input-number" type="number" min="1"/>
-                            <div className="label">층</div>
-                        </div>
-                    </d.DetailRegistrationInputNumber>
-                </d.DetailRegistrationWrapperInput>
-            </d.DetailRegistrationSession>
         </d.DetailRegistrationContainer>
     );
 }
