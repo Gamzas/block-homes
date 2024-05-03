@@ -4,13 +4,13 @@ import ReactApexChart from 'react-apexcharts'
 import { ApexOptions } from 'apexcharts'
 const getGaugeColor = steps => {
   if (steps <= 2) return '#FF0000'
-  if (steps === 3) return '#00FF00'
+  if (steps <= 4) return '#FFA500'
   return '#845BD3' // Purple
 }
 
 const getStatusMessage = steps => {
   if (steps <= 2) return '위험'
-  if (steps === 3) return '경계'
+  if (steps <= 4) return '경계'
   return '안전'
 }
 
@@ -48,13 +48,13 @@ const Gauge = ({ steps }) => {
         track: {
           background: '#e7e7e7',
           strokeWidth: '100%',
-          margin: 11,
+          margin: 13,
           dropShadow: {
             enabled: true,
             top: 2,
             left: 0,
             color: '#999',
-            opacity: 1,
+            opacity: 0.1,
             blur: 2,
           },
         },
@@ -71,7 +71,7 @@ const Gauge = ({ steps }) => {
     },
     grid: {
       padding: {
-        top: -10,
+        top: -19,
       },
     },
     fill: {
@@ -102,7 +102,8 @@ const Gauge = ({ steps }) => {
           series={options.series}
           type="radialBar"
           options={options}
-          height={150}
+          // width={400}
+          height={180}
         />
         <div className="status-text" style={{ color: getGaugeColor(steps) }}>
           {' '}
