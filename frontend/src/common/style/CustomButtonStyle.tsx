@@ -46,9 +46,9 @@ export const CustomButtonStyle = styled.button<ButtonProps>`
 {
   /*
   버튼사용방법
-  <Button disabled>비활성화 버튼</StyledButton>
-  <Button>보라색 기본 버튼</StyledButton>
-  <Button $small>작은 버튼</Button>
-  <Button $secondary>회색 버튼</StyledButton>
-  <Button $small secondary>회색 작은 버튼</StyledButton> */
+  <CustomButtonStyle disabled>비활성화 버튼</CustomButtonStyle>
+  <CustomButtonStyle>보라색 기본 버튼</CustomButtonStyle>
+  <CustomButtonStyle $small>작은 버튼</CustomButtonStyle>
+  <CustomButtonStyle $secondary>회색 버튼</CustomButtonStyle>
+  <CustomButtonStyle $small secondary>회색 작은 버튼</CustomButtonStyle> */
 }

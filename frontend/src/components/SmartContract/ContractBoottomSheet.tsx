@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ContractBottomContainer } from './style/BoottomSheetStyle'
-import { Button } from '@/common/style/Button'
+import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { useAtom } from 'jotai'
 import { contractStepAtom } from '@/stores/smartcontract'
 
@@ -36,19 +36,21 @@ const ContractBoottomSheet = () => {
               추후 해당 내용과 관련한 권리구제가 어려울 수 있어요.
             </div>
 
-            <Button
+            <CustomButtonStyle
               $secondary
               onClick={toggleSheet}
               style={{ marginBottom: '10px' }}
             >
               닫기
-            </Button>
-            <Button onClick={handleNext}>네, 충분히 이해했어요</Button>
+            </CustomButtonStyle>
+            <CustomButtonStyle onClick={handleNext}>
+              네, 충분히 이해했어요
+            </CustomButtonStyle>
           </>
         ) : (
           <>
             <div className="agree-text">위 사항에 대해서 동의하시겠습니까?</div>
-            <Button onClick={toggleSheet}>확인</Button>
+            <CustomButtonStyle onClick={toggleSheet}>확인</CustomButtonStyle>
           </>
         )}
       </ContractBottomContainer>

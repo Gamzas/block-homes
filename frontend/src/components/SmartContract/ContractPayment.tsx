@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Step from './Step'
 import * as c from './style/ContractPayment'
-import { Button } from '@/common/style/Button'
+import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { useSwipeable } from 'react-swipeable'
 import { contractStepAtom } from '@/stores/smartcontract'
 import { useAtom } from 'jotai'
@@ -88,7 +88,9 @@ const ContractPayment = () => {
         )}
 
         <div className="button-box">
-          <Button disabled={screenIndex === 0} onClick={handleNext}>결제</Button>
+          <CustomButtonStyle disabled={screenIndex === 0} onClick={handleNext}>
+            결제
+          </CustomButtonStyle>
         </div>
      
       </c.ScreenContainer>
