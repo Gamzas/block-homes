@@ -1,11 +1,12 @@
 import Accordion from "@components/RegistrateEstatePage/Accordion";
 import CheckEstate from "@components/RegistrateEstatePage/CheckEstate";
 import {AccordionGroupContainer} from "@components/RegistrateEstatePage/style/AccordionGroupStyle";
+import DetailRegistration from "@components/RegistrateEstatePage/DetailRegistration";
 
 const AccordionGroup = ({maxOpenIndex, isOpenArray, setIsOpenArray}) => {
     const accordions = [
         {title: "1. 임대목적물 확인", children: <CheckEstate/>},
-        {title: "2. 거래 상세 정보", children: <CheckEstate/>},
+        {title: "2. 거래 상세 정보", children: <DetailRegistration/>},
         {title: "3. 방 정보", children: <CheckEstate/>},
         {title: "4. 사진 등록", children: <CheckEstate/>},
     ]
