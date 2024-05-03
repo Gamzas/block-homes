@@ -5,7 +5,7 @@ interface ButtonProps {
   $small?: boolean
 }
 
-export const Button = styled.button<ButtonProps>`
+export const CustomButtonStyle = styled.button<ButtonProps>`
   background: ${props => (props.$secondary ? '#D9D9D9' : '#845BD3')};
   color: ${props => (props.$secondary ? '#666' : 'white')};
   width: ${props => (props.$small ? '93px' : '267.84px')};
@@ -19,10 +19,12 @@ export const Button = styled.button<ButtonProps>`
 
   &:hover {
   }
+
   transition:
-    transform 0.1s ease-in-out,
-    background-color 0.1s ease-in-out,
-    box-shadow 0.1s ease-in-out;
+    transform 0.5s ease-in-out,
+    background-color 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out;
+
   &:active {
     transform: scale(0.96);
     background-color: ${props => (props.$secondary ? '#bfbfbf' : '#7e57c2')};
