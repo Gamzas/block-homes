@@ -7,14 +7,12 @@ import { contractStepAtom } from '@/stores/smartcontract'
 import { useAtom } from 'jotai'
 import ScreenIndicators from './ScreenIndicator'
 
-
-
 const ContractPayment = () => {
-  const [step,setStep] = useAtom(contractStepAtom)
+  const [step, setStep] = useAtom(contractStepAtom)
   const [screenIndex, setScreenIndex] = useState(0)
   const totalScreens = 2
 
-  const handleNext = () =>{
+  const handleNext = () => {
     setStep(step + 1)
   }
   const nextScreen = () => {
@@ -39,15 +37,18 @@ const ContractPayment = () => {
     // preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   })
+
   return (
     <>
       <Step currentindex={2}></Step>
       <c.ScreenContainer {...swipeHandlers}>
-    
         <div className="contract-text">
           계약 내용을<br></br>확인해주세요
         </div>
-        <ScreenIndicators totalScreens={totalScreens} currentIndex={screenIndex}></ScreenIndicators>
+        <ScreenIndicators
+          totalScreens={totalScreens}
+          currentIndex={screenIndex}
+        ></ScreenIndicators>
 
         {screenIndex === 0 && (
           <div>
@@ -92,7 +93,6 @@ const ContractPayment = () => {
             결제
           </CustomButtonStyle>
         </div>
-     
       </c.ScreenContainer>
     </>
   )
