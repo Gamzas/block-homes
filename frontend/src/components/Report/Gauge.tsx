@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { GaugeContainer } from './style/GuageStyle'
 import ReactApexChart from 'react-apexcharts'
-import { ApexOptions } from "apexcharts";
+import { ApexOptions } from 'apexcharts'
 const getGaugeColor = steps => {
   if (steps <= 2) return '#FF0000'
   if (steps === 3) return '#00FF00'
@@ -9,10 +9,10 @@ const getGaugeColor = steps => {
 }
 
 const getStatusMessage = steps => {
-  if (steps <= 2) return '위험';
-  if (steps === 3) return '경계';
-  return '안전';
-};
+  if (steps <= 2) return '위험'
+  if (steps === 3) return '경계'
+  return '안전'
+}
 
 const getPointerAngle = steps => {
   return -90 + (steps * 180) / 5
@@ -32,23 +32,23 @@ const getColorStops = steps => [
 ]
 
 const Gauge = ({ steps }) => {
-  const options:ApexOptions = {
-    series: [steps * 20], 
+  const options: ApexOptions = {
+    series: [steps * 20],
     chart: {
       type: 'radialBar',
-      offsetY: 0, 
+      offsetY: 0,
       sparkline: {
-        enabled: false, 
+        enabled: false,
       },
     },
     plotOptions: {
       radialBar: {
-        startAngle: -90, 
-        endAngle: 90, 
+        startAngle: -90,
+        endAngle: 90,
         track: {
-          background: '#e7e7e7', 
-          strokeWidth: '100%', 
-          margin: 11, 
+          background: '#e7e7e7',
+          strokeWidth: '100%',
+          margin: 11,
           dropShadow: {
             enabled: true,
             top: 2,
@@ -60,11 +60,11 @@ const Gauge = ({ steps }) => {
         },
         dataLabels: {
           name: {
-            show: false, 
+            show: false,
           },
           value: {
-            offsetY: -2, 
-            fontSize: '0px', 
+            offsetY: -2,
+            fontSize: '0px',
           },
         },
       },
@@ -82,11 +82,11 @@ const Gauge = ({ steps }) => {
         // inverseColors: false,
         opacityFrom: 1,
         opacityTo: 1,
-        stops: [0, 100], 
+        stops: [0, 100],
         colorStops: getColorStops(steps),
       },
     },
-    labels: ['Average Results'], // 차트 레이블을 설정합니다.
+    labels: ['Average Results'], // 차트 레이블을 설정
   }
 
   const [angle, setAngle] = useState(-90)
@@ -97,16 +97,24 @@ const Gauge = ({ steps }) => {
 
   return (
     <>
-      <GaugeContainer >
+      <GaugeContainer>
         <ReactApexChart
           series={options.series}
           type="radialBar"
           options={options}
           height={150}
         />
-        <div className='status-text' style={{color:getGaugeColor(steps)}}> {getStatusMessage(steps)}</div>
-        <div className="pointer" style={{ transform: `rotate(${angle}deg)` }}>
-      </div>
+        <div className="status-text" style={{ color: getGaugeColor(steps) }}>
+          {' '}
+          {getStatusMessage(steps)}
+        </div>
+
+        <div
+          className="pointer"
+          style={{
+            transform: `rotate(${angle}deg)`,
+          }}
+        ></div>
       </GaugeContainer>
     </>
   )
