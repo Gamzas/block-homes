@@ -22,7 +22,7 @@ export const AccordionSummary = styled.div`
     }
 `
 
-export const AccordionToggleIcon = styled.div`
+export const AccordionToggleIcon = styled.div<{ $isOpen: boolean }>`
     width: 15px;
     height: 15px;
     background-image: url("/icon/icon_vertical_arrow.png");
@@ -33,7 +33,7 @@ export const AccordionToggleIcon = styled.div`
     transition: transform 0.3s ease-in-out;
 `;
 
-export const AccordionDetails = styled.div`
+export const AccordionDetails = styled.div<{ $isOpen: boolean }>`
     width: 100%;
     overflow: hidden; // 내용이 접힐 때 내용이 보이지 않도록 설정
     transition: max-height 0.5s ease-in-out; // 부드러운 전환 효과
