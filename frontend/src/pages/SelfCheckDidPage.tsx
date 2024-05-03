@@ -1,6 +1,9 @@
 import * as s from '@pages/style/SelfCheckDidPageStyle'
 import Header from '@common/Header'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
+import AddressInput from '@components/SelfCheckDidPage/AddressInput'
+import SimpleInput from '@components/SelfCheckDidPage/SimpleInput'
+import RealEstateTypeInput from '@components/SelfCheckDidPage/RealEstateTypeInput'
 
 const SelfCheckDidPage = () => {
   return (
@@ -12,6 +15,10 @@ const SelfCheckDidPage = () => {
       <div className="info-text">
         등록하고자 하는 목적물의 정보를 기입해주세요.
       </div>
+      <AddressInput />
+      <SimpleInput />
+      <RealEstateTypeInput />
+      <SimpleInput />
     </s.SelfUploadDidPageContainer>
   )
 }
