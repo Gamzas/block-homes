@@ -1,39 +1,52 @@
 import * as o from '@components/MainPage/style/OwnEstateDidListStyle'
 import EstateDidCard from '@common/EstateDidCard'
-import Carousel from '@components/MainPage/Carousel'
+import CustomCarousel from '@components/MainPage/CustomCarousel'
 import EmptyEstateDidCard from '@components/CheckDidPage/EmptyEstateDidCard'
+import { useState } from 'react'
 
 const OwnEstateDidList = () => {
+  const [currentCenterIndex, setCurrentCenterIndex] = useState(0)
+
+  const handleCenterChange = (newIndex: number) => {
+    setCurrentCenterIndex(newIndex)
+  }
+
   const cards = [
     {
+      key: 0,
+      content: (
+        <EstateDidCard index={0} currentCenterIndex={currentCenterIndex} />
+      ),
+    },
+    {
       key: 1,
-      content: <EstateDidCard />,
+      content: (
+        <EstateDidCard index={1} currentCenterIndex={currentCenterIndex} />
+      ),
     },
     {
       key: 2,
-      content: <EstateDidCard />,
+      content: (
+        <EstateDidCard index={2} currentCenterIndex={currentCenterIndex} />
+      ),
     },
     {
       key: 3,
-      content: <EstateDidCard />,
-    },
-    {
-      key: 4,
-      content: <EmptyEstateDidCard />,
+      content: (
+        <EmptyEstateDidCard index={3} currentCenterIndex={currentCenterIndex} />
+      ),
     },
   ]
 
   return (
     <o.OwnEstateDidListContainer>
       <div className="estate-did-info-text">내 부동산 DID 목록</div>
-      <o.DidListCarousel>
-        <Carousel
-          cards={cards}
-          offset={50}
-          showArrows={false}
-          showNavigation={false}
-        />
-      </o.DidListCarousel>
+      <CustomCarousel
+        cards={cards}
+        offset={100}
+        currentCenterIndex={currentCenterIndex}
+        setCurrentCenterIndex={handleCenterChange}
+      />
     </o.OwnEstateDidListContainer>
   )
 }

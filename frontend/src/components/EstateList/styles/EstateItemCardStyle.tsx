@@ -26,14 +26,14 @@ export const BackgroundContainer = styled.div`
     width: 100%;
     height: 10rem;
   }
-  .big-wave {
+  .bigWave {
     position: absolute;
     bottom: 0;
     left: 0;
     border-radius: 1.5rem;
   }
 
-  .small-wave {
+  .smallWave {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -75,7 +75,7 @@ export const LocationContainer = styled.div<colorType>`
   top: 1rem;
   left: 1rem;
   position: absolute;
-  .location-icon {
+  .locationIcon {
     margin-right: 0.2rem;
     width: 1rem;
     height: 100%;

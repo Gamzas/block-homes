@@ -1,9 +1,9 @@
+import { useAtom } from 'jotai'
 import Footer from '@/common/Footer'
 import Header from '@/common/Header'
 import { mapAtom } from '@/stores/atoms/EstateListStore'
 import * as r from '@pages/style/RealEstatePageStyle'
-import { useAtom } from 'jotai'
-import { Outlet } from 'react-router-dom'
+import EstateItemList from '@/components/EstateList/EstateItemList'
 
 const RealEstatePage = () => {
   const [menu] = useAtom(mapAtom)
@@ -14,7 +14,7 @@ const RealEstatePage = () => {
         isSearch={true}
         rightIconSrc={menu ? '/icon/icon_map.png' : '/icon/icon_list.png'}
       />
-      <Outlet />
+      <EstateItemList />
       <Footer />
     </r.Container>
   )

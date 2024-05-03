@@ -1,13 +1,42 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1000,
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.svg', 'robots.txt'], // 정적 파일 목록
+      manifest: {
+        name: 'BLOCK-HOMES',
+        short_name: 'BLOCKHOMES',
+        description: '',
+        start_url: '',
+        display: 'standalone',
+        orientation: 'portrait',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        icons: [
+          {
+            src: 'icon/icon_main_character_192x192.png', // 192x192 크기의 아이콘
+            type: 'image/png',
+            sizes: '192x192',
+          },
+          {
+            src: 'icon/icon_main_character_512x512.png', // 512x512 크기의 아이콘
+            type: 'image/png',
+            sizes: '512x512',
+          },
+        ],
+      },
+    }),
+  ],
   define: {
     global: 'window',
   },
