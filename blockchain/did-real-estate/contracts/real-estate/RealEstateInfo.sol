@@ -2,69 +2,111 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "../structs/RealEstateStructs.sol";
 
 contract RealEstateInfo is Ownable {
 
-    struct HeadLine {
-        uint8 num;
-        string registeration;
-        string location;
-        string buildingInfo;
-        string reasonAndEtc;
-    }
-
-    struct Section {
-        uint8 rank; // 순위번호
-        string purpose; // 등기목적
-        string registeration; // 접수
-        string reason; // 등기원인
-        string holderAndEtc; // 권리자 및 기타사항
-    }
-
-    struct StructureStatus {
-        string category; // 구분
-        uint8 floorNumber; // 층별
-        string structure; // 구조
-        string usage; // 용도
-        string area; // 면적
-    }
+    RealEstateStructs.RealEstateBasicInfo basicInfo;
+    RealEstateStructs.RealEstateRegistryCertificate registryCertificate;
+    RealEstateStructs.BuildingManagementRecord buildingManagementRecord;
 
     constructor() Ownable(msg.sender) {}
 
-    // 부동산 기본 정보
-    string roadNameAddress; // 도로명주소
-    string buildingName; // 건물명
-    uint8 buildingNumber; // 동 번호 (아파트 동)
-    uint8 roomNumber; // 호수 번호
-    string genDate; // 생성 일자
+    function setRealEstateBasicInfo(RealEstateStructs.RealEstateBasicInfo calldata _basicInfo) external onlyOwner {
+        basicInfo = RealEstateStructs.RealEstateBasicInfo({
+            roadNameAddress: _basicInfo.roadNameAddress,
+            buildingName: _basicInfo.buildingName,
+            buildingNumber: _basicInfo.buildingNumber,
+            roomNumber: _basicInfo.roomNumber,
+            genDate: _basicInfo.genDate
+        });
+    }
 
-    // 등기부등본
-    HeadLine headline; // 표제부
-    Section rightsSection; // 갑구 (소유권 변동 및 관련 권리)
-    Section encumbrancesSection; // 을구 (저당권, 지상권, 전세권 등의 권리사항)
+    function setHeadLine(RealEstateStructs.HeadLine calldata _headline) external onlyOwner {
+        registryCertificate.headline = RealEstateStructs.HeadLine({
+            num: _headline.num,
+            registration: _headline.registration,
+            location: _headline.location,
+            buildingInfo: _headline.buildingInfo,
+            reasonAndEtc: _headline.reasonAndEtc
+        });
+    }
+
+    function setRightsSection(RealEstateStructs.Section calldata _rightsSection) external onlyOwner {
+        registryCertificate.rightsSection = RealEstateStructs.Section({
+            rank: _rightsSection.rank,
+            purpose: _rightsSection.purpose,
+            registration: _rightsSection.registration,
+            reason: _rightsSection.reason,
+            holderAndEtc: _rightsSection.holderAndEtc
+        });
+    }
+
+    function setEncumbrancesSection(RealEstateStructs.Section calldata _encumbrancesSection) external onlyOwner {
+        registryCertificate.rightsSection = RealEstateStructs.Section({
+            rank: _encumbrancesSection.rank,
+            purpose: _encumbrancesSection.purpose,
+            registration: _encumbrancesSection.registration,
+            reason: _encumbrancesSection.reason,
+            holderAndEtc: _encumbrancesSection.holderAndEtc
+        });
+    }
+
+    function setBuildingManagementRecord(RealEstateStructs.BuildingManagementRecord calldata _buildingManagementRecord) external onlyOwner {
+        buildingManagementRecord.isViolated = _buildingManagementRecord.isViolated;
+        buildingManagementRecord.units = _buildingManagementRecord.units;
+        buildingManagementRecord.households = _buildingManagementRecord.households;
+        buildingManagementRecord.dwellingUnits = _buildingManagementRecord.dwellingUnits;
+        buildingManagementRecord.landLocation = _buildingManagementRecord.landLocation;
+        buildingManagementRecord.landNumber = _buildingManagementRecord.landNumber;
+        buildingManagementRecord.landArea = _buildingManagementRecord.landArea;
+        buildingManagementRecord.totalFloorArea = _buildingManagementRecord.totalFloorArea;
+        buildingManagementRecord.region = _buildingManagementRecord.region;
+        buildingManagementRecord.buildingArea = _buildingManagementRecord.buildingArea;
+        buildingManagementRecord.mainStructure = _buildingManagementRecord.mainStructure;
+        buildingManagementRecord.mainUsage = _buildingManagementRecord.mainUsage;
+        buildingManagementRecord.basementFloorCount = _buildingManagementRecord.basementFloorCount;
+        buildingManagementRecord.aboveGroundFloorCount = _buildingManagementRecord.aboveGroundFloorCount;
+        buildingManagementRecord.height = _buildingManagementRecord.height;
+        buildingManagementRecord.floor = _buildingManagementRecord.floor;
+
+        // Clear the existing statuses array
+        delete buildingManagementRecord.statuses;
+        
+        // Copy each status from calldata to storage
+        for (uint i = 0; i < _buildingManagementRecord.statuses.length; i++) {
+            buildingManagementRecord.statuses.push(_buildingManagementRecord.statuses[i]);
+        }
+    }
 
 
-    // 건축물 관리대장
-    bool violatedBuildingStatus; // 위반건축물 여부
+    function addStatus(RealEstateStructs.StructureStatus calldata _status) external onlyOwner {
+        buildingManagementRecord.statuses.push(RealEstateStructs.StructureStatus({
+            category: _status.category,
+            floorNumber: _status.floorNumber,
+            structure: _status.structure,
+            usage: _status.usage,
+            area: _status.area
+        }));
+    }
 
-    uint8 unitCount; // 호수
-    uint8 householdCount; // 가구 수
-    uint8 dwellingUnitCount; // 세대 수
+    function getRealEstateFullInfo() external view returns (
+        RealEstateStructs.RealEstateBasicInfo memory, 
+        RealEstateStructs.RealEstateRegistryCertificate memory, 
+        RealEstateStructs.BuildingManagementRecord memory) {
+        return (basicInfo, registryCertificate, buildingManagementRecord);
+    }
 
-    string landLocation; // 대지위치
-    uint8 landNumber; // 지번
-    string landArea; // 대지면적
-    string grossFloorArea; // 연면적
-    string region; // 지역
-    string buildingArea; // 건축면적
-    string mainStructure; // 주구조
-    string mainUsage; // 주용도
-    uint8 baseFloorCount; // 지하 층수
-    uint8 aboveGroundFloorCount; // 지상층수
-    
-    string height; // 높이
-    string floor; // 지붕
+    function getBasicInfo() external view returns (RealEstateStructs.RealEstateBasicInfo memory) {
+        return basicInfo;
+    }
 
-    StructureStatus[] statuses; // 건축물 현황 배열
+    function getRegistryCertificate() external view returns (RealEstateStructs.RealEstateRegistryCertificate memory) {
+        return registryCertificate;
+    }
+
+    function getBuildingManagementRecord() external view returns (RealEstateStructs.BuildingManagementRecord memory) {
+        return buildingManagementRecord;
+    }
 
 }

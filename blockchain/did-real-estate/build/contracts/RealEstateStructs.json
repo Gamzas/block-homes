@@ -1,0 +1,1278 @@
+{
+  "contractName": "RealEstateStructs",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/RealEstateStructs.sol\":\"RealEstateStructs\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/RealEstateStructs.sol\":{\"keccak256\":\"0xd11cfb00881c2b7cc3b67ae59f1233207659401ffab15b9188abf0eb85d35c6e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d439a305fcf8d1a394b4a12855e164bd93511fc52c8f19fae140e5ca851ea4b2\",\"dweb:/ipfs/QmXthUoujafcVcZ4zUv1XjhPTGRSxZCHR8onfWF2zi6exF\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f4a32d25a4afb36977651bef213ce13bb2b08c8d17a4aca2c3c28c253a02aa5864736f6c63430008190033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f4a32d25a4afb36977651bef213ce13bb2b08c8d17a4aca2c3c28c253a02aa5864736f6c63430008190033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "57:2172:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "57:2172:3:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nlibrary RealEstateStructs {\n\n    // 등기부등본 표제부\n    struct HeadLine {\n        uint8 num;\n        string registration;\n        string location;\n        string buildingInfo;\n        string reasonAndEtc;\n    }\n\n    // 등기부등본 갑구, 을구\n    struct Section {\n        uint8 rank; // 순위번호\n        string purpose; // 등기목적\n        string registration; // 접수\n        string reason; // 등기원인\n        string holderAndEtc; // 권리자 및 기타사항\n    }\n\n    // 건축물관리대장 층별 건축물 현황\n    struct StructureStatus {\n        string category; // 구분\n        uint8 floorNumber; // 층별\n        string structure; // 구조\n        string usage; // 용도\n        string area; // 면적\n    }\n\n    // 부동산 기본 정보\n    struct RealEstateBasicInfo {\n        string roadNameAddress; // 도로명주소\n        string buildingName; // 건물명\n        uint8 buildingNumber; // 동 번호 (아파트 동)\n        uint8 roomNumber; // 호수 번호\n        string genDate; // 생성 일자\n    }\n\n    // 등기부등본\n    struct RealEstateRegistryCertificate {\n        HeadLine headline; // 표제부\n        Section rightsSection; // 갑구 (소유권 변동 및 관련 권리)\n        Section encumbrancesSection; // 을구 (저당권, 지상권, 전세권 등의 권리사항)\n    }\n\n    // 건축물 관리대장\n    struct BuildingManagementRecord {\n        bool isViolated; // 위반건축물 여부\n\n        uint8 units; // 호수\n        uint8 households; // 가구 수\n        uint8 dwellingUnits; // 세대 수\n\n        string landLocation; // 대지위치\n        uint8 landNumber; // 지번\n        string landArea; // 대지면적\n        string totalFloorArea; // 연면적\n        string region; // 지역\n        string buildingArea; // 건축면적\n        string mainStructure; // 주구조\n        string mainUsage; // 주용도\n        uint8 basementFloorCount; // 지하 층수\n        uint8 aboveGroundFloorCount; // 지상층수\n        \n        string height; // 높이\n        string floor; // 지붕\n\n        StructureStatus[] statuses; // 건축물 현황 배열\n    }\n\n}",
+  "sourcePath": "/Users/sejin/Desktop/Development/C203/S10P31C203/blockchain/did-real-estate/contracts/structs/RealEstateStructs.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/structs/RealEstateStructs.sol",
+    "exportedSymbols": {
+      "RealEstateStructs": [
+        356
+      ]
+    },
+    "id": 357,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 264,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "RealEstateStructs",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 356,
+        "linearizedBaseContracts": [
+          356
+        ],
+        "name": "RealEstateStructs",
+        "nameLocation": "65:17:3",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "RealEstateStructs.HeadLine",
+            "id": 275,
+            "members": [
+              {
+                "constant": false,
+                "id": 266,
+                "mutability": "mutable",
+                "name": "num",
+                "nameLocation": "155:3:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 275,
+                "src": "149:9:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 265,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "149:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 268,
+                "mutability": "mutable",
+                "name": "registration",
+                "nameLocation": "175:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 275,
+                "src": "168:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 267,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "168:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 270,
+                "mutability": "mutable",
+                "name": "location",
+                "nameLocation": "204:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 275,
+                "src": "197:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 269,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "197:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 272,
+                "mutability": "mutable",
+                "name": "buildingInfo",
+                "nameLocation": "229:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 275,
+                "src": "222:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 271,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "222:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 274,
+                "mutability": "mutable",
+                "name": "reasonAndEtc",
+                "nameLocation": "258:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 275,
+                "src": "251:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 273,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "251:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "HeadLine",
+            "nameLocation": "130:8:3",
+            "nodeType": "StructDefinition",
+            "scope": 356,
+            "src": "123:154:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "RealEstateStructs.Section",
+            "id": 286,
+            "members": [
+              {
+                "constant": false,
+                "id": 277,
+                "mutability": "mutable",
+                "name": "rank",
+                "nameLocation": "352:4:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 286,
+                "src": "346:10:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 276,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "346:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 279,
+                "mutability": "mutable",
+                "name": "purpose",
+                "nameLocation": "389:7:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 286,
+                "src": "382:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 278,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "382:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 281,
+                "mutability": "mutable",
+                "name": "registration",
+                "nameLocation": "429:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 286,
+                "src": "422:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 280,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "422:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 283,
+                "mutability": "mutable",
+                "name": "reason",
+                "nameLocation": "468:6:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 286,
+                "src": "461:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 282,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "461:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 285,
+                "mutability": "mutable",
+                "name": "holderAndEtc",
+                "nameLocation": "507:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 286,
+                "src": "500:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 284,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "500:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Section",
+            "nameLocation": "328:7:3",
+            "nodeType": "StructDefinition",
+            "scope": 356,
+            "src": "321:235:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "RealEstateStructs.StructureStatus",
+            "id": 297,
+            "members": [
+              {
+                "constant": false,
+                "id": 288,
+                "mutability": "mutable",
+                "name": "category",
+                "nameLocation": "655:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 297,
+                "src": "648:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 287,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "648:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 290,
+                "mutability": "mutable",
+                "name": "floorNumber",
+                "nameLocation": "689:11:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 297,
+                "src": "683:17:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 289,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "683:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 292,
+                "mutability": "mutable",
+                "name": "structure",
+                "nameLocation": "727:9:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 297,
+                "src": "720:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 291,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "720:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 294,
+                "mutability": "mutable",
+                "name": "usage",
+                "nameLocation": "763:5:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 297,
+                "src": "756:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 293,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "756:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 296,
+                "mutability": "mutable",
+                "name": "area",
+                "nameLocation": "795:4:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 297,
+                "src": "788:11:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 295,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "788:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "StructureStatus",
+            "nameLocation": "622:15:3",
+            "nodeType": "StructDefinition",
+            "scope": 356,
+            "src": "615:201:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "RealEstateStructs.RealEstateBasicInfo",
+            "id": 308,
+            "members": [
+              {
+                "constant": false,
+                "id": 299,
+                "mutability": "mutable",
+                "name": "roadNameAddress",
+                "nameLocation": "897:15:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 308,
+                "src": "890:22:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 298,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "890:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 301,
+                "mutability": "mutable",
+                "name": "buildingName",
+                "nameLocation": "948:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 308,
+                "src": "941:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 300,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "941:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 303,
+                "mutability": "mutable",
+                "name": "buildingNumber",
+                "nameLocation": "989:14:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 308,
+                "src": "983:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 302,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "983:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 305,
+                "mutability": "mutable",
+                "name": "roomNumber",
+                "nameLocation": "1049:10:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 308,
+                "src": "1043:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 304,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1043:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 307,
+                "mutability": "mutable",
+                "name": "genDate",
+                "nameLocation": "1093:7:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 308,
+                "src": "1086:14:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 306,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1086:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "RealEstateBasicInfo",
+            "nameLocation": "860:19:3",
+            "nodeType": "StructDefinition",
+            "scope": 356,
+            "src": "853:271:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "RealEstateStructs.RealEstateRegistryCertificate",
+            "id": 318,
+            "members": [
+              {
+                "constant": false,
+                "id": 311,
+                "mutability": "mutable",
+                "name": "headline",
+                "nameLocation": "1209:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 318,
+                "src": "1200:17:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_HeadLine_$275_storage_ptr",
+                  "typeString": "struct RealEstateStructs.HeadLine"
+                },
+                "typeName": {
+                  "id": 310,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 309,
+                    "name": "HeadLine",
+                    "nameLocations": [
+                      "1200:8:3"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 275,
+                    "src": "1200:8:3"
+                  },
+                  "referencedDeclaration": 275,
+                  "src": "1200:8:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_HeadLine_$275_storage_ptr",
+                    "typeString": "struct RealEstateStructs.HeadLine"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 314,
+                "mutability": "mutable",
+                "name": "rightsSection",
+                "nameLocation": "1248:13:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 318,
+                "src": "1240:21:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Section_$286_storage_ptr",
+                  "typeString": "struct RealEstateStructs.Section"
+                },
+                "typeName": {
+                  "id": 313,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 312,
+                    "name": "Section",
+                    "nameLocations": [
+                      "1240:7:3"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 286,
+                    "src": "1240:7:3"
+                  },
+                  "referencedDeclaration": 286,
+                  "src": "1240:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Section_$286_storage_ptr",
+                    "typeString": "struct RealEstateStructs.Section"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 317,
+                "mutability": "mutable",
+                "name": "encumbrancesSection",
+                "nameLocation": "1326:19:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 318,
+                "src": "1318:27:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Section_$286_storage_ptr",
+                  "typeString": "struct RealEstateStructs.Section"
+                },
+                "typeName": {
+                  "id": 316,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 315,
+                    "name": "Section",
+                    "nameLocations": [
+                      "1318:7:3"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 286,
+                    "src": "1318:7:3"
+                  },
+                  "referencedDeclaration": 286,
+                  "src": "1318:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Section_$286_storage_ptr",
+                    "typeString": "struct RealEstateStructs.Section"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "RealEstateRegistryCertificate",
+            "nameLocation": "1160:29:3",
+            "nodeType": "StructDefinition",
+            "scope": 356,
+            "src": "1153:263:3",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "RealEstateStructs.BuildingManagementRecord",
+            "id": 355,
+            "members": [
+              {
+                "constant": false,
+                "id": 320,
+                "mutability": "mutable",
+                "name": "isViolated",
+                "nameLocation": "1499:10:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1494:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 319,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1494:4:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 322,
+                "mutability": "mutable",
+                "name": "units",
+                "nameLocation": "1552:5:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1546:11:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 321,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1546:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 324,
+                "mutability": "mutable",
+                "name": "households",
+                "nameLocation": "1583:10:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1577:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 323,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1577:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 326,
+                "mutability": "mutable",
+                "name": "dwellingUnits",
+                "nameLocation": "1623:13:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1617:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 325,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1617:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 328,
+                "mutability": "mutable",
+                "name": "landLocation",
+                "nameLocation": "1668:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1661:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 327,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1661:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 330,
+                "mutability": "mutable",
+                "name": "landNumber",
+                "nameLocation": "1712:10:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1706:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 329,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1706:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 332,
+                "mutability": "mutable",
+                "name": "landArea",
+                "nameLocation": "1749:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1742:15:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 331,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1742:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 334,
+                "mutability": "mutable",
+                "name": "totalFloorArea",
+                "nameLocation": "1790:14:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1783:21:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 333,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1783:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 336,
+                "mutability": "mutable",
+                "name": "region",
+                "nameLocation": "1834:6:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1827:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 335,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1827:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 338,
+                "mutability": "mutable",
+                "name": "buildingArea",
+                "nameLocation": "1867:12:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1860:19:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 337,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1860:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 340,
+                "mutability": "mutable",
+                "name": "mainStructure",
+                "nameLocation": "1912:13:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1905:20:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 339,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1905:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 342,
+                "mutability": "mutable",
+                "name": "mainUsage",
+                "nameLocation": "1955:9:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1948:16:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 341,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1948:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 344,
+                "mutability": "mutable",
+                "name": "basementFloorCount",
+                "nameLocation": "1993:18:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "1987:24:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 343,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1987:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 346,
+                "mutability": "mutable",
+                "name": "aboveGroundFloorCount",
+                "nameLocation": "2044:21:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "2038:27:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 345,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2038:5:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 348,
+                "mutability": "mutable",
+                "name": "height",
+                "nameLocation": "2107:6:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "2100:13:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 347,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2100:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 350,
+                "mutability": "mutable",
+                "name": "floor",
+                "nameLocation": "2140:5:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "2133:12:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 349,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2133:6:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 354,
+                "mutability": "mutable",
+                "name": "statuses",
+                "nameLocation": "2184:8:3",
+                "nodeType": "VariableDeclaration",
+                "scope": 355,
+                "src": "2166:26:3",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_StructureStatus_$297_storage_$dyn_storage_ptr",
+                  "typeString": "struct RealEstateStructs.StructureStatus[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 352,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 351,
+                      "name": "StructureStatus",
+                      "nameLocations": [
+                        "2166:15:3"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 297,
+                      "src": "2166:15:3"
+                    },
+                    "referencedDeclaration": 297,
+                    "src": "2166:15:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_StructureStatus_$297_storage_ptr",
+                      "typeString": "struct RealEstateStructs.StructureStatus"
+                    }
+                  },
+                  "id": 353,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2166:17:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_StructureStatus_$297_storage_$dyn_storage_ptr",
+                    "typeString": "struct RealEstateStructs.StructureStatus[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "BuildingManagementRecord",
+            "nameLocation": "1459:24:3",
+            "nodeType": "StructDefinition",
+            "scope": 356,
+            "src": "1452:774:3",
+            "visibility": "public"
+          }
+        ],
+        "scope": 357,
+        "src": "57:2172:3",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "32:2197:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.25+commit.b61c2a91.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-05-05T01:12:05.927Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
