@@ -79,7 +79,6 @@ contract RealEstateInfo is Ownable {
         }
     }
 
-
     function addStatus(RealEstateStructs.StructureStatus calldata _status) external onlyOwner {
         buildingManagementRecord.statuses.push(RealEstateStructs.StructureStatus({
             category: _status.category,
@@ -89,6 +88,7 @@ contract RealEstateInfo is Ownable {
             area: _status.area
         }));
     }
+
 
     function getRealEstateFullInfo() external view returns (
         RealEstateStructs.RealEstateBasicInfo memory, 

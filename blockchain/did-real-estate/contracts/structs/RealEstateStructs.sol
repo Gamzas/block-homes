@@ -5,7 +5,7 @@ library RealEstateStructs {
 
     // 등기부등본 표제부
     struct HeadLine {
-        uint8 num;
+        uint32 num;
         string registration;
         string location;
         string buildingInfo;
@@ -34,8 +34,8 @@ library RealEstateStructs {
     struct RealEstateBasicInfo {
         string roadNameAddress; // 도로명주소
         string buildingName; // 건물명
-        uint8 buildingNumber; // 동 번호 (아파트 동)
-        uint8 roomNumber; // 호수 번호
+        uint16 buildingNumber; // 동 번호 (아파트 동)
+        uint16 roomNumber; // 호수 번호
         string genDate; // 생성 일자
     }
 
@@ -50,12 +50,12 @@ library RealEstateStructs {
     struct BuildingManagementRecord {
         bool isViolated; // 위반건축물 여부
 
-        uint8 units; // 호수
-        uint8 households; // 가구 수
-        uint8 dwellingUnits; // 세대 수
+        uint16 units; // 호수
+        uint16 households; // 가구 수
+        uint16 dwellingUnits; // 세대 수
 
         string landLocation; // 대지위치
-        uint8 landNumber; // 지번
+        uint16 landNumber; // 지번
         string landArea; // 대지면적
         string totalFloorArea; // 연면적
         string region; // 지역
