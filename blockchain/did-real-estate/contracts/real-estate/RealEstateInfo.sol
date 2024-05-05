@@ -10,7 +10,7 @@ contract RealEstateInfo is Ownable {
     RealEstateStructs.RealEstateRegistryCertificate registryCertificate;
     RealEstateStructs.BuildingManagementRecord buildingManagementRecord;
 
-    constructor() Ownable(msg.sender) {}
+    constructor(address _owner) Ownable(_owner) {}
 
     function setRealEstateBasicInfo(RealEstateStructs.RealEstateBasicInfo calldata _basicInfo) external onlyOwner {
         basicInfo = RealEstateStructs.RealEstateBasicInfo({
