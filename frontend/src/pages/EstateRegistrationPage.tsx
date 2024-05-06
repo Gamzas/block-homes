@@ -1,13 +1,12 @@
-import * as r from "@pages/style/RegistrateEstatePageStyle";
-import {AccodionWrapper} from "@pages/style/RegistrateEstatePageStyle";
+import * as r from "@pages/style/EstateRegistrationPageStyle";
 import Header from "@common/Header";
 import AccordionGroup from "@components/RegistrateEstatePage/AccordionGroup";
 import {useState} from "react";
 
-const RegistrateEstatePage = () => {
+const EstateRegistrationPage = () => {
     const [openIndex, setOpenIndex] = useState(0);
     const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]); // 각 아코디언의 열림 상태 초기화
-    const buttonNames = ["다음", "완료"]
+    const buttonNames = ["다음", "매물 등록하기"]
 
 
     const handleNextButtonClick = () => {
@@ -26,21 +25,21 @@ const RegistrateEstatePage = () => {
         }
     }
 
-    return (
-        <r.RegistrateEstatePageStyleContainer>
-            <Header
-                title={'매물 등록'}
-                isSearch={false}
-                rightIconSrc={null}
-            />
-            <AccodionWrapper>
-                <AccordionGroup maxOpenIndex={openIndex} isOpenArray={isOpenArray} setIsOpenArray={setIsOpenArray}/>
-            </AccodionWrapper>
-            <r.NextButton onClick={handleNextButtonClick}>
-                {openIndex === 3 ? buttonNames[1] : buttonNames[0]}
-            </r.NextButton>
-        </r.RegistrateEstatePageStyleContainer>
-    )
+  return (
+    <r.EstateRegistrationPageContainer>
+      <Header
+        title={'매물 등록'}
+        isSearch={false}
+        rightIconSrc={null}
+      />
+      <r.AccodionWrapper>
+        <AccordionGroup maxOpenIndex={openIndex} isOpenArray={isOpenArray} setIsOpenArray={setIsOpenArray} />
+      </r.AccodionWrapper>
+      <r.NextButton onClick={handleNextButtonClick}>
+        {openIndex === 3 ? buttonNames[1] : buttonNames[0]}
+      </r.NextButton>
+    </r.EstateRegistrationPageContainer>
+  )
 }
 
-export default RegistrateEstatePage
+export default EstateRegistrationPage
