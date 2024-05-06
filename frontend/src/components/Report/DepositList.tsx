@@ -61,9 +61,9 @@ const DepositList = () => {
         <div
           className={`deposit-explain ${isCharterVisible ? `` : 'isVisible'}`}
         >
-          <div>매매시세 평균 3.63 억원</div>
-          <div>x</div>
-          <div>해당 지역 전세가율 70.7% 기준</div>
+          <div className='text-top'>매매시세 평균 3.63 억원</div>
+          <div className='text-middle'>x</div>
+          <div className='text-bottom'>해당 지역 전세가율 70.7% 기준</div>
         </div>
       </DepositDetailContainer>
       <DepositDetailContainer>
@@ -92,9 +92,9 @@ const DepositList = () => {
         <div
           className={`deposit-explain ${isAuctionVisible ? `` : 'isVisible'}`}
         >
-          <div>매매시세 평균 3.63 억원</div>
-          <div>x</div>
-          <div>해당 경매낙찰가율 84.2% 기준</div>
+          <div className='text-top'>매매시세 평균 3.63 억원</div>
+          <div className='text-middle'>x</div>
+          <div className='text-bottom'>해당 경매낙찰가율 84.2% 기준</div>
         </div>
       </DepositDetailContainer>
     </DepositListContainer>
