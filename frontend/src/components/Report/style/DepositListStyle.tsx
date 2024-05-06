@@ -66,13 +66,13 @@ export const DepositDetailContainer = styled.div`
     border-radius: 0.4375rem;
     background: #f9f9f9;
     box-shadow: 0px 5.972px 5.972px 0px rgba(0, 0, 0, 0.25);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #808080;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.8rem 0.5rem;
+    padding: 1rem 0.7rem;
     
     
     .text-middle{
