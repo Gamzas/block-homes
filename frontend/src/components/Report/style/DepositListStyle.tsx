@@ -20,7 +20,6 @@ export const DepositListContainer = styled.div`
     margin-bottom: 2rem;
     align-items: center;
     display: flex;
-    /* justify-content: space-between; */
   }
   .line {
     width: 100%;
@@ -31,15 +30,26 @@ export const DepositListContainer = styled.div`
 `
 
 export const DepositDetailContainer = styled.div`
-  /* border: 1px solid; */
   margin-bottom: 1.7rem;
 
   .deposit-text {
+    width: 20.1875rem;
     display: flex;
     font-weight: 700;
     font-size: 1rem;
     margin-bottom: 1rem;
+    line-height: 2;
+    align-items: center;
+    .deposit-text-box{
+      width: 95%;
+    }
+
   }
+  .rotate-arrow {
+  transform: rotateX(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+
   .deposit-explain {
     transition:
       opacity 0.5s ease-in-out,
@@ -56,7 +66,7 @@ export const DepositDetailContainer = styled.div`
     border-radius: 0.4375rem;
     background: #f9f9f9;
     box-shadow: 0px 5.972px 5.972px 0px rgba(0, 0, 0, 0.25);
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 600;
     color: #808080;
     display: flex;
@@ -67,7 +77,7 @@ export const DepositDetailContainer = styled.div`
     
     .text-middle{
       text-align: center;
-      font-size: 25px;
+      font-size: 1.3rem;
     }
     .text-bottom{
       text-align: end;
