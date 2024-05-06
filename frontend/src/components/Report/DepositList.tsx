@@ -5,8 +5,8 @@ import {
 } from './style/DepositListStyle'
 
 const DepositList = () => {
-  const [isCharterVisible, setIsCharterVisible] = useState(false)
-  const [isAuctionVisible, setIsAuctionVisible] = useState(false)
+  const [isCharterVisible, setIsCharterVisible] = useState(true)
+  const [isAuctionVisible, setIsAuctionVisible] = useState(true)
 
   return (
     <DepositListContainer>
