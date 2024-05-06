@@ -5,8 +5,8 @@ import {
 } from './style/DepositListStyle'
 
 const DepositList = () => {
-  const [isCharterVisible, SetIsCharterVisible] = useState(false)
-  const [isAuctionVisible, SetIsAuctionVisible] = useState(false)
+  const [isCharterVisible, setIsCharterVisible] = useState(false)
+  const [isAuctionVisible, setIsAuctionVisible] = useState(false)
 
   return (
     <DepositListContainer>
@@ -38,8 +38,8 @@ const DepositList = () => {
       </div>
       <DepositDetailContainer>
         <div className="deposit-text">
-          <div>
-            선순위 채권 없이 2.57억원 이하의 보증금으로
+          <div className='deposit-text-box' >
+            선순위 채권 없이 <span style={{color:'#00B2B8'}}>2.57억원 이하</span>의 보증금으로
             <br /> 전세계약을 권유드립니다.
           </div>
           <svg
@@ -48,8 +48,9 @@ const DepositList = () => {
             height="10"
             viewBox="0 0 15 10"
             fill="none"
+            className={isCharterVisible ? 'rotate-arrow' : ''}
             onClick={() => {
-              SetIsCharterVisible(!isCharterVisible)
+              setIsCharterVisible(!isCharterVisible)
             }}
           >
             <path
@@ -61,16 +62,16 @@ const DepositList = () => {
         <div
           className={`deposit-explain ${isCharterVisible ? `` : 'isVisible'}`}
         >
-          <div>매매시세 평균 3.63 억원</div>
-          <div>x</div>
-          <div>해당 지역 전세가율 70.7% 기준</div>
+          <div className='text-top'>매매시세 평균 <span style={{color:'#00B2B8'}}>3.63 억원</span></div>
+          <div className='text-middle'>x</div>
+          <div className='text-bottom'>해당 지역 전세가율 <span style={{color:'#00B2B8'}}>70.7% 기준</span></div>
         </div>
       </DepositDetailContainer>
       <DepositDetailContainer>
         <div className="line"></div>
         <div className="deposit-text">
-          <div>
-            보증금이 3.06억원을 초과하는 경우
+          <div className='deposit-text-box'>
+            보증금이 <span style={{color:' #FE754E'}}>3.06억원을 초과</span>하는 경우
             <br /> 경매발생 시 보증금 회수가 어려울 수 있습니다.
           </div>
           <svg
@@ -80,8 +81,9 @@ const DepositList = () => {
             viewBox="0 0 15 10"
             fill="none"
             onClick={() => {
-              SetIsAuctionVisible(!isAuctionVisible)
+              setIsAuctionVisible(!isAuctionVisible)
             }}
+            className={isAuctionVisible ? 'rotate-arrow':''}
           >
             <path
               d="M0.738332 9.045C0.93758 9.25591 1.20778 9.37439 1.48952 9.37439C1.77126 9.37439 2.04146 9.25591 2.24071 9.045L7.50008 3.47625L12.7595 9.045C12.9598 9.24993 13.2282 9.36332 13.5068 9.36076C13.7854 9.3582 14.0519 9.23988 14.2489 9.0313C14.4459 8.82271 14.5576 8.54055 14.56 8.24558C14.5625 7.95061 14.4554 7.66643 14.2618 7.45425L8.25127 1.09013C8.05202 0.879222 7.78182 0.760742 7.50008 0.760742C7.21834 0.760742 6.94814 0.879222 6.74889 1.09013L0.738332 7.45425C0.539144 7.66522 0.427246 7.95132 0.427246 8.24963C0.427246 8.54794 0.539144 8.83403 0.738332 9.045Z"
@@ -92,9 +94,9 @@ const DepositList = () => {
         <div
           className={`deposit-explain ${isAuctionVisible ? `` : 'isVisible'}`}
         >
-          <div>매매시세 평균 3.63 억원</div>
-          <div>x</div>
-          <div>해당 경매낙찰가율 84.2% 기준</div>
+          <div className='text-top'>매매시세 평균 <span style={{color:'#FE754E'}}>3.63 억원</span></div>
+          <div className='text-middle'>x</div>
+          <div className='text-bottom'>해당 경매낙찰가율 <span style={{color:' #FE754E'}}>84.2% 기준</span></div>
         </div>
       </DepositDetailContainer>
     </DepositListContainer>
