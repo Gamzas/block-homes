@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 
-export const RegistrateEstatePageStyleContainer = styled.div`
+export const EstateRegistrationPageContainer = styled.div`
   width: 100%;
   height: 100vh;
 
