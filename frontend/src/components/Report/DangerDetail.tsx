@@ -33,7 +33,7 @@ const DangerDetail = (props: Props) => {
   const selectToggleMessage = message['toggleMessage'][props.dangerIndex]
 
 
-  const [isVisible,setIsVisible] = useState(false)
+  const [isVisible,setIsVisible] = useState(true)
   return (
     <DangerDetailContainer>
 
