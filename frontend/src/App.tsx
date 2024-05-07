@@ -12,6 +12,7 @@ import SelfCheckDidPage from '@pages/SelfCheckDidPage'
 import RealEstateDetailPage from '@pages/RealEstateDetailPage'
 import ReportPage from './pages/ReportPage'
 import RegistrateEstatePage from "@pages/RegistrateEstatePage";
+import MyPage from '@pages/MyPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -25,6 +26,7 @@ const HomeRoutes = () => (
     <Route path="/smart-contract" element={<SmartContractPage />} />
     <Route path="/report" element={<ReportPage />} />
     <Route path="/registrate-estate" element={<RegistrateEstatePage/>}/>
+    <Route path="/mypage" element={<MyPage/>}/>
   </Routes>
 )
 
