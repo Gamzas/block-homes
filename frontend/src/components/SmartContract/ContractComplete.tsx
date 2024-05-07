@@ -11,7 +11,6 @@ const ContractComplete = () => {
   }
   return (
     <ContractCompleteContainer>
-      <Gauge steps={5} />
       <CompletePigContainer></CompletePigContainer>
       <div className="complete-text">거래가 완료되었습니다</div>
       <div className="button-box">
