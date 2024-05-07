@@ -20,10 +20,10 @@ export const HeaderContainer = styled.div`
 
 export const HeaderLeftContainer = styled.div`
   display: flex;
-  width: 95%;
+  width: 95vw;
 
   .back-arrow {
-    padding-right: 0.5rem;
+    width: 5%;
     margin: 0.4rem;
   }
 
