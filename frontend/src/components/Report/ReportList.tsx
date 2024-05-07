@@ -10,7 +10,12 @@ type ExtendedStep = Step & {
 }
 
 const ReportList = () => {
-  const [run, setRun] = useState(true)
+  const [run, setRun] = useState(false)
+
+  const handleGuide = () => {
+    console.log('Guide button clicked.')
+    setRun(true)
+  }
 
   const steps: ExtendedStep[] = [
     {
@@ -53,23 +58,26 @@ const ReportList = () => {
         run={run}
         steps={steps}
         callback={handleJoyrideCallback}
+        scrollToFirstStep
         showProgress
         showSkipButton
         styles={{
           options: {
             zIndex: 1000,
-            arrowColor: '#e3ffeb', // 화살표 색상
-            // backgroundColor: '#f04', // 배경 색상
-            // overlayColor: 'rgba(79, 26, 0, 0.4)', // 오버레이 색상
-            primaryColor: '#845bd3', // 주 색상
-            // textColor: '#fff', // 텍스트 색상
             width: 360, // 툴팁의 너비
-            // spotlightPadding: 10, // 스포트라이트 패딩
+          },
+          buttonNext: {
+            backgroundColor: '#845bd3',
+            color: '#fff',
+          },
+          buttonBack: {
+            borderRadius: '0.5px',
+            color: '#D9D9D9',
           },
         }}
       />
       <div>
-        <div className="question-box">
+        <div className="question-box" onClick={handleGuide}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="2.3rem"
