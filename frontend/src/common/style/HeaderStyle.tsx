@@ -14,18 +14,18 @@ export const HeaderContainer = styled.div`
   padding: 0.6rem;
 
   .right-icon {
-    width: 5%;
+    width: 8%;
     margin-top: 0.1rem;
   }
 `
 
 export const HeaderLeftContainer = styled.div`
   display: flex;
-  width: 95%;
+  width: 92%;
 
   .back-arrow {
-    width: 5%;
-    margin: 0.4rem;
+    width: 6%;
+    margin: 0.4rem 0.6rem 0.4rem 0;
   }
 
   .title {
