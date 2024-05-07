@@ -85,4 +85,10 @@ export const DetailContainer = styled.div`
   border: 1px solid #e0e0e0;
   padding: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+`
+
+export const LocationWrapper = styled.div`
+  width: 90%;
+  height: fit-content;
 `
