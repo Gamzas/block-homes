@@ -1,4 +1,4 @@
-import * as m from '@components/MyPage/style/MenuList'
+import * as m from '@/components/MyPage/style/MenuListStyle'
 
 const MenuList = () => {
   const menuArr = ['내 관심매물', '현재 계약중인 부동산']
