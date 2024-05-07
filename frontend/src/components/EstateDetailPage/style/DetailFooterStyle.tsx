@@ -38,17 +38,19 @@ export const InfoContainer = styled.div`
 export const ChatBtn = styled.button`
   border-radius: 5px;
   background: #845bd3;
-  width: 23%;
+  width: 6rem;
   height: 2.2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: absolute;
   right: 2rem;
   .name {
+    width: 100%;
     color: #fff;
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 500;
   }
 
