@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-library DIDStruct {
+library DIDStructs {
 
     struct PublicKey {
         string id;
@@ -19,9 +19,9 @@ library DIDStruct {
     struct DIDDocument {
         string context;
         string id;
-        PublicKey publicKey;
-        string authentication;
-        Service service;
+        PublicKey[] publicKey;
+        string[] authentication;
+        Service[] service;
     }
 
 }

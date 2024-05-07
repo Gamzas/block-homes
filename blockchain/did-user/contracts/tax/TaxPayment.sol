@@ -8,7 +8,7 @@ contract TaxPayment is Ownable {
     address payable private taxAccount;
 
     constructor(address _owner) Ownable(_owner) {
-        taxAccount = payable(0xcd48b32650621694240fafb2d467cdb52fd95795);
+        taxAccount = payable(0xcd48B32650621694240FAFB2D467CdB52fd95795);
     }
 
     event AcquisitionTaxPaid(uint256 klay);
@@ -21,7 +21,7 @@ contract TaxPayment is Ownable {
         emit AcquisitionTaxPaid(msg.value);
     }
 
-    function payAcquisitionTax() external payable onlyOwner {
+    function payCapitalGainsTax() external payable onlyOwner {
         require(msg.value > 0, "You need to send some KLAY");
         (bool sent, ) = taxAccount.call{value: msg.value}("");
         require(sent, "Failed to send KLAY to the tax account");
