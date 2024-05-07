@@ -17,13 +17,14 @@ export const MenuContainer = styled.div`
   }
   .title {
     color: #807c7c;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px; /* 114.286% */
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1rem; /* 114.286% */
   }
   .arrow-icon {
     width: 1rem;
     height: 1rem;
     transform: rotate(180deg);
+    color: #807c7c;
   }
 `
