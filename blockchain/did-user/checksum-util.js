@@ -4,7 +4,7 @@ const web3 = new Web3(
   new Web3.providers.HttpProvider("https://api.baobab.klaytn.net:8651")
 );
 
-const address = "0xcd48b32650621694240fafb2d467cdb52fd95795";
+const address = "0xc0a88521a8669e453c02d37ceed99dbb0a4dc508";
 const checksumAddress = web3.utils.toChecksumAddress(address);
 
 console.log(checksumAddress); // Klaytn 주소의 체크섬 버전을 출력

@@ -11,6 +11,7 @@ contract MinistryDIDRegistry is Ownable {
     mapping(string => DIDStructs.DIDDocument) didDocuments;
 
     mapping(string => address) taxAddresses;
+    mapping(string => address) loanAddresses;
 
     constructor() Ownable(msg.sender) {}
 
