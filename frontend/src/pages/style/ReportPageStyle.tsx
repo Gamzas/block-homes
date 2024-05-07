@@ -7,15 +7,14 @@ export const ReportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
   border: 1px solid;
   .question-box {
     position: fixed;
-    top: 0.6%;
-    right: 2%;
-    z-index: 1001;
+    top: 1.2%;
+    transform: translateX(430%);
+    z-index: 1003;
     &:active {
-      transform: scale(0.93);
+      transform: translateX(430%) scale(0.93);
     }
   }
 `
