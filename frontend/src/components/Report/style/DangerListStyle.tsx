@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import styled from 'styled-components'
 
 export const DangerListContainer = styled.div`
   margin-top: 1rem;
+  width: 100%;
   width: 100%;
   min-height: 10vh;
   border-radius: 0.93313rem;
@@ -11,6 +13,7 @@ export const DangerListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
   padding: 1rem;
 
   .title-container {

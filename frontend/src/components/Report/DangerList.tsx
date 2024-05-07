@@ -24,10 +24,9 @@ const DangerList = () => {
             fill="#FA5655"
           />
         </svg>
-        &nbsp;해당 매물의 위험 요소는 무엇일까요?
+        &nbsp;&nbsp;해당 매물의 위험 요소는 무엇일까요?
       </div>
-
-      <DangerDetail isDanger={false} dangerIndex={0} />
+      <DangerDetail isDanger={true} dangerIndex={0} />
       <DangerDetail isDanger={false} dangerIndex={1} />
       <DangerDetail isDanger={true} dangerIndex={2} />
       <DangerDetail isDanger={false} dangerIndex={3} />
