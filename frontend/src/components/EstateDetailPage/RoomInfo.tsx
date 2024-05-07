@@ -1,4 +1,5 @@
 import * as r from '@components/EstateDetailPage/style/RoomInfoStyle'
+import Location from './Location'
 
 const RoomInfo = () => {
   const infoItems = [
@@ -60,9 +61,16 @@ const RoomInfo = () => {
       </r.TitleContainer>
       <r.DetailContainer>
         <div>
-        ⭐ 특징 ⭐ - 1룸 오픈형 구조입니다- 화이트톤 깨끗함의 정석~! 올리모델링
+          ⭐ 특징 ⭐ - 1룸 오픈형 구조입니다- 화이트톤 깨끗함의 정석~!
+          올리모델링
         </div>
       </r.DetailContainer>
+      <r.TitleContainer>
+        <div className="title">위치</div>
+      </r.TitleContainer>
+      <r.LocationWrapper>
+        <Location />
+      </r.LocationWrapper>
     </r.RoomInfoContainer>
   )
 }
