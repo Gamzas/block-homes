@@ -24,7 +24,7 @@ export const PhotoRegistrationSession = styled.div`
         width: 100%;
         padding: 2% 0;
     }
-    
+
     .detail {
         width: 100%;
         font-size: 0.8rem;
@@ -32,24 +32,33 @@ export const PhotoRegistrationSession = styled.div`
     }
 `
 
-export const PhotoRegistrationPhoto = styled.div`
+export const PhotoRegistrationImages = styled.div`
     width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 비율을 유지하기 위한 값 */
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+
+    .images-wrapper {
+        display: flex;
+        gap: 10px;
+    }
+`
+
+export const PhotoRegistrationPhoto = styled.div`
     background-color: #F6F6F6;
     margin-top: 2%;
     position: relative;
     cursor: pointer;
 
     input {
-        width: 100%;
-        height: 100%;
-        opacity: 0; /* input을 숨김 */
+        opacity: 0;
         position: absolute;
         cursor: pointer;
-        z-index: 10; /* 가장 위에 위치시킴 */
+        z-index: 10;
+        width: 100%;
+        height: 100%;
     }
-    
+
     .plus {
         position: absolute;
         transform: translate(-50%, -50%);
@@ -59,14 +68,14 @@ export const PhotoRegistrationPhoto = styled.div`
         height: 50%;
         object-fit: contain;
     }
-    
+
     .upload {
         position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-    
+
     .cancel {
         position: absolute;
         top: 3px;
@@ -74,7 +83,19 @@ export const PhotoRegistrationPhoto = styled.div`
         width: 27px;
         height: 27px;
         object-fit: cover;
-        z-index: 100; /* 가장 위에 위치시킴 */
+        z-index: 10;
     }
 `;
 
+
+export const PhotoRegistrationPhotoMain = styled(PhotoRegistrationPhoto)`
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+`;
+
+
+export const PhotoRegistrationPhotoSub = styled(PhotoRegistrationPhoto)`
+    width: 150px;
+    height: 84.375px;
+`;

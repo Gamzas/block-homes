@@ -1,5 +1,5 @@
-import * as d from "@components/RegistrateEstatePage/style/DetailRegistrationStyle";
-import {DetailRegistrationBigInput} from "@components/RegistrateEstatePage/style/DetailRegistrationStyle";
+import * as d from "@components/EstateRegistrationPage/style/DetailRegistrationStyle";
+import {DetailRegistrationBigInput} from "@components/EstateRegistrationPage/style/DetailRegistrationStyle";
 import {useState} from "react";
 
 const DetailRegistration = () => {

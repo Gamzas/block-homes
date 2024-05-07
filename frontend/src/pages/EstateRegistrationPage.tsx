@@ -1,12 +1,14 @@
 import * as r from "@pages/style/EstateRegistrationPageStyle";
 import Header from "@common/Header";
-import AccordionGroup from "@components/RegistrateEstatePage/AccordionGroup";
+import AccordionGroup from "@components/EstateRegistrationPage/AccordionGroup";
 import {useState} from "react";
+import EstateRegistrationComplete from "@components/EstateRegistrationPage/EstateRegistrationComplete";
 
 const EstateRegistrationPage = () => {
+    const buttonNames = ["다음", "매물 등록하기"]
     const [openIndex, setOpenIndex] = useState(0);
     const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]); // 각 아코디언의 열림 상태 초기화
-    const buttonNames = ["다음", "매물 등록하기"]
+    const [isComplete, setIsComplete] = useState(false);
 
 
     const handleNextButtonClick = () => {
@@ -20,26 +22,31 @@ const EstateRegistrationPage = () => {
 
             setIsOpenArray(newIsOpenArray);
         } else {
-            // 완료 로직 처리
-            console.log("완료 로직 처리");
+            setIsComplete(true)
         }
     }
 
-  return (
-    <r.EstateRegistrationPageContainer>
-      <Header
-        title={'매물 등록'}
-        isSearch={false}
-        rightIconSrc={null}
-      />
-      <r.AccodionWrapper>
-        <AccordionGroup maxOpenIndex={openIndex} isOpenArray={isOpenArray} setIsOpenArray={setIsOpenArray} />
-      </r.AccodionWrapper>
-      <r.NextButton onClick={handleNextButtonClick}>
-        {openIndex === 3 ? buttonNames[1] : buttonNames[0]}
-      </r.NextButton>
-    </r.EstateRegistrationPageContainer>
-  )
+    return (
+        <r.EstateRegistrationPageContainer>
+            <Header
+                title={'매물 등록'}
+                isSearch={false}
+                rightIconSrc={null}
+            />
+            {!isComplete ?
+                <>
+                    <r.AccodionWrapper>
+                        <AccordionGroup maxOpenIndex={openIndex} isOpenArray={isOpenArray}
+                                        setIsOpenArray={setIsOpenArray}/>
+                    </r.AccodionWrapper>
+                    <r.NextButton onClick={handleNextButtonClick}>
+                        {openIndex === 3 ? buttonNames[1] : buttonNames[0]}
+                    </r.NextButton>
+                </> :
+                <EstateRegistrationComplete/>
+            }
+        </r.EstateRegistrationPageContainer>
+    )
 }
 
 export default EstateRegistrationPage

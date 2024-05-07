@@ -1,4 +1,4 @@
-import * as a from "@components/RegistrateEstatePage/style/AccordionStyle";
+import * as a from "@components/EstateRegistrationPage/style/AccordionStyle";
 
 const Accordion = ({title, children, isOpen, show, onToggle}) => {
     return (

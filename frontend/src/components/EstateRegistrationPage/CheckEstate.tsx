@@ -1,4 +1,4 @@
-import {CheckEstateContainer} from "@components/RegistrateEstatePage/style/CheckEstateStyle";
+import {CheckEstateContainer} from "@components/EstateRegistrationPage/style/CheckEstateStyle";
 
 const CheckEstate = () => {
     const category = [

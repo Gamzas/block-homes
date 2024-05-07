@@ -1,4 +1,4 @@
-import * as d from "@components/RegistrateEstatePage/style/DetailEstateStyle";
+import * as d from "@components/EstateRegistrationPage/style/DetailEstateStyle";
 import {useState} from "react";
 
 const DetailEstate = () => {

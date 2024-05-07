@@ -1,9 +1,9 @@
-import Accordion from "@components/RegistrateEstatePage/Accordion";
-import CheckEstate from "@components/RegistrateEstatePage/CheckEstate";
-import {AccordionGroupContainer} from "@components/RegistrateEstatePage/style/AccordionGroupStyle";
-import DetailRegistration from "@components/RegistrateEstatePage/DetailRegistration";
-import RoomInfomation from "@components/RegistrateEstatePage/DetailEstate";
-import PhotoRegistration from '@components/RegistrateEstatePage/PhotoRegistration'
+import Accordion from "@components/EstateRegistrationPage/Accordion";
+import CheckEstate from "@components/EstateRegistrationPage/CheckEstate";
+import {AccordionGroupContainer} from "@components/EstateRegistrationPage/style/AccordionGroupStyle";
+import DetailRegistration from "@components/EstateRegistrationPage/DetailRegistration";
+import RoomInfomation from "@components/EstateRegistrationPage/DetailEstate";
+import PhotoRegistration from '@components/EstateRegistrationPage/PhotoRegistration'
 
 const AccordionGroup = ({maxOpenIndex, isOpenArray, setIsOpenArray}) => {
     const accordions = [
