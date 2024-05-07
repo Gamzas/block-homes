@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const DepositListContainer = styled.div`
   margin-top: 1rem;
-  width: 95%;
+  width: 100%;
   min-height: 10vh;
   border-radius: 0.93313rem;
   background: #f3f0f7;
@@ -40,15 +40,14 @@ export const DepositDetailContainer = styled.div`
     margin-bottom: 1rem;
     line-height: 2;
     align-items: center;
-    .deposit-text-box{
+    .deposit-text-box {
       width: 95%;
     }
-
   }
   .rotate-arrow {
-  transform: rotateX(180deg);
-  transition: transform 0.3s ease-in-out;
-}
+    transform: rotateX(180deg);
+    transition: transform 0.3s ease-in-out;
+  }
 
   .deposit-explain {
     transition:
@@ -73,13 +72,12 @@ export const DepositDetailContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 1rem 0.7rem;
-    
-    
-    .text-middle{
+
+    .text-middle {
       text-align: center;
       font-size: 1.3rem;
     }
-    .text-bottom{
+    .text-bottom {
       text-align: end;
     }
   }
