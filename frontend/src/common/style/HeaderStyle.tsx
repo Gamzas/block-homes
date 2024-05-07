@@ -14,13 +14,13 @@ export const HeaderContainer = styled.div`
   padding: 0.6rem;
 
   .right-icon {
-    margin: 0.4rem;
+    margin-top: 0.1rem;
   }
 `
 
 export const HeaderLeftContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 95%;
 
   .back-arrow {
     padding-right: 0.5rem;
