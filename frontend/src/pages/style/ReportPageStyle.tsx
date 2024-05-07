@@ -10,7 +10,7 @@ export const ReportContainer = styled.div`
   position: relative;
   border: 1px solid;
   .question-box {
-    position: absolute;
+    position: fixed;
     top: 0.6%;
     right: 2%;
     z-index: 1001;
