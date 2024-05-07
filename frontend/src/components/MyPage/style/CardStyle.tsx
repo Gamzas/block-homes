@@ -12,7 +12,6 @@ export const CardContainer = styled.div`
     position: absolute;
     bottom: 0;
     margin: 1rem;
-    letter-spacing: -0.48px;
     z-index: 1;
   }
   .house-img {
