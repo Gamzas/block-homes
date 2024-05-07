@@ -1,5 +1,6 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
+import { useNavigate } from 'react-router-dom'
 
 interface PropsType {
   condition: string
@@ -22,15 +23,19 @@ const EstateItemCard = (props: PropsType) => {
     roomCount,
     createDate,
   } = props
+  const navigate = useNavigate()
   const { getColor, getStatus } = useEstateCondition(condition)
   const mainColor = getColor()?.main
   const secondColor = getColor()?.second
   const thirdColor = getColor()?.third
   const fourthColor = getColor()?.fourth
   const status = getStatus()
+  const goDetail = () => {
+    navigate('/estate-detail')
+  }
   return (
     <>
-      <c.ItemCardContainer $color={fourthColor}>
+      <c.ItemCardContainer $color={fourthColor} onClick={goDetail}>
         <c.LocationContainer $color={mainColor}>
           <svg
             className="locationIcon"

@@ -18,6 +18,11 @@ const RoomInfo = () => {
 
   const activateInfo = [true, true, false, true]
 
+  const detailText = `⭐ 특징 ⭐ 
+  - 1룸 오픈형 구조입니다- 화이트톤 깨끗함의 정석~! 올리모델링 
+  ⭐ 위치 ⭐
+  - 신사동 가로수길 블럭입니다- 신사/압구정 도보거리 이용가능
+  `
   return (
     <r.RoomInfoContainer>
       <r.TitleContainer>
@@ -40,30 +45,30 @@ const RoomInfo = () => {
         <div className="title">추가 정보</div>
         <hr className="underline" />
       </r.TitleContainer>
-      <r.AdditionalContainer>
-        {additionalInfo.map(
-          (info, index) =>
-            activateInfo[index] && (
-              <div className="info-box" key={index}>
-                <img
-                  className="icon"
-                  src={`icon/icon_room_info_${info.icon}.png`}
-                  alt={`${info.icon} icon`}
-                />
-                <div className="name">{info.name}</div>
-              </div>
-            ),
-        )}
-      </r.AdditionalContainer>
+      <r.AdditionalWrapper>
+        <r.AdditionalContainer>
+          {additionalInfo.map(
+            (info, index) =>
+              activateInfo[index] && (
+                <div className="info-box" key={index}>
+                  <img
+                    className="icon"
+                    src={`icon/icon_room_info_${info.icon}.png`}
+                    alt={`${info.icon} icon`}
+                  />
+                  <div className="name">{info.name}</div>
+                </div>
+              ),
+          )}
+        </r.AdditionalContainer>
+      </r.AdditionalWrapper>
+
       <r.TitleContainer>
         <div className="title">상세 설명</div>
         <hr className="underline" />
       </r.TitleContainer>
       <r.DetailContainer>
-        <div>
-          ⭐ 특징 ⭐ - 1룸 오픈형 구조입니다- 화이트톤 깨끗함의 정석~!
-          올리모델링
-        </div>
+        <p className="detail-text">{detailText}</p>
       </r.DetailContainer>
       <r.TitleContainer>
         <div className="title">위치</div>

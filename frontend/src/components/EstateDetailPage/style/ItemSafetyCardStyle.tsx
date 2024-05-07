@@ -45,6 +45,8 @@ export const WaveContainer = styled.div`
   .back-wrapper {
     width: 100%;
     height: 6rem;
+  border-radius: 1.3rem;
+
   }
   .bigWave {
     position: absolute;

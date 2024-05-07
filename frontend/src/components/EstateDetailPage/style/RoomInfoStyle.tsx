@@ -52,6 +52,11 @@ export const DetailInfoContainer = styled.div`
   }
 `
 
+export const AdditionalWrapper = styled.div`
+  width: 90%;
+  height: fit-content;
+`
+
 export const AdditionalContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -64,7 +69,7 @@ export const AdditionalContainer = styled.div`
     justify-content: center;
     align-items: center;
     border: 1.2px solid black;
-    margin: 1rem;
+    margin: 1rem 1rem 1rem 0;
   }
   .icon {
     width: 2rem;
@@ -86,6 +91,10 @@ export const DetailContainer = styled.div`
   padding: 1rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  .detail-text {
+    line-height: 2rem;
+    white-space: pre-line;
+  }
 `
 
 export const LocationWrapper = styled.div`
