@@ -6,7 +6,7 @@ const DetailTabMenu = () => {
     {
       name: 'image',
       content:
-        'https://lh3.googleusercontent.com/proxy/IIfeuAYBiaEspecUJ24KOG2m_jkVtjOsaO917fKd_CD0QuM20lkVHye0psrKZIa4ODecaruNqWLzYaxFUaua6-MvTMoC6iMxGHlncOci_rbZ_1iGqgJzxxUTwvo3BytkIVM_qKI6a9wOjoynZUwpxucuX2ScxA',
+        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169087905318351049.jpeg?gif=1&w=480&h=480&c=c&q=80&webp=1',
     },
     {
       name: 'floor_plan',
@@ -40,7 +40,11 @@ const DetailTabMenu = () => {
             key={index}
             onClick={() => selectMenuHandler(index)}
           >
-            <img className="tab-icon" src={`icon/icon_tab_${menu}.png`} alt="" />
+            <img
+              className="tab-icon"
+              src={`icon/icon_tab_${menu}.png`}
+              alt=""
+            />
           </div>
         ))}
       </t.TabMenuImgContainer>
