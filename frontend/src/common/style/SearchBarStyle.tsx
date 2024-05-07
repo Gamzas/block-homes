@@ -22,6 +22,7 @@ export const SearchBarContainer = styled.div`
   }
 
   .icon-find {
+    width: 6%;
     margin: 0.4rem;
   }
 `
