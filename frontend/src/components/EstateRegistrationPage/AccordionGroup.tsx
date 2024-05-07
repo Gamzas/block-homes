@@ -1,15 +1,16 @@
-import Accordion from "@components/RegistrateEstatePage/Accordion";
-import CheckEstate from "@components/RegistrateEstatePage/CheckEstate";
-import {AccordionGroupContainer} from "@components/RegistrateEstatePage/style/AccordionGroupStyle";
-import DetailRegistration from "@components/RegistrateEstatePage/DetailRegistration";
-import RoomInfomation from "@components/RegistrateEstatePage/DetailEstate";
+import Accordion from "@components/EstateRegistrationPage/Accordion";
+import CheckEstate from "@components/EstateRegistrationPage/CheckEstate";
+import {AccordionGroupContainer} from "@components/EstateRegistrationPage/style/AccordionGroupStyle";
+import DetailRegistration from "@components/EstateRegistrationPage/DetailRegistration";
+import RoomInfomation from "@components/EstateRegistrationPage/DetailEstate";
+import PhotoRegistration from '@components/EstateRegistrationPage/PhotoRegistration'
 
 const AccordionGroup = ({maxOpenIndex, isOpenArray, setIsOpenArray}) => {
     const accordions = [
         {title: "1. 임대목적물 확인", children: <CheckEstate/>},
         {title: "2. 거래 상세 정보", children: <DetailRegistration/>},
         {title: "3. 매물 상세 정보", children: <RoomInfomation/>},
-        {title: "4. 사진 등록", children: <CheckEstate/>},
+        {title: "4. 사진 등록", children: <PhotoRegistration/>},
     ]
 
     const handleAccordionClick = (index) => {

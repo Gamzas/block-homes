@@ -29,7 +29,7 @@ export const AccordionToggleIcon = styled.div<{ $isOpen: boolean }>`
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transform: ${props => props.$isOpen ? 'rotateX(180deg)' : 'rotateX(0deg)'};
     transition: transform 0.3s ease-in-out;
 `;
 
