@@ -45,7 +45,7 @@ export const ChatBtn = styled.button`
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 2rem;
+  right: 1rem;
   .name {
     width: 100%;
     color: #fff;
