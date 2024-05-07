@@ -5,7 +5,7 @@ const { kakao } = window
 
 const Location = () => {
   const location = { latitude: 35.204315, longitude: 126.812546 }
-  const position = '광주광역시 광산구 장덕 30번길 13'
+  const position = '광주광역시 광산구 장덕로 30번길 13'
   useEffect(() => {
     const container = document.getElementById('map')
     const options = {
