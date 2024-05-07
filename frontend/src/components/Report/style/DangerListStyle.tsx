@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import styled from 'styled-components'
 
 export const DangerListContainer = styled.div`
   margin-top: 1rem;
