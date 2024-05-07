@@ -1,29 +1,29 @@
 {
   "contractName": "RealEstateStructs",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/RealEstateStructs.sol\":\"RealEstateStructs\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/RealEstateStructs.sol\":{\"keccak256\":\"0x5b0eab9e9198a2ea99b67c536cab3eeab1efc81c1a282307221a426a61e49de8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://acf6a03ad00f161f3e46e0615a5535dda49e8b2e3bf09e658ad94fb95b1c615c\",\"dweb:/ipfs/Qmf1VQ1xjCqxqh5JPNna1NpfYXj3XswAu44fKp5vdm139H\"]}},\"version\":1}",
-  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220cb401c3fe1255b7eeef037755cc25948e5eb351085301b044e8fa4e6d743371f64736f6c63430008190033",
-  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220cb401c3fe1255b7eeef037755cc25948e5eb351085301b044e8fa4e6d743371f64736f6c63430008190033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/RealEstateStructs.sol\":\"RealEstateStructs\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/RealEstateStructs.sol\":{\"keccak256\":\"0x1e680736f311f60a14ec9cbf5906fc981d823ad903c943aef9d3aaddf45e3644\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7664e1548149ee4dde62159ea165b1eb832e9610ee9531313fc558de21906889\",\"dweb:/ipfs/QmUWej45p9U48sxe6zZKCQ8YqGwst4voPpwdzjGdr8srJ5\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f09288c25d7d3f87e9a176fdb8ff5787da7582f1639811be152f7073a743f48d64736f6c63430008190033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f09288c25d7d3f87e9a176fdb8ff5787da7582f1639811be152f7073a743f48d64736f6c63430008190033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "57:2179:5:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "57:2179:5:-:0;;;;;;;;",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nlibrary RealEstateStructs {\n\n    // 등기부등본 표제부\n    struct HeadLine {\n        uint32 num;\n        string registration;\n        string location;\n        string buildingInfo;\n        string reasonAndEtc;\n    }\n\n    // 등기부등본 갑구, 을구\n    struct Section {\n        uint8 rank; // 순위번호\n        string purpose; // 등기목적\n        string registration; // 접수\n        string reason; // 등기원인\n        string holderAndEtc; // 권리자 및 기타사항\n    }\n\n    // 건축물관리대장 층별 건축물 현황\n    struct StructureStatus {\n        string category; // 구분\n        uint8 floorNumber; // 층별\n        string structure; // 구조\n        string usage; // 용도\n        string area; // 면적\n    }\n\n    // 부동산 기본 정보\n    struct RealEstateBasicInfo {\n        string roadNameAddress; // 도로명주소\n        string buildingName; // 건물명\n        uint16 buildingNumber; // 동 번호 (아파트 동)\n        uint16 roomNumber; // 호수 번호\n        string genDate; // 생성 일자\n    }\n\n    // 등기부등본\n    struct RealEstateRegistryCertificate {\n        HeadLine headline; // 표제부\n        Section rightsSection; // 갑구 (소유권 변동 및 관련 권리)\n        Section encumbrancesSection; // 을구 (저당권, 지상권, 전세권 등의 권리사항)\n    }\n\n    // 건축물 관리대장\n    struct BuildingManagementRecord {\n        bool isViolated; // 위반건축물 여부\n\n        uint16 units; // 호수\n        uint16 households; // 가구 수\n        uint16 dwellingUnits; // 세대 수\n\n        string landLocation; // 대지위치\n        uint16 landNumber; // 지번\n        string landArea; // 대지면적\n        string totalFloorArea; // 연면적\n        string region; // 지역\n        string buildingArea; // 건축면적\n        string mainStructure; // 주구조\n        string mainUsage; // 주용도\n        uint8 basementFloorCount; // 지하 층수\n        uint8 aboveGroundFloorCount; // 지상층수\n        \n        string height; // 높이\n        string floor; // 지붕\n\n        StructureStatus[] statuses; // 건축물 현황 배열\n    }\n\n}",
-  "sourcePath": "/Users/sejin/Desktop/Development/C203/S10P31C203/blockchain/did-real-estate/contracts/structs/RealEstateStructs.sol",
+  "sourceMap": "60:2249:5:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "60:2249:5:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary RealEstateStructs {\r\n\r\n    // 등기부등본 표제부\r\n    struct HeadLine {\r\n        uint32 num;\r\n        string registration;\r\n        string location;\r\n        string buildingInfo;\r\n        string reasonAndEtc;\r\n    }\r\n\r\n    // 등기부등본 갑구, 을구\r\n    struct Section {\r\n        uint8 rank; // 순위번호\r\n        string purpose; // 등기목적\r\n        string registration; // 접수\r\n        string reason; // 등기원인\r\n        string holderAndEtc; // 권리자 및 기타사항\r\n    }\r\n\r\n    // 건축물관리대장 층별 건축물 현황\r\n    struct StructureStatus {\r\n        string category; // 구분\r\n        uint8 floorNumber; // 층별\r\n        string structure; // 구조\r\n        string usage; // 용도\r\n        string area; // 면적\r\n    }\r\n\r\n    // 부동산 기본 정보\r\n    struct RealEstateBasicInfo {\r\n        string roadNameAddress; // 도로명주소\r\n        string buildingName; // 건물명\r\n        uint16 buildingNumber; // 동 번호 (아파트 동)\r\n        uint16 roomNumber; // 호수 번호\r\n        string genDate; // 생성 일자\r\n    }\r\n\r\n    // 등기부등본\r\n    struct RealEstateRegistryCertificate {\r\n        HeadLine headline; // 표제부\r\n        Section rightsSection; // 갑구 (소유권 변동 및 관련 권리)\r\n        Section encumbrancesSection; // 을구 (저당권, 지상권, 전세권 등의 권리사항)\r\n    }\r\n\r\n    // 건축물 관리대장\r\n    struct BuildingManagementRecord {\r\n        bool isViolated; // 위반건축물 여부\r\n\r\n        uint16 units; // 호수\r\n        uint16 households; // 가구 수\r\n        uint16 dwellingUnits; // 세대 수\r\n\r\n        string landLocation; // 대지위치\r\n        uint16 landNumber; // 지번\r\n        string landArea; // 대지면적\r\n        string totalFloorArea; // 연면적\r\n        string region; // 지역\r\n        string buildingArea; // 건축면적\r\n        string mainStructure; // 주구조\r\n        string mainUsage; // 주용도\r\n        uint8 basementFloorCount; // 지하 층수\r\n        uint8 aboveGroundFloorCount; // 지상층수\r\n        \r\n        string height; // 높이\r\n        string floor; // 지붕\r\n\r\n        StructureStatus[] statuses; // 건축물 현황 배열\r\n    }\r\n\r\n}",
+  "sourcePath": "C:\\SSAFY\\S10P31C203\\blockchain\\did-real-estate\\contracts\\structs\\RealEstateStructs.sol",
   "ast": {
     "absolutePath": "project:/contracts/structs/RealEstateStructs.sol",
     "exportedSymbols": {
       "RealEstateStructs": [
-        980
+        872
       ]
     },
-    "id": 981,
+    "id": 873,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 888,
+        "id": 780,
         "literals": [
           "solidity",
           "^",
@@ -31,7 +31,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:5"
+        "src": "33:23:5"
       },
       {
         "abstract": false,
@@ -40,27 +40,27 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 980,
+        "id": 872,
         "linearizedBaseContracts": [
-          980
+          872
         ],
         "name": "RealEstateStructs",
-        "nameLocation": "65:17:5",
+        "nameLocation": "68:17:5",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "RealEstateStructs.HeadLine",
-            "id": 899,
+            "id": 791,
             "members": [
               {
                 "constant": false,
-                "id": 890,
+                "id": 782,
                 "mutability": "mutable",
                 "name": "num",
-                "nameLocation": "156:3:5",
+                "nameLocation": "163:3:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 899,
-                "src": "149:10:5",
+                "scope": 791,
+                "src": "156:10:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -68,10 +68,10 @@
                   "typeString": "uint32"
                 },
                 "typeName": {
-                  "id": 889,
+                  "id": 781,
                   "name": "uint32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "149:6:5",
+                  "src": "156:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint32",
                     "typeString": "uint32"
@@ -81,13 +81,13 @@
               },
               {
                 "constant": false,
-                "id": 892,
+                "id": 784,
                 "mutability": "mutable",
                 "name": "registration",
-                "nameLocation": "176:12:5",
+                "nameLocation": "184:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 899,
-                "src": "169:19:5",
+                "scope": 791,
+                "src": "177:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -95,10 +95,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 891,
+                  "id": 783,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "169:6:5",
+                  "src": "177:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -108,13 +108,13 @@
               },
               {
                 "constant": false,
-                "id": 894,
+                "id": 786,
                 "mutability": "mutable",
                 "name": "location",
-                "nameLocation": "205:8:5",
+                "nameLocation": "214:8:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 899,
-                "src": "198:15:5",
+                "scope": 791,
+                "src": "207:15:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -122,10 +122,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 893,
+                  "id": 785,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "198:6:5",
+                  "src": "207:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -135,13 +135,13 @@
               },
               {
                 "constant": false,
-                "id": 896,
+                "id": 788,
                 "mutability": "mutable",
                 "name": "buildingInfo",
-                "nameLocation": "230:12:5",
+                "nameLocation": "240:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 899,
-                "src": "223:19:5",
+                "scope": 791,
+                "src": "233:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -149,10 +149,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 895,
+                  "id": 787,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "223:6:5",
+                  "src": "233:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -162,13 +162,13 @@
               },
               {
                 "constant": false,
-                "id": 898,
+                "id": 790,
                 "mutability": "mutable",
                 "name": "reasonAndEtc",
-                "nameLocation": "259:12:5",
+                "nameLocation": "270:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 899,
-                "src": "252:19:5",
+                "scope": 791,
+                "src": "263:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -176,10 +176,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 897,
+                  "id": 789,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "252:6:5",
+                  "src": "263:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -189,25 +189,25 @@
               }
             ],
             "name": "HeadLine",
-            "nameLocation": "130:8:5",
+            "nameLocation": "136:8:5",
             "nodeType": "StructDefinition",
-            "scope": 980,
-            "src": "123:155:5",
+            "scope": 872,
+            "src": "129:161:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.Section",
-            "id": 910,
+            "id": 802,
             "members": [
               {
                 "constant": false,
-                "id": 901,
+                "id": 793,
                 "mutability": "mutable",
                 "name": "rank",
-                "nameLocation": "353:4:5",
+                "nameLocation": "369:4:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 910,
-                "src": "347:10:5",
+                "scope": 802,
+                "src": "363:10:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -215,10 +215,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 900,
+                  "id": 792,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "347:5:5",
+                  "src": "363:5:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -228,13 +228,13 @@
               },
               {
                 "constant": false,
-                "id": 903,
+                "id": 795,
                 "mutability": "mutable",
                 "name": "purpose",
-                "nameLocation": "390:7:5",
+                "nameLocation": "407:7:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 910,
-                "src": "383:14:5",
+                "scope": 802,
+                "src": "400:14:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -242,10 +242,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 902,
+                  "id": 794,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "383:6:5",
+                  "src": "400:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -255,13 +255,13 @@
               },
               {
                 "constant": false,
-                "id": 905,
+                "id": 797,
                 "mutability": "mutable",
                 "name": "registration",
-                "nameLocation": "430:12:5",
+                "nameLocation": "448:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 910,
-                "src": "423:19:5",
+                "scope": 802,
+                "src": "441:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -269,10 +269,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 904,
+                  "id": 796,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "423:6:5",
+                  "src": "441:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -282,13 +282,13 @@
               },
               {
                 "constant": false,
-                "id": 907,
+                "id": 799,
                 "mutability": "mutable",
                 "name": "reason",
-                "nameLocation": "469:6:5",
+                "nameLocation": "488:6:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 910,
-                "src": "462:13:5",
+                "scope": 802,
+                "src": "481:13:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -296,10 +296,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 906,
+                  "id": 798,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "462:6:5",
+                  "src": "481:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -309,13 +309,13 @@
               },
               {
                 "constant": false,
-                "id": 909,
+                "id": 801,
                 "mutability": "mutable",
                 "name": "holderAndEtc",
-                "nameLocation": "508:12:5",
+                "nameLocation": "528:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 910,
-                "src": "501:19:5",
+                "scope": 802,
+                "src": "521:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -323,10 +323,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 908,
+                  "id": 800,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "501:6:5",
+                  "src": "521:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -336,25 +336,25 @@
               }
             ],
             "name": "Section",
-            "nameLocation": "329:7:5",
+            "nameLocation": "344:7:5",
             "nodeType": "StructDefinition",
-            "scope": 980,
-            "src": "322:235:5",
+            "scope": 872,
+            "src": "337:241:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.StructureStatus",
-            "id": 921,
+            "id": 813,
             "members": [
               {
                 "constant": false,
-                "id": 912,
+                "id": 804,
                 "mutability": "mutable",
                 "name": "category",
-                "nameLocation": "656:8:5",
+                "nameLocation": "681:8:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 921,
-                "src": "649:15:5",
+                "scope": 813,
+                "src": "674:15:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -362,10 +362,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 911,
+                  "id": 803,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "649:6:5",
+                  "src": "674:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -375,13 +375,13 @@
               },
               {
                 "constant": false,
-                "id": 914,
+                "id": 806,
                 "mutability": "mutable",
                 "name": "floorNumber",
-                "nameLocation": "690:11:5",
+                "nameLocation": "716:11:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 921,
-                "src": "684:17:5",
+                "scope": 813,
+                "src": "710:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -389,10 +389,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 913,
+                  "id": 805,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "684:5:5",
+                  "src": "710:5:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -402,13 +402,13 @@
               },
               {
                 "constant": false,
-                "id": 916,
+                "id": 808,
                 "mutability": "mutable",
                 "name": "structure",
-                "nameLocation": "728:9:5",
+                "nameLocation": "755:9:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 921,
-                "src": "721:16:5",
+                "scope": 813,
+                "src": "748:16:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -416,10 +416,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 915,
+                  "id": 807,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "721:6:5",
+                  "src": "748:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -429,13 +429,13 @@
               },
               {
                 "constant": false,
-                "id": 918,
+                "id": 810,
                 "mutability": "mutable",
                 "name": "usage",
-                "nameLocation": "764:5:5",
+                "nameLocation": "792:5:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 921,
-                "src": "757:12:5",
+                "scope": 813,
+                "src": "785:12:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -443,10 +443,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 917,
+                  "id": 809,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "757:6:5",
+                  "src": "785:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -456,13 +456,13 @@
               },
               {
                 "constant": false,
-                "id": 920,
+                "id": 812,
                 "mutability": "mutable",
                 "name": "area",
-                "nameLocation": "796:4:5",
+                "nameLocation": "825:4:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 921,
-                "src": "789:11:5",
+                "scope": 813,
+                "src": "818:11:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -470,10 +470,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 919,
+                  "id": 811,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "789:6:5",
+                  "src": "818:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -483,25 +483,25 @@
               }
             ],
             "name": "StructureStatus",
-            "nameLocation": "623:15:5",
+            "nameLocation": "647:15:5",
             "nodeType": "StructDefinition",
-            "scope": 980,
-            "src": "616:201:5",
+            "scope": 872,
+            "src": "640:207:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.RealEstateBasicInfo",
-            "id": 932,
+            "id": 824,
             "members": [
               {
                 "constant": false,
-                "id": 923,
+                "id": 815,
                 "mutability": "mutable",
                 "name": "roadNameAddress",
-                "nameLocation": "898:15:5",
+                "nameLocation": "932:15:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 932,
-                "src": "891:22:5",
+                "scope": 824,
+                "src": "925:22:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -509,10 +509,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 922,
+                  "id": 814,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "891:6:5",
+                  "src": "925:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -522,13 +522,13 @@
               },
               {
                 "constant": false,
-                "id": 925,
+                "id": 817,
                 "mutability": "mutable",
                 "name": "buildingName",
-                "nameLocation": "949:12:5",
+                "nameLocation": "984:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 932,
-                "src": "942:19:5",
+                "scope": 824,
+                "src": "977:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -536,10 +536,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 924,
+                  "id": 816,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "942:6:5",
+                  "src": "977:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -549,13 +549,13 @@
               },
               {
                 "constant": false,
-                "id": 927,
+                "id": 819,
                 "mutability": "mutable",
                 "name": "buildingNumber",
-                "nameLocation": "991:14:5",
+                "nameLocation": "1027:14:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 932,
-                "src": "984:21:5",
+                "scope": 824,
+                "src": "1020:21:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -563,10 +563,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 926,
+                  "id": 818,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "984:6:5",
+                  "src": "1020:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -576,13 +576,13 @@
               },
               {
                 "constant": false,
-                "id": 929,
+                "id": 821,
                 "mutability": "mutable",
                 "name": "roomNumber",
-                "nameLocation": "1052:10:5",
+                "nameLocation": "1089:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 932,
-                "src": "1045:17:5",
+                "scope": 824,
+                "src": "1082:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -590,10 +590,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 928,
+                  "id": 820,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1045:6:5",
+                  "src": "1082:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -603,13 +603,13 @@
               },
               {
                 "constant": false,
-                "id": 931,
+                "id": 823,
                 "mutability": "mutable",
                 "name": "genDate",
-                "nameLocation": "1096:7:5",
+                "nameLocation": "1134:7:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 932,
-                "src": "1089:14:5",
+                "scope": 824,
+                "src": "1127:14:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -617,10 +617,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 930,
+                  "id": 822,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1089:6:5",
+                  "src": "1127:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -630,48 +630,48 @@
               }
             ],
             "name": "RealEstateBasicInfo",
-            "nameLocation": "861:19:5",
+            "nameLocation": "894:19:5",
             "nodeType": "StructDefinition",
-            "scope": 980,
-            "src": "854:273:5",
+            "scope": 872,
+            "src": "887:279:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.RealEstateRegistryCertificate",
-            "id": 942,
+            "id": 834,
             "members": [
               {
                 "constant": false,
-                "id": 935,
+                "id": 827,
                 "mutability": "mutable",
                 "name": "headline",
-                "nameLocation": "1212:8:5",
+                "nameLocation": "1255:8:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 942,
-                "src": "1203:17:5",
+                "scope": 834,
+                "src": "1246:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_HeadLine_$899_storage_ptr",
+                  "typeIdentifier": "t_struct$_HeadLine_$791_storage_ptr",
                   "typeString": "struct RealEstateStructs.HeadLine"
                 },
                 "typeName": {
-                  "id": 934,
+                  "id": 826,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 933,
+                    "id": 825,
                     "name": "HeadLine",
                     "nameLocations": [
-                      "1203:8:5"
+                      "1246:8:5"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 899,
-                    "src": "1203:8:5"
+                    "referencedDeclaration": 791,
+                    "src": "1246:8:5"
                   },
-                  "referencedDeclaration": 899,
-                  "src": "1203:8:5",
+                  "referencedDeclaration": 791,
+                  "src": "1246:8:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_HeadLine_$899_storage_ptr",
+                    "typeIdentifier": "t_struct$_HeadLine_$791_storage_ptr",
                     "typeString": "struct RealEstateStructs.HeadLine"
                   }
                 },
@@ -679,36 +679,36 @@
               },
               {
                 "constant": false,
-                "id": 938,
+                "id": 830,
                 "mutability": "mutable",
                 "name": "rightsSection",
-                "nameLocation": "1251:13:5",
+                "nameLocation": "1295:13:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 942,
-                "src": "1243:21:5",
+                "scope": 834,
+                "src": "1287:21:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Section_$910_storage_ptr",
+                  "typeIdentifier": "t_struct$_Section_$802_storage_ptr",
                   "typeString": "struct RealEstateStructs.Section"
                 },
                 "typeName": {
-                  "id": 937,
+                  "id": 829,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 936,
+                    "id": 828,
                     "name": "Section",
                     "nameLocations": [
-                      "1243:7:5"
+                      "1287:7:5"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 910,
-                    "src": "1243:7:5"
+                    "referencedDeclaration": 802,
+                    "src": "1287:7:5"
                   },
-                  "referencedDeclaration": 910,
-                  "src": "1243:7:5",
+                  "referencedDeclaration": 802,
+                  "src": "1287:7:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Section_$910_storage_ptr",
+                    "typeIdentifier": "t_struct$_Section_$802_storage_ptr",
                     "typeString": "struct RealEstateStructs.Section"
                   }
                 },
@@ -716,36 +716,36 @@
               },
               {
                 "constant": false,
-                "id": 941,
+                "id": 833,
                 "mutability": "mutable",
                 "name": "encumbrancesSection",
-                "nameLocation": "1329:19:5",
+                "nameLocation": "1374:19:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 942,
-                "src": "1321:27:5",
+                "scope": 834,
+                "src": "1366:27:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Section_$910_storage_ptr",
+                  "typeIdentifier": "t_struct$_Section_$802_storage_ptr",
                   "typeString": "struct RealEstateStructs.Section"
                 },
                 "typeName": {
-                  "id": 940,
+                  "id": 832,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 939,
+                    "id": 831,
                     "name": "Section",
                     "nameLocations": [
-                      "1321:7:5"
+                      "1366:7:5"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 910,
-                    "src": "1321:7:5"
+                    "referencedDeclaration": 802,
+                    "src": "1366:7:5"
                   },
-                  "referencedDeclaration": 910,
-                  "src": "1321:7:5",
+                  "referencedDeclaration": 802,
+                  "src": "1366:7:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Section_$910_storage_ptr",
+                    "typeIdentifier": "t_struct$_Section_$802_storage_ptr",
                     "typeString": "struct RealEstateStructs.Section"
                   }
                 },
@@ -753,25 +753,25 @@
               }
             ],
             "name": "RealEstateRegistryCertificate",
-            "nameLocation": "1163:29:5",
+            "nameLocation": "1205:29:5",
             "nodeType": "StructDefinition",
-            "scope": 980,
-            "src": "1156:263:5",
+            "scope": 872,
+            "src": "1198:267:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.BuildingManagementRecord",
-            "id": 979,
+            "id": 871,
             "members": [
               {
                 "constant": false,
-                "id": 944,
+                "id": 836,
                 "mutability": "mutable",
                 "name": "isViolated",
-                "nameLocation": "1502:10:5",
+                "nameLocation": "1552:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1497:15:5",
+                "scope": 871,
+                "src": "1547:15:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -779,10 +779,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 943,
+                  "id": 835,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1497:4:5",
+                  "src": "1547:4:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -792,13 +792,13 @@
               },
               {
                 "constant": false,
-                "id": 946,
+                "id": 838,
                 "mutability": "mutable",
                 "name": "units",
-                "nameLocation": "1556:5:5",
+                "nameLocation": "1608:5:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1549:12:5",
+                "scope": 871,
+                "src": "1601:12:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -806,10 +806,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 945,
+                  "id": 837,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1549:6:5",
+                  "src": "1601:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -819,13 +819,13 @@
               },
               {
                 "constant": false,
-                "id": 948,
+                "id": 840,
                 "mutability": "mutable",
                 "name": "households",
-                "nameLocation": "1588:10:5",
+                "nameLocation": "1641:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1581:17:5",
+                "scope": 871,
+                "src": "1634:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -833,10 +833,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 947,
+                  "id": 839,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1581:6:5",
+                  "src": "1634:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -846,13 +846,13 @@
               },
               {
                 "constant": false,
-                "id": 950,
+                "id": 842,
                 "mutability": "mutable",
                 "name": "dwellingUnits",
-                "nameLocation": "1629:13:5",
+                "nameLocation": "1683:13:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1622:20:5",
+                "scope": 871,
+                "src": "1676:20:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -860,10 +860,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 949,
+                  "id": 841,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1622:6:5",
+                  "src": "1676:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -873,13 +873,13 @@
               },
               {
                 "constant": false,
-                "id": 952,
+                "id": 844,
                 "mutability": "mutable",
                 "name": "landLocation",
-                "nameLocation": "1674:12:5",
+                "nameLocation": "1730:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1667:19:5",
+                "scope": 871,
+                "src": "1723:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -887,10 +887,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 951,
+                  "id": 843,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1667:6:5",
+                  "src": "1723:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -900,13 +900,13 @@
               },
               {
                 "constant": false,
-                "id": 954,
+                "id": 846,
                 "mutability": "mutable",
                 "name": "landNumber",
-                "nameLocation": "1719:10:5",
+                "nameLocation": "1776:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1712:17:5",
+                "scope": 871,
+                "src": "1769:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -914,10 +914,10 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 953,
+                  "id": 845,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1712:6:5",
+                  "src": "1769:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint16",
                     "typeString": "uint16"
@@ -927,13 +927,13 @@
               },
               {
                 "constant": false,
-                "id": 956,
+                "id": 848,
                 "mutability": "mutable",
                 "name": "landArea",
-                "nameLocation": "1756:8:5",
+                "nameLocation": "1814:8:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1749:15:5",
+                "scope": 871,
+                "src": "1807:15:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -941,10 +941,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 955,
+                  "id": 847,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1749:6:5",
+                  "src": "1807:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -954,13 +954,13 @@
               },
               {
                 "constant": false,
-                "id": 958,
+                "id": 850,
                 "mutability": "mutable",
                 "name": "totalFloorArea",
-                "nameLocation": "1797:14:5",
+                "nameLocation": "1856:14:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1790:21:5",
+                "scope": 871,
+                "src": "1849:21:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -968,10 +968,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 957,
+                  "id": 849,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1790:6:5",
+                  "src": "1849:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -981,13 +981,13 @@
               },
               {
                 "constant": false,
-                "id": 960,
+                "id": 852,
                 "mutability": "mutable",
                 "name": "region",
-                "nameLocation": "1841:6:5",
+                "nameLocation": "1901:6:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1834:13:5",
+                "scope": 871,
+                "src": "1894:13:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -995,10 +995,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 959,
+                  "id": 851,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1834:6:5",
+                  "src": "1894:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1008,13 +1008,13 @@
               },
               {
                 "constant": false,
-                "id": 962,
+                "id": 854,
                 "mutability": "mutable",
                 "name": "buildingArea",
-                "nameLocation": "1874:12:5",
+                "nameLocation": "1935:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1867:19:5",
+                "scope": 871,
+                "src": "1928:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1022,10 +1022,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 961,
+                  "id": 853,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1867:6:5",
+                  "src": "1928:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1035,13 +1035,13 @@
               },
               {
                 "constant": false,
-                "id": 964,
+                "id": 856,
                 "mutability": "mutable",
                 "name": "mainStructure",
-                "nameLocation": "1919:13:5",
+                "nameLocation": "1981:13:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1912:20:5",
+                "scope": 871,
+                "src": "1974:20:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1049,10 +1049,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 963,
+                  "id": 855,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1912:6:5",
+                  "src": "1974:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1062,13 +1062,13 @@
               },
               {
                 "constant": false,
-                "id": 966,
+                "id": 858,
                 "mutability": "mutable",
                 "name": "mainUsage",
-                "nameLocation": "1962:9:5",
+                "nameLocation": "2025:9:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1955:16:5",
+                "scope": 871,
+                "src": "2018:16:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1076,10 +1076,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 965,
+                  "id": 857,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1955:6:5",
+                  "src": "2018:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1089,13 +1089,13 @@
               },
               {
                 "constant": false,
-                "id": 968,
+                "id": 860,
                 "mutability": "mutable",
                 "name": "basementFloorCount",
-                "nameLocation": "2000:18:5",
+                "nameLocation": "2064:18:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "1994:24:5",
+                "scope": 871,
+                "src": "2058:24:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1103,10 +1103,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 967,
+                  "id": 859,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "1994:5:5",
+                  "src": "2058:5:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -1116,13 +1116,13 @@
               },
               {
                 "constant": false,
-                "id": 970,
+                "id": 862,
                 "mutability": "mutable",
                 "name": "aboveGroundFloorCount",
-                "nameLocation": "2051:21:5",
+                "nameLocation": "2116:21:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "2045:27:5",
+                "scope": 871,
+                "src": "2110:27:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1130,10 +1130,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 969,
+                  "id": 861,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "2045:5:5",
+                  "src": "2110:5:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -1143,13 +1143,13 @@
               },
               {
                 "constant": false,
-                "id": 972,
+                "id": 864,
                 "mutability": "mutable",
                 "name": "height",
-                "nameLocation": "2114:6:5",
+                "nameLocation": "2181:6:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "2107:13:5",
+                "scope": 871,
+                "src": "2174:13:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1157,10 +1157,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 971,
+                  "id": 863,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "2107:6:5",
+                  "src": "2174:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1170,13 +1170,13 @@
               },
               {
                 "constant": false,
-                "id": 974,
+                "id": 866,
                 "mutability": "mutable",
                 "name": "floor",
-                "nameLocation": "2147:5:5",
+                "nameLocation": "2215:5:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "2140:12:5",
+                "scope": 871,
+                "src": "2208:12:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -1184,10 +1184,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 973,
+                  "id": 865,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "2140:6:5",
+                  "src": "2208:6:5",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -1197,45 +1197,45 @@
               },
               {
                 "constant": false,
-                "id": 978,
+                "id": 870,
                 "mutability": "mutable",
                 "name": "statuses",
-                "nameLocation": "2191:8:5",
+                "nameLocation": "2261:8:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 979,
-                "src": "2173:26:5",
+                "scope": 871,
+                "src": "2243:26:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_StructureStatus_$921_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_StructureStatus_$813_storage_$dyn_storage_ptr",
                   "typeString": "struct RealEstateStructs.StructureStatus[]"
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 976,
+                    "id": 868,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 975,
+                      "id": 867,
                       "name": "StructureStatus",
                       "nameLocations": [
-                        "2173:15:5"
+                        "2243:15:5"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 921,
-                      "src": "2173:15:5"
+                      "referencedDeclaration": 813,
+                      "src": "2243:15:5"
                     },
-                    "referencedDeclaration": 921,
-                    "src": "2173:15:5",
+                    "referencedDeclaration": 813,
+                    "src": "2243:15:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_StructureStatus_$921_storage_ptr",
+                      "typeIdentifier": "t_struct$_StructureStatus_$813_storage_ptr",
                       "typeString": "struct RealEstateStructs.StructureStatus"
                     }
                   },
-                  "id": 977,
+                  "id": 869,
                   "nodeType": "ArrayTypeName",
-                  "src": "2173:17:5",
+                  "src": "2243:17:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_StructureStatus_$921_storage_$dyn_storage_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_StructureStatus_$813_storage_$dyn_storage_ptr",
                     "typeString": "struct RealEstateStructs.StructureStatus[]"
                   }
                 },
@@ -1243,20 +1243,20 @@
               }
             ],
             "name": "BuildingManagementRecord",
-            "nameLocation": "1462:24:5",
+            "nameLocation": "1511:24:5",
             "nodeType": "StructDefinition",
-            "scope": 980,
-            "src": "1455:778:5",
+            "scope": 872,
+            "src": "1504:800:5",
             "visibility": "public"
           }
         ],
-        "scope": 981,
-        "src": "57:2179:5",
+        "scope": 873,
+        "src": "60:2249:5",
         "usedErrors": [],
         "usedEvents": []
       }
     ],
-    "src": "32:2204:5"
+    "src": "33:2276:5"
   },
   "compiler": {
     "name": "solc",
@@ -1264,7 +1264,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-05T03:22:44.063Z",
+  "updatedAt": "2024-05-07T00:13:08.123Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

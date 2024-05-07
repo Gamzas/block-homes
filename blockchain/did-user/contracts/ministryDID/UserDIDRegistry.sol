@@ -4,10 +4,13 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "../structs/DIDStruct.sol";
 import "../utils/HexUtils.sol";
+import "../tax/TaxPayment.sol";
 
 contract MinistryDIDRegistry is Ownable {
 
     mapping(string => DIDStructs.DIDDocument) didDocuments;
+
+    mapping(string => address) taxAddresses;
 
     constructor() Ownable(msg.sender) {}
 
@@ -18,6 +21,9 @@ contract MinistryDIDRegistry is Ownable {
         DIDStruct.DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
         didDocument.context = _didDocument.context;
+
+        address taxAddress = new TaxPayment(msg.sender);
+        taxAddressses[didDocument.id] = taxAddress;
 
         didDocument.publicKey.id = string(abi.encodePacked(didDocument.id, _didDocument.publicKey.id)); // DID + fragment 수행
         didDocument.publicKey.keyType = _didDocument.publicKey.keyType;
@@ -42,6 +48,10 @@ contract MinistryDIDRegistry is Ownable {
     function deleteDIDDocument(string calldata did) external onlyOwner {
         delete didDocuments[did];
         emit DIDDeleted(did);
+    }
+    
+    function getTaxContractAddress(string calldata did) external returns (address) {
+        return taxAddresses[did];
     }
 
 }

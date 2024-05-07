@@ -49,6 +49,7 @@ library RealEstateStructs {
     // 건축물 관리대장
     struct BuildingManagementRecord {
         bool isViolated; // 위반건축물 여부
+        bool isNotPermitted; // 무허가건축물 여부
 
         uint16 units; // 호수
         uint16 households; // 가구 수
