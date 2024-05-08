@@ -28,18 +28,25 @@ const SignIn = () => {
         }
     };
     const handleResult = async () => {
+        if (!requestKey) {
+            setErrorMessage('requestKey가 없습니다. 먼저 인증을 완료해 주세요.');
+            return;
+        }
+
         try {
             const result = await getResult(requestKey);
+            console.log(result);  // 로그 출력으로 결과 확인
             if (result.status === 'completed' && result.result) {
                 setAccount(result.result.klaytn_address);
             } else {
-                setErrorMessage('result 실패');
+                setErrorMessage('Kaikas 지갑 주소 가져오기 실패: ' + result.status);
             }
         } catch (error) {
-            setErrorMessage('result get 실패');
-            console.error('Error during authentication:', error);
+            setErrorMessage('result 조회 실패: ' + error.message);
+            console.error('Error during result fetching:', error);
         }
     };
+
 
     return (
         <k.SignInContainer onClick={e => e.stopPropagation()}>
