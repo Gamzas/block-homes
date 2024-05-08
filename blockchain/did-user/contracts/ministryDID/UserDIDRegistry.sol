@@ -6,7 +6,7 @@ import "../structs/DIDStructs.sol";
 import "../utils/HexUtils.sol";
 import "../tax/TaxPayment.sol";
 
-contract MinistryDIDRegistry is Ownable {
+contract UserDIDRegistry is Ownable {
 
     mapping(string => DIDStructs.DIDDocument) didDocuments;
 
@@ -19,11 +19,8 @@ contract MinistryDIDRegistry is Ownable {
     event DIDDeleted(string did);
 
     function createDIDDocument(DIDStructs.DIDDocument memory _didDocument) external onlyOwner {
-        // DIDStructs.DIDDocument memory didDocument;
-
-        string memory did = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
-        DIDStructs.DIDDocument storage didDocument = didDocuments[did];
-        
+        DIDStruct.DIDDocument memory didDocument;
+        didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
         didDocument.context = _didDocument.context;
 
         address taxAddress = address(new TaxPayment(msg.sender));
@@ -54,7 +51,7 @@ contract MinistryDIDRegistry is Ownable {
         emit DIDCreated(didDocument.id);
     }
 
-    function getDIDDocument(string calldata did) external view returns (DIDStructs.DIDDocument memory) {
+    function getDIDDocument(string calldata did) external view returns (DIDStruct.DIDDocument memory) {
         return didDocuments[did];
     }
 

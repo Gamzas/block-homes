@@ -1,18 +1,19 @@
 import axios from 'axios';
-import {PrepareResponse, ResultResponse} from "@/types/components/kaikas";
+import {PrepareResponse, ResultResponse} from "@/types/components/kaikasType";
 
 const API_BASE_URL = 'https://api.kaikas.io/api/v1/k';
 
 export const prepareAuthRequest = async (): Promise<PrepareResponse> => {
     const response = await axios.post(`${API_BASE_URL}/prepare`, {
-        type: 'auth',
+        chain_id: '1001',
         bapp: {
             name: 'Block Homes',
             callback: {
                 success: 'https://block-homes.kr/signin',
                 fail: 'https://block-homes.kr/signin'
             }
-        }
+        },
+        type: 'auth',
     }, {
         headers: {
             'Content-Type': 'application/json'
