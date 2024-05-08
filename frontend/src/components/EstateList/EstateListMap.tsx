@@ -6,9 +6,9 @@ import useCurrentLocation from '@/hooks/useCurrentLocation'
 import { useAtom } from 'jotai'
 import {
   estateItemListAtom,
-  // selectedItemAtom,
+  selectedItemAtom,
 } from '@/stores/atoms/EstateListStore'
-// import EstateItemCard from './EstateItemCard'
+import EstateItemCard from './EstateItemCard'
 
 declare global {
   interface Window {
@@ -19,18 +19,19 @@ const { kakao } = window
 
 const EstateListMap = () => {
   const { location, getCurrentLocation } = useCurrentLocation()
-  // const [openCard, setOpenCard] = useState(false)
   // 부동산 매물 리스트
   const [estateItemList] = useAtom(estateItemListAtom)
   // 상세보기 선택한 부동산
-  // const [item, setItem] = useAtom(selectedItemAtom)
+  const [item, setItem] = useAtom(selectedItemAtom)
+
 
   // 닫기 버튼
-  // const handleDetailCardClose = () => {
-  //   // setItem(null)
-  // }
+  const handleDetailCardClose = () => {
+    setItem('not')
+  }
 
   useEffect(() => {
+    setItem('not')
     getCurrentLocation()
   }, [])
 
@@ -67,7 +68,8 @@ const EstateListMap = () => {
 
     // 커스텀 오버레이 렌더링
     // 오버레이 위치 리스트에 대해 처리
-    {estateItemList !== null &&
+    {
+      estateItemList !== null &&
         estateItemList.forEach(estateItem => {
           const position = new kakao.maps.LatLng(
             estateItem.latitude,
@@ -78,9 +80,7 @@ const EstateListMap = () => {
             <CustomOverlay condition={estateItem.condition} />,
           )
           const handleOverlayClick = () => {
-            // setOpenCard(true)
-            // console.log(typeof setItem)
-            // setItem(estateItem)
+            setItem(estateItem)
           }
 
           const customOverlay = new kakao.maps.CustomOverlay({
@@ -92,7 +92,10 @@ const EstateListMap = () => {
             zIndex: 4,
           })
           const circleElement = overlayDiv.querySelector('.circle')
-          {circleElement && circleElement.addEventListener('click' , handleOverlayClick)}
+          {
+            circleElement &&
+              circleElement.addEventListener('click', handleOverlayClick)
+          }
 
           customOverlay.setMap(map)
         })
@@ -102,16 +105,20 @@ const EstateListMap = () => {
   return (
     <>
       <e.EstateMapContainer id="map">
-        {/* {item !== null && (
-          <e.DetailCardContainer>
+        {item !== 'not' && (
+          <e.DetailCardContainer id="card-container">
+            <div className="card-background" onClick={handleDetailCardClose} />
             <EstateItemCard {...item} />
-            <e.CloseCardContainer>
+            {/* DELETE 닫기 버튼 삭제하기 */}
+            {/* <e.CloseCardContainer>
               <div className="closeBtn" onClick={handleDetailCardClose}>
                 닫기
               </div>
-            </e.CloseCardContainer>
+            </e.CloseCardContainer> */}
+            {/* DELETE div 삭제 */}
+            {/* <div className="card"></div> */}
           </e.DetailCardContainer>
-        )} */}
+        )}
       </e.EstateMapContainer>
     </>
   )

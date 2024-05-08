@@ -2,20 +2,28 @@ import styled from 'styled-components'
 
 export const EstateMapContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 82vh;
   position: relative;
   z-index: 0;
 `
 
-
 export const DetailCardContainer = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100%;
-  left: 1.2rem;
-  bottom: 10rem;
+  max-width: 390px;
+  background: rgba(196, 195, 195, 0.7);
+  bottom: 4rem;
   z-index: 10;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .card-background {
+    width: 100%;
+    height: 80vh;
+  }
 `
-
+// DELETE 닫기 버튼 컨테이너 삭제하기
 export const CloseCardContainer = styled.div`
   width: 1rem;
   height: 1rem;
