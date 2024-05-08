@@ -9,7 +9,7 @@ export const CurrentStatusContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 5vh;
+  height: 3rem;
   background: #fff;
   box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
   position: relative;
