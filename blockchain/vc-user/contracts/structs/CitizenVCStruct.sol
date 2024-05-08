@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-library VCstruct {
+library CitizenVCStruct {
 
     struct Name{
         string value;
