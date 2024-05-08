@@ -27,8 +27,12 @@ export const EstateFilterContainer = styled.div`
   background: rgba(130, 130, 130, 0.7);
 `
 
+
+// DELETE 컨테이너 삭제 
+
 export const EstateMapContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 2rem;
   position: relative;
+  border: 3px solid yellow;
 `

@@ -8,7 +8,7 @@ export const ItemCardContainer = styled.div<colorType>`
   width: 90%;
   height: 10rem;
   flex-shrink: 0;
-  border-radius: 18.5px;
+  border-radius: 1.5rem;
   background: ${props => props.$color};
   position: relative;
   margin-top: 1rem;
