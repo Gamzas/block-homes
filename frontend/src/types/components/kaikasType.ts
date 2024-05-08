@@ -1,5 +1,3 @@
-import {AccountType} from "@/types/accountType";
-
 export interface PrepareResponse {
     chain_id: string;
     request_key: string;
@@ -8,7 +6,7 @@ export interface PrepareResponse {
 }
 
 export interface AuthResult {
-    klaytn_address: AccountType;
+    klaytn_address: string | null; // 0xc14E094bEc4432D732Cd514CcDEEba332a9Af8aF
 }
 
 export interface ResultResponse {

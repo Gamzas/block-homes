@@ -15,7 +15,8 @@ const SignIn = () => {
             const {request_key, status} = await prepareAuthRequest();
             if (status === 'prepared' && request_key) {
                 setRequestKey(request_key)
-                const url = `kaikas://wallet/api?request_key=${request_key}`;
+                // const url = `kaikas://wallet/api?request_key=${request_key}`;
+                const url = `https://app.kaikas.io/a/${request_key}`;
                 window.open(url, '_blank');
             } else {
                 setErrorMessage('prepared 실패');
@@ -37,7 +38,7 @@ const SignIn = () => {
             const result = await getResult(requestKey);
             console.log(result);  // 로그 출력으로 결과 확인
             if (result.status === 'completed' && result.result) {
-                setAccount(result.result.klaytn_address);
+                setAccount(result.result);
             } else {
                 setErrorMessage('Kaikas 지갑 주소 가져오기 실패: ' + result.status);
             }
@@ -55,7 +56,7 @@ const SignIn = () => {
             <br/>
             <br/>
             <br/>
-            {account ? account.account : null}
+            {account ? account.klaytn_address : null}
             <br/>
             <br/>
             <br/>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {PrepareResponse, ResultResponse} from "@/types/components/kaikas";
+import {PrepareResponse, ResultResponse} from "@/types/components/kaikasType";
 
 const API_BASE_URL = 'https://api.kaikas.io/api/v1/k';
 
