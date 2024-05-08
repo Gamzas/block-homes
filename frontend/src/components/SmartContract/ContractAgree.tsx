@@ -12,7 +12,7 @@ const ContractAgree = () => {
     setIsAgreed(true)
     setTimeout(() => {
       setStep(step + 1)
-    }, 1000)
+    }, 1200)
   }
   return (
     <ContractAgreeWrapper>
@@ -48,7 +48,7 @@ const ContractAgree = () => {
             '개인(신용)정보 조회 동의',
             '고유식별정보 처리에 관한 동의',
             '개인정보 제3자 제공 동의',
-            '공공마이데이터활용 개인정보 수집이용 등에 관한 동의',
+            '공공마이데이터 개인정보 수집이용 등에 관한 동의',
           ].map((text, index) => (
             <p key={index}>
               {text}{' '}
