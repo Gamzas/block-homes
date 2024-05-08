@@ -41,9 +41,10 @@ const EstateItemList = () => {
             </>
           )
         ) : (
-          <l.EstateMapContainer>
-            <EstateListMap />
-          </l.EstateMapContainer>
+          // FIXME 컨테이너 삭제 EstateMapContainer
+          // <l.EstateMapContainer>
+          <EstateListMap />
+          // </l.EstateMapContainer>
         )}
         {filter && (
           <l.EstateFilterContainer>
