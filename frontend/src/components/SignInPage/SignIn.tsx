@@ -43,7 +43,7 @@ const SignIn = () => {
       setAccount(resultAuth.result)
       console.log('Account updated with:', resultAuth)
     }
-  }, [resultAuth])
+  }, [resultAuth, setAccount])
 
   const {
     mutate: prepareClaimCredential,
@@ -60,15 +60,13 @@ const SignIn = () => {
     },
   })
 
-  const {
-    data: resultClaimCredential,
-  } = useQuery<ResultResponse, Error>({
+  const { error, isError } = useQuery<ResultResponse, Error>({
     queryKey: ['getResult', requestKey],
     queryFn: () => getResult(requestKey),
     enabled: !!requestKey, // requestKey가 존재할 때만 쿼리 실행
-  })
+  });
 
-  const handleprepareClaimCredentialRequest = () => {
+  const handlePrepareClaimCredentialRequest = () => {
     prepareClaimCredential()
   }
   return (
@@ -78,13 +76,13 @@ const SignIn = () => {
         Kaikas prepare / request
       </k.SignInButton>
       <br />
-      <k.SignInButton onClick={handleprepareClaimCredentialRequest}>
+      <k.SignInButton onClick={handlePrepareClaimCredentialRequest}>
         claimCredential
       </k.SignInButton>
       <br />
       {resultAuth && <div>Address: {account.klaytn_address}</div>}
       <br />
-      {resultClaimCredential === [] && <div>성공</div>}
+      {isError && <div>Error: {error?.message}</div>}
     </k.SignInContainer>
   )
 }
