@@ -1,32 +1,17 @@
 import axios from 'axios';
 import {PrepareResponse, ResultResponse} from "@/types/components/kaikasType";
+import {KAIKAS_API_BASE_HEADERS, KAIKAS_API_BASE_PREPARE_REQUEST_BODY, KAIKAS_API_BASE_URL} from "@constants/kaikas";
 
-const API_BASE_URL = 'https://api.kaikas.io/api/v1/k';
 
 export const prepareAuthRequest = async (): Promise<PrepareResponse> => {
-    const response = await axios.post(`${API_BASE_URL}/prepare`, {
-        chain_id: '1001',
-        bapp: {
-            name: 'Block Homes',
-            callback: {
-                success: 'https://block-homes.kr/signin',
-                fail: 'https://block-homes.kr/signin'
-            }
-        },
+    const response = await axios.post<PrepareResponse>(`${KAIKAS_API_BASE_URL}/prepare`, {
+        ...KAIKAS_API_BASE_PREPARE_REQUEST_BODY,
         type: 'auth',
-    }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    }, KAIKAS_API_BASE_HEADERS);
     return response.data;
 }
 
 export const getResult = async (request_key: string): Promise<ResultResponse> => {
-    const response = await axios.get(`${API_BASE_URL}/result/${request_key}`, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    const response = await axios.get<ResultResponse>(`${KAIKAS_API_BASE_URL}/result/${request_key}`, KAIKAS_API_BASE_HEADERS);
     return response.data;
 }
