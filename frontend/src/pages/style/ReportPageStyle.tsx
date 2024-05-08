@@ -7,7 +7,6 @@ export const ReportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid;
   .question-box {
     position: fixed;
     top: 1.2%;
