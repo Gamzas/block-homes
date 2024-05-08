@@ -1,20 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "../../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "../structs/DIDStruct.sol";
 import "../utils/HexUtils.sol";
 
 contract MinistryDIDRegistry is Ownable {
 
-    mapping(string => DIDStructs.DIDDocument) didDocuments;
+    mapping(string => DIDStruct.DIDDocument) didDocuments;
 
     constructor() Ownable(msg.sender) {}
 
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(DIDStructs.DIDDocument memory _didDocument) external onlyOwner {
+    function createDIDDocument(DIDStruct.DIDDocument memory _didDocument) external onlyOwner {
         DIDStruct.DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
         didDocument.context = _didDocument.context;
@@ -35,7 +35,7 @@ contract MinistryDIDRegistry is Ownable {
         emit DIDCreated(didDocument.id);
     }
 
-    function getDIDDocument(string calldata did) external view returns (DIDStructs.DIDDocument memory) {
+    function getDIDDocument(string calldata did) external view returns (DIDStruct.DIDDocument memory) {
         return didDocuments[did];
     }
 
