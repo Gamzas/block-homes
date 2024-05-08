@@ -91,8 +91,8 @@ const EstateListMap = () => {
             clickable: true,
             zIndex: 4,
           })
-          
-          overlayDiv.querySelector('.circle').addEventListener('click', handleOverlayClick)
+          const circleElement = overlayDiv.querySelector('.circle')
+          {circleElement && circleElement.addEventListener('click' , handleOverlayClick)}
 
           customOverlay.setMap(map)
         })
