@@ -30,15 +30,21 @@ const EstateItemList = () => {
       </l.StatusBarContainer>
       <l.EstateItemListContainer>
         {menu ? (
-          <>
-            {estateItemList.map((item, index) => (
-              <EstateItemCard key={index} {...item} />
-            ))}
-          </>
+          estateItemList === null || estateItemList.length === 0 ? (
+            // TODO 매물 없을때 컴포넌트 분리해서 완성하기
+            <div>해당 지역에 매물이 없습니다.</div>
+          ) : (
+            <>
+              {estateItemList.map((item, index) => (
+                <EstateItemCard key={index} {...item} />
+              ))}
+            </>
+          )
         ) : (
-          <l.EstateMapContainer>
-            <EstateListMap />
-          </l.EstateMapContainer>
+          // DELETE 컨테이너 삭제 EstateMapContainer
+          // <l.EstateMapContainer>
+          <EstateListMap />
+          // </l.EstateMapContainer>
         )}
         {filter && (
           <l.EstateFilterContainer>

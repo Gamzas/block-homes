@@ -13,8 +13,8 @@ import { useNavigate } from 'react-router-dom'
 //     title="목록"
 //     isSearch={false}
 //     rightIconSrc="public/icon/icon_map.png"
+//     onModal={handleOpen} (선택)
 // />
-
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
   const downloadPdf = useDownloadPDF()
   const [menu, setMenu] = useAtom(mapAtom)
@@ -26,7 +26,9 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
           className="back-arrow"
           alt="뒤로가기"
           src="/icon/icon_back_arrow.png"
-          onClick={() => navigate(-1)}
+          onClick={() =>
+            HeaderProps.onModal ? HeaderProps.onModal() : navigate(-1)
+          }
         />
 
         {HeaderProps.isSearch ? (

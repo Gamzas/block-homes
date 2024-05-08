@@ -1,29 +1,29 @@
 {
   "contractName": "IterableMapping",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/utils/IterableMapping.sol\":\"IterableMapping\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/utils/IterableMapping.sol\":{\"keccak256\":\"0x174e43c488be5eff8473102df787804159ae4945a865b062176f6fd13ea94be7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6eb7a166432ccd16594a9d71e5c83d146bd4d4d0b3d7c059096a04d3b21d9022\",\"dweb:/ipfs/QmQyjrdcvq4w8dt1WnDsZD5jXpjgrd482w1TJknNJVUygQ\"]}},\"version\":1}",
-  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220b69eeca30d0436d3cac0fc964fe34aa60a6b267c4bf52e82249206924180c3d964736f6c63430008150033",
-  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220b69eeca30d0436d3cac0fc964fe34aa60a6b267c4bf52e82249206924180c3d964736f6c63430008150033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/utils/IterableMapping.sol\":\"IterableMapping\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/utils/IterableMapping.sol\":{\"keccak256\":\"0xf29ec8e9f9a92f5fb6c0e4fc3a430cbc7fbf3ce4eaf17a7fe6829839f5fc6c76\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://80a115540c13f0d38c7c2811f57f5f9708c308afc3ae002df2243ac55439bd10\",\"dweb:/ipfs/QmX1eJuvEQEyCxzJpPYnqNZYXeQpyRDB8tofAbycxMuWws\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea26469706673582212209316110747fe272a9ed2b9e4cdd2d3707cd7a7e046c4df09af0f4f8dd8345d8664736f6c63430008150033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea26469706673582212209316110747fe272a9ed2b9e4cdd2d3707cd7a7e046c4df09af0f4f8dd8345d8664736f6c63430008150033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "57:2257:9:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "57:2257:9:-:0;;;;;;;;",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nlibrary IterableMapping {\n    \n    struct IndexValue {\n        uint256 keyIndex;\n        bytes value;\n    }\n\n    struct KeyFlag {\n        bytes32 key;\n        bool deleted;\n    }\n\n    struct itmap {\n        mapping(bytes32 => IndexValue) data;\n        KeyFlag[] keys;\n        uint256 size;\n    }\n\n    function getSize(itmap storage self) internal view returns (uint256) {\n        return self.size;\n    }\n\n    function getValue(itmap storage self, bytes32 key) internal view returns (bytes memory) {\n        return self.data[key].value;\n    }\n\n    function insert(itmap storage self, bytes32 key, bytes memory value) internal returns (bool replaced) {\n        uint256 keyIndex = self.data[key].keyIndex;\n        self.data[key].value = value;\n        if (keyIndex > 0) return true;\n        else {\n            keyIndex = self.keys.length;\n            self.keys.push(KeyFlag(key, false));\n            self.data[key].keyIndex = keyIndex + 1;\n            self.keys[keyIndex].key = key;\n            self.size++;\n            return false;\n        }\n    }\n\n    function remove(itmap storage self, bytes32 key) internal returns (bool success) {\n        uint256 keyIndex = self.data[key].keyIndex;\n        if (keyIndex == 0) return false;\n        delete self.data[key];\n        self.keys[keyIndex - 1].deleted = true;\n        self.size--;\n        return true;\n    }\n\n    function contains(itmap storage self, bytes32 key) internal view returns (bool) {\n        return self.data[key].keyIndex > 0;\n    }\n\n    function iterate_start(itmap storage self) internal view returns (uint256 keyIndex) {\n        return iterate_next(self, type(uint256).max);\n    }\n\n    function iterate_valid(itmap storage self, uint256 keyIndex) internal view returns (bool) {\n        return keyIndex < self.keys.length;\n    }\n\n    function iterate_next(itmap storage self, uint256 keyIndex) internal view returns (uint256 r_keyIndex) {\n        keyIndex++;\n        while (keyIndex < self.keys.length && self.keys[keyIndex].deleted)\n            keyIndex++;\n        return keyIndex;\n    }\n\n    function iterate_get(itmap storage self, uint256 keyIndex) internal view returns (bytes32 key, bytes memory value) {\n        key = self.keys[keyIndex].key;\n        value = self.data[key].value;\n    }\n\n}",
-  "sourcePath": "/Users/sejin/Desktop/Development/C203/S10P31C203/blockchain/did-user/contracts/utils/IterableMapping.sol",
+  "sourceMap": "60:2330:7:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "60:2330:7:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary IterableMapping {\r\n    \r\n    struct IndexValue {\r\n        uint256 keyIndex;\r\n        bytes value;\r\n    }\r\n\r\n    struct KeyFlag {\r\n        bytes32 key;\r\n        bool deleted;\r\n    }\r\n\r\n    struct itmap {\r\n        mapping(bytes32 => IndexValue) data;\r\n        KeyFlag[] keys;\r\n        uint256 size;\r\n    }\r\n\r\n    function getSize(itmap storage self) internal view returns (uint256) {\r\n        return self.size;\r\n    }\r\n\r\n    function getValue(itmap storage self, bytes32 key) internal view returns (bytes memory) {\r\n        return self.data[key].value;\r\n    }\r\n\r\n    function insert(itmap storage self, bytes32 key, bytes memory value) internal returns (bool replaced) {\r\n        uint256 keyIndex = self.data[key].keyIndex;\r\n        self.data[key].value = value;\r\n        if (keyIndex > 0) return true;\r\n        else {\r\n            keyIndex = self.keys.length;\r\n            self.keys.push(KeyFlag(key, false));\r\n            self.data[key].keyIndex = keyIndex + 1;\r\n            self.keys[keyIndex].key = key;\r\n            self.size++;\r\n            return false;\r\n        }\r\n    }\r\n\r\n    function remove(itmap storage self, bytes32 key) internal returns (bool success) {\r\n        uint256 keyIndex = self.data[key].keyIndex;\r\n        if (keyIndex == 0) return false;\r\n        delete self.data[key];\r\n        self.keys[keyIndex - 1].deleted = true;\r\n        self.size--;\r\n        return true;\r\n    }\r\n\r\n    function contains(itmap storage self, bytes32 key) internal view returns (bool) {\r\n        return self.data[key].keyIndex > 0;\r\n    }\r\n\r\n    function iterate_start(itmap storage self) internal view returns (uint256 keyIndex) {\r\n        return iterate_next(self, type(uint256).max);\r\n    }\r\n\r\n    function iterate_valid(itmap storage self, uint256 keyIndex) internal view returns (bool) {\r\n        return keyIndex < self.keys.length;\r\n    }\r\n\r\n    function iterate_next(itmap storage self, uint256 keyIndex) internal view returns (uint256 r_keyIndex) {\r\n        keyIndex++;\r\n        while (keyIndex < self.keys.length && self.keys[keyIndex].deleted)\r\n            keyIndex++;\r\n        return keyIndex;\r\n    }\r\n\r\n    function iterate_get(itmap storage self, uint256 keyIndex) internal view returns (bytes32 key, bytes memory value) {\r\n        key = self.keys[keyIndex].key;\r\n        value = self.data[key].value;\r\n    }\r\n\r\n}",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\S10P31C203\\blockchain\\did-consortium\\contracts\\utils\\IterableMapping.sol",
   "ast": {
     "absolutePath": "project:/contracts/utils/IterableMapping.sol",
     "exportedSymbols": {
       "IterableMapping": [
-        1937
+        1658
       ]
     },
-    "id": 1938,
+    "id": 1659,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1641,
+        "id": 1362,
         "literals": [
           "solidity",
           "^",
@@ -31,7 +31,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:23:9"
+        "src": "33:23:7"
       },
       {
         "abstract": false,
@@ -40,27 +40,27 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 1937,
+        "id": 1658,
         "linearizedBaseContracts": [
-          1937
+          1658
         ],
         "name": "IterableMapping",
-        "nameLocation": "65:15:9",
+        "nameLocation": "68:15:7",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "IterableMapping.IndexValue",
-            "id": 1646,
+            "id": 1367,
             "members": [
               {
                 "constant": false,
-                "id": 1643,
+                "id": 1364,
                 "mutability": "mutable",
                 "name": "keyIndex",
-                "nameLocation": "128:8:9",
+                "nameLocation": "134:8:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1646,
-                "src": "120:16:9",
+                "scope": 1367,
+                "src": "126:16:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -68,10 +68,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1642,
+                  "id": 1363,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "120:7:9",
+                  "src": "126:7:7",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -81,13 +81,13 @@
               },
               {
                 "constant": false,
-                "id": 1645,
+                "id": 1366,
                 "mutability": "mutable",
                 "name": "value",
-                "nameLocation": "152:5:9",
+                "nameLocation": "159:5:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1646,
-                "src": "146:11:9",
+                "scope": 1367,
+                "src": "153:11:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -95,10 +95,10 @@
                   "typeString": "bytes"
                 },
                 "typeName": {
-                  "id": 1644,
+                  "id": 1365,
                   "name": "bytes",
                   "nodeType": "ElementaryTypeName",
-                  "src": "146:5:9",
+                  "src": "153:5:7",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes_storage_ptr",
                     "typeString": "bytes"
@@ -108,25 +108,25 @@
               }
             ],
             "name": "IndexValue",
-            "nameLocation": "99:10:9",
+            "nameLocation": "104:10:7",
             "nodeType": "StructDefinition",
-            "scope": 1937,
-            "src": "92:72:9",
+            "scope": 1658,
+            "src": "97:75:7",
             "visibility": "public"
           },
           {
             "canonicalName": "IterableMapping.KeyFlag",
-            "id": 1651,
+            "id": 1372,
             "members": [
               {
                 "constant": false,
-                "id": 1648,
+                "id": 1369,
                 "mutability": "mutable",
                 "name": "key",
-                "nameLocation": "203:3:9",
+                "nameLocation": "214:3:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1651,
-                "src": "195:11:9",
+                "scope": 1372,
+                "src": "206:11:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -134,10 +134,10 @@
                   "typeString": "bytes32"
                 },
                 "typeName": {
-                  "id": 1647,
+                  "id": 1368,
                   "name": "bytes32",
                   "nodeType": "ElementaryTypeName",
-                  "src": "195:7:9",
+                  "src": "206:7:7",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes32",
                     "typeString": "bytes32"
@@ -147,13 +147,13 @@
               },
               {
                 "constant": false,
-                "id": 1650,
+                "id": 1371,
                 "mutability": "mutable",
                 "name": "deleted",
-                "nameLocation": "221:7:9",
+                "nameLocation": "233:7:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1651,
-                "src": "216:12:9",
+                "scope": 1372,
+                "src": "228:12:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -161,10 +161,10 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 1649,
+                  "id": 1370,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
-                  "src": "216:4:9",
+                  "src": "228:4:7",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bool",
                     "typeString": "bool"
@@ -174,70 +174,70 @@
               }
             ],
             "name": "KeyFlag",
-            "nameLocation": "177:7:9",
+            "nameLocation": "187:7:7",
             "nodeType": "StructDefinition",
-            "scope": 1937,
-            "src": "170:65:9",
+            "scope": 1658,
+            "src": "180:68:7",
             "visibility": "public"
           },
           {
             "canonicalName": "IterableMapping.itmap",
-            "id": 1663,
+            "id": 1384,
             "members": [
               {
                 "constant": false,
-                "id": 1656,
+                "id": 1377,
                 "mutability": "mutable",
                 "name": "data",
-                "nameLocation": "295:4:9",
+                "nameLocation": "311:4:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1663,
-                "src": "264:35:9",
+                "scope": 1384,
+                "src": "280:35:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                   "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue)"
                 },
                 "typeName": {
-                  "id": 1655,
+                  "id": 1376,
                   "keyName": "",
                   "keyNameLocation": "-1:-1:-1",
                   "keyType": {
-                    "id": 1652,
+                    "id": 1373,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "272:7:9",
+                    "src": "288:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   },
                   "nodeType": "Mapping",
-                  "src": "264:30:9",
+                  "src": "280:30:7",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                    "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                     "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue)"
                   },
                   "valueName": "",
                   "valueNameLocation": "-1:-1:-1",
                   "valueType": {
-                    "id": 1654,
+                    "id": 1375,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1653,
+                      "id": 1374,
                       "name": "IndexValue",
                       "nameLocations": [
-                        "283:10:9"
+                        "299:10:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1646,
-                      "src": "283:10:9"
+                      "referencedDeclaration": 1367,
+                      "src": "299:10:7"
                     },
-                    "referencedDeclaration": 1646,
-                    "src": "283:10:9",
+                    "referencedDeclaration": 1367,
+                    "src": "299:10:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_IndexValue_$1646_storage_ptr",
+                      "typeIdentifier": "t_struct$_IndexValue_$1367_storage_ptr",
                       "typeString": "struct IterableMapping.IndexValue"
                     }
                   }
@@ -246,45 +246,45 @@
               },
               {
                 "constant": false,
-                "id": 1660,
+                "id": 1381,
                 "mutability": "mutable",
                 "name": "keys",
-                "nameLocation": "319:4:9",
+                "nameLocation": "336:4:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1663,
-                "src": "309:14:9",
+                "scope": 1384,
+                "src": "326:14:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage_ptr",
+                  "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage_ptr",
                   "typeString": "struct IterableMapping.KeyFlag[]"
                 },
                 "typeName": {
                   "baseType": {
-                    "id": 1658,
+                    "id": 1379,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1657,
+                      "id": 1378,
                       "name": "KeyFlag",
                       "nameLocations": [
-                        "309:7:9"
+                        "326:7:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1651,
-                      "src": "309:7:9"
+                      "referencedDeclaration": 1372,
+                      "src": "326:7:7"
                     },
-                    "referencedDeclaration": 1651,
-                    "src": "309:7:9",
+                    "referencedDeclaration": 1372,
+                    "src": "326:7:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_KeyFlag_$1651_storage_ptr",
+                      "typeIdentifier": "t_struct$_KeyFlag_$1372_storage_ptr",
                       "typeString": "struct IterableMapping.KeyFlag"
                     }
                   },
-                  "id": 1659,
+                  "id": 1380,
                   "nodeType": "ArrayTypeName",
-                  "src": "309:9:9",
+                  "src": "326:9:7",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage_ptr",
                     "typeString": "struct IterableMapping.KeyFlag[]"
                   }
                 },
@@ -292,13 +292,13 @@
               },
               {
                 "constant": false,
-                "id": 1662,
+                "id": 1383,
                 "mutability": "mutable",
                 "name": "size",
-                "nameLocation": "341:4:9",
+                "nameLocation": "359:4:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1663,
-                "src": "333:12:9",
+                "scope": 1384,
+                "src": "351:12:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -306,10 +306,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1661,
+                  "id": 1382,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
-                  "src": "333:7:9",
+                  "src": "351:7:7",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -319,118 +319,118 @@
               }
             ],
             "name": "itmap",
-            "nameLocation": "248:5:9",
+            "nameLocation": "263:5:7",
             "nodeType": "StructDefinition",
-            "scope": 1937,
-            "src": "241:111:9",
+            "scope": 1658,
+            "src": "256:115:7",
             "visibility": "public"
           },
           {
             "body": {
-              "id": 1674,
+              "id": 1395,
               "nodeType": "Block",
-              "src": "427:33:9",
+              "src": "448:35:7",
               "statements": [
                 {
                   "expression": {
                     "expression": {
-                      "id": 1671,
+                      "id": 1392,
                       "name": "self",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1666,
-                      "src": "444:4:9",
+                      "referencedDeclaration": 1387,
+                      "src": "466:4:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                        "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                         "typeString": "struct IterableMapping.itmap storage pointer"
                       }
                     },
-                    "id": 1672,
+                    "id": 1393,
                     "isConstant": false,
                     "isLValue": true,
                     "isPure": false,
                     "lValueRequested": false,
-                    "memberLocation": "449:4:9",
+                    "memberLocation": "471:4:7",
                     "memberName": "size",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 1662,
-                    "src": "444:9:9",
+                    "referencedDeclaration": 1383,
+                    "src": "466:9:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 1670,
-                  "id": 1673,
+                  "functionReturnParameters": 1391,
+                  "id": 1394,
                   "nodeType": "Return",
-                  "src": "437:16:9"
+                  "src": "459:16:7"
                 }
               ]
             },
-            "id": 1675,
+            "id": 1396,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getSize",
-            "nameLocation": "367:7:9",
+            "nameLocation": "388:7:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1667,
+              "id": 1388,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1666,
+                  "id": 1387,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "389:4:9",
+                  "nameLocation": "410:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1675,
-                  "src": "375:18:9",
+                  "scope": 1396,
+                  "src": "396:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1665,
+                    "id": 1386,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1664,
+                      "id": 1385,
                       "name": "itmap",
                       "nameLocations": [
-                        "375:5:9"
+                        "396:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "375:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "396:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "375:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "396:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "374:20:9"
+              "src": "395:20:7"
             },
             "returnParameters": {
-              "id": 1670,
+              "id": 1391,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1669,
+                  "id": 1390,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1675,
-                  "src": "418:7:9",
+                  "scope": 1396,
+                  "src": "439:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -438,10 +438,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1668,
+                    "id": 1389,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "418:7:9",
+                    "src": "439:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -450,59 +450,59 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "417:9:9"
+              "src": "438:9:7"
             },
-            "scope": 1937,
-            "src": "358:102:9",
+            "scope": 1658,
+            "src": "379:104:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1691,
+              "id": 1412,
               "nodeType": "Block",
-              "src": "554:44:9",
+              "src": "579:46:7",
               "statements": [
                 {
                   "expression": {
                     "expression": {
                       "baseExpression": {
                         "expression": {
-                          "id": 1685,
+                          "id": 1406,
                           "name": "self",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1678,
-                          "src": "571:4:9",
+                          "referencedDeclaration": 1399,
+                          "src": "597:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                            "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                             "typeString": "struct IterableMapping.itmap storage pointer"
                           }
                         },
-                        "id": 1686,
+                        "id": 1407,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "576:4:9",
+                        "memberLocation": "602:4:7",
                         "memberName": "data",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1656,
-                        "src": "571:9:9",
+                        "referencedDeclaration": 1377,
+                        "src": "597:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                           "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                         }
                       },
-                      "id": 1688,
+                      "id": 1409,
                       "indexExpression": {
-                        "id": 1687,
+                        "id": 1408,
                         "name": "key",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1680,
-                        "src": "581:3:9",
+                        "referencedDeclaration": 1401,
+                        "src": "607:3:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -513,77 +513,77 @@
                       "isPure": false,
                       "lValueRequested": false,
                       "nodeType": "IndexAccess",
-                      "src": "571:14:9",
+                      "src": "597:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                        "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                         "typeString": "struct IterableMapping.IndexValue storage ref"
                       }
                     },
-                    "id": 1689,
+                    "id": 1410,
                     "isConstant": false,
                     "isLValue": true,
                     "isPure": false,
                     "lValueRequested": false,
-                    "memberLocation": "586:5:9",
+                    "memberLocation": "612:5:7",
                     "memberName": "value",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 1645,
-                    "src": "571:20:9",
+                    "referencedDeclaration": 1366,
+                    "src": "597:20:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage",
                       "typeString": "bytes storage ref"
                     }
                   },
-                  "functionReturnParameters": 1684,
-                  "id": 1690,
+                  "functionReturnParameters": 1405,
+                  "id": 1411,
                   "nodeType": "Return",
-                  "src": "564:27:9"
+                  "src": "590:27:7"
                 }
               ]
             },
-            "id": 1692,
+            "id": 1413,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getValue",
-            "nameLocation": "475:8:9",
+            "nameLocation": "500:8:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1681,
+              "id": 1402,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1678,
+                  "id": 1399,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "498:4:9",
+                  "nameLocation": "523:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1692,
-                  "src": "484:18:9",
+                  "scope": 1413,
+                  "src": "509:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1677,
+                    "id": 1398,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1676,
+                      "id": 1397,
                       "name": "itmap",
                       "nameLocations": [
-                        "484:5:9"
+                        "509:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "484:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "509:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "484:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "509:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -591,13 +591,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1680,
+                  "id": 1401,
                   "mutability": "mutable",
                   "name": "key",
-                  "nameLocation": "512:3:9",
+                  "nameLocation": "537:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1692,
-                  "src": "504:11:9",
+                  "scope": 1413,
+                  "src": "529:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -605,10 +605,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1679,
+                    "id": 1400,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "504:7:9",
+                    "src": "529:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -617,21 +617,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "483:33:9"
+              "src": "508:33:7"
             },
             "returnParameters": {
-              "id": 1684,
+              "id": 1405,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1683,
+                  "id": 1404,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1692,
-                  "src": "540:12:9",
+                  "scope": 1413,
+                  "src": "565:12:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -639,10 +639,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1682,
+                    "id": 1403,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "540:5:9",
+                    "src": "565:5:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -651,34 +651,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "539:14:9"
+              "src": "564:14:7"
             },
-            "scope": 1937,
-            "src": "466:132:9",
+            "scope": 1658,
+            "src": "491:134:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1772,
+              "id": 1493,
               "nodeType": "Block",
-              "src": "706:397:9",
+              "src": "735:409:7",
               "statements": [
                 {
                   "assignments": [
-                    1705
+                    1426
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1705,
+                      "id": 1426,
                       "mutability": "mutable",
                       "name": "keyIndex",
-                      "nameLocation": "724:8:9",
+                      "nameLocation": "754:8:7",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1772,
-                      "src": "716:16:9",
+                      "scope": 1493,
+                      "src": "746:16:7",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -686,10 +686,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 1704,
+                        "id": 1425,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "716:7:9",
+                        "src": "746:7:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -698,45 +698,45 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1711,
+                  "id": 1432,
                   "initialValue": {
                     "expression": {
                       "baseExpression": {
                         "expression": {
-                          "id": 1706,
+                          "id": 1427,
                           "name": "self",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1695,
-                          "src": "735:4:9",
+                          "referencedDeclaration": 1416,
+                          "src": "765:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                            "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                             "typeString": "struct IterableMapping.itmap storage pointer"
                           }
                         },
-                        "id": 1707,
+                        "id": 1428,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "740:4:9",
+                        "memberLocation": "770:4:7",
                         "memberName": "data",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1656,
-                        "src": "735:9:9",
+                        "referencedDeclaration": 1377,
+                        "src": "765:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                           "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                         }
                       },
-                      "id": 1709,
+                      "id": 1430,
                       "indexExpression": {
-                        "id": 1708,
+                        "id": 1429,
                         "name": "key",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1697,
-                        "src": "745:3:9",
+                        "referencedDeclaration": 1418,
+                        "src": "775:3:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -747,33 +747,33 @@
                       "isPure": false,
                       "lValueRequested": false,
                       "nodeType": "IndexAccess",
-                      "src": "735:14:9",
+                      "src": "765:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                        "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                         "typeString": "struct IterableMapping.IndexValue storage ref"
                       }
                     },
-                    "id": 1710,
+                    "id": 1431,
                     "isConstant": false,
                     "isLValue": true,
                     "isPure": false,
                     "lValueRequested": false,
-                    "memberLocation": "750:8:9",
+                    "memberLocation": "780:8:7",
                     "memberName": "keyIndex",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 1643,
-                    "src": "735:23:9",
+                    "referencedDeclaration": 1364,
+                    "src": "765:23:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "716:42:9"
+                  "src": "746:42:7"
                 },
                 {
                   "expression": {
-                    "id": 1719,
+                    "id": 1440,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -782,40 +782,40 @@
                       "expression": {
                         "baseExpression": {
                           "expression": {
-                            "id": 1712,
+                            "id": 1433,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1695,
-                            "src": "768:4:9",
+                            "referencedDeclaration": 1416,
+                            "src": "799:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1715,
+                          "id": 1436,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "773:4:9",
+                          "memberLocation": "804:4:7",
                           "memberName": "data",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1656,
-                          "src": "768:9:9",
+                          "referencedDeclaration": 1377,
+                          "src": "799:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                             "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                           }
                         },
-                        "id": 1716,
+                        "id": 1437,
                         "indexExpression": {
-                          "id": 1714,
+                          "id": 1435,
                           "name": "key",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1697,
-                          "src": "778:3:9",
+                          "referencedDeclaration": 1418,
+                          "src": "809:3:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
                             "typeString": "bytes32"
@@ -826,22 +826,22 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "IndexAccess",
-                        "src": "768:14:9",
+                        "src": "799:14:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                          "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                           "typeString": "struct IterableMapping.IndexValue storage ref"
                         }
                       },
-                      "id": 1717,
+                      "id": 1438,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "783:5:9",
+                      "memberLocation": "814:5:7",
                       "memberName": "value",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1645,
-                      "src": "768:20:9",
+                      "referencedDeclaration": 1366,
+                      "src": "799:20:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes_storage",
                         "typeString": "bytes storage ref"
@@ -850,26 +850,26 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 1718,
+                      "id": 1439,
                       "name": "value",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1699,
-                      "src": "791:5:9",
+                      "referencedDeclaration": 1420,
+                      "src": "822:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes_memory_ptr",
                         "typeString": "bytes memory"
                       }
                     },
-                    "src": "768:28:9",
+                    "src": "799:28:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage",
                       "typeString": "bytes storage ref"
                     }
                   },
-                  "id": 1720,
+                  "id": 1441,
                   "nodeType": "ExpressionStatement",
-                  "src": "768:28:9"
+                  "src": "799:28:7"
                 },
                 {
                   "condition": {
@@ -877,18 +877,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 1723,
+                    "id": 1444,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
-                      "id": 1721,
+                      "id": 1442,
                       "name": "keyIndex",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1705,
-                      "src": "810:8:9",
+                      "referencedDeclaration": 1426,
+                      "src": "842:8:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -898,45 +898,45 @@
                     "operator": ">",
                     "rightExpression": {
                       "hexValue": "30",
-                      "id": 1722,
+                      "id": 1443,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "821:1:9",
+                      "src": "853:1:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_0_by_1",
                         "typeString": "int_const 0"
                       },
                       "value": "0"
                     },
-                    "src": "810:12:9",
+                    "src": "842:12:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
                   "falseBody": {
-                    "id": 1770,
+                    "id": 1491,
                     "nodeType": "Block",
-                    "src": "850:247:9",
+                    "src": "883:254:7",
                     "statements": [
                       {
                         "expression": {
-                          "id": 1730,
+                          "id": 1451,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftHandSide": {
-                            "id": 1726,
+                            "id": 1447,
                             "name": "keyIndex",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1705,
-                            "src": "864:8:9",
+                            "referencedDeclaration": 1426,
+                            "src": "898:8:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -947,55 +947,55 @@
                           "rightHandSide": {
                             "expression": {
                               "expression": {
-                                "id": 1727,
+                                "id": 1448,
                                 "name": "self",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1695,
-                                "src": "875:4:9",
+                                "referencedDeclaration": 1416,
+                                "src": "909:4:7",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                                  "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                                   "typeString": "struct IterableMapping.itmap storage pointer"
                                 }
                               },
-                              "id": 1728,
+                              "id": 1449,
                               "isConstant": false,
                               "isLValue": true,
                               "isPure": false,
                               "lValueRequested": false,
-                              "memberLocation": "880:4:9",
+                              "memberLocation": "914:4:7",
                               "memberName": "keys",
                               "nodeType": "MemberAccess",
-                              "referencedDeclaration": 1660,
-                              "src": "875:9:9",
+                              "referencedDeclaration": 1381,
+                              "src": "909:9:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                                "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                                 "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                               }
                             },
-                            "id": 1729,
+                            "id": 1450,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
-                            "memberLocation": "885:6:9",
+                            "memberLocation": "919:6:7",
                             "memberName": "length",
                             "nodeType": "MemberAccess",
-                            "src": "875:16:9",
+                            "src": "909:16:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             }
                           },
-                          "src": "864:27:9",
+                          "src": "898:27:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "id": 1731,
+                        "id": 1452,
                         "nodeType": "ExpressionStatement",
-                        "src": "864:27:9"
+                        "src": "898:27:7"
                       },
                       {
                         "expression": {
@@ -1003,12 +1003,12 @@
                             {
                               "arguments": [
                                 {
-                                  "id": 1738,
+                                  "id": 1459,
                                   "name": "key",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 1697,
-                                  "src": "928:3:9",
+                                  "referencedDeclaration": 1418,
+                                  "src": "963:3:7",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_bytes32",
                                     "typeString": "bytes32"
@@ -1016,14 +1016,14 @@
                                 },
                                 {
                                   "hexValue": "66616c7365",
-                                  "id": 1739,
+                                  "id": 1460,
                                   "isConstant": false,
                                   "isLValue": false,
                                   "isPure": true,
                                   "kind": "bool",
                                   "lValueRequested": false,
                                   "nodeType": "Literal",
-                                  "src": "933:5:9",
+                                  "src": "968:5:7",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_bool",
                                     "typeString": "bool"
@@ -1042,18 +1042,18 @@
                                     "typeString": "bool"
                                   }
                                 ],
-                                "id": 1737,
+                                "id": 1458,
                                 "name": "KeyFlag",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1651,
-                                "src": "920:7:9",
+                                "referencedDeclaration": 1372,
+                                "src": "955:7:7",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_type$_t_struct$_KeyFlag_$1651_storage_ptr_$",
+                                  "typeIdentifier": "t_type$_t_struct$_KeyFlag_$1372_storage_ptr_$",
                                   "typeString": "type(struct IterableMapping.KeyFlag storage pointer)"
                                 }
                               },
-                              "id": 1740,
+                              "id": 1461,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1062,10 +1062,10 @@
                               "nameLocations": [],
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "920:19:9",
+                              "src": "955:19:7",
                               "tryCall": false,
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_KeyFlag_$1651_memory_ptr",
+                                "typeIdentifier": "t_struct$_KeyFlag_$1372_memory_ptr",
                                 "typeString": "struct IterableMapping.KeyFlag memory"
                               }
                             }
@@ -1073,53 +1073,53 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_struct$_KeyFlag_$1651_memory_ptr",
+                                "typeIdentifier": "t_struct$_KeyFlag_$1372_memory_ptr",
                                 "typeString": "struct IterableMapping.KeyFlag memory"
                               }
                             ],
                             "expression": {
                               "expression": {
-                                "id": 1732,
+                                "id": 1453,
                                 "name": "self",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1695,
-                                "src": "905:4:9",
+                                "referencedDeclaration": 1416,
+                                "src": "940:4:7",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                                  "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                                   "typeString": "struct IterableMapping.itmap storage pointer"
                                 }
                               },
-                              "id": 1735,
+                              "id": 1456,
                               "isConstant": false,
                               "isLValue": true,
                               "isPure": false,
                               "lValueRequested": false,
-                              "memberLocation": "910:4:9",
+                              "memberLocation": "945:4:7",
                               "memberName": "keys",
                               "nodeType": "MemberAccess",
-                              "referencedDeclaration": 1660,
-                              "src": "905:9:9",
+                              "referencedDeclaration": 1381,
+                              "src": "940:9:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                                "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                                 "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                               }
                             },
-                            "id": 1736,
+                            "id": 1457,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
-                            "memberLocation": "915:4:9",
+                            "memberLocation": "950:4:7",
                             "memberName": "push",
                             "nodeType": "MemberAccess",
-                            "src": "905:14:9",
+                            "src": "940:14:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage_ptr_$_t_struct$_KeyFlag_$1651_storage_$returns$__$attached_to$_t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage_ptr_$",
+                              "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage_ptr_$_t_struct$_KeyFlag_$1372_storage_$returns$__$attached_to$_t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage_ptr_$",
                               "typeString": "function (struct IterableMapping.KeyFlag storage ref[] storage pointer,struct IterableMapping.KeyFlag storage ref)"
                             }
                           },
-                          "id": 1741,
+                          "id": 1462,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1128,20 +1128,20 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "905:35:9",
+                          "src": "940:35:7",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_tuple$__$",
                             "typeString": "tuple()"
                           }
                         },
-                        "id": 1742,
+                        "id": 1463,
                         "nodeType": "ExpressionStatement",
-                        "src": "905:35:9"
+                        "src": "940:35:7"
                       },
                       {
                         "expression": {
-                          "id": 1752,
+                          "id": 1473,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1150,40 +1150,40 @@
                             "expression": {
                               "baseExpression": {
                                 "expression": {
-                                  "id": 1743,
+                                  "id": 1464,
                                   "name": "self",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 1695,
-                                  "src": "954:4:9",
+                                  "referencedDeclaration": 1416,
+                                  "src": "990:4:7",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                                     "typeString": "struct IterableMapping.itmap storage pointer"
                                   }
                                 },
-                                "id": 1746,
+                                "id": 1467,
                                 "isConstant": false,
                                 "isLValue": true,
                                 "isPure": false,
                                 "lValueRequested": false,
-                                "memberLocation": "959:4:9",
+                                "memberLocation": "995:4:7",
                                 "memberName": "data",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 1656,
-                                "src": "954:9:9",
+                                "referencedDeclaration": 1377,
+                                "src": "990:9:7",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                                   "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                                 }
                               },
-                              "id": 1747,
+                              "id": 1468,
                               "indexExpression": {
-                                "id": 1745,
+                                "id": 1466,
                                 "name": "key",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1697,
-                                "src": "964:3:9",
+                                "referencedDeclaration": 1418,
+                                "src": "1000:3:7",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_bytes32",
                                   "typeString": "bytes32"
@@ -1194,22 +1194,22 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "nodeType": "IndexAccess",
-                              "src": "954:14:9",
+                              "src": "990:14:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                                "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                                 "typeString": "struct IterableMapping.IndexValue storage ref"
                               }
                             },
-                            "id": 1748,
+                            "id": 1469,
                             "isConstant": false,
                             "isLValue": true,
                             "isPure": false,
                             "lValueRequested": true,
-                            "memberLocation": "969:8:9",
+                            "memberLocation": "1005:8:7",
                             "memberName": "keyIndex",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1643,
-                            "src": "954:23:9",
+                            "referencedDeclaration": 1364,
+                            "src": "990:23:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -1222,18 +1222,18 @@
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             },
-                            "id": 1751,
+                            "id": 1472,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "leftExpression": {
-                              "id": 1749,
+                              "id": 1470,
                               "name": "keyIndex",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1705,
-                              "src": "980:8:9",
+                              "referencedDeclaration": 1426,
+                              "src": "1016:8:7",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -1243,39 +1243,39 @@
                             "operator": "+",
                             "rightExpression": {
                               "hexValue": "31",
-                              "id": 1750,
+                              "id": 1471,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "991:1:9",
+                              "src": "1027:1:7",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_1_by_1",
                                 "typeString": "int_const 1"
                               },
                               "value": "1"
                             },
-                            "src": "980:12:9",
+                            "src": "1016:12:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             }
                           },
-                          "src": "954:38:9",
+                          "src": "990:38:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "id": 1753,
+                        "id": 1474,
                         "nodeType": "ExpressionStatement",
-                        "src": "954:38:9"
+                        "src": "990:38:7"
                       },
                       {
                         "expression": {
-                          "id": 1761,
+                          "id": 1482,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1284,40 +1284,40 @@
                             "expression": {
                               "baseExpression": {
                                 "expression": {
-                                  "id": 1754,
+                                  "id": 1475,
                                   "name": "self",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 1695,
-                                  "src": "1006:4:9",
+                                  "referencedDeclaration": 1416,
+                                  "src": "1043:4:7",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                                     "typeString": "struct IterableMapping.itmap storage pointer"
                                   }
                                 },
-                                "id": 1757,
+                                "id": 1478,
                                 "isConstant": false,
                                 "isLValue": true,
                                 "isPure": false,
                                 "lValueRequested": false,
-                                "memberLocation": "1011:4:9",
+                                "memberLocation": "1048:4:7",
                                 "memberName": "keys",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 1660,
-                                "src": "1006:9:9",
+                                "referencedDeclaration": 1381,
+                                "src": "1043:9:7",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                                  "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                                   "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                                 }
                               },
-                              "id": 1758,
+                              "id": 1479,
                               "indexExpression": {
-                                "id": 1756,
+                                "id": 1477,
                                 "name": "keyIndex",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1705,
-                                "src": "1016:8:9",
+                                "referencedDeclaration": 1426,
+                                "src": "1053:8:7",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
@@ -1328,22 +1328,22 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "nodeType": "IndexAccess",
-                              "src": "1006:19:9",
+                              "src": "1043:19:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_KeyFlag_$1651_storage",
+                                "typeIdentifier": "t_struct$_KeyFlag_$1372_storage",
                                 "typeString": "struct IterableMapping.KeyFlag storage ref"
                               }
                             },
-                            "id": 1759,
+                            "id": 1480,
                             "isConstant": false,
                             "isLValue": true,
                             "isPure": false,
                             "lValueRequested": true,
-                            "memberLocation": "1026:3:9",
+                            "memberLocation": "1063:3:7",
                             "memberName": "key",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1648,
-                            "src": "1006:23:9",
+                            "referencedDeclaration": 1369,
+                            "src": "1043:23:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
@@ -1352,30 +1352,30 @@
                           "nodeType": "Assignment",
                           "operator": "=",
                           "rightHandSide": {
-                            "id": 1760,
+                            "id": 1481,
                             "name": "key",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1697,
-                            "src": "1032:3:9",
+                            "referencedDeclaration": 1418,
+                            "src": "1069:3:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
                             }
                           },
-                          "src": "1006:29:9",
+                          "src": "1043:29:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
                             "typeString": "bytes32"
                           }
                         },
-                        "id": 1762,
+                        "id": 1483,
                         "nodeType": "ExpressionStatement",
-                        "src": "1006:29:9"
+                        "src": "1043:29:7"
                       },
                       {
                         "expression": {
-                          "id": 1766,
+                          "id": 1487,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1383,30 +1383,30 @@
                           "nodeType": "UnaryOperation",
                           "operator": "++",
                           "prefix": false,
-                          "src": "1049:11:9",
+                          "src": "1087:11:7",
                           "subExpression": {
                             "expression": {
-                              "id": 1763,
+                              "id": 1484,
                               "name": "self",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1695,
-                              "src": "1049:4:9",
+                              "referencedDeclaration": 1416,
+                              "src": "1087:4:7",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                                "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                                 "typeString": "struct IterableMapping.itmap storage pointer"
                               }
                             },
-                            "id": 1765,
+                            "id": 1486,
                             "isConstant": false,
                             "isLValue": true,
                             "isPure": false,
                             "lValueRequested": true,
-                            "memberLocation": "1054:4:9",
+                            "memberLocation": "1092:4:7",
                             "memberName": "size",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 1662,
-                            "src": "1049:9:9",
+                            "referencedDeclaration": 1383,
+                            "src": "1087:9:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -1417,105 +1417,105 @@
                             "typeString": "uint256"
                           }
                         },
-                        "id": 1767,
+                        "id": 1488,
                         "nodeType": "ExpressionStatement",
-                        "src": "1049:11:9"
+                        "src": "1087:11:7"
                       },
                       {
                         "expression": {
                           "hexValue": "66616c7365",
-                          "id": 1768,
+                          "id": 1489,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
                           "kind": "bool",
                           "lValueRequested": false,
                           "nodeType": "Literal",
-                          "src": "1081:5:9",
+                          "src": "1120:5:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
                           },
                           "value": "false"
                         },
-                        "functionReturnParameters": 1703,
-                        "id": 1769,
+                        "functionReturnParameters": 1424,
+                        "id": 1490,
                         "nodeType": "Return",
-                        "src": "1074:12:9"
+                        "src": "1113:12:7"
                       }
                     ]
                   },
-                  "id": 1771,
+                  "id": 1492,
                   "nodeType": "IfStatement",
-                  "src": "806:291:9",
+                  "src": "838:299:7",
                   "trueBody": {
                     "expression": {
                       "hexValue": "74727565",
-                      "id": 1724,
+                      "id": 1445,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "bool",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "831:4:9",
+                      "src": "863:4:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       },
                       "value": "true"
                     },
-                    "functionReturnParameters": 1703,
-                    "id": 1725,
+                    "functionReturnParameters": 1424,
+                    "id": 1446,
                     "nodeType": "Return",
-                    "src": "824:11:9"
+                    "src": "856:11:7"
                   }
                 }
               ]
             },
-            "id": 1773,
+            "id": 1494,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "insert",
-            "nameLocation": "613:6:9",
+            "nameLocation": "642:6:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1700,
+              "id": 1421,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1695,
+                  "id": 1416,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "634:4:9",
+                  "nameLocation": "663:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1773,
-                  "src": "620:18:9",
+                  "scope": 1494,
+                  "src": "649:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1694,
+                    "id": 1415,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1693,
+                      "id": 1414,
                       "name": "itmap",
                       "nameLocations": [
-                        "620:5:9"
+                        "649:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "620:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "649:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "620:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "649:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -1523,13 +1523,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1697,
+                  "id": 1418,
                   "mutability": "mutable",
                   "name": "key",
-                  "nameLocation": "648:3:9",
+                  "nameLocation": "677:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1773,
-                  "src": "640:11:9",
+                  "scope": 1494,
+                  "src": "669:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1537,10 +1537,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1696,
+                    "id": 1417,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "640:7:9",
+                    "src": "669:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1550,13 +1550,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1699,
+                  "id": 1420,
                   "mutability": "mutable",
                   "name": "value",
-                  "nameLocation": "666:5:9",
+                  "nameLocation": "695:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1773,
-                  "src": "653:18:9",
+                  "scope": 1494,
+                  "src": "682:18:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -1564,10 +1564,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1698,
+                    "id": 1419,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "653:5:9",
+                    "src": "682:5:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -1576,21 +1576,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "619:53:9"
+              "src": "648:53:7"
             },
             "returnParameters": {
-              "id": 1703,
+              "id": 1424,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1702,
+                  "id": 1423,
                   "mutability": "mutable",
                   "name": "replaced",
-                  "nameLocation": "696:8:9",
+                  "nameLocation": "725:8:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1773,
-                  "src": "691:13:9",
+                  "scope": 1494,
+                  "src": "720:13:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1598,10 +1598,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1701,
+                    "id": 1422,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "691:4:9",
+                    "src": "720:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -1610,34 +1610,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "690:15:9"
+              "src": "719:15:7"
             },
-            "scope": 1937,
-            "src": "604:499:9",
+            "scope": 1658,
+            "src": "633:511:7",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1821,
+              "id": 1542,
               "nodeType": "Block",
-              "src": "1190:221:9",
+              "src": "1233:228:7",
               "statements": [
                 {
                   "assignments": [
-                    1784
+                    1505
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1784,
+                      "id": 1505,
                       "mutability": "mutable",
                       "name": "keyIndex",
-                      "nameLocation": "1208:8:9",
+                      "nameLocation": "1252:8:7",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1821,
-                      "src": "1200:16:9",
+                      "scope": 1542,
+                      "src": "1244:16:7",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1645,10 +1645,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 1783,
+                        "id": 1504,
                         "name": "uint256",
                         "nodeType": "ElementaryTypeName",
-                        "src": "1200:7:9",
+                        "src": "1244:7:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1657,45 +1657,45 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1790,
+                  "id": 1511,
                   "initialValue": {
                     "expression": {
                       "baseExpression": {
                         "expression": {
-                          "id": 1785,
+                          "id": 1506,
                           "name": "self",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1776,
-                          "src": "1219:4:9",
+                          "referencedDeclaration": 1497,
+                          "src": "1263:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                            "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                             "typeString": "struct IterableMapping.itmap storage pointer"
                           }
                         },
-                        "id": 1786,
+                        "id": 1507,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "1224:4:9",
+                        "memberLocation": "1268:4:7",
                         "memberName": "data",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1656,
-                        "src": "1219:9:9",
+                        "referencedDeclaration": 1377,
+                        "src": "1263:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                           "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                         }
                       },
-                      "id": 1788,
+                      "id": 1509,
                       "indexExpression": {
-                        "id": 1787,
+                        "id": 1508,
                         "name": "key",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1778,
-                        "src": "1229:3:9",
+                        "referencedDeclaration": 1499,
+                        "src": "1273:3:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -1706,29 +1706,29 @@
                       "isPure": false,
                       "lValueRequested": false,
                       "nodeType": "IndexAccess",
-                      "src": "1219:14:9",
+                      "src": "1263:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                        "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                         "typeString": "struct IterableMapping.IndexValue storage ref"
                       }
                     },
-                    "id": 1789,
+                    "id": 1510,
                     "isConstant": false,
                     "isLValue": true,
                     "isPure": false,
                     "lValueRequested": false,
-                    "memberLocation": "1234:8:9",
+                    "memberLocation": "1278:8:7",
                     "memberName": "keyIndex",
                     "nodeType": "MemberAccess",
-                    "referencedDeclaration": 1643,
-                    "src": "1219:23:9",
+                    "referencedDeclaration": 1364,
+                    "src": "1263:23:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "1200:42:9"
+                  "src": "1244:42:7"
                 },
                 {
                   "condition": {
@@ -1736,18 +1736,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 1793,
+                    "id": 1514,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
-                      "id": 1791,
+                      "id": 1512,
                       "name": "keyIndex",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1784,
-                      "src": "1256:8:9",
+                      "referencedDeclaration": 1505,
+                      "src": "1301:8:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -1757,55 +1757,55 @@
                     "operator": "==",
                     "rightExpression": {
                       "hexValue": "30",
-                      "id": 1792,
+                      "id": 1513,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1268:1:9",
+                      "src": "1313:1:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_0_by_1",
                         "typeString": "int_const 0"
                       },
                       "value": "0"
                     },
-                    "src": "1256:13:9",
+                    "src": "1301:13:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 1796,
+                  "id": 1517,
                   "nodeType": "IfStatement",
-                  "src": "1252:31:9",
+                  "src": "1297:31:7",
                   "trueBody": {
                     "expression": {
                       "hexValue": "66616c7365",
-                      "id": 1794,
+                      "id": 1515,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "bool",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1278:5:9",
+                      "src": "1323:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       },
                       "value": "false"
                     },
-                    "functionReturnParameters": 1782,
-                    "id": 1795,
+                    "functionReturnParameters": 1503,
+                    "id": 1516,
                     "nodeType": "Return",
-                    "src": "1271:12:9"
+                    "src": "1316:12:7"
                   }
                 },
                 {
                   "expression": {
-                    "id": 1801,
+                    "id": 1522,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1813,44 +1813,44 @@
                     "nodeType": "UnaryOperation",
                     "operator": "delete",
                     "prefix": true,
-                    "src": "1293:21:9",
+                    "src": "1339:21:7",
                     "subExpression": {
                       "baseExpression": {
                         "expression": {
-                          "id": 1797,
+                          "id": 1518,
                           "name": "self",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1776,
-                          "src": "1300:4:9",
+                          "referencedDeclaration": 1497,
+                          "src": "1346:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                            "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                             "typeString": "struct IterableMapping.itmap storage pointer"
                           }
                         },
-                        "id": 1798,
+                        "id": 1519,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "1305:4:9",
+                        "memberLocation": "1351:4:7",
                         "memberName": "data",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1656,
-                        "src": "1300:9:9",
+                        "referencedDeclaration": 1377,
+                        "src": "1346:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                           "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                         }
                       },
-                      "id": 1800,
+                      "id": 1521,
                       "indexExpression": {
-                        "id": 1799,
+                        "id": 1520,
                         "name": "key",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1778,
-                        "src": "1310:3:9",
+                        "referencedDeclaration": 1499,
+                        "src": "1356:3:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -1861,9 +1861,9 @@
                       "isPure": false,
                       "lValueRequested": true,
                       "nodeType": "IndexAccess",
-                      "src": "1300:14:9",
+                      "src": "1346:14:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                        "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                         "typeString": "struct IterableMapping.IndexValue storage ref"
                       }
                     },
@@ -1872,13 +1872,13 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 1802,
+                  "id": 1523,
                   "nodeType": "ExpressionStatement",
-                  "src": "1293:21:9"
+                  "src": "1339:21:7"
                 },
                 {
                   "expression": {
-                    "id": 1812,
+                    "id": 1533,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1887,50 +1887,50 @@
                       "expression": {
                         "baseExpression": {
                           "expression": {
-                            "id": 1803,
+                            "id": 1524,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1776,
-                            "src": "1324:4:9",
+                            "referencedDeclaration": 1497,
+                            "src": "1371:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1808,
+                          "id": 1529,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "1329:4:9",
+                          "memberLocation": "1376:4:7",
                           "memberName": "keys",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1660,
-                          "src": "1324:9:9",
+                          "referencedDeclaration": 1381,
+                          "src": "1371:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                             "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                           }
                         },
-                        "id": 1809,
+                        "id": 1530,
                         "indexExpression": {
                           "commonType": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           },
-                          "id": 1807,
+                          "id": 1528,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
-                            "id": 1805,
+                            "id": 1526,
                             "name": "keyIndex",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1784,
-                            "src": "1334:8:9",
+                            "referencedDeclaration": 1505,
+                            "src": "1381:8:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -1940,21 +1940,21 @@
                           "operator": "-",
                           "rightExpression": {
                             "hexValue": "31",
-                            "id": 1806,
+                            "id": 1527,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "1345:1:9",
+                            "src": "1392:1:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_1_by_1",
                               "typeString": "int_const 1"
                             },
                             "value": "1"
                           },
-                          "src": "1334:12:9",
+                          "src": "1381:12:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -1965,22 +1965,22 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "IndexAccess",
-                        "src": "1324:23:9",
+                        "src": "1371:23:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_KeyFlag_$1651_storage",
+                          "typeIdentifier": "t_struct$_KeyFlag_$1372_storage",
                           "typeString": "struct IterableMapping.KeyFlag storage ref"
                         }
                       },
-                      "id": 1810,
+                      "id": 1531,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1348:7:9",
+                      "memberLocation": "1395:7:7",
                       "memberName": "deleted",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1650,
-                      "src": "1324:31:9",
+                      "referencedDeclaration": 1371,
+                      "src": "1371:31:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
@@ -1990,33 +1990,33 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "74727565",
-                      "id": 1811,
+                      "id": 1532,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "bool",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1358:4:9",
+                      "src": "1405:4:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       },
                       "value": "true"
                     },
-                    "src": "1324:38:9",
+                    "src": "1371:38:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 1813,
+                  "id": 1534,
                   "nodeType": "ExpressionStatement",
-                  "src": "1324:38:9"
+                  "src": "1371:38:7"
                 },
                 {
                   "expression": {
-                    "id": 1817,
+                    "id": 1538,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2024,30 +2024,30 @@
                     "nodeType": "UnaryOperation",
                     "operator": "--",
                     "prefix": false,
-                    "src": "1372:11:9",
+                    "src": "1420:11:7",
                     "subExpression": {
                       "expression": {
-                        "id": 1814,
+                        "id": 1535,
                         "name": "self",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1776,
-                        "src": "1372:4:9",
+                        "referencedDeclaration": 1497,
+                        "src": "1420:4:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                          "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                           "typeString": "struct IterableMapping.itmap storage pointer"
                         }
                       },
-                      "id": 1816,
+                      "id": 1537,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": true,
-                      "memberLocation": "1377:4:9",
+                      "memberLocation": "1425:4:7",
                       "memberName": "size",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1662,
-                      "src": "1372:9:9",
+                      "referencedDeclaration": 1383,
+                      "src": "1420:9:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2058,77 +2058,77 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 1818,
+                  "id": 1539,
                   "nodeType": "ExpressionStatement",
-                  "src": "1372:11:9"
+                  "src": "1420:11:7"
                 },
                 {
                   "expression": {
                     "hexValue": "74727565",
-                    "id": 1819,
+                    "id": 1540,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "bool",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "1400:4:9",
+                    "src": "1449:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     },
                     "value": "true"
                   },
-                  "functionReturnParameters": 1782,
-                  "id": 1820,
+                  "functionReturnParameters": 1503,
+                  "id": 1541,
                   "nodeType": "Return",
-                  "src": "1393:11:9"
+                  "src": "1442:11:7"
                 }
               ]
             },
-            "id": 1822,
+            "id": 1543,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "remove",
-            "nameLocation": "1118:6:9",
+            "nameLocation": "1161:6:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1779,
+              "id": 1500,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1776,
+                  "id": 1497,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "1139:4:9",
+                  "nameLocation": "1182:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1822,
-                  "src": "1125:18:9",
+                  "scope": 1543,
+                  "src": "1168:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1775,
+                    "id": 1496,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1774,
+                      "id": 1495,
                       "name": "itmap",
                       "nameLocations": [
-                        "1125:5:9"
+                        "1168:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "1125:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "1168:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "1125:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "1168:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -2136,13 +2136,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1778,
+                  "id": 1499,
                   "mutability": "mutable",
                   "name": "key",
-                  "nameLocation": "1153:3:9",
+                  "nameLocation": "1196:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1822,
-                  "src": "1145:11:9",
+                  "scope": 1543,
+                  "src": "1188:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2150,10 +2150,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1777,
+                    "id": 1498,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1145:7:9",
+                    "src": "1188:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -2162,21 +2162,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1124:33:9"
+              "src": "1167:33:7"
             },
             "returnParameters": {
-              "id": 1782,
+              "id": 1503,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1781,
+                  "id": 1502,
                   "mutability": "mutable",
                   "name": "success",
-                  "nameLocation": "1181:7:9",
+                  "nameLocation": "1224:7:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1822,
-                  "src": "1176:12:9",
+                  "scope": 1543,
+                  "src": "1219:12:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2184,10 +2184,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1780,
+                    "id": 1501,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1176:4:9",
+                    "src": "1219:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -2196,19 +2196,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1175:14:9"
+              "src": "1218:14:7"
             },
-            "scope": 1937,
-            "src": "1109:302:9",
+            "scope": 1658,
+            "src": "1152:309:7",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1840,
+              "id": 1561,
               "nodeType": "Block",
-              "src": "1497:51:9",
+              "src": "1549:53:7",
               "statements": [
                 {
                   "expression": {
@@ -2216,7 +2216,7 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 1838,
+                    "id": 1559,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2225,40 +2225,40 @@
                       "expression": {
                         "baseExpression": {
                           "expression": {
-                            "id": 1832,
+                            "id": 1553,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1825,
-                            "src": "1514:4:9",
+                            "referencedDeclaration": 1546,
+                            "src": "1567:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1833,
+                          "id": 1554,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "1519:4:9",
+                          "memberLocation": "1572:4:7",
                           "memberName": "data",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1656,
-                          "src": "1514:9:9",
+                          "referencedDeclaration": 1377,
+                          "src": "1567:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                             "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                           }
                         },
-                        "id": 1835,
+                        "id": 1556,
                         "indexExpression": {
-                          "id": 1834,
+                          "id": 1555,
                           "name": "key",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1827,
-                          "src": "1524:3:9",
+                          "referencedDeclaration": 1548,
+                          "src": "1577:3:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
                             "typeString": "bytes32"
@@ -2269,22 +2269,22 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "IndexAccess",
-                        "src": "1514:14:9",
+                        "src": "1567:14:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                          "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                           "typeString": "struct IterableMapping.IndexValue storage ref"
                         }
                       },
-                      "id": 1836,
+                      "id": 1557,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1529:8:9",
+                      "memberLocation": "1582:8:7",
                       "memberName": "keyIndex",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1643,
-                      "src": "1514:23:9",
+                      "referencedDeclaration": 1364,
+                      "src": "1567:23:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2294,76 +2294,76 @@
                     "operator": ">",
                     "rightExpression": {
                       "hexValue": "30",
-                      "id": 1837,
+                      "id": 1558,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1540:1:9",
+                      "src": "1593:1:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_0_by_1",
                         "typeString": "int_const 0"
                       },
                       "value": "0"
                     },
-                    "src": "1514:27:9",
+                    "src": "1567:27:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 1831,
-                  "id": 1839,
+                  "functionReturnParameters": 1552,
+                  "id": 1560,
                   "nodeType": "Return",
-                  "src": "1507:34:9"
+                  "src": "1560:34:7"
                 }
               ]
             },
-            "id": 1841,
+            "id": 1562,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "contains",
-            "nameLocation": "1426:8:9",
+            "nameLocation": "1478:8:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1828,
+              "id": 1549,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1825,
+                  "id": 1546,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "1449:4:9",
+                  "nameLocation": "1501:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1841,
-                  "src": "1435:18:9",
+                  "scope": 1562,
+                  "src": "1487:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1824,
+                    "id": 1545,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1823,
+                      "id": 1544,
                       "name": "itmap",
                       "nameLocations": [
-                        "1435:5:9"
+                        "1487:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "1435:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "1487:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "1435:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "1487:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -2371,13 +2371,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1827,
+                  "id": 1548,
                   "mutability": "mutable",
                   "name": "key",
-                  "nameLocation": "1463:3:9",
+                  "nameLocation": "1515:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1841,
-                  "src": "1455:11:9",
+                  "scope": 1562,
+                  "src": "1507:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2385,10 +2385,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1826,
+                    "id": 1547,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1455:7:9",
+                    "src": "1507:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -2397,21 +2397,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1434:33:9"
+              "src": "1486:33:7"
             },
             "returnParameters": {
-              "id": 1831,
+              "id": 1552,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1830,
+                  "id": 1551,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1841,
-                  "src": "1491:4:9",
+                  "scope": 1562,
+                  "src": "1543:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2419,10 +2419,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1829,
+                    "id": 1550,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1491:4:9",
+                    "src": "1543:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -2431,32 +2431,32 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1490:6:9"
+              "src": "1542:6:7"
             },
-            "scope": 1937,
-            "src": "1417:131:9",
+            "scope": 1658,
+            "src": "1469:133:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1858,
+              "id": 1579,
               "nodeType": "Block",
-              "src": "1638:61:9",
+              "src": "1694:63:7",
               "statements": [
                 {
                   "expression": {
                     "arguments": [
                       {
-                        "id": 1850,
+                        "id": 1571,
                         "name": "self",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1844,
-                        "src": "1668:4:9",
+                        "referencedDeclaration": 1565,
+                        "src": "1725:4:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                          "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                           "typeString": "struct IterableMapping.itmap storage pointer"
                         }
                       },
@@ -2464,22 +2464,22 @@
                         "expression": {
                           "arguments": [
                             {
-                              "id": 1853,
+                              "id": 1574,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "lValueRequested": false,
                               "nodeType": "ElementaryTypeNameExpression",
-                              "src": "1679:7:9",
+                              "src": "1736:7:7",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_type$_t_uint256_$",
                                 "typeString": "type(uint256)"
                               },
                               "typeName": {
-                                "id": 1852,
+                                "id": 1573,
                                 "name": "uint256",
                                 "nodeType": "ElementaryTypeName",
-                                "src": "1679:7:9",
+                                "src": "1736:7:7",
                                 "typeDescriptions": {}
                               }
                             }
@@ -2491,18 +2491,18 @@
                                 "typeString": "type(uint256)"
                               }
                             ],
-                            "id": 1851,
+                            "id": 1572,
                             "name": "type",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967269,
-                            "src": "1674:4:9",
+                            "src": "1731:4:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_metatype_pure$__$returns$__$",
                               "typeString": "function () pure"
                             }
                           },
-                          "id": 1854,
+                          "id": 1575,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -2511,22 +2511,22 @@
                           "nameLocations": [],
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1674:13:9",
+                          "src": "1731:13:7",
                           "tryCall": false,
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_meta_type_t_uint256",
                             "typeString": "type(uint256)"
                           }
                         },
-                        "id": 1855,
+                        "id": 1576,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
-                        "memberLocation": "1688:3:9",
+                        "memberLocation": "1745:3:7",
                         "memberName": "max",
                         "nodeType": "MemberAccess",
-                        "src": "1674:17:9",
+                        "src": "1731:17:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2536,7 +2536,7 @@
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                          "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                           "typeString": "struct IterableMapping.itmap storage pointer"
                         },
                         {
@@ -2544,18 +2544,18 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 1849,
+                      "id": 1570,
                       "name": "iterate_next",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1907,
-                      "src": "1655:12:9",
+                      "referencedDeclaration": 1628,
+                      "src": "1712:12:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_struct$_itmap_$1663_storage_ptr_$_t_uint256_$returns$_t_uint256_$",
+                        "typeIdentifier": "t_function_internal_view$_t_struct$_itmap_$1384_storage_ptr_$_t_uint256_$returns$_t_uint256_$",
                         "typeString": "function (struct IterableMapping.itmap storage pointer,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 1856,
+                    "id": 1577,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2564,84 +2564,84 @@
                     "nameLocations": [],
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1655:37:9",
+                    "src": "1712:37:7",
                     "tryCall": false,
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 1848,
-                  "id": 1857,
+                  "functionReturnParameters": 1569,
+                  "id": 1578,
                   "nodeType": "Return",
-                  "src": "1648:44:9"
+                  "src": "1705:44:7"
                 }
               ]
             },
-            "id": 1859,
+            "id": 1580,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "iterate_start",
-            "nameLocation": "1563:13:9",
+            "nameLocation": "1619:13:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1845,
+              "id": 1566,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1844,
+                  "id": 1565,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "1591:4:9",
+                  "nameLocation": "1647:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1859,
-                  "src": "1577:18:9",
+                  "scope": 1580,
+                  "src": "1633:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1843,
+                    "id": 1564,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1842,
+                      "id": 1563,
                       "name": "itmap",
                       "nameLocations": [
-                        "1577:5:9"
+                        "1633:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "1577:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "1633:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "1577:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "1633:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "1576:20:9"
+              "src": "1632:20:7"
             },
             "returnParameters": {
-              "id": 1848,
+              "id": 1569,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1847,
+                  "id": 1568,
                   "mutability": "mutable",
                   "name": "keyIndex",
-                  "nameLocation": "1628:8:9",
+                  "nameLocation": "1684:8:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1859,
-                  "src": "1620:16:9",
+                  "scope": 1580,
+                  "src": "1676:16:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2649,10 +2649,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1846,
+                    "id": 1567,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1620:7:9",
+                    "src": "1676:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2661,19 +2661,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1619:18:9"
+              "src": "1675:18:7"
             },
-            "scope": 1937,
-            "src": "1554:145:9",
+            "scope": 1658,
+            "src": "1610:147:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1875,
+              "id": 1596,
               "nodeType": "Block",
-              "src": "1795:51:9",
+              "src": "1855:53:7",
               "statements": [
                 {
                   "expression": {
@@ -2681,18 +2681,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 1873,
+                    "id": 1594,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
-                      "id": 1869,
+                      "id": 1590,
                       "name": "keyIndex",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1864,
-                      "src": "1812:8:9",
+                      "referencedDeclaration": 1585,
+                      "src": "1873:8:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2703,102 +2703,102 @@
                     "rightExpression": {
                       "expression": {
                         "expression": {
-                          "id": 1870,
+                          "id": 1591,
                           "name": "self",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1862,
-                          "src": "1823:4:9",
+                          "referencedDeclaration": 1583,
+                          "src": "1884:4:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                            "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                             "typeString": "struct IterableMapping.itmap storage pointer"
                           }
                         },
-                        "id": 1871,
+                        "id": 1592,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "1828:4:9",
+                        "memberLocation": "1889:4:7",
                         "memberName": "keys",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1660,
-                        "src": "1823:9:9",
+                        "referencedDeclaration": 1381,
+                        "src": "1884:9:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                          "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                           "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                         }
                       },
-                      "id": 1872,
+                      "id": 1593,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "1833:6:9",
+                      "memberLocation": "1894:6:7",
                       "memberName": "length",
                       "nodeType": "MemberAccess",
-                      "src": "1823:16:9",
+                      "src": "1884:16:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "1812:27:9",
+                    "src": "1873:27:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 1868,
-                  "id": 1874,
+                  "functionReturnParameters": 1589,
+                  "id": 1595,
                   "nodeType": "Return",
-                  "src": "1805:34:9"
+                  "src": "1866:34:7"
                 }
               ]
             },
-            "id": 1876,
+            "id": 1597,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "iterate_valid",
-            "nameLocation": "1714:13:9",
+            "nameLocation": "1774:13:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1865,
+              "id": 1586,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1862,
+                  "id": 1583,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "1742:4:9",
+                  "nameLocation": "1802:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1876,
-                  "src": "1728:18:9",
+                  "scope": 1597,
+                  "src": "1788:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1861,
+                    "id": 1582,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1860,
+                      "id": 1581,
                       "name": "itmap",
                       "nameLocations": [
-                        "1728:5:9"
+                        "1788:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "1728:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "1788:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "1728:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "1788:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -2806,13 +2806,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1864,
+                  "id": 1585,
                   "mutability": "mutable",
                   "name": "keyIndex",
-                  "nameLocation": "1756:8:9",
+                  "nameLocation": "1816:8:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1876,
-                  "src": "1748:16:9",
+                  "scope": 1597,
+                  "src": "1808:16:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2820,10 +2820,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1863,
+                    "id": 1584,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1748:7:9",
+                    "src": "1808:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2832,21 +2832,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1727:38:9"
+              "src": "1787:38:7"
             },
             "returnParameters": {
-              "id": 1868,
+              "id": 1589,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1867,
+                  "id": 1588,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1876,
-                  "src": "1789:4:9",
+                  "scope": 1597,
+                  "src": "1849:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2854,10 +2854,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 1866,
+                    "id": 1587,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1789:4:9",
+                    "src": "1849:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -2866,23 +2866,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1788:6:9"
+              "src": "1848:6:7"
             },
-            "scope": 1937,
-            "src": "1705:141:9",
+            "scope": 1658,
+            "src": "1765:143:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1906,
+              "id": 1627,
               "nodeType": "Block",
-              "src": "1955:151:9",
+              "src": "2019:156:7",
               "statements": [
                 {
                   "expression": {
-                    "id": 1887,
+                    "id": 1608,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2890,14 +2890,14 @@
                     "nodeType": "UnaryOperation",
                     "operator": "++",
                     "prefix": false,
-                    "src": "1965:10:9",
+                    "src": "2030:10:7",
                     "subExpression": {
-                      "id": 1886,
+                      "id": 1607,
                       "name": "keyIndex",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1881,
-                      "src": "1965:8:9",
+                      "referencedDeclaration": 1602,
+                      "src": "2030:8:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -2908,14 +2908,14 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 1888,
+                  "id": 1609,
                   "nodeType": "ExpressionStatement",
-                  "src": "1965:10:9"
+                  "src": "2030:10:7"
                 },
                 {
                   "body": {
                     "expression": {
-                      "id": 1901,
+                      "id": 1622,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2923,14 +2923,14 @@
                       "nodeType": "UnaryOperation",
                       "operator": "++",
                       "prefix": false,
-                      "src": "2064:10:9",
+                      "src": "2131:10:7",
                       "subExpression": {
-                        "id": 1900,
+                        "id": 1621,
                         "name": "keyIndex",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1881,
-                        "src": "2064:8:9",
+                        "referencedDeclaration": 1602,
+                        "src": "2131:8:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2941,16 +2941,16 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1902,
+                    "id": 1623,
                     "nodeType": "ExpressionStatement",
-                    "src": "2064:10:9"
+                    "src": "2131:10:7"
                   },
                   "condition": {
                     "commonType": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     },
-                    "id": 1899,
+                    "id": 1620,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2960,18 +2960,18 @@
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 1893,
+                      "id": 1614,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "leftExpression": {
-                        "id": 1889,
+                        "id": 1610,
                         "name": "keyIndex",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1881,
-                        "src": "1992:8:9",
+                        "referencedDeclaration": 1602,
+                        "src": "2058:8:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -2982,47 +2982,47 @@
                       "rightExpression": {
                         "expression": {
                           "expression": {
-                            "id": 1890,
+                            "id": 1611,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1879,
-                            "src": "2003:4:9",
+                            "referencedDeclaration": 1600,
+                            "src": "2069:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1891,
+                          "id": 1612,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "2008:4:9",
+                          "memberLocation": "2074:4:7",
                           "memberName": "keys",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1660,
-                          "src": "2003:9:9",
+                          "referencedDeclaration": 1381,
+                          "src": "2069:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                             "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                           }
                         },
-                        "id": 1892,
+                        "id": 1613,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
-                        "memberLocation": "2013:6:9",
+                        "memberLocation": "2079:6:7",
                         "memberName": "length",
                         "nodeType": "MemberAccess",
-                        "src": "2003:16:9",
+                        "src": "2069:16:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         }
                       },
-                      "src": "1992:27:9",
+                      "src": "2058:27:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
@@ -3034,40 +3034,40 @@
                       "expression": {
                         "baseExpression": {
                           "expression": {
-                            "id": 1894,
+                            "id": 1615,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1879,
-                            "src": "2023:4:9",
+                            "referencedDeclaration": 1600,
+                            "src": "2089:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1895,
+                          "id": 1616,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "2028:4:9",
+                          "memberLocation": "2094:4:7",
                           "memberName": "keys",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1660,
-                          "src": "2023:9:9",
+                          "referencedDeclaration": 1381,
+                          "src": "2089:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                             "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                           }
                         },
-                        "id": 1897,
+                        "id": 1618,
                         "indexExpression": {
-                          "id": 1896,
+                          "id": 1617,
                           "name": "keyIndex",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1881,
-                          "src": "2033:8:9",
+                          "referencedDeclaration": 1602,
+                          "src": "2099:8:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -3078,100 +3078,100 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "IndexAccess",
-                        "src": "2023:19:9",
+                        "src": "2089:19:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_KeyFlag_$1651_storage",
+                          "typeIdentifier": "t_struct$_KeyFlag_$1372_storage",
                           "typeString": "struct IterableMapping.KeyFlag storage ref"
                         }
                       },
-                      "id": 1898,
+                      "id": 1619,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "2043:7:9",
+                      "memberLocation": "2109:7:7",
                       "memberName": "deleted",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1650,
-                      "src": "2023:27:9",
+                      "referencedDeclaration": 1371,
+                      "src": "2089:27:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       }
                     },
-                    "src": "1992:58:9",
+                    "src": "2058:58:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "id": 1903,
+                  "id": 1624,
                   "nodeType": "WhileStatement",
-                  "src": "1985:89:9"
+                  "src": "2051:90:7"
                 },
                 {
                   "expression": {
-                    "id": 1904,
+                    "id": 1625,
                     "name": "keyIndex",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 1881,
-                    "src": "2091:8:9",
+                    "referencedDeclaration": 1602,
+                    "src": "2159:8:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 1885,
-                  "id": 1905,
+                  "functionReturnParameters": 1606,
+                  "id": 1626,
                   "nodeType": "Return",
-                  "src": "2084:15:9"
+                  "src": "2152:15:7"
                 }
               ]
             },
-            "id": 1907,
+            "id": 1628,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "iterate_next",
-            "nameLocation": "1861:12:9",
+            "nameLocation": "1925:12:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1882,
+              "id": 1603,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1879,
+                  "id": 1600,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "1888:4:9",
+                  "nameLocation": "1952:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1907,
-                  "src": "1874:18:9",
+                  "scope": 1628,
+                  "src": "1938:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1878,
+                    "id": 1599,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1877,
+                      "id": 1598,
                       "name": "itmap",
                       "nameLocations": [
-                        "1874:5:9"
+                        "1938:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "1874:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "1938:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "1874:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "1938:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -3179,13 +3179,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1881,
+                  "id": 1602,
                   "mutability": "mutable",
                   "name": "keyIndex",
-                  "nameLocation": "1902:8:9",
+                  "nameLocation": "1966:8:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1907,
-                  "src": "1894:16:9",
+                  "scope": 1628,
+                  "src": "1958:16:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3193,10 +3193,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1880,
+                    "id": 1601,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1894:7:9",
+                    "src": "1958:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3205,21 +3205,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1873:38:9"
+              "src": "1937:38:7"
             },
             "returnParameters": {
-              "id": 1885,
+              "id": 1606,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1884,
+                  "id": 1605,
                   "mutability": "mutable",
                   "name": "r_keyIndex",
-                  "nameLocation": "1943:10:9",
+                  "nameLocation": "2007:10:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1907,
-                  "src": "1935:18:9",
+                  "scope": 1628,
+                  "src": "1999:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3227,10 +3227,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1883,
+                    "id": 1604,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1935:7:9",
+                    "src": "1999:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3239,34 +3239,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1934:20:9"
+              "src": "1998:20:7"
             },
-            "scope": 1937,
-            "src": "1852:254:9",
+            "scope": 1658,
+            "src": "1916:259:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 1935,
+              "id": 1656,
               "nodeType": "Block",
-              "src": "2227:84:9",
+              "src": "2298:87:7",
               "statements": [
                 {
                   "expression": {
-                    "id": 1925,
+                    "id": 1646,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 1919,
+                      "id": 1640,
                       "name": "key",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1915,
-                      "src": "2237:3:9",
+                      "referencedDeclaration": 1636,
+                      "src": "2309:3:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes32",
                         "typeString": "bytes32"
@@ -3278,40 +3278,40 @@
                       "expression": {
                         "baseExpression": {
                           "expression": {
-                            "id": 1920,
+                            "id": 1641,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1910,
-                            "src": "2243:4:9",
+                            "referencedDeclaration": 1631,
+                            "src": "2315:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1921,
+                          "id": 1642,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "2248:4:9",
+                          "memberLocation": "2320:4:7",
                           "memberName": "keys",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1660,
-                          "src": "2243:9:9",
+                          "referencedDeclaration": 1381,
+                          "src": "2315:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1651_storage_$dyn_storage",
+                            "typeIdentifier": "t_array$_t_struct$_KeyFlag_$1372_storage_$dyn_storage",
                             "typeString": "struct IterableMapping.KeyFlag storage ref[] storage ref"
                           }
                         },
-                        "id": 1923,
+                        "id": 1644,
                         "indexExpression": {
-                          "id": 1922,
+                          "id": 1643,
                           "name": "keyIndex",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1912,
-                          "src": "2253:8:9",
+                          "referencedDeclaration": 1633,
+                          "src": "2325:8:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -3322,51 +3322,51 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "IndexAccess",
-                        "src": "2243:19:9",
+                        "src": "2315:19:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_KeyFlag_$1651_storage",
+                          "typeIdentifier": "t_struct$_KeyFlag_$1372_storage",
                           "typeString": "struct IterableMapping.KeyFlag storage ref"
                         }
                       },
-                      "id": 1924,
+                      "id": 1645,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "2263:3:9",
+                      "memberLocation": "2335:3:7",
                       "memberName": "key",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1648,
-                      "src": "2243:23:9",
+                      "referencedDeclaration": 1369,
+                      "src": "2315:23:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes32",
                         "typeString": "bytes32"
                       }
                     },
-                    "src": "2237:29:9",
+                    "src": "2309:29:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   },
-                  "id": 1926,
+                  "id": 1647,
                   "nodeType": "ExpressionStatement",
-                  "src": "2237:29:9"
+                  "src": "2309:29:7"
                 },
                 {
                   "expression": {
-                    "id": 1933,
+                    "id": 1654,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 1927,
+                      "id": 1648,
                       "name": "value",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1917,
-                      "src": "2276:5:9",
+                      "referencedDeclaration": 1638,
+                      "src": "2349:5:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes_memory_ptr",
                         "typeString": "bytes memory"
@@ -3378,40 +3378,40 @@
                       "expression": {
                         "baseExpression": {
                           "expression": {
-                            "id": 1928,
+                            "id": 1649,
                             "name": "self",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1910,
-                            "src": "2284:4:9",
+                            "referencedDeclaration": 1631,
+                            "src": "2357:4:7",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                              "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                               "typeString": "struct IterableMapping.itmap storage pointer"
                             }
                           },
-                          "id": 1929,
+                          "id": 1650,
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
                           "lValueRequested": false,
-                          "memberLocation": "2289:4:9",
+                          "memberLocation": "2362:4:7",
                           "memberName": "data",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1656,
-                          "src": "2284:9:9",
+                          "referencedDeclaration": 1377,
+                          "src": "2357:9:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1646_storage_$",
+                            "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_IndexValue_$1367_storage_$",
                             "typeString": "mapping(bytes32 => struct IterableMapping.IndexValue storage ref)"
                           }
                         },
-                        "id": 1931,
+                        "id": 1652,
                         "indexExpression": {
-                          "id": 1930,
+                          "id": 1651,
                           "name": "key",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1915,
-                          "src": "2294:3:9",
+                          "referencedDeclaration": 1636,
+                          "src": "2367:3:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes32",
                             "typeString": "bytes32"
@@ -3422,82 +3422,82 @@
                         "isPure": false,
                         "lValueRequested": false,
                         "nodeType": "IndexAccess",
-                        "src": "2284:14:9",
+                        "src": "2357:14:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_IndexValue_$1646_storage",
+                          "typeIdentifier": "t_struct$_IndexValue_$1367_storage",
                           "typeString": "struct IterableMapping.IndexValue storage ref"
                         }
                       },
-                      "id": 1932,
+                      "id": 1653,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberLocation": "2299:5:9",
+                      "memberLocation": "2372:5:7",
                       "memberName": "value",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1645,
-                      "src": "2284:20:9",
+                      "referencedDeclaration": 1366,
+                      "src": "2357:20:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes_storage",
                         "typeString": "bytes storage ref"
                       }
                     },
-                    "src": "2276:28:9",
+                    "src": "2349:28:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_memory_ptr",
                       "typeString": "bytes memory"
                     }
                   },
-                  "id": 1934,
+                  "id": 1655,
                   "nodeType": "ExpressionStatement",
-                  "src": "2276:28:9"
+                  "src": "2349:28:7"
                 }
               ]
             },
-            "id": 1936,
+            "id": 1657,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "iterate_get",
-            "nameLocation": "2121:11:9",
+            "nameLocation": "2192:11:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1913,
+              "id": 1634,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1910,
+                  "id": 1631,
                   "mutability": "mutable",
                   "name": "self",
-                  "nameLocation": "2147:4:9",
+                  "nameLocation": "2218:4:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1936,
-                  "src": "2133:18:9",
+                  "scope": 1657,
+                  "src": "2204:18:7",
                   "stateVariable": false,
                   "storageLocation": "storage",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                    "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                     "typeString": "struct IterableMapping.itmap"
                   },
                   "typeName": {
-                    "id": 1909,
+                    "id": 1630,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 1908,
+                      "id": 1629,
                       "name": "itmap",
                       "nameLocations": [
-                        "2133:5:9"
+                        "2204:5:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1663,
-                      "src": "2133:5:9"
+                      "referencedDeclaration": 1384,
+                      "src": "2204:5:7"
                     },
-                    "referencedDeclaration": 1663,
-                    "src": "2133:5:9",
+                    "referencedDeclaration": 1384,
+                    "src": "2204:5:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_itmap_$1663_storage_ptr",
+                      "typeIdentifier": "t_struct$_itmap_$1384_storage_ptr",
                       "typeString": "struct IterableMapping.itmap"
                     }
                   },
@@ -3505,13 +3505,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1912,
+                  "id": 1633,
                   "mutability": "mutable",
                   "name": "keyIndex",
-                  "nameLocation": "2161:8:9",
+                  "nameLocation": "2232:8:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1936,
-                  "src": "2153:16:9",
+                  "scope": 1657,
+                  "src": "2224:16:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3519,10 +3519,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1911,
+                    "id": 1632,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2153:7:9",
+                    "src": "2224:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3531,21 +3531,21 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2132:38:9"
+              "src": "2203:38:7"
             },
             "returnParameters": {
-              "id": 1918,
+              "id": 1639,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1915,
+                  "id": 1636,
                   "mutability": "mutable",
                   "name": "key",
-                  "nameLocation": "2202:3:9",
+                  "nameLocation": "2273:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1936,
-                  "src": "2194:11:9",
+                  "scope": 1657,
+                  "src": "2265:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3553,10 +3553,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 1914,
+                    "id": 1635,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2194:7:9",
+                    "src": "2265:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -3566,13 +3566,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 1917,
+                  "id": 1638,
                   "mutability": "mutable",
                   "name": "value",
-                  "nameLocation": "2220:5:9",
+                  "nameLocation": "2291:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1936,
-                  "src": "2207:18:9",
+                  "scope": 1657,
+                  "src": "2278:18:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -3580,10 +3580,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 1916,
+                    "id": 1637,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2207:5:9",
+                    "src": "2278:5:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -3592,22 +3592,22 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2193:33:9"
+              "src": "2264:33:7"
             },
-            "scope": 1937,
-            "src": "2112:199:9",
+            "scope": 1658,
+            "src": "2183:202:7",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "internal"
           }
         ],
-        "scope": 1938,
-        "src": "57:2257:9",
+        "scope": 1659,
+        "src": "60:2330:7",
         "usedErrors": [],
         "usedEvents": []
       }
     ],
-    "src": "32:2282:9"
+    "src": "33:2357:7"
   },
   "compiler": {
     "name": "solc",
@@ -3615,7 +3615,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-08T06:09:17.000Z",
+  "updatedAt": "2024-05-08T00:36:01.883Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
