@@ -9,11 +9,11 @@ export const ReportContainer = styled.div`
   align-items: center;
   .question-box {
     position: fixed;
-    top: 1.2%;
-    transform: translateX(430%);
+    top: 1.6%;
+    transform: translateX(455%);
     z-index: 1003;
     &:active {
-      transform: translateX(430%) scale(0.93);
+      transform: translateX(455%) scale(0.93);
     }
   }
 `
