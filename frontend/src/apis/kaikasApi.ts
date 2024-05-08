@@ -7,10 +7,10 @@ export const prepareAuthRequest = async (): Promise<PrepareResponse> => {
     const response = await axios.post(`${API_BASE_URL}/prepare`, {
         type: 'auth',
         bapp: {
-            name: 'test app',
+            name: 'Block Homes',
             callback: {
-                success: 'https://www.google.com/search?q=success',
-                fail: 'https://www.google.com/search?q=fail'
+                success: 'https://block-homes.kr/signin',
+                fail: 'https://block-homes.kr/signin'
             }
         }
     }, {
