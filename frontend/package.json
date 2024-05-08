@@ -11,6 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.16",
     "@tanstack/react-query-devtools": "^5.32.0",
     "apexcharts": "^3.49.0",
     "axios": "^1.6.8",
