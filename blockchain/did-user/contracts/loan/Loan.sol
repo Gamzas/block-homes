@@ -20,9 +20,10 @@ contract Loan {
 
     event Borrowed(string mortgage, uint256 amount);
 
-    function sendLoanRequest(string mortgage, uint256 amount) external {
+    function sendLoanRequest(string memory mortgage, uint256 amount) external {
         require(msg.sender == target, "Only the designated target can request a loan");
         pendingLoanAmount = amount;
+        pendingLoanMortgage = mortgage;
     }
 
     function assignLoanRequest() external {
@@ -31,13 +32,13 @@ contract Loan {
 
         target.transfer(pendingLoanAmount); // 대출 금액을 target에게 이체
         
-        emit Borrowed(target, pendingLoanAmount); // 이벤트 로깅
+        emit Borrowed(pendingLoanMortgage, pendingLoanAmount); // 이벤트 로깅
 
         pendingLoanAmount = 0; // 대출 금액 초기화
     }
 
     function depositFunds() external payable {
-        require(msg.value == 1 ether, "Only 1 Ether can be deposited at a time");
+        // require(msg.value == 1 ether, "Only 1 Ether can be deposited at a time");
     }
 
 }
