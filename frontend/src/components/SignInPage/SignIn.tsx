@@ -8,15 +8,22 @@ import {getResult, prepareAuthRequest} from "@apis/kaikasApi";
 const SignIn = () => {
     const [account, setAccount] = useAtom(accountAtom);
     const [requestKey, setRequestKey] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleRequest = async () => {
         try {
-            const {request_key} = await prepareAuthRequest();
-            setRequestKey(request_key)
-            const url = `kaikas://wallet/api?request_key=${request_key}`;
-            window.open(url, '_blank');
+            const {request_key, status} = await prepareAuthRequest();
+            if (status === 'prepared' && request_key) {
+                setRequestKey(request_key)
+                const url = `kaikas://wallet/api?request_key=${request_key}`;
+                window.open(url, '_blank');
+            } else {
+                setErrorMessage('prepared 실패');
+                console.error('Authentication failed');
+            }
 
         } catch (error) {
+            setErrorMessage('request post 실패');
             console.error('Error during authentication:', error);
         }
     };
@@ -26,9 +33,10 @@ const SignIn = () => {
             if (result.status === 'completed' && result.result) {
                 setAccount(result.result.klaytn_address);
             } else {
-                console.error('Authentication failed');
+                setErrorMessage('result 실패');
             }
         } catch (error) {
+            setErrorMessage('result get 실패');
             console.error('Error during authentication:', error);
         }
     };
@@ -36,7 +44,15 @@ const SignIn = () => {
     return (
         <k.SignInContainer onClick={e => e.stopPropagation()}>
             <Header title="로그인" isSearch={false} rightIconSrc={null}/>
+            {requestKey ? requestKey : null}
+            <br/>
+            <br/>
+            <br/>
             {account ? account.account : null}
+            <br/>
+            <br/>
+            <br/>
+            {errorMessage ? errorMessage : null}
             <br/>
             <br/>
             <br/>
