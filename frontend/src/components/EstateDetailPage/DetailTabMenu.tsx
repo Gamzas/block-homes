@@ -21,7 +21,7 @@ const DetailTabMenu = () => {
   ]
 
   const tabMenuArr = ['image', 'floor_plan', '360']
-  const selectMenuHandler = index => {
+  const selectMenuHandler = (index: number) => {
     clickTab(index)
   }
   return (
