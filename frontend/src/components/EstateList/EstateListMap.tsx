@@ -109,13 +109,13 @@ const EstateListMap = () => {
           <e.DetailCardContainer id="card-container">
             <div className="card-background" onClick={handleDetailCardClose} />
             <EstateItemCard {...item} />
-            {/* FIX 닫기 버튼 삭제하기 */}
+            {/* DELETE 닫기 버튼 삭제하기 */}
             {/* <e.CloseCardContainer>
               <div className="closeBtn" onClick={handleDetailCardClose}>
                 닫기
               </div>
             </e.CloseCardContainer> */}
-            {/* FIX div 삭제 */}
+            {/* DELETE div 삭제 */}
             {/* <div className="card"></div> */}
           </e.DetailCardContainer>
         )}

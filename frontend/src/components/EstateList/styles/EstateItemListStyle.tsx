@@ -28,7 +28,7 @@ export const EstateFilterContainer = styled.div`
 `
 
 
-// FIXME 컨테이너 삭제 
+// DELETE 컨테이너 삭제 
 
 export const EstateMapContainer = styled.div`
   width: 100%;

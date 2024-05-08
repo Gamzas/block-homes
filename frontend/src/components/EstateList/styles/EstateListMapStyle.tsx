@@ -12,9 +12,6 @@ export const DetailCardContainer = styled.div`
   width: 100%;
   max-width: 390px;
   background: rgba(196, 195, 195, 0.7);
-  /* height: 50vh; */
-
-  /* left: 1rem; */
   bottom: 4rem;
   z-index: 10;
   padding-bottom: 1rem;
@@ -24,18 +21,9 @@ export const DetailCardContainer = styled.div`
   .card-background {
     width: 100%;
     height: 80vh;
-    /* border: 3px solid red; */
-    /* z-index: 15; */
-  }
-  .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border: 2px solid black;
   }
 `
-
+// DELETE 닫기 버튼 컨테이너 삭제하기
 export const CloseCardContainer = styled.div`
   width: 1rem;
   height: 1rem;
