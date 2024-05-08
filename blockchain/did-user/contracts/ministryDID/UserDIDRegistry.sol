@@ -2,33 +2,49 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../structs/DIDStruct.sol";
+import "../structs/DIDStructs.sol";
 import "../utils/HexUtils.sol";
+import "../tax/TaxPayment.sol";
 
 contract UserDIDRegistry is Ownable {
 
-    mapping(string => DIDStruct.DIDDocument) didDocuments;
+    mapping(string => DIDStructs.DIDDocument) didDocuments;
+
+    mapping(string => address) taxAddresses;
+    mapping(string => address) loanAddresses;
 
     constructor() Ownable(msg.sender) {}
 
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(DIDStruct.DIDDocument memory _didDocument) external onlyOwner {
+    function createDIDDocument(DIDStructs.DIDDocument memory _didDocument) external onlyOwner {
         DIDStruct.DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
         didDocument.context = _didDocument.context;
 
-        didDocument.publicKey.id = string(abi.encodePacked(didDocument.id, _didDocument.publicKey.id)); // DID + fragment 수행
-        didDocument.publicKey.keyType = _didDocument.publicKey.keyType;
-        didDocument.publicKey.controller = _didDocument.publicKey.controller;
-        didDocument.publicKey.publicKeyData = _didDocument.publicKey.publicKeyData;
+        address taxAddress = address(new TaxPayment(msg.sender));
+        taxAddresses[didDocument.id] = taxAddress;
 
-        didDocument.authentication = _didDocument.authentication;
+        for (uint i = 0; i < _didDocument.publicKey.length; i++) {
+            didDocument.publicKey.push(DIDStructs.PublicKey({
+                id: string(abi.encodePacked(didDocument.id, _didDocument.publicKey[i].id)),
+                keyType: _didDocument.publicKey[i].keyType,
+                controller: _didDocument.publicKey[i].controller,
+                publicKeyData: _didDocument.publicKey[i].publicKeyData
+            }));
 
-        didDocument.service.id = _didDocument.service.id;
-        didDocument.service.serviceType = _didDocument.service.serviceType;
-        didDocument.service.serviceEndPoint = _didDocument.service.serviceEndPoint;
+            // 처음에는 모든 key가 auth로 등록
+            didDocument.authentication.push(_didDocument.authentication[i]);
+        }
+
+        for (uint i = 0; i < _didDocument.service.length; i++) {
+            didDocument.service.push(DIDStructs.Service({
+                id: _didDocument.service[i].id,
+                serviceType: _didDocument.service[i].serviceType,
+                serviceEndPoint: _didDocument.service[i].serviceEndPoint
+            }));
+        }
 
         didDocuments[didDocument.id] = didDocument;
 
@@ -42,6 +58,10 @@ contract UserDIDRegistry is Ownable {
     function deleteDIDDocument(string calldata did) external onlyOwner {
         delete didDocuments[did];
         emit DIDDeleted(did);
+    }
+    
+    function getTaxContractAddress(string calldata did) external view returns (address) {
+        return taxAddresses[did];
     }
 
 }

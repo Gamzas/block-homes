@@ -1,41 +1,70 @@
-import React, { useState } from 'react'
-import * as k from '@components/SignInPage/style/SignInStyle'
-import Header from '@common/Header'
-import { useSetAtom } from 'jotai'
-import { accountAtom } from '@stores/atoms/accountStore'
+import React, {useState} from 'react';
+import {useAtom} from 'jotai';
+import {accountAtom} from '@stores/atoms/accountStore';
+import * as k from '@components/SignInPage/style/SignInStyle';
+import Header from '@common/Header';
+import {getResult, prepareAuthRequest} from "@apis/kaikasApi";
 
 const SignIn = () => {
-  const setAccount = useSetAtom(accountAtom)
-  const [manualAddress, setManualAddress] = useState<string>('')
+    const [account, setAccount] = useAtom(accountAtom);
+    const [requestKey, setRequestKey] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleAddressInput = (event: { target: { value: React.SetStateAction<string> } }) => {
-    setManualAddress(event.target.value)
-  }
+    const handleRequest = async () => {
+        try {
+            const {request_key, status} = await prepareAuthRequest();
+            if (status === 'prepared' && request_key) {
+                setRequestKey(request_key)
+                const url = `kaikas://wallet/api?request_key=${request_key}`;
+                window.open(url, '_blank');
+            } else {
+                setErrorMessage('prepared 실패');
+                console.error('Authentication failed');
+            }
 
-  const handleManualConnect = () => {
-    if (manualAddress) {
-      setAccount({ account: manualAddress })
-    }
-  }
+        } catch (error) {
+            setErrorMessage('request post 실패');
+            console.error('Error during authentication:', error);
+        }
+    };
+    const handleResult = async () => {
+        try {
+            const result = await getResult(requestKey);
+            if (result.status === 'completed' && result.result) {
+                setAccount(result.result.klaytn_address);
+            } else {
+                setErrorMessage('result 실패');
+            }
+        } catch (error) {
+            setErrorMessage('result get 실패');
+            console.error('Error during authentication:', error);
+        }
+    };
 
-  return (
-    <k.SignInContainer onClick={e => e.stopPropagation()}>
-      <Header title="로그인" isSearch={false} rightIconSrc={null} />
-      <k.SignInAccount>
-        <input
-          className="account-input"
-          type="text"
-          value={manualAddress}
-          onChange={handleAddressInput}
-          placeholder="클립 지갑 주소를 입력하세요."
-        />
-      </k.SignInAccount>
-      <k.SignInButton onClick={handleManualConnect}>
-        <div className="symbol" />
-        클립으로 로그인
-      </k.SignInButton>
-    </k.SignInContainer>
-  )
-}
+    return (
+        <k.SignInContainer onClick={e => e.stopPropagation()}>
+            <Header title="로그인" isSearch={false} rightIconSrc={null}/>
+            {requestKey ? requestKey : null}
+            <br/>
+            <br/>
+            <br/>
+            {account ? account.account : null}
+            <br/>
+            <br/>
+            <br/>
+            {errorMessage ? errorMessage : null}
+            <br/>
+            <br/>
+            <br/>
+            <k.SignInButton onClick={handleRequest}>
+                Kaikas와 연동
+            </k.SignInButton>
+            <br/>
+            <k.SignInButton onClick={handleResult}>
+                Kaikas로 지갑주소 가져오기
+            </k.SignInButton>
+        </k.SignInContainer>
+    );
+};
 
-export default SignIn
+export default SignIn;
