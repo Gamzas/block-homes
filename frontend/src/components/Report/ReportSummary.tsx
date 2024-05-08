@@ -1,4 +1,3 @@
-import React from 'react'
 import Gauge from './Gauge'
 import { SummaryContainer } from './style/ReportSummaryStyle'
 

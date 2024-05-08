@@ -7,4 +7,14 @@ export const ReportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 1px solid;
+  .question-box {
+    position: fixed;
+    top: 1.2%;
+    transform: translateX(430%);
+    z-index: 1003;
+    &:active {
+      transform: translateX(430%) scale(0.93);
+    }
+  }
 `

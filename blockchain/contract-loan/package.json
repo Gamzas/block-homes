@@ -1,5 +1,5 @@
 {
-  "name": "did-user",
+  "name": "contract-loan",
   "version": "1.0.0",
   "main": "truffle-config.js",
   "directories": {
