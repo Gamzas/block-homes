@@ -11,7 +11,7 @@ const SignIn = () => {
     const handleAuth = async () => {
         try {
             const {request_key} = await prepareAuthRequest();
-            const url = `kaikas://wallet/browser?url=${encodeURIComponent('https://app.kaikas.io/u/block-homes.kr/signin')}`;
+            const url = `kaikas://wallet/api?request_key=${request_key}`;
             window.open(url, '_blank');
 
             const result = await getResult(request_key);
