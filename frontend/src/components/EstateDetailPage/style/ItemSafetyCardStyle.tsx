@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface colorType {
+  $color: string
+}
+
 export const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -8,11 +12,12 @@ export const CardWrapper = styled.div`
   margin: 1rem 0 1rem 0;
 `
 
-export const SafetyCardContainer = styled.div`
+export const SafetyCardContainer = styled.div<colorType>`
   width: 90%;
   height: 7rem;
   border-radius: 1.3rem;
-  background: #f3f0f7;
+  background: ${props => props.$color};
+
   position: relative;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `
@@ -45,8 +50,7 @@ export const WaveContainer = styled.div`
   .back-wrapper {
     width: 100%;
     height: 6rem;
-  border-radius: 1.3rem;
-
+    border-radius: 1.3rem;
   }
   .bigWave {
     position: absolute;
@@ -63,7 +67,7 @@ export const WaveContainer = styled.div`
   }
 `
 
-export const InfoTextContainer = styled.div`
+export const InfoTextContainer = styled.div<colorType>`
   display: flex;
   position: absolute;
   width: fit-content;
@@ -78,7 +82,7 @@ export const InfoTextContainer = styled.div`
     line-height: 0.5rem;
   }
   .info {
-    color: #845bd3;
+    color: ${props => props.$color};
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
