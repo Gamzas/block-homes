@@ -1,14 +1,6 @@
 import * as c from '@components/ChatPage/style/ChatPreviewComponentStyle'
 import React, { useEffect, useState } from 'react'
-
-interface ChatComponentProps {
-  representativeImage: string
-  address: string
-  type: number
-  price: number
-  lastChat: string
-  dangerType: number
-}
+import { ChatComponentProps } from '@/types/components/chatType'
 
 const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   representativeImage,
