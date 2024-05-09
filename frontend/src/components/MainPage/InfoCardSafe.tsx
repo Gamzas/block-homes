@@ -1,7 +1,14 @@
 import React from 'react'
 import * as i from '@components/MainPage/style/InfoCardStyle'
+import { useNavigate } from 'react-router-dom'
 
 const InfoCardSafe = () => {
+  const navigate = useNavigate()
+
+  const navigateInfoPage = () => {
+    navigate('/info-how-safe')
+  }
+
   return (
     <i.InfoCardContainer $backgroundColor="#F3F0F7">
       <div className="image-container">
@@ -19,7 +26,7 @@ const InfoCardSafe = () => {
           <span className="highlight-text">전세 사기</span>
         </div>
         <div className="info-text">방지할까요?</div>
-        <i.NavigateButtonContainer>
+        <i.NavigateButtonContainer onClick={navigateInfoPage}>
           <div className="button-title">블록홈즈 기술 살펴보기</div>
           <img
             alt="이동 아이콘"

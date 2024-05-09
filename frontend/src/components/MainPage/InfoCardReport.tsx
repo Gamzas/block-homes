@@ -3,23 +3,22 @@ import * as i from '@components/MainPage/style/InfoCardStyle'
 
 const InfoCardReport = () => {
   return (
-    <i.InfoCardContainer $backgroundColor="#F7F0F0">
+    <i.InfoCardContainer $backgroundColor="#F7F7F0">
       <div className="image-container">
         <img
           alt="증명서"
-          src="/image/image_info_certification.png"
+          src="/image/image_info_report.png"
           className="left-image"
         />
       </div>
 
       <i.InfoContainer>
+        <div className="info-text">블록홈즈에는 각 매물에 대한</div>
         <div className="info-text">
-          블록홈즈에서는 <span className="highlight-text">어떤 과정</span>을
-          거쳐
+          <span className="highlight-text"> 레포트</span>가 작성되어 있어요.
         </div>
-        <div className="info-text">집을 거래할까요?</div>
         <i.NavigateButtonContainer>
-          <div className="button-title">블록홈즈 거래 과정 보기</div>
+          <div className="button-title">매물 레포트 알아보기</div>
           <img
             alt="이동 아이콘"
             className="double-right-arrows"
