@@ -1,11 +1,11 @@
-import {atomWithStorage} from 'jotai/utils'
-import {AuthResult} from "@/types/components/kaikasType";
+import { atomWithStorage } from 'jotai/utils'
+import { ResultAuth } from '@/types/components/kaikasType'
 
 const currentAccount = {
-    klaytn_address: null,
+  klaytn_address: null,
 }
 
-export const accountAtom = atomWithStorage<AuthResult>(
-    'currentAccount',
-    currentAccount,
+export const accountAtom = atomWithStorage<ResultAuth>(
+  'currentAccount',
+  currentAccount,
 )
