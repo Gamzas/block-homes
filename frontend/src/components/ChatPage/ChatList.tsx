@@ -1,4 +1,4 @@
-import ChatComponent from '@components/ChatPage/ChatComponent'
+import ChatPreviewComponent from '@components/ChatPage/ChatPreviewComponent'
 
 const ChatList = () => {
   const chatData = {
@@ -12,7 +12,7 @@ const ChatList = () => {
 
   return (
     <>
-      <ChatComponent {...chatData} />
+      <ChatPreviewComponent {...chatData} />
     </>
   )
 }
