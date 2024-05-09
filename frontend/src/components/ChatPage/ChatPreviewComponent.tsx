@@ -17,6 +17,24 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   lastChat,
 }) => {
   const [typeOfNumber, setTypeOfNumber] = useState('type')
+  const [stringPrice, setStringPrice] = useState('')
+
+  const formatPrice = (price: number) => {
+    const units = ['원', '만', '억']
+    let result = ''
+    let unitIndex = 0
+
+    while (price > 0) {
+      const part = price % 10000
+      if (part > 0) {
+        result = part + units[unitIndex] + ' ' + result // 각 단위마다 값을 추가
+      }
+      price = Math.floor(price / 10000)
+      unitIndex++
+    }
+
+    setStringPrice(result.trim()) // 마지막 공백 제거
+  }
 
   useEffect(() => {
     switch (type) {
@@ -30,7 +48,9 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
         setTypeOfNumber('월세')
         break
     }
-  }, [price])
+
+    formatPrice(price)
+  }, [type, price])
 
   return (
     <c.ChatComponentContainer>
@@ -38,7 +58,7 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
       <c.ChatComponentRightContainer>
         <div className="address">{address}</div>
         <div className="type">{typeOfNumber}</div>
-        <div className="price">{price} 원</div>
+        <div className="price">{stringPrice} 원</div>
         <div className="last-chat">{lastChat}</div>
       </c.ChatComponentRightContainer>
     </c.ChatComponentContainer>
