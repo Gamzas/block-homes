@@ -6,7 +6,6 @@ interface PropsType {
 }
 const ItemSafetyCard = (props: PropsType) => {
   const condition = props.condition
-  console.log(condition)
   const { getColor, getStatus } = useEstateCondition(condition)
   const mainColor = getColor()?.main
   const secondColor = getColor()?.second
