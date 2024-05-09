@@ -1,13 +1,9 @@
 import Web3 from 'web3'
-import {
-  blockChainEndpoint,
-  contractABI,
-  contractAddress,
-} from '@constants/contract'
+import { ABI_ARRAY, BLOCK_CHAIN_ENDPOINT, CONTRACT_ADDRESS } from '@constants/abi'
 
 export const getContract = () => {
-  const web3 = new Web3(blockChainEndpoint)
-  return new web3.eth.Contract(contractABI, contractAddress).methods
+  const web3 = new Web3(BLOCK_CHAIN_ENDPOINT)
+  return new web3.eth.Contract(ABI_ARRAY, CONTRACT_ADDRESS).methods
 }
 
 // 예시
