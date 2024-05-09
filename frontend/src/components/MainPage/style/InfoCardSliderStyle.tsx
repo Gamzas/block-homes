@@ -16,14 +16,14 @@ export const SliderContainer = styled.div`
 
       button {
         &:before {
-          font-size: 1.7rem;
+          font-size: 15px;
           color: #ababab;
         }
       }
 
       &.slick-active button:before {
         color: #845bd3;
-        font-size: 2rem;
+        font-size: 20px;
       }
     }
   }
