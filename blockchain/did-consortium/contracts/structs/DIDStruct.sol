@@ -10,18 +10,11 @@ library DIDStruct {
         string publicKeyData;
     }
 
-    struct Service {
-        string id;
-        string serviceType;
-        string serviceEndPoint;
-    }
-
     struct DIDDocument {
         string context;
         string id;
         PublicKey publicKey;
         string authentication;
-        Service service;
     }
 
 }
