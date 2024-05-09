@@ -7,6 +7,10 @@ interface InfoPageHeaderProps {
 }
 
 const InfoPageHeader = (InfoPageHeaderProps: InfoPageHeaderProps) => {
+  const createMarkup = (htmlString: string) => {
+    return { __html: htmlString }
+  }
+
   return (
     <i.InfoPageHeaderContainer>
       <div className="question-logo">Q</div>
@@ -15,7 +19,12 @@ const InfoPageHeader = (InfoPageHeaderProps: InfoPageHeaderProps) => {
         alt="배경이미지"
         src={InfoPageHeaderProps.backgroundImageSrc}
       />
-      <div className="question-title">{InfoPageHeaderProps.questionTitle}</div>
+      <div
+        className="question-title"
+        dangerouslySetInnerHTML={createMarkup(
+          InfoPageHeaderProps.questionTitle,
+        )}
+      ></div>
     </i.InfoPageHeaderContainer>
   )
 }
