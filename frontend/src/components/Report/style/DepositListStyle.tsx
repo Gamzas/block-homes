@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const DepositListContainer = styled.div`
-  margin-top: 1rem;
   width: 100%;
   min-height: 10vh;
   border-radius: 0.93313rem;
