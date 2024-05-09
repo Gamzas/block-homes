@@ -9,7 +9,8 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 const SignIn = () => {
   const [account, setAccount] = useAtom(accountAtom)
-  const [requestKey, setRequestKey] = useState<string | null>(null)
+  const [authRequestKey, setAuthRequestKey] = useState<string | null>(null)
+  const [claimCredentialRequestKey, setClaimCredentialRequestKey] = useState<string | null>(null)
 
   const {
     mutate: prepareAuth,
@@ -19,7 +20,7 @@ const SignIn = () => {
       console.log('Authentication prepared successfully:', data)
       const url = `kaikas://wallet/api?request_key=${data.request_key}`
       window.open(url, '_blank')
-      setRequestKey(data.request_key)
+      setAuthRequestKey(data.request_key)
     },
     onError: (error) => {
       console.error('Failed to prepare authentication:', error)
@@ -29,9 +30,9 @@ const SignIn = () => {
   const {
     data: resultAuth,
   } = useQuery<ResultResponse, Error>({
-    queryKey: ['getResult', requestKey],
-    queryFn: () => getResult(requestKey),
-    enabled: !!requestKey, // requestKey가 존재할 때만 쿼리 실행
+    queryKey: ['getResult', authRequestKey],
+    queryFn: () => getResult(authRequestKey),
+    enabled: !!authRequestKey,
   })
 
   const handlePrepareRequest = () => {
@@ -53,7 +54,7 @@ const SignIn = () => {
       console.log('Authentication prepared successfully:', data)
       const url = `kaikas://wallet/api?request_key=${data.request_key}`
       window.open(url, '_blank')
-      setRequestKey(data.request_key)
+      setClaimCredentialRequestKey(data.request_key)
     },
     onError: (error) => {
       console.error('Failed to prepare authentication:', error)
@@ -61,10 +62,10 @@ const SignIn = () => {
   })
 
   const { error, isError } = useQuery<ResultResponse, Error>({
-    queryKey: ['getResult', requestKey],
-    queryFn: () => getResult(requestKey),
-    enabled: !!requestKey, // requestKey가 존재할 때만 쿼리 실행
-  });
+    queryKey: ['getResult', claimCredentialRequestKey],
+    queryFn: () => getResult(claimCredentialRequestKey),
+    enabled: !!claimCredentialRequestKey,
+  })
 
   const handlePrepareClaimCredentialRequest = () => {
     prepareClaimCredential()
