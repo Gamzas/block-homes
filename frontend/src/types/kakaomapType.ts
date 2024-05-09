@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    kakao: any
+  }
+}
+
 export interface GeocoderResult {
   address: {
     address_name: string // 전체 주소 명
@@ -24,7 +30,7 @@ export interface GeocoderResult {
 }
 
 export enum KakaoMapsStatus {
-  OK = 'OK',             // 성공
-  ERROR = 'ERROR',       // 오류
-  ZERO_RESULT = 'ZERO_RESULT' // 결과 없음
+  OK = 'OK', // 성공
+  ERROR = 'ERROR', // 오류
+  ZERO_RESULT = 'ZERO_RESULT', // 결과 없음
 }
