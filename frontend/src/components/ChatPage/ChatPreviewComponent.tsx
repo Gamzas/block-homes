@@ -7,6 +7,7 @@ interface ChatComponentProps {
   type: number
   price: number
   lastChat: string
+  dangerType: number
 }
 
 const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
@@ -15,6 +16,7 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   type,
   price,
   lastChat,
+  dangerType,
 }) => {
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
@@ -60,6 +62,7 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
         <div className="type">{typeOfNumber}</div>
         <div className="price">{stringPrice} 원</div>
         <div className="last-chat">{lastChat}</div>
+        <div>{dangerType}</div>
       </c.ChatComponentRightContainer>
     </c.ChatComponentContainer>
   )

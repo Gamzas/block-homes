@@ -8,10 +8,15 @@ const ChatList = () => {
     type: 1,
     price: 300000000,
     lastChat: '집 상태 좋아요',
+    dangerType: 1,
   }
 
   return (
     <>
+      <ChatPreviewComponent {...chatData} />
+      <ChatPreviewComponent {...chatData} />
+      <ChatPreviewComponent {...chatData} />
+      <ChatPreviewComponent {...chatData} />
       <ChatPreviewComponent {...chatData} />
     </>
   )
