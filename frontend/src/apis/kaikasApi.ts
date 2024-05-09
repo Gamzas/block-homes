@@ -13,21 +13,29 @@ export const prepareAuthRequest = async (): Promise<PrepareResponse> => {
 }
 
 // 가정된 claimCredentialFunction의 매개변수에 대한 JSON 배열 생성
-const paramsArray = [
-  'http://example.org',  // context
-  'credential-123',      // id
-  'OwnershipCredential', // credentialType
-  '0xIssuerAddress',     // issuer
-  1625097600,          // issuanceDate
-  '0xSubjectAddress',    // credentialSubject.id
-  '0xOwnerAddress',      // credentialSubject.ownerOf.id
-  'John Doe',            // credentialSubject.ownerOf.name.value
-  'en',                  // credentialSubject.ownerOf.name.lang
-  'Ecdsa',               // proof.proofType
-  'assertionMethod',     // proof.proofPurpose
-  '0xVerificationMethod',// proof.verificationMethod
-  'signatureValue',       // proof.jws
-]
+const paramsArray = {
+  context: 'http://example.org',
+  id: 'credential-123',
+  credentialType: 'OwnershipCredential',
+  issuer: '0xIssuerAddress',
+  issuanceDate: 1625097600,
+  credentialSubject: {
+    id: '0xSubjectAddress',
+    ownerOf: {
+      id: '0xOwnerAddress',
+      name: {
+        value: 'John Doe',
+        lang: 'en',
+      },
+    },
+  },
+  proof: {
+    proofType: 'Ecdsa',
+    proofPurpose: 'assertionMethod',
+    verificationMethod: '0xVerificationMethod',
+    jws: 'signatureValue',
+  },
+}
 
 // JSON 배열을 문자열로 인코딩
 const paramsString = JSON.stringify(paramsArray)
