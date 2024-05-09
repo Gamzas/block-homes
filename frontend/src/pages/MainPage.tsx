@@ -6,12 +6,14 @@ import UserTypeToggle from '@common/UserTypeToggle'
 import { useAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import OwnEstateDidList from '@components/MainPage/OwnEstateDidList'
+import InfoCardSlider from '@components/MainPage/InfoCardSlider'
 
 const MainPage = () => {
   const [currentUser] = useAtom(userAtom)
   return (
     <h.MainPageContainer>
       <TopCard />
+      <InfoCardSlider />
       {currentUser.type === 0 && <RealEstateCategory />}
       {currentUser.type === 1 && <OwnEstateDidList />}
       <UserTypeToggle />
