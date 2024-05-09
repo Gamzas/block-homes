@@ -1,13 +1,20 @@
 import * as f from '@components/EstateList/styles/EstateItemFilterStyle'
 import RangeSlider from './RangeSlider'
+import { filterAtom } from '@/stores/atoms/EstateListStore'
+import { useSetAtom } from 'jotai'
 
 const EstateItemFilter = () => {
+  const setFilter = useSetAtom(filterAtom)
+  const handleFilterContainer = () => {
+    setFilter(false)
+  }
   return (
     <>
       {/* <f.FilterBackground /> */}
       <f.FilterWrapper>
-        <f.FilterContainer>
-          <f.OptionContainer>
+        <div className="close-area" onClick={handleFilterContainer} />
+        <f.FilterContainer id="container">
+          <f.OptionContainer id="option">
             <div className="option-title">거래형태</div>
             <f.TransactionContainer>
               <div className="option-box">매매</div>
