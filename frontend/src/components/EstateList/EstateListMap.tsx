@@ -44,6 +44,7 @@ const EstateListMap = () => {
       ),
       level: 3,
       animate: true,
+      isPanto: true,
     }
     const map = new kakao.maps.Map(container, options)
 
