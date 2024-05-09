@@ -5,7 +5,6 @@ export const SummaryContainer = styled.div`
   height: 6rem;
   border: 2px solid #845bd3;
   border-radius: 20px;
-  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

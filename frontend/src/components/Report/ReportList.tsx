@@ -58,13 +58,14 @@ const ReportList = () => {
         run={run}
         steps={steps}
         callback={handleJoyrideCallback}
-        scrollToFirstStep
+        // scrollToFirstStep
         showProgress
         showSkipButton
         styles={{
           options: {
             zIndex: 1000,
             width: 360, // 툴팁의 너비
+            primaryColor: '#845bd3',
           },
           buttonNext: {
             backgroundColor: '#845bd3',
@@ -92,16 +93,23 @@ const ReportList = () => {
           </svg>
         </div>
       </div>
+      <div style={{ height: '1rem' }}></div>
       <div className="report-summary" style={{ width: '90%' }}>
         <ReportSummary />
       </div>
+      <div style={{ height: '1rem' }}></div>
       <div className="deposit-graph" style={{ width: '90%' }}>
         <DepositGraph></DepositGraph>
       </div>
+      <div style={{ height: '1rem' }}></div>
       <div className="deposit-list" style={{ width: '90%' }}>
         <DepositList></DepositList>
       </div>
-      <div className="danger-list" style={{ width: '90%' }}>
+      <div style={{ height: '1rem' }}></div>
+      <div
+        className="danger-list"
+        style={{ width: '90%', marginBottom: '13rem' }}
+      >
         <DangerList></DangerList>
       </div>
     </>
