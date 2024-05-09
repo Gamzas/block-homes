@@ -1,7 +1,7 @@
 export interface ChatComponentProps {
   representativeImage: string
   address: string
-  type: number
+  transactionType: number
   price: number
   lastChat: string
   dangerType: number
