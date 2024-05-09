@@ -3,21 +3,11 @@ import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 
-declare global {
-  interface Window {
-    kakao: any
-  }
-}
 const { kakao } = window
 
 const useCurrentLocation = () => {
-  // const [location, setLocation] = useState({
-  //   latitude: 37.365264512305174,
-  //   longitude: 127.10676860117488,
-  // })
-
   const [location, setLocation] = useAtom(currentPositonAtom)
-  // console.log(location.location.latitude)
+
   // 현재 동네
   const [currentPosition, setCurrentPosition] = useState('정자동')
 
@@ -41,7 +31,9 @@ const useCurrentLocation = () => {
       const coord = new kakao.maps.LatLng(lat, lng)
       const callback = (result: GeocoderResult[], status: KakaoMapsStatus) => {
         if (status === kakao.maps.services.Status.OK) {
+          // DELETE 주석 삭제하기
           // console.log(result[0].address)
+          // console.log(result[0].road_address)
           setCurrentPosition(result[0].address.region_3depth_name)
         }
       }
