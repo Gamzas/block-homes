@@ -16,6 +16,7 @@ import MyPage from './pages/MyPage'
 import CallBackPage from '@pages/CallBackPage'
 import ChatPage from '@pages/ChatPage'
 import InfoProcessPage from '@pages/InfoProcessPage'
+import InfoSafePage from '@pages/InfoSafePage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -33,6 +34,7 @@ const HomeRoutes = () => (
     <Route path="/callback/:result" element={<CallBackPage />} />
     <Route path="/chat" element={<ChatPage />} />
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
+    <Route path="/info-how-safe" element={<InfoSafePage />} />
   </Routes>
 )
 
