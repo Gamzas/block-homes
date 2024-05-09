@@ -6,6 +6,7 @@ import { useSwipeable } from 'react-swipeable'
 import { contractStepAtom } from '@/stores/smartcontract'
 import { useAtom } from 'jotai'
 import ScreenIndicators from './ScreenIndicator'
+import EstateDidCard from '@/common/EstateDidCard'
 
 const ContractPayment = () => {
   const [step, setStep] = useAtom(contractStepAtom)
@@ -52,13 +53,8 @@ const ContractPayment = () => {
 
         {screenIndex === 0 && (
           <div>
-            <div
-              style={{ width: '239px', height: '270px', border: '1px solid' }}
-              className="card-box"
-            >
-              카드 예정
-            </div>
-            <p className="card-text">
+            <EstateDidCard index={1} currentCenterIndex={1} />
+            <p className="card-text" style={{ marginTop: '0.9rem' }}>
               해당 매물은 자동으로 나의 지갑에 추가됩니다
             </p>
           </div>
