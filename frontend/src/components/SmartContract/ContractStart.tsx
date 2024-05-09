@@ -2,6 +2,7 @@ import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { ContractStartContainer } from './style/ContractStart'
 import { useAtom } from 'jotai'
 import { contractStepAtom } from '@/stores/smartcontract'
+import EstateDidCard from '@/common/EstateDidCard'
 
 const ContractStart = () => {
   const [step, setStep] = useAtom(contractStepAtom)
@@ -10,9 +11,8 @@ const ContractStart = () => {
   }
   return (
     <ContractStartContainer>
-      <div style={{ width: '239px', height: '270px', border: '1px solid' }}>
-        카드 예정
-      </div>
+      <EstateDidCard index={1} currentCenterIndex={1} />
+
       <div className="button-box">
         <CustomButtonStyle onClick={handleNext}>
           부동산 거래 시작
