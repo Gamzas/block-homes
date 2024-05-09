@@ -27,35 +27,38 @@ const getOverLayColor = (condition: string) => {
 export const EstateItem = styled.div<conditionProps>`
   display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   width: 3rem;
   height: 3rem;
   position: relative;
-  .circle {
-    border-radius: 100%;
-    background-color: ${props => getOverLayColor(props.$condition)?.circle};
-    width: 3rem;
-    height: 3rem;
+  .circle,
+  .inner-circle,
+  .estate-sign {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .circle {
+    border-radius: 50%;
+    background-color: ${props => getOverLayColor(props.$condition)?.circle};
+    width: 100%;
+    height: 100%;
   }
   .inner-circle {
     background-color: ${props =>
       getOverLayColor(props.$condition)?.innerCircle};
-    border-radius: 100%;
-    width: 2.5rem;
-    height: 2.5rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 90%;
+    height: 90%;
   }
   .estate-sign {
+    width: 100%;
     color: ${props => getOverLayColor(props.$condition)?.circle};
     font-size: 1rem;
     font-weight: 500;
-    line-height: 2.5rem;
+    line-height: 3rem;
   }
 `
