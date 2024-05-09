@@ -1,7 +1,23 @@
 import * as i from '@common/style/InfoPageHeaderStyle'
+import React from 'react'
 
-const InfoPageHeader = () => {
-  return <i.InfoPageHeaderContainer></i.InfoPageHeaderContainer>
+interface InfoPageHeaderProps {
+  backgroundImageSrc: string
+  questionTitle: string
+}
+
+const InfoPageHeader = (InfoPageHeaderProps: InfoPageHeaderProps) => {
+  return (
+    <i.InfoPageHeaderContainer>
+      <div className="question-logo">Q</div>
+      <img
+        className="background-imgae"
+        alt="배경이미지"
+        src={InfoPageHeaderProps.backgroundImageSrc}
+      />
+      <div className="question-title">{InfoPageHeaderProps.questionTitle}</div>
+    </i.InfoPageHeaderContainer>
+  )
 }
 
 export default InfoPageHeader
