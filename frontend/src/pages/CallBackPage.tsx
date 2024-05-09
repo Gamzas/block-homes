@@ -11,7 +11,7 @@ const CallBackPage = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData: ConnectWallet,
+    animationData: params === 'success' ? ConnectWallet : Reload,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
@@ -22,7 +22,7 @@ const CallBackPage = () => {
       <div className="highlight">{params === 'success' ? '성공!' : '실패...'}</div>
       <div className="large">블록홈즈 앱으로 돌아가세요.</div>
       <div className="lottie-container">
-        <Lottie options={params === 'success' ? defaultOptions : Reload} height={350} width={350} />
+        <Lottie options={defaultOptions} height={350} width={350} />
       </div>
       <WaveContainer />
     </c.CallBackPageContainer>
