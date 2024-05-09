@@ -5,7 +5,7 @@ import { ChatComponentProps } from '@/types/components/chatType'
 const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   representativeImage,
   address,
-  type,
+  transactionType,
   price,
   lastChat,
   dangerType,
@@ -31,7 +31,7 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   }
 
   useEffect(() => {
-    switch (type) {
+    switch (transactionType) {
       case 0:
         setTypeOfNumber('매매')
         break
@@ -44,7 +44,7 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
     }
 
     formatPrice(price)
-  }, [type, price])
+  }, [transactionType, price])
 
   return (
     <c.ChatComponentContainer>
