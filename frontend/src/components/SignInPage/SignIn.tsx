@@ -10,56 +10,56 @@ import { KAIKAS_API_AUTH_TYPE } from '@constants/kaikas'
 const SignIn = () => {
   const [currentAccount, setCurrentAccount] = useAtom(accountAtom)
   const [authRequestKey, setAuthRequestKey] = useState<string | null>(null)
-  // const [testRequestKey, setTestRequestKey] = useState<string | null>(null)
-  // const [keys, setKeys] = useState({
-  //   publicKey: null,
-  //   privateKey: null,
-  // })
-//   const generateKeys = async () => {
-//     try {
-//       const keyPair = await window.crypto.subtle.generateKey(
-//         { name: 'ECDSA', namedCurve: 'P-256' },
-//         true,
-//         ['sign', 'verify'],
-//       )
-//
-//       // 공개 키 추출
-//       const publicKey = await window.crypto.subtle.exportKey('spki', keyPair.publicKey)
-//       console.log(publicKey)
-//       const publicKeyBase64 = bufferToBase64(publicKey)
-//       console.log(publicKeyBase64)
-//       const publicKeyPEM = `-----BEGIN PUBLIC KEY-----\n${formatPEM(publicKeyBase64)}\n-----END PUBLIC KEY-----`
-//       console.log(publicKeyPEM)
-//
-//       // 비밀 키 추출
-//       const privateKey = await window.crypto.subtle.exportKey('pkcs8', keyPair.privateKey)
-//       const privateKeyBase64 = bufferToBase64(privateKey)
-//       const privateKeyPEM = `-----BEGIN PRIVATE KEY-----\n${formatPEM(privateKeyBase64)}\n-----END PRIVATE KEY-----`
-//
-//       setKeys({ publicKey: publicKeyPEM, privateKey: privateKeyPEM })
-//     } catch (error) {
-//       console.error('Error generating keys:', error)
-//     }
-//   }
-//
-// // ArrayBuffer를 Base64로 변환
-//   const bufferToBase64 = (buffer) => {
-//     return btoa(String.fromCharCode(...new Uint8Array(buffer)))
-//   }
-//
-// // Base64 문자열을 PEM 형식에 맞게 줄바꿈 처리
-//   const formatPEM = (str) => {
-//     let finalString = ''
-//     while (str.length > 0) {
-//       finalString += str.substring(0, 64) + '\n'
-//       str = str.substring(64)
-//     }
-//     return finalString
-//   }
-//
-//   useEffect(() => {
-//     generateKeys()
-//   }, [])
+  const [testRequestKey, setTestRequestKey] = useState<string | null>(null)
+  const [keys, setKeys] = useState({
+    publicKey: null,
+    privateKey: null,
+  })
+  const generateKeys = async () => {
+    try {
+      const keyPair = await window.crypto.subtle.generateKey(
+        { name: 'ECDSA', namedCurve: 'P-256' },
+        true,
+        ['sign', 'verify'],
+      )
+
+      // 공개 키 추출
+      const publicKey = await window.crypto.subtle.exportKey('spki', keyPair.publicKey)
+      console.log(publicKey)
+      const publicKeyBase64 = bufferToBase64(publicKey)
+      console.log(typeof publicKeyBase64)
+      const publicKeyPEM = `-----BEGIN PUBLIC KEY-----\n${formatPEM(publicKeyBase64)}\n-----END PUBLIC KEY-----`
+      console.log(publicKeyPEM)
+
+      // 비밀 키 추출
+      const privateKey = await window.crypto.subtle.exportKey('pkcs8', keyPair.privateKey)
+      const privateKeyBase64 = bufferToBase64(privateKey)
+      const privateKeyPEM = `-----BEGIN PRIVATE KEY-----\n${formatPEM(privateKeyBase64)}\n-----END PRIVATE KEY-----`
+
+      setKeys({ publicKey: publicKeyPEM, privateKey: privateKeyPEM })
+    } catch (error) {
+      console.error('Error generating keys:', error)
+    }
+  }
+
+// ArrayBuffer를 Base64로 변환
+  const bufferToBase64 = (buffer) => {
+    return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+  }
+
+// Base64 문자열을 PEM 형식에 맞게 줄바꿈 처리
+  const formatPEM = (str) => {
+    let finalString = ''
+    while (str.length > 0) {
+      finalString += str.substring(0, 64) + '\n'
+      str = str.substring(64)
+    }
+    return finalString
+  }
+
+  useEffect(() => {
+    generateKeys()
+  }, [])
 
   const {
     mutate: prepareAuth,

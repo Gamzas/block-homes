@@ -10,7 +10,12 @@ export const KAIKAS_API_BASE_PREPARE_REQUEST_BODY = {
   chain_id: '1001',
   bapp: {
     name: 'Block Homes',
+    callback: {
+      'success': 'https://block-homes.kr/callback/success',
+      'fail': 'https://block-homes.kr/callback/fail',
+    },
   },
+
 }
 
 export const KAIKAS_API_AUTH_TYPE = 'auth'
