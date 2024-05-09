@@ -97,6 +97,12 @@ export const DetailContainer = styled.div`
   }
 `
 
+export const TransactionProcedureContainer = styled.div`
+  width: 90%;
+  height: fit-content;
+  margin-bottom: 1rem;
+`
+
 export const LocationWrapper = styled.div`
   width: 90%;
   height: fit-content;

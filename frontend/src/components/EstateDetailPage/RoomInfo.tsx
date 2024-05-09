@@ -1,6 +1,7 @@
 import * as r from '@components/EstateDetailPage/style/RoomInfoStyle'
 import Location from './Location'
 import { EstateItem } from '@/types/estateListType'
+import TransactionProcedure from './TransactionProcedure'
 
 interface PropsType {
   info: EstateItem
@@ -78,6 +79,12 @@ const RoomInfo = (props: PropsType) => {
       <r.DetailContainer>
         <p className="detail-text">{detailText}</p>
       </r.DetailContainer>
+      <r.TitleContainer>
+        <div className="title">거래 절차</div>
+      </r.TitleContainer>
+      <r.TransactionProcedureContainer>
+        <TransactionProcedure />
+      </r.TransactionProcedureContainer>
       <r.TitleContainer>
         <div className="title">위치</div>
       </r.TitleContainer>
