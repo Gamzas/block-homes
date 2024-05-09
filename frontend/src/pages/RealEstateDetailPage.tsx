@@ -15,7 +15,7 @@ const RealEstateDetailPage = () => {
         <>
           <Header title={'매물 상세 조회'} isSearch={false} rightIconSrc={''} />
           <DetailTabMenu />
-          <ItemSafetyCard />
+          <ItemSafetyCard condition={selectedItem.condition} />
           <RoomInfo />
           <DetailFooter />
         </>
