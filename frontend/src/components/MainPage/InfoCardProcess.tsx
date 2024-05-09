@@ -1,7 +1,14 @@
 import React from 'react'
 import * as i from '@components/MainPage/style/InfoCardStyle'
+import { useNavigate } from 'react-router-dom'
 
 const InfoCardProcess = () => {
+  const navigate = useNavigate()
+
+  const navigateInfoPage = () => {
+    navigate('/info-transaction-process')
+  }
+
   return (
     <i.InfoCardContainer $backgroundColor="#F7F7F0">
       <div className="image-container">
@@ -19,6 +26,7 @@ const InfoCardProcess = () => {
         </div>
         <i.NavigateButtonContainer>
           <div className="button-title">매물 레포트 알아보기</div>
+        <i.NavigateButtonContainer onClick={navigateInfoPage}>
           <img
             alt="이동 아이콘"
             className="double-right-arrows"
