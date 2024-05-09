@@ -1,5 +1,7 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
+import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
+import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
 
 interface PropsType {
@@ -11,6 +13,8 @@ interface PropsType {
   roomSize: string
   roomCount: string
   createDate: string
+  latitude: number
+  longitude: number
 }
 const EstateItemCard = (props: PropsType) => {
   const {
@@ -30,7 +34,9 @@ const EstateItemCard = (props: PropsType) => {
   const thirdColor = getColor()?.third
   const fourthColor = getColor()?.fourth
   const status = getStatus()
+  const setItem = useSetAtom(selectedItemAtom)
   const goDetail = () => {
+    setItem(props)
     navigate('/estate-detail')
   }
   return (
