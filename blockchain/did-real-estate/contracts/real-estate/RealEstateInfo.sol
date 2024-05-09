@@ -2,40 +2,94 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "../structs/RealEstateStructs.sol";
 
 contract RealEstateInfo is Ownable {
 
-    struct RealEstate {
-        string roadNameAddress; // 도로명주소
-        string buildingName; // 건물명
-        uint16 buildingNumber; // 동 번호 (아파트 동)
-        uint16 roomNumber; // 호수 번호
-        string genDate; // 생성 일자
-        bool isViolated; // 위반건축물 여부
-        bool isNotPermitted; // 무허가건축물 여부
-        string mainUsage; // 주용도
-    }
+    RealEstateStructs.BasicInfo basicInfo;
+    RealEstateStructs.RealEstateRegistryCertificate registryCertificate;
+    RealEstateStructs.BuildingManagementRecord buildingManagementRecord;
 
-    RealEstate realEstate;
 
     constructor(address _owner) Ownable(_owner) {}
 
-    function setRealEstateInfo(RealEstate calldata _realEstate) external onlyOwner {
-        realEstate = RealEstate({
-            roadNameAddress: _realEstate.roadNameAddress,
-            buildingName: _realEstate.buildingName,
-            buildingNumber: _realEstate.buildingNumber,
-            roomNumber: _realEstate.roomNumber,
-            genDate: _realEstate.genDate,
-            isViolated: _realEstate.isViolated,
-            isNotPermitted: _realEstate.isNotPermitted,
-            mainUsage: _realEstate.mainUsage
+    function setBasicInfo(
+        string memory _roadNameAddress,
+        string memory _buildingName,
+        uint16 _buildingNumber,
+        uint16 _roomNumber
+    ) external onlyOwner {
+        basicInfo = RealEstateStructs.BasicInfo({
+            roadNameAddress: _roadNameAddress,
+            buildingName: _buildingName,
+            buildingNumber: _buildingNumber,
+            roomNumber: _roomNumber
         });
     }
 
-   
-    function getBasicInfo() external view returns (RealEstate memory) {
-        return realEstate;
+    function setRightsSection(
+        uint8 _rank,
+        string memory _purpose,
+        string memory _registration,
+        string memory _reason,
+        string memory _holderAndEtc
+    ) external onlyOwner {
+        registryCertificate.rightsSection = RealEstateStructs.Section({
+            rank: _rank,
+            purpose: _purpose,
+            registration: _registration,
+            reason: _reason,
+            holderAndEtc: _holderAndEtc
+        });
     }
+
+    function setEncumbrancesSection(
+        uint8 _rank,
+        string memory _purpose,
+        string memory _registration,
+        string memory _reason,
+        string memory _holderAndEtc
+    ) external onlyOwner {
+        registryCertificate.encumbrancesSection = RealEstateStructs.Section({
+            rank: _rank,
+            purpose: _purpose,
+            registration: _registration,
+            reason: _reason,
+            holderAndEtc: _holderAndEtc
+        });
+    }
+
+    function setBuildingManagementRecord(
+        bool _isViolated,
+        bool _isNotPermitted,
+        uint16 _units,
+        uint16 _households,
+        string memory _landArea,
+        string memory _mainStructure,
+        string memory _mainUsage,
+        string memory _height,
+        string memory _floor
+    ) external onlyOwner {
+        buildingManagementRecord = RealEstateStructs.BuildingManagementRecord({
+            isViolated: _isViolated,
+            isNotPermitted: _isNotPermitted,
+            units: _units,
+            households: _households,
+            landArea: _landArea,
+            mainStructure: _mainStructure,
+            mainUsage: _mainUsage,
+            height: _height,
+            floor: _floor
+        });
+    }
+
+    function getRealEstateInfo() external view returns (
+        RealEstateStructs.BasicInfo memory, 
+        RealEstateStructs.RealEstateRegistryCertificate memory, 
+        RealEstateStructs.BuildingManagementRecord memory) {
+            return (basicInfo, registryCertificate, buildingManagementRecord);
+    }
+
+
 
 }
