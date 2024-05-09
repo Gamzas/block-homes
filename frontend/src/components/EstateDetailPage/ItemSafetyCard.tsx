@@ -1,9 +1,21 @@
+import useEstateCondition from '@/hooks/useEstateCondition'
 import * as i from '@components/EstateDetailPage/style/ItemSafetyCardStyle'
 
-const ItemSafetyCard = () => {
+interface PropsType {
+  condition: string
+}
+const ItemSafetyCard = (props: PropsType) => {
+  const condition = props.condition
+  console.log(condition)
+  const { getColor, getStatus } = useEstateCondition(condition)
+  const mainColor = getColor()?.main
+  const secondColor = getColor()?.second
+  const thirdColor = getColor()?.third
+  const fourthColor = getColor()?.fourth
+  const status = getStatus()
   return (
     <i.CardWrapper>
-      <i.SafetyCardContainer>
+      <i.SafetyCardContainer $color={fourthColor}>
         <i.WaveContainer>
           <div className="back-wrapper">
             <svg
@@ -16,7 +28,7 @@ const ItemSafetyCard = () => {
             >
               <path
                 d="M109.427 0.0368644C31.4679 1.32966 -16.0073 17.3819 -30 25.2464V65H449V14.5809C435.507 19.3666 431.199 45.9584 362.235 48.2208C293.271 50.4832 206.876 -1.57913 109.427 0.0368644Z"
-                fill="#E8E0F7"
+                fill={thirdColor}
               />
             </svg>
             <svg
@@ -29,7 +41,7 @@ const ItemSafetyCard = () => {
             >
               <path
                 d="M144.431 0.558797C66.5006 1.40412 5.74038 27.645 -8.24707 32.7874V41.3588H470.573V24.5588C457.085 27.6881 451.345 28.5652 382.407 30.0445C313.469 31.5238 241.843 -0.497861 144.431 0.558797Z"
-                fill="#D2C5F1"
+                fill={secondColor}
               />
             </svg>
           </div>
@@ -37,8 +49,8 @@ const ItemSafetyCard = () => {
         <i.ImgContainer>
           <img
             className="alert-img"
-            src="/image/image_normal.png"
-            alt="알려주는돼지"
+            src={`/image/image_card_${condition}.png`}
+            alt="위험도 아이콘"
           />
           <img
             className="pig-img"
@@ -46,10 +58,10 @@ const ItemSafetyCard = () => {
             alt="알려주는돼지"
           />
         </i.ImgContainer>
-        <i.InfoTextContainer>
+        <i.InfoTextContainer $color={mainColor}>
           <div className="txt">
             해당 매물의 안전도는&nbsp;
-            <span className="info">안전</span>
+            <span className="info">{status}</span>
             &nbsp;입니다.
           </div>
         </i.InfoTextContainer>
