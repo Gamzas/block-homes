@@ -1,5 +1,11 @@
+import ChatComponent from '@components/ChatPage/ChatComponent'
+
 const ChatList = () => {
-  return <></>
+  return (
+    <>
+      <ChatComponent />
+    </>
+  )
 }
 
 export default ChatList
