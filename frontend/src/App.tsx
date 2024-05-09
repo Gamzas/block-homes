@@ -13,6 +13,7 @@ import RealEstateDetailPage from '@pages/RealEstateDetailPage'
 import ReportPage from './pages/ReportPage'
 import EstateRegistrationPage from '@pages/EstateRegistrationPage'
 import MyPage from './pages/MyPage'
+import CallBackPage from '@pages/CallBackPage'
 import ChatPage from '@pages/ChatPage'
 
 const HomeRoutes = () => (
@@ -26,8 +27,9 @@ const HomeRoutes = () => (
     <Route path="/estate-detail" element={<RealEstateDetailPage />} />
     <Route path="/smart-contract" element={<SmartContractPage />} />
     <Route path="/report" element={<ReportPage />} />
-    <Route path="/estate-registration" element={<EstateRegistrationPage />} />
-    <Route path="/mypage" element={<MyPage />} />
+    <Route path="/estate-registration" element={<EstateRegistrationPage/>}/>
+    <Route path="/mypage" element={<MyPage/>}/>
+    <Route path="/callback/:result" element={<CallBackPage/>}/>
     <Route path="/chat" element={<ChatPage />} />
   </Routes>
 )
