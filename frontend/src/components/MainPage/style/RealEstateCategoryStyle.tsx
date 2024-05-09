@@ -28,11 +28,12 @@ export const CategoryContainer = styled.div`
   position: relative;
   margin-bottom: 0.6rem;
   cursor: pointer;
+  overflow: hidden;
 
   .category-img {
-    width: 65%;
+    width: 58%;
     position: absolute;
-    bottom: -0.5rem;
+    bottom: 0;
     right: -0.2rem;
   }
 
