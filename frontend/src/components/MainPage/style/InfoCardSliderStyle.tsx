@@ -12,18 +12,18 @@ export const SliderContainer = styled.div`
     align-items: center;
 
     li {
-      margin: 0 -0.5%;
+      margin: 0 -0.1rem;
 
       button {
         &:before {
-          font-size: 15px;
+          font-size: 0.1rem;
           color: #ababab;
         }
       }
 
       &.slick-active button:before {
         color: #845bd3;
-        font-size: 20px;
+        font-size: 0.2rem;
       }
     }
   }
