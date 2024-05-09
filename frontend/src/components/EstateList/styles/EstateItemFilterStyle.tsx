@@ -10,6 +10,12 @@ export const FilterWrapper = styled.div`
   height: 100%;
   position: relative;
   z-index: 1;
+  .close-area {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+  }
 `
 
 // bottom sheet style
@@ -19,14 +25,13 @@ export const FilterContainer = styled.div`
   position: fixed;
   max-width: 390px;
   bottom: 50px;
-  z-index: 1;
+  z-index: 2;
   border-radius: 30px 30px 0px 0px;
   border-top: 1px solid #cecccc;
   background: #fff;
   padding: 2rem;
   transition: height 0.3s ease-in-out;
   overflow: hidden;
-
 `
 
 // 거래형태 및 옵션
