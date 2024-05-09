@@ -15,10 +15,14 @@ const Graph = () => {
       zoom: {
         enabled: false,
       },
+      toolbar: {
+        show: false,
+      },
     },
     dataLabels: {
       enabled: false,
     },
+
     stroke: {
       curve: 'straight',
     },

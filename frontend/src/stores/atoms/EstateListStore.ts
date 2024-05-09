@@ -1,9 +1,6 @@
 import { atomWithStorage } from 'jotai/utils'
 import { atom } from 'jotai'
-import {
-  CurrentPosition,
-  EstateItem,
-} from '@/types/estateListType'
+import { CurrentPosition, EstateItem } from '@/types/estateListType'
 
 export const filterAtom = atom<boolean>(false) // false 필터 닫힘, true 필터 열림
 
@@ -102,4 +99,7 @@ const EstateList = [
 export const estateItemListAtom = atom<EstateItem[] | null>(EstateList)
 
 // 선택된 부동산 매물
-export const selectedItemAtom = atom<EstateItem | 'not'>('not')
+export const selectedItemAtom = atomWithStorage<EstateItem | 'not'>(
+  'selectedItem',
+  'not',
+)

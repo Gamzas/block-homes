@@ -11,9 +11,10 @@ import CheckDidPage from '@pages/CheckDidPage'
 import SelfCheckDidPage from '@pages/SelfCheckDidPage'
 import RealEstateDetailPage from '@pages/RealEstateDetailPage'
 import ReportPage from './pages/ReportPage'
-import EstateRegistrationPage from "@pages/EstateRegistrationPage";
+import EstateRegistrationPage from '@pages/EstateRegistrationPage'
 import MyPage from './pages/MyPage'
 import CallBackPage from '@pages/CallBackPage'
+import ChatPage from '@pages/ChatPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -29,6 +30,7 @@ const HomeRoutes = () => (
     <Route path="/estate-registration" element={<EstateRegistrationPage/>}/>
     <Route path="/mypage" element={<MyPage/>}/>
     <Route path="/callback/:result" element={<CallBackPage/>}/>
+    <Route path="/chat" element={<ChatPage />} />
   </Routes>
 )
 

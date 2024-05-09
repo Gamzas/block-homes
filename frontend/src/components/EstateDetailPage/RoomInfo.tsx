@@ -1,7 +1,15 @@
 import * as r from '@components/EstateDetailPage/style/RoomInfoStyle'
 import Location from './Location'
+import { EstateItem } from '@/types/estateListType'
+import TransactionProcedure from './TransactionProcedure'
 
-const RoomInfo = () => {
+interface PropsType {
+  info: EstateItem
+}
+
+// TODO 매물별 방 정보 출력 수정하기!!
+const RoomInfo = (props: PropsType) => {
+  const { latitude, longitude } = props.info
   const infoItems = [
     { icon: 'count', info: '원룸' },
     { icon: 'area', info: '방1 화1' },
@@ -71,10 +79,16 @@ const RoomInfo = () => {
         <p className="detail-text">{detailText}</p>
       </r.DetailContainer>
       <r.TitleContainer>
+        <div className="title">거래 절차</div>
+      </r.TitleContainer>
+      <r.TransactionProcedureContainer>
+        <TransactionProcedure />
+      </r.TransactionProcedureContainer>
+      <r.TitleContainer>
         <div className="title">위치</div>
       </r.TitleContainer>
       <r.LocationWrapper>
-        <Location />
+        <Location latitude={latitude} longitude={longitude} />
       </r.LocationWrapper>
     </r.RoomInfoContainer>
   )

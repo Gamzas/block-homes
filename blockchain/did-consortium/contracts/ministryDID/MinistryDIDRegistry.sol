@@ -1,12 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "../structs/DIDStruct.sol";
 import "../utils/HexUtils.sol";
 
 contract MinistryDIDRegistry is Ownable {
 
+    //DID로 DID document 찾기
     mapping(string => DIDStruct.DIDDocument) didDocuments;
 
     constructor() Ownable(msg.sender) {}
@@ -14,21 +15,18 @@ contract MinistryDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(DIDStruct.DIDDocument memory _didDocument) external onlyOwner {
+    function createDIDDocument(string memory _publicKey) external onlyOwner {
         DIDStruct.DIDDocument memory didDocument;
+       
+        didDocument.context = "https://www.w3.org/ns/did/v1";
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
-        didDocument.context = _didDocument.context;
 
-        didDocument.publicKey.id = string(abi.encodePacked(didDocument.id, _didDocument.publicKey.id)); // DID + fragment 수행
-        didDocument.publicKey.keyType = _didDocument.publicKey.keyType;
-        didDocument.publicKey.controller = _didDocument.publicKey.controller;
-        didDocument.publicKey.publicKeyData = _didDocument.publicKey.publicKeyData;
+        didDocument.publicKey.id = string(abi.encodePacked(didDocument.id,"#keys-1"));
+        didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
+        didDocument.publicKey.controller = didDocument.id;
+        didDocument.publicKey.publicKeyData = _publicKey;
 
-        didDocument.authentication = _didDocument.authentication;
-
-        didDocument.service.id = _didDocument.service.id;
-        didDocument.service.serviceType = _didDocument.service.serviceType;
-        didDocument.service.serviceEndPoint = _didDocument.service.serviceEndPoint;
+        didDocument.authentication=didDocument.publicKey.id;
 
         didDocuments[didDocument.id] = didDocument;
 

@@ -63,6 +63,12 @@ export const EstateStatusButton = styled.button<ColorProps>`
     border-color: ${props => props.$color};
     color: white;
   }
+  &:focus {
+    background-color: ${props => props.$color};
+    color: white;
+    border-color: ${props => props.$color};
+    outline-color: ${props => props.$color};
+  }
 `
 
 export const FilterContainer = styled.div`

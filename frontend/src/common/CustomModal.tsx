@@ -47,21 +47,21 @@ const CustomModal: React.FC<CustomModalProps> = ({
         <p id="modal-modal-description" style={{ marginBottom: '1rem' }}>
           {description}
         </p>
-        <div></div>
-
-        <CustomButtonStyle
-          style={{ width: '5rem', height: '2.3rem', marginRight: '1rem' }}
-          onClick={() => navigate(-1)}
-        >
-          네
-        </CustomButtonStyle>
-        <CustomButtonStyle
-          $secondary={true}
-          style={{ width: '5rem', height: '2.3rem' }}
-          onClick={handleClose}
-        >
-          아니요
-        </CustomButtonStyle>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <CustomButtonStyle
+            style={{ width: '5rem', height: '2.3rem', marginRight: '1rem' }}
+            onClick={() => navigate(-1)}
+          >
+            네
+          </CustomButtonStyle>
+          <CustomButtonStyle
+            $secondary={true}
+            style={{ width: '5rem', height: '2.3rem' }}
+            onClick={handleClose}
+          >
+            아니요
+          </CustomButtonStyle>
+        </div>
       </Box>
     </Modal>
   )
