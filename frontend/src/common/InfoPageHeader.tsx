@@ -15,7 +15,7 @@ const InfoPageHeader = (InfoPageHeaderProps: InfoPageHeaderProps) => {
     <i.InfoPageHeaderContainer>
       <div className="question-logo">Q</div>
       <img
-        className="background-imgae"
+        className="background-image"
         alt="배경이미지"
         src={InfoPageHeaderProps.backgroundImageSrc}
       />
