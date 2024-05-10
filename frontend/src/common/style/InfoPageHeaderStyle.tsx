@@ -8,7 +8,8 @@ export const InfoPageHeaderContainer = styled.div`
 
   .background-image {
     position: absolute;
-    width: 25%;
+    top: 0.7rem;
+    width: 11rem;
     opacity: 25%;
   }
 
