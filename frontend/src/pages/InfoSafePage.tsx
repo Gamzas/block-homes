@@ -1,5 +1,6 @@
 import React from 'react'
 import InfoPageHeader from '@common/InfoPageHeader'
+import InfoSafeList from '@components/InfoPage/InfoSafeList'
 import * as i from '@pages/style/InfoSafePageStyle'
 
 const InfoSafePage = () => {
@@ -11,7 +12,7 @@ const InfoSafePage = () => {
   return (
     <i.InfoSafePageContainer>
       <InfoPageHeader {...infoHeaderProps} />
-    </div>
+      <InfoSafeList />
     </i.InfoSafePageContainer>
   )
 }
