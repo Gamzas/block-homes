@@ -5,8 +5,10 @@ export const VCCardWrapper = styled.div`
   height: fit-content;
   display: flex;
   justify-content: center;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   position: relative;
+  /* border: 1px solid red; */
 `
 
 export const VCCardContainer = styled.div`
@@ -76,11 +78,14 @@ export const NotCertifiedContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   .txt {
     margin-top: 3rem;
     color: #555050;
-    font-size: 1.0625rem;
+    font-size: 1rem;
     font-weight: 600;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   .btn {
     width: 9.75rem;
