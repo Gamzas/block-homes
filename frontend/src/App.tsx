@@ -19,6 +19,10 @@ import InfoProcessPage from '@pages/InfoProcessPage'
 import InfoSafePage from '@pages/InfoSafePage'
 import TransactionProgress from './pages/TransactionProgress'
 
+function RealEstateCheckListPage() {
+  return null
+}
+
 const HomeRoutes = () => (
   <Routes>
     <Route path="/intro" element={<IntroPage />} />
@@ -37,6 +41,7 @@ const HomeRoutes = () => (
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/transaction-progress" element={<TransactionProgress />} />
+    <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
   </Routes>
 )
 
