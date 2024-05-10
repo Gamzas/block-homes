@@ -8,12 +8,13 @@ export const InfoPageHeaderContainer = styled.div`
 
   .background-image {
     position: absolute;
-    width: 25%;
-    opacity: 30%;
+    top: 0.7rem;
+    width: 11rem;
+    opacity: 25%;
   }
 
   .question-title {
-    margin-top: 3rem;
+    margin: 5rem 0 3rem 0;
     width: 19rem;
     font-weight: 500;
     font-size: 1.2rem;
@@ -35,18 +36,19 @@ export const InfoPageHeaderContainer = styled.div`
 export const QuestionLogoContainer = styled.div`
   position: absolute;
   background-color: #e8e0f7;
-  border-radius: 3rem;
-  width: 4rem;
-  height: 4rem;
-  top: -1.8rem;
+  border-radius: 5rem;
+  width: 5rem;
+  height: 5rem;
+  top: -2.5rem;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: end;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 
   .question-logo {
-    padding-bottom: 0.6rem;
+    padding-bottom: 0.7rem;
     font-weight: 700;
     font-size: 1.5rem;
     color: #845bd3;
