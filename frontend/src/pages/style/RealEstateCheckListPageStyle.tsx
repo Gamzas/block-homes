@@ -9,15 +9,14 @@ export const RealEstateCheckListPageContainer = styled.div`
 `
 
 export const RealEstateCheckListPageHeader = styled.div`
-  margin: 2.6rem 2.3rem;
+  margin: 2.6rem 2.3rem 1.6rem 2.3rem;
 
   .check-list-title {
     color: #00adff;
     font-size: 2rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .check-list-info {
@@ -29,8 +28,9 @@ export const RealEstateCheckListPageHeader = styled.div`
 
   .check-list-image {
     position: absolute;
-    width: 13rem;
-    top: -3.5rem;
+    width: 14rem;
+    top: -3.4rem;
     right: -2.5rem;
+    z-index: 0;
   }
 `
