@@ -1,4 +1,5 @@
 import * as r from '@pages/style/RealEstateCheckListPageStyle'
+import RealEstateCheckListTypes from '@components/RealEstateCheckListPage/RealEstateCheckListTypes'
 
 const RealEstateCheckListPage = () => {
   return (
@@ -14,6 +15,7 @@ const RealEstateCheckListPage = () => {
           className="check-list-image"
         />
       </r.RealEstateCheckListPageHeader>
+      <RealEstateCheckListTypes />
     </r.RealEstateCheckListPageContainer>
   )
 }
