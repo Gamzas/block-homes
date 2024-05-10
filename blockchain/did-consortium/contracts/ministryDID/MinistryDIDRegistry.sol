@@ -7,7 +7,6 @@ import "../utils/HexUtils.sol";
 
 contract MinistryDIDRegistry is Ownable {
 
-    //DID로 DID document 찾기
     mapping(string => DIDStruct.DIDDocument) didDocuments;
 
     constructor() Ownable(msg.sender) {}
@@ -15,7 +14,7 @@ contract MinistryDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(string memory _publicKey) external onlyOwner {
+    function createDIDDocument(bytes calldata _publicKey) external onlyOwner {
         DIDStruct.DIDDocument memory didDocument;
        
         didDocument.context = "https://www.w3.org/ns/did/v1";
