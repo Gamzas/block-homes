@@ -15,22 +15,18 @@ contract RealEstateDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(DIDStructs.DIDDocument memory _didDocument) external onlyOwner {
+    function createDIDDocument(bytes calldata _publicKey) external onlyOwner {
         address identifier = address(new RealEstateInfo(msg.sender));
         DIDStructs.DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(identifier)), 20)));
-        didDocument.context = _didDocument.context;
+        didDocument.context = "https://www.w3.org/ns/did/v1";
 
-        didDocument.publicKey.id = string(abi.encodePacked(didDocument.id, _didDocument.publicKey.id)); // DID + fragment 수행
-        didDocument.publicKey.keyType = _didDocument.publicKey.keyType;
-        didDocument.publicKey.controller = _didDocument.publicKey.controller;
-        didDocument.publicKey.publicKeyData = _didDocument.publicKey.publicKeyData;
+        didDocument.publicKey.id = "did:klay:0xb5496deda0d1aa1f7ba39d0217642bcd74ae6cd4#keys-1";
+        didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
+        didDocument.publicKey.controller = "did:klay:0xb5496deda0d1aa1f7ba39d0217642bcd74ae6cd4";
+        didDocument.publicKey.publicKeyData = _publicKey;
 
-        didDocument.authentication = _didDocument.authentication;
-
-        didDocument.service.id = _didDocument.service.id;
-        didDocument.service.serviceType = _didDocument.service.serviceType;
-        didDocument.service.serviceEndPoint = _didDocument.service.serviceEndPoint;
+        didDocument.authentication = didDocument.publicKey.id;
 
         didDocuments[didDocument.id] = didDocument;
 
