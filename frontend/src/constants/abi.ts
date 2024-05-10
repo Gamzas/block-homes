@@ -1,7 +1,7 @@
 // 네트워크 주소
 export const BLOCK_CHAIN_ENDPOINT = 'https://api.baobab.klaytn.net:8651'
 // 스마트 컨트랙트 주소
-export const CONTRACT_ADDRESS = '0x63f2211e20c769e1bdc730F1d0D314b27A229d59'
+export const CONTRACT_ADDRESS = '0x4A38D012384056209BB9E8b2234C13CfCF9C9e34'
 // ABI
 export const ABI_ARRAY = [
   {
@@ -143,7 +143,7 @@ export const ABI_ARRAY = [
               },
               {
                 'internalType': 'string',
-                'name': 'publicKeyData',
+                'name': 'publicKeyHex',
                 'type': 'string',
               },
             ],
@@ -199,17 +199,3 @@ export const ABI_ARRAY = [
     'type': 'function',
   },
 ]
-
-export const TEST_ABI = JSON.stringify({
-  'inputs': [
-    {
-      'internalType': 'string',
-      'name': '_publicKey',
-      'type': 'string',
-    },
-  ],
-  'name': 'createDIDDocument',
-  'outputs': [],
-  'stateMutability': 'nonpayable',
-  'type': 'function',
-})
