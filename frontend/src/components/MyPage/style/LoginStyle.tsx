@@ -75,6 +75,7 @@ export const TextContainer = styled.div`
   font-weight: 500;
   margin-bottom: 2rem;
   z-index: 1;
+  margin-top: 2rem;
 
   div {
     margin-top: 1rem;
@@ -91,7 +92,7 @@ export const BtnContainer = styled.div`
   bottom: 10rem; */
   /* border: 3px solid violet; */
   z-index: 1;
-
+  margin-top: 4rem;
   width: 15rem;
   height: 3.0625rem;
   border-radius: 0.875rem;
