@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const CardContainer = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 15rem;
   background: rgba(177, 137, 255, 0.26);
   position: relative;
+  overflow: hidden;
   .logo-img {
     width: 5.10313rem;
     height: 2.67288rem;
