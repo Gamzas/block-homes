@@ -22,13 +22,14 @@ export const CategoryContainer = styled.div`
   width: 45%;
   height: 125px;
   border-radius: 1rem;
-  border: 0.1rem solid #d3c3f0;
+  border: 0.11rem solid #d3c3f0;
   background: #e8e0f7;
   padding: 1rem;
   position: relative;
   margin-bottom: 0.6rem;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3);
 
   .category-img {
     width: 58%;
