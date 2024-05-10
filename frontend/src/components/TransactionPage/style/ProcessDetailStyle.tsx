@@ -32,7 +32,7 @@ export const ProcessDetailContainer = styled.div<ProcessDetailContainerProps>`
   }
   .content-box {
     padding: 0 0.7rem;
-    font-size: 0.92rem;
+    font-size: 0.85rem;
   }
   transition: width 1s ease-in-out;
 `
