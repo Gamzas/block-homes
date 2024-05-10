@@ -18,10 +18,7 @@ import ChatPage from '@pages/ChatPage'
 import InfoProcessPage from '@pages/InfoProcessPage'
 import InfoSafePage from '@pages/InfoSafePage'
 import TransactionProgress from './pages/TransactionProgress'
-
-function RealEstateCheckListPage() {
-  return null
-}
+import RealEstateCheckListPage from '@pages/RealEstateCheckListPage'
 
 const HomeRoutes = () => (
   <Routes>
