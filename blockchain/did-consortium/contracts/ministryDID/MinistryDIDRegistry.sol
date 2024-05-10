@@ -14,7 +14,7 @@ contract MinistryDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(bytes calldata _publicKey) external onlyOwner {
+    function createDIDDocument(string calldata _publicKey) external onlyOwner {
         DIDStruct.DIDDocument memory didDocument;
        
         didDocument.context = "https://www.w3.org/ns/did/v1";
@@ -23,7 +23,7 @@ contract MinistryDIDRegistry is Ownable {
         didDocument.publicKey.id = string(abi.encodePacked(didDocument.id,"#keys-1"));
         didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
         didDocument.publicKey.controller = didDocument.id;
-        didDocument.publicKey.publicKeyData = _publicKey;
+        didDocument.publicKey.publicKeyHex = _publicKey;
 
         didDocument.authentication=didDocument.publicKey.id;
 

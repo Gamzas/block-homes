@@ -15,7 +15,7 @@ contract RealEstateDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument(bytes calldata _publicKey) external onlyOwner {
+    function createDIDDocument() external onlyOwner {
         address identifier = address(new RealEstateInfo(msg.sender));
         DIDStructs.DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(identifier)), 20)));
@@ -24,7 +24,6 @@ contract RealEstateDIDRegistry is Ownable {
         didDocument.publicKey.id = "did:klay:0xb5496deda0d1aa1f7ba39d0217642bcd74ae6cd4#keys-1";
         didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
         didDocument.publicKey.controller = "did:klay:0xb5496deda0d1aa1f7ba39d0217642bcd74ae6cd4";
-        didDocument.publicKey.publicKeyData = _publicKey;
 
         didDocument.authentication = didDocument.publicKey.id;
 

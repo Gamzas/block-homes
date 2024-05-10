@@ -2704,7 +2704,7 @@
                 }
               ]
             },
-            "name": "abi_encode_t_struct$_BasicInfo_$552_memory_ptr_to_t_struct$_BasicInfo_$552_memory_ptr_fromStack",
+            "name": "abi_encode_t_struct$_BasicInfo_$540_memory_ptr_to_t_struct$_BasicInfo_$540_memory_ptr_fromStack",
             "nativeSrc": "1179:1058:7",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
@@ -3733,7 +3733,7 @@
                 }
               ]
             },
-            "name": "abi_encode_t_struct$_Section_$543_memory_ptr_to_t_struct$_Section_$543_memory_ptr",
+            "name": "abi_encode_t_struct$_Section_$531_memory_ptr_to_t_struct$_Section_$531_memory_ptr",
             "nativeSrc": "2519:1346:7",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
@@ -3959,7 +3959,7 @@
                           }
                         ],
                         "functionName": {
-                          "name": "abi_encode_t_struct$_Section_$543_memory_ptr_to_t_struct$_Section_$543_memory_ptr",
+                          "name": "abi_encode_t_struct$_Section_$531_memory_ptr_to_t_struct$_Section_$531_memory_ptr",
                           "nativeSrc": "4363:81:7",
                           "nodeType": "YulIdentifier",
                           "src": "4363:81:7"
@@ -4128,7 +4128,7 @@
                           }
                         ],
                         "functionName": {
-                          "name": "abi_encode_t_struct$_Section_$543_memory_ptr_to_t_struct$_Section_$543_memory_ptr",
+                          "name": "abi_encode_t_struct$_Section_$531_memory_ptr_to_t_struct$_Section_$531_memory_ptr",
                           "nativeSrc": "4651:81:7",
                           "nodeType": "YulIdentifier",
                           "src": "4651:81:7"
@@ -4169,7 +4169,7 @@
                 }
               ]
             },
-            "name": "abi_encode_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_fromStack",
+            "name": "abi_encode_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_fromStack",
             "nativeSrc": "3991:799:7",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
@@ -5708,7 +5708,7 @@
                 }
               ]
             },
-            "name": "abi_encode_t_struct$_BuildingManagementRecord_$578_memory_ptr_to_t_struct$_BuildingManagementRecord_$578_memory_ptr_fromStack",
+            "name": "abi_encode_t_struct$_BuildingManagementRecord_$566_memory_ptr_to_t_struct$_BuildingManagementRecord_$566_memory_ptr_fromStack",
             "nativeSrc": "5107:2174:7",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
@@ -5874,7 +5874,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "abi_encode_t_struct$_BasicInfo_$552_memory_ptr_to_t_struct$_BasicInfo_$552_memory_ptr_fromStack",
+                      "name": "abi_encode_t_struct$_BasicInfo_$540_memory_ptr_to_t_struct$_BasicInfo_$540_memory_ptr_fromStack",
                       "nativeSrc": "7777:95:7",
                       "nodeType": "YulIdentifier",
                       "src": "7777:95:7"
@@ -5982,7 +5982,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "abi_encode_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_fromStack",
+                      "name": "abi_encode_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_fromStack",
                       "nativeSrc": "7962:135:7",
                       "nodeType": "YulIdentifier",
                       "src": "7962:135:7"
@@ -6090,7 +6090,7 @@
                       }
                     ],
                     "functionName": {
-                      "name": "abi_encode_t_struct$_BuildingManagementRecord_$578_memory_ptr_to_t_struct$_BuildingManagementRecord_$578_memory_ptr_fromStack",
+                      "name": "abi_encode_t_struct$_BuildingManagementRecord_$566_memory_ptr_to_t_struct$_BuildingManagementRecord_$566_memory_ptr_fromStack",
                       "nativeSrc": "8187:125:7",
                       "nodeType": "YulIdentifier",
                       "src": "8187:125:7"
@@ -6110,7 +6110,7 @@
                 }
               ]
             },
-            "name": "abi_encode_tuple_t_struct$_BasicInfo_$552_memory_ptr_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_t_struct$_BuildingManagementRecord_$578_memory_ptr__to_t_struct$_BasicInfo_$552_memory_ptr_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_t_struct$_BuildingManagementRecord_$578_memory_ptr__fromStack_reversed",
+            "name": "abi_encode_tuple_t_struct$_BasicInfo_$540_memory_ptr_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_t_struct$_BuildingManagementRecord_$566_memory_ptr__to_t_struct$_BasicInfo_$540_memory_ptr_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_t_struct$_BuildingManagementRecord_$566_memory_ptr__fromStack_reversed",
             "nativeSrc": "7287:1047:7",
             "nodeType": "YulFunctionDefinition",
             "parameters": [
@@ -15219,7 +15219,7 @@
           }
         ]
       },
-      "contents": "{\n\n    function array_length_t_string_memory_ptr(value) -> length {\n\n        length := mload(value)\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr(pos, length) -> updated_pos {\n        mstore(pos, length)\n        updated_pos := add(pos, 0x20)\n    }\n\n    function copy_memory_to_memory_with_cleanup(src, dst, length) {\n\n        mcopy(dst, src, length)\n        mstore(add(dst, length), 0)\n\n    }\n\n    function round_up_to_mul_of_32(value) -> result {\n        result := and(add(value, 31), not(31))\n    }\n\n    function abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(value, pos) -> end {\n        let length := array_length_t_string_memory_ptr(value)\n        pos := array_storeLengthForEncoding_t_string_memory_ptr(pos, length)\n        copy_memory_to_memory_with_cleanup(add(value, 0x20), pos, length)\n        end := add(pos, round_up_to_mul_of_32(length))\n    }\n\n    function cleanup_t_uint16(value) -> cleaned {\n        cleaned := and(value, 0xffff)\n    }\n\n    function abi_encode_t_uint16_to_t_uint16(value, pos) {\n        mstore(pos, cleanup_t_uint16(value))\n    }\n\n    // struct RealEstateStructs.BasicInfo -> struct RealEstateStructs.BasicInfo\n    function abi_encode_t_struct$_BasicInfo_$552_memory_ptr_to_t_struct$_BasicInfo_$552_memory_ptr_fromStack(value, pos)  -> end  {\n        let tail := add(pos, 0x80)\n\n        {\n            // roadNameAddress\n\n            let memberValue0 := mload(add(value, 0x00))\n\n            mstore(add(pos, 0x00), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // buildingName\n\n            let memberValue0 := mload(add(value, 0x20))\n\n            mstore(add(pos, 0x20), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // buildingNumber\n\n            let memberValue0 := mload(add(value, 0x40))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x40))\n        }\n\n        {\n            // roomNumber\n\n            let memberValue0 := mload(add(value, 0x60))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x60))\n        }\n\n        end := tail\n    }\n\n    function cleanup_t_uint8(value) -> cleaned {\n        cleaned := and(value, 0xff)\n    }\n\n    function abi_encode_t_uint8_to_t_uint8(value, pos) {\n        mstore(pos, cleanup_t_uint8(value))\n    }\n\n    // struct RealEstateStructs.Section -> struct RealEstateStructs.Section\n    function abi_encode_t_struct$_Section_$543_memory_ptr_to_t_struct$_Section_$543_memory_ptr(value, pos)  -> end  {\n        let tail := add(pos, 0xa0)\n\n        {\n            // rank\n\n            let memberValue0 := mload(add(value, 0x00))\n            abi_encode_t_uint8_to_t_uint8(memberValue0, add(pos, 0x00))\n        }\n\n        {\n            // purpose\n\n            let memberValue0 := mload(add(value, 0x20))\n\n            mstore(add(pos, 0x20), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // registration\n\n            let memberValue0 := mload(add(value, 0x40))\n\n            mstore(add(pos, 0x40), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // reason\n\n            let memberValue0 := mload(add(value, 0x60))\n\n            mstore(add(pos, 0x60), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // holderAndEtc\n\n            let memberValue0 := mload(add(value, 0x80))\n\n            mstore(add(pos, 0x80), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        end := tail\n    }\n\n    // struct RealEstateStructs.RealEstateRegistryCertificate -> struct RealEstateStructs.RealEstateRegistryCertificate\n    function abi_encode_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_fromStack(value, pos)  -> end  {\n        let tail := add(pos, 0x40)\n\n        {\n            // rightsSection\n\n            let memberValue0 := mload(add(value, 0x00))\n\n            mstore(add(pos, 0x00), sub(tail, pos))\n            tail := abi_encode_t_struct$_Section_$543_memory_ptr_to_t_struct$_Section_$543_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // encumbrancesSection\n\n            let memberValue0 := mload(add(value, 0x20))\n\n            mstore(add(pos, 0x20), sub(tail, pos))\n            tail := abi_encode_t_struct$_Section_$543_memory_ptr_to_t_struct$_Section_$543_memory_ptr(memberValue0, tail)\n\n        }\n\n        end := tail\n    }\n\n    function cleanup_t_bool(value) -> cleaned {\n        cleaned := iszero(iszero(value))\n    }\n\n    function abi_encode_t_bool_to_t_bool(value, pos) {\n        mstore(pos, cleanup_t_bool(value))\n    }\n\n    // struct RealEstateStructs.BuildingManagementRecord -> struct RealEstateStructs.BuildingManagementRecord\n    function abi_encode_t_struct$_BuildingManagementRecord_$578_memory_ptr_to_t_struct$_BuildingManagementRecord_$578_memory_ptr_fromStack(value, pos)  -> end  {\n        let tail := add(pos, 0x0120)\n\n        {\n            // isViolated\n\n            let memberValue0 := mload(add(value, 0x00))\n            abi_encode_t_bool_to_t_bool(memberValue0, add(pos, 0x00))\n        }\n\n        {\n            // isNotPermitted\n\n            let memberValue0 := mload(add(value, 0x20))\n            abi_encode_t_bool_to_t_bool(memberValue0, add(pos, 0x20))\n        }\n\n        {\n            // units\n\n            let memberValue0 := mload(add(value, 0x40))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x40))\n        }\n\n        {\n            // households\n\n            let memberValue0 := mload(add(value, 0x60))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x60))\n        }\n\n        {\n            // landArea\n\n            let memberValue0 := mload(add(value, 0x80))\n\n            mstore(add(pos, 0x80), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // mainStructure\n\n            let memberValue0 := mload(add(value, 0xa0))\n\n            mstore(add(pos, 0xa0), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // mainUsage\n\n            let memberValue0 := mload(add(value, 0xc0))\n\n            mstore(add(pos, 0xc0), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // height\n\n            let memberValue0 := mload(add(value, 0xe0))\n\n            mstore(add(pos, 0xe0), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // floor\n\n            let memberValue0 := mload(add(value, 0x0100))\n\n            mstore(add(pos, 0x0100), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        end := tail\n    }\n\n    function abi_encode_tuple_t_struct$_BasicInfo_$552_memory_ptr_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_t_struct$_BuildingManagementRecord_$578_memory_ptr__to_t_struct$_BasicInfo_$552_memory_ptr_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_t_struct$_BuildingManagementRecord_$578_memory_ptr__fromStack_reversed(headStart , value2, value1, value0) -> tail {\n        tail := add(headStart, 96)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_struct$_BasicInfo_$552_memory_ptr_to_t_struct$_BasicInfo_$552_memory_ptr_fromStack(value0,  tail)\n\n        mstore(add(headStart, 32), sub(tail, headStart))\n        tail := abi_encode_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$559_memory_ptr_fromStack(value1,  tail)\n\n        mstore(add(headStart, 64), sub(tail, headStart))\n        tail := abi_encode_t_struct$_BuildingManagementRecord_$578_memory_ptr_to_t_struct$_BuildingManagementRecord_$578_memory_ptr_fromStack(value2,  tail)\n\n    }\n\n    function allocate_unbounded() -> memPtr {\n        memPtr := mload(64)\n    }\n\n    function revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() {\n        revert(0, 0)\n    }\n\n    function revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() {\n        revert(0, 0)\n    }\n\n    function revert_error_1b9f4a0a5773e33b91aa01db23bf8c55fce1411167c872835e7fa00a4f17d46d() {\n        revert(0, 0)\n    }\n\n    function revert_error_987264b3b1d58a9c7f8255e93e81c77d86d6299019c33110a076957a3e06e2ae() {\n        revert(0, 0)\n    }\n\n    function panic_error_0x41() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x41)\n        revert(0, 0x24)\n    }\n\n    function finalize_allocation(memPtr, size) {\n        let newFreePtr := add(memPtr, round_up_to_mul_of_32(size))\n        // protect against overflow\n        if or(gt(newFreePtr, 0xffffffffffffffff), lt(newFreePtr, memPtr)) { panic_error_0x41() }\n        mstore(64, newFreePtr)\n    }\n\n    function allocate_memory(size) -> memPtr {\n        memPtr := allocate_unbounded()\n        finalize_allocation(memPtr, size)\n    }\n\n    function array_allocation_size_t_string_memory_ptr(length) -> size {\n        // Make sure we can allocate memory without overflow\n        if gt(length, 0xffffffffffffffff) { panic_error_0x41() }\n\n        size := round_up_to_mul_of_32(length)\n\n        // add length slot\n        size := add(size, 0x20)\n\n    }\n\n    function copy_calldata_to_memory_with_cleanup(src, dst, length) {\n\n        calldatacopy(dst, src, length)\n        mstore(add(dst, length), 0)\n\n    }\n\n    function abi_decode_available_length_t_string_memory_ptr(src, length, end) -> array {\n        array := allocate_memory(array_allocation_size_t_string_memory_ptr(length))\n        mstore(array, length)\n        let dst := add(array, 0x20)\n        if gt(add(src, length), end) { revert_error_987264b3b1d58a9c7f8255e93e81c77d86d6299019c33110a076957a3e06e2ae() }\n        copy_calldata_to_memory_with_cleanup(src, dst, length)\n    }\n\n    // string\n    function abi_decode_t_string_memory_ptr(offset, end) -> array {\n        if iszero(slt(add(offset, 0x1f), end)) { revert_error_1b9f4a0a5773e33b91aa01db23bf8c55fce1411167c872835e7fa00a4f17d46d() }\n        let length := calldataload(offset)\n        array := abi_decode_available_length_t_string_memory_ptr(add(offset, 0x20), length, end)\n    }\n\n    function validator_revert_t_uint16(value) {\n        if iszero(eq(value, cleanup_t_uint16(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint16(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint16(value)\n    }\n\n    function abi_decode_tuple_t_string_memory_ptrt_string_memory_ptrt_uint16t_uint16(headStart, dataEnd) -> value0, value1, value2, value3 {\n        if slt(sub(dataEnd, headStart), 128) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := calldataload(add(headStart, 0))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value0 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 32))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value1 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_uint160(value) -> cleaned {\n        cleaned := and(value, 0xffffffffffffffffffffffffffffffffffffffff)\n    }\n\n    function cleanup_t_address(value) -> cleaned {\n        cleaned := cleanup_t_uint160(value)\n    }\n\n    function abi_encode_t_address_to_t_address_fromStack(value, pos) {\n        mstore(pos, cleanup_t_address(value))\n    }\n\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function validator_revert_t_uint8(value) {\n        if iszero(eq(value, cleanup_t_uint8(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint8(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint8(value)\n    }\n\n    function abi_decode_tuple_t_uint8t_string_memory_ptrt_string_memory_ptrt_string_memory_ptrt_string_memory_ptr(headStart, dataEnd) -> value0, value1, value2, value3, value4 {\n        if slt(sub(dataEnd, headStart), 160) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint8(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 32))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value1 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 64))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value2 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 96))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value3 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 128))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value4 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function validator_revert_t_bool(value) {\n        if iszero(eq(value, cleanup_t_bool(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_bool(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_bool(value)\n    }\n\n    function abi_decode_tuple_t_boolt_boolt_uint16t_uint16t_string_memory_ptrt_string_memory_ptrt_string_memory_ptrt_string_memory_ptrt_string_memory_ptr(headStart, dataEnd) -> value0, value1, value2, value3, value4, value5, value6, value7, value8 {\n        if slt(sub(dataEnd, headStart), 288) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bool(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_bool(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 128))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value4 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 160))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value5 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 192))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value6 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 224))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value7 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 256))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value8 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function validator_revert_t_address(value) {\n        if iszero(eq(value, cleanup_t_address(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_address(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_address(value)\n    }\n\n    function abi_decode_tuple_t_address(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function panic_error_0x22() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x22)\n        revert(0, 0x24)\n    }\n\n    function extract_byte_array_length(data) -> length {\n        length := div(data, 2)\n        let outOfPlaceEncoding := and(data, 1)\n        if iszero(outOfPlaceEncoding) {\n            length := and(length, 0x7f)\n        }\n\n        if eq(outOfPlaceEncoding, lt(length, 32)) {\n            panic_error_0x22()\n        }\n    }\n\n    function array_dataslot_t_string_storage(ptr) -> data {\n        data := ptr\n\n        mstore(0, ptr)\n        data := keccak256(0, 0x20)\n\n    }\n\n    function divide_by_32_ceil(value) -> result {\n        result := div(add(value, 31), 32)\n    }\n\n    function shift_left_dynamic(bits, value) -> newValue {\n        newValue :=\n\n        shl(bits, value)\n\n    }\n\n    function update_byte_slice_dynamic32(value, shiftBytes, toInsert) -> result {\n        let shiftBits := mul(shiftBytes, 8)\n        let mask := shift_left_dynamic(shiftBits, 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff)\n        toInsert := shift_left_dynamic(shiftBits, toInsert)\n        value := and(value, not(mask))\n        result := or(value, and(toInsert, mask))\n    }\n\n    function cleanup_t_uint256(value) -> cleaned {\n        cleaned := value\n    }\n\n    function identity(value) -> ret {\n        ret := value\n    }\n\n    function convert_t_uint256_to_t_uint256(value) -> converted {\n        converted := cleanup_t_uint256(identity(cleanup_t_uint256(value)))\n    }\n\n    function prepare_store_t_uint256(value) -> ret {\n        ret := value\n    }\n\n    function update_storage_value_t_uint256_to_t_uint256(slot, offset, value_0) {\n        let convertedValue_0 := convert_t_uint256_to_t_uint256(value_0)\n        sstore(slot, update_byte_slice_dynamic32(sload(slot), offset, prepare_store_t_uint256(convertedValue_0)))\n    }\n\n    function zero_value_for_split_t_uint256() -> ret {\n        ret := 0\n    }\n\n    function storage_set_to_zero_t_uint256(slot, offset) {\n        let zero_0 := zero_value_for_split_t_uint256()\n        update_storage_value_t_uint256_to_t_uint256(slot, offset, zero_0)\n    }\n\n    function clear_storage_range_t_bytes1(start, end) {\n        for {} lt(start, end) { start := add(start, 1) }\n        {\n            storage_set_to_zero_t_uint256(start, 0)\n        }\n    }\n\n    function clean_up_bytearray_end_slots_t_string_storage(array, len, startIndex) {\n\n        if gt(len, 31) {\n            let dataArea := array_dataslot_t_string_storage(array)\n            let deleteStart := add(dataArea, divide_by_32_ceil(startIndex))\n            // If we are clearing array to be short byte array, we want to clear only data starting from array data area.\n            if lt(startIndex, 32) { deleteStart := dataArea }\n            clear_storage_range_t_bytes1(deleteStart, add(dataArea, divide_by_32_ceil(len)))\n        }\n\n    }\n\n    function shift_right_unsigned_dynamic(bits, value) -> newValue {\n        newValue :=\n\n        shr(bits, value)\n\n    }\n\n    function mask_bytes_dynamic(data, bytes) -> result {\n        let mask := not(shift_right_unsigned_dynamic(mul(8, bytes), not(0)))\n        result := and(data, mask)\n    }\n    function extract_used_part_and_set_length_of_short_byte_array(data, len) -> used {\n        // we want to save only elements that are part of the array after resizing\n        // others should be set to zero\n        data := mask_bytes_dynamic(data, len)\n        used := or(data, mul(2, len))\n    }\n    function copy_byte_array_to_storage_from_t_string_memory_ptr_to_t_string_storage(slot, src) {\n\n        let newLen := array_length_t_string_memory_ptr(src)\n        // Make sure array length is sane\n        if gt(newLen, 0xffffffffffffffff) { panic_error_0x41() }\n\n        let oldLen := extract_byte_array_length(sload(slot))\n\n        // potentially truncate data\n        clean_up_bytearray_end_slots_t_string_storage(slot, oldLen, newLen)\n\n        let srcOffset := 0\n\n        srcOffset := 0x20\n\n        switch gt(newLen, 31)\n        case 1 {\n            let loopEnd := and(newLen, not(0x1f))\n\n            let dstPtr := array_dataslot_t_string_storage(slot)\n            let i := 0\n            for { } lt(i, loopEnd) { i := add(i, 0x20) } {\n                sstore(dstPtr, mload(add(src, srcOffset)))\n                dstPtr := add(dstPtr, 1)\n                srcOffset := add(srcOffset, 32)\n            }\n            if lt(loopEnd, newLen) {\n                let lastValue := mload(add(src, srcOffset))\n                sstore(dstPtr, mask_bytes_dynamic(lastValue, and(newLen, 0x1f)))\n            }\n            sstore(slot, add(mul(newLen, 2), 1))\n        }\n        default {\n            let value := 0\n            if newLen {\n                value := mload(add(src, srcOffset))\n            }\n            sstore(slot, extract_used_part_and_set_length_of_short_byte_array(value, newLen))\n        }\n    }\n\n}\n",
+      "contents": "{\n\n    function array_length_t_string_memory_ptr(value) -> length {\n\n        length := mload(value)\n\n    }\n\n    function array_storeLengthForEncoding_t_string_memory_ptr(pos, length) -> updated_pos {\n        mstore(pos, length)\n        updated_pos := add(pos, 0x20)\n    }\n\n    function copy_memory_to_memory_with_cleanup(src, dst, length) {\n\n        mcopy(dst, src, length)\n        mstore(add(dst, length), 0)\n\n    }\n\n    function round_up_to_mul_of_32(value) -> result {\n        result := and(add(value, 31), not(31))\n    }\n\n    function abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(value, pos) -> end {\n        let length := array_length_t_string_memory_ptr(value)\n        pos := array_storeLengthForEncoding_t_string_memory_ptr(pos, length)\n        copy_memory_to_memory_with_cleanup(add(value, 0x20), pos, length)\n        end := add(pos, round_up_to_mul_of_32(length))\n    }\n\n    function cleanup_t_uint16(value) -> cleaned {\n        cleaned := and(value, 0xffff)\n    }\n\n    function abi_encode_t_uint16_to_t_uint16(value, pos) {\n        mstore(pos, cleanup_t_uint16(value))\n    }\n\n    // struct RealEstateStructs.BasicInfo -> struct RealEstateStructs.BasicInfo\n    function abi_encode_t_struct$_BasicInfo_$540_memory_ptr_to_t_struct$_BasicInfo_$540_memory_ptr_fromStack(value, pos)  -> end  {\n        let tail := add(pos, 0x80)\n\n        {\n            // roadNameAddress\n\n            let memberValue0 := mload(add(value, 0x00))\n\n            mstore(add(pos, 0x00), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // buildingName\n\n            let memberValue0 := mload(add(value, 0x20))\n\n            mstore(add(pos, 0x20), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // buildingNumber\n\n            let memberValue0 := mload(add(value, 0x40))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x40))\n        }\n\n        {\n            // roomNumber\n\n            let memberValue0 := mload(add(value, 0x60))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x60))\n        }\n\n        end := tail\n    }\n\n    function cleanup_t_uint8(value) -> cleaned {\n        cleaned := and(value, 0xff)\n    }\n\n    function abi_encode_t_uint8_to_t_uint8(value, pos) {\n        mstore(pos, cleanup_t_uint8(value))\n    }\n\n    // struct RealEstateStructs.Section -> struct RealEstateStructs.Section\n    function abi_encode_t_struct$_Section_$531_memory_ptr_to_t_struct$_Section_$531_memory_ptr(value, pos)  -> end  {\n        let tail := add(pos, 0xa0)\n\n        {\n            // rank\n\n            let memberValue0 := mload(add(value, 0x00))\n            abi_encode_t_uint8_to_t_uint8(memberValue0, add(pos, 0x00))\n        }\n\n        {\n            // purpose\n\n            let memberValue0 := mload(add(value, 0x20))\n\n            mstore(add(pos, 0x20), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // registration\n\n            let memberValue0 := mload(add(value, 0x40))\n\n            mstore(add(pos, 0x40), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // reason\n\n            let memberValue0 := mload(add(value, 0x60))\n\n            mstore(add(pos, 0x60), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // holderAndEtc\n\n            let memberValue0 := mload(add(value, 0x80))\n\n            mstore(add(pos, 0x80), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        end := tail\n    }\n\n    // struct RealEstateStructs.RealEstateRegistryCertificate -> struct RealEstateStructs.RealEstateRegistryCertificate\n    function abi_encode_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_fromStack(value, pos)  -> end  {\n        let tail := add(pos, 0x40)\n\n        {\n            // rightsSection\n\n            let memberValue0 := mload(add(value, 0x00))\n\n            mstore(add(pos, 0x00), sub(tail, pos))\n            tail := abi_encode_t_struct$_Section_$531_memory_ptr_to_t_struct$_Section_$531_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // encumbrancesSection\n\n            let memberValue0 := mload(add(value, 0x20))\n\n            mstore(add(pos, 0x20), sub(tail, pos))\n            tail := abi_encode_t_struct$_Section_$531_memory_ptr_to_t_struct$_Section_$531_memory_ptr(memberValue0, tail)\n\n        }\n\n        end := tail\n    }\n\n    function cleanup_t_bool(value) -> cleaned {\n        cleaned := iszero(iszero(value))\n    }\n\n    function abi_encode_t_bool_to_t_bool(value, pos) {\n        mstore(pos, cleanup_t_bool(value))\n    }\n\n    // struct RealEstateStructs.BuildingManagementRecord -> struct RealEstateStructs.BuildingManagementRecord\n    function abi_encode_t_struct$_BuildingManagementRecord_$566_memory_ptr_to_t_struct$_BuildingManagementRecord_$566_memory_ptr_fromStack(value, pos)  -> end  {\n        let tail := add(pos, 0x0120)\n\n        {\n            // isViolated\n\n            let memberValue0 := mload(add(value, 0x00))\n            abi_encode_t_bool_to_t_bool(memberValue0, add(pos, 0x00))\n        }\n\n        {\n            // isNotPermitted\n\n            let memberValue0 := mload(add(value, 0x20))\n            abi_encode_t_bool_to_t_bool(memberValue0, add(pos, 0x20))\n        }\n\n        {\n            // units\n\n            let memberValue0 := mload(add(value, 0x40))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x40))\n        }\n\n        {\n            // households\n\n            let memberValue0 := mload(add(value, 0x60))\n            abi_encode_t_uint16_to_t_uint16(memberValue0, add(pos, 0x60))\n        }\n\n        {\n            // landArea\n\n            let memberValue0 := mload(add(value, 0x80))\n\n            mstore(add(pos, 0x80), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // mainStructure\n\n            let memberValue0 := mload(add(value, 0xa0))\n\n            mstore(add(pos, 0xa0), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // mainUsage\n\n            let memberValue0 := mload(add(value, 0xc0))\n\n            mstore(add(pos, 0xc0), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // height\n\n            let memberValue0 := mload(add(value, 0xe0))\n\n            mstore(add(pos, 0xe0), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        {\n            // floor\n\n            let memberValue0 := mload(add(value, 0x0100))\n\n            mstore(add(pos, 0x0100), sub(tail, pos))\n            tail := abi_encode_t_string_memory_ptr_to_t_string_memory_ptr(memberValue0, tail)\n\n        }\n\n        end := tail\n    }\n\n    function abi_encode_tuple_t_struct$_BasicInfo_$540_memory_ptr_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_t_struct$_BuildingManagementRecord_$566_memory_ptr__to_t_struct$_BasicInfo_$540_memory_ptr_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_t_struct$_BuildingManagementRecord_$566_memory_ptr__fromStack_reversed(headStart , value2, value1, value0) -> tail {\n        tail := add(headStart, 96)\n\n        mstore(add(headStart, 0), sub(tail, headStart))\n        tail := abi_encode_t_struct$_BasicInfo_$540_memory_ptr_to_t_struct$_BasicInfo_$540_memory_ptr_fromStack(value0,  tail)\n\n        mstore(add(headStart, 32), sub(tail, headStart))\n        tail := abi_encode_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_to_t_struct$_RealEstateRegistryCertificate_$547_memory_ptr_fromStack(value1,  tail)\n\n        mstore(add(headStart, 64), sub(tail, headStart))\n        tail := abi_encode_t_struct$_BuildingManagementRecord_$566_memory_ptr_to_t_struct$_BuildingManagementRecord_$566_memory_ptr_fromStack(value2,  tail)\n\n    }\n\n    function allocate_unbounded() -> memPtr {\n        memPtr := mload(64)\n    }\n\n    function revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() {\n        revert(0, 0)\n    }\n\n    function revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() {\n        revert(0, 0)\n    }\n\n    function revert_error_1b9f4a0a5773e33b91aa01db23bf8c55fce1411167c872835e7fa00a4f17d46d() {\n        revert(0, 0)\n    }\n\n    function revert_error_987264b3b1d58a9c7f8255e93e81c77d86d6299019c33110a076957a3e06e2ae() {\n        revert(0, 0)\n    }\n\n    function panic_error_0x41() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x41)\n        revert(0, 0x24)\n    }\n\n    function finalize_allocation(memPtr, size) {\n        let newFreePtr := add(memPtr, round_up_to_mul_of_32(size))\n        // protect against overflow\n        if or(gt(newFreePtr, 0xffffffffffffffff), lt(newFreePtr, memPtr)) { panic_error_0x41() }\n        mstore(64, newFreePtr)\n    }\n\n    function allocate_memory(size) -> memPtr {\n        memPtr := allocate_unbounded()\n        finalize_allocation(memPtr, size)\n    }\n\n    function array_allocation_size_t_string_memory_ptr(length) -> size {\n        // Make sure we can allocate memory without overflow\n        if gt(length, 0xffffffffffffffff) { panic_error_0x41() }\n\n        size := round_up_to_mul_of_32(length)\n\n        // add length slot\n        size := add(size, 0x20)\n\n    }\n\n    function copy_calldata_to_memory_with_cleanup(src, dst, length) {\n\n        calldatacopy(dst, src, length)\n        mstore(add(dst, length), 0)\n\n    }\n\n    function abi_decode_available_length_t_string_memory_ptr(src, length, end) -> array {\n        array := allocate_memory(array_allocation_size_t_string_memory_ptr(length))\n        mstore(array, length)\n        let dst := add(array, 0x20)\n        if gt(add(src, length), end) { revert_error_987264b3b1d58a9c7f8255e93e81c77d86d6299019c33110a076957a3e06e2ae() }\n        copy_calldata_to_memory_with_cleanup(src, dst, length)\n    }\n\n    // string\n    function abi_decode_t_string_memory_ptr(offset, end) -> array {\n        if iszero(slt(add(offset, 0x1f), end)) { revert_error_1b9f4a0a5773e33b91aa01db23bf8c55fce1411167c872835e7fa00a4f17d46d() }\n        let length := calldataload(offset)\n        array := abi_decode_available_length_t_string_memory_ptr(add(offset, 0x20), length, end)\n    }\n\n    function validator_revert_t_uint16(value) {\n        if iszero(eq(value, cleanup_t_uint16(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint16(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint16(value)\n    }\n\n    function abi_decode_tuple_t_string_memory_ptrt_string_memory_ptrt_uint16t_uint16(headStart, dataEnd) -> value0, value1, value2, value3 {\n        if slt(sub(dataEnd, headStart), 128) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := calldataload(add(headStart, 0))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value0 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 32))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value1 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function cleanup_t_uint160(value) -> cleaned {\n        cleaned := and(value, 0xffffffffffffffffffffffffffffffffffffffff)\n    }\n\n    function cleanup_t_address(value) -> cleaned {\n        cleaned := cleanup_t_uint160(value)\n    }\n\n    function abi_encode_t_address_to_t_address_fromStack(value, pos) {\n        mstore(pos, cleanup_t_address(value))\n    }\n\n    function abi_encode_tuple_t_address__to_t_address__fromStack_reversed(headStart , value0) -> tail {\n        tail := add(headStart, 32)\n\n        abi_encode_t_address_to_t_address_fromStack(value0,  add(headStart, 0))\n\n    }\n\n    function validator_revert_t_uint8(value) {\n        if iszero(eq(value, cleanup_t_uint8(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_uint8(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_uint8(value)\n    }\n\n    function abi_decode_tuple_t_uint8t_string_memory_ptrt_string_memory_ptrt_string_memory_ptrt_string_memory_ptr(headStart, dataEnd) -> value0, value1, value2, value3, value4 {\n        if slt(sub(dataEnd, headStart), 160) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_uint8(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 32))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value1 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 64))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value2 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 96))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value3 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 128))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value4 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function validator_revert_t_bool(value) {\n        if iszero(eq(value, cleanup_t_bool(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_bool(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_bool(value)\n    }\n\n    function abi_decode_tuple_t_boolt_boolt_uint16t_uint16t_string_memory_ptrt_string_memory_ptrt_string_memory_ptrt_string_memory_ptrt_string_memory_ptr(headStart, dataEnd) -> value0, value1, value2, value3, value4, value5, value6, value7, value8 {\n        if slt(sub(dataEnd, headStart), 288) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_bool(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 32\n\n            value1 := abi_decode_t_bool(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 64\n\n            value2 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := 96\n\n            value3 := abi_decode_t_uint16(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 128))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value4 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 160))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value5 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 192))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value6 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 224))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value7 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n        {\n\n            let offset := calldataload(add(headStart, 256))\n            if gt(offset, 0xffffffffffffffff) { revert_error_c1322bf8034eace5e0b5c7295db60986aa89aae5e0ea0873e4689e076861a5db() }\n\n            value8 := abi_decode_t_string_memory_ptr(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function validator_revert_t_address(value) {\n        if iszero(eq(value, cleanup_t_address(value))) { revert(0, 0) }\n    }\n\n    function abi_decode_t_address(offset, end) -> value {\n        value := calldataload(offset)\n        validator_revert_t_address(value)\n    }\n\n    function abi_decode_tuple_t_address(headStart, dataEnd) -> value0 {\n        if slt(sub(dataEnd, headStart), 32) { revert_error_dbdddcbe895c83990c08b3492a0e83918d802a52331272ac6fdb6a7c4aea3b1b() }\n\n        {\n\n            let offset := 0\n\n            value0 := abi_decode_t_address(add(headStart, offset), dataEnd)\n        }\n\n    }\n\n    function panic_error_0x22() {\n        mstore(0, 35408467139433450592217433187231851964531694900788300625387963629091585785856)\n        mstore(4, 0x22)\n        revert(0, 0x24)\n    }\n\n    function extract_byte_array_length(data) -> length {\n        length := div(data, 2)\n        let outOfPlaceEncoding := and(data, 1)\n        if iszero(outOfPlaceEncoding) {\n            length := and(length, 0x7f)\n        }\n\n        if eq(outOfPlaceEncoding, lt(length, 32)) {\n            panic_error_0x22()\n        }\n    }\n\n    function array_dataslot_t_string_storage(ptr) -> data {\n        data := ptr\n\n        mstore(0, ptr)\n        data := keccak256(0, 0x20)\n\n    }\n\n    function divide_by_32_ceil(value) -> result {\n        result := div(add(value, 31), 32)\n    }\n\n    function shift_left_dynamic(bits, value) -> newValue {\n        newValue :=\n\n        shl(bits, value)\n\n    }\n\n    function update_byte_slice_dynamic32(value, shiftBytes, toInsert) -> result {\n        let shiftBits := mul(shiftBytes, 8)\n        let mask := shift_left_dynamic(shiftBits, 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff)\n        toInsert := shift_left_dynamic(shiftBits, toInsert)\n        value := and(value, not(mask))\n        result := or(value, and(toInsert, mask))\n    }\n\n    function cleanup_t_uint256(value) -> cleaned {\n        cleaned := value\n    }\n\n    function identity(value) -> ret {\n        ret := value\n    }\n\n    function convert_t_uint256_to_t_uint256(value) -> converted {\n        converted := cleanup_t_uint256(identity(cleanup_t_uint256(value)))\n    }\n\n    function prepare_store_t_uint256(value) -> ret {\n        ret := value\n    }\n\n    function update_storage_value_t_uint256_to_t_uint256(slot, offset, value_0) {\n        let convertedValue_0 := convert_t_uint256_to_t_uint256(value_0)\n        sstore(slot, update_byte_slice_dynamic32(sload(slot), offset, prepare_store_t_uint256(convertedValue_0)))\n    }\n\n    function zero_value_for_split_t_uint256() -> ret {\n        ret := 0\n    }\n\n    function storage_set_to_zero_t_uint256(slot, offset) {\n        let zero_0 := zero_value_for_split_t_uint256()\n        update_storage_value_t_uint256_to_t_uint256(slot, offset, zero_0)\n    }\n\n    function clear_storage_range_t_bytes1(start, end) {\n        for {} lt(start, end) { start := add(start, 1) }\n        {\n            storage_set_to_zero_t_uint256(start, 0)\n        }\n    }\n\n    function clean_up_bytearray_end_slots_t_string_storage(array, len, startIndex) {\n\n        if gt(len, 31) {\n            let dataArea := array_dataslot_t_string_storage(array)\n            let deleteStart := add(dataArea, divide_by_32_ceil(startIndex))\n            // If we are clearing array to be short byte array, we want to clear only data starting from array data area.\n            if lt(startIndex, 32) { deleteStart := dataArea }\n            clear_storage_range_t_bytes1(deleteStart, add(dataArea, divide_by_32_ceil(len)))\n        }\n\n    }\n\n    function shift_right_unsigned_dynamic(bits, value) -> newValue {\n        newValue :=\n\n        shr(bits, value)\n\n    }\n\n    function mask_bytes_dynamic(data, bytes) -> result {\n        let mask := not(shift_right_unsigned_dynamic(mul(8, bytes), not(0)))\n        result := and(data, mask)\n    }\n    function extract_used_part_and_set_length_of_short_byte_array(data, len) -> used {\n        // we want to save only elements that are part of the array after resizing\n        // others should be set to zero\n        data := mask_bytes_dynamic(data, len)\n        used := or(data, mul(2, len))\n    }\n    function copy_byte_array_to_storage_from_t_string_memory_ptr_to_t_string_storage(slot, src) {\n\n        let newLen := array_length_t_string_memory_ptr(src)\n        // Make sure array length is sane\n        if gt(newLen, 0xffffffffffffffff) { panic_error_0x41() }\n\n        let oldLen := extract_byte_array_length(sload(slot))\n\n        // potentially truncate data\n        clean_up_bytearray_end_slots_t_string_storage(slot, oldLen, newLen)\n\n        let srcOffset := 0\n\n        srcOffset := 0x20\n\n        switch gt(newLen, 31)\n        case 1 {\n            let loopEnd := and(newLen, not(0x1f))\n\n            let dstPtr := array_dataslot_t_string_storage(slot)\n            let i := 0\n            for { } lt(i, loopEnd) { i := add(i, 0x20) } {\n                sstore(dstPtr, mload(add(src, srcOffset)))\n                dstPtr := add(dstPtr, 1)\n                srcOffset := add(srcOffset, 32)\n            }\n            if lt(loopEnd, newLen) {\n                let lastValue := mload(add(src, srcOffset))\n                sstore(dstPtr, mask_bytes_dynamic(lastValue, and(newLen, 0x1f)))\n            }\n            sstore(slot, add(mul(newLen, 2), 1))\n        }\n        default {\n            let value := 0\n            if newLen {\n                value := mload(add(src, srcOffset))\n            }\n            sstore(slot, extract_used_part_and_set_length_of_short_byte_array(value, newLen))\n        }\n    }\n\n}\n",
       "id": 7,
       "language": "Yul",
       "name": "#utility.yul"
@@ -15239,18 +15239,18 @@
         147
       ],
       "RealEstateInfo": [
-        508
+        498
       ],
       "RealEstateStructs": [
-        579
+        567
       ]
     },
-    "id": 509,
+    "id": 499,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 346,
+        "id": 336,
         "literals": [
           "solidity",
           "^",
@@ -15263,10 +15263,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
         "file": "@openzeppelin/contracts/access/Ownable.sol",
-        "id": 347,
+        "id": 337,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 509,
+        "scope": 499,
         "sourceUnit": 148,
         "src": "60:52:3",
         "symbolAliases": [],
@@ -15275,11 +15275,11 @@
       {
         "absolutePath": "project:/contracts/structs/RealEstateStructs.sol",
         "file": "../structs/RealEstateStructs.sol",
-        "id": 348,
+        "id": 338,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 509,
-        "sourceUnit": 580,
+        "scope": 499,
+        "sourceUnit": 568,
         "src": "114:42:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -15289,7 +15289,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 349,
+              "id": 339,
               "name": "Ownable",
               "nameLocations": [
                 "187:7:3"
@@ -15298,7 +15298,7 @@
               "referencedDeclaration": 147,
               "src": "187:7:3"
             },
-            "id": 350,
+            "id": 340,
             "nodeType": "InheritanceSpecifier",
             "src": "187:7:3"
           }
@@ -15307,9 +15307,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 508,
+        "id": 498,
         "linearizedBaseContracts": [
-          508,
+          498,
           147,
           177
         ],
@@ -15319,37 +15319,37 @@
         "nodes": [
           {
             "constant": false,
-            "id": 353,
+            "id": 343,
             "mutability": "mutable",
             "name": "basicInfo",
             "nameLocation": "232:9:3",
             "nodeType": "VariableDeclaration",
-            "scope": 508,
+            "scope": 498,
             "src": "204:37:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_BasicInfo_$552_storage",
+              "typeIdentifier": "t_struct$_BasicInfo_$540_storage",
               "typeString": "struct RealEstateStructs.BasicInfo"
             },
             "typeName": {
-              "id": 352,
+              "id": 342,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 351,
+                "id": 341,
                 "name": "RealEstateStructs.BasicInfo",
                 "nameLocations": [
                   "204:17:3",
                   "222:9:3"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 552,
+                "referencedDeclaration": 540,
                 "src": "204:27:3"
               },
-              "referencedDeclaration": 552,
+              "referencedDeclaration": 540,
               "src": "204:27:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_BasicInfo_$552_storage_ptr",
+                "typeIdentifier": "t_struct$_BasicInfo_$540_storage_ptr",
                 "typeString": "struct RealEstateStructs.BasicInfo"
               }
             },
@@ -15357,37 +15357,37 @@
           },
           {
             "constant": false,
-            "id": 356,
+            "id": 346,
             "mutability": "mutable",
             "name": "registryCertificate",
             "nameLocation": "296:19:3",
             "nodeType": "VariableDeclaration",
-            "scope": 508,
+            "scope": 498,
             "src": "248:67:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_storage",
+              "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_storage",
               "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate"
             },
             "typeName": {
-              "id": 355,
+              "id": 345,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 354,
+                "id": 344,
                 "name": "RealEstateStructs.RealEstateRegistryCertificate",
                 "nameLocations": [
                   "248:17:3",
                   "266:29:3"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 559,
+                "referencedDeclaration": 547,
                 "src": "248:47:3"
               },
-              "referencedDeclaration": 559,
+              "referencedDeclaration": 547,
               "src": "248:47:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_storage_ptr",
+                "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_storage_ptr",
                 "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate"
               }
             },
@@ -15395,37 +15395,37 @@
           },
           {
             "constant": false,
-            "id": 359,
+            "id": 349,
             "mutability": "mutable",
             "name": "buildingManagementRecord",
             "nameLocation": "365:24:3",
             "nodeType": "VariableDeclaration",
-            "scope": 508,
+            "scope": 498,
             "src": "322:67:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_storage",
+              "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_storage",
               "typeString": "struct RealEstateStructs.BuildingManagementRecord"
             },
             "typeName": {
-              "id": 358,
+              "id": 348,
               "nodeType": "UserDefinedTypeName",
               "pathNode": {
-                "id": 357,
+                "id": 347,
                 "name": "RealEstateStructs.BuildingManagementRecord",
                 "nameLocations": [
                   "322:17:3",
                   "340:24:3"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 578,
+                "referencedDeclaration": 566,
                 "src": "322:42:3"
               },
-              "referencedDeclaration": 578,
+              "referencedDeclaration": 566,
               "src": "322:42:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_storage_ptr",
+                "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_storage_ptr",
                 "typeString": "struct RealEstateStructs.BuildingManagementRecord"
               }
             },
@@ -15433,23 +15433,23 @@
           },
           {
             "body": {
-              "id": 367,
+              "id": 357,
               "nodeType": "Block",
               "src": "444:2:3",
               "statements": []
             },
-            "id": 368,
+            "id": 358,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
               {
                 "arguments": [
                   {
-                    "id": 364,
+                    "id": 354,
                     "name": "_owner",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 361,
+                    "referencedDeclaration": 351,
                     "src": "436:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -15457,10 +15457,10 @@
                     }
                   }
                 ],
-                "id": 365,
+                "id": 355,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 363,
+                  "id": 353,
                   "name": "Ownable",
                   "nameLocations": [
                     "428:7:3"
@@ -15477,17 +15477,17 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 362,
+              "id": 352,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 361,
+                  "id": 351,
                   "mutability": "mutable",
                   "name": "_owner",
                   "nameLocation": "420:6:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 368,
+                  "scope": 358,
                   "src": "412:14:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -15496,7 +15496,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 360,
+                    "id": 350,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "412:7:3",
@@ -15512,12 +15512,12 @@
               "src": "411:16:3"
             },
             "returnParameters": {
-              "id": 366,
+              "id": 356,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "444:0:3"
             },
-            "scope": 508,
+            "scope": 498,
             "src": "400:46:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -15525,26 +15525,26 @@
           },
           {
             "body": {
-              "id": 391,
+              "id": 381,
               "nodeType": "Block",
               "src": "643:245:3",
               "statements": [
                 {
                   "expression": {
-                    "id": 389,
+                    "id": 379,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 381,
+                      "id": 371,
                       "name": "basicInfo",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 353,
+                      "referencedDeclaration": 343,
                       "src": "654:9:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_BasicInfo_$552_storage",
+                        "typeIdentifier": "t_struct$_BasicInfo_$540_storage",
                         "typeString": "struct RealEstateStructs.BasicInfo storage ref"
                       }
                     },
@@ -15553,11 +15553,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 384,
+                          "id": 374,
                           "name": "_roadNameAddress",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 370,
+                          "referencedDeclaration": 360,
                           "src": "726:16:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -15565,11 +15565,11 @@
                           }
                         },
                         {
-                          "id": 385,
+                          "id": 375,
                           "name": "_buildingName",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 372,
+                          "referencedDeclaration": 362,
                           "src": "771:13:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -15577,11 +15577,11 @@
                           }
                         },
                         {
-                          "id": 386,
+                          "id": 376,
                           "name": "_buildingNumber",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 374,
+                          "referencedDeclaration": 364,
                           "src": "815:15:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint16",
@@ -15589,11 +15589,11 @@
                           }
                         },
                         {
-                          "id": 387,
+                          "id": 377,
                           "name": "_roomNumber",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 376,
+                          "referencedDeclaration": 366,
                           "src": "857:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint16",
@@ -15621,18 +15621,18 @@
                           }
                         ],
                         "expression": {
-                          "id": 382,
+                          "id": 372,
                           "name": "RealEstateStructs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 579,
+                          "referencedDeclaration": 567,
                           "src": "666:17:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$579_$",
+                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$567_$",
                             "typeString": "type(library RealEstateStructs)"
                           }
                         },
-                        "id": 383,
+                        "id": 373,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -15640,14 +15640,14 @@
                         "memberLocation": "684:9:3",
                         "memberName": "BasicInfo",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 552,
+                        "referencedDeclaration": 540,
                         "src": "666:27:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_struct$_BasicInfo_$552_storage_ptr_$",
+                          "typeIdentifier": "t_type$_t_struct$_BasicInfo_$540_storage_ptr_$",
                           "typeString": "type(struct RealEstateStructs.BasicInfo storage pointer)"
                         }
                       },
-                      "id": 388,
+                      "id": 378,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -15669,32 +15669,32 @@
                       "src": "666:214:3",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_BasicInfo_$552_memory_ptr",
+                        "typeIdentifier": "t_struct$_BasicInfo_$540_memory_ptr",
                         "typeString": "struct RealEstateStructs.BasicInfo memory"
                       }
                     },
                     "src": "654:226:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_BasicInfo_$552_storage",
+                      "typeIdentifier": "t_struct$_BasicInfo_$540_storage",
                       "typeString": "struct RealEstateStructs.BasicInfo storage ref"
                     }
                   },
-                  "id": 390,
+                  "id": 380,
                   "nodeType": "ExpressionStatement",
                   "src": "654:226:3"
                 }
               ]
             },
             "functionSelector": "57b05dfd",
-            "id": 392,
+            "id": 382,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 379,
+                "id": 369,
                 "kind": "modifierInvocation",
                 "modifierName": {
-                  "id": 378,
+                  "id": 368,
                   "name": "onlyOwner",
                   "nameLocations": [
                     "633:9:3"
@@ -15711,17 +15711,17 @@
             "nameLocation": "463:12:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 377,
+              "id": 367,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 370,
+                  "id": 360,
                   "mutability": "mutable",
                   "name": "_roadNameAddress",
                   "nameLocation": "500:16:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 392,
+                  "scope": 382,
                   "src": "486:30:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -15730,7 +15730,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 369,
+                    "id": 359,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "486:6:3",
@@ -15743,12 +15743,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 372,
+                  "id": 362,
                   "mutability": "mutable",
                   "name": "_buildingName",
                   "nameLocation": "541:13:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 392,
+                  "scope": 382,
                   "src": "527:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -15757,7 +15757,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 371,
+                    "id": 361,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "527:6:3",
@@ -15770,12 +15770,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 374,
+                  "id": 364,
                   "mutability": "mutable",
                   "name": "_buildingNumber",
                   "nameLocation": "572:15:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 392,
+                  "scope": 382,
                   "src": "565:22:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -15784,7 +15784,7 @@
                     "typeString": "uint16"
                   },
                   "typeName": {
-                    "id": 373,
+                    "id": 363,
                     "name": "uint16",
                     "nodeType": "ElementaryTypeName",
                     "src": "565:6:3",
@@ -15797,12 +15797,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 376,
+                  "id": 366,
                   "mutability": "mutable",
                   "name": "_roomNumber",
                   "nameLocation": "605:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 392,
+                  "scope": 382,
                   "src": "598:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -15811,7 +15811,7 @@
                     "typeString": "uint16"
                   },
                   "typeName": {
-                    "id": 375,
+                    "id": 365,
                     "name": "uint16",
                     "nodeType": "ElementaryTypeName",
                     "src": "598:6:3",
@@ -15826,12 +15826,12 @@
               "src": "475:148:3"
             },
             "returnParameters": {
-              "id": 380,
+              "id": 370,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "643:0:3"
             },
-            "scope": 508,
+            "scope": 498,
             "src": "454:434:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -15839,31 +15839,31 @@
           },
           {
             "body": {
-              "id": 420,
+              "id": 410,
               "nodeType": "Block",
               "src": "1111:265:3",
               "statements": [
                 {
                   "expression": {
-                    "id": 418,
+                    "id": 408,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "expression": {
-                        "id": 407,
+                        "id": 397,
                         "name": "registryCertificate",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 356,
+                        "referencedDeclaration": 346,
                         "src": "1122:19:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_storage",
+                          "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_storage",
                           "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate storage ref"
                         }
                       },
-                      "id": 409,
+                      "id": 399,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -15871,10 +15871,10 @@
                       "memberLocation": "1142:13:3",
                       "memberName": "rightsSection",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 555,
+                      "referencedDeclaration": 543,
                       "src": "1122:33:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Section_$543_storage",
+                        "typeIdentifier": "t_struct$_Section_$531_storage",
                         "typeString": "struct RealEstateStructs.Section storage ref"
                       }
                     },
@@ -15883,11 +15883,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 412,
+                          "id": 402,
                           "name": "_rank",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 394,
+                          "referencedDeclaration": 384,
                           "src": "1205:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint8",
@@ -15895,11 +15895,11 @@
                           }
                         },
                         {
-                          "id": 413,
+                          "id": 403,
                           "name": "_purpose",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 396,
+                          "referencedDeclaration": 386,
                           "src": "1234:8:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -15907,11 +15907,11 @@
                           }
                         },
                         {
-                          "id": 414,
+                          "id": 404,
                           "name": "_registration",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 398,
+                          "referencedDeclaration": 388,
                           "src": "1271:13:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -15919,11 +15919,11 @@
                           }
                         },
                         {
-                          "id": 415,
+                          "id": 405,
                           "name": "_reason",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 400,
+                          "referencedDeclaration": 390,
                           "src": "1307:7:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -15931,11 +15931,11 @@
                           }
                         },
                         {
-                          "id": 416,
+                          "id": 406,
                           "name": "_holderAndEtc",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 402,
+                          "referencedDeclaration": 392,
                           "src": "1343:13:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -15967,18 +15967,18 @@
                           }
                         ],
                         "expression": {
-                          "id": 410,
+                          "id": 400,
                           "name": "RealEstateStructs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 579,
+                          "referencedDeclaration": 567,
                           "src": "1158:17:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$579_$",
+                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$567_$",
                             "typeString": "type(library RealEstateStructs)"
                           }
                         },
-                        "id": 411,
+                        "id": 401,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -15986,14 +15986,14 @@
                         "memberLocation": "1176:7:3",
                         "memberName": "Section",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 543,
+                        "referencedDeclaration": 531,
                         "src": "1158:25:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_struct$_Section_$543_storage_ptr_$",
+                          "typeIdentifier": "t_type$_t_struct$_Section_$531_storage_ptr_$",
                           "typeString": "type(struct RealEstateStructs.Section storage pointer)"
                         }
                       },
-                      "id": 417,
+                      "id": 407,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -16017,32 +16017,32 @@
                       "src": "1158:210:3",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Section_$543_memory_ptr",
+                        "typeIdentifier": "t_struct$_Section_$531_memory_ptr",
                         "typeString": "struct RealEstateStructs.Section memory"
                       }
                     },
                     "src": "1122:246:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Section_$543_storage",
+                      "typeIdentifier": "t_struct$_Section_$531_storage",
                       "typeString": "struct RealEstateStructs.Section storage ref"
                     }
                   },
-                  "id": 419,
+                  "id": 409,
                   "nodeType": "ExpressionStatement",
                   "src": "1122:246:3"
                 }
               ]
             },
             "functionSelector": "a2f21d2d",
-            "id": 421,
+            "id": 411,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 405,
+                "id": 395,
                 "kind": "modifierInvocation",
                 "modifierName": {
-                  "id": 404,
+                  "id": 394,
                   "name": "onlyOwner",
                   "nameLocations": [
                     "1101:9:3"
@@ -16059,17 +16059,17 @@
             "nameLocation": "905:16:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 403,
+              "id": 393,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 394,
+                  "id": 384,
                   "mutability": "mutable",
                   "name": "_rank",
                   "nameLocation": "938:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 421,
+                  "scope": 411,
                   "src": "932:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -16078,7 +16078,7 @@
                     "typeString": "uint8"
                   },
                   "typeName": {
-                    "id": 393,
+                    "id": 383,
                     "name": "uint8",
                     "nodeType": "ElementaryTypeName",
                     "src": "932:5:3",
@@ -16091,12 +16091,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 396,
+                  "id": 386,
                   "mutability": "mutable",
                   "name": "_purpose",
                   "nameLocation": "968:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 421,
+                  "scope": 411,
                   "src": "954:22:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16105,7 +16105,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 395,
+                    "id": 385,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "954:6:3",
@@ -16118,12 +16118,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 398,
+                  "id": 388,
                   "mutability": "mutable",
                   "name": "_registration",
                   "nameLocation": "1001:13:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 421,
+                  "scope": 411,
                   "src": "987:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16132,7 +16132,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 397,
+                    "id": 387,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "987:6:3",
@@ -16145,12 +16145,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 400,
+                  "id": 390,
                   "mutability": "mutable",
                   "name": "_reason",
                   "nameLocation": "1039:7:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 421,
+                  "scope": 411,
                   "src": "1025:21:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16159,7 +16159,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 399,
+                    "id": 389,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1025:6:3",
@@ -16172,12 +16172,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 402,
+                  "id": 392,
                   "mutability": "mutable",
                   "name": "_holderAndEtc",
                   "nameLocation": "1071:13:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 421,
+                  "scope": 411,
                   "src": "1057:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16186,7 +16186,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 401,
+                    "id": 391,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1057:6:3",
@@ -16201,12 +16201,12 @@
               "src": "921:170:3"
             },
             "returnParameters": {
-              "id": 406,
+              "id": 396,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1111:0:3"
             },
-            "scope": 508,
+            "scope": 498,
             "src": "896:480:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -16214,31 +16214,31 @@
           },
           {
             "body": {
-              "id": 449,
+              "id": 439,
               "nodeType": "Block",
               "src": "1605:271:3",
               "statements": [
                 {
                   "expression": {
-                    "id": 447,
+                    "id": 437,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "expression": {
-                        "id": 436,
+                        "id": 426,
                         "name": "registryCertificate",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 356,
+                        "referencedDeclaration": 346,
                         "src": "1616:19:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_storage",
+                          "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_storage",
                           "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate storage ref"
                         }
                       },
-                      "id": 438,
+                      "id": 428,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -16246,10 +16246,10 @@
                       "memberLocation": "1636:19:3",
                       "memberName": "encumbrancesSection",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 558,
+                      "referencedDeclaration": 546,
                       "src": "1616:39:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Section_$543_storage",
+                        "typeIdentifier": "t_struct$_Section_$531_storage",
                         "typeString": "struct RealEstateStructs.Section storage ref"
                       }
                     },
@@ -16258,11 +16258,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 441,
+                          "id": 431,
                           "name": "_rank",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 423,
+                          "referencedDeclaration": 413,
                           "src": "1705:5:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint8",
@@ -16270,11 +16270,11 @@
                           }
                         },
                         {
-                          "id": 442,
+                          "id": 432,
                           "name": "_purpose",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 425,
+                          "referencedDeclaration": 415,
                           "src": "1734:8:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16282,11 +16282,11 @@
                           }
                         },
                         {
-                          "id": 443,
+                          "id": 433,
                           "name": "_registration",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 427,
+                          "referencedDeclaration": 417,
                           "src": "1771:13:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16294,11 +16294,11 @@
                           }
                         },
                         {
-                          "id": 444,
+                          "id": 434,
                           "name": "_reason",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 429,
+                          "referencedDeclaration": 419,
                           "src": "1807:7:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16306,11 +16306,11 @@
                           }
                         },
                         {
-                          "id": 445,
+                          "id": 435,
                           "name": "_holderAndEtc",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 431,
+                          "referencedDeclaration": 421,
                           "src": "1843:13:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16342,18 +16342,18 @@
                           }
                         ],
                         "expression": {
-                          "id": 439,
+                          "id": 429,
                           "name": "RealEstateStructs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 579,
+                          "referencedDeclaration": 567,
                           "src": "1658:17:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$579_$",
+                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$567_$",
                             "typeString": "type(library RealEstateStructs)"
                           }
                         },
-                        "id": 440,
+                        "id": 430,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -16361,14 +16361,14 @@
                         "memberLocation": "1676:7:3",
                         "memberName": "Section",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 543,
+                        "referencedDeclaration": 531,
                         "src": "1658:25:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_struct$_Section_$543_storage_ptr_$",
+                          "typeIdentifier": "t_type$_t_struct$_Section_$531_storage_ptr_$",
                           "typeString": "type(struct RealEstateStructs.Section storage pointer)"
                         }
                       },
-                      "id": 446,
+                      "id": 436,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -16392,32 +16392,32 @@
                       "src": "1658:210:3",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Section_$543_memory_ptr",
+                        "typeIdentifier": "t_struct$_Section_$531_memory_ptr",
                         "typeString": "struct RealEstateStructs.Section memory"
                       }
                     },
                     "src": "1616:252:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Section_$543_storage",
+                      "typeIdentifier": "t_struct$_Section_$531_storage",
                       "typeString": "struct RealEstateStructs.Section storage ref"
                     }
                   },
-                  "id": 448,
+                  "id": 438,
                   "nodeType": "ExpressionStatement",
                   "src": "1616:252:3"
                 }
               ]
             },
             "functionSelector": "e250e838",
-            "id": 450,
+            "id": 440,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 434,
+                "id": 424,
                 "kind": "modifierInvocation",
                 "modifierName": {
-                  "id": 433,
+                  "id": 423,
                   "name": "onlyOwner",
                   "nameLocations": [
                     "1595:9:3"
@@ -16434,17 +16434,17 @@
             "nameLocation": "1393:22:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 432,
+              "id": 422,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 423,
+                  "id": 413,
                   "mutability": "mutable",
                   "name": "_rank",
                   "nameLocation": "1432:5:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 450,
+                  "scope": 440,
                   "src": "1426:11:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -16453,7 +16453,7 @@
                     "typeString": "uint8"
                   },
                   "typeName": {
-                    "id": 422,
+                    "id": 412,
                     "name": "uint8",
                     "nodeType": "ElementaryTypeName",
                     "src": "1426:5:3",
@@ -16466,12 +16466,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 425,
+                  "id": 415,
                   "mutability": "mutable",
                   "name": "_purpose",
                   "nameLocation": "1462:8:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 450,
+                  "scope": 440,
                   "src": "1448:22:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16480,7 +16480,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 424,
+                    "id": 414,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1448:6:3",
@@ -16493,12 +16493,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 427,
+                  "id": 417,
                   "mutability": "mutable",
                   "name": "_registration",
                   "nameLocation": "1495:13:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 450,
+                  "scope": 440,
                   "src": "1481:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16507,7 +16507,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 426,
+                    "id": 416,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1481:6:3",
@@ -16520,12 +16520,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 429,
+                  "id": 419,
                   "mutability": "mutable",
                   "name": "_reason",
                   "nameLocation": "1533:7:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 450,
+                  "scope": 440,
                   "src": "1519:21:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16534,7 +16534,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 428,
+                    "id": 418,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1519:6:3",
@@ -16547,12 +16547,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 431,
+                  "id": 421,
                   "mutability": "mutable",
                   "name": "_holderAndEtc",
                   "nameLocation": "1565:13:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 450,
+                  "scope": 440,
                   "src": "1551:27:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16561,7 +16561,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 430,
+                    "id": 420,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1551:6:3",
@@ -16576,12 +16576,12 @@
               "src": "1415:170:3"
             },
             "returnParameters": {
-              "id": 435,
+              "id": 425,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1605:0:3"
             },
-            "scope": 508,
+            "scope": 498,
             "src": "1384:492:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -16589,26 +16589,26 @@
           },
           {
             "body": {
-              "id": 488,
+              "id": 478,
               "nodeType": "Block",
               "src": "2229:423:3",
               "statements": [
                 {
                   "expression": {
-                    "id": 486,
+                    "id": 476,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 473,
+                      "id": 463,
                       "name": "buildingManagementRecord",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 359,
+                      "referencedDeclaration": 349,
                       "src": "2240:24:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_storage",
+                        "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_storage",
                         "typeString": "struct RealEstateStructs.BuildingManagementRecord storage ref"
                       }
                     },
@@ -16617,11 +16617,11 @@
                     "rightHandSide": {
                       "arguments": [
                         {
-                          "id": 476,
+                          "id": 466,
                           "name": "_isViolated",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 452,
+                          "referencedDeclaration": 442,
                           "src": "2337:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -16629,11 +16629,11 @@
                           }
                         },
                         {
-                          "id": 477,
+                          "id": 467,
                           "name": "_isNotPermitted",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 454,
+                          "referencedDeclaration": 444,
                           "src": "2379:15:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -16641,11 +16641,11 @@
                           }
                         },
                         {
-                          "id": 478,
+                          "id": 468,
                           "name": "_units",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 456,
+                          "referencedDeclaration": 446,
                           "src": "2416:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint16",
@@ -16653,11 +16653,11 @@
                           }
                         },
                         {
-                          "id": 479,
+                          "id": 469,
                           "name": "_households",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 458,
+                          "referencedDeclaration": 448,
                           "src": "2449:11:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint16",
@@ -16665,11 +16665,11 @@
                           }
                         },
                         {
-                          "id": 480,
+                          "id": 470,
                           "name": "_landArea",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 460,
+                          "referencedDeclaration": 450,
                           "src": "2485:9:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16677,11 +16677,11 @@
                           }
                         },
                         {
-                          "id": 481,
+                          "id": 471,
                           "name": "_mainStructure",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 462,
+                          "referencedDeclaration": 452,
                           "src": "2524:14:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16689,11 +16689,11 @@
                           }
                         },
                         {
-                          "id": 482,
+                          "id": 472,
                           "name": "_mainUsage",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 464,
+                          "referencedDeclaration": 454,
                           "src": "2564:10:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16701,11 +16701,11 @@
                           }
                         },
                         {
-                          "id": 483,
+                          "id": 473,
                           "name": "_height",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 466,
+                          "referencedDeclaration": 456,
                           "src": "2597:7:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16713,11 +16713,11 @@
                           }
                         },
                         {
-                          "id": 484,
+                          "id": 474,
                           "name": "_floor",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 468,
+                          "referencedDeclaration": 458,
                           "src": "2626:6:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_string_memory_ptr",
@@ -16765,18 +16765,18 @@
                           }
                         ],
                         "expression": {
-                          "id": 474,
+                          "id": 464,
                           "name": "RealEstateStructs",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 579,
+                          "referencedDeclaration": 567,
                           "src": "2267:17:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$579_$",
+                            "typeIdentifier": "t_type$_t_contract$_RealEstateStructs_$567_$",
                             "typeString": "type(library RealEstateStructs)"
                           }
                         },
-                        "id": 475,
+                        "id": 465,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -16784,14 +16784,14 @@
                         "memberLocation": "2285:24:3",
                         "memberName": "BuildingManagementRecord",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 578,
+                        "referencedDeclaration": 566,
                         "src": "2267:42:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_struct$_BuildingManagementRecord_$578_storage_ptr_$",
+                          "typeIdentifier": "t_type$_t_struct$_BuildingManagementRecord_$566_storage_ptr_$",
                           "typeString": "type(struct RealEstateStructs.BuildingManagementRecord storage pointer)"
                         }
                       },
-                      "id": 485,
+                      "id": 475,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -16823,32 +16823,32 @@
                       "src": "2267:377:3",
                       "tryCall": false,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_memory_ptr",
+                        "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_memory_ptr",
                         "typeString": "struct RealEstateStructs.BuildingManagementRecord memory"
                       }
                     },
                     "src": "2240:404:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_storage",
+                      "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_storage",
                       "typeString": "struct RealEstateStructs.BuildingManagementRecord storage ref"
                     }
                   },
-                  "id": 487,
+                  "id": 477,
                   "nodeType": "ExpressionStatement",
                   "src": "2240:404:3"
                 }
               ]
             },
             "functionSelector": "dc92b860",
-            "id": 489,
+            "id": 479,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 471,
+                "id": 461,
                 "kind": "modifierInvocation",
                 "modifierName": {
-                  "id": 470,
+                  "id": 460,
                   "name": "onlyOwner",
                   "nameLocations": [
                     "2219:9:3"
@@ -16865,17 +16865,17 @@
             "nameLocation": "1893:27:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 469,
+              "id": 459,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 452,
+                  "id": 442,
                   "mutability": "mutable",
                   "name": "_isViolated",
                   "nameLocation": "1936:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "1931:16:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -16884,7 +16884,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 451,
+                    "id": 441,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1931:4:3",
@@ -16897,12 +16897,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 454,
+                  "id": 444,
                   "mutability": "mutable",
                   "name": "_isNotPermitted",
                   "nameLocation": "1963:15:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "1958:20:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -16911,7 +16911,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 453,
+                    "id": 443,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1958:4:3",
@@ -16924,12 +16924,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 456,
+                  "id": 446,
                   "mutability": "mutable",
                   "name": "_units",
                   "nameLocation": "1996:6:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "1989:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -16938,7 +16938,7 @@
                     "typeString": "uint16"
                   },
                   "typeName": {
-                    "id": 455,
+                    "id": 445,
                     "name": "uint16",
                     "nodeType": "ElementaryTypeName",
                     "src": "1989:6:3",
@@ -16951,12 +16951,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 458,
+                  "id": 448,
                   "mutability": "mutable",
                   "name": "_households",
                   "nameLocation": "2020:11:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "2013:18:3",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -16965,7 +16965,7 @@
                     "typeString": "uint16"
                   },
                   "typeName": {
-                    "id": 457,
+                    "id": 447,
                     "name": "uint16",
                     "nodeType": "ElementaryTypeName",
                     "src": "2013:6:3",
@@ -16978,12 +16978,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 460,
+                  "id": 450,
                   "mutability": "mutable",
                   "name": "_landArea",
                   "nameLocation": "2056:9:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "2042:23:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -16992,7 +16992,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 459,
+                    "id": 449,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "2042:6:3",
@@ -17005,12 +17005,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 462,
+                  "id": 452,
                   "mutability": "mutable",
                   "name": "_mainStructure",
                   "nameLocation": "2090:14:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "2076:28:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -17019,7 +17019,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 461,
+                    "id": 451,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "2076:6:3",
@@ -17032,12 +17032,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 464,
+                  "id": 454,
                   "mutability": "mutable",
                   "name": "_mainUsage",
                   "nameLocation": "2129:10:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "2115:24:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -17046,7 +17046,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 463,
+                    "id": 453,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "2115:6:3",
@@ -17059,12 +17059,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 466,
+                  "id": 456,
                   "mutability": "mutable",
                   "name": "_height",
                   "nameLocation": "2164:7:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "2150:21:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -17073,7 +17073,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 465,
+                    "id": 455,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "2150:6:3",
@@ -17086,12 +17086,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 468,
+                  "id": 458,
                   "mutability": "mutable",
                   "name": "_floor",
                   "nameLocation": "2196:6:3",
                   "nodeType": "VariableDeclaration",
-                  "scope": 489,
+                  "scope": 479,
                   "src": "2182:20:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -17100,7 +17100,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 467,
+                    "id": 457,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "2182:6:3",
@@ -17115,12 +17115,12 @@
               "src": "1920:289:3"
             },
             "returnParameters": {
-              "id": 472,
+              "id": 462,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2229:0:3"
             },
-            "scope": 508,
+            "scope": 498,
             "src": "1884:768:3",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -17128,7 +17128,7 @@
           },
           {
             "body": {
-              "id": 506,
+              "id": 496,
               "nodeType": "Block",
               "src": "2885:88:3",
               "statements": [
@@ -17136,43 +17136,43 @@
                   "expression": {
                     "components": [
                       {
-                        "id": 501,
+                        "id": 491,
                         "name": "basicInfo",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 353,
+                        "referencedDeclaration": 343,
                         "src": "2908:9:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_BasicInfo_$552_storage",
+                          "typeIdentifier": "t_struct$_BasicInfo_$540_storage",
                           "typeString": "struct RealEstateStructs.BasicInfo storage ref"
                         }
                       },
                       {
-                        "id": 502,
+                        "id": 492,
                         "name": "registryCertificate",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 356,
+                        "referencedDeclaration": 346,
                         "src": "2919:19:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_storage",
+                          "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_storage",
                           "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate storage ref"
                         }
                       },
                       {
-                        "id": 503,
+                        "id": 493,
                         "name": "buildingManagementRecord",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 359,
+                        "referencedDeclaration": 349,
                         "src": "2940:24:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_storage",
+                          "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_storage",
                           "typeString": "struct RealEstateStructs.BuildingManagementRecord storage ref"
                         }
                       }
                     ],
-                    "id": 504,
+                    "id": 494,
                     "isConstant": false,
                     "isInlineArray": false,
                     "isLValue": false,
@@ -17181,19 +17181,19 @@
                     "nodeType": "TupleExpression",
                     "src": "2907:58:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_tuple$_t_struct$_BasicInfo_$552_storage_$_t_struct$_RealEstateRegistryCertificate_$559_storage_$_t_struct$_BuildingManagementRecord_$578_storage_$",
+                      "typeIdentifier": "t_tuple$_t_struct$_BasicInfo_$540_storage_$_t_struct$_RealEstateRegistryCertificate_$547_storage_$_t_struct$_BuildingManagementRecord_$566_storage_$",
                       "typeString": "tuple(struct RealEstateStructs.BasicInfo storage ref,struct RealEstateStructs.RealEstateRegistryCertificate storage ref,struct RealEstateStructs.BuildingManagementRecord storage ref)"
                     }
                   },
-                  "functionReturnParameters": 500,
-                  "id": 505,
+                  "functionReturnParameters": 490,
+                  "id": 495,
                   "nodeType": "Return",
                   "src": "2900:65:3"
                 }
               ]
             },
             "functionSelector": "0998d292",
-            "id": 507,
+            "id": 497,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -17201,48 +17201,48 @@
             "nameLocation": "2669:17:3",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 490,
+              "id": 480,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2686:2:3"
             },
             "returnParameters": {
-              "id": 500,
+              "id": 490,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 493,
+                  "id": 483,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 507,
+                  "scope": 497,
                   "src": "2722:34:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_BasicInfo_$552_memory_ptr",
+                    "typeIdentifier": "t_struct$_BasicInfo_$540_memory_ptr",
                     "typeString": "struct RealEstateStructs.BasicInfo"
                   },
                   "typeName": {
-                    "id": 492,
+                    "id": 482,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 491,
+                      "id": 481,
                       "name": "RealEstateStructs.BasicInfo",
                       "nameLocations": [
                         "2722:17:3",
                         "2740:9:3"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 552,
+                      "referencedDeclaration": 540,
                       "src": "2722:27:3"
                     },
-                    "referencedDeclaration": 552,
+                    "referencedDeclaration": 540,
                     "src": "2722:27:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_BasicInfo_$552_storage_ptr",
+                      "typeIdentifier": "t_struct$_BasicInfo_$540_storage_ptr",
                       "typeString": "struct RealEstateStructs.BasicInfo"
                     }
                   },
@@ -17250,37 +17250,37 @@
                 },
                 {
                   "constant": false,
-                  "id": 496,
+                  "id": 486,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 507,
+                  "scope": 497,
                   "src": "2768:54:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_memory_ptr",
+                    "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_memory_ptr",
                     "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate"
                   },
                   "typeName": {
-                    "id": 495,
+                    "id": 485,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 494,
+                      "id": 484,
                       "name": "RealEstateStructs.RealEstateRegistryCertificate",
                       "nameLocations": [
                         "2768:17:3",
                         "2786:29:3"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 559,
+                      "referencedDeclaration": 547,
                       "src": "2768:47:3"
                     },
-                    "referencedDeclaration": 559,
+                    "referencedDeclaration": 547,
                     "src": "2768:47:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$559_storage_ptr",
+                      "typeIdentifier": "t_struct$_RealEstateRegistryCertificate_$547_storage_ptr",
                       "typeString": "struct RealEstateStructs.RealEstateRegistryCertificate"
                     }
                   },
@@ -17288,37 +17288,37 @@
                 },
                 {
                   "constant": false,
-                  "id": 499,
+                  "id": 489,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 507,
+                  "scope": 497,
                   "src": "2834:49:3",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_memory_ptr",
+                    "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_memory_ptr",
                     "typeString": "struct RealEstateStructs.BuildingManagementRecord"
                   },
                   "typeName": {
-                    "id": 498,
+                    "id": 488,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 497,
+                      "id": 487,
                       "name": "RealEstateStructs.BuildingManagementRecord",
                       "nameLocations": [
                         "2834:17:3",
                         "2852:24:3"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 578,
+                      "referencedDeclaration": 566,
                       "src": "2834:42:3"
                     },
-                    "referencedDeclaration": 578,
+                    "referencedDeclaration": 566,
                     "src": "2834:42:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_BuildingManagementRecord_$578_storage_ptr",
+                      "typeIdentifier": "t_struct$_BuildingManagementRecord_$566_storage_ptr",
                       "typeString": "struct RealEstateStructs.BuildingManagementRecord"
                     }
                   },
@@ -17327,14 +17327,14 @@
               ],
               "src": "2711:173:3"
             },
-            "scope": 508,
+            "scope": 498,
             "src": "2660:313:3",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 509,
+        "scope": 499,
         "src": "160:2822:3",
         "usedErrors": [
           13,
@@ -17353,7 +17353,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-10T01:18:52.785Z",
+  "updatedAt": "2024-05-10T05:10:13.633Z",
   "devdoc": {
     "errors": {
       "OwnableInvalidOwner(address)": [

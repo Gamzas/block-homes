@@ -14,7 +14,8 @@ contract Loan {
     mapping(string => uint256) mortgageAmounts;
 
     constructor(address payable _target) {
-        bankAccount = payable(0xcd48B32650621694240FAFB2D467CdB52fd95795);
+
+        bankAccount = payable(0xC0a88521a8669e453c02D37cEed99dBb0a4dc508);
         target = _target;
     }
 
@@ -35,10 +36,6 @@ contract Loan {
         emit Borrowed(pendingLoanMortgage, pendingLoanAmount); // 이벤트 로깅
 
         pendingLoanAmount = 0; // 대출 금액 초기화
-    }
-
-    function depositFunds() external payable {
-        // require(msg.value == 1 ether, "Only 1 Ether can be deposited at a time");
     }
 
 }

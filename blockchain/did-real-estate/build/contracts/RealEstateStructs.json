@@ -15,15 +15,15 @@
     "absolutePath": "project:/contracts/structs/RealEstateStructs.sol",
     "exportedSymbols": {
       "RealEstateStructs": [
-        579
+        567
       ]
     },
-    "id": 580,
+    "id": 568,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 532,
+        "id": 520,
         "literals": [
           "solidity",
           "^",
@@ -40,9 +40,9 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 579,
+        "id": 567,
         "linearizedBaseContracts": [
-          579
+          567
         ],
         "name": "RealEstateStructs",
         "nameLocation": "68:17:5",
@@ -50,16 +50,16 @@
         "nodes": [
           {
             "canonicalName": "RealEstateStructs.Section",
-            "id": 543,
+            "id": 531,
             "members": [
               {
                 "constant": false,
-                "id": 534,
+                "id": 522,
                 "mutability": "mutable",
                 "name": "rank",
                 "nameLocation": "166:4:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 543,
+                "scope": 531,
                 "src": "160:10:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -68,7 +68,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 533,
+                  "id": 521,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "160:5:5",
@@ -81,12 +81,12 @@
               },
               {
                 "constant": false,
-                "id": 536,
+                "id": 524,
                 "mutability": "mutable",
                 "name": "purpose",
                 "nameLocation": "204:7:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 543,
+                "scope": 531,
                 "src": "197:14:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -95,7 +95,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 535,
+                  "id": 523,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "197:6:5",
@@ -108,12 +108,12 @@
               },
               {
                 "constant": false,
-                "id": 538,
+                "id": 526,
                 "mutability": "mutable",
                 "name": "registration",
                 "nameLocation": "245:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 543,
+                "scope": 531,
                 "src": "238:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -122,7 +122,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 537,
+                  "id": 525,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "238:6:5",
@@ -135,12 +135,12 @@
               },
               {
                 "constant": false,
-                "id": 540,
+                "id": 528,
                 "mutability": "mutable",
                 "name": "reason",
                 "nameLocation": "285:6:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 543,
+                "scope": 531,
                 "src": "278:13:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -149,7 +149,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 539,
+                  "id": 527,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "278:6:5",
@@ -162,12 +162,12 @@
               },
               {
                 "constant": false,
-                "id": 542,
+                "id": 530,
                 "mutability": "mutable",
                 "name": "holderAndEtc",
                 "nameLocation": "325:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 543,
+                "scope": 531,
                 "src": "318:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -176,7 +176,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 541,
+                  "id": 529,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "318:6:5",
@@ -191,22 +191,22 @@
             "name": "Section",
             "nameLocation": "141:7:5",
             "nodeType": "StructDefinition",
-            "scope": 579,
+            "scope": 567,
             "src": "134:241:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.BasicInfo",
-            "id": 552,
+            "id": 540,
             "members": [
               {
                 "constant": false,
-                "id": 545,
+                "id": 533,
                 "mutability": "mutable",
                 "name": "roadNameAddress",
                 "nameLocation": "454:15:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 552,
+                "scope": 540,
                 "src": "447:22:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -215,7 +215,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 544,
+                  "id": 532,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "447:6:5",
@@ -228,12 +228,12 @@
               },
               {
                 "constant": false,
-                "id": 547,
+                "id": 535,
                 "mutability": "mutable",
                 "name": "buildingName",
                 "nameLocation": "506:12:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 552,
+                "scope": 540,
                 "src": "499:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -242,7 +242,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 546,
+                  "id": 534,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "499:6:5",
@@ -255,12 +255,12 @@
               },
               {
                 "constant": false,
-                "id": 549,
+                "id": 537,
                 "mutability": "mutable",
                 "name": "buildingNumber",
                 "nameLocation": "549:14:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 552,
+                "scope": 540,
                 "src": "542:21:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -269,7 +269,7 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 548,
+                  "id": 536,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
                   "src": "542:6:5",
@@ -282,12 +282,12 @@
               },
               {
                 "constant": false,
-                "id": 551,
+                "id": 539,
                 "mutability": "mutable",
                 "name": "roomNumber",
                 "nameLocation": "611:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 552,
+                "scope": 540,
                 "src": "604:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -296,7 +296,7 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 550,
+                  "id": 538,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
                   "src": "604:6:5",
@@ -311,46 +311,46 @@
             "name": "BasicInfo",
             "nameLocation": "426:9:5",
             "nodeType": "StructDefinition",
-            "scope": 579,
+            "scope": 567,
             "src": "419:227:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.RealEstateRegistryCertificate",
-            "id": 559,
+            "id": 547,
             "members": [
               {
                 "constant": false,
-                "id": 555,
+                "id": 543,
                 "mutability": "mutable",
                 "name": "rightsSection",
                 "nameLocation": "734:13:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 559,
+                "scope": 547,
                 "src": "726:21:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Section_$543_storage_ptr",
+                  "typeIdentifier": "t_struct$_Section_$531_storage_ptr",
                   "typeString": "struct RealEstateStructs.Section"
                 },
                 "typeName": {
-                  "id": 554,
+                  "id": 542,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 553,
+                    "id": 541,
                     "name": "Section",
                     "nameLocations": [
                       "726:7:5"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 543,
+                    "referencedDeclaration": 531,
                     "src": "726:7:5"
                   },
-                  "referencedDeclaration": 543,
+                  "referencedDeclaration": 531,
                   "src": "726:7:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Section_$543_storage_ptr",
+                    "typeIdentifier": "t_struct$_Section_$531_storage_ptr",
                     "typeString": "struct RealEstateStructs.Section"
                   }
                 },
@@ -358,36 +358,36 @@
               },
               {
                 "constant": false,
-                "id": 558,
+                "id": 546,
                 "mutability": "mutable",
                 "name": "encumbrancesSection",
                 "nameLocation": "813:19:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 559,
+                "scope": 547,
                 "src": "805:27:5",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Section_$543_storage_ptr",
+                  "typeIdentifier": "t_struct$_Section_$531_storage_ptr",
                   "typeString": "struct RealEstateStructs.Section"
                 },
                 "typeName": {
-                  "id": 557,
+                  "id": 545,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 556,
+                    "id": 544,
                     "name": "Section",
                     "nameLocations": [
                       "805:7:5"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 543,
+                    "referencedDeclaration": 531,
                     "src": "805:7:5"
                   },
-                  "referencedDeclaration": 543,
+                  "referencedDeclaration": 531,
                   "src": "805:7:5",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Section_$543_storage_ptr",
+                    "typeIdentifier": "t_struct$_Section_$531_storage_ptr",
                     "typeString": "struct RealEstateStructs.Section"
                   }
                 },
@@ -397,22 +397,22 @@
             "name": "RealEstateRegistryCertificate",
             "nameLocation": "685:29:5",
             "nodeType": "StructDefinition",
-            "scope": 579,
+            "scope": 567,
             "src": "678:226:5",
             "visibility": "public"
           },
           {
             "canonicalName": "RealEstateStructs.BuildingManagementRecord",
-            "id": 578,
+            "id": 566,
             "members": [
               {
                 "constant": false,
-                "id": 561,
+                "id": 549,
                 "mutability": "mutable",
                 "name": "isViolated",
                 "nameLocation": "991:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "986:15:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -421,7 +421,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 560,
+                  "id": 548,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "986:4:5",
@@ -434,12 +434,12 @@
               },
               {
                 "constant": false,
-                "id": 563,
+                "id": 551,
                 "mutability": "mutable",
                 "name": "isNotPermitted",
                 "nameLocation": "1043:14:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1038:19:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -448,7 +448,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 562,
+                  "id": 550,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "1038:4:5",
@@ -461,12 +461,12 @@
               },
               {
                 "constant": false,
-                "id": 565,
+                "id": 553,
                 "mutability": "mutable",
                 "name": "units",
                 "nameLocation": "1104:5:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1097:12:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -475,7 +475,7 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 564,
+                  "id": 552,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
                   "src": "1097:6:5",
@@ -488,12 +488,12 @@
               },
               {
                 "constant": false,
-                "id": 567,
+                "id": 555,
                 "mutability": "mutable",
                 "name": "households",
                 "nameLocation": "1137:10:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1130:17:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -502,7 +502,7 @@
                   "typeString": "uint16"
                 },
                 "typeName": {
-                  "id": 566,
+                  "id": 554,
                   "name": "uint16",
                   "nodeType": "ElementaryTypeName",
                   "src": "1130:6:5",
@@ -515,12 +515,12 @@
               },
               {
                 "constant": false,
-                "id": 569,
+                "id": 557,
                 "mutability": "mutable",
                 "name": "landArea",
                 "nameLocation": "1179:8:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1172:15:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -529,7 +529,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 568,
+                  "id": 556,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "1172:6:5",
@@ -542,12 +542,12 @@
               },
               {
                 "constant": false,
-                "id": 571,
+                "id": 559,
                 "mutability": "mutable",
                 "name": "mainStructure",
                 "nameLocation": "1221:13:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1214:20:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -556,7 +556,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 570,
+                  "id": 558,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "1214:6:5",
@@ -569,12 +569,12 @@
               },
               {
                 "constant": false,
-                "id": 573,
+                "id": 561,
                 "mutability": "mutable",
                 "name": "mainUsage",
                 "nameLocation": "1265:9:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1258:16:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -583,7 +583,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 572,
+                  "id": 560,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "1258:6:5",
@@ -596,12 +596,12 @@
               },
               {
                 "constant": false,
-                "id": 575,
+                "id": 563,
                 "mutability": "mutable",
                 "name": "height",
                 "nameLocation": "1305:6:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1298:13:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -610,7 +610,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 574,
+                  "id": 562,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "1298:6:5",
@@ -623,12 +623,12 @@
               },
               {
                 "constant": false,
-                "id": 577,
+                "id": 565,
                 "mutability": "mutable",
                 "name": "floor",
                 "nameLocation": "1339:5:5",
                 "nodeType": "VariableDeclaration",
-                "scope": 578,
+                "scope": 566,
                 "src": "1332:12:5",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -637,7 +637,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 576,
+                  "id": 564,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "1332:6:5",
@@ -652,12 +652,12 @@
             "name": "BuildingManagementRecord",
             "nameLocation": "950:24:5",
             "nodeType": "StructDefinition",
-            "scope": 579,
+            "scope": 567,
             "src": "943:419:5",
             "visibility": "public"
           }
         ],
-        "scope": 580,
+        "scope": 568,
         "src": "60:1307:5",
         "usedErrors": [],
         "usedEvents": []
@@ -671,7 +671,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-10T01:18:52.789Z",
+  "updatedAt": "2024-05-10T05:10:13.638Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

@@ -1,15 +1,15 @@
 {
   "contractName": "DIDStruct",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/DIDStruct.sol\":\"DIDStruct\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/DIDStruct.sol\":{\"keccak256\":\"0x78ed629e1931bf27c9b6eb60ee35d05301fb9d8a84c55f388a0283a52be5702e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://aa29a6d153c4ae2d9ac709ac303fcfc6128adb7664eef7ed379e9f6bfcc84fba\",\"dweb:/ipfs/QmaHvWjM3jHUhT8K1hKseDtf9yALwZesWxdxyzFZFgH1XN\"]}},\"version\":1}",
-  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220e0e0cb3cb8d940cfe73655fbf3b95585918772c719e2045c800095e6d3072b2164736f6c63430008150033",
-  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220e0e0cb3cb8d940cfe73655fbf3b95585918772c719e2045c800095e6d3072b2164736f6c63430008150033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/DIDStruct.sol\":\"DIDStruct\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/DIDStruct.sol\":{\"keccak256\":\"0xdab546ad06946987baad1d19374d401c2275fd628f1dfb9569d6a3e304f41bc6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6c70437e889a60aa051e45b8b484e8ffcb608e27e213754d345be4c728746f9a\",\"dweb:/ipfs/QmUbfkAdMGTwUHqELdRGhnH8rHiLXyYyKbkXbD4WvnVrBD\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f90a371b3294242761d7757df83a71c5bf5c270eb43402e471d2c7d84e0e522c64736f6c63430008150033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f90a371b3294242761d7757df83a71c5bf5c270eb43402e471d2c7d84e0e522c64736f6c63430008150033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
   "sourceMap": "60:302:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "60:302:3:-:0;;;;;;;;",
-  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary DIDStruct {\r\n\r\n    struct PublicKey {\r\n        string id;\r\n        string keyType;\r\n        string controller;\r\n        bytes publicKeyData;\r\n    }\r\n\r\n    struct DIDDocument {\r\n        string context;\r\n        string id;\r\n        PublicKey publicKey;\r\n        string authentication;\r\n    }\r\n\r\n}",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary DIDStruct {\r\n\r\n    struct PublicKey {\r\n        string id;\r\n        string keyType;\r\n        string controller;\r\n        string publicKeyHex;\r\n    }\r\n\r\n    struct DIDDocument {\r\n        string context;\r\n        string id;\r\n        PublicKey publicKey;\r\n        string authentication;\r\n    }\r\n\r\n}",
   "sourcePath": "C:\\Users\\SSAFY\\Desktop\\S10P31C203\\blockchain\\did-consortium\\contracts\\structs\\DIDStruct.sol",
   "ast": {
     "absolutePath": "project:/contracts/structs/DIDStruct.sol",
@@ -137,25 +137,25 @@
                 "constant": false,
                 "id": 351,
                 "mutability": "mutable",
-                "name": "publicKeyData",
-                "nameLocation": "194:13:3",
+                "name": "publicKeyHex",
+                "nameLocation": "195:12:3",
                 "nodeType": "VariableDeclaration",
                 "scope": 352,
                 "src": "188:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_bytes_storage_ptr",
-                  "typeString": "bytes"
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
                 },
                 "typeName": {
                   "id": 350,
-                  "name": "bytes",
+                  "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "188:5:3",
+                  "src": "188:6:3",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_bytes_storage_ptr",
-                    "typeString": "bytes"
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
                   }
                 },
                 "visibility": "internal"
@@ -313,7 +313,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-10T00:55:05.190Z",
+  "updatedAt": "2024-05-10T06:18:02.847Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

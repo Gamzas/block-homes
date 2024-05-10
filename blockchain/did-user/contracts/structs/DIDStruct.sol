@@ -19,9 +19,9 @@ library DIDStruct {
     struct DIDDocument {
         string context;
         string id;
-        PublicKey[] publicKey;
-        string[] authentication;
-        Service[] service;
+        PublicKey publicKey;
+        string authentication;
+        Service service;
     }
 
 }

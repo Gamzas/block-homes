@@ -1,29 +1,29 @@
 {
   "contractName": "DIDStruct",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/DIDStruct.sol\":\"DIDStruct\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/DIDStruct.sol\":{\"keccak256\":\"0xfec00b7b6ce8d55bc06f054641ee7ac15184d55f3b1aaf7657bad0648807955c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://055eae50d6402de755c532a0aba6e5ecffb779f70f98919d5dd873b63ec1c6a5\",\"dweb:/ipfs/QmPz85NjMqxFxd78xxUsUSqKfKckSBxsdLbP8dnY9jtcdw\"]}},\"version\":1}",
-  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea264697066735822122091211430b024a397b9f4763d78add6b564ad6ac901d2ae73f200e81c93cdda4b64736f6c63430008150033",
-  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea264697066735822122091211430b024a397b9f4763d78add6b564ad6ac901d2ae73f200e81c93cdda4b64736f6c63430008150033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/structs/DIDStruct.sol\":\"DIDStruct\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/structs/DIDStruct.sol\":{\"keccak256\":\"0xd59300e8385e1e648bc4372e32d5be01e492f1555368e10ef65f96b9e4cd1fe1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c3d672aa4632ee08cf717f59c3f70736dd214009cbb86360dbfa47babfbc0673\",\"dweb:/ipfs/QmZmwZvUoQbndLJCeqZfBMQBjrtoomjKwNtavohpxM4osC\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea26469706673582212206375a343f3ca8d8feafb5460f42c60ab4b2f85b12c44d1bd917f73f9e557c52764736f6c63430008150033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea26469706673582212206375a343f3ca8d8feafb5460f42c60ab4b2f85b12c44d1bd917f73f9e557c52764736f6c63430008150033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
-  "sourceMap": "60:448:4:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "60:448:4:-:0;;;;;;;;",
-  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary DIDStruct {\r\n\r\n    struct PublicKey {\r\n        string id;\r\n        string keyType;\r\n        string controller;\r\n        string publicKeyData;\r\n    }\r\n\r\n    struct Service {\r\n        string id;\r\n        string serviceType;\r\n        string serviceEndPoint;\r\n    }\r\n\r\n    struct DIDDocument {\r\n        string context;\r\n        string id;\r\n        PublicKey[] publicKey;\r\n        string[] authentication;\r\n        Service[] service;\r\n    }\r\n\r\n}",
-  "sourcePath": "C:\\SSAFY\\S10P31C203\\blockchain\\did-user\\contracts\\structs\\DIDStruct.sol",
+  "sourceMap": "60:442:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "60:442:3:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nlibrary DIDStruct {\r\n\r\n    struct PublicKey {\r\n        string id;\r\n        string keyType;\r\n        string controller;\r\n        string publicKeyData;\r\n    }\r\n\r\n    struct Service {\r\n        string id;\r\n        string serviceType;\r\n        string serviceEndPoint;\r\n    }\r\n\r\n    struct DIDDocument {\r\n        string context;\r\n        string id;\r\n        PublicKey publicKey;\r\n        string authentication;\r\n        Service service;\r\n    }\r\n\r\n}",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\S10P31C203\\blockchain\\did-user\\contracts\\structs\\DIDStruct.sol",
   "ast": {
     "absolutePath": "project:/contracts/structs/DIDStruct.sol",
     "exportedSymbols": {
       "DIDStruct": [
-        582
+        309
       ]
     },
-    "id": 583,
+    "id": 310,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 549,
+        "id": 279,
         "literals": [
           "solidity",
           "^",
@@ -31,7 +31,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:4"
+        "src": "33:23:3"
       },
       {
         "abstract": false,
@@ -40,27 +40,27 @@
         "contractDependencies": [],
         "contractKind": "library",
         "fullyImplemented": true,
-        "id": 582,
+        "id": 309,
         "linearizedBaseContracts": [
-          582
+          309
         ],
         "name": "DIDStruct",
-        "nameLocation": "68:9:4",
+        "nameLocation": "68:9:3",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "DIDStruct.PublicKey",
-            "id": 558,
+            "id": 288,
             "members": [
               {
                 "constant": false,
-                "id": 551,
+                "id": 281,
                 "mutability": "mutable",
                 "name": "id",
-                "nameLocation": "122:2:4",
+                "nameLocation": "122:2:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 558,
-                "src": "115:9:4",
+                "scope": 288,
+                "src": "115:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -68,10 +68,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 550,
+                  "id": 280,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "115:6:4",
+                  "src": "115:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -81,13 +81,13 @@
               },
               {
                 "constant": false,
-                "id": 553,
+                "id": 283,
                 "mutability": "mutable",
                 "name": "keyType",
-                "nameLocation": "142:7:4",
+                "nameLocation": "142:7:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 558,
-                "src": "135:14:4",
+                "scope": 288,
+                "src": "135:14:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -95,10 +95,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 552,
+                  "id": 282,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "135:6:4",
+                  "src": "135:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -108,13 +108,13 @@
               },
               {
                 "constant": false,
-                "id": 555,
+                "id": 285,
                 "mutability": "mutable",
                 "name": "controller",
-                "nameLocation": "167:10:4",
+                "nameLocation": "167:10:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 558,
-                "src": "160:17:4",
+                "scope": 288,
+                "src": "160:17:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -122,10 +122,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 554,
+                  "id": 284,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "160:6:4",
+                  "src": "160:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -135,13 +135,13 @@
               },
               {
                 "constant": false,
-                "id": 557,
+                "id": 287,
                 "mutability": "mutable",
                 "name": "publicKeyData",
-                "nameLocation": "195:13:4",
+                "nameLocation": "195:13:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 558,
-                "src": "188:20:4",
+                "scope": 288,
+                "src": "188:20:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -149,10 +149,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 556,
+                  "id": 286,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "188:6:4",
+                  "src": "188:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -162,25 +162,25 @@
               }
             ],
             "name": "PublicKey",
-            "nameLocation": "94:9:4",
+            "nameLocation": "94:9:3",
             "nodeType": "StructDefinition",
-            "scope": 582,
-            "src": "87:129:4",
+            "scope": 309,
+            "src": "87:129:3",
             "visibility": "public"
           },
           {
             "canonicalName": "DIDStruct.Service",
-            "id": 565,
+            "id": 295,
             "members": [
               {
                 "constant": false,
-                "id": 560,
+                "id": 290,
                 "mutability": "mutable",
                 "name": "id",
-                "nameLocation": "257:2:4",
+                "nameLocation": "257:2:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 565,
-                "src": "250:9:4",
+                "scope": 295,
+                "src": "250:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -188,10 +188,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 559,
+                  "id": 289,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "250:6:4",
+                  "src": "250:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -201,13 +201,13 @@
               },
               {
                 "constant": false,
-                "id": 562,
+                "id": 292,
                 "mutability": "mutable",
                 "name": "serviceType",
-                "nameLocation": "277:11:4",
+                "nameLocation": "277:11:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 565,
-                "src": "270:18:4",
+                "scope": 295,
+                "src": "270:18:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -215,10 +215,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 561,
+                  "id": 291,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "270:6:4",
+                  "src": "270:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -228,13 +228,13 @@
               },
               {
                 "constant": false,
-                "id": 564,
+                "id": 294,
                 "mutability": "mutable",
                 "name": "serviceEndPoint",
-                "nameLocation": "306:15:4",
+                "nameLocation": "306:15:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 565,
-                "src": "299:22:4",
+                "scope": 295,
+                "src": "299:22:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -242,10 +242,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 563,
+                  "id": 293,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "299:6:4",
+                  "src": "299:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -255,25 +255,25 @@
               }
             ],
             "name": "Service",
-            "nameLocation": "231:7:4",
+            "nameLocation": "231:7:3",
             "nodeType": "StructDefinition",
-            "scope": 582,
-            "src": "224:105:4",
+            "scope": 309,
+            "src": "224:105:3",
             "visibility": "public"
           },
           {
             "canonicalName": "DIDStruct.DIDDocument",
-            "id": 581,
+            "id": 308,
             "members": [
               {
                 "constant": false,
-                "id": 567,
+                "id": 297,
                 "mutability": "mutable",
                 "name": "context",
-                "nameLocation": "374:7:4",
+                "nameLocation": "374:7:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 581,
-                "src": "367:14:4",
+                "scope": 308,
+                "src": "367:14:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -281,10 +281,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 566,
+                  "id": 296,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "367:6:4",
+                  "src": "367:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -294,13 +294,13 @@
               },
               {
                 "constant": false,
-                "id": 569,
+                "id": 299,
                 "mutability": "mutable",
                 "name": "id",
-                "nameLocation": "399:2:4",
+                "nameLocation": "399:2:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 581,
-                "src": "392:9:4",
+                "scope": 308,
+                "src": "392:9:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -308,10 +308,10 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 568,
+                  "id": 298,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
-                  "src": "392:6:4",
+                  "src": "392:6:3",
                   "typeDescriptions": {
                     "typeIdentifier": "t_string_storage_ptr",
                     "typeString": "string"
@@ -321,148 +321,121 @@
               },
               {
                 "constant": false,
-                "id": 573,
+                "id": 302,
                 "mutability": "mutable",
                 "name": "publicKey",
-                "nameLocation": "424:9:4",
+                "nameLocation": "422:9:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 581,
-                "src": "412:21:4",
+                "scope": 308,
+                "src": "412:19:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_PublicKey_$558_storage_$dyn_storage_ptr",
-                  "typeString": "struct DIDStruct.PublicKey[]"
+                  "typeIdentifier": "t_struct$_PublicKey_$288_storage_ptr",
+                  "typeString": "struct DIDStruct.PublicKey"
                 },
                 "typeName": {
-                  "baseType": {
-                    "id": 571,
-                    "nodeType": "UserDefinedTypeName",
-                    "pathNode": {
-                      "id": 570,
-                      "name": "PublicKey",
-                      "nameLocations": [
-                        "412:9:4"
-                      ],
-                      "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 558,
-                      "src": "412:9:4"
-                    },
-                    "referencedDeclaration": 558,
-                    "src": "412:9:4",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_PublicKey_$558_storage_ptr",
-                      "typeString": "struct DIDStruct.PublicKey"
-                    }
+                  "id": 301,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 300,
+                    "name": "PublicKey",
+                    "nameLocations": [
+                      "412:9:3"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 288,
+                    "src": "412:9:3"
                   },
-                  "id": 572,
-                  "nodeType": "ArrayTypeName",
-                  "src": "412:11:4",
+                  "referencedDeclaration": 288,
+                  "src": "412:9:3",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_PublicKey_$558_storage_$dyn_storage_ptr",
-                    "typeString": "struct DIDStruct.PublicKey[]"
+                    "typeIdentifier": "t_struct$_PublicKey_$288_storage_ptr",
+                    "typeString": "struct DIDStruct.PublicKey"
                   }
                 },
                 "visibility": "internal"
               },
               {
                 "constant": false,
-                "id": 576,
+                "id": 304,
                 "mutability": "mutable",
                 "name": "authentication",
-                "nameLocation": "453:14:4",
+                "nameLocation": "449:14:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 581,
-                "src": "444:23:4",
+                "scope": 308,
+                "src": "442:21:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
-                  "typeString": "string[]"
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
                 },
                 "typeName": {
-                  "baseType": {
-                    "id": 574,
-                    "name": "string",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "444:6:4",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_string_storage_ptr",
-                      "typeString": "string"
-                    }
-                  },
-                  "id": 575,
-                  "nodeType": "ArrayTypeName",
-                  "src": "444:8:4",
+                  "id": 303,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "442:6:3",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
-                    "typeString": "string[]"
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
                   }
                 },
                 "visibility": "internal"
               },
               {
                 "constant": false,
-                "id": 580,
+                "id": 307,
                 "mutability": "mutable",
                 "name": "service",
-                "nameLocation": "488:7:4",
+                "nameLocation": "482:7:3",
                 "nodeType": "VariableDeclaration",
-                "scope": 581,
-                "src": "478:17:4",
+                "scope": 308,
+                "src": "474:15:3",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_array$_t_struct$_Service_$565_storage_$dyn_storage_ptr",
-                  "typeString": "struct DIDStruct.Service[]"
+                  "typeIdentifier": "t_struct$_Service_$295_storage_ptr",
+                  "typeString": "struct DIDStruct.Service"
                 },
                 "typeName": {
-                  "baseType": {
-                    "id": 578,
-                    "nodeType": "UserDefinedTypeName",
-                    "pathNode": {
-                      "id": 577,
-                      "name": "Service",
-                      "nameLocations": [
-                        "478:7:4"
-                      ],
-                      "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 565,
-                      "src": "478:7:4"
-                    },
-                    "referencedDeclaration": 565,
-                    "src": "478:7:4",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Service_$565_storage_ptr",
-                      "typeString": "struct DIDStruct.Service"
-                    }
+                  "id": 306,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 305,
+                    "name": "Service",
+                    "nameLocations": [
+                      "474:7:3"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 295,
+                    "src": "474:7:3"
                   },
-                  "id": 579,
-                  "nodeType": "ArrayTypeName",
-                  "src": "478:9:4",
+                  "referencedDeclaration": 295,
+                  "src": "474:7:3",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_Service_$565_storage_$dyn_storage_ptr",
-                    "typeString": "struct DIDStruct.Service[]"
+                    "typeIdentifier": "t_struct$_Service_$295_storage_ptr",
+                    "typeString": "struct DIDStruct.Service"
                   }
                 },
                 "visibility": "internal"
               }
             ],
             "name": "DIDDocument",
-            "nameLocation": "344:11:4",
+            "nameLocation": "344:11:3",
             "nodeType": "StructDefinition",
-            "scope": 582,
-            "src": "337:166:4",
+            "scope": 309,
+            "src": "337:160:3",
             "visibility": "public"
           }
         ],
-        "scope": 583,
-        "src": "60:448:4",
+        "scope": 310,
+        "src": "60:442:3",
         "usedErrors": [],
         "usedEvents": []
       }
     ],
-    "src": "33:475:4"
+    "src": "33:469:3"
   },
   "compiler": {
     "name": "solc",
@@ -470,7 +443,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-09T01:28:28.679Z",
+  "updatedAt": "2024-05-10T06:01:48.775Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
