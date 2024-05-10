@@ -5,8 +5,10 @@ export const VCCardWrapper = styled.div`
   height: fit-content;
   display: flex;
   justify-content: center;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   position: relative;
+  /* border: 1px solid red; */
 `
 
 export const VCCardContainer = styled.div`
