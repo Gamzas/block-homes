@@ -78,11 +78,14 @@ export const NotCertifiedContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   .txt {
     margin-top: 3rem;
     color: #555050;
-    font-size: 1.0625rem;
+    font-size: 1rem;
     font-weight: 600;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   .btn {
     width: 9.75rem;
