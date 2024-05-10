@@ -1,3 +1,5 @@
+import InfoSafeComponent from '@components/InfoPage/InfoSafeComponent'
+
 const InfoSafeList = () => {
   const InfoSafeContents = [
     {
