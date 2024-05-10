@@ -7,7 +7,7 @@ library DIDStruct {
         string id;
         string keyType;
         string controller;
-        string publicKeyData;
+        bytes publicKeyData;
     }
 
     struct DIDDocument {
