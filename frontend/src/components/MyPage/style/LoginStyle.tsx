@@ -35,8 +35,8 @@ export const CharacterContainer = styled.div`
   position: absolute;
   width: 50%;
   height: 80%;
-  top: 1rem;
-  right: -3rem;
+  top: -4rem;
+  right: -3.5rem;
   z-index: 1;
 
   .pig-character {
@@ -48,8 +48,8 @@ export const CharacterContainer = styled.div`
   .hat {
     position: absolute;
     width: 50%;
-    top: 0.5rem;
-    right: 2.7rem;
+    top: 0.1%;
+    right: 25%;
     z-index: 2;
     transform: rotate(-10deg);
   }
@@ -58,8 +58,8 @@ export const CharacterContainer = styled.div`
     position: absolute;
     width: 50%;
     z-index: 2;
-    top: 2.7rem;
-    right: 2.3rem;
+    top: 30%;
+    right: 22%;
     transform: rotate(-5deg);
   }
 `
