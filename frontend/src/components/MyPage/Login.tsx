@@ -11,7 +11,9 @@ const Login = () => {
   }
   return (
     <l.LoginContainer>
-      <WaveContainer />
+      <l.WaveWrapper>
+        <WaveContainer />
+      </l.WaveWrapper>
       <l.LogoContainer>
         <img className="logo-img" src="image/image_logo.png" alt="로고" />
         <l.CharacterContainer>
