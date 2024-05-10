@@ -5,6 +5,7 @@ import Buyer from '@/components/TransactionPage/Buyer'
 import Seller from '@/components/TransactionPage/Seller'
 
 const TransactionProgress = () => {
+  // buyer 판매자 구매자 화면 전환 
   const [buyer] = useState(true)
   return (
     <t.TransactionProcessPageContainer>

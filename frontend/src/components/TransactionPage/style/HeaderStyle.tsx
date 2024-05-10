@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const ProcessHeaderContainer = styled.div`
-  margin-top: 1.3rem;
   display: flex;
   align-items: center;
   .header-text {

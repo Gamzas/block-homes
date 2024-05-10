@@ -8,9 +8,10 @@ const Buyer = () => {
   const [currentindex, setCurrentIndex] = useState(0)
   return (
     <b.BuyMainContainer>
+      {/* 확인용 버튼 삭제 필요 */}
       <div className="ex">
         <CustomButtonStyle
-          style={{ width: '2rem', height: '1rem' }}
+          style={{ width: '2rem', height: '1rem' ,backgroundColor:'red'}}
           onClick={() => {
             setCurrentIndex(currentindex + 1)
           }}
