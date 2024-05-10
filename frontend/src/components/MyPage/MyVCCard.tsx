@@ -2,7 +2,7 @@ import * as s from '@/components/MyPage/style/MyVCCardStyle'
 import WalletAddress from './WalletAddress'
 
 const MyVCCard = () => {
-  const isLoggedin = false
+  const isLoggedin = true
   return (
     <s.VCCardWrapper>
       <s.VCCardContainer>
