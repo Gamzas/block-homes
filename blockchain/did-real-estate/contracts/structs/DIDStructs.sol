@@ -7,13 +7,7 @@ library DIDStructs {
         string id;
         string keyType;
         string controller;
-        string publicKeyData;
-    }
-
-    struct Service {
-        string id;
-        string serviceType;
-        string serviceEndPoint;
+        bytes publicKeyData;
     }
 
     struct DIDDocument {
@@ -21,7 +15,6 @@ library DIDStructs {
         string id;
         PublicKey publicKey;
         string authentication;
-        Service service;
     }
 
 }
