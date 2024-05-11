@@ -76,3 +76,60 @@ export const InfoElement = styled.div`
     font-weight: 500;
   }
 `
+
+
+
+export const BackContainer = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e9f7f7;
+  position: relative;
+  padding-top: 2rem;
+  .ministry-of-land-logo {
+    width: 40%;
+  }
+
+  .building-type-image {
+    width: 65%;
+    opacity: 0.8;
+    z-index: 10;
+    position: relative;
+    bottom: -0.5rem;
+  }
+  .registration-button-box{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+   left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    z-index: 11;
+  }
+`
+
+export const BackInfoElement = styled.div`
+  display: flex;
+  width: 77%;
+  margin-bottom: 0.4rem;
+  align-items: center;
+  .element-title {
+    display: flex;
+    padding-top: 0.2rem;
+    width: 40%;
+    color: #808080;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+
+  .element-content {
+    width: 70%;
+    font-size: 0.6rem;
+    font-weight: 600;
+  }
+
+`
