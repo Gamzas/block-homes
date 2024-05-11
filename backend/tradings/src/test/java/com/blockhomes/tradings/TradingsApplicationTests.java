@@ -1,13 +1,13 @@
-package com.blockhomes.chattings;
+package com.blockhomes.tradings;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChattingsApplicationTests {
+class TradingsApplicationTests {
 
-//	@Test
-//	void contextLoads() {
-//	}
+	@Test
+	void contextLoads() {
+	}
 
 }

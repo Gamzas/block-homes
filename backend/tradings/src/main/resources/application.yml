@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: tradings
+  config:
+    import:
+      - classpath:/keys.yml
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db.host:localhost:3306}/block-homes-dev?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: ${db.username}
+    password: ${db.password}
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+
+springdoc:
+  packages-to-scan: com.blockhomes.tradings.controller
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: alpha
