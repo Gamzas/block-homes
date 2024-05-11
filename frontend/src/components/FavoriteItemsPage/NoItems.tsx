@@ -1,6 +1,11 @@
 import * as n from '@components/FavoriteItemsPage/style/NoItemsStyle'
+import { useNavigate } from 'react-router-dom'
 
 const NoItems = () => {
+  const navigate = useNavigate()
+  const goEstate = () => {
+    navigate('/estate')
+  }
   return (
     <n.Container>
       <n.ContentContainer>
@@ -31,7 +36,7 @@ const NoItems = () => {
         </div>
         <div className="txt">관심매물이 없습니다.</div>
       </n.ContentContainer>
-      <n.BtnContainer>
+      <n.BtnContainer onClick={goEstate}>
         <div className="title">매물 구경하러 가기</div>
       </n.BtnContainer>
     </n.Container>
