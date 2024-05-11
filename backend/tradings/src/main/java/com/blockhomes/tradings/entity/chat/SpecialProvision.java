@@ -2,6 +2,7 @@ package com.blockhomes.tradings.entity.chat;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,8 @@ public class SpecialProvision extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer specialProvisionNo;
 
-    @Column(name = "content")
+    @NotNull
+    @Column(name = "content", nullable = false)
     private String content;
 
 }

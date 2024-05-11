@@ -3,6 +3,7 @@ package com.blockhomes.tradings.entity.item;
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,53 +21,68 @@ public class Item extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemNo;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_wallet_no")
+    @JoinColumn(name = "owner_wallet_no", nullable = false)
     private Wallet wallet;
 
-    @Column(name = "real_estate_did")
+    @NotNull
+    @Column(name = "real_estate_did", nullable = false)
     private String realEstateDID;
 
-    @Column(name = "transaction_type")
+    @NotNull
+    @Column(name = "transaction_type", nullable = false)
     private Integer transactionType;
 
-    @Column(name = "area")
+    @NotNull
+    @Column(name = "area", nullable = false)
     private Double area;
 
-    @Column(name = "price")
+    @NotNull
+    @Column(name = "price", nullable = false)
     private Integer price;
 
-    @Column(name = "real_estate_type")
+    @NotNull
+    @Column(name = "real_estate_type", nullable = false)
     private Integer realEstateType;
 
-    @Column(name = "room_number")
+    @NotNull
+    @Column(name = "room_number", nullable = false)
     private Integer roomNumber;
 
-    @Column(name = "toilet_number")
+    @NotNull
+    @Column(name = "toilet_number", nullable = false)
     private Integer toiletNumber;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "report_rank")
+    @NotNull
+    @Column(name = "report_rank", nullable = false)
     private Integer reportRank;
 
-    @Column(name = "building_floor")
+    @NotNull
+    @Column(name = "building_floor", nullable = false)
     private Integer buildingFloor;
 
-    @Column(name = "item_floor")
+    @NotNull
+    @Column(name = "item_floor", nullable = false)
     private Integer itemFloor;
 
-    @Column(name = "administration_cost")
+    @NotNull
+    @Column(name = "administration_cost", nullable = false)
     private Integer administrationCost;
 
-    @Column(name = "move_in_date")
+    @NotNull
+    @Column(name = "move_in_date", nullable = false)
     private LocalDateTime moveInDate;
 
-    @Column(name = "parking_rate")
+    @NotNull
+    @Column(name = "parking_rate", nullable = false)
     private Double parkingRate;
 
-    @Column(name = "have_elevator")
+    @NotNull
+    @Column(name = "have_elevator", nullable = false)
     private Boolean haveElevator;
 
 }

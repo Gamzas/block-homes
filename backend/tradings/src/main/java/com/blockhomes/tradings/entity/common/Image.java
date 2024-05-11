@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.entity.common;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,8 @@ public class Image extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer imageNo;
 
-    @Column(name = "image_url")
+    @NotNull
+    @Column(name = "image_url", nullable = false)
     private Integer imageUrl;
 
 }

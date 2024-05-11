@@ -2,6 +2,7 @@ package com.blockhomes.tradings.entity.item;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,8 @@ public class AdministrationFee extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer administrationFeeNo;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
 }

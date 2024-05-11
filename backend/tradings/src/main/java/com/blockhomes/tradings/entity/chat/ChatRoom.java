@@ -3,6 +3,7 @@ package com.blockhomes.tradings.entity.chat;
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.item.Item;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,17 +20,21 @@ public class ChatRoom extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer chatRoomNo;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_no")
+    @JoinColumn(name = "item_no", nullable = false)
     private Item item;
 
-    @Column(name = "seller_step")
+    @NotNull
+    @Column(name = "seller_step", nullable = false)
     private Integer sellerStep;
 
-    @Column(name = "buyer_step")
+    @NotNull
+    @Column(name = "buyer_step", nullable = false)
     private Integer buyerStep;
 
-    @Column(name = "session_id")
+    @NotNull
+    @Column(name = "session_id", nullable = false)
     private String sessionId;
 
 }
