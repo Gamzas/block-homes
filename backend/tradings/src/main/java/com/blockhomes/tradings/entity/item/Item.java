@@ -1,5 +1,7 @@
-package com.blockhomes.tradings.entity;
+package com.blockhomes.tradings.entity.item;
 
+import com.blockhomes.tradings.entity.common.BaseEntity;
+import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,21 +13,25 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Table(name = "item")
-public class Item {
+public class Item extends BaseEntity {
 
     @Id
     @Column(name = "item_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemNo;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_wallet_no")
+    private Wallet wallet;
 
     @Column(name = "real_estate_did")
     private String realEstateDID;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "additional_info_no")
-    private List<AdditionalInfo> additionalInfos;
-
     @Column(name = "transaction_type")
     private Integer transactionType;
+
+    @Column(name = "area")
+    private Double area;
 
     @Column(name = "price")
     private Integer price;
@@ -62,8 +68,5 @@ public class Item {
 
     @Column(name = "have_elevator")
     private Boolean haveElevator;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
 
 }

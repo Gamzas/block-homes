@@ -1,5 +1,6 @@
-package com.blockhomes.tradings.entity;
+package com.blockhomes.tradings.entity.item;
 
+import com.blockhomes.tradings.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +13,14 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @Table(name = "additional_info")
-public class AdditionalInfo {
+public class AdditionalInfo extends BaseEntity {
 
     @Id
-    @GeneratedValue
     @Column(name = "addditional_info_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer additionalInfoNo;
 
-    @Column(name = "additional_info_name")
+    @Column(name = "name")
     private String additionalInfoName;
-
-    @Column(name = "created_at", insertable = false)
-    private LocalDateTime createdAt;
 
 }

@@ -6,10 +6,10 @@ spring:
       - classpath:/keys.yml
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${db.host:localhost:3306}/block-homes?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://${db.host:localhost:3306}/block-homes-dev?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: ${db.username}
     password: ${db.password}
 

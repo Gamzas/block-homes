@@ -1,5 +1,8 @@
-package com.blockhomes.tradings.entity;
+package com.blockhomes.tradings.entity.wallet;
 
+import com.blockhomes.tradings.entity.common.BaseEntity;
+import com.blockhomes.tradings.entity.item.Item;
+import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +14,12 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "additional_info")
-public class Likes {
+@Table(name = "likes")
+public class Likes extends BaseEntity {
 
     @Id
-    @GeneratedValue
     @Column(name = "likes_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer likesNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,8 +29,5 @@ public class Likes {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_no")
     private Wallet wallet;
-
-    @Column(name = "created_at", insertable = false)
-    private LocalDateTime createdAt;
 
 }
