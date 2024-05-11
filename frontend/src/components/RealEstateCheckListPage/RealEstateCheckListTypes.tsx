@@ -1,10 +1,13 @@
 import React from 'react'
 import * as r from '@components/RealEstateCheckListPage/style/RealEstateCheckListTypesStyle'
 import { REAL_ESTATE_CHECK_LIST_DATA } from '@constants/RealEstateCheckListData'
+import { selectedCheckListTypeIndex } from '@stores/atoms/checkListStore'
+import { useAtom } from 'jotai'
 
 const RealEstateCheckListTypes = () => {
+  const [, setSelectedTypeIndex] = useAtom(selectedCheckListTypeIndex)
   const selectType = (index: number) => {
-    console.log(index)
+    setSelectedTypeIndex(index)
   }
 
   return (
