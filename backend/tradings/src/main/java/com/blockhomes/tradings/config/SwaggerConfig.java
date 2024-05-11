@@ -1,5 +1,7 @@
 package com.blockhomes.tradings.config;
 
+import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.annotations.servers.Servers;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -7,6 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Servers(value = {
+    @Server(url = "https://block-homes.kr", description = "블록홈즈 배포 서버"),
+
+})
 public class SwaggerConfig {
 
     @Bean
