@@ -1,5 +1,6 @@
 import * as r from '@pages/style/RealEstateCheckListPageStyle'
 import RealEstateCheckListTypes from '@components/RealEstateCheckListPage/RealEstateCheckListTypes'
+import RealEstateCheckList from '@components/RealEstateCheckListPage/RealEstateCheckList'
 
 const RealEstateCheckListPage = () => {
   return (
@@ -16,6 +17,7 @@ const RealEstateCheckListPage = () => {
         />
       </r.RealEstateCheckListPageHeader>
       <RealEstateCheckListTypes />
+      <RealEstateCheckList />
     </r.RealEstateCheckListPageContainer>
   )
 }
