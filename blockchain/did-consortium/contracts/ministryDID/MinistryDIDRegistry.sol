@@ -19,12 +19,10 @@ contract MinistryDIDRegistry is Ownable {
        
         didDocument.context = "https://www.w3.org/ns/did/v1";
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
-
         didDocument.publicKey.id = string(abi.encodePacked(didDocument.id,"#keys-1"));
         didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
         didDocument.publicKey.controller = didDocument.id;
         didDocument.publicKey.publicKeyHex = _publicKey;
-
         didDocument.authentication=didDocument.publicKey.id;
 
         didDocuments[didDocument.id] = didDocument;

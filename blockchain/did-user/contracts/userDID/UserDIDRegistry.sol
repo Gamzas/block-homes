@@ -18,14 +18,19 @@ contract UserDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function createDIDDocument() external onlyOwner {
+    function createDIDDocument(string calldata _publicKey) external onlyOwner {
         DIDStruct.DIDDocument memory didDocument;
+        
         didDocument.id = string(abi.encodePacked("did:klay:", HexUtils.toHexString(uint256(uint160(msg.sender)), 20)));
         didDocument.context = "https://www.w3.org/ns/did/v1";
+        didDocument.publicKey.id = string(abi.encodePacked(didDocument.id,"#keys-1"));
+        didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
+        didDocument.publicKey.controller = didDocument.id;
+        didDocument.publicKey.publicKeyHex = _publicKey;
+        didDocument.authentication=didDocument.publicKey.id;
 
         address taxAddress = address(new TaxPayment(msg.sender));
         taxAddresses[didDocument.id] = taxAddress;
-
         didDocuments[didDocument.id] = didDocument;
 
         emit DIDCreated(didDocument.id);
