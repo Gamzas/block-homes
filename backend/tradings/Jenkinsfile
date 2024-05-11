@@ -1,0 +1,126 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_PUBLIC_IP = '3.34.135.180'
+        SSH_CMD = 'ssh -i /var/jenkins_home/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no' // SSH 명령어 설정
+        DOCKER = 'sudo DOCKER_BUILDKIT=1 docker' // Docker BuildKit을 활성화하여 docker 명령어 설정
+        repository = "sejinnnnnn/blockhomes-backend" // Docker Hub ID와 Repository 이름
+        repo_name = "blockhomes-backend"
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-token') // Jenkins에 등록된 Docker Hub 인증 정보
+        dockerImage = '' // 빌드된 도커 이미지를 저장할 변수
+        REPO = "s10-final/S10P31C203"
+    }
+
+
+    stages {
+
+        stage('Add Env Files') {
+            steps {
+                dir('./backend/tradings') {
+                    sh 'chmod -R 700 src/main/resources'
+                    sh 'mkdir src/main/resources/config'
+
+                    withCredentials([file(credentialsId: 'trading-keys', variable: 'keys')]) {
+                        sh 'cp ${keys} src/main/resources/keys.yml'
+                    }
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('./backend/tradings') {
+                    script {
+                        sh "chmod +x ./gradlew"
+                        sh './gradlew clean build'
+                    }
+                }
+            }
+        }
+
+//         stage('SonarQube analysis') {
+//             steps {
+//                 withSonarQubeEnv('SonarQube-Server') {
+//                     dir('./backend') {
+//                         sh './gradlew sonarqube'
+//                     }
+//                 }
+//             }
+//         }
+
+        stage('Build image') {
+            steps {
+                script {
+                    dir('./backend/tradings') {
+                        dockerImage = docker.build repository
+                    }
+                }
+            }
+        }
+
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+            }
+        }
+
+        stage('Push image') {
+            steps {
+                script {
+                    sh 'docker push $repository' //docker push
+                }
+            }
+        }
+
+        stage('Clean image') {
+            steps {
+                sh 'docker rmi $repository' // jenkins 컨테이너에 있는 docker image 제거
+            }
+        }
+
+        stage('Deployment') {
+            steps {
+                script {
+                    try {
+                        sh '$SSH_CMD $DOCKER stop $repo_name'
+                        sh '$SSH_CMD $DOCKER rm $repo_name'
+                    } catch (e) {
+                        sh 'echo "fail to stop and remove container"'
+                    }
+                }
+                sh '$SSH_CMD $DOCKER pull $repository:latest'
+                sh """$SSH_CMD $DOCKER run --name $repo_name -d -p 8081:8081 $repository -e TZ=Asia/Seoul"""
+                //         sh '$SSH_CMD $DOCKER compose up'
+            }
+        }
+
+    }
+
+    post {
+        success {
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'good',
+                    message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)",
+                    endpoint: 'https://meeting.ssafy.com/hooks/nfsx17pzyjgkdgmk19xzp6q4ae',
+                    channel: 'Jenkins-S003'
+                )
+            }
+        }
+
+        failure {
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'danger',
+                    message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)",
+                    endpoint: 'https://meeting.ssafy.com/hooks/nfsx17pzyjgkdgmk19xzp6q4ae',
+                    channel: 'Jenkins-S003'
+                )
+            }
+        }
+    }
+
+}
