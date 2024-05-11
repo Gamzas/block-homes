@@ -13,7 +13,10 @@ const RealEstateCheckListTypes = () => {
   return (
     <r.RealEstateCheckListTypesContainer>
       {REAL_ESTATE_CHECK_LIST_DATA.map((realEstateCheckListTypeData, index) => (
-        <r.RealEstateCheckListType onClick={() => selectType(index)}>
+        <r.RealEstateCheckListType
+          key={index}
+          onClick={() => selectType(index)}
+        >
           <img
             src={realEstateCheckListTypeData.src}
             alt={realEstateCheckListTypeData.title}
