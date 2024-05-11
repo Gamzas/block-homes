@@ -1,60 +1,58 @@
 import styled from 'styled-components'
+import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
+import { CustomToggleButtonStyle } from '@common/style/CustomToggleButtonStyle'
 
 export const SignInContainer = styled.div`
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 8rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    position: relative;
+  position: relative;
 `
 
 export const SignInWrapper = styled.div`
+  width: 70%;
+  height: 5rem;
+  margin-bottom: 1rem;
+
+  .title {
     width: 100%;
-    height: 50%;
+    height: fit-content;
+    margin-bottom: 0.5rem;
+  }
+  .input {
+    width: 100%;
+    height: fit-content;
+    padding: 1rem;
+    border: 1px solid #c3c3c3;
+    border-radius: 3px;
+  }
 `
 
-export const SignInAccount = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+export const SignInButton = styled(CustomButtonStyle)`
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
 
-    .qr-code {
-        width: 100%;
-        height: fit-content;
-    }
-
-    .account-input {
-        width: 60%;
-        height: 56px;
-        border-radius: 10px;
-        border: 1px solid #c3c3c3;
-        padding: 10px;
-        margin-top: 5%;
-    }
+  &:hover,
+  &:active {
+    transform: translateX(-50%);
+  }
 `
-export const SignInButton = styled.div`
-    background-color: #216fea;
-    height: 56px;
-    width: 60%;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #ffffff;
+export const SignUpToggleButton = styled(CustomToggleButtonStyle)`
+  width: 70%;
+  margin-bottom: 1rem;
 
-    .symbol {
-        height: 56px;
-        width: 56px;
-        background-image: url('/icon/icon_klip.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-    }
+  .left {
+    padding: 4%;
+  }
+
+  .right {
+    padding: 4%;
+  }
 `
