@@ -1,4 +1,4 @@
-export const RealEstateCheckListData = [
+export const REAL_ESTATE_CHECK_LIST_DATA = [
   {
     src: '/image/image_check_list_supply_drainage.png',
     title: '수도와 배수',
