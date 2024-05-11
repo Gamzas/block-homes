@@ -18,8 +18,7 @@ pipeline {
         stage('Add Env Files') {
             steps {
                 dir('./backend/tradings') {
-//                     sh 'chmod -R 700 src/main/resources'
-//                     sh 'mkdir src/main/resources/config'
+                    sh 'chmod -R 700 src/main/resources'
 
                     withCredentials([file(credentialsId: 'trading-keys', variable: 'keys')]) {
                         sh 'cp ${keys} src/main/resources/keys.yml'
