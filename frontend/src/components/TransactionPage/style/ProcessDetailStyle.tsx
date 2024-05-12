@@ -8,8 +8,6 @@ interface ProcessDetailContainerProps {
 export const ProcessDetailContainer = styled.div<ProcessDetailContainerProps>`
   width: 17.5625rem;
   border-radius: 0.8rem;
-  /* width: ${props =>
-    props.stepIndex === props.currentStep ? '17.5625rem;' : '16rem'};  */
   transform: ${props =>
     props.stepIndex === props.currentStep ? 'scale(1.1)' : 'scale(1)'};
   background: ${props =>
