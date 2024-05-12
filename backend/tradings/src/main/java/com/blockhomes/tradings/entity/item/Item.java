@@ -2,14 +2,12 @@ package com.blockhomes.tradings.entity.item;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.wallet.Wallet;
-import com.blockhomes.tradings.util.LocalDateTimeUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -31,6 +29,10 @@ public class Item extends BaseEntity {
     @NotNull
     @Column(name = "real_estate_did", unique = true, nullable = false)
     private String realEstateDID;
+
+    @NotNull
+    @Column(name = "road_name_address", nullable = false)
+    private String roadNameAddress;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -107,6 +109,7 @@ public class Item extends BaseEntity {
     public Item(
         Wallet ownerWallet,
         String realEstateDID,
+        String roadNameAddress,
         TransactionType transactionType,
         Double area,
         Long price,
@@ -127,6 +130,7 @@ public class Item extends BaseEntity {
     ) {
         this.ownerWallet = ownerWallet;
         this.realEstateDID = realEstateDID;
+        this.roadNameAddress = roadNameAddress;
         this.transactionType = transactionType;
         this.area = area;
         this.price = price;
