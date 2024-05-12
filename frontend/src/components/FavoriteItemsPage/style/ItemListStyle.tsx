@@ -39,7 +39,8 @@ export const selectedItemContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  input {
+  input[type='checkbox'] {
+    background-color: white;
     margin-left: 0.7rem;
   }
 `
