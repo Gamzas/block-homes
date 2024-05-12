@@ -79,7 +79,7 @@ public class Item extends BaseEntity {
     @Column(name = "toilet_number", nullable = false)
     private Integer toiletNumber;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 500)
     @Size(max = 500)
     private String description;
 
