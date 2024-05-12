@@ -6,6 +6,7 @@ import RoomInfo from '@/components/EstateDetailPage/RoomInfo'
 import DetailFooter from '@/components/EstateDetailPage/DetailFooter'
 import { useAtom } from 'jotai'
 import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
+import DetailInfo from '@/components/EstateDetailPage/DetailInfo'
 
 const RealEstateDetailPage = () => {
   const [selectedItem] = useAtom(selectedItemAtom)
@@ -16,11 +17,14 @@ const RealEstateDetailPage = () => {
           <Header title={'매물 상세 조회'} isSearch={false} rightIconSrc={''} />
           <DetailTabMenu />
           <ItemSafetyCard condition={selectedItem.condition} />
-          <RoomInfo info={selectedItem}/>
+          <RoomInfo info={selectedItem} />
           <DetailFooter />
         </>
       ) : (
-        <div>잘못된접근입니다.</div>
+        <>
+          <Header title={'매물 상세 조회'} isSearch={false} rightIconSrc={''} />
+          <DetailInfo />
+        </>
       )}
     </r.Container>
   )
