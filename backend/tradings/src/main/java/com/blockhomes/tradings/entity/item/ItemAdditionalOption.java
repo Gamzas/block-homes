@@ -3,21 +3,20 @@ package com.blockhomes.tradings.entity.item;
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "item_additional_info")
-public class ItemAdditionalInfo extends BaseEntity {
+@Table(name = "item_additional_option")
+public class ItemAdditionalOption extends BaseEntity {
 
     @Id
-    @Column(name = "item_additional_info_no")
+    @Column(name = "item_additional_option_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer itemAdditionalInfoNo;
 
@@ -27,9 +26,14 @@ public class ItemAdditionalInfo extends BaseEntity {
     private Item item;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "additional_info_no", nullable = false)
-    private AdditionalInfo additionalInfo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "option_name", nullable = false)
+    private AdditionalOptionCategory additionalOptionCategory;
 
+    @Builder
+    public ItemAdditionalOption(Item item, AdditionalOptionCategory additionalOptionCategory) {
+        this.item = item;
+        this.additionalOptionCategory = additionalOptionCategory;
+    }
 
 }
