@@ -1,9 +1,9 @@
 import * as u from '@common/style/UserTypeToggleStyle'
-import { userAtom } from '@stores/atoms/userStore'
+import { userTypeAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 
 const UserTypeToggle = () => {
-  const [currentUser, setCurrentUser] = useAtom(userAtom)
+  const [currentUser, setCurrentUser] = useAtom(userTypeAtom)
 
   const toggleUserType = (type: number) => {
     setCurrentUser({ type: type })
