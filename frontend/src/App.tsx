@@ -14,7 +14,7 @@ import ReportPage from './pages/ReportPage'
 import EstateRegistrationPage from '@pages/EstateRegistrationPage'
 import MyPage from './pages/MyPage'
 import CallBackPage from '@pages/CallBackPage'
-import ChatPage from '@pages/ChatPage'
+import ChatListPage from '@pages/ChatListPage'
 import InfoProcessPage from '@pages/InfoProcessPage'
 import InfoSafePage from '@pages/InfoSafePage'
 import TransactionProgress from './pages/TransactionProgress'
@@ -35,7 +35,7 @@ const HomeRoutes = () => (
     <Route path="/estate-registration" element={<EstateRegistrationPage />} />
     <Route path="/mypage" element={<MyPage />} />
     <Route path="/callback/:result" element={<CallBackPage />} />
-    <Route path="/chat" element={<ChatPage />} />
+    <Route path="/chat" element={<ChatListPage />} />
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/transaction-progress" element={<TransactionProgress />} />
