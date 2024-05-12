@@ -11,7 +11,21 @@ const ChattingRoomPage = () => {
   const { chatNo } = useParams()
   const [user] = useAtom(userAtom)
 
+  const defaultMessage = {
+    chatNo: 0,
+    createdAt: '',
+    isRead: false,
+    message: '',
+    type: null,
+    userImage: null,
+    userName: user.name,
+    userNo: user.userNo,
+  }
+
+  const [messages, setMessages] = useState<MessageType[]>([])
+  const [newMessage, setNewMessage] = useState<MessageType>(defaultMessage)
   const scrollRef = useRef<HTMLDivElement>(null)
+
   const scrollToBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
