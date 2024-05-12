@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
 export const ChattingRoomPageContainer = styled.div`
-  width: 100%;
+  max-width: 390px;
   height: 100vh;
 `
