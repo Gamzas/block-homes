@@ -1,8 +1,8 @@
 package com.blockhomes.tradings.controller;
 
-import com.blockhomes.tradings.dto.item.request.LikeItemReq;
+import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
-import com.blockhomes.tradings.dto.item.response.LikeItemRes;
+import com.blockhomes.tradings.dto.item.response.ListItemRes;
 import com.blockhomes.tradings.dto.item.response.RegisterItemRes;
 import com.blockhomes.tradings.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,12 +27,12 @@ public class ItemController {
 
     private final ItemService itemService;
 
-//    @GetMapping("/list")
-//    public ResponseEntity<ItemListRes> listItems(ItemListReq req) {
-//        return ResponseEntity
-//            .status(OK)
-//            .body(itemService.listItems(req));
-//    }
+    @GetMapping("/list")
+    public ResponseEntity<ListItemRes> listItems(@ModelAttribute @Valid ListItemReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(itemService.listItems(req));
+    }
 
     @PostMapping("/register")
     @Operation(
