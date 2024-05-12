@@ -1,7 +1,7 @@
 import * as c from '@pages/style/ChattingRoomPageStyle'
 import Header from '@common/Header'
 import SendMessageInput from '@components/ChattingPage/SendMessageInput'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useParams } from 'react-router-dom'
