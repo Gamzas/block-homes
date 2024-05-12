@@ -3,9 +3,23 @@ import ProcessDetail from './ProcessDetail'
 import * as b from './style/BuyStyle'
 import TransactionStep from './TransactionStep'
 import { useState } from 'react'
+import SpecialContract from './SpecialContract'
+
 
 const Seller = () => {
   const [currentindex, setCurrentIndex] = useState(0)
+  const [isSpecialOpen, setIsSpecialOpenOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsSpecialOpenOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsSpecialOpenOpen(false);
+  };
+
+  
+  
   return (
     <b.BuyMainContainer>
       {/* 확인용 버튼 삭제 필요 */}
@@ -50,6 +64,7 @@ const Seller = () => {
                 fontWeight: '500',
                 boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
+              onClick={handleOpenModal} 
             >
               특약 사항 작성 하기
             </CustomButtonStyle>
@@ -64,6 +79,10 @@ const Seller = () => {
         <div className="button-box">
         
         </div>
+        <SpecialContract
+                 open={isSpecialOpen} // 모달 열림 상태
+                 handleClose={handleCloseModal} // 모달 닫기 함수 전달
+                 />
 
         <ProcessDetail
           title="[[거래 완료]]"
