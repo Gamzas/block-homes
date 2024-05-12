@@ -21,6 +21,7 @@ import TransactionProgress from './pages/TransactionProgress'
 import RealEstateCheckListPage from '@pages/RealEstateCheckListPage'
 import FavoriteItemsPage from '@pages/FavoriteItemsPage'
 import ChattingRoomPage from '@pages/ChattingRoomPage'
+import MyEstatePage from './pages/MyEstatePage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -43,6 +44,7 @@ const HomeRoutes = () => (
     <Route path="/transaction-progress" element={<TransactionProgress />} />
     <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
     <Route path="/likes" element={<FavoriteItemsPage />} />
+    <Route path="/myestate" element={<MyEstatePage />} />
   </Routes>
 )
 

@@ -42,7 +42,7 @@ const RoomInfo = (props: PropsType) => {
           <div className="info-box" key={index}>
             <img
               className="icon"
-              src={`icon/icon_room_info_${item.icon}.png`}
+              src={`/icon/icon_room_info_${item.icon}.png`}
               alt={`${item.icon}_icon`}
             />
             <div className="info-text">{item.info}</div>
@@ -61,7 +61,7 @@ const RoomInfo = (props: PropsType) => {
                 <div className="info-box" key={index}>
                   <img
                     className="icon"
-                    src={`icon/icon_room_info_${info.icon}.png`}
+                    src={`/icon/icon_room_info_${info.icon}.png`}
                     alt={`${info.icon} icon`}
                   />
                   <div className="name">{info.name}</div>
