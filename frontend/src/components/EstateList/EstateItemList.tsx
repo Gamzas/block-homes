@@ -36,7 +36,7 @@ const EstateItemList = () => {
           ) : (
             <>
               {estateItemList.map((item, index) => (
-                <EstateItemCard key={index} {...item}/>
+                <EstateItemCard key={index} {...item} />
               ))}
             </>
           )
