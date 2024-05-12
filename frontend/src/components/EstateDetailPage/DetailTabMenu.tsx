@@ -9,20 +9,21 @@ const DetailTabMenu = () => {
       content: [
         'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169087905318351049.jpeg?gif=1&w=480&h=480&c=c&q=80&webp=1',
         'https://ms-housing.kr/data/file/residence_gallery/1893533933_JMZkwRQt_7e007afcf36372f893058c91dcc64b65fed06003.jpg',
-        'https://ms-housing.kr/data/file/residence_gallery/1893533933_JMZkwRQt_7e007afcf36372f893058c91dcc64b65fed06003.jpg',
+        'https://cdn.imweb.me/thumbnail/20211222/c0a271a8dfdcf.jpg',
       ],
     },
     {
       name: 'floor_plan',
       content: [
         'https://cdn.bizwatch.co.kr/news/photo/2017/01/09/34f7001900daf6a1d6834b1716c199b8165840.jpg',
-        'https://cdn.bizwatch.co.kr/news/photo/2017/01/09/34f7001900daf6a1d6834b1716c199b8165840.jpg',
+        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/165447962465729230.png?gif=1&w=480&h=480&c=c&q=80',
       ],
     },
     {
       name: '360',
       content: [
         'https://mblogthumb-phinf.pstatic.net/MjAyMDA0MDZfMjI2/MDAxNTg2MTY0MjMyMDg1.rrhT5tfVxYciD0U6Ze4eka95kJtrmSbHKilIQkvZ2KMg.ri446TdMF2fxBzyUlORyT9_E8lwrIlU4DY7Ksh4_JGQg.JPEG.ejejej1775/%EC%95%84%ED%8C%8C%ED%8A%B83d.jpg?type=w800',
+        'https://blog.kakaocdn.net/dn/buOonG/btqOizVak2A/4SNqcJaiiaJYwg655ZokS1/img.png',
       ],
     },
   ]
@@ -35,6 +36,7 @@ const DetailTabMenu = () => {
     swipeToSlide: true,
     adaptiveHeight: true,
     dotsClass: 'slick-dots',
+    arrows: false,
   }
   const tabMenuArr = ['image', 'floor_plan', '360']
   const selectMenuHandler = (index: number) => {

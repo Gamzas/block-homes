@@ -53,7 +53,7 @@ export const Desc = styled.div`
   .slick-dots li button:before {
     font-size: 2rem; /* 점의 크기를 늘립니다 */
     line-height: 20px; /* 텍스트 라인 높이를 조정하여 버튼 내부 중앙에 위치하도록 합니다 */
-    color: #cfcfcf; /* dots 색상 변경 */
+    color: #9b9b9b; /* dots 색상 변경 */
   }
 
   .slick-dots li.slick-active button:before {
