@@ -2,8 +2,10 @@ package com.blockhomes.tradings.entity.item;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.wallet.Wallet;
+import com.blockhomes.tradings.util.LocalDateTimeUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -24,15 +26,26 @@ public class Item extends BaseEntity {
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_wallet_no", nullable = false)
-    private Wallet wallet;
+    private Wallet ownerWallet;
 
     @NotNull
-    @Column(name = "real_estate_did", nullable = false)
+    @Column(name = "real_estate_did", unique = true, nullable = false)
     private String realEstateDID;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type", nullable = false)
-    private Integer transactionType;
+    private TransactionType transactionType;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "real_estate_type", nullable = false)
+    private RealEstateType realEstateType;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "report_rank", nullable = false)
+    private ReportRank reportRank;
 
     @NotNull
     @Column(name = "area", nullable = false)
@@ -40,11 +53,23 @@ public class Item extends BaseEntity {
 
     @NotNull
     @Column(name = "price", nullable = false)
-    private Integer price;
+    private Long price;
 
     @NotNull
-    @Column(name = "real_estate_type", nullable = false)
-    private Integer realEstateType;
+    @Column(name = "monthly_price", nullable = false)
+    private Integer monthlyPrice;
+
+    @NotNull
+    @Column(name = "administration_cost", nullable = false)
+    private Integer administrationCost;
+
+    @NotNull
+    @Column(name = "latitude", nullable = false)
+    private Double latitude;
+
+    @NotNull
+    @Column(name = "longitude", nullable = false)
+    private Double longitude;
 
     @NotNull
     @Column(name = "room_number", nullable = false)
@@ -55,11 +80,8 @@ public class Item extends BaseEntity {
     private Integer toiletNumber;
 
     @Column(name = "description")
+    @Size(max = 500)
     private String description;
-
-    @NotNull
-    @Column(name = "report_rank", nullable = false)
-    private Integer reportRank;
 
     @NotNull
     @Column(name = "building_floor", nullable = false)
@@ -68,10 +90,6 @@ public class Item extends BaseEntity {
     @NotNull
     @Column(name = "item_floor", nullable = false)
     private Integer itemFloor;
-
-    @NotNull
-    @Column(name = "administration_cost", nullable = false)
-    private Integer administrationCost;
 
     @NotNull
     @Column(name = "move_in_date", nullable = false)
@@ -84,5 +102,48 @@ public class Item extends BaseEntity {
     @NotNull
     @Column(name = "have_elevator", nullable = false)
     private Boolean haveElevator;
+
+    @Builder
+    public Item(
+        Wallet ownerWallet,
+        String realEstateDID,
+        TransactionType transactionType,
+        Double area,
+        Long price,
+        Integer monthlyPrice,
+        Integer administrationCost,
+        Double latitude,
+        Double longitude,
+        RealEstateType realEstateType,
+        Integer roomNumber,
+        Integer toiletNumber,
+        String description,
+        ReportRank reportRank,
+        Integer buildingFloor,
+        Integer itemFloor,
+        LocalDateTime moveInDate,
+        Double parkingRate,
+        Boolean haveElevator
+    ) {
+        this.ownerWallet = ownerWallet;
+        this.realEstateDID = realEstateDID;
+        this.transactionType = transactionType;
+        this.area = area;
+        this.price = price;
+        this.monthlyPrice = monthlyPrice;
+        this.administrationCost = administrationCost;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.realEstateType = realEstateType;
+        this.roomNumber = roomNumber;
+        this.toiletNumber = toiletNumber;
+        this.description = description;
+        this.reportRank = reportRank;
+        this.buildingFloor = buildingFloor;
+        this.itemFloor = itemFloor;
+        this.moveInDate =moveInDate;
+        this.parkingRate = parkingRate;
+        this.haveElevator = haveElevator;
+    }
 
 }
