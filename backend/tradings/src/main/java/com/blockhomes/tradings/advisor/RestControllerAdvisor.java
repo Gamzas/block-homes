@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.advisor;
 
 import com.blockhomes.tradings.dto.BaseResponseBody;
+import com.blockhomes.tradings.exception.common.DateNotFormattedException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,17 +44,17 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return 내용과 코드를 포함한 ResponseEntity 객체
      */
-//    @ExceptionHandler(value = {})
-//    public ResponseEntity<BaseResponseBody> badRequestError(Exception e) {
-//        log.error(e.getMessage());
-//
-//        return ResponseEntity
-//            .status(HttpStatus.BAD_REQUEST)
-//            .body(BaseResponseBody.builder()
-//                .message(e.getMessage())
-//                .statusCode(HttpStatus.BAD_REQUEST)
-//                .build());
-//    }
+    @ExceptionHandler(value = {DateNotFormattedException.class})
+    public ResponseEntity<BaseResponseBody> badRequestError(Exception e) {
+        log.error(e.getMessage());
+
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(BaseResponseBody.builder()
+                .message(e.getMessage())
+                .statusCode(HttpStatus.BAD_REQUEST)
+                .build());
+    }
 
     /**
      * 401 Error를 처리하는 메서드입니다.
