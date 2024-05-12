@@ -32,7 +32,7 @@ const FavoriteItems = [
 
 // TODO 삭제로직 수정
 const ItemList = () => {
-  const [editActive, setEditActive] = useState(true)
+  const [editActive, setEditActive] = useState(false)
   // const [selectedItems, setSelectedItems] = useState(new Set())
   // TODO 서버 연결 시 찜한 목록 아래 변수 사용하기!
   // const [favoriteItems, setFavoriteItems] = useState(FavoriteItems) // 상태에 초기 아이템 목록을 저장합니다.
