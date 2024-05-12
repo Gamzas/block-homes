@@ -14,14 +14,14 @@ const DetailInfo = () => {
   const [selectedItem] = useAtom(selectedItemAtom)
 
   const { id } = useParams()
-  const [item, setItem] = useState(null)
-  const [loading, setLoading] = useState(true)
+  // const [item, setItem] = useState(null)
+  // const [loading, setLoading] = useState(true)
   // DELETE 임시 , 삭제하기
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/items/${id}`)
-        setItem(response.data)
+        // const response = await axios.get(`/api/items/${id}`)
+        // setItem(response.data)
         // setLoading(false)
       } catch (error) {
         if (error.response && error.response.status === 404) {
