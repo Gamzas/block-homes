@@ -1,4 +1,4 @@
-package com.blockhomes.tradings.repository;
+package com.blockhomes.tradings.repository.wallet;
 
 import com.blockhomes.tradings.entity.wallet.Likes;
 import com.blockhomes.tradings.entity.wallet.Wallet;

@@ -8,7 +8,7 @@ import com.blockhomes.tradings.dto.wallet.response.GetWalletRes;
 import com.blockhomes.tradings.dto.wallet.response.RegisterWalletRes;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
-import com.blockhomes.tradings.repository.WalletRepository;
+import com.blockhomes.tradings.repository.wallet.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,9 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public CheckWalletRes checkWallet(CheckWalletReq req) {
-        Wallet wallet = walletRepository.getWalletByName(req.getName()).orElseThrow(WalletNotFoundException::new);
+        Wallet wallet = walletRepository
+            .getWalletByNameAndPhoneNumber(req.getName(), req.getPhoneNumber())
+            .orElseThrow(WalletNotFoundException::new);
 
         return CheckWalletRes.builder()
             .walletAddress(wallet.getWalletAddress())
@@ -34,7 +36,9 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public GetWalletRes getWallet(GetWalletReq req) {
-        Wallet wallet = walletRepository.getWalletByWalletAddress(req.getWalletAddress()).orElseThrow(WalletNotFoundException::new);
+        Wallet wallet = walletRepository
+            .getWalletByWalletAddress(req.getWalletAddress())
+            .orElseThrow(WalletNotFoundException::new);
 
         return GetWalletRes.builder()
             .walletAddress(wallet.getWalletAddress())
@@ -51,11 +55,14 @@ public class WalletServiceImpl implements WalletService {
             .walletAddress(req.getWalletAddress())
             .encPrivateKey(req.getEncPrivateKey())
             .name(req.getName())
+            .phoneNumber(req.getPhoneNumber())
             .build());
 
         return RegisterWalletRes.builder()
             .walletAddress(registeredWallet.getWalletAddress())
             .encPrivateKey(registeredWallet.getEncPrivateKey())
+            .name(registeredWallet.getName())
+            .phoneNumber(registeredWallet.getPhoneNumber())
             .createdAt(registeredWallet.getCreatedAt())
             .build();
     }

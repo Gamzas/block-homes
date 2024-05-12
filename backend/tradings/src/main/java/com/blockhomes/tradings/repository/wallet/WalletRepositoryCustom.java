@@ -1,4 +1,4 @@
-package com.blockhomes.tradings.repository;
+package com.blockhomes.tradings.repository.wallet;
 
 import org.springframework.data.repository.NoRepositoryBean;
 

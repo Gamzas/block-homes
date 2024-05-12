@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -17,6 +19,9 @@ public class RegisterItemReq {
 
     @Schema(description = "매물 부동산 DID", example = "did:klay:abcd...")
     private String realEstateDID;
+
+    @Schema(description = "도로명주소", example = "서울특별시 광진구 능동로 120")
+    private String roadNameAddress;
 
     @Min(1) @Max(3)
     @Schema(description = "거래 형식", example = "1 : 월세, 2 : 전세, 3 : 매매")
@@ -33,6 +38,14 @@ public class RegisterItemReq {
 
     @Schema(description = "관리비", example = "100000 (없으면 0)")
     private Integer administrationCost;
+
+    @Min(1) @Max(5)
+    @Schema(description = "관리비 항목", example = "1 : 전기비, 2 : 가스비, 3 : 수도비, 4 : 인터넷, 5 : TV")
+    private List<Integer> administrationFeeCategoryList;
+
+    @Min(1) @Max(12)
+    @Schema(description = "옵션 항목", example = "1 : 에어컨, 2 : 냉장고, 3 : 세탁기, 4 : 가스레인지, 5 : 인덕션, 6 : 전자레인지, 7 : 책상, 8 : 책장, 9 : 침대, 10 : 옷장, 11 : 신발장, 12 : 싱크대")
+    private List<Integer> additionalOptionCategoryList;
 
     @Schema(description = "위도")
     private Double latitude;
