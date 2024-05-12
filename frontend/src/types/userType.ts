@@ -1,5 +1,10 @@
-export interface UserType {
+export interface UserTypeType {
   type: number // 0 임차인 1 임대인
+}
+
+export interface UserType {
+  userNo: number
+  name: string
 }
 
 export interface SignInParamsType {

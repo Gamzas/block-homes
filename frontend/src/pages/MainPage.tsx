@@ -4,18 +4,18 @@ import TopCard from '@components/MainPage/TopCard'
 import RealEstateCategory from '@components/MainPage/RealEstateCategory'
 import UserTypeToggle from '@common/UserTypeToggle'
 import { useAtom } from 'jotai'
-import { userAtom } from '@stores/atoms/userStore'
+import { userTypeAtom } from '@stores/atoms/userStore'
 import OwnEstateDidList from '@components/MainPage/OwnEstateDidList'
 import InfoCardSlider from '@components/MainPage/InfoCardSlider'
 
 const MainPage = () => {
-  const [currentUser] = useAtom(userAtom)
+  const [currentUserType] = useAtom(userTypeAtom)
   return (
     <h.MainPageContainer>
       <TopCard />
       <InfoCardSlider />
-      {currentUser.type === 0 && <RealEstateCategory />}
-      {currentUser.type === 1 && <OwnEstateDidList />}
+      {currentUserType.type === 0 && <RealEstateCategory />}
+      {currentUserType.type === 1 && <OwnEstateDidList />}
       <UserTypeToggle />
       <Footer />
     </h.MainPageContainer>
