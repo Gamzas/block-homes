@@ -13,6 +13,7 @@ export const ItemCardContainer = styled.div<colorType>`
   position: relative;
   margin-top: 1rem;
   z-index: 0;
+  overflow: hidden;
 `
 
 export const BackgroundContainer = styled.div`
@@ -26,13 +27,7 @@ export const BackgroundContainer = styled.div`
     width: 100%;
     height: 10rem;
   }
-  .bigWave {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 1.5rem;
-  }
-
+  .bigWave,
   .smallWave {
     position: absolute;
     bottom: 0;
@@ -42,8 +37,10 @@ export const BackgroundContainer = styled.div`
 `
 export const ItemStatusContainer = styled.div`
   position: absolute;
-  right: 0.2rem;
-  top: -0.4rem;
+  right: 8%;
+  top: 3%;
+  z-index: 10; // z-index 높게 설정
+
   .polygon {
     /* position: absolute; */
     width: 100%;
@@ -136,4 +133,12 @@ export const ItemPriceInfoContainer = styled.div`
     font-weight: 500;
     margin-bottom: 0.2rem;
   }
+`
+
+export const ItemCardWrapper = styled.div`
+  position: relative;
+  width: 100%; // 적절히 조정 필요
+  height: auto; // 적절히 조정 필요
+  display: flex;
+  justify-content: center;
 `

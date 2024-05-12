@@ -17,9 +17,9 @@ export const ItemContainer = styled.div`
 `
 
 export const EditContainer = styled.div`
-  width: 90%;
+  width: 85%;
   text-align: end;
-  color: #000;
+  color: #757474;
   font-size: 0.875rem;
   font-weight: 500;
   .disabled {
@@ -34,12 +34,12 @@ export const EditContainer = styled.div`
   }
 `
 
-export const selectedItmeContainer = styled.div`
+export const selectedItemContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
 
   input {
-    /* margin-left: 0.7rem; */
+    margin-left: 0.7rem;
   }
 `

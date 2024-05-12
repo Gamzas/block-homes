@@ -17,6 +17,7 @@ export const SafetyCardContainer = styled.div<colorType>`
   height: 7rem;
   border-radius: 1.3rem;
   background: ${props => props.$color};
+  overflow: hidden;
 
   position: relative;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
