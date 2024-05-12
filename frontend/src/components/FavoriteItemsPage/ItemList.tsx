@@ -92,7 +92,7 @@ const ItemList = () => {
       </i.EditContainer>
       <i.ItemContainer>
         {FavoriteItems.map((item, index) => (
-          <i.selectedItmeContainer>
+          <i.selectedItemContainer>
             {editActive && (
               <input
                 type="checkbox"
@@ -101,7 +101,7 @@ const ItemList = () => {
               />
             )}
             <EstateItemCard key={index} {...item} />
-          </i.selectedItmeContainer>
+          </i.selectedItemContainer>
         ))}
       </i.ItemContainer>
     </i.ItemListWrapper>
