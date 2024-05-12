@@ -1,4 +1,4 @@
-import { MoreFunctionCollectionContainer } from '@components/ChattingPage/style/MoreFunctionCollectionStyle'
+import * as m from '@components/ChattingPage/style/MoreFunctionCollectionStyle'
 
 const MoreFunctionCollection = () => {
   const chatRoomNo = 1
@@ -26,9 +26,22 @@ const MoreFunctionCollection = () => {
     },
   ]
   return (
-    <MoreFunctionCollectionContainer>
-      뭐가 들어가는게 좋을까나
-    </MoreFunctionCollectionContainer>
+    <m.MoreFunctionCollectionContainer>
+      {moreFunctionDatas.map(moreFunctionData => (
+        <m.MoreFunctionData>
+          <div className="more-function-data-image-container">
+            <img
+              src={moreFunctionData.src}
+              alt={moreFunctionData.title}
+              className="more-function-data-image"
+            />
+          </div>
+          <div className="more-function-data-title">
+            {moreFunctionData.title}
+          </div>
+        </m.MoreFunctionData>
+      ))}
+    </m.MoreFunctionCollectionContainer>
   )
 }
 
