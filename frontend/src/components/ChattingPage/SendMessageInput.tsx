@@ -1,5 +1,10 @@
 import React from 'react'
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
+import React, { useState } from 'react'
+import { SendMessageInputPropsType } from '@/types/chatType'
+
+const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
+  const { sendButtonClick, message, onChange } = SendMessageInputProps
   const [isShowMoreFunction, setIsShowMoreFunction] = useState(false)
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -23,8 +28,14 @@ import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
             src="/icon/icon_plus_gray.png"
           />
         </s.PlusButtonContainer>
-        <input className="message-input" placeholder="메시지 보내기" />
-        <s.SendButtonContainer>
+        <input
+          className="message-input"
+          value={message}
+          onKeyUp={handleKeyUp}
+          onChange={onChange}
+          placeholder="메시지 보내기"
+        />
+        <s.SendButtonContainer onClick={sendButtonClick}>
           <img
             className="send-button"
             src="/icon/icon_send_message.png"
