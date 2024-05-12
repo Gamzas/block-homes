@@ -38,7 +38,7 @@ export const selectedItemContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
-
+  align-items: center;
   input {
     margin-left: 0.7rem;
   }
