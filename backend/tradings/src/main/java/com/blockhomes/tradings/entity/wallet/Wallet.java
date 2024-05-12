@@ -24,7 +24,7 @@ public class Wallet extends BaseEntity {
     private String walletAddress;
 
     @NotNull
-    @Column(name = "user_did", nullable = false)
+    @Column(name = "user_did", unique = true, nullable = false)
     private String userDID;
 
     @NotNull
