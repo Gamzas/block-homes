@@ -35,11 +35,16 @@ public class Wallet extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Column(name = "phone_number", nullable = false)
+    private String phoneNumber;
+
     @Builder
-    public Wallet(String walletAddress, String encPrivateKey, String name) {
+    public Wallet(String walletAddress, String encPrivateKey, String name, String phoneNumber) {
         this.walletAddress = walletAddress;
         this.encPrivateKey = encPrivateKey;
         this.name = name;
+        this.phoneNumber = phoneNumber;
 
         userDID = "did:klay:" + walletAddress;
     }
