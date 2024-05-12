@@ -9,6 +9,8 @@ import { MessageType } from '@/types/chatType'
 
 const ChattingRoomPage = () => {
   const { chatNo } = useParams()
+  const [user] = useAtom(userAtom)
+
   const scrollRef = useRef<HTMLDivElement>(null)
   const scrollToBottom = () => {
     if (scrollRef.current) {
