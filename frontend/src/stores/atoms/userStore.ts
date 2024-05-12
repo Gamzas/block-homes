@@ -6,6 +6,11 @@ const currentUser = {
   type: 0, //0 임차인 1 임대인
 }
 
+export const userTypeAtom = atomWithStorage<UserTypeType>(
+  'currentUserType',
+  currentUserType,
+)
+
 export const userAtom = atomWithStorage<UserType>('currentUser', currentUser)
 
 // FIX member 임시 데이터!!!
