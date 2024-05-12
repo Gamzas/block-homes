@@ -1,6 +1,7 @@
 import * as c from '@components/ChatPage/style/ChatPreviewComponentStyle'
 import React, { useEffect, useState } from 'react'
 import { ChatComponentProps } from '@/types/components/chatType'
+import { useNavigate } from 'react-router-dom'
 
 const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   representativeImage,
@@ -9,9 +10,11 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   price,
   lastChat,
   dangerType,
+  chatRoomNum,
 }) => {
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
+  const navigate = useNavigate()
 
   const formatPrice = (price: number) => {
     const units = ['원', '만', '억']
@@ -46,8 +49,12 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
     formatPrice(price)
   }, [transactionType, price])
 
+  const handleClick = () => {
+    navigate(`/chat/${chatRoomNum}`)
+  }
+
   return (
-    <c.ChatComponentContainer>
+    <c.ChatComponentContainer onClick={handleClick}>
       <img className="estate-image" alt="매물 사진" src={representativeImage} />
       <c.ChatComponentRightContainer>
         <div className="address">{address}</div>
