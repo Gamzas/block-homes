@@ -1,11 +1,16 @@
 import React from 'react'
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
+  const [isShowMoreFunction, setIsShowMoreFunction] = useState(false)
 
 const SendMessageInput = () => {
+  const clickIsShowMoreFunction = () => {
+    setIsShowMoreFunction(!isShowMoreFunction)
+  }
+
   return (
     <s.SendMessageInputContainer>
       <s.SendMessageInputWrap>
-        <s.PlusButtonContainer>
+        <s.PlusButtonContainer onClick={clickIsShowMoreFunction}>
           <img
             className="plus-button"
             alt="더보기"
