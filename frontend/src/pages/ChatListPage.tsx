@@ -2,7 +2,7 @@ import * as c from '@pages/style/ChatPageStyle'
 import Footer from '@common/Footer'
 import ChatList from '@components/ChatPage/ChatList'
 
-const ChatPage = () => {
+const ChatListPage = () => {
   return (
     <c.ChatPageContainer>
       <ChatList />
@@ -11,4 +11,4 @@ const ChatPage = () => {
   )
 }
 
-export default ChatPage
+export default ChatListPage

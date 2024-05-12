@@ -5,4 +5,5 @@ export interface ChatComponentProps {
   price: number
   lastChat: string
   dangerType: number
+  chatRoomNum: number
 }
