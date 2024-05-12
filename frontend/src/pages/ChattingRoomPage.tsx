@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { MessageType } from '@/types/chatType'
 
 const ChattingRoomPage = () => {
+  const { chatNo } = useParams()
   const scrollRef = useRef<HTMLDivElement>(null)
   const scrollToBottom = () => {
     if (scrollRef.current) {
