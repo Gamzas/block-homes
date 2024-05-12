@@ -1,4 +1,4 @@
-import ChatPreviewComponent from '@components/ChatPage/ChatPreviewComponent'
+import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
 
 const ChatList = () => {
   const chatRoomDatas = [

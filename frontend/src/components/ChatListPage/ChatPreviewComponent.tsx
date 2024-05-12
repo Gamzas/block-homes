@@ -1,4 +1,4 @@
-import * as c from '@components/ChatPage/style/ChatPreviewComponentStyle'
+import * as c from '@components/ChatListPage/style/ChatPreviewComponentStyle'
 import React, { useEffect, useState } from 'react'
 import { ChatComponentProps } from '@/types/components/chatType'
 import { useNavigate } from 'react-router-dom'
