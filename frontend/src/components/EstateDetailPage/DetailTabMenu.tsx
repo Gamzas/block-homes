@@ -42,8 +42,8 @@ const DetailTabMenu = () => {
           >
             <img
               className="tab-icon"
-              src={`icon/icon_tab_${menu}.png`}
-              alt=""
+              src={`/icon/icon_tab_${menu}.png`}
+              alt="탭아이콘"
             />
           </div>
         ))}
