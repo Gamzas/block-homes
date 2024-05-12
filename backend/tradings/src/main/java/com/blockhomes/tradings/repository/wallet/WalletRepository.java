@@ -1,4 +1,4 @@
-package com.blockhomes.tradings.repository;
+package com.blockhomes.tradings.repository.wallet;
 
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface WalletRepository extends JpaRepository<Wallet, Integer>, WalletRepositoryCustom {
 
-    Optional<Wallet> getWalletByName(String name);
+    Optional<Wallet> getWalletByNameAndPhoneNumber(String name, String phoneNumber);
 
     Optional<Wallet> getWalletByWalletAddress(String walletAddress);
 
