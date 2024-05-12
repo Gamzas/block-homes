@@ -4,6 +4,7 @@ import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.common.Image;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,7 +34,15 @@ public class ItemImage extends BaseEntity {
     private Image image;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "item_image_category", nullable = false)
-    private Integer itemImageCategory;
+    private ItemImageCategory itemImageCategory;
+
+    @Builder
+    public ItemImage(Item item, Image image, ItemImageCategory itemImageCategory) {
+        this.item = item;
+        this.image = image;
+        this.itemImageCategory = itemImageCategory;
+    }
 
 }

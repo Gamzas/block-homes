@@ -12,6 +12,10 @@ spring:
     url: jdbc:mysql://${db.host:localhost:3306}/block-homes-dev?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
     username: ${db.username}
     password: ${db.password}
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 server:
   port: 8081

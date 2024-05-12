@@ -5,6 +5,7 @@ import com.blockhomes.tradings.entity.item.Item;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,5 +33,11 @@ public class Likes extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_no", nullable = false)
     private Wallet wallet;
+
+    @Builder
+    public Likes(Wallet wallet, Item item) {
+        this.wallet = wallet;
+        this.item = item;
+    }
 
 }

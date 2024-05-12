@@ -28,7 +28,7 @@ public class Wallet extends BaseEntity {
     private String userDID;
 
     @NotNull
-    @Column(name = "enc_private_key", nullable = false)
+    @Column(name = "enc_private_key", nullable = false, length = 1500)
     private String encPrivateKey;
 
     @NotNull
