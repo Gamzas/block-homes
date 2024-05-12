@@ -31,6 +31,14 @@ const ChattingRoomPage = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
   }
+
+  const sendTextMessage = () => {
+    if (newMessage.message.trim() !== '') {
+      setNewMessage(defaultMessage)
+      scrollToBottom()
+    }
+  }
+
   return (
     <c.ChattingRoomPageContainer>
       <Header
@@ -38,7 +46,13 @@ const ChattingRoomPage = () => {
         isSearch={false}
         rightIconSrc="/icon/icon_safety_card_report.png"
       />
-      <SendMessageInput />
+      <SendMessageInput
+        sendButtonClick={sendTextMessage}
+        message={newMessage.message}
+        onChange={e =>
+          setNewMessage(prev => ({ ...prev, message: e.target.value }))
+        }
+      />
     </c.ChattingRoomPageContainer>
   )
 }
