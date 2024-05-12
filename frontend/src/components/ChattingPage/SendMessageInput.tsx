@@ -1,4 +1,3 @@
-import React from 'react'
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
 import React, { useState } from 'react'
 import { SendMessageInputPropsType } from '@/types/chatType'
