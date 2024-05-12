@@ -8,25 +8,24 @@ contract UserIdentityVCRegistry is Ownable{
 
     mapping( string=> CitizenVCStruct.Credential) credentials;
 
-    constructor() Ownable(msg.sender) {}
+    uint256 serialNum;
+    constructor() Ownable(msg.sender) {
+        serialNum=1;
+    }
 
     event VCcreated(string id);
     event VCdeleted(string id);
 
-    function claimCredential(CitizenVCStruct.Credential memory _inputCredential) external onlyOwner{
-        require(credentials[_inputCredential.credentialSubject.id].issuanceDate == 0, "Credential already issued");
+    function claimCredential(string calldata _targetDID) external onlyOwner{
 
         CitizenVCStruct.Credential memory newCredential;
 
-        newCredential.context=_inputCredential.context;
-        newCredential.id=_inputCredential.id;
-        newCredential.credentialType=_inputCredential.credentialType;
-        newCredential.issuer=_inputCredential.issuer;
+        newCredential.context="https://www.w3.org/2018/credentials/v1";
+        newCredential.id=string(abi.encodePacked("www.mois.go.kr/credentials/",Strings.toString(serialNum)));
+        newCredential.credentialType="VerifiableCredential";
+        newCredential.issuer="www.molit.go.kr/issuers/938472";
         newCredential.issuanceDate=block.timestamp;
-        newCredential.credentialSubject.id=_inputCredential.credentialSubject.id;
-        newCredential.credentialSubject.citizenOf.id=_inputCredential.credentialSubject.citizenOf.id;
-        newCredential.credentialSubject.citizenOf.name=_inputCredential.credentialSubject.citizenOf.name;
-        newCredential.proof=_inputCredential.proof;
+        newCredential.credentialSubject.id=_targetDID;
 
         credentials[newCredential.id] = newCredential;
 
