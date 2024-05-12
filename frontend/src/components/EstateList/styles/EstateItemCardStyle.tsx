@@ -26,13 +26,7 @@ export const BackgroundContainer = styled.div`
     width: 100%;
     height: 10rem;
   }
-  .bigWave {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 1.5rem;
-  }
-
+  .bigWave,
   .smallWave {
     position: absolute;
     bottom: 0;
