@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const RealEstateCheckListContainer = styled.div`
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
   display: flex;
   flex-direction: column;
   align-content: center;
