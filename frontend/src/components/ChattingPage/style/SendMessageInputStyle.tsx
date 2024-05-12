@@ -4,9 +4,10 @@ interface IsShowMoreFunctionProps {
   $isShowMoreFunction: boolean
 }
 
-export const SendMessageInputContainer = styled.nav`
+export const SendMessageInputContainer = styled.div`
   position: fixed;
-  width: 390px;
+  width: 100%;
+  max-width: 390px;
   bottom: 0;
   z-index: 100;
 `
