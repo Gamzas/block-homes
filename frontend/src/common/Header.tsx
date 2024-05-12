@@ -19,6 +19,7 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
   const downloadPdf = useDownloadPDF()
   const [menu, setMenu] = useAtom(mapAtom)
   const navigate = useNavigate()
+
   return (
     <h.HeaderContainer>
       <h.HeaderLeftContainer>
@@ -46,6 +47,10 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
           onClick={() => {
             if (HeaderProps.rightIconSrc === '/icon/icon_download.png') {
               downloadPdf('paperContainer', 'contract.pdf')
+            } else if (
+              HeaderProps.rightIconSrc === '/icon/icon_safety_card_report.png'
+            ) {
+              navigate('/report')
             } else if (
               HeaderProps.rightIconSrc == '/icon/icon_map.png' ||
               HeaderProps.rightIconSrc == '/icon/icon_list.png'
