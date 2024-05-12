@@ -39,7 +39,6 @@ export const ItemStatusContainer = styled.div`
   position: absolute;
   right: 8%;
   top: 3%;
-  z-index: 10; // z-index 높게 설정
 
   .polygon {
     /* position: absolute; */
