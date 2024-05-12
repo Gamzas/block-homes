@@ -1,6 +1,7 @@
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
 import React, { useState } from 'react'
 import { SendMessageInputPropsType } from '@/types/chatType'
+import MoreFunctionCollection from '@components/ChattingPage/MoreFunctionCollection'
 
 const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
   const { sendButtonClick, message, onChange } = SendMessageInputProps
@@ -20,7 +21,10 @@ const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
   return (
     <s.SendMessageInputContainer>
       <s.SendMessageInputWrap>
-        <s.PlusButtonContainer onClick={clickIsShowMoreFunction}>
+        <s.PlusButtonContainer
+          onClick={clickIsShowMoreFunction}
+          $isShowMoreFunction={isShowMoreFunction}
+        >
           <img
             className="plus-button"
             alt="더보기"
@@ -42,6 +46,11 @@ const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
           />
         </s.SendButtonContainer>
       </s.SendMessageInputWrap>
+      <s.MoreFunctionCollectionContainer
+        $isShowMoreFunction={isShowMoreFunction}
+      >
+        <MoreFunctionCollection />
+      </s.MoreFunctionCollectionContainer>
     </s.SendMessageInputContainer>
   )
 }
