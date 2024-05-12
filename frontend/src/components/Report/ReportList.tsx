@@ -9,11 +9,12 @@ type ExtendedStep = Step & {
   placement: 'top' | 'bottom' | 'left' | 'right' | 'auto' | 'center'
 }
 
-const ReportList = () => {
+const ReportList = ({ onShowHeader, onHideHeader,isHeaderVisible }) => {
   const [run, setRun] = useState(false)
 
   const handleGuide = () => {
     console.log('Guide button clicked.')
+    onHideHeader(); 
     setRun(true)
   }
 
@@ -48,6 +49,7 @@ const ReportList = () => {
     const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED]
     if (finishedStatuses.includes(status)) {
       setRun(false)
+      onShowHeader();
     }
   }
 
@@ -58,12 +60,12 @@ const ReportList = () => {
         run={run}
         steps={steps}
         callback={handleJoyrideCallback}
-        // scrollToFirstStep
+        scrollToFirstStep
         showProgress
         showSkipButton
         styles={{
           options: {
-            zIndex: 1000,
+            zIndex: 10,
             width: 360, // 툴팁의 너비
             primaryColor: '#845bd3',
           },
@@ -78,7 +80,7 @@ const ReportList = () => {
         }}
       />
       <div>
-        <div className="question-box" onClick={handleGuide}>
+        {isHeaderVisible &&  <div className="question-box" onClick={handleGuide}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="2.3rem"
@@ -91,7 +93,8 @@ const ReportList = () => {
               fill="black"
             />
           </svg>
-        </div>
+        </div>}
+      
       </div>
       <div style={{ height: '1rem' }}></div>
       <div className="report-summary" style={{ width: '90%' }}>
