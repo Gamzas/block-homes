@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DangerDetailContainer } from './style/ContractDetailStyle'
+import { ContractDetailContainer } from './style/ContractDetailStyle'
 
 type Props = { isSelect: boolean; content: string }
 
@@ -11,7 +11,7 @@ const ContractDetail = (props: Props) => {
   }
 
   return (
-    <DangerDetailContainer onClick={()=>handleSelect()}>
+    <ContractDetailContainer onClick={()=>handleSelect()}>
       <div className={`title ${isSelect ? 'select' : ''}`}>
         <div>
               <svg
@@ -35,7 +35,7 @@ const ContractDetail = (props: Props) => {
         <div className="title-box">{props.content}</div>
 
       </div>
-    </DangerDetailContainer>
+    </ContractDetailContainer>
   )
 }
 
