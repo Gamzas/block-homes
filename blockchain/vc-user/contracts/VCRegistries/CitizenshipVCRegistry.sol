@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract OwnershipVCRegistry is Ownable{
+contract CitizenshipVCRegistry is Ownable{
 
     struct Proof{
         bytes32 r;
@@ -16,7 +16,7 @@ contract OwnershipVCRegistry is Ownable{
         string issuer;
         string subject;
         uint256 issuanceDate;
-        string value; //소유 부동산의 DID 
+        string value; //대한민국 국민임을 증명 
         Proof proof;
     }
 
@@ -33,17 +33,17 @@ contract OwnershipVCRegistry is Ownable{
     }
 
     function claimCredential(
-        string calldata _subject, uint256 _issuanceDate, bytes32 _r, bytes32 _s, uint8 _v,string calldata _value
+        string calldata _subject, uint256 _issuanceDate, bytes32 _r, bytes32 _s, uint8 _v
         ) external onlyOwner{
 
-        Credential storage newCredential = credentials[_value];
-        newCredential.issuer="did:klay:0xb5496deda0d1aa1f7ba39d0217642bcd74ae6cd4"; //국토교통부의 DID
+        Credential storage newCredential = credentials[_subject];
+        newCredential.issuer="did:klay:0x47a54b46770cc839830cbb150f7fa49c90e880ac"; //행정안전부의 DID
         newCredential.subject=_subject;
         newCredential.issuanceDate=_issuanceDate;
-        newCredential.value=_value;
+        newCredential.value="Republic of Korea";
         newCredential.proof=Proof(_r,_s,_v);
 
-        emit VCcreated(newCredential.value);
+        emit VCcreated(newCredential.subject);
     }
 
     function verifyCredential(string memory _id) public view returns (bool) {
