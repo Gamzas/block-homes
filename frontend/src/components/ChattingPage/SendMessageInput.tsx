@@ -2,7 +2,13 @@ import React from 'react'
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
   const [isShowMoreFunction, setIsShowMoreFunction] = useState(false)
 
-const SendMessageInput = () => {
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      sendButtonClick()
+    }
+  }
+
   const clickIsShowMoreFunction = () => {
     setIsShowMoreFunction(!isShowMoreFunction)
   }
