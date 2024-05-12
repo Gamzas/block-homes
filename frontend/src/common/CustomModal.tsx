@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Box, Button } from '@mui/material'
+import { Modal, Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { CustomButtonStyle } from './style/CustomButtonStyle'
 
