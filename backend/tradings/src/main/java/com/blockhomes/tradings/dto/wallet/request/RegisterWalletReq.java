@@ -12,5 +12,6 @@ public class RegisterWalletReq {
     private String walletAddress;
     private String encPrivateKey;
     private String name;
+    private String phoneNumber;
 
 }

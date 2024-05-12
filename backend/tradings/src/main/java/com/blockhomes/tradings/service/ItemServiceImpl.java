@@ -1,16 +1,22 @@
 package com.blockhomes.tradings.service;
 
-import com.blockhomes.tradings.dto.item.request.LikeItemReq;
+import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
-import com.blockhomes.tradings.dto.item.response.LikeItemRes;
+import com.blockhomes.tradings.dto.item.response.ListItemInstance;
+import com.blockhomes.tradings.dto.item.response.ListItemRes;
 import com.blockhomes.tradings.dto.item.response.RegisterItemRes;
 import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.item.*;
-import com.blockhomes.tradings.entity.wallet.Likes;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
-import com.blockhomes.tradings.repository.*;
+import com.blockhomes.tradings.repository.common.ImageRepository;
+import com.blockhomes.tradings.repository.item.ItemAdditionalOptionRepository;
+import com.blockhomes.tradings.repository.item.ItemAdministrationFeeRepository;
+import com.blockhomes.tradings.repository.item.ItemImageRepository;
+import com.blockhomes.tradings.repository.item.ItemRepository;
+import com.blockhomes.tradings.repository.wallet.LikesRepository;
+import com.blockhomes.tradings.repository.wallet.WalletRepository;
 import com.blockhomes.tradings.util.LocalDateTimeUtil;
 import com.blockhomes.tradings.util.S3BucketUtil;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +36,13 @@ public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
     private final WalletRepository walletRepository;
-    private final S3BucketUtil s3BucketUtil;
     private final ImageRepository imageRepository;
     private final ItemImageRepository itemImageRepository;
-
+    private final ItemAdditionalOptionRepository itemAdditionalOptionRepository;
+    private final ItemAdministrationFeeRepository itemAdministrationFeeRepository;
     private final LikesRepository likesRepository;
+
+    private final S3BucketUtil s3BucketUtil;
 
     private final String BASE_FOLDER_NAME = "items";
 
@@ -51,6 +59,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemRepository.save(Item.builder()
             .ownerWallet(ownerWallet)
             .realEstateDID(req.getRealEstateDID())
+            .roadNameAddress(req.getRoadNameAddress())
             .transactionType(TransactionType.valueToEnum(req.getTransactionType()))
             .area(req.getArea())
             .price(req.getPrice())
@@ -69,6 +78,32 @@ public class ItemServiceImpl implements ItemService {
             .parkingRate(req.getParkingRate())
             .haveElevator(req.getHaveElevator())
             .build());
+
+        // 관리비 카테고리 저장
+        List<Integer> feeCategoryList = req.getAdministrationFeeCategoryList();
+        List<ItemAdministrationFee> feeEntityList = new ArrayList<>();
+
+        for (Integer category : feeCategoryList) {
+            feeEntityList.add(ItemAdministrationFee.builder()
+                .item(item)
+                .administrationFeeCategory(AdministrationFeeCategory.valueToEnum(category))
+                .build());
+        }
+
+        itemAdministrationFeeRepository.saveAll(feeEntityList);
+
+        // 추가 옵션 카테고리 저장
+        List<Integer> optionCategoryList = req.getAdditionalOptionCategoryList();
+        List<ItemAdditionalOption> optionEntityList = new ArrayList<>();
+
+        for (Integer category : optionCategoryList) {
+            optionEntityList.add(ItemAdditionalOption.builder()
+                .item(item)
+                .additionalOptionCategory(AdditionalOptionCategory.valueToEnum(category))
+                .build());
+        }
+
+        itemAdditionalOptionRepository.saveAll(optionEntityList);
 
         String folderName = BASE_FOLDER_NAME + "/" + item.getItemNo();
 
@@ -167,9 +202,23 @@ public class ItemServiceImpl implements ItemService {
             .ownerWalletAddress(item.getOwnerWallet().getWalletAddress())
             .realEstateDID(item.getRealEstateDID())
             .createdAt(item.getCreatedAt())
-            .mainImageUrl(s3BucketUtil.getFileUrl(mainImageKey, folderName))
-            .roomImageUrls(s3BucketUtil.getFileUrlList(roomImageKeys, folderName))
-            .kitchenToiletUrls(s3BucketUtil.getFileUrlList(kitchenToiletImageKeys, folderName))
+            .build();
+    }
+
+    @Override
+    public ListItemRes listItems(ListItemReq req) {
+        List<ListItemInstance> itemsList = itemRepository.listItemsByFiltering(req);
+
+        if (itemsList.isEmpty()) {
+            return ListItemRes.builder()
+                .itemList(List.of())
+                .count(0)
+                .build();
+        }
+
+        return ListItemRes.builder()
+            .itemList(itemsList)
+            .count(itemsList.size())
             .build();
     }
 

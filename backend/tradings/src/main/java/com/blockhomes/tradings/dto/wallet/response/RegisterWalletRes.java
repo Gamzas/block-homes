@@ -13,6 +13,8 @@ public class RegisterWalletRes {
 
     private String walletAddress;
     private String encPrivateKey;
+    private String name;
+    private String phoneNumber;
     private LocalDateTime createdAt;
 
 }

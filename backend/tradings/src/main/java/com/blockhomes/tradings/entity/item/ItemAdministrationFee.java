@@ -3,6 +3,7 @@ package com.blockhomes.tradings.entity.item;
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,8 +28,14 @@ public class ItemAdministrationFee extends BaseEntity {
     private Item item;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "administration_fee_no", nullable = false)
-    private AdministrationFee administrationFee;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "fee_detail", nullable = false)
+    private AdministrationFeeCategory administrationFeeCategory;
+
+    @Builder
+    public ItemAdministrationFee(Item item, AdministrationFeeCategory administrationFeeCategory) {
+        this.item = item;
+        this.administrationFeeCategory = administrationFeeCategory;
+    }
 
 }
