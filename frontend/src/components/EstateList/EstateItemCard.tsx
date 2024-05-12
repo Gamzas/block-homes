@@ -40,7 +40,7 @@ const EstateItemCard = (props: PropsType) => {
     navigate('/estate-detail')
   }
   return (
-    <>
+    <c.ItemCardWrapper>
       <c.ItemCardContainer $color={fourthColor} onClick={goDetail}>
         <c.LocationContainer $color={mainColor}>
           <svg
@@ -71,22 +71,7 @@ const EstateItemCard = (props: PropsType) => {
           <div className="location-text">{address}</div>
         </c.LocationContainer>
         <c.ItemImage src="https://i0.wp.com/www.gangnamapt.com/wp-content/uploads/2023/01/20230105_180953_HDR.jpg?resize=480%2C360" />
-        <c.ItemStatusContainer>
-          <svg
-            className="polygon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="41"
-            height="56"
-            viewBox="0 0 41 56"
-            fill="none"
-          >
-            <path
-              d="M22.6829 54.5285C21.3557 55.6169 19.4447 55.6169 18.1175 54.5285L1.91748 41.2442C1.08361 40.5604 0.600197 39.5389 0.600197 38.4605V3.60038C0.600197 1.61216 2.21197 0.000389099 4.2002 0.000389099H36.6002C38.5884 0.000389099 40.2002 1.61216 40.2002 3.60039V38.4605C40.2002 39.5389 39.7168 40.5604 38.8829 41.2442L22.6829 54.5285Z"
-              fill={mainColor}
-            />
-          </svg>
-          <p className="status-title">{status}</p>
-        </c.ItemStatusContainer>
+
         <c.ItemInfoContainer $color={mainColor}>
           {infos.map((item, index) => (
             <div key={index} className="info-box">
@@ -114,10 +99,17 @@ const EstateItemCard = (props: PropsType) => {
               viewBox="0 0 356 62"
               fill="none"
             >
-              <path
-                d="M108.197 0.0351526C32.6032 1.26792 -13.4318 16.5748 -27 24.0741V61.9817H437.469V13.9038C424.385 18.4673 420.208 43.8243 353.336 45.9817C286.464 48.139 202.69 -1.50581 108.197 0.0351526Z"
-                fill={thirdColor}
-              />
+              <defs>
+                <clipPath id="roundedClip">
+                  <rect width="356" height="60" rx="24" ry="24" />
+                </clipPath>
+              </defs>
+              <g clip-path="url(#roundedClip)">
+                <path
+                  d="M108.197 0.0351526C32.6032 1.26792 -13.4318 16.5748 -27 24.0741V61.9817H437.469V13.9038C424.385 18.4673 420.208 43.8243 353.336 45.9817C286.464 48.139 202.69 -1.50581 108.197 0.0351526Z"
+                  fill={thirdColor}
+                />
+              </g>
             </svg>
             <svg
               className="smallWave"
@@ -127,15 +119,38 @@ const EstateItemCard = (props: PropsType) => {
               viewBox="0 0 356 60"
               fill="none"
             >
-              <path
-                d="M146.102 0.48166C70.5073 1.71443 11.5682 39.9823 -2 47.4816V59.9816H462.469V35.4817C449.385 40.0452 443.817 41.3243 376.945 43.4817C310.073 45.639 240.594 -1.0593 146.102 0.48166Z"
-                fill={secondColor}
-              />
+              <defs>
+                <clipPath id="roundedClip">
+                  <rect width="356" height="60" rx="24" ry="24" />
+                </clipPath>
+              </defs>
+              <g clip-path="url(#roundedClip)">
+                <path
+                  d="M146.102 0.48166C70.5073 1.71443 11.5682 39.9823 -2 47.4816V59.9816H462.469V35.4817C449.385 40.0452 443.817 41.3243 376.945 43.4817C310.073 45.639 240.594 -1.0593 146.102 0.48166Z"
+                  fill={secondColor}
+                />
+              </g>
             </svg>
           </div>
         </c.BackgroundContainer>
       </c.ItemCardContainer>
-    </>
+      <c.ItemStatusContainer>
+        <svg
+          className="polygon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="41"
+          height="56"
+          viewBox="0 0 41 56"
+          fill="none"
+        >
+          <path
+            d="M22.6829 54.5285C21.3557 55.6169 19.4447 55.6169 18.1175 54.5285L1.91748 41.2442C1.08361 40.5604 0.600197 39.5389 0.600197 38.4605V3.60038C0.600197 1.61216 2.21197 0.000389099 4.2002 0.000389099H36.6002C38.5884 0.000389099 40.2002 1.61216 40.2002 3.60039V38.4605C40.2002 39.5389 39.7168 40.5604 38.8829 41.2442L22.6829 54.5285Z"
+            fill={mainColor}
+          />
+        </svg>
+        <p className="status-title">{status}</p>
+      </c.ItemStatusContainer>
+    </c.ItemCardWrapper>
   )
 }
 
