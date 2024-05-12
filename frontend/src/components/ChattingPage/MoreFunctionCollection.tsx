@@ -1,7 +1,9 @@
 import * as m from '@components/ChattingPage/style/MoreFunctionCollectionStyle'
+import { useNavigate } from 'react-router-dom'
 
 const MoreFunctionCollection = () => {
   const chatRoomNo = 1
+  const navigate = useNavigate()
 
   const moreFunctionDatas = [
     {
@@ -22,14 +24,20 @@ const MoreFunctionCollection = () => {
     {
       title: '체크 리스트',
       src: '/icon/icon_function_checklist.png',
-      navigateRoute: `/estate-checklist/${chatRoomNo}`,
+      navigateRoute: `/estate-checklist`,
     },
   ]
+
   return (
     <m.MoreFunctionCollectionContainer>
       {moreFunctionDatas.map(moreFunctionData => (
         <m.MoreFunctionData>
-          <div className="more-function-data-image-container">
+          <div
+            className="more-function-data-image-container"
+            onClick={() => {
+              navigate(moreFunctionData.navigateRoute)
+            }}
+          >
             <img
               src={moreFunctionData.src}
               alt={moreFunctionData.title}
