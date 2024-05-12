@@ -75,6 +75,4 @@ public class WalletController {
             .body(walletService.registerWallet(req));
     }
 
-
-
 }
