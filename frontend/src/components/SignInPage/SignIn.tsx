@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { ethers } from 'ethers'
 import * as k from '@/components/SignInPage/style/SignInStyle'
 import Header from '@/common/Header'
 import {
   SignInButton,
   SignInWrapper,
 } from '@/components/SignInPage/style/SignInStyle'
-import ConnectionWallet from '@components/SignInPage/ConnectionWallet'
+import SignUp from '@components/SignInPage/SignUp'
 
 const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true)
@@ -37,7 +36,7 @@ const SignIn = () => {
           </SignInButton>
         </>
       ) : (
-        <ConnectionWallet />
+        <SignUp />
       )}
     </k.SignInContainer>
   )

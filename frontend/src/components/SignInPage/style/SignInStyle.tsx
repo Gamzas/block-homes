@@ -44,15 +44,3 @@ export const SignInButton = styled(CustomButtonStyle)`
     transform: translateX(-50%);
   }
 `
-export const SignUpToggleButton = styled(CustomToggleButtonStyle)`
-  width: 70%;
-  margin-bottom: 1rem;
-
-  .left {
-    padding: 4%;
-  }
-
-  .right {
-    padding: 4%;
-  }
-`
