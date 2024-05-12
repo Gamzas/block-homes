@@ -83,6 +83,7 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
             Projections.constructor(ListItemInstance.class,
                 qItem.itemNo,
                 qItem.realEstateDID,
+                qItem.roadNameAddress,
                 qItem.transactionType,
                 qItem.realEstateType,
                 qItem.reportRank,
