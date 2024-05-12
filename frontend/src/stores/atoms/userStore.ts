@@ -1,9 +1,14 @@
 import { atomWithStorage } from 'jotai/utils'
-import { UserType } from '@/types/userType'
+import { UserType, UserTypeType } from '@/types/userType'
 import { atom } from 'jotai'
 
-const currentUser = {
+const currentUserType = {
   type: 0, //0 임차인 1 임대인
+}
+
+const currentUser = {
+  userNo: 0,
+  name: '',
 }
 
 export const userTypeAtom = atomWithStorage<UserTypeType>(
