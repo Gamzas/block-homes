@@ -4,6 +4,7 @@ export interface UserTypeType {
 
 export interface UserType {
   userNo: number
+  walletAddress: string
   name: string
 }
 

@@ -13,6 +13,7 @@ export interface PostWalletParams {
   walletAddress: string
   encPrivateKey: string
   name: string
+  phoneNumber: string
 }
 
 export interface PostWalletResponse {
