@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Slider from 'react-slick'
 import * as t from '@components/EstateDetailPage/style/DetailTabStyle'
 const DetailTabMenu = () => {
   const [currentTab, clickTab] = useState(0)
+  const sliderRef = useRef(null)
   const menuArr = [
     {
       name: 'image',
@@ -40,13 +41,16 @@ const DetailTabMenu = () => {
   }
   const tabMenuArr = ['image', 'floor_plan', '360']
   const selectMenuHandler = (index: number) => {
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(0) // 슬라이더를 첫 번째 슬라이드로 이동
+    }
     clickTab(index)
   }
 
   return (
     <div>
       <t.Desc>
-        <Slider {...settings}>
+        <Slider ref={sliderRef} {...settings}>
           {menuArr[currentTab].content.map((image, index) => (
             <div key={index}>
               <img className="desc-img" src={image} alt={`Slide ${index}`} />
