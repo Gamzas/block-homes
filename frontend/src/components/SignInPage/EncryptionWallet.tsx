@@ -1,7 +1,4 @@
-import {
-  SignInButton,
-  SignInWrapper,
-} from '@components/SignInPage/style/SignInStyle'
+import { SignInButton, SignInWrapper } from '@components/SignInPage/style/SignInStyle'
 import React, { useEffect, useState } from 'react'
 import { useCreateDIDDocument } from '@/abi/userDIDRegistry/createDIDDocument'
 import { useSetAtom } from 'jotai'
@@ -11,13 +8,13 @@ import { Wallet } from '@klaytn/ethers-ext'
 import { useNavigate } from 'react-router-dom'
 
 const EncryptionWallet = ({
-  name,
-  phoneNumber,
-  wallet,
-  setWallet,
-  encryptionWallet,
-  setEncryptionWallet,
-}: {
+                            name,
+                            phoneNumber,
+                            wallet,
+                            setWallet,
+                            encryptionWallet,
+                            setEncryptionWallet,
+                          }: {
   name: string
   phoneNumber: string
   wallet: Wallet
@@ -51,7 +48,6 @@ const EncryptionWallet = ({
           phoneNumber: phoneNumber,
         })
         setUserAtom({
-          userNo: 0,
           walletAddress: wallet.address,
           name: name,
         })
