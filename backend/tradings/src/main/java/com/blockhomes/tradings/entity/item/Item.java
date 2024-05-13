@@ -1,6 +1,10 @@
 package com.blockhomes.tradings.entity.item;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
+import com.blockhomes.tradings.entity.item.enums.RealEstateType;
+import com.blockhomes.tradings.entity.item.enums.ReportRank;
+import com.blockhomes.tradings.entity.item.enums.TransactionStatus;
+import com.blockhomes.tradings.entity.item.enums.TransactionType;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -48,6 +52,11 @@ public class Item extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "report_rank", nullable = false)
     private ReportRank reportRank;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_status", nullable = false)
+    private TransactionStatus transactionStatus;
 
     @NotNull
     @Column(name = "area", nullable = false)
@@ -122,6 +131,7 @@ public class Item extends BaseEntity {
         Integer toiletNumber,
         String description,
         ReportRank reportRank,
+        TransactionStatus transactionStatus,
         Integer buildingFloor,
         Integer itemFloor,
         LocalDateTime moveInDate,
@@ -143,6 +153,7 @@ public class Item extends BaseEntity {
         this.toiletNumber = toiletNumber;
         this.description = description;
         this.reportRank = reportRank;
+        this.transactionStatus = transactionStatus;
         this.buildingFloor = buildingFloor;
         this.itemFloor = itemFloor;
         this.moveInDate =moveInDate;
