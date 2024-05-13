@@ -23,6 +23,7 @@ import FavoriteItemsPage from '@pages/FavoriteItemsPage'
 import ChattingRoomPage from '@pages/ChattingRoomPage'
 import MyEstatePage from './pages/MyEstatePage'
 import InfoReportPage from '@pages/InfoReportPage'
+import ScrollToTop from '@hooks/ScrollToTop'
 
 const HomeRoutes = () => (
   <Routes>
@@ -53,11 +54,14 @@ const HomeRoutes = () => (
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <GlobalStyle />
-      <HomeRoutes />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </BrowserRouter>
+      <BrowserRouter>
+        <ScrollToTop />
+        <HomeRoutes />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </BrowserRouter>
+    </>
   )
 }
 
