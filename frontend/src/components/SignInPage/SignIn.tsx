@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import * as k from '@/components/SignInPage/style/SignInStyle'
-import { SignInButton, SignInWrapper } from '@/components/SignInPage/style/SignInStyle'
+import {
+  SignInButton,
+  SignInWrapper,
+} from '@/components/SignInPage/style/SignInStyle'
 import Header from '@/common/Header'
 import SignUp from '@components/SignInPage/SignUp'
 import { useGetWalletCheck } from '@apis/walletApi'
@@ -60,7 +63,7 @@ const SignIn = () => {
           </SignInButton>
         </>
       ) : (
-        <SignUp />
+        <SignUp name={name} phoneNumber={phoneNumber} />
       )}
     </k.SignInContainer>
   )

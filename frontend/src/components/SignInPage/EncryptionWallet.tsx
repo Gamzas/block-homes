@@ -1,27 +1,29 @@
-import { SignInButton, SignInWrapper } from '@components/SignInPage/style/SignInStyle'
+import {
+  SignInButton,
+  SignInWrapper,
+} from '@components/SignInPage/style/SignInStyle'
 import React, { useEffect, useState } from 'react'
-import { ethers } from 'ethers'
 import { useCreateDIDDocument } from '@/abi/userDIDRegistry/createDIDDocument'
 import { useSetAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { usePostWallet } from '@apis/walletApi'
+import { Wallet } from '@klaytn/ethers-ext'
 
-const EncryptionWallet = (
-  {
-    name,
-    phoneNumber,
-    wallet,
-    setWallet,
-    encryptionWallet,
-    setEncryptionWallet,
-  }: {
-    name: string
-    phoneNumber: string
-    wallet: ethers.Wallet
-    setWallet: (wallet: ethers.Wallet) => void
-    encryptionWallet: string
-    setEncryptionWallet: (encryptionWallet: string) => void
-  }) => {
+const EncryptionWallet = ({
+  name,
+  phoneNumber,
+  wallet,
+  setWallet,
+  encryptionWallet,
+  setEncryptionWallet,
+}: {
+  name: string
+  phoneNumber: string
+  wallet: Wallet
+  setWallet: (wallet: Wallet) => void
+  encryptionWallet: string
+  setEncryptionWallet: (encryptionWallet: string) => void
+}) => {
   // const navigate = useNavigate()
   const setUserAtom = useSetAtom(userAtom)
   const [password, setPassword] = useState('')
@@ -87,7 +89,9 @@ const EncryptionWallet = (
           onChange={e => setConfirmPassword(e.target.value)}
           placeholder="비밀번호는 찾을 수 없으니 주의하십시오."
         />
-        {!isPasswordMatch && <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
+        {!isPasswordMatch && (
+          <div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>
+        )}
       </SignInWrapper>
       <SignInButton
         onClick={handleEncryptionWalletButtonClick}
