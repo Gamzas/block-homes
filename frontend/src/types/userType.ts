@@ -3,19 +3,6 @@ export interface UserTypeType {
 }
 
 export interface UserType {
-  userNo: number
   walletAddress: string
   name: string
-}
-
-export interface SignInParamsType {
-  name: string
-  phoneNumber: string
-}
-
-export interface SignUpParamsType {
-  name: string
-  phoneNumber: string
-  walletAddress: string
-  encryptionPrivateKey: string
 }
