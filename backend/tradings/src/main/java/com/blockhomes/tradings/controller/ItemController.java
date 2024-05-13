@@ -1,10 +1,10 @@
 package com.blockhomes.tradings.controller;
 
+import com.blockhomes.tradings.dto.item.request.GetLikeItemsReq;
+import com.blockhomes.tradings.dto.item.request.LikeItemReq;
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
-import com.blockhomes.tradings.dto.item.response.DetailItemRes;
-import com.blockhomes.tradings.dto.item.response.ListItemRes;
-import com.blockhomes.tradings.dto.item.response.RegisterItemRes;
+import com.blockhomes.tradings.dto.item.response.*;
 import com.blockhomes.tradings.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -81,11 +81,38 @@ public class ItemController {
             .body(itemService.registerItem(req, mainImage, roomImages, kitchenToiletImages));
     }
 
-//    @PostMapping("/like")
-//    public ResponseEntity<LikeItemRes> likeItem(@RequestBody @Valid LikeItemReq req) {
-//        return ResponseEntity
-//            .status(OK)
-//            .body(itemService.likeItem(req));
-//    }
+    @PostMapping("/likes")
+    @Operation(
+        summary = "매물 찜하기",
+        description = "사용자가 마음에 드는 매물을 찜합니다.",
+        responses = {
+            @ApiResponse(responseCode = "201", description = "정상 등록"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "없는 사용자 / 아이템"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<LikeItemRes> likeItem(@RequestBody @Valid LikeItemReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(itemService.likeItem(req));
+    }
+
+    @GetMapping("/likes")
+    @Operation(
+        summary = "찜한 매물 목록 가져오기",
+        description = "사용자가 마음에 드는 매물을 찜합니다.",
+        responses = {
+            @ApiResponse(responseCode = "201", description = "정상 등록"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "없는 사용자"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<GetLikeItemsRes> getLikeItems(GetLikeItemsReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(itemService.getLikeItems(req));
+    }
 
 }
