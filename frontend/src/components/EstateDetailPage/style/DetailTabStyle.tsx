@@ -45,14 +45,14 @@ export const Desc = styled.div`
 
       button {
         &:before {
-          font-size: 0.2rem; /* 점의 크기를 늘립니다 */
+          font-size: 0.4rem; /* 점의 크기를 늘립니다 */
           color: #9b9b9b; /* dots 색상 변경 */
         }
       }
 
       &.slick-active button:before {
         color: #845bd3; /* 활성화된 점의 색상 변경 */
-        font-size: 0.4rem;
+        font-size: 0.6rem;
         opacity: 1; /* 투명도 조정 */
       }
     }

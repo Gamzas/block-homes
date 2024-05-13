@@ -81,8 +81,11 @@ const ItemList = () => {
       <i.EditContainer>
         {editActive ? (
           <div className="disabled">
-            <div onClick={deleteSelectedItems}>선택삭제</div>
-            <div onClick={deleteAllItems}>전체삭제</div>
+            <div onClick={toggleEdit}>취소</div>
+            <div className="delete">
+              <div onClick={deleteSelectedItems}>선택삭제</div>
+              <div onClick={deleteAllItems}>전체삭제</div>
+            </div>
           </div>
         ) : (
           <div className="abled" onClick={toggleEdit}>
