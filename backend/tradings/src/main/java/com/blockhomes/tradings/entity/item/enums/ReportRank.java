@@ -1,5 +1,6 @@
-package com.blockhomes.tradings.entity.item;
+package com.blockhomes.tradings.entity.item.enums;
 
+import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;
 
 @Getter
@@ -19,7 +20,7 @@ public enum ReportRank {
             if (r.getValue().equals(value)) return r;
         }
 
-        return null;
+        throw new EnumNotMatchException(ReportRank.class, value);
     }
 
     public static Integer enumToValue(ReportRank reportRank) {
@@ -27,7 +28,7 @@ public enum ReportRank {
             if (r.equals(reportRank)) return r.getValue();
         }
 
-        return null;
+        return 0;
     }
 
 }

@@ -11,9 +11,9 @@ import lombok.*;
 public class LikeItemReq {
 
     @NotNull
-    private String userDID;
+    private String walletAddress;
 
     @NotNull
-    private String realEstateDID;
+    private Integer itemNo;
 
 }
