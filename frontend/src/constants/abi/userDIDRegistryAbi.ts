@@ -1,9 +1,4 @@
-// 네트워크 주소
-export const BLOCK_CHAIN_ENDPOINT = 'https://api.baobab.klaytn.net:8651'
-// 스마트 컨트랙트 주소
-export const CONTRACT_ADDRESS = '0x4A38D012384056209BB9E8b2234C13CfCF9C9e34'
-// ABI
-export const ABI_ARRAY = [
+export const USER_DID_REGISTRY_ABI = [
   {
     'inputs': [],
     'stateMutability': 'nonpayable',
@@ -156,10 +151,51 @@ export const ABI_ARRAY = [
             'name': 'authentication',
             'type': 'string',
           },
+          {
+            'components': [
+              {
+                'internalType': 'string',
+                'name': 'id',
+                'type': 'string',
+              },
+              {
+                'internalType': 'string',
+                'name': 'serviceType',
+                'type': 'string',
+              },
+              {
+                'internalType': 'string',
+                'name': 'serviceEndPoint',
+                'type': 'string',
+              },
+            ],
+            'internalType': 'struct DIDStruct.Service',
+            'name': 'service',
+            'type': 'tuple',
+          },
         ],
         'internalType': 'struct DIDStruct.DIDDocument',
         'name': '',
         'type': 'tuple',
+      },
+    ],
+    'stateMutability': 'view',
+    'type': 'function',
+  },
+  {
+    'inputs': [
+      {
+        'internalType': 'string',
+        'name': 'did',
+        'type': 'string',
+      },
+    ],
+    'name': 'getTaxContractAddress',
+    'outputs': [
+      {
+        'internalType': 'address',
+        'name': '',
+        'type': 'address',
       },
     ],
     'stateMutability': 'view',

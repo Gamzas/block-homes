@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://block-homes.kr'
+export const API_BASE_URL = 'https://k10c203.p.ssafy.io'
 export const API_BASE_PATH = '/api/v1'
 export const API_BASE = `${API_BASE_URL}${API_BASE_PATH}`
 

@@ -8,6 +8,7 @@ const currentUserType = {
 
 const currentUser = {
   userNo: 0,
+  walletAddress: '',
   name: '',
 }
 
