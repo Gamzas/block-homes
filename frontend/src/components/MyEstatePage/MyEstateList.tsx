@@ -41,6 +41,9 @@ const estateList = [
 const MyEstateList = () => {
   return (
     <m.MyEstateListWrapper>
+      <m.EditContainer>
+        <div>매물관리</div>
+      </m.EditContainer>
       <m.MyEstateListContainer>
         {estateList.map((item, index) => (
           <MyEstateCard />
