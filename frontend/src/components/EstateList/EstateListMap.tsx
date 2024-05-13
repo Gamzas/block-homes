@@ -5,6 +5,7 @@ import CustomOverlay from '@components/EstateList/CustomOverlay'
 import useCurrentLocation from '@/hooks/useCurrentLocation'
 import { useAtom } from 'jotai'
 import {
+  currentCoordAtom,
   estateItemListAtom,
   selectedItemAtom,
 } from '@/stores/atoms/EstateListStore'
@@ -18,7 +19,11 @@ declare global {
 const { kakao } = window
 
 const EstateListMap = () => {
-  const { location, getCurrentLocation } = useCurrentLocation()
+  // setLocation => 지도의 중심좌표를 설정하기 위한 함수
+  const { getCurrentLocation, setLocation } = useCurrentLocation()
+
+  const [coord] = useAtom(currentCoordAtom)
+
   // 부동산 매물 리스트
   const [estateItemList] = useAtom(estateItemListAtom)
   // 상세보기 선택한 부동산
@@ -38,10 +43,7 @@ const EstateListMap = () => {
     // 지도생성
     const container = document.getElementById('map')
     const options = {
-      center: new kakao.maps.LatLng(
-        location.location.latitude,
-        location.location.longitude,
-      ),
+      center: new kakao.maps.LatLng(coord.latitude, coord.longitude),
       level: 3,
       animate: true,
       isPanto: true,
@@ -59,6 +61,21 @@ const EstateListMap = () => {
       imageSize = new kakao.maps.Size(48, 48), // 마커이미지의 크기입니다
       imageOption = { offset: new kakao.maps.Point(32, 45) } // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
+    //--------------------------------------
+
+    // 지도 중심이 변경될 때 호출되는 이벤트 리스너를 추가합니다.
+    kakao.maps.event.addListener(map, 'center_changed', () => {
+      const center = map.getCenter()
+      setLocation({
+        latitude: center.Ma,
+        longitude: center.La,
+      })
+      // console.log('지도의 중심 좌표:', center) // 현재 지도의 중심 좌표를 로그로 출력
+      // 필요한 경우 이 값을 상태에 저장하거나 다른 컴포넌트로 전달할 수 있습니다.
+    })
+
+    //--------------------------------------
+
     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
     const markerImage = new kakao.maps.MarkerImage(
       imageSrc,
@@ -68,8 +85,8 @@ const EstateListMap = () => {
 
     // 지도 마커 생성
     const markerPosition = new kakao.maps.LatLng(
-      location.location.latitude,
-      location.location.longitude,
+      coord.latitude,
+      coord.longitude,
     )
 
     const marker = new kakao.maps.Marker({
@@ -112,7 +129,7 @@ const EstateListMap = () => {
           customOverlay.setMap(map)
         })
     }
-  }, [location, estateItemList])
+  }, [coord, estateItemList])
 
   return (
     <>
