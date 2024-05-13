@@ -2,6 +2,7 @@ import * as c from '@components/MyEstatePage/style/MyEstateCardStyle'
 
 const MyEstateCard = () => {
   return (
+    // TODO 매물 상세 정보 navigate 연결하기
     <c.MyEstateCardContainer>
       <div className='info-wrapper'>
         <c.IconContainer>
