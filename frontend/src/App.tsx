@@ -22,6 +22,7 @@ import RealEstateCheckListPage from '@pages/RealEstateCheckListPage'
 import FavoriteItemsPage from '@pages/FavoriteItemsPage'
 import ChattingRoomPage from '@pages/ChattingRoomPage'
 import MyEstatePage from './pages/MyEstatePage'
+import InfoReportPage from '@pages/InfoReportPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -34,6 +35,7 @@ const HomeRoutes = () => (
     <Route path="/estate-detail" element={<RealEstateDetailPage />} />
     <Route path="/smart-contract" element={<SmartContractPage />} />
     <Route path="/report" element={<ReportPage />} />
+
     <Route path="/estate-registration" element={<EstateRegistrationPage />} />
     <Route path="/mypage" element={<MyPage />} />
     <Route path="/callback/:result" element={<CallBackPage />} />
@@ -41,6 +43,7 @@ const HomeRoutes = () => (
     <Route path="/chat/:chatNum" element={<ChattingRoomPage />} />
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
+    <Route path="/info-report" element={<InfoReportPage />} />
     <Route path="/transaction-progress" element={<TransactionProgress />} />
     <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
     <Route path="/likes" element={<FavoriteItemsPage />} />

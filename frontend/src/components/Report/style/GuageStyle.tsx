@@ -5,6 +5,7 @@ export const GaugeContainer = styled.div`
   height: 60px;
   position: relative;
   /* background-color: #fff; */
+
   .pointer {
     width: 0px;
     height: 0px;
@@ -33,6 +34,7 @@ export const GaugeContainer = styled.div`
     font-weight: 700;
     font-size: 12px;
   }
+
   &:after {
     content: '';
     position: absolute;

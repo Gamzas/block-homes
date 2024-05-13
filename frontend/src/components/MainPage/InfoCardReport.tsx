@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 const InfoCardReport = () => {
   const navigate = useNavigate()
-  const handleGoReport =()=>{
-    navigate('report')
-
+  const handleGoReport = () => {
+    navigate('/info-report')
   }
 
   return (
@@ -24,7 +23,9 @@ const InfoCardReport = () => {
           <span className="highlight-text"> 레포트</span>가 작성되어 있어요.
         </div>
         <i.NavigateButtonContainer>
-          <div className="button-title" onClick={handleGoReport}>매물 레포트 알아보기</div>
+          <div className="button-title" onClick={handleGoReport}>
+            매물 레포트 알아보기
+          </div>
           <img
             alt="이동 아이콘"
             className="double-right-arrows"
