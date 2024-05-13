@@ -1,13 +1,12 @@
-import useCurrentLocation from '@/hooks/useCurrentLocation'
 import {
-  currentCoordAtom,
   currentPositonAtom,
   filterAtom,
+  matchAtom,
 } from '@/stores/atoms/EstateListStore'
 import { RealEstateStatusType } from '@/types/estateListType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
 import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 interface PropsType {
   getCurrentLocation: () => void
@@ -15,10 +14,7 @@ interface PropsType {
 
 const CurrentStatus = (props: PropsType) => {
   const { getCurrentLocation } = props
-  const { location, match } = useCurrentLocation()
-  const [coord] = useAtom(currentCoordAtom)
-  const [coordMatch, setCoordMatch] = useState(false)
-
+  const [match] = useAtom(matchAtom)
   const [currentPostion] = useAtom(currentPositonAtom)
   useEffect(() => {}, [currentPostion])
   const [filter, setFilter] = useAtom(filterAtom)
@@ -44,22 +40,8 @@ const CurrentStatus = (props: PropsType) => {
   const handlerFilterClick = () => {
     setFilter(!filter)
   }
-  // 좌표 일치 여부 확인
-  const checkCoordinatesMatch = (coord, location) => {
-    return (
-      coord.latitude === location.latitude &&
-      coord.longitude === location.longitude
-    )
-  }
-  // useEffect(() => {
-  //   const isMatch = checkCoordinatesMatch(coord, location)
-  //   setMatch(isMatch)
-  //   console.log('Coordinate match:', isMatch)
-  // }, [coord, location])
 
-  useEffect(() => {
-    console.log('상태바', match)
-  }, [match])
+  useEffect(() => {}, [match])
   return (
     <c.CurrentStatusContainer>
       <c.CurrentLocationContainer>
@@ -77,11 +59,6 @@ const CurrentStatus = (props: PropsType) => {
             </g>
           </svg>
         </div>
-        {/* <img
-          className="location-icon"
-          src="/icon/icon_gpsLocation.png"
-          onClick={handleLocationClick}
-        /> */}
         <div className="current-location">{currentPostion}</div>
       </c.CurrentLocationContainer>
       <c.EstateStatusButtonContainer>
