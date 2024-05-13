@@ -8,6 +8,7 @@ import { useSetAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { usePostWallet } from '@apis/walletApi'
 import { Wallet } from '@klaytn/ethers-ext'
+import { useNavigate } from 'react-router-dom'
 
 const EncryptionWallet = ({
   name,
@@ -24,7 +25,7 @@ const EncryptionWallet = ({
   encryptionWallet: string
   setEncryptionWallet: (encryptionWallet: string) => void
 }) => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const setUserAtom = useSetAtom(userAtom)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -39,7 +40,6 @@ const EncryptionWallet = ({
         setEncryptionWallet(encryptedWallet)
         setPassword('')
         setConfirmPassword('')
-        console.log(wallet)
         createDIDDocumentMutate({
           wallet: wallet,
           params: { publicKey: wallet.publicKey },
@@ -56,6 +56,7 @@ const EncryptionWallet = ({
           name: name,
         })
         setWallet(null)
+        navigate('/')
       } catch {
         alert('암호화를 실패하였습니다. 다시 시도 하세요.')
       }
