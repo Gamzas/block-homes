@@ -12,12 +12,25 @@ const { kakao } = window
 const useCurrentLocation = () => {
   const setTown = useSetAtom(currentPositonAtom)
   const [coord, setCoord] = useAtom(currentCoordAtom)
-
+  // 지도 중심 위치 와 사용자 위치 일지 여부
+  const [match, setMatch] = useState(false)
   // 위치 출력을 위한 좌표(지도 이동 시 지도의 센터 좌표값 설정 됨)
   const [location, setLocation] = useState<CoordType>({
     latitude: 37.365264512305174,
     longitude: 127.10676860117488,
   })
+
+  const checkCoordinatesMatch = (coord, location) => {
+    return (
+      coord.latitude === location.latitude &&
+      coord.longitude === location.longitude
+    )
+  }
+  useEffect(() => {
+    const isMatch = checkCoordinatesMatch(coord, location)
+    setMatch(isMatch)
+    console.log('Coordinate match:', isMatch)
+  }, [coord, location])
 
   // 현재 좌표 받아오면 location 에 set 하기
   useEffect(() => {
@@ -74,7 +87,7 @@ const useCurrentLocation = () => {
   }, [location])
 
   // 위도 경도 , 현재 위치, 현재위치 재설정
-  return { getCurrentLocation, setLocation }
+  return { getCurrentLocation, location, setLocation, match }
 }
 
 export default useCurrentLocation
