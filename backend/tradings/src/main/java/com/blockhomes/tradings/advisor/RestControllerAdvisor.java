@@ -3,6 +3,7 @@ package com.blockhomes.tradings.advisor;
 import com.blockhomes.tradings.dto.BaseResponseBody;
 import com.blockhomes.tradings.exception.common.DateNotFormattedException;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
+import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +82,7 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return 내용과 코드를 포함한 ResponseEntity 객체
      */
-    @ExceptionHandler(value = {WalletNotFoundException.class})
+    @ExceptionHandler(value = {WalletNotFoundException.class, ItemNotFoundException.class})
     public ResponseEntity<BaseResponseBody> notFoundError(Exception e) {
         log.error(e.getMessage());
 
