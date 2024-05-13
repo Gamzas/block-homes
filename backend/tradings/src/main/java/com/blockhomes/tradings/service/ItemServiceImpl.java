@@ -339,7 +339,7 @@ public class ItemServiceImpl implements ItemService {
 
         return GetLikeItemsRes.builder()
             .likedItems(itemInstances)
-            .count(itemInstances.size() )
+            .count(itemInstances.size())
             .build();
     }
 
