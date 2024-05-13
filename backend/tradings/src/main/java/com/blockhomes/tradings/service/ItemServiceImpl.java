@@ -1,10 +1,14 @@
 package com.blockhomes.tradings.service;
 
+import com.blockhomes.tradings.dto.item.request.GetLikeItemsReq;
+import com.blockhomes.tradings.dto.item.request.LikeItemReq;
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
 import com.blockhomes.tradings.dto.item.response.*;
 import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.item.*;
+import com.blockhomes.tradings.entity.item.enums.*;
+import com.blockhomes.tradings.entity.wallet.Likes;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
@@ -258,6 +262,7 @@ public class ItemServiceImpl implements ItemService {
             .roadNameAddress(item.getRoadNameAddress())
             .realEstateType(RealEstateType.enumToValue(item.getRealEstateType()))
             .reportRank(ReportRank.enumToValue(item.getReportRank()))
+            .transactionStatus(TransactionStatus.enumToValue(item.getTransactionStatus()))
             .area(item.getArea())
             .pyeong((int) Math.round(AreaUtil.squareMeterToPyeong(item.getArea())))
             .price(item.getPrice())
@@ -280,19 +285,62 @@ public class ItemServiceImpl implements ItemService {
             .build();
     }
 
-//    @Override
-//    public LikeItemRes likeItem(LikeItemReq req) {
-//        Wallet userWallet = walletRepository.getWalletByUserDID(req.getUserDID())
-//            .orElseThrow(WalletNotFoundException::new);
-//
-//        List<Likes> likesList = likesRepository.findAllByWallet(userWallet);
-//        List<Integer> likedItemNoList = new ArrayList<>();
-//
-//        for (Likes likes : likesList) {
-//            likedItemNoList.add(likes.getLikesNo());
-//        }
-//
-//
-//    }
+    @Override
+    public LikeItemRes likeItem(LikeItemReq req) {
+        Wallet userWallet = walletRepository
+            .getWalletByWalletAddress(req.getWalletAddress())
+            .orElseThrow(WalletNotFoundException::new);
+
+        Item item = itemRepository
+            .getItemByItemNo(req.getItemNo())
+            .orElseThrow(ItemNotFoundException::new);
+
+        Likes likes = likesRepository.save(Likes.builder()
+            .wallet(userWallet)
+            .item(item)
+            .build());
+
+        return LikeItemRes.builder()
+            .walletAddress(likes.getWallet().getWalletAddress())
+            .itemNo(likes.getItem().getItemNo())
+            .createdAt(likes.getCreatedAt())
+            .build();
+    }
+
+    @Override
+    public GetLikeItemsRes getLikeItems(GetLikeItemsReq req) {
+        Wallet userWallet = walletRepository
+            .getWalletByWalletAddress(req.getUserAddress())
+            .orElseThrow(WalletNotFoundException::new);
+
+        List<Likes> likesList = likesRepository.getLikesByWallet(userWallet);
+
+        List<ListItemInstance> itemInstances = new ArrayList<>();
+
+        for (Likes likes : likesList) {
+            Item item = likes.getItem();
+
+            itemInstances.add(ListItemInstance.builder()
+                    .itemNo(item.getItemNo())
+                    .realEstateDID(item.getRealEstateDID())
+                    .roadNameAddress(item.getRoadNameAddress())
+                    .transactionType(item.getTransactionType())
+                    .realEstateType(item.getRealEstateType())
+                    .reportRank(item.getReportRank())
+                    .area(item.getArea())
+                    .price(item.getPrice())
+                    .monthlyPrice(item.getMonthlyPrice())
+                    .administrationCost(item.getAdministrationCost())
+                    .latitude(item.getLatitude())
+                    .longitude(item.getLongitude())
+                    .build());
+        }
+
+        return GetLikeItemsRes.builder()
+            .likedItems(itemInstances)
+            .count(itemInstances.size() )
+            .build();
+    }
+
 
 }
