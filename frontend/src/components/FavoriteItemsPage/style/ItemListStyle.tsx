@@ -25,9 +25,13 @@ export const EditContainer = styled.div`
   .disabled {
     display: flex;
     align-items: center;
-    justify-content: end;
-    div:first-child {
-      margin-right: 1rem; /* 첫 번째 div 요소에만 마진 적용 */
+    justify-content: space-between;
+
+    .delete {
+      display: flex;
+      div:first-child {
+        margin-right: 1rem; /* 첫 번째 div 요소에만 마진 적용 */
+      }
     }
   }
   .abled {
