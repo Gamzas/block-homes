@@ -70,8 +70,6 @@ const EstateListMap = () => {
         latitude: center.Ma,
         longitude: center.La,
       })
-      // console.log('지도의 중심 좌표:', center) // 현재 지도의 중심 좌표를 로그로 출력
-      // 필요한 경우 이 값을 상태에 저장하거나 다른 컴포넌트로 전달할 수 있습니다.
     })
 
     //--------------------------------------
@@ -138,14 +136,6 @@ const EstateListMap = () => {
           <e.DetailCardContainer id="card-container">
             <div className="card-background" onClick={handleDetailCardClose} />
             <EstateItemCard {...item} />
-            {/* DELETE 닫기 버튼 삭제하기 */}
-            {/* <e.CloseCardContainer>
-              <div className="closeBtn" onClick={handleDetailCardClose}>
-                닫기
-              </div>
-            </e.CloseCardContainer> */}
-            {/* DELETE div 삭제 */}
-            {/* <div className="card"></div> */}
           </e.DetailCardContainer>
         )}
       </e.EstateMapContainer>

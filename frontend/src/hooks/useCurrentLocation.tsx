@@ -53,7 +53,6 @@ const useCurrentLocation = () => {
           // DELETE 주석 삭제하기
           // console.log(result[0].address)
           // console.log(result[0].road_address)
-          // setCurrentPosition(result[0].address.region_3depth_name)
           setTown(extractFirstWord(result[0].address.region_3depth_name))
         }
       }
