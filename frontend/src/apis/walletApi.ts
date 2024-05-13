@@ -1,12 +1,11 @@
 import axios from 'axios'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { API_WALLET, API_WALLET_CHECK } from '@constants/api'
 import { GetWalletCheckParams, PostWalletParams } from '@/types/api/walletType'
 
-export const useGetWalletCheck = (params: GetWalletCheckParams) => {
-  return useQuery({
-    queryKey: ['getWalletAddress', params],
-    queryFn: () => axios.get(API_WALLET_CHECK, { params }),
+export const useGetWalletCheck = () => {
+  return useMutation({
+    mutationFn: (params: GetWalletCheckParams) => axios.get(API_WALLET_CHECK, { params }),
   })
 }
 

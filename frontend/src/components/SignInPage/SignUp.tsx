@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
-import { ethers } from 'ethers'
 import ConnectionWallet from '@components/SignInPage/ConnectionWallet'
 import EncryptionWallet from '@components/SignInPage/EncryptionWallet'
+import { Wallet } from '@klaytn/ethers-ext'
 
-const SignUp = () => {
-  const [wallet, setWallet] = useState<ethers.Wallet | null>(null)
+const SignUp = ({
+  name,
+  phoneNumber,
+}: {
+  name: string
+  phoneNumber: string
+}) => {
+  const [wallet, setWallet] = useState<Wallet | null>(null)
   const [encryptionWallet, setEncryptionWallet] = useState<string | null>(null)
   const [isFirstStep, setIsFirstStep] = useState(true)
   return (
@@ -17,6 +23,8 @@ const SignUp = () => {
         />
       ) : (
         <EncryptionWallet
+          name={name}
+          phoneNumber={phoneNumber}
           wallet={wallet}
           setWallet={setWallet}
           encryptionWallet={encryptionWallet}
