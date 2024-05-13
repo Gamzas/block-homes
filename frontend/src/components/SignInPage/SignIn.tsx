@@ -7,25 +7,28 @@ import {
 import Header from '@/common/Header'
 import SignUp from '@components/SignInPage/SignUp'
 import { useGetWalletCheck } from '@apis/walletApi'
+import { useSetAtom } from 'jotai'
+import { userAtom } from '@stores/atoms/userStore'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
-  // const setUserAtom = useSetAtom(userAtom)
+  const navigate = useNavigate()
+  const setUserAtom = useSetAtom(userAtom)
   const [isSignIn, setIsSignIn] = useState(true)
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
-  const { mutate: getWalletCheckMutate } = useGetWalletCheck()
+  const { mutate: getWalletCheckMutate } = useGetWalletCheck({
+    name,
+    setUserAtom,
+    setIsSignIn,
+    navigate,
+  })
 
   const handleSignInButtonClick = () => {
     getWalletCheckMutate({
       name: name,
       phoneNumber: phoneNumber,
     })
-    // setUserAtom({
-    //   userNo: 0,
-    //   walletAddress: wallet.address,
-    //   name: name,
-    // })
-    setIsSignIn(false)
   }
 
   return (
