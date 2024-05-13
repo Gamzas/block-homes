@@ -1,5 +1,6 @@
-package com.blockhomes.tradings.entity.item;
+package com.blockhomes.tradings.entity.item.enums;
 
+import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;
 
 @Getter
@@ -21,7 +22,7 @@ public enum AdministrationFeeCategory {
             if (a.getValue().equals(value)) return a;
         }
 
-        return null;
+        throw new EnumNotMatchException(AdministrationFeeCategory.class, value);
     }
 
     public static Integer enumToValue(AdministrationFeeCategory administrationFeeCategory) {
@@ -29,7 +30,7 @@ public enum AdministrationFeeCategory {
             if (a.equals(administrationFeeCategory)) return a.getValue();
         }
 
-        return null;
+        return 0;
     }
 
 }

@@ -2,7 +2,6 @@ package com.blockhomes.tradings.dto.item.response;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -10,10 +9,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LikeItemRes {
+public class GetLikeItemsRes {
 
-    private String walletAddress;
-    private Integer itemNo;
-    private LocalDateTime createdAt;
+    List<ListItemInstance> likedItems;
+    Integer count;
 
 }

@@ -3,6 +3,10 @@ package com.blockhomes.tradings.repository.item;
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.response.ListItemInstance;
 import com.blockhomes.tradings.entity.item.*;
+import com.blockhomes.tradings.entity.item.enums.RealEstateType;
+import com.blockhomes.tradings.entity.item.enums.ReportRank;
+import com.blockhomes.tradings.entity.item.enums.TransactionStatus;
+import com.blockhomes.tradings.entity.item.enums.TransactionType;
 import com.blockhomes.tradings.util.AreaUtil;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -25,7 +29,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     public List<ListItemInstance> listItemsByFiltering(ListItemReq req) {
         return getListItemsQuery()
             .where(
-                inMap(req.getNorthEastLatitude(), req.getNorthEastLongitude(), req.getSouthWestLatitude(), req.getSouthWestLongitude())
+                qItem.transactionStatus.eq(Expressions.constant(TransactionStatus.READY))
+                    .and(inMap(req.getNorthEastLatitude(), req.getNorthEastLongitude(), req.getSouthWestLatitude(), req.getSouthWestLongitude()))
                     .and(filterRealEstateType(req.getRealEstateType()))
                     .and(filterReportRank(req.getReportRank()))
                     .and(filterTransactionType(req.getTransactionType()))
@@ -87,6 +92,7 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                 qItem.transactionType,
                 qItem.realEstateType,
                 qItem.reportRank,
+                qItem.transactionStatus,
                 qItem.area,
                 qItem.price,
                 qItem.monthlyPrice,

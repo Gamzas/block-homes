@@ -18,6 +18,7 @@ public class DetailItemRes {
     private String roadNameAddress;
     private Integer realEstateType;
     private Integer reportRank;
+    private Integer transactionStatus;
     private Double area;
     private Integer pyeong;
     private Long price;

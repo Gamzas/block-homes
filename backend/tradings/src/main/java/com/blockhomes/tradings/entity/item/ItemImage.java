@@ -2,14 +2,13 @@ package com.blockhomes.tradings.entity.item;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.common.Image;
+import com.blockhomes.tradings.entity.item.enums.ItemImageCategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter

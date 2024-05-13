@@ -1,12 +1,10 @@
 package com.blockhomes.tradings.service;
 
+import com.blockhomes.tradings.dto.item.request.GetLikeItemsReq;
 import com.blockhomes.tradings.dto.item.request.LikeItemReq;
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
-import com.blockhomes.tradings.dto.item.response.DetailItemRes;
-import com.blockhomes.tradings.dto.item.response.LikeItemRes;
-import com.blockhomes.tradings.dto.item.response.ListItemRes;
-import com.blockhomes.tradings.dto.item.response.RegisterItemRes;
+import com.blockhomes.tradings.dto.item.response.*;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface ItemService {
@@ -17,6 +15,8 @@ public interface ItemService {
 
     DetailItemRes getDetailItem(Integer itemNo);
 
-//    LikeItemRes likeItem(LikeItemReq req);
+    LikeItemRes likeItem(LikeItemReq req);
+
+    GetLikeItemsRes getLikeItems(GetLikeItemsReq req);
 
 }

@@ -1,8 +1,9 @@
 package com.blockhomes.tradings.dto.item.response;
 
-import com.blockhomes.tradings.entity.item.RealEstateType;
-import com.blockhomes.tradings.entity.item.ReportRank;
-import com.blockhomes.tradings.entity.item.TransactionType;
+import com.blockhomes.tradings.entity.item.enums.RealEstateType;
+import com.blockhomes.tradings.entity.item.enums.ReportRank;
+import com.blockhomes.tradings.entity.item.enums.TransactionStatus;
+import com.blockhomes.tradings.entity.item.enums.TransactionType;
 import com.blockhomes.tradings.util.AreaUtil;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class ListItemInstance {
     private Integer transactionType;
     private Integer realEstateType;
     private Integer reportRank;
+    private Integer transactionStatus;
     private Double area;
     private Double pyeong;
     private Long price;
@@ -33,6 +35,7 @@ public class ListItemInstance {
         TransactionType transactionType,
         RealEstateType realEstateType,
         ReportRank reportRank,
+        TransactionStatus transactionStatus,
         Double area,
         Long price,
         Integer monthlyPrice,
@@ -46,6 +49,7 @@ public class ListItemInstance {
         this.transactionType = TransactionType.enumToValue(transactionType);
         this.realEstateType = RealEstateType.enumToValue(realEstateType);
         this.reportRank = ReportRank.enumToValue(reportRank);
+        this.transactionStatus = TransactionStatus.enumToValue(transactionStatus);
         this.area = area;
         this.pyeong = AreaUtil.squareMeterToPyeong(area);
         this.price = price;

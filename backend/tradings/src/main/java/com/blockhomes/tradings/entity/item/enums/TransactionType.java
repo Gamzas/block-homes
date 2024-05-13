@@ -1,5 +1,6 @@
-package com.blockhomes.tradings.entity.item;
+package com.blockhomes.tradings.entity.item.enums;
 
+import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;
 
 @Getter
@@ -19,7 +20,7 @@ public enum TransactionType {
             if (t.getValue().equals(value)) return t;
         }
 
-        return null;
+        throw new EnumNotMatchException(TransactionType.class, value);
     }
 
     public static Integer enumToValue(TransactionType transactionType) {
@@ -27,7 +28,7 @@ public enum TransactionType {
             if (t.equals(transactionType)) return t.getValue();
         }
 
-        return null;
+        return 0;
     }
 
 }
