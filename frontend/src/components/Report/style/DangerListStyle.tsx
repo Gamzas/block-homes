@@ -6,7 +6,7 @@ export const DangerListContainer = styled.div`
   min-height: 10vh;
   border-radius: 0.93313rem;
   background: #f3f0f7;
-  box-shadow: 0px 5.972px 5.972px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5.972px 5.972px 3px rgba(0, 0, 0, 0.25);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
