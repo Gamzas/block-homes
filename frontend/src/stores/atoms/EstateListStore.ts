@@ -7,8 +7,7 @@ export const filterAtom = atom<boolean>(false) // false 필터 닫힘, true 필�
 // Header 지도 or list 아이콘
 export const mapAtom = atom<boolean>(false) // false list true map
 
-// 위치 상태관리
-
+// 위치 일치여부 상태관리
 export const currentPositonAtom = atom<string>('정자동')
 
 export const currentCoordAtom = atom<CoordType>({
@@ -16,6 +15,7 @@ export const currentCoordAtom = atom<CoordType>({
   longitude: 127.10676860117488,
 })
 
+export const matchAtom = atom<boolean>(false)
 const EstateList = [
   {
     condition: 'normal',
