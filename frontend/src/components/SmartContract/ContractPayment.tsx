@@ -16,17 +16,6 @@ const ContractPayment = () => {
   const handleNext = () => {
     setStep(step + 1)
   }
-  const nextScreen = () => {
-    if (screenIndex < totalScreens - 1) {
-      setScreenIndex(screenIndex + 1)
-    }
-  }
-
-  const prevScreen = () => {
-    if (screenIndex > 0) {
-      setScreenIndex(screenIndex - 1)
-    }
-  }
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () =>
@@ -50,10 +39,9 @@ const ContractPayment = () => {
           totalScreens={totalScreens}
           currentIndex={screenIndex}
         ></ScreenIndicators>
-
         {screenIndex === 0 && (
           <div>
-            <EstateDidCard index={1} currentCenterIndex={1} />
+            <EstateDidCard index={1} currentCenterIndex={0} />
             <p className="card-text" style={{ marginTop: '0.9rem' }}>
               해당 매물은 자동으로 나의 지갑에 추가됩니다
             </p>
