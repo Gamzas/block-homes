@@ -10,7 +10,7 @@ export const InfoPageHeaderContainer = styled.div`
     position: absolute;
     top: 0.7rem;
     width: 11rem;
-    opacity: 25%;
+    opacity: 40%;
   }
 
   .question-title {
