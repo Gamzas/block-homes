@@ -2,13 +2,12 @@ package com.blockhomes.tradings.service;
 
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
-import com.blockhomes.tradings.dto.item.response.ListItemInstance;
-import com.blockhomes.tradings.dto.item.response.ListItemRes;
-import com.blockhomes.tradings.dto.item.response.RegisterItemRes;
+import com.blockhomes.tradings.dto.item.response.*;
 import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.item.*;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
+import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import com.blockhomes.tradings.repository.common.ImageRepository;
 import com.blockhomes.tradings.repository.item.ItemAdditionalOptionRepository;
@@ -17,6 +16,7 @@ import com.blockhomes.tradings.repository.item.ItemImageRepository;
 import com.blockhomes.tradings.repository.item.ItemRepository;
 import com.blockhomes.tradings.repository.wallet.LikesRepository;
 import com.blockhomes.tradings.repository.wallet.WalletRepository;
+import com.blockhomes.tradings.util.AreaUtil;
 import com.blockhomes.tradings.util.LocalDateTimeUtil;
 import com.blockhomes.tradings.util.S3BucketUtil;
 import lombok.RequiredArgsConstructor;
@@ -219,6 +219,64 @@ public class ItemServiceImpl implements ItemService {
         return ListItemRes.builder()
             .itemList(itemsList)
             .count(itemsList.size())
+            .build();
+    }
+
+    @Override
+    public DetailItemRes getDetailItem(Integer itemNo) {
+        Item item = itemRepository.getItemByItemNo(itemNo).orElseThrow(ItemNotFoundException::new);
+
+        List<ItemImage> itemImages = itemImageRepository.getItemImagesByItem(item);
+        List<ItemAdministrationFee> itemAdministrationFees = itemAdministrationFeeRepository.getItemAdministrationFeesByItem(item);
+        List<ItemAdditionalOption> itemAdditionalOptions = itemAdditionalOptionRepository.getItemAdditionalOptionsByItem(item);
+
+        List<ItemImageInstance> itemImageInstanceList = new ArrayList<>();
+
+        for (ItemImage itemImage : itemImages) {
+            itemImageInstanceList.add(ItemImageInstance.builder()
+                    .imageUrl(itemImage.getImage().getImageUrl())
+                    .itemImageCategory(ItemImageCategory.enumToValue(itemImage.getItemImageCategory()))
+                    .build());
+        }
+
+        List<Integer> administrationFeeList = new ArrayList<>();
+
+        for (ItemAdministrationFee itemAdministrationFee : itemAdministrationFees) {
+            administrationFeeList.add(AdministrationFeeCategory.enumToValue(itemAdministrationFee.getAdministrationFeeCategory()));
+        }
+
+        List<Integer> additionalOptionList = new ArrayList<>();
+
+        for (ItemAdditionalOption itemAdditionalOption : itemAdditionalOptions) {
+            additionalOptionList.add(AdditionalOptionCategory.enumToValue(itemAdditionalOption.getAdditionalOptionCategory()));
+        }
+
+        return DetailItemRes.builder()
+            .itemNo(item.getItemNo())
+            .ownerDID(item.getOwnerWallet().getUserDID())
+            .realEstateDID(item.getRealEstateDID())
+            .roadNameAddress(item.getRoadNameAddress())
+            .realEstateType(RealEstateType.enumToValue(item.getRealEstateType()))
+            .reportRank(ReportRank.enumToValue(item.getReportRank()))
+            .area(item.getArea())
+            .pyeong((int) Math.round(AreaUtil.squareMeterToPyeong(item.getArea())))
+            .price(item.getPrice())
+            .monthlyPrice(item.getMonthlyPrice())
+            .administrationCost(item.getAdministrationCost())
+            .latitude(item.getLatitude())
+            .longitude(item.getLongitude())
+            .roomNumber(item.getRoomNumber())
+            .toiletNumber(item.getToiletNumber())
+            .description(item.getDescription())
+            .buildingFloor(item.getBuildingFloor())
+            .itemFloor(item.getItemFloor())
+            .moveInDate(item.getMoveInDate())
+            .parkingRate(item.getParkingRate())
+            .haveElevator(item.getHaveElevator())
+            .createdAt(item.getCreatedAt())
+            .itemImageList(itemImageInstanceList)
+            .itemAdministrationFeeList(administrationFeeList)
+            .itemAdditionalOptionList(additionalOptionList)
             .build();
     }
 

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
     servers = {
-        @Server(url = "https://block-homes.kr", description = "블록홈즈 배포 서버"),
+        @Server(url = "https://k10c203.p.ssafy.io", description = "블록홈즈 API 서버"),
         @Server(url = "http://localhost:8081", description = "Localhost")
     },
     info = @Info(
