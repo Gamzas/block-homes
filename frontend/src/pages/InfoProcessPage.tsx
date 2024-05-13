@@ -1,6 +1,7 @@
 import React from 'react'
 import InfoPageHeader from '@common/InfoPageHeader'
 import * as i from '@pages/style/InfoProcessPageStyle'
+import InfoProcessContent from '@components/InfoPage/InfoProcessContent'
 
 const InfoProcessPage = () => {
   const infoHeaderProps = {
@@ -11,6 +12,7 @@ const InfoProcessPage = () => {
   return (
     <i.InfoProcessPageContainer>
       <InfoPageHeader {...infoHeaderProps} />
+      <InfoProcessContent />
     </i.InfoProcessPageContainer>
   )
 }
