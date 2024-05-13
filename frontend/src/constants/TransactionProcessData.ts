@@ -1,5 +1,10 @@
 export const TRANSACTION_PROCESS_STEP_DATA = [
   {
+    title: '',
+    detail: ' 각 절차의 아이콘을 클릭하여, <br />자세한 과정을 알아보세요.',
+    src: '/icon/icon_process_info.png',
+  },
+  {
     title: '매물 탐색',
     detail:
       '플랫폼 내 지도와 다양한 필터 기능을 사용하여 원하는 매물을 검색하세요. <br /> 위치, 가격, 면적 등 원하는 조건을 설정하여 매물을 쉽게 찾을 수 있습니다!',
