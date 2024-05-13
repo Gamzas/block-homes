@@ -3,6 +3,8 @@ package com.blockhomes.tradings.dto.item.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -12,15 +14,19 @@ import lombok.*;
 @AllArgsConstructor
 public class ListItemReq {
 
+    @NotNull
     @Schema(description = "지도 북동쪽 위도")
     private Double northEastLatitude;
 
+    @NotNull
     @Schema(description = "지도 북동쪽 경도")
     private Double northEastLongitude;
 
+    @NotNull
     @Schema(description = "지도 남서쪽 위도")
     private Double southWestLatitude;
 
+    @NotNull
     @Schema(description = "지도 남서쪽 경도")
     private Double southWestLongitude;
 
@@ -36,15 +42,19 @@ public class ListItemReq {
     @Schema(description = "거래 형식", example = "0 : 필터 없음, 1 : 월세, 2 : 전세, 3 : 매매")
     private Integer transactionType;
 
+    @NotNull
     @Schema(description = "최소가격 (0 : 필터 적용 X)")
     private Long minPrice;
 
+    @NotNull
     @Schema(description = "최대가격 (0 : 필터 적용 X)")
     private Long maxPrice;
 
+    @NotNull
     @Schema(description = "최소 평 수 (0 : 필터 적용 X)")
     private Integer minPyeong;
 
+    @NotNull
     @Schema(description = "최대 평 수 (0 : 필터 적용 X)")
     private Integer maxPyeong;
 

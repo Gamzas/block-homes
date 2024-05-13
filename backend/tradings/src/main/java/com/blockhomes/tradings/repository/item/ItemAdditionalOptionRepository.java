@@ -10,4 +10,6 @@ public interface ItemAdditionalOptionRepository extends JpaRepository<ItemAdditi
 
     List<ItemAdditionalOption> getItemAdditionalOptionsByItem(Item item);
 
+    void deleteAllByItem(Item item);
+
 }
