@@ -286,6 +286,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional
     public LikeItemRes likeItem(LikeItemReq req) {
         Wallet userWallet = walletRepository
             .getWalletByWalletAddress(req.getWalletAddress())
