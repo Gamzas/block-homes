@@ -10,23 +10,20 @@ export interface RealEstateStatusType {
   color1: string
 }
 
-export interface CurrentPosition {
-  currentPosition: string
-  location: {
-    latitude: number
-    longitude: number
-  }
+export interface CoordType {
+  latitude: number
+  longitude: number
 }
 
 export interface EstateItem {
-  condition: string;
-  address: string;
-  infos: string[];
-  leaseType: string;
-  price: string;
-  roomSize: string;
-  roomCount: string;
-  createDate: string;
-  latitude: number;
-  longitude: number;
+  condition: string
+  address: string
+  infos: string[]
+  leaseType: string
+  price: string
+  roomSize: string
+  roomCount: string
+  createDate: string
+  latitude: number
+  longitude: number
 }

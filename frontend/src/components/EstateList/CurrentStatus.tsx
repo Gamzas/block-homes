@@ -1,16 +1,17 @@
-import { filterAtom } from '@/stores/atoms/EstateListStore'
+import { currentPositonAtom, filterAtom } from '@/stores/atoms/EstateListStore'
 import { RealEstateStatusType } from '@/types/estateListType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 
 interface PropsType {
-  currentPosition: string
   getCurrentLocation: () => void
 }
 
 const CurrentStatus = (props: PropsType) => {
-  const { getCurrentLocation, currentPosition } = props
+  const { getCurrentLocation } = props
+  const [currentPostion] = useAtom(currentPositonAtom)
+  useEffect(() => {}, [currentPostion])
   const [filter, setFilter] = useAtom(filterAtom)
   const EstateStatusList: RealEstateStatusType[] = [
     {
@@ -26,8 +27,6 @@ const CurrentStatus = (props: PropsType) => {
       color1: '#FE754E',
     },
   ]
-
-  useEffect(() => {}, [currentPosition])
 
   const handleLocationClick = () => {
     getCurrentLocation()
@@ -45,7 +44,7 @@ const CurrentStatus = (props: PropsType) => {
           src="/icon/icon_gpsLocation.png"
           onClick={handleLocationClick}
         />
-        <div className="current-location">{currentPosition}</div>
+        <div className="current-location">{currentPostion}</div>
       </c.CurrentLocationContainer>
       <c.EstateStatusButtonContainer>
         {EstateStatusList.map((item, index) => (
