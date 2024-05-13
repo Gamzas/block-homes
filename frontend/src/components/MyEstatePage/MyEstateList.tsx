@@ -43,11 +43,20 @@ const estateList = [
 ]
 const MyEstateList = () => {
   const [myEstateList, setMyEstateList] = useState<EstateItem[]>([])
-
+  const [loading, setLoading] = useState(true)
   // TODO 나의 매물 조회 코드 작성하기
   useEffect(() => {
-    setMyEstateList(estateList)
+    const fetchData = async () => {
+      try {
+        setMyEstateList(estateList)
+        setLoading(false)
+      } catch {
+        setLoading(false)
+      }
+    }
+    fetchData()
   }, [])
+  if (loading) return <div>Loading...</div>
   return myEstateList.length !== 0 ? (
     <m.MyEstateListWrapper>
       <m.EditContainer>
