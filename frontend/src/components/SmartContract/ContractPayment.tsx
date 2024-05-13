@@ -39,14 +39,31 @@ const ContractPayment = () => {
           totalScreens={totalScreens}
           currentIndex={screenIndex}
         ></ScreenIndicators>
-        {screenIndex === 0 && (
-          <div>
-            <EstateDidCard index={1} currentCenterIndex={0} />
-            <p className="card-text" style={{ marginTop: '0.9rem' }}>
-              해당 매물은 자동으로 나의 지갑에 추가됩니다
-            </p>
-          </div>
-        )}
+        <div style={{ position: 'relative' }}>
+          {screenIndex === 0 && (
+            <>
+              <EstateDidCard
+                index={1}
+                currentCenterIndex={1}
+                showRegistrationButton={false}
+              />
+              <div>
+                <p
+                  className="card-text"
+                  style={{
+                    marginTop: '1.4rem',
+                    position: 'absolute',
+                    width: '12rem',
+                    right: '-5%',
+                  }}
+                >
+                  해당 매물은 자동으로 나의 지갑에 추가됩니다
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+
         {screenIndex === 1 && (
           <c.GridContainer>
             <c.Cell>

@@ -4,7 +4,7 @@ export const DangerDetailContainer = styled.div`
   width: 20.1875rem;
   border-radius: 0.43rem;
   background: #f9f9f9;
-  box-shadow: 0px 5.972px 5.972px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0.3rem 0.3rem 0.05rem rgba(0, 0, 0, 0.25);
   padding: 1rem 0.5rem;
   margin-bottom: 1rem;
   font-weight: 500;
