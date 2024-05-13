@@ -11,7 +11,11 @@ const ContractStart = () => {
   }
   return (
     <ContractStartContainer>
-      <EstateDidCard index={1} currentCenterIndex={1} />
+      <EstateDidCard
+        index={1}
+        currentCenterIndex={1}
+        showRegistrationButton={false}
+      />
 
       <div className="button-box">
         <CustomButtonStyle onClick={handleNext}>
