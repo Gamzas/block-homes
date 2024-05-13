@@ -1,5 +1,6 @@
-package com.blockhomes.tradings.entity.item;
+package com.blockhomes.tradings.entity.item.enums;
 
+import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;
 
 @Getter
@@ -19,7 +20,7 @@ public enum ItemImageCategory {
             if (i.getValue().equals(value)) return i;
         }
 
-        return null;
+        throw new EnumNotMatchException(ItemImageCategory.class, value);
     }
 
     public static Integer enumToValue(ItemImageCategory itemImageCategory) {
@@ -27,7 +28,7 @@ public enum ItemImageCategory {
             if (i.equals(itemImageCategory)) return i.getValue();
         }
 
-        return null;
+        return 0;
     }
 
 }
