@@ -13,7 +13,7 @@ import {
 import EstateListMap from './EstateListMap'
 
 const EstateItemList = () => {
-  const { currentPosition, getCurrentLocation } = useCurrentLocation()
+  const { getCurrentLocation } = useCurrentLocation()
   const [filter] = useAtom(filterAtom)
   const [menu] = useAtom(mapAtom)
   const [estateItemList] = useAtom(estateItemListAtom)
@@ -23,10 +23,7 @@ const EstateItemList = () => {
   return (
     <>
       <l.StatusBarContainer>
-        <CurrentStatus
-          getCurrentLocation={getCurrentLocation}
-          currentPosition={currentPosition}
-        />
+        <CurrentStatus getCurrentLocation={getCurrentLocation} />
       </l.StatusBarContainer>
       <l.EstateItemListContainer>
         {menu ? (
@@ -41,10 +38,7 @@ const EstateItemList = () => {
             </>
           )
         ) : (
-          // DELETE 컨테이너 삭제 EstateMapContainer
-          // <l.EstateMapContainer>
           <EstateListMap />
-          // </l.EstateMapContainer>
         )}
         {filter && (
           <l.EstateFilterContainer>
