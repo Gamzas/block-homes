@@ -42,7 +42,7 @@ const SmartContractPage = () => {
         open={open}
         handleClose={handleClose}
         title="나가시겠습니까?"
-        description="계약 시 나가면 처음부터 시작해야합니다."
+        description="계약 중 나가면 처음부터 시작해야합니다."
       />
     </s.ContractContainer>
   )
