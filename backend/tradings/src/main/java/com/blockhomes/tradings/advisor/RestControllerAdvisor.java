@@ -5,6 +5,7 @@ import com.blockhomes.tradings.exception.common.DateNotFormattedException;
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
+import com.blockhomes.tradings.exception.item.ItemOwnerNotMatchException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -110,6 +111,18 @@ public class RestControllerAdvisor {
             .body(BaseResponseBody.builder()
                 .message(e.getMessage())
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
+                .build());
+    }
+
+    @ExceptionHandler(value = {ItemOwnerNotMatchException.class})
+    public ResponseEntity<BaseResponseBody> conflictError(Exception e) {
+        log.error(e.getMessage());
+
+        return ResponseEntity
+            .status(HttpStatus.CONFLICT)
+            .body(BaseResponseBody.builder()
+                .message(e.getMessage())
+                .statusCode(HttpStatus.CONFLICT)
                 .build());
     }
 

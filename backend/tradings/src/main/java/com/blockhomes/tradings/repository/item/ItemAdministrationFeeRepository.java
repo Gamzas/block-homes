@@ -10,4 +10,6 @@ public interface ItemAdministrationFeeRepository extends JpaRepository<ItemAdmin
 
     List<ItemAdministrationFee> getItemAdministrationFeesByItem(Item item);
 
+    void deleteAllByItem(Item item);
+
 }

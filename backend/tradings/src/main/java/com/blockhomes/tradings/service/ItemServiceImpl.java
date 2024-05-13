@@ -1,9 +1,7 @@
 package com.blockhomes.tradings.service;
 
-import com.blockhomes.tradings.dto.item.request.GetLikeItemsReq;
-import com.blockhomes.tradings.dto.item.request.LikeItemReq;
-import com.blockhomes.tradings.dto.item.request.ListItemReq;
-import com.blockhomes.tradings.dto.item.request.RegisterItemReq;
+import com.blockhomes.tradings.dto.BaseResponseBody;
+import com.blockhomes.tradings.dto.item.request.*;
 import com.blockhomes.tradings.dto.item.response.*;
 import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.item.*;
@@ -12,6 +10,7 @@ import com.blockhomes.tradings.entity.wallet.Likes;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
+import com.blockhomes.tradings.exception.item.ItemOwnerNotMatchException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import com.blockhomes.tradings.repository.common.ImageRepository;
 import com.blockhomes.tradings.repository.item.ItemAdditionalOptionRepository;
@@ -25,6 +24,7 @@ import com.blockhomes.tradings.util.LocalDateTimeUtil;
 import com.blockhomes.tradings.util.S3BucketUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,27 +61,28 @@ public class ItemServiceImpl implements ItemService {
 
         // 이미지 제외 아이템 정보 저장
         Item item = itemRepository.save(Item.builder()
-            .ownerWallet(ownerWallet)
-            .realEstateDID(req.getRealEstateDID())
-            .roadNameAddress(req.getRoadNameAddress())
-            .transactionType(TransactionType.valueToEnum(req.getTransactionType()))
-            .area(req.getArea())
-            .price(req.getPrice())
-            .monthlyPrice(req.getMonthlyPrice())
-            .administrationCost(req.getAdministrationCost())
-            .latitude(req.getLatitude())
-            .longitude(req.getLongitude())
-            .realEstateType(RealEstateType.valueToEnum(req.getRealEstateType()))
-            .roomNumber(req.getRoomNumber())
-            .toiletNumber(req.getToiletNumber())
-            .description(req.getDescription())
-            .reportRank(ReportRank.valueToEnum(req.getReportRank()))
-            .buildingFloor(req.getBuildingFloor())
-            .itemFloor(req.getItemFloor())
-            .moveInDate(LocalDateTimeUtil.stringToLocalDateTime(req.getMoveInDate()))
-            .parkingRate(req.getParkingRate())
-            .haveElevator(req.getHaveElevator())
-            .build());
+                .ownerWallet(ownerWallet)
+                .realEstateDID(req.getRealEstateDID())
+                .roadNameAddress(req.getRoadNameAddress())
+                .transactionType(TransactionType.valueToEnum(req.getTransactionType()))
+                .area(req.getArea())
+                .price(req.getPrice())
+                .monthlyPrice(req.getMonthlyPrice())
+                .administrationCost(req.getAdministrationCost())
+                .latitude(req.getLatitude())
+                .longitude(req.getLongitude())
+                .realEstateType(RealEstateType.valueToEnum(req.getRealEstateType()))
+                .roomNumber(req.getRoomNumber())
+                .toiletNumber(req.getToiletNumber())
+                .description(req.getDescription())
+                .reportRank(ReportRank.valueToEnum(req.getReportRank()))
+                .transactionStatus(TransactionStatus.READY)
+                .buildingFloor(req.getBuildingFloor())
+                .itemFloor(req.getItemFloor())
+                .moveInDate(LocalDateTimeUtil.stringToLocalDateTime(req.getMoveInDate()))
+                .parkingRate(req.getParkingRate())
+                .haveElevator(req.getHaveElevator())
+                .build());
 
         // 관리비 카테고리 저장
         List<Integer> feeCategoryList = req.getAdministrationFeeCategoryList();
@@ -287,6 +288,88 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
+    public BaseResponseBody deleteItem(DeleteItemReq req) {
+        Wallet ownerWallet = walletRepository
+            .getWalletByWalletAddress(req.getWalletAddress())
+            .orElseThrow(WalletNotFoundException::new);
+
+        Item item = itemRepository.getItemByItemNo(req.getItemNo())
+            .orElseThrow(ItemNotFoundException::new);
+
+        if (!ownerWallet.getWalletAddress().equals(item.getOwnerWallet().getWalletAddress())) {
+            throw new ItemOwnerNotMatchException(item.getRealEstateDID(), ownerWallet.getWalletAddress());
+        }
+
+        itemRepository.delete(item);
+
+        return BaseResponseBody.builder()
+            .statusCode(HttpStatus.OK)
+            .message("매물 삭제 완료")
+            .build();
+    }
+
+    @Override
+    @Transactional
+    public DetailItemRes modifyItem(ModifyItemReq req) {
+        Item item = itemRepository.getItemByItemNo(req.getItemNo())
+            .orElseThrow(ItemNotFoundException::new);
+
+        item.setPrice(req.getPrice());
+        item.setMonthlyPrice(req.getMonthlyPrice());
+        item.setAdministrationCost(req.getAdministrationCost());
+        item.setRoomNumber(req.getRoomNumber());
+        item.setToiletNumber(req.getToiletNumber());
+        item.setDescription(req.getDescription());
+        item.setMoveInDate(LocalDateTimeUtil.stringToLocalDateTime(req.getMoveInDate()));
+
+        itemAdditionalOptionRepository.deleteAllByItem(item);
+        itemAdministrationFeeRepository.deleteAllByItem(item);
+
+        // 관리비 카테고리 저장
+        List<Integer> feeCategoryList = req.getAdministrationFeeCategoryList();
+        List<ItemAdministrationFee> feeEntityList = new ArrayList<>();
+
+        for (Integer category : feeCategoryList) {
+            feeEntityList.add(ItemAdministrationFee.builder()
+                .item(item)
+                .administrationFeeCategory(AdministrationFeeCategory.valueToEnum(category))
+                .build());
+        }
+
+        itemAdministrationFeeRepository.saveAll(feeEntityList);
+
+        // 추가 옵션 카테고리 저장
+        List<Integer> optionCategoryList = req.getAdditionalOptionCategoryList();
+        List<ItemAdditionalOption> optionEntityList = new ArrayList<>();
+
+        for (Integer category : optionCategoryList) {
+            optionEntityList.add(ItemAdditionalOption.builder()
+                .item(item)
+                .additionalOptionCategory(AdditionalOptionCategory.valueToEnum(category))
+                .build());
+        }
+
+        itemAdditionalOptionRepository.saveAll(optionEntityList);
+
+        return getDetailItem(item.getItemNo());
+    }
+
+    @Override
+    @Transactional
+    public BaseResponseBody processTransaction(Integer itemNo, Integer process) {
+        Item item = itemRepository.getItemByItemNo(itemNo)
+            .orElseThrow(ItemNotFoundException::new);
+        item.setTransactionStatus(TransactionStatus.valueToEnum(process));
+        itemRepository.save(item);
+
+        return BaseResponseBody.builder()
+            .statusCode(HttpStatus.ACCEPTED)
+            .message("매물 " + item.getItemNo() + " : 거래 단계 수정 완료 (" + TransactionStatus.valueToEnum(process) + ")")
+            .build();
+    }
+
+    @Override
+    @Transactional
     public LikeItemRes likeItem(LikeItemReq req) {
         Wallet userWallet = walletRepository
             .getWalletByWalletAddress(req.getWalletAddress())
@@ -339,7 +422,25 @@ public class ItemServiceImpl implements ItemService {
 
         return GetLikeItemsRes.builder()
             .likedItems(itemInstances)
-            .count(itemInstances.size() )
+            .count(itemInstances.size())
+            .build();
+    }
+
+    @Override
+    @Transactional
+    public BaseResponseBody deleteLikes(DeleteLikesReq req) {
+        Wallet userWallet = walletRepository
+            .getWalletByWalletAddress(req.getWalletAddress())
+            .orElseThrow(WalletNotFoundException::new);
+
+        Item item = itemRepository.getItemByItemNo(req.getItemNo())
+            .orElseThrow(ItemNotFoundException::new);
+
+        likesRepository.deleteByWalletAndItem(userWallet, item);
+
+        return BaseResponseBody.builder()
+            .statusCode(HttpStatus.OK)
+            .message("찜 삭제 완료")
             .build();
     }
 
