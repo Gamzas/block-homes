@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { ethers } from 'ethers'
-import { Wallet } from '@klaytn/ethers-ext'
+import { JsonRpcProvider, Wallet } from '@klaytn/ethers-ext'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
-import { SignInButton, SignInWrapper } from '@components/SignInPage/style/SignInStyle'
+import {
+  SignInButton,
+  SignInWrapper,
+} from '@components/SignInPage/style/SignInStyle'
 import { ConnectionWalletToggleButton } from '@components/SignInPage/style/ConnectionWallet'
 
-const ConnectionWallet = (
-  {
-    wallet,
-    setWallet,
-    setIsFirstStep,
-  }: {
-    wallet: Wallet | null
-    setWallet: (wallet: Wallet) => void
-    setIsFirstStep: (isFirstStep: boolean) => void
-  }) => {
-  const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
+const ConnectionWallet = ({
+  wallet,
+  setWallet,
+  setIsFirstStep,
+}: {
+  wallet: Wallet | null
+  setWallet: (wallet: Wallet) => void
+  setIsFirstStep: (isFirstStep: boolean) => void
+}) => {
+  const provider = new JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
   const [isSelected, setIsSelected] = useState(true)
   const [newWallet, setNewWallet] = useState(null)
   const [oldWallet, setOldWallet] = useState(null)
