@@ -15,10 +15,7 @@ const defaultPosition = {
     longitude: 127.10676860117488,
   },
 }
-export const currentPositonAtom = atomWithStorage<CurrentPosition>(
-  'currentPosition',
-  defaultPosition,
-)
+export const currentPositonAtom = atom<CurrentPosition>(defaultPosition)
 
 const EstateList = [
   {
