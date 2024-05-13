@@ -14,27 +14,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterItemReq {
-
-    @NotBlank
-    @Schema(description = "소유주 지갑 DID", example = "did:klay:abcd...")
-    private String ownerWalletDID;
-
-    @NotBlank
-    @Schema(description = "매물 부동산 DID", example = "did:klay:abcd...")
-    private String realEstateDID;
-
-    @NotBlank
-    @Schema(description = "도로명주소", example = "서울특별시 광진구 능동로 120")
-    private String roadNameAddress;
-
-    @Min(1) @Max(3)
-    @Schema(description = "거래 형식", example = "1 : 월세, 2 : 전세, 3 : 매매")
-    private Integer transactionType;
+public class ModifyItemReq {
 
     @NotNull
-    @Schema(description = "넓이 (제곱미터)", example = "19.2")
-    private Double area;
+    @Schema(description = "매물 고유번호 (PK)")
+    private Integer itemNo;
 
     @NotNull
     @Schema(description = "가격", example = "1000000000")
@@ -57,18 +41,6 @@ public class RegisterItemReq {
     private List<Integer> additionalOptionCategoryList;
 
     @NotNull
-    @Schema(description = "위도")
-    private Double latitude;
-
-    @NotNull
-    @Schema(description = "경도")
-    private Double longitude;
-
-    @Min(1) @Max(4)
-    @Schema(description = "부동산 형식", example = "1 : 아파트, 2 : 빌라, 3 : 원룸, 4 : 오피스텔")
-    private Integer realEstateType;
-
-    @NotNull
     @Schema(description = "방 개수", example = "2")
     private Integer roomNumber;
 
@@ -79,28 +51,8 @@ public class RegisterItemReq {
     @Schema(description = "상세설명")
     private String description;
 
-    @Min(1) @Max(3)
-    @Schema(description = "분석 레포트 등급", example = "1 : 안전, 2 : 보통, 3 : 위험")
-    private Integer reportRank;
-
-    @NotNull
-    @Schema(description = "매물의 건물 총 층수", example = "3")
-    private Integer buildingFloor;
-
-    @NotNull
-    @Schema(description = "매물 층", example = "2")
-    private Integer itemFloor;
-
     @NotBlank
     @Schema(description = "입주가능일", example = "yyyy.MM.dd (반드시 지켜야함 ㅠㅠ)")
     private String moveInDate;
-
-    @NotNull
-    @Schema(description = "세대 당 주차대수", example = "1.7")
-    private Double parkingRate;
-
-    @NotNull
-    @Schema(description = "엘리베이터 보유 여부", example = "true")
-    private Boolean haveElevator;
 
 }

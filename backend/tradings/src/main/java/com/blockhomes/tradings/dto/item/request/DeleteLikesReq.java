@@ -1,6 +1,7 @@
-package com.blockhomes.tradings.dto.wallet.request;
+package com.blockhomes.tradings.dto.item.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -8,9 +9,12 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetWalletReq {
+public class DeleteLikesReq {
 
     @NotBlank
     private String walletAddress;
+
+    @NotNull
+    private Integer itemNo;
 
 }
