@@ -1,5 +1,8 @@
 import * as m from '@components/MyEstatePage/style/MyEstateListStyle'
 import MyEstateCard from './MyEstateCard'
+import { useEffect, useState } from 'react'
+import NoMyEstate from './NoMyEstate'
+import { EstateItem } from '@/types/estateListType'
 const estateList = [
   {
     condition: 'normal',
@@ -39,17 +42,25 @@ const estateList = [
   },
 ]
 const MyEstateList = () => {
-  return (
+  const [myEstateList, setMyEstateList] = useState<EstateItem[]>([])
+
+  // TODO 나의 매물 조회 코드 작성하기
+  useEffect(() => {
+    setMyEstateList(estateList)
+  }, [])
+  return myEstateList.length !== 0 ? (
     <m.MyEstateListWrapper>
       <m.EditContainer>
         <div>매물관리</div>
       </m.EditContainer>
       <m.MyEstateListContainer>
-        {estateList.map((item, index) => (
+        {myEstateList.map((item, index) => (
           <MyEstateCard />
         ))}
       </m.MyEstateListContainer>
     </m.MyEstateListWrapper>
+  ) : (
+    <NoMyEstate />
   )
 }
 
