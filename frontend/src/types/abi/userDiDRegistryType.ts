@@ -1,7 +1,3 @@
-export interface CreateDIDDocumentInputs {
-  publicKey: string;
-}
-
 export interface DIDInputs {
   did: string
 }
