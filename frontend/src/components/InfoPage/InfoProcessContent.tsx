@@ -1,13 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { TRANSACTION_PROCESS_STEP_DATA } from '@constants/TransactionProcessData'
 import InfoProcessSelectedStep from '@components/InfoPage/InfoProcessSelectedStep'
 import * as i from '@components/InfoPage/style/InfoProcessContentStyle'
 
 const InfoProcessContent = () => {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollToBottom = () => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+  }
+
+  useEffect(() => {
+    if (selectedProcessIndex > 0) {
+      scrollToBottom()
+    }
+  }, [selectedProcessIndex])
 
   return (
-    <i.InfoProcessContentContainer>
+    <i.InfoProcessContentContainer ref={scrollRef}>
       <InfoProcessSelectedStep
         selectedProcessIndex={selectedProcessIndex}
         setSelectedProcessIndex={setSelectedProcessIndex}
