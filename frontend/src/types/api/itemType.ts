@@ -23,9 +23,9 @@ export interface PostItemRegisterParams {
     parkingRate: number
     haveElevator: boolean
   }
-  mainImage: string
-  roomImages: string[]
-  kitchenToiletImages: string[]
+  mainImage: File | null
+  roomImages: File[]
+  kitchenToiletImages: File[]
 }
 
 export interface PostItemRegisterResponses {
