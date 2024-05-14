@@ -22,6 +22,11 @@ export const BalanceBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  .title-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.7rem;
+  }
   .title,
   .balance {
     color: #fff;
@@ -29,8 +34,8 @@ export const BalanceBox = styled.div`
   .title {
     font-size: 0.875rem;
     font-weight: 400;
-    line-height: 1rem; /* 114.286% */
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    margin-right: 0.3rem;
   }
   .balance {
     color: #fff;
