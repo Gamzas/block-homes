@@ -33,6 +33,7 @@ const SearchBar = () => {
     if (event.key === 'Enter') {
       // Enter 키를 감지
       searchLocation(event.target.value)
+      setSearchKeyword('') // 검색어 초기화
     }
   }
   return (
@@ -44,7 +45,7 @@ const SearchBar = () => {
           value={searchKeyword}
           onChange={onChangeHandler}
           ref={searchInput}
-          placeholder="지역 검색 [주소, 지명]"
+          placeholder="지역 검색 ex) 장덕동, 능동로, 능동로 120"
           onKeyDown={handleKeyDown}
         />
         <img
