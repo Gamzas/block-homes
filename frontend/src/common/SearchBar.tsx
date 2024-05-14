@@ -38,7 +38,7 @@ const SearchBar = () => {
   }
   return (
     <>
-      <s.SearchBarContainer>
+      <s.SearchBarContainer onClick={handleCloseModal}>
         <input
           type="text"
           className="input-box"
