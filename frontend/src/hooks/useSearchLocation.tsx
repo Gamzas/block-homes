@@ -40,6 +40,8 @@ const useSearchLocation = () => {
           // 동명의 동네가 없을 때
           if (result.length === 1) {
             // console.log(result[0].address_name)
+            setIsModalOpen(false)
+
             const coords = new kakao.maps.LatLng(result[0].y, result[0].x)
             // console.log(coords)
             setMarkerCoord({
