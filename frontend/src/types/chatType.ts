@@ -6,8 +6,9 @@ export type MessageType = {
   isRead: boolean
   message: string
   type: string | null
+  userImage: string | null
   userName: string
-  userNo: number
+  userWalletAddress: string
 }
 
 export interface SendMessageInputPropsType {

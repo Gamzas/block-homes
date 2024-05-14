@@ -6,3 +6,15 @@ export interface UserType {
   walletAddress: string
   name: string
 }
+
+export interface SignInParamsType {
+  name: string
+  phoneNumber: string
+}
+
+export interface SignUpParamsType {
+  name: string
+  phoneNumber: string
+  walletAddress: string
+  encryptionPrivateKey: string
+}
