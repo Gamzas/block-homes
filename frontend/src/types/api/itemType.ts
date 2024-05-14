@@ -2,11 +2,14 @@ export interface PostItemRegisterParams {
   req: {
     ownerWalletDID: string
     realEstateDID: string
+    roadNameAddress: string
     transactionType: number
     area: number
     price: number
     monthlyPrice: number
     administrationCost: number
+    administrationFeeCategoryList: string
+    additionalOptionCategoryList: string
     latitude: number
     longitude: number
     realEstateType: number
