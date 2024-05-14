@@ -5,8 +5,21 @@ const { kakao } = window
 
 const useSearchLocation = () => {
   const geocoder = new kakao.maps.services.Geocoder()
-  const [locationList, setLocationList] = useState<GeocoderResult[]>()
-  // const keyword = word
+  const [locationList, setLocationList] = useState<GeocoderResult[]>([])
+  // locationlist 존재 시 모달 오픈!
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // 선택한 아이템
+  const handleSelectLocation = (location: GeocoderResult) => {
+    console.log(location.address_name)
+    const coords = new kakao.maps.LatLng(location.y, location.x)
+    console.log('선택된 좌표:', coords)
+    setIsModalOpen(false) // 모달 닫기
+  }
+  // 모달 닫기
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
 
   // 주소로 좌표를 검색합니다.
   const searchLocation = (address: string) => {
@@ -17,10 +30,12 @@ const useSearchLocation = () => {
         if (status === kakao.maps.services.Status.OK) {
           // 동명의 동네가 없을 때
           if (result.length === 1) {
+            console.log(result[0].address_name)
             const coords = new kakao.maps.LatLng(result[0].y, result[0].x)
             console.log(coords)
             // 동명의 동네가 있을 때
           } else {
+            setIsModalOpen(true)
             console.log(result)
             setLocationList(result)
           }
@@ -34,7 +49,13 @@ const useSearchLocation = () => {
   }
 
   // 키워드로 동네 검색
-  return { searchLocation }
+  return {
+    searchLocation,
+    locationList,
+    isModalOpen,
+    handleSelectLocation,
+    handleCloseModal,
+  }
 }
 
 export default useSearchLocation
