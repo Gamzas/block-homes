@@ -24,6 +24,7 @@ const LocationListModal = (props: PropsType) => {
           </m.ModalListBox>
         ))}
       </m.ModalListContainer>
+        <m.CloseBtnContainer onClick={onClose}>닫기</m.CloseBtnContainer>
     </m.ModalWrapper>
   )
 }
