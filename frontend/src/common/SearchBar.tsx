@@ -44,7 +44,7 @@ const SearchBar = () => {
           value={searchKeyword}
           onChange={onChangeHandler}
           ref={searchInput}
-          placeholder="지역 검색"
+          placeholder="지역 검색 [주소, 지명]"
           onKeyDown={handleKeyDown}
         />
         <img
