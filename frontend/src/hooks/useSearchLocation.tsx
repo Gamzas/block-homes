@@ -55,7 +55,7 @@ const useSearchLocation = () => {
           // 결과가 여러 개인 경우 모두 저장
         } else {
           console.error('주소 검색 실패:', status)
-          alert('검색 결과가 없습니다. 더 정확한 주소를 입력해주세요.')
+          alert('검색 결과가 없습니다. 정확한 주소를 입력해주세요.')
         }
       },
     )
