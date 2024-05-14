@@ -8,7 +8,7 @@ export const ModalWrapper = styled.div`
   top: 50px;
   left: 0;
   background-color: #b5b4b49f;
-  z-index: 100;
+  /* z-index: 100; */
   /* border: 2px solid red; */
   display: flex;
   justify-content: center;
@@ -16,8 +16,8 @@ export const ModalWrapper = styled.div`
 `
 export const ModalListContainer = styled.div`
   position: absolute;
-  /* top: 1rem; */
-  z-index: 1000;
+  top: 1rem;
+  /* z-index: 1000; */
   width: 80%;
   height: 100%;
   border-radius: 0.82531rem;
@@ -26,7 +26,7 @@ export const ModalListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0 2rem 0;
+  padding: 2rem 0 5rem 0;
   overflow-y: scroll;
   /* 스크롤바 숨기기를 위한 스타일 */
   ::-webkit-scrollbar {
@@ -61,4 +61,18 @@ export const LocationTitleContainer = styled.div`
     font-size: 1rem;
     font-weight: 500;
   }
+`
+
+export const CloseBtnContainer = styled.div`
+  position: absolute;
+  bottom: 0rem;
+  width: 3rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 `
