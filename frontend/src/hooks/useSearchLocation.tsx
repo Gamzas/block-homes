@@ -1,4 +1,6 @@
+import { currentCoordAtom } from '@/stores/atoms/EstateListStore'
 import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
+import { useSetAtom } from 'jotai'
 import { useState } from 'react'
 
 const { kakao } = window
@@ -9,11 +11,18 @@ const useSearchLocation = () => {
   // locationlist 존재 시 모달 오픈!
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  // 마커 위치 표시하는 ~
+  const setMarkerCoord = useSetAtom(currentCoordAtom)
+
   // 선택한 아이템
   const handleSelectLocation = (location: GeocoderResult) => {
-    console.log(location.address_name)
+    // console.log(location.address_name)
     const coords = new kakao.maps.LatLng(location.y, location.x)
-    console.log('선택된 좌표:', coords)
+    // console.log('선택된 좌표:', coords)
+    setMarkerCoord({
+      latitude: coords.Ma,
+      longitude: coords.La,
+    })
     setIsModalOpen(false) // 모달 닫기
   }
   // 모달 닫기
@@ -30,13 +39,17 @@ const useSearchLocation = () => {
         if (status === kakao.maps.services.Status.OK) {
           // 동명의 동네가 없을 때
           if (result.length === 1) {
-            console.log(result[0].address_name)
+            // console.log(result[0].address_name)
             const coords = new kakao.maps.LatLng(result[0].y, result[0].x)
-            console.log(coords)
+            // console.log(coords)
+            setMarkerCoord({
+              latitude: coords.Ma,
+              longitude: coords.La,
+            })
             // 동명의 동네가 있을 때
           } else {
             setIsModalOpen(true)
-            console.log(result)
+            // console.log(result)
             setLocationList(result)
           }
           // 결과가 여러 개인 경우 모두 저장
