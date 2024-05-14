@@ -33,7 +33,7 @@ const EstateListMap = () => {
   const handleDetailCardClose = () => {
     setItem('not')
   }
-
+  
   useEffect(() => {
     setItem('not')
     getCurrentLocation()

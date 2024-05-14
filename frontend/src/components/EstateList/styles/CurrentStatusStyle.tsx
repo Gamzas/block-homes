@@ -25,9 +25,9 @@ export const CurrentLocationContainer = styled.div`
   position: relative;
   z-index: 1;
   .location-icon {
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.6rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.2rem;
   }
   .current-location {
     font-weight: 600;
