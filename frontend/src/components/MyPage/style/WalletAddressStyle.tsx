@@ -8,7 +8,7 @@ export const WalletAddressContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.3rem;
+  /* margin: 0.3rem; */
   .address {
     color: #555050;
     font-size: 0.49444rem;

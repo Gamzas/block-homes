@@ -21,7 +21,6 @@ const MyVCCard = () => {
               />
               <div>
                 <div className="title">신원증명</div>
-                <WalletAddress />
               </div>
             </s.CertifiedTitle>
             <s.CertifiedContent>
