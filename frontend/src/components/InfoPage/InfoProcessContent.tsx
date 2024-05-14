@@ -7,7 +7,10 @@ const InfoProcessContent = () => {
 
   return (
     <div>
-      <InfoProcessSelectedStep selectedProcessIndex={selectedProcessIndex} />
+      <InfoProcessSelectedStep
+        selectedProcessIndex={selectedProcessIndex}
+        setSelectedProcessIndex={setSelectedProcessIndex}
+      />
       {TRANSACTION_PROCESS_STEP_DATA.map((transactionStep, index) => (
         <img
           src={transactionStep.src}
