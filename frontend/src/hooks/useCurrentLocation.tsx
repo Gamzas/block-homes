@@ -11,7 +11,9 @@ import { useEffect, useState } from 'react'
 const { kakao } = window
 
 const useCurrentLocation = () => {
+  // 지도 중심의 위치(상태바 출력)
   const setTown = useSetAtom(currentPositonAtom)
+  // 마커 좌표
   const [coord, setCoord] = useAtom(currentCoordAtom)
   // 지도 중심 위치 와 사용자 위치 일지 여부
   const [match, setMatch] = useAtom(matchAtom)

@@ -5,6 +5,10 @@ declare global {
 }
 
 export interface GeocoderResult {
+  address_name: string
+  address_type: string
+  x: string
+  y: string
   address: {
     address_name: string // 전체 주소 명
     region_1depth_name: string // 대분류 지역명 (예: 서울특별시)
