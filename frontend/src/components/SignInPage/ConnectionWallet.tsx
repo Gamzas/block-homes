@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { JsonRpcProvider, Wallet } from '@klaytn/ethers-ext'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
-import {
-  SignInButton,
-  SignInWrapper,
-} from '@components/SignInPage/style/SignInStyle'
+import { SignInButton, SignInError, SignInWrapper } from '@components/SignInPage/style/SignInStyle'
 import { ConnectionWalletToggleButton } from '@components/SignInPage/style/ConnectionWallet'
+import { ethers, Wallet } from 'ethers'
 
 const ConnectionWallet = ({
-  wallet,
-  setWallet,
-  setIsFirstStep,
-}: {
-  wallet: Wallet | null
-  setWallet: (wallet: Wallet) => void
+                            wallet,
+                            setWallet,
+                            setIsFirstStep,
+                          }: {
+  wallet: ethers.Wallet | null
+  setWallet: (wallet: ethers.Wallet) => void
   setIsFirstStep: (isFirstStep: boolean) => void
 }) => {
-  const provider = new JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
+  const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
   const [isSelected, setIsSelected] = useState(true)
   const [newWallet, setNewWallet] = useState(null)
   const [oldWallet, setOldWallet] = useState(null)
   const [oldWalletPrivateKey, setOldWalletPrivateKey] = useState('')
-  const [privateKeyError, setPrivateKeyError] = useState(null)
+  const [privateKeyError, setPrivateKeyError] = useState(true)
 
   const handleCreateWalletButtonClick = () => {
     if (!newWallet) setNewWallet(Wallet.createRandom().connect(provider))
@@ -37,23 +34,19 @@ const ConnectionWallet = ({
       setOldWalletPrivateKey(e.target.value)
       const loadWallet = new Wallet(e.target.value, provider)
       setOldWallet(loadWallet)
-      setPrivateKeyError(null)
+      setPrivateKeyError(true)
     } catch (error) {
       setOldWallet(null)
-      setPrivateKeyError('유효하지 않은 키입니다.')
+      setPrivateKeyError(false)
     }
   }
 
   const handleConnectWalletButtonClick = () => {
-    if (isSelected) {
-      if (oldWallet) setWallet(oldWallet)
-      if (privateKeyError) alert(privateKeyError)
-    } else if (!isSelected && newWallet) setWallet(newWallet)
-    if (wallet) {
-      setOldWallet(null)
-      setNewWallet(null)
-      setIsFirstStep(false)
-    }
+    if (isSelected && oldWallet) setWallet(oldWallet)
+    else if (!isSelected && newWallet) setWallet(newWallet)
+    setOldWallet(null)
+    setNewWallet(null)
+    setIsFirstStep(false)
   }
 
   useEffect(() => {
@@ -82,6 +75,9 @@ const ConnectionWallet = ({
               placeholder="0x0..."
             />
           </SignInWrapper>
+          {!privateKeyError && oldWalletPrivateKey && (
+            <SignInError>유효하지 않은 개인키 입니다.</SignInError>
+          )}
           {oldWallet && (
             <SignInWrapper>
               <div className="title">지갑 주소</div>
@@ -118,7 +114,10 @@ const ConnectionWallet = ({
           </>
         )
       )}
-      <SignInButton onClick={handleConnectWalletButtonClick}>
+      <SignInButton
+        onClick={handleConnectWalletButtonClick}
+        disabled={(isSelected && !oldWallet) || (!isSelected) && (!newWallet)}
+      >
         지갑 연결
       </SignInButton>
     </>

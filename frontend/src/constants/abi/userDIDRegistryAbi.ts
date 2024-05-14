@@ -75,6 +75,11 @@ export const USER_DID_REGISTRY_ABI = [
     'inputs': [
       {
         'internalType': 'string',
+        'name': '_walletAddress',
+        'type': 'string',
+      },
+      {
+        'internalType': 'string',
         'name': '_publicKey',
         'type': 'string',
       },
@@ -142,7 +147,7 @@ export const USER_DID_REGISTRY_ABI = [
                 'type': 'string',
               },
             ],
-            'internalType': 'struct DIDStruct.PublicKey',
+            'internalType': 'struct UserDIDRegistry.PublicKey',
             'name': 'publicKey',
             'type': 'tuple',
           },
@@ -151,51 +156,10 @@ export const USER_DID_REGISTRY_ABI = [
             'name': 'authentication',
             'type': 'string',
           },
-          {
-            'components': [
-              {
-                'internalType': 'string',
-                'name': 'id',
-                'type': 'string',
-              },
-              {
-                'internalType': 'string',
-                'name': 'serviceType',
-                'type': 'string',
-              },
-              {
-                'internalType': 'string',
-                'name': 'serviceEndPoint',
-                'type': 'string',
-              },
-            ],
-            'internalType': 'struct DIDStruct.Service',
-            'name': 'service',
-            'type': 'tuple',
-          },
         ],
-        'internalType': 'struct DIDStruct.DIDDocument',
+        'internalType': 'struct UserDIDRegistry.DIDDocument',
         'name': '',
         'type': 'tuple',
-      },
-    ],
-    'stateMutability': 'view',
-    'type': 'function',
-  },
-  {
-    'inputs': [
-      {
-        'internalType': 'string',
-        'name': 'did',
-        'type': 'string',
-      },
-    ],
-    'name': 'getTaxContractAddress',
-    'outputs': [
-      {
-        'internalType': 'address',
-        'name': '',
-        'type': 'address',
       },
     ],
     'stateMutability': 'view',
@@ -219,6 +183,30 @@ export const USER_DID_REGISTRY_ABI = [
     'name': 'renounceOwnership',
     'outputs': [],
     'stateMutability': 'nonpayable',
+    'type': 'function',
+  },
+  {
+    'inputs': [
+      {
+        'internalType': 'uint256',
+        'name': 'value',
+        'type': 'uint256',
+      },
+      {
+        'internalType': 'uint256',
+        'name': 'length',
+        'type': 'uint256',
+      },
+    ],
+    'name': 'toHexString',
+    'outputs': [
+      {
+        'internalType': 'string',
+        'name': '',
+        'type': 'string',
+      },
+    ],
+    'stateMutability': 'pure',
     'type': 'function',
   },
   {
