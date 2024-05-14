@@ -34,7 +34,7 @@ export const BalanceBox = styled.div`
   .title {
     font-size: 0.875rem;
     font-weight: 400;
-    margin-bottom: 0.3rem;
+    margin-bottom: 1rem;
     margin-right: 0.3rem;
   }
   .balance {

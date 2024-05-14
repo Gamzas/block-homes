@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const WalletAddressWrapper = styled.div`
+  
+` 
+
 export const WalletAddressContainer = styled.div`
   width: 13.5rem;
   height: 0.9375rem;
