@@ -1,24 +1,19 @@
 import { useState } from 'react'
 import { TRANSACTION_PROCESS_STEP_DATA } from '@constants/TransactionProcessData'
 import InfoProcessSelectedStep from '@components/InfoPage/InfoProcessSelectedStep'
+import * as i from '@components/InfoPage/style/InfoProcessContentStyle'
 
 const InfoProcessContent = () => {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0)
 
   return (
-    <div>
+    <i.InfoProcessContentContainer>
       <InfoProcessSelectedStep
         selectedProcessIndex={selectedProcessIndex}
         setSelectedProcessIndex={setSelectedProcessIndex}
       />
-      {TRANSACTION_PROCESS_STEP_DATA.map((transactionStep, index) => (
-        <img
-          src={transactionStep.src}
-          alt={transactionStep.title}
-          key={index}
-        />
-      ))}
-    </div>
+
+      <i.StepRoadContainer>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="303"
@@ -33,6 +28,20 @@ const InfoProcessContent = () => {
             fill="#D2C5F1"
           />
         </svg>
+        {TRANSACTION_PROCESS_STEP_DATA.slice(1, 10).map(
+          (transactionStep, index) => (
+            <i.IconContainer
+              key={index}
+              onClick={() => setSelectedProcessIndex(index + 1)}
+              $isSelected={selectedProcessIndex === index + 1}
+              className={`icon${index + 1}`}
+            >
+              <img src={transactionStep.src} alt={transactionStep.title} />
+            </i.IconContainer>
+          ),
+        )}
+      </i.StepRoadContainer>
+    </i.InfoProcessContentContainer>
   )
 }
 
