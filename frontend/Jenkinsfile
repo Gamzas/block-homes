@@ -22,6 +22,7 @@ pipeline {
             steps {
                 dir('./frontend') {
                     script {
+                        sh 'cp /home/wallet-private-key/MOISPrivateKey.ts .'
                         sh 'npm install' // npm 패키지 설치
                         sh 'npm run build' // 프론트엔드 빌드 실행
                     }
