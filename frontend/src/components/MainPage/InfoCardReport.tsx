@@ -18,10 +18,11 @@ const InfoCardReport = () => {
       </div>
 
       <i.InfoContainer>
-        <div className="info-text">블록홈즈에는 각 매물에 대한</div>
         <div className="info-text">
-          <span className="highlight-text"> 레포트</span>가 작성되어 있어요.
+          블록홈즈에는 매물에 대한{' '}
+          <span className="highlight-text"> 레포트</span>가
         </div>
+        <div className="info-text">작성되어 있어요.</div>
         <i.NavigateButtonContainer>
           <div className="button-title" onClick={handleGoReport}>
             매물 레포트 알아보기
