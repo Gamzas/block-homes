@@ -1,11 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
-import { API_BASE_HEADERS, API_ITEM_REGISTER } from '@constants/api'
-import { PostItemRegisterParams } from '@/types/api/itemType'
+import { API_ITEM } from '@constants/api'
 
-export const usePostWallet = () => {
+export const usePostItemRegister = () => {
   return useMutation({
-    mutationFn: (params: PostItemRegisterParams) =>
-      axios.post(API_ITEM_REGISTER, params, API_BASE_HEADERS),
+    mutationFn: (formData: FormData) => axios.post(API_ITEM, formData),
   })
 }
