@@ -39,7 +39,7 @@ const InfoProcessSelectedStep = ({
         <div
           className="detail-container"
           dangerouslySetInnerHTML={createMarkup(selectedStepData.detail)}
-        ></div>
+        />
       </i.InfoProcessSelectedStepContent>
       <img
         className="right-arrow"
