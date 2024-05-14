@@ -13,7 +13,7 @@ export const TRANSACTION_PROCESS_STEP_DATA = [
   {
     title: '채팅 시작',
     detail:
-      '관심 있는 매물을 찾으셨다면, 해당 건물의 소유주와 <br /> 직접 채팅을 통해 상세 정보를 논의하고 거래 절차를 준비하세요!',
+      '관심 있는 매물을 찾으셨다면, <br />해당 건물의 소유주와  직접 채팅을 통해 <br />상세 정보를 논의하고 거래 절차를 준비하세요!',
     src: '/icon/icon_process_chat.png',
   },
   {
