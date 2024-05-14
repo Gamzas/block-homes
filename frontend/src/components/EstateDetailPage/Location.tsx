@@ -1,4 +1,7 @@
-import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
+import {
+  GeocoderResult,
+  KakaoMapsStatus,
+} from '@/types/components/kakaomapType'
 import * as l from '@components/EstateDetailPage/style/LocationStyle'
 import { useEffect, useState } from 'react'
 

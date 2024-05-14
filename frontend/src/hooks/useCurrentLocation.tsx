@@ -3,8 +3,11 @@ import {
   currentPositonAtom,
   matchAtom,
 } from '@/stores/atoms/EstateListStore'
-import { CoordType } from '@/types/estateListType'
-import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
+import { CoordType } from '@/types/components/estateListType'
+import {
+  GeocoderResult,
+  KakaoMapsStatus,
+} from '@/types/components/kakaomapType'
 import { useAtom, useSetAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 

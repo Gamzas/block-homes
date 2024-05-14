@@ -1,6 +1,6 @@
 import * as r from '@components/EstateDetailPage/style/RoomInfoStyle'
 import Location from './Location'
-import { EstateItem } from '@/types/estateListType'
+import { EstateItem } from '@/types/components/estateListType'
 import TransactionProcedure from './TransactionProcedure'
 
 interface PropsType {
