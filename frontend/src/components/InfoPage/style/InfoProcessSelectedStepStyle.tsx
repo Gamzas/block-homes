@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const InfoProcessSelectedStepContainer = styled.div`
   width: 90%;
   margin: 0 5%;
-  height: 9.5rem;
+  height: fit-content;
   border-radius: 1rem;
   background: #fff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -25,18 +25,18 @@ export const InfoProcessSelectedStepContainer = styled.div`
 
 export const InfoProcessSelectedStepContent = styled.div`
   width: 95%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 
   .icon-container {
-    margin: 1rem 0;
     position: relative;
     top: 0;
     width: 2.6rem;
     height: 2.6rem;
+    margin: 1rem;
     border-radius: 5rem;
     background: #845bd3;
     border: #fff 0.1rem solid;
@@ -53,10 +53,9 @@ export const InfoProcessSelectedStepContent = styled.div`
   }
 
   .detail-container {
+    margin-bottom: 1rem;
     text-align: center;
-    height: 5rem;
-    width: 100%;
-
     font-size: 1rem;
+    line-height: 1.2rem;
   }
 `
