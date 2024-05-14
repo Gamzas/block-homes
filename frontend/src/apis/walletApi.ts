@@ -1,15 +1,19 @@
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
-import { API_BASE_HEADERS, API_WALLET, API_WALLET_CHECK } from '@constants/api'
-import { GetWalletCheckParams, GetWalletCheckResponse, PostWalletParams } from '@/types/api/walletType'
+import { API_HEADERS_JSON, API_WALLET, API_WALLET_CHECK } from '@constants/api'
+import {
+  GetWalletCheckParams,
+  GetWalletCheckResponse,
+  PostWalletParams,
+} from '@/types/api/walletType'
 import { UserType } from '@/types/userType'
 
 export const useGetWalletCheck = ({
-                                    name,
-                                    setUserAtom,
-                                    setIsSignIn,
-                                    navigate,
-                                  }: {
+  name,
+  setUserAtom,
+  setIsSignIn,
+  navigate,
+}: {
   name: string
   setUserAtom: (currentUser: UserType) => void
   setIsSignIn: (isSignIn: boolean) => void
@@ -34,6 +38,6 @@ export const useGetWalletCheck = ({
 export const usePostWallet = () => {
   return useMutation({
     mutationFn: (params: PostWalletParams) =>
-      axios.post(API_WALLET, params, API_BASE_HEADERS),
+      axios.post(API_WALLET, params, API_HEADERS_JSON),
   })
 }
