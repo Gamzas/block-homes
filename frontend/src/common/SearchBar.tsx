@@ -1,3 +1,4 @@
+import LocationListModal from '@/components/EstateList/LocationListModal'
 import useSearchLocation from '@/hooks/useSearchLocation'
 import * as s from '@common/style/SearchBarStyle'
 import { useRef, useState } from 'react'
@@ -5,8 +6,13 @@ import { useRef, useState } from 'react'
 const SearchBar = () => {
   const [searchKeyword, setSearchKeyword] = useState<string>('')
   const searchInput = useRef<HTMLInputElement>()
-
-  const { searchLocation } = useSearchLocation()
+  const {
+    searchLocation,
+    isModalOpen,
+    locationList,
+    handleSelectLocation,
+    handleCloseModal,
+  } = useSearchLocation()
 
   const goSearch = () => {
     if (searchKeyword.trim().length < 1) {
@@ -21,22 +27,41 @@ const SearchBar = () => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value)
   }
+
+  // 엔터 키 감지
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      // Enter 키를 감지
+      searchLocation(event.target.value)
+    }
+  }
   return (
-    <s.SearchBarContainer>
-      <input
-        className="input-box"
-        value={searchKeyword}
-        onChange={onChangeHandler}
-        ref={searchInput}
-        placeholder="지역 검색"
-      />
-      <img
-        alt="검색"
-        className="icon-find"
-        src="/icon/icon_reading_glass.png"
-        onClick={goSearch}
-      />
-    </s.SearchBarContainer>
+    <>
+      <s.SearchBarContainer>
+        <input
+          type="text"
+          className="input-box"
+          value={searchKeyword}
+          onChange={onChangeHandler}
+          ref={searchInput}
+          placeholder="지역 검색"
+          onKeyDown={handleKeyDown}
+        />
+        <img
+          alt="검색"
+          className="icon-find"
+          src="/icon/icon_reading_glass.png"
+          onClick={goSearch}
+        />
+      </s.SearchBarContainer>
+      {isModalOpen && (
+        <LocationListModal
+          locationList={locationList}
+          onSelect={handleSelectLocation}
+          onClose={handleCloseModal}
+        />
+      )}
+    </>
   )
 }
 
