@@ -19,7 +19,7 @@ const ChattingRoomPage = () => {
     type: null,
     userImage: null,
     userName: user.name,
-    userNo: user.userNo,
+    userWalletAddress: user.walletAddress,
   }
 
   const [messages, setMessages] = useState<MessageType[]>([])
