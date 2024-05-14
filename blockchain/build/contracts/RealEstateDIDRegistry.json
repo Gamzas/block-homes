@@ -84,7 +84,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -128,7 +129,8 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -193,7 +195,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -14753,9 +14756,63 @@
     "name": "solc",
     "version": "0.8.21+commit.d9974bed.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1001": {
+      "events": {
+        "0x5fccafd09eeeb6a3dc1c80357ee982c00d7fb00a991274a9b96fe4fd7cb60552": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "did",
+              "type": "string"
+            }
+          ],
+          "name": "DIDCreated",
+          "type": "event"
+        },
+        "0xb24f94d3ff75ed62d7237e14a510a969d70c1d4efdd4cce8ad563aa8ba60a64c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "did",
+              "type": "string"
+            }
+          ],
+          "name": "DIDDeleted",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xfAf8C595fBE94A51c9ab9db044B041B7843e9D6e",
+      "transactionHash": "0x13a958f5f21be08ee1d874a550421e7a8feceb3ccc1ff05703ba8dcfdc375a1f"
+    }
+  },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-14T01:23:49.832Z",
+  "updatedAt": "2024-05-14T06:37:31.491Z",
+  "networkType": "ethereum",
   "devdoc": {
     "errors": {
       "OwnableInvalidOwner(address)": [

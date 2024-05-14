@@ -16277,14 +16277,60 @@
   },
   "networks": {
     "1001": {
-      "events": {},
+      "events": {
+        "0x5fccafd09eeeb6a3dc1c80357ee982c00d7fb00a991274a9b96fe4fd7cb60552": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "did",
+              "type": "string"
+            }
+          ],
+          "name": "DIDCreated",
+          "type": "event"
+        },
+        "0xb24f94d3ff75ed62d7237e14a510a969d70c1d4efdd4cce8ad563aa8ba60a64c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "did",
+              "type": "string"
+            }
+          ],
+          "name": "DIDDeleted",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0xFFfDBf487230C2dc00E448837C6893051a6b4db1",
-      "transactionHash": "0xc6ab444daa3010b76857c936a63546ea8de2d87755b4746c74b4368d716a3512"
+      "address": "0x7b3e4a619d76e3F7BDf5e71345CDc2BCa589083b",
+      "transactionHash": "0x9a990536e0dafdaeb45be30873e7ee36040e34c2b127f7c759dd03ac7599d3dd"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-14T01:23:49.849Z",
+  "updatedAt": "2024-05-14T06:37:21.129Z",
   "devdoc": {
     "errors": {
       "OwnableInvalidOwner(address)": [

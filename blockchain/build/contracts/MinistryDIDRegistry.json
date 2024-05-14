@@ -84,8 +84,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -186,8 +185,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -15293,8 +15291,7 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-14T01:24:01.018Z",
-  "networkType": "ethereum",
+  "updatedAt": "2024-05-14T06:37:21.091Z",
   "devdoc": {
     "errors": {
       "OwnableInvalidOwner(address)": [
