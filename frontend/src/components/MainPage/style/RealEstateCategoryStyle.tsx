@@ -22,8 +22,8 @@ export const CategoryContainer = styled.div`
   width: 45%;
   height: 125px;
   border-radius: 1rem;
-  border: 0.11rem solid #d3c3f0;
-  background: #e8e0f7;
+
+  background: linear-gradient(145deg, #d3c3f0 -0.03%, #fff 103.99%);
   padding: 1rem;
   position: relative;
   margin-bottom: 0.6rem;
