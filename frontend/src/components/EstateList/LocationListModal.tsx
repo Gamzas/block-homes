@@ -1,4 +1,4 @@
-import { GeocoderResult } from '@/types/kakaomapType'
+import { GeocoderResult } from '@/types/components/kakaomapType'
 import * as m from '@components/EstateList/styles/LocationListModalStyle'
 interface PropsType {
   locationList: GeocoderResult[]

@@ -1,5 +1,8 @@
 import { currentCoordAtom } from '@/stores/atoms/EstateListStore'
-import { GeocoderResult, KakaoMapsStatus } from '@/types/kakaomapType'
+import {
+  GeocoderResult,
+  KakaoMapsStatus,
+} from '@/types/components/kakaomapType'
 import { useSetAtom } from 'jotai'
 import { useState } from 'react'
 
