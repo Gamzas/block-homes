@@ -1,19 +1,15 @@
 import axios from 'axios'
 import { useMutation } from '@tanstack/react-query'
 import { API_BASE_HEADERS, API_WALLET, API_WALLET_CHECK } from '@constants/api'
-import {
-  GetWalletCheckParams,
-  GetWalletCheckResponse,
-  PostWalletParams,
-} from '@/types/api/walletType'
+import { GetWalletCheckParams, GetWalletCheckResponse, PostWalletParams } from '@/types/api/walletType'
 import { UserType } from '@/types/userType'
 
 export const useGetWalletCheck = ({
-  name,
-  setUserAtom,
-  setIsSignIn,
-  navigate,
-}: {
+                                    name,
+                                    setUserAtom,
+                                    setIsSignIn,
+                                    navigate,
+                                  }: {
   name: string
   setUserAtom: (currentUser: UserType) => void
   setIsSignIn: (isSignIn: boolean) => void
@@ -24,7 +20,6 @@ export const useGetWalletCheck = ({
       axios.get(API_WALLET_CHECK, { params }),
     onSuccess: ({ data }: { data: GetWalletCheckResponse }) => {
       setUserAtom({
-        userNo: 0,
         walletAddress: data.walletAddress,
         name: name,
       })
