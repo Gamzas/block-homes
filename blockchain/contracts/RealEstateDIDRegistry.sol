@@ -37,8 +37,17 @@ contract RealEstateDIDRegistry is Ownable {
         return string(buffer);
     }
 
-    function createDIDDocument() external onlyOwner {
-        address identifier = address(new RealEstateInfo(msg.sender));
+    function createDIDDocument(
+        string calldata _roadNameAddress,
+        string calldata _buildingName,
+        uint16  _buildingNumber,
+        uint16  _roomNumber) external onlyOwner {
+        RealEstateInfo realEstateInfo = new RealEstateInfo(
+        _roadNameAddress,
+        _buildingName,
+        _buildingNumber,
+         _roomNumber);
+        address identifier = address(realEstateInfo);
         DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(identifier)), 20)));
         didDocument.context = "https://www.w3.org/ns/did/v1";

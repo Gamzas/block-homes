@@ -67,16 +67,23 @@ module.exports = {
 
   networks: {
 
-    baobab: {
+    consortium: {
       provider: () => new HDWalletProvider({
         privateKeys: [
-          consortiumPrivate,
-          revenuePrivate,
-          bankPrivate,
-          adminMinistryPrivate,
+          consortiumPrivate
+        ],
+        providerOrUrl: "https://api.baobab.klaytn.net:8651",  // Klaytn Baobab 네트워크의 URL
+      }),
+      network_id: "1001",
+      gas: "8500000",
+      gasPrice: null  // 가스 가격을 null로 설정하여 Klaytn 가스 정책을 따름
+    },
+    land: {
+      provider: () => new HDWalletProvider({
+        privateKeys: [
           landMinistryPrivate
         ],
-        providerOrUrl: "https://api.baobab.klaytn.net:8651"  // Klaytn Baobab 네트워크의 URL
+        providerOrUrl: "https://api.baobab.klaytn.net:8651",  // Klaytn Baobab 네트워크의 URL
       }),
       network_id: "1001",
       gas: "8500000",
@@ -132,7 +139,10 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.21",      // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.21",
+      settings:{
+        viaIR:true
+      }      // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
