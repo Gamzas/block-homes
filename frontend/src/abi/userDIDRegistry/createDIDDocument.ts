@@ -1,61 +1,31 @@
-import { useMutation } from '@tanstack/react-query'
-import { CreateDIDDocumentInputs } from '@/types/abi/userDiDRegistryType'
-import { baseUserDIDRegistryContract } from '@/abi/userDIDRegistry/baseUserDIDRegistryContract'
-import {
-  BLOCK_CHAIN_ENDPOINT,
-  USER_DID_REGISTRY_CONTRACT_ADDRESS,
-} from '@constants/abi/abi'
-import { JsonRpcProvider, TxType, Wallet } from '@klaytn/ethers-ext'
 import { ethers } from 'ethers'
-import { USER_DID_REGISTRY_ABI } from '@constants/abi/userDIDRegistryAbi'
+import { useMutation } from '@tanstack/react-query'
+import { baseUserDIDRegistryContract } from '@/abi/userDIDRegistry/baseUserDIDRegistryContract'
+import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
+import { MOIS_PRIVATE_KEY } from '@constants/abi/MOISPrivateKey'
 
 export const useCreateDIDDocument = () => {
   return useMutation({
-    mutationFn: async ({
-      wallet,
-      params,
-    }: {
-      wallet: Wallet
-      params: CreateDIDDocumentInputs
-    }) => {
-      try {
-        const provider = new JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
-        const contract = new ethers.Contract(
-          USER_DID_REGISTRY_CONTRACT_ADDRESS,
-          USER_DID_REGISTRY_ABI,
-          wallet,
-        )
-        const feePayerWallet = new Wallet(
-          '0xfdb063ba30ff72e37a260e17582a953cc85dcb20a71f6fee83a4bb89e7ea8910',
-          provider,
-        )
-        const data = contract.interface.encodeFunctionData(
-          'createDIDDocument',
-          [params.publicKey],
-        )
-        const tx = {
-          type: TxType.FeeDelegatedSmartContractExecution,
-          from: wallet.address,
-          to: contract.address,
-          data: data,
-        }
+    mutationFn: async (wallet: ethers.Wallet) => {
+      const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
+      const MOISWallet = new ethers.Wallet(MOIS_PRIVATE_KEY, provider)
+      const contract = baseUserDIDRegistryContract(MOISWallet)
 
-        // Sign transaction by sender
-        const populatedTx = await wallet.populateTransaction(tx)
-        const senderTxHashRLP = await wallet.signTransaction(populatedTx)
-        console.log('senderTxHashRLP', senderTxHashRLP)
+      // 이 부분에서는 스마트 계약의 함수 인코딩 방식을 그대로 유지합니다.
+      const data = contract.interface.encodeFunctionData('createDIDDocument', [wallet.address, wallet.publicKey])
 
-        // Sign and send transaction by fee payer
-        const sentTx =
-          await feePayerWallet.sendTransactionAsFeePayer(senderTxHashRLP)
-        const receipt = await sentTx.wait()
-        console.log('receipt', receipt)
-      } catch (error) {
-        console.error('트랜잭션 실행 오류:', error)
+      // 트랜잭션 객체 구성
+      const tx = {
+        from: MOISWallet.address,
+        to: contract.address,
+        value: ethers.constants.Zero,
+        data: data,  // 'input' 대신 'data' 필드 사용
       }
-    },
-    onError: error => {
-      console.error('Error creating DID document:', error)
+
+      // 트랜잭션 발송 및 수신 확인
+      const sentTx = await MOISWallet.sendTransaction(tx)
+      const receipt = await sentTx.wait()
+      console.log('receipt', receipt)
     },
   })
 }
