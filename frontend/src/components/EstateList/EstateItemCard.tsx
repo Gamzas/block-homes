@@ -16,6 +16,7 @@ interface PropsType {
   latitude: number
   longitude: number
 }
+
 const EstateItemCard = (props: PropsType) => {
   const {
     condition,
