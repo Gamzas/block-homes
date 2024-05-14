@@ -4,6 +4,6 @@ export interface ChatComponentProps {
   transactionType: number
   price: number
   lastChat: string
-  dangerType: number
+  dangerType: string
   chatRoomNum: number
 }

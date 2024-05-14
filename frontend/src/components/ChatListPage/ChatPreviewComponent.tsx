@@ -2,6 +2,7 @@ import * as c from '@components/ChatListPage/style/ChatPreviewComponentStyle'
 import React, { useEffect, useState } from 'react'
 import { ChatComponentProps } from '@/types/components/chatType'
 import { useNavigate } from 'react-router-dom'
+import useEstateCondition from '@hooks/useEstateCondition'
 
 const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   representativeImage,
@@ -15,6 +16,8 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
   const navigate = useNavigate()
+  const { getColor } = useEstateCondition(dangerType)
+  const fourthColor = getColor()?.fourth
 
   const formatPrice = (price: number) => {
     const units = ['원', '만', '억']
@@ -54,16 +57,29 @@ const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
   }
 
   return (
-    <c.ChatComponentContainer onClick={handleClick}>
-      <img className="estate-image" alt="매물 사진" src={representativeImage} />
+    <c.ChatPreviewComponentContainer onClick={handleClick} $color={fourthColor}>
+      <div className="image-container">
+        <img
+          className="estate-image"
+          alt="매물 사진"
+          src={representativeImage}
+        />
+      </div>
+
       <c.ChatComponentRightContainer>
         <div className="address">{address}</div>
-        <div className="type">{typeOfNumber}</div>
-        <div className="price">{stringPrice} 원</div>
-        <div className="last-chat">{lastChat}</div>
-        <div>{dangerType}</div>
+
+        <div className="price">
+          <img src="/icon/icon_chat_preview_coin.png" alt="돈" />
+          <div className="type">{typeOfNumber}</div>
+          &nbsp;{stringPrice} 원
+        </div>
+        <div className="last-chat">
+          <img src="/icon/icon_chat_preview_message.png" alt="채팅" />
+          {lastChat}
+        </div>
       </c.ChatComponentRightContainer>
-    </c.ChatComponentContainer>
+    </c.ChatPreviewComponentContainer>
   )
 }
 
