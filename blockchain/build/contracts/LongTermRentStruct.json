@@ -1,0 +1,417 @@
+{
+  "contractName": "LongTermRentStruct",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/real-estate/LongTermRentStruct.sol\":\"LongTermRentStruct\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/real-estate/LongTermRentStruct.sol\":{\"keccak256\":\"0x753c0584b2000796d514405576de8f1b439738e5cd5fb991b459006e5c2de668\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a0d9affde0b8683fd89bc5c69202f8252f9901dc3b69e821208a76de96a612fe\",\"dweb:/ipfs/QmWxwiBtsk1hDxoFYtbgUx3iZRWGvtZMZMp3FLAgHeZj41\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f2b1cb705c946c349976922c75e6dc68e28e44c121624baf32b56483f4884d9a64736f6c63430008150033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea2646970667358221220f2b1cb705c946c349976922c75e6dc68e28e44c121624baf32b56483f4884d9a64736f6c63430008150033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "62:708:14:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "62:708:14:-:0;;;;;;;;",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\n\r\nlibrary LongTermRentStruct {\r\n\r\n    struct ContractInfo {\r\n        string landlordDID; // 임대인의 분산식 식별자\r\n        string tenantDID; // 임차인의 분산식 식별자\r\n        uint16 leasePeriod; // 임대 기간 (월 단위)\r\n        uint256 deposit; // 전세금\r\n        string propertyDID; // 부동산의 분산식 식별자\r\n        uint256 contractDate; // 계약 날짜 (timestamp)\r\n        string[] terms; // 계약의 세부 조건들\r\n    }\r\n\r\n    struct LongTermRentContract {\r\n        ContractInfo contractInfo;\r\n        bytes32 contractInfoHash;\r\n\r\n        bytes landlordSignature; // 임대인의 서명\r\n        bytes tenantSignature; // 임차인의 서명\r\n    }\r\n    \r\n}",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\S10P31C203\\blockchain\\contracts\\real-estate\\LongTermRentStruct.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/real-estate/LongTermRentStruct.sol",
+    "exportedSymbols": {
+      "LongTermRentStruct": [
+        3590
+      ]
+    },
+    "id": 3591,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3563,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:14"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "LongTermRentStruct",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "id": 3590,
+        "linearizedBaseContracts": [
+          3590
+        ],
+        "name": "LongTermRentStruct",
+        "nameLocation": "70:18:14",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "LongTermRentStruct.ContractInfo",
+            "id": 3579,
+            "members": [
+              {
+                "constant": false,
+                "id": 3565,
+                "mutability": "mutable",
+                "name": "landlordDID",
+                "nameLocation": "136:11:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "129:18:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 3564,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "129:6:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3567,
+                "mutability": "mutable",
+                "name": "tenantDID",
+                "nameLocation": "201:9:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "194:16:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 3566,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "194:6:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3569,
+                "mutability": "mutable",
+                "name": "leasePeriod",
+                "nameLocation": "264:11:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "257:18:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 3568,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "257:6:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3571,
+                "mutability": "mutable",
+                "name": "deposit",
+                "nameLocation": "324:7:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "316:15:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 3570,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "316:7:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3573,
+                "mutability": "mutable",
+                "name": "propertyDID",
+                "nameLocation": "362:11:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "355:18:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 3572,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "355:6:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3575,
+                "mutability": "mutable",
+                "name": "contractDate",
+                "nameLocation": "428:12:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "420:20:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 3574,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "420:7:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3578,
+                "mutability": "mutable",
+                "name": "terms",
+                "nameLocation": "489:5:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3579,
+                "src": "480:14:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                  "typeString": "string[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 3576,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "480:6:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "id": 3577,
+                  "nodeType": "ArrayTypeName",
+                  "src": "480:8:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                    "typeString": "string[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "ContractInfo",
+            "nameLocation": "105:12:14",
+            "nodeType": "StructDefinition",
+            "scope": 3590,
+            "src": "98:434:14",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "LongTermRentStruct.LongTermRentContract",
+            "id": 3589,
+            "members": [
+              {
+                "constant": false,
+                "id": 3582,
+                "mutability": "mutable",
+                "name": "contractInfo",
+                "nameLocation": "592:12:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3589,
+                "src": "579:25:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_ContractInfo_$3579_storage_ptr",
+                  "typeString": "struct LongTermRentStruct.ContractInfo"
+                },
+                "typeName": {
+                  "id": 3581,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 3580,
+                    "name": "ContractInfo",
+                    "nameLocations": [
+                      "579:12:14"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 3579,
+                    "src": "579:12:14"
+                  },
+                  "referencedDeclaration": 3579,
+                  "src": "579:12:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_ContractInfo_$3579_storage_ptr",
+                    "typeString": "struct LongTermRentStruct.ContractInfo"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3584,
+                "mutability": "mutable",
+                "name": "contractInfoHash",
+                "nameLocation": "623:16:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3589,
+                "src": "615:24:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 3583,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "615:7:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3586,
+                "mutability": "mutable",
+                "name": "landlordSignature",
+                "nameLocation": "658:17:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3589,
+                "src": "652:23:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 3585,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "652:5:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 3588,
+                "mutability": "mutable",
+                "name": "tenantSignature",
+                "nameLocation": "715:15:14",
+                "nodeType": "VariableDeclaration",
+                "scope": 3589,
+                "src": "709:21:14",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 3587,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "709:5:14",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "LongTermRentContract",
+            "nameLocation": "547:20:14",
+            "nodeType": "StructDefinition",
+            "scope": 3590,
+            "src": "540:221:14",
+            "visibility": "public"
+          }
+        ],
+        "scope": 3591,
+        "src": "62:708:14",
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "src": "33:737:14"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-05-14T00:17:50.042Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
