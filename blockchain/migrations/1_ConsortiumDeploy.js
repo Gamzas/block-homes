@@ -1,4 +1,6 @@
 const consortium = artifacts.require("MinistryDIDRegistry");
+const userDID = artifacts.require("UserDIDRegistry");
+
 module.exports = function (deployer) {
   deployer.deploy(consortium).then(function(consortiumIt){
     let promise1 = consortiumIt.createDIDDocument("0xcd48b32650621694240fafb2d467cdb52fd95795","0x045b52fe522a52deba904bdca0bd15c52e64083e587ddde74575efeb2996f0e3dec5e93c1b93ffba9038c3f82f2099f0d0b39c14e4cba3b60d5e380870a1f401c5");
@@ -15,3 +17,7 @@ module.exports = function (deployer) {
       console.error("An error occurred during the function calls:", err);
   });
 };
+
+module.exports = function (deployer) {
+    deployer.deploy(userDID);
+}
