@@ -1,5 +1,5 @@
 import * as r from '@components/MainPage/style/RealEstateCategoryStyle'
-import { RealEstateCategoryType } from '@/types/estateListType'
+import { RealEstateCategoryType } from '@/types/components/estateListType'
 import { useNavigate } from 'react-router-dom'
 
 const RealEstateCategory = () => {

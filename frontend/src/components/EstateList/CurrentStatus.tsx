@@ -3,7 +3,7 @@ import {
   filterAtom,
   matchAtom,
 } from '@/stores/atoms/EstateListStore'
-import { RealEstateStatusType } from '@/types/estateListType'
+import { RealEstateStatusType } from '@/types/components/estateListType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'

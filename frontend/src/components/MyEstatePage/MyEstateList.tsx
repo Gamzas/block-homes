@@ -2,7 +2,7 @@ import * as m from '@components/MyEstatePage/style/MyEstateListStyle'
 import MyEstateCard from './MyEstateCard'
 import { useEffect, useState } from 'react'
 import NoMyEstate from './NoMyEstate'
-import { EstateItem } from '@/types/estateListType'
+import { EstateItem } from '@/types/components/estateListType'
 const estateList = [
   {
     condition: 'normal',
