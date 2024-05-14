@@ -26,7 +26,7 @@ contract MinistryDIDRegistry is Ownable {
     event DIDCreated(string did);
     event DIDDeleted(string did);
 
-    function toHexString(uint256 value, uint length) public pure returns (string memory) {
+    function toHexString(uint256 value, uint length) private pure returns (string memory) {
         bytes memory buffer = new bytes(2 * length + 2);
         buffer[0] = '0';
         buffer[1] = 'x';
@@ -37,11 +37,11 @@ contract MinistryDIDRegistry is Ownable {
         return string(buffer);
     }
 
-    function createDIDDocument(string calldata _publicKey) public {
+    function createDIDDocument(address _holderAddress, string calldata _publicKey) public {
         DIDDocument memory didDocument;
        
         didDocument.context = "https://www.w3.org/ns/did/v1";
-        didDocument.id = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(msg.sender)), 20)));
+        didDocument.id = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(_holderAddress)), 20)));
         didDocument.publicKey.id = string(abi.encodePacked(didDocument.id,"#keys-1"));
         didDocument.publicKey.keyType = "EcdsaSecp256k1VerificationKey2019";
         didDocument.publicKey.controller = didDocument.id;
