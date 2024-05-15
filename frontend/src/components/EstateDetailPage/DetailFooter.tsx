@@ -1,14 +1,31 @@
 import * as f from '@components/EstateDetailPage/style/DetailFooterStyle'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { CreateChatRoomParamsType } from '@/types/components/chatRoomType'
+import { userAtom } from '@stores/atoms/userStore'
+import { useAtom } from 'jotai'
+import { createChatRoom } from '@apis/chatApi'
 
 const DetailFooter = () => {
+  const { realEstateNo } = useParams()
+  const [user] = useAtom(userAtom)
   const [isLiked, setIsLiked] = useState(false)
   const navigate = useNavigate()
+  const [createChatRoomParams, setCreateChatRoomParams] =
+    useState<CreateChatRoomParamsType>()
 
-  const handleBtnClick = () => {
-    navigate(`/chat/1`)
-    // navigate(`/chat/${realEstateNo}`)
+  useEffect(() => {
+    setCreateChatRoomParams({
+      realEstateNo: Number(realEstateNo),
+      userWalletAddress: user.walletAddress,
+    })
+  }, [realEstateNo, user])
+
+  const handleBtnClick = async () => {
+    const createChatRoomResult = await createChatRoom(createChatRoomParams)
+    if (createChatRoomResult && createChatRoomResult.chatRoomNo) {
+      navigate(`/chat/${createChatRoomResult.chatRoomNo}`)
+    }
   }
 
   return (
