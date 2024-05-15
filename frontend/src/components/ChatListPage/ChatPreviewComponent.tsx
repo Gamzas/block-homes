@@ -53,7 +53,7 @@ const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
   }, [transactionType, price])
 
   const handleClick = () => {
-    navigate(`/chat/${chatRoomNum}`)
+    navigate(`/chatroom/${chatRoomNum}`)
   }
 
   return (
