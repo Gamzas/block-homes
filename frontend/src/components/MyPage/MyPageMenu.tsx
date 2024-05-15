@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const MyPageMenu = () => {
   const navigate = useNavigate()
   const menuArr = ['내가 등록한 매물', '서비스 소개']
-  const address = ['/myestate', '/info-how-safe']
+  const address = ['/myestate', '/info-transaction-process']
   const goMenu = (index: number) => {
     navigate(`${address[index]}`)
   }
