@@ -21,6 +21,10 @@ public class ChatRoom extends BaseEntity {
     private Integer chatRoomNo;
 
     @NotNull
+    @Column(name = "chat_room_id", nullable = false, unique = true)
+    private String chatRoomId;
+
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_no", nullable = false)
     private Item item;
