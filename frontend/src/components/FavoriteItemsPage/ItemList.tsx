@@ -2,10 +2,11 @@ import * as i from '@components/FavoriteItemsPage/style/ItemListStyle'
 import NoItems from './NoItems'
 import EstateItemCard from '../EstateList/EstateItemCard'
 import { useState } from 'react'
-import {  useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { getFavoriteItem } from '@/apis/itemApi'
 import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
+import ItemLoading from '@/common/ItemLoading'
 
 const FavoriteItems = [
   {
@@ -40,23 +41,23 @@ const ItemList = () => {
   // const [selectedItems, setSelectedItems] = useState(new Set())
   const [wallet] = useAtom(userAtom)
 
-
   const { data, error, isLoading } = useQuery({
     queryKey: ['favoriteItem'],
     queryFn: () => getFavoriteItem(wallet.walletAddress),
   })
   // 데이터 로딩 상태 확인
   if (isLoading) {
-    console.log('Loading...')
-    return <div>Loading...</div>
+    return (
+      <i.ItemListWrapper>
+        <ItemLoading />
+      </i.ItemListWrapper>
+    )
   }
 
   // 에러 상태 확인
   if (error) {
-    console.error('Error fetching data:', error)
     return <div>Error fetching data</div>
   }
-
 
   // TODO 서버 연결 시 찜한 목록 아래 변수 사용하기!
   // const [favoriteItems, setFavoriteItems] = useState(FavoriteItems) // 상태에 초기 아이템 목록을 저장합니다.
