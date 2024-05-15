@@ -31,3 +31,9 @@ export const createChatRoom = async (
     .post(`/chatrooms`, chatRoomRequestBody)
     .then(res => res.data)
 }
+
+export const fetchChatRoomDetail = async (chatRoomNo: number) => {
+  return publicRequest.get(`/chatrooms/${chatRoomNo}`).then(res => {
+    return res.data
+  })
+}

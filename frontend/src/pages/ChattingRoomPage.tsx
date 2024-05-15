@@ -6,6 +6,8 @@ import { useAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useParams } from 'react-router-dom'
 import { MessageType } from '@/types/components/chatType'
+import { useQuery } from '@tanstack/react-query'
+import { fetchChatRoomDetail } from '@apis/chatApi'
 
 const ChattingRoomPage = () => {
   const { chatNo } = useParams()
@@ -31,9 +33,23 @@ const ChattingRoomPage = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
   }
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ['fetchChatRoomDetail', chatRoomNo],
+    queryFn: () => fetchChatRoomDetail(Number(chatRoomNo)),
+  })
+
 
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
+      client.current!.publish({
+        destination: `/sub/chat.talk.${chatRoomNo}`,
+        body: JSON.stringify({
+          chatRoomNo: chatRoomNo,
+          senderWalletAddress: user.walletAddress,
+          message: newMessage.message,
+          type: 2,
+        }),
+      })
       setNewMessage(defaultMessage)
       scrollToBottom()
     }
