@@ -41,6 +41,15 @@ const ChattingRoomPage = () => {
 
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
+      client.current!.publish({
+        destination: `/sub/chat.talk.${chatRoomNo}`,
+        body: JSON.stringify({
+          chatRoomNo: chatRoomNo,
+          senderWalletAddress: user.walletAddress,
+          message: newMessage.message,
+          type: 2,
+        }),
+      })
       setNewMessage(defaultMessage)
       scrollToBottom()
     }
