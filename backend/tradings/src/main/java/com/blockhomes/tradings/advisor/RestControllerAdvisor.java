@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.advisor;
 
 import com.blockhomes.tradings.dto.BaseResponseBody;
+import com.blockhomes.tradings.exception.chat.ChatRoomNotFoundException;
 import com.blockhomes.tradings.exception.common.DateNotFormattedException;
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
@@ -84,7 +85,7 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return 내용과 코드를 포함한 ResponseEntity 객체
      */
-    @ExceptionHandler(value = {WalletNotFoundException.class, ItemNotFoundException.class})
+    @ExceptionHandler(value = {WalletNotFoundException.class, ItemNotFoundException.class, ChatRoomNotFoundException.class})
     public ResponseEntity<BaseResponseBody> notFoundError(Exception e) {
         log.error(e.getMessage());
 
