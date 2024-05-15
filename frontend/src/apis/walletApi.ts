@@ -1,9 +1,10 @@
 import axios from 'axios'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { API_HEADERS_JSON, API_WALLET, API_WALLET_CHECK } from '@constants/api'
 import {
   GetWalletCheckParams,
   GetWalletCheckResponse,
+  GetWalletParams,
   PostWalletParams,
 } from '@/types/api/walletType'
 import { UserType } from '@/types/userType'
@@ -39,5 +40,13 @@ export const usePostWallet = () => {
   return useMutation({
     mutationFn: (params: PostWalletParams) =>
       axios.post(API_WALLET, params, API_HEADERS_JSON),
+  })
+}
+
+export const useGetWallet = (params: GetWalletParams) => {
+  return useQuery({
+    queryKey: ['getWallet', params],
+    queryFn: () => axios.get(API_WALLET, { params }),
+    enabled: !!params.walletAddress,
   })
 }
