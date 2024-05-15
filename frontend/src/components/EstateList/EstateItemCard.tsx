@@ -1,35 +1,35 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
 import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
+import { EsetateItemResType, EstateItemListType } from '@/types/api/itemType'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
 import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
 
 interface PropsType {
-  condition: string
-  address: string
-  infos: string[]
-  leaseType: string
-  price: string
-  roomSize: string
-  roomCount: string
-  createDate: string
-  latitude: number
-  longitude: number
+  itemList: EstateItemListType
 }
 
 const EstateItemCard = (props: PropsType) => {
+  // const { itemList } = props
   const {
-    condition,
-    address,
-    infos,
-    leaseType,
+    itemNo,
+    realEstateDID,
+    roadNameAddress,
+    transactionType,
+    realEstateType,
+    reportRank,
+    transactionStatus,
+    area,
+    pyeong,
     price,
-    roomSize,
-    roomCount,
-    createDate,
-  } = props
+    monthlyPrice,
+    administrationCost,
+    contractMonths,
+    latitude,
+    longitude,
+  } = props.itemList
   const navigate = useNavigate()
-  const { getColor, getStatus } = useEstateCondition(condition)
+  const { getColor, getStatus } = useEstateCondition(reportRank)
   const mainColor = getColor()?.main
   const secondColor = getColor()?.second
   const thirdColor = getColor()?.third
@@ -42,6 +42,7 @@ const EstateItemCard = (props: PropsType) => {
     navigate('/estate-detail')
     // navigate(`/estate-detail/${id}`)
   }
+  console.log(roadNameAddress)
   return (
     <c.ItemCardWrapper>
       <c.ItemCardContainer $color={fourthColor} onClick={goDetail}>
@@ -71,26 +72,24 @@ const EstateItemCard = (props: PropsType) => {
               strokeLinejoin="round"
             />
           </svg>
-          <div className="location-text">{address}</div>
+          <div className="location-text">{roadNameAddress}</div>
         </c.LocationContainer>
         <c.ItemImage src="https://i0.wp.com/www.gangnamapt.com/wp-content/uploads/2023/01/20230105_180953_HDR.jpg?resize=480%2C360" />
 
-        <c.ItemInfoContainer $color={mainColor}>
+        {/* <c.ItemInfoContainer $color={mainColor}>
           {infos.map((item, index) => (
             <div key={index} className="info-box">
               {item}
             </div>
           ))}
-        </c.ItemInfoContainer>
+        </c.ItemInfoContainer> */}
         <c.ItemPriceInfoContainer>
           <div className="price-text">
-            {leaseType} {price}
+            {transactionStatus} {price}
           </div>
-          <div className="info-text">
-            {roomSize} m2 / {roomCount}
-          </div>
-          <div className="info-text">6층</div>
-          <div className="info-text">등록일자 {createDate}</div>
+          <div className="info-text">{pyeong} m2</div>
+          {/* <div className="info-text">6층</div> */}
+          {/* <div className="info-text">등록일자 {createDate}</div> */}
         </c.ItemPriceInfoContainer>
         <c.BackgroundContainer>
           <div className="back-wrapper">
