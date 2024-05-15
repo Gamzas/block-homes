@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.service;
 
 
+import com.blockhomes.tradings.dto.BaseResponseBody;
 import com.blockhomes.tradings.dto.wallet.request.CheckWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.GetWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.RegisterWalletReq;
@@ -16,4 +17,5 @@ public interface WalletService {
 
     GetWalletRes getWallet(GetWalletReq req);
 
+    BaseResponseBody deleteWallet(String walletAddress);
 }
