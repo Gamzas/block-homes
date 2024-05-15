@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 
 const NoItems = () => {
   const navigate = useNavigate()
+
   const goEstate = () => {
     navigate('/estate')
   }
+
   return (
     <n.Container>
       <n.ContentContainer>
