@@ -44,14 +44,11 @@ const ItemList = () => {
   const [wallet] = useAtom(userAtom)
 
   useEffect(() => {
-    // 로컬 스토리지에서 지갑 주소를 불러옵니다.
-    const walletAddressFromStorage = localStorage.getItem('walletAddress')
-
-    // 지갑 주소가 로컬 스토리지에 있으면 상태를 업데이트합니다.
-    if (walletAddressFromStorage) {
+    const currentUser = localStorage.getItem('currentUser')
+    const currentUserData = currentUser ? JSON.parse(currentUser) : null
+    if (currentUserData && currentUserData.walletAddress) {
       return
     } else {
-      // 로컬 스토리지에 지갑 주소가 없으면 로그인 페이지로 리다이렉션합니다.
       alert('로그인 후 이용해주세요')
       navigate('/signin')
     }
