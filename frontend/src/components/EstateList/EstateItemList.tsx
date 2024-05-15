@@ -26,7 +26,7 @@ const EstateItemList = () => {
   const { category } = useParams()
   console.log(category)
   return (
-    <>
+    <l.EstateItemListContainer>
       <l.StatusBarContainer>
         <CurrentStatus getCurrentLocation={getCurrentLocation} />
       </l.StatusBarContainer>

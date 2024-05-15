@@ -4,14 +4,25 @@ import AccordionGroup from '@components/EstateRegistrationPage/AccordionGroup'
 import { useState } from 'react'
 import EstateRegistrationComplete from '@components/EstateRegistrationPage/EstateRegistrationComplete'
 import { usePostItemRegister } from '@apis/itemApi'
+import { useAtomValue } from 'jotai'
+import { userAtom } from '@stores/atoms/userStore'
 
 const EstateRegistrationPage = () => {
   const buttonNames = ['다음', '매물 등록하기']
+  const userInfo = useAtomValue(userAtom)
+  const postParams = {
+    ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
+    realEstateDID: 'did:klay:0x00',
+    latitude: 0,
+    longitude: 0,
+    reportRank: 1,
+  }
   const [openIndex, setOpenIndex] = useState(0)
   const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]) // 각 아코디언의 열림 상태 초기화
   const [isComplete, setIsComplete] = useState(false)
   const [checkEstateProps, setCheckEstateProps] = useState({
     roadNameAddress: '광주광역시 광산구 장덕동 0000',
+    realEstateType: 1,
     area: 33,
   })
   const [detailRegistrationProps, setDetailRegistrationProps] = useState({
@@ -19,6 +30,7 @@ const EstateRegistrationPage = () => {
     price: null,
     monthlyPrice: null,
     administrationCost: null,
+    contractMonths: null,
     administrationFeeCategoryList: null,
     moveInDate: null,
   })
@@ -52,6 +64,7 @@ const EstateRegistrationPage = () => {
   const handleFormSubmit = () => {
     const formData = new FormData()
     const reqData = {
+      ...postParams,
       ...checkEstateProps,
       ...detailRegistrationProps,
       ...detailEstateProps,
@@ -85,10 +98,7 @@ const EstateRegistrationPage = () => {
       return value !== null && value !== '' && value !== undefined
     })
   }
-  const isValidDateFormat = dateStr => {
-    const regex = /^\d{4}\.\d{2}\.\d{2}$/
-    return regex.test(dateStr)
-  }
+
   const handleNextButtonClick = () => {
     switch (openIndex) {
       case 0:
@@ -96,11 +106,7 @@ const EstateRegistrationPage = () => {
         break
       case 1:
         console.log()
-        if (
-          isDataFilled(detailRegistrationProps) &&
-          isValidDateFormat(detailRegistrationProps.moveInDate)
-        )
-          handleOpenIndex()
+        if (isDataFilled(detailRegistrationProps)) handleOpenIndex()
         break
       case 2:
         if (isDataFilled(detailEstateProps)) handleOpenIndex()
@@ -109,8 +115,7 @@ const EstateRegistrationPage = () => {
         if (
           isDataFilled(detailRegistrationProps) &&
           isDataFilled(photoRegistrationProps) &&
-          isDataFilled(detailEstateProps) &&
-          isValidDateFormat(detailRegistrationProps.moveInDate)
+          isDataFilled(detailEstateProps)
         )
           handleFormSubmit()
         break
@@ -139,9 +144,7 @@ const EstateRegistrationPage = () => {
           <r.NextButton
             onClick={handleNextButtonClick}
             disabled={
-              (openIndex === 1 &&
-                !isDataFilled(detailRegistrationProps) &&
-                !isValidDateFormat(detailRegistrationProps.moveInDate)) ||
+              (openIndex === 1 && !isDataFilled(detailRegistrationProps)) ||
               (openIndex === 2 && !isDataFilled(detailEstateProps)) ||
               (openIndex === 3 && !isDataFilled(photoRegistrationProps))
             }

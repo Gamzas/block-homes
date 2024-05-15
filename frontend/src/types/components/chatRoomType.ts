@@ -7,3 +7,20 @@ export interface ChatRoomListType {
   dangerType: string
   chatRoomNum: number
 }
+
+export interface fetchChatRoomsRequestType {
+  mode: number
+  value: string
+}
+
+export interface chatRoomRequestDataType {
+  itemNo: number
+  userWalletAddress: string
+}
+
+export interface ChatRoomCheckResponseType {
+  status: number
+  data?: {
+    chatRoomNo?: number
+  }
+}

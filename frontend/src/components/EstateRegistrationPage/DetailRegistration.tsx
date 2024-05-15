@@ -1,6 +1,5 @@
-import * as d from '@components/EstateRegistrationPage/style/DetailRegistrationStyle'
-import { DetailRegistrationBigInput } from '@components/EstateRegistrationPage/style/DetailRegistrationStyle'
 import { useState } from 'react'
+import * as d from '@components/EstateRegistrationPage/style/DetailRegistrationStyle'
 
 const DetailRegistration = ({
   detailRegistrationProps,
@@ -13,6 +12,7 @@ const DetailRegistration = ({
     Array(costTypes.length).fill(false),
   )
   const [isNoAdminCost, setIsNoAdminCost] = useState()
+  const [isNoContractMonths, setIsNoContractMonths] = useState()
 
   const handleTransactionTypeButtonClick = (index: number) => {
     setDetailRegistrationProps(currentParams => ({
@@ -33,16 +33,25 @@ const DetailRegistration = ({
         .map((selected, idx) => (selected ? idx + 1 : null))
         .filter(value => value !== null)
 
-      // 배열을 문자열로 변환하여 상태 업데이트
-      const selectedIndicesString = `[${selectedIndices.join(', ')}]`
-
       setDetailRegistrationProps(currentParams => ({
         ...currentParams,
-        administrationFeeCategoryList: selectedIndicesString,
+        administrationFeeCategoryList: selectedIndices,
       }))
     }
   }
 
+  // 계약 기간 체크박스 변경 핸들러
+  const handleContractMonthsChange = e => {
+    const isChecked = e.target.checked // 체크 상태를 변수에 저장
+    if (isChecked) {
+      // 체크박스가 선택된 경우만 상태 업데이트
+      setDetailRegistrationProps(currentParams => ({
+        ...currentParams,
+        contractMonths: 0,
+      }))
+    }
+    setIsNoContractMonths(isChecked)
+  }
   // 관리비 없음 체크박스 변경 핸들러
   const handleAdminCostChange = e => {
     const isChecked = e.target.checked // 체크 상태를 변수에 저장
@@ -76,34 +85,77 @@ const DetailRegistration = ({
           ))}
         </d.DetailRegistrationType>
         <d.DetailRegistrationWrapperInput>
-          <d.DetailRegistrationPricesInput>
+          <d.DetailRegistrationInputNumber>
+            <div className="title">보증금</div>
+            <div className="input-wrapper">
+              <input
+                className="input-number"
+                type="number"
+                min="1"
+                max="99"
+                value={detailRegistrationProps.price}
+                onChange={e =>
+                  setDetailRegistrationProps(currentParams => ({
+                    ...currentParams,
+                    price: e.target.value,
+                  }))
+                }
+              />
+              <div className="label">만원</div>
+            </div>
+          </d.DetailRegistrationInputNumber>
+          <d.DetailRegistrationInputNumber>
+            <div className="title">월세</div>
+            <div className="input-wrapper">
+              <input
+                className="input-number"
+                type="number"
+                min="1"
+                max="99"
+                value={detailRegistrationProps.monthlyPrice}
+                onChange={e =>
+                  setDetailRegistrationProps(currentParams => ({
+                    ...currentParams,
+                    monthlyPrice: e.target.value,
+                  }))
+                }
+              />
+              <div className="label">만원</div>
+            </div>
+          </d.DetailRegistrationInputNumber>
+        </d.DetailRegistrationWrapperInput>
+        <d.DetailRegistrationWrapperInput>
+          {!isNoContractMonths && (
+            <d.DetailRegistrationInputNumber>
+              <div className="title">계약 기간</div>
+              <div className="input-wrapper">
+                <input
+                  className="input-number"
+                  type="number"
+                  min="1"
+                  max="99"
+                  value={detailRegistrationProps.contractMonths}
+                  onChange={e =>
+                    setDetailRegistrationProps(currentParams => ({
+                      ...currentParams,
+                      contractMonths: e.target.value,
+                    }))
+                  }
+                  disabled={isNoContractMonths}
+                />
+                <div className="label">개월</div>
+              </div>
+            </d.DetailRegistrationInputNumber>
+          )}
+          <d.DetailRegistrationCheckBox>
             <input
-              className="prices-input"
-              value={detailRegistrationProps.price}
-              onChange={e =>
-                setDetailRegistrationProps(currentParams => ({
-                  ...currentParams,
-                  price: e.target.value,
-                }))
-              }
-              placeholder="보증금"
+              className="check-box"
+              type="checkbox"
+              checked={isNoContractMonths}
+              onChange={handleContractMonthsChange}
             />
-            <div className="prices-label">만원</div>
-          </d.DetailRegistrationPricesInput>
-          <d.DetailRegistrationPricesInput>
-            <input
-              className="prices-input"
-              value={detailRegistrationProps.monthlyPrice}
-              onChange={e =>
-                setDetailRegistrationProps(currentParams => ({
-                  ...currentParams,
-                  monthlyPrice: e.target.value,
-                }))
-              }
-              placeholder="월세"
-            />
-            <div className="prices-label">만원</div>
-          </d.DetailRegistrationPricesInput>
+            협의 후 결정
+          </d.DetailRegistrationCheckBox>
         </d.DetailRegistrationWrapperInput>
       </d.DetailRegistrationSession>
       <d.DetailRegistrationSession>
@@ -126,21 +178,26 @@ const DetailRegistration = ({
         )}
         <d.DetailRegistrationWrapperInput>
           {!isNoAdminCost && (
-            <d.DetailRegistrationPricesInput>
-              <input
-                className="prices-input"
-                value={detailRegistrationProps.administrationCost}
-                onChange={e =>
-                  setDetailRegistrationProps(currentParams => ({
-                    ...currentParams,
-                    administrationCost: e.target.value,
-                  }))
-                }
-                placeholder="관리비"
-                disabled={isNoAdminCost}
-              />
-              <div className="prices-label">만원</div>
-            </d.DetailRegistrationPricesInput>
+            <d.DetailRegistrationInputNumber>
+              <div className="title">관리비</div>
+              <div className="input-wrapper">
+                <input
+                  className="input-number"
+                  type="number"
+                  min="1"
+                  max="99"
+                  value={detailRegistrationProps.administrationCost}
+                  onChange={e =>
+                    setDetailRegistrationProps(currentParams => ({
+                      ...currentParams,
+                      administrationCost: e.target.value,
+                    }))
+                  }
+                  disabled={isNoAdminCost}
+                />
+                <div className="label">만원</div>
+              </div>
+            </d.DetailRegistrationInputNumber>
           )}
           <d.DetailRegistrationCheckBox>
             <input
@@ -155,7 +212,8 @@ const DetailRegistration = ({
       </d.DetailRegistrationSession>
       <d.DetailRegistrationSession>
         <div className="title">입주가능일</div>
-        <DetailRegistrationBigInput
+        <d.DetailRegistrationBigInput
+          type="date"
           value={detailRegistrationProps.moveInDate}
           onChange={e =>
             setDetailRegistrationProps(currentParams => ({
@@ -163,7 +221,6 @@ const DetailRegistration = ({
               moveInDate: e.target.value,
             }))
           }
-          placeholder="예) 2024.01.01"
         />
       </d.DetailRegistrationSession>
     </d.DetailRegistrationContainer>

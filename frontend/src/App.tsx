@@ -39,8 +39,8 @@ const HomeRoutes = () => (
     <Route path="/estate-registration" element={<EstateRegistrationPage />} />
     <Route path="/mypage" element={<MyPage />} />
     <Route path="/callback/:result" element={<CallBackPage />} />
-    <Route path="/chat" element={<ChatListPage />} />
-    <Route path="/chat/:chatNum" element={<ChattingRoomPage />} />
+    <Route path="/chatroom-list" element={<ChatListPage />} />
+    <Route path="/chatroom/:chatNum" element={<ChattingRoomPage />} />
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/info-report" element={<InfoReportPage />} />

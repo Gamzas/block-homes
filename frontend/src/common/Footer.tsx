@@ -20,7 +20,7 @@ const Footer = () => {
     {
       title: '채팅',
       iconSrc: '/icon/icon_footer_chat.png',
-      routePath: '/chat',
+      routePath: '/chatroom-list',
     },
     {
       title: '마이페이지',
