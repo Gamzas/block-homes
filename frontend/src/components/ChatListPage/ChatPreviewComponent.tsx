@@ -1,6 +1,6 @@
 import * as c from '@components/ChatListPage/style/ChatPreviewComponentStyle'
 import React, { useEffect, useState } from 'react'
-import { ChatComponentProps } from '@/types/components/chatType'
+import { ChatComponentProps } from '@/types/components/chatRoomType'
 import { useNavigate } from 'react-router-dom'
 import useEstateCondition from '@hooks/useEstateCondition'
 
