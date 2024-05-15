@@ -7,6 +7,7 @@ export const StatusBarContainer = styled.div`
   top: 50px;
   z-index: 1;
 `
+
 export const EstateItemListContainer = styled.div`
   width: 100%;
   height: 100%;
