@@ -24,6 +24,7 @@ public class DetailItemRes {
     private Long price;
     private Integer monthlyPrice;
     private Integer administrationCost;
+    private Integer contractMonths;
     private Double latitude;
     private Double longitude;
     private Integer roomNumber;
