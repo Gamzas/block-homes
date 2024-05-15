@@ -1,14 +1,13 @@
 import * as i from '@components/FavoriteItemsPage/style/ItemListStyle'
-import NoItems from '@common/NoItems'
 import EstateItemCard from '../EstateList/EstateItemCard'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getFavoriteItem } from '@/apis/itemApi'
 import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
 import ItemLoading from '@/common/ItemLoading'
-import { useNavigate } from 'react-router-dom'
 import useLoginStatus from '@/hooks/useLoginStatus'
+import NoItems from '@common/NoItems'
 
 const FavoriteItems = [
   {
@@ -143,7 +142,10 @@ const ItemList = () => {
           </i.ItemContainer>
         </i.ItemListWrapper>
       ) : (
-        <NoItems alarmText={'관심 매물이 없어요'} />
+        <NoItems
+          src={'image/image_sad_pig.png'}
+          alarmText={'관심 매물이 없어요'}
+        />
       )}
     </>
   )

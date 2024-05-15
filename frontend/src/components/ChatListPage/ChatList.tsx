@@ -40,7 +40,10 @@ const ChatList = () => {
   return (
     <>
       {chatRoomDatas && chatRoomDatas.length === 0 ? (
-        <NoItems alarmText={'현재 진행중인 채팅방이 없어요.'} />
+        <NoItems
+          src={'image/image_sad_pig.png'}
+          alarmText={'현재 진행중인 채팅방이 없어요.'}
+        />
       ) : (
         chatRoomDatas.map(chatData => <ChatPreviewComponent {...chatData} />)
       )}
