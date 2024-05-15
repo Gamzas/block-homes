@@ -9,6 +9,7 @@ import {
 import { fetchChatRooms } from '@apis/chatApi'
 import NoItems from '@common/NoItems'
 import { useEffect, useState } from 'react'
+import * as c from '@components/ChatListPage/style/ChatListStyle'
 
 const ChatList = () => {
   const [user] = useAtom(userAtom)
@@ -52,7 +53,7 @@ const ChatList = () => {
   ]
 
   return (
-    <>
+    <c.ChatListContainer>
       {chatRoomDatas && chatRoomDatas.length === 0 ? (
         <NoItems
           src={'image/image_sad_pig.png'}
@@ -61,7 +62,7 @@ const ChatList = () => {
       ) : (
         chatRoomDatas.map(chatData => <ChatPreviewComponent {...chatData} />)
       )}
-    </>
+    </c.ChatListContainer>
   )
 }
 
