@@ -84,7 +84,7 @@ pipeline {
                     try {
                         sh '$SSH_CMD $DOCKER stop $repo_name'
                         sh '$SSH_CMD $DOCKER rm $repo_name'
-                        sh '$SSH_CMD $DOCKER rmi $repository'
+                        sh "${SSH_CMD} ${DOCKER} rmi \$(docker images | awk '\$1 ~ /${repo_name}/ {print \$3}')"
                     } catch (e) {
                         sh 'echo "fail to stop and remove container"'
                     }
