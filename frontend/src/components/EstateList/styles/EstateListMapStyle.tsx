@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const EstateMapContainer = styled.div`
   width: 100%;
-  height: 82vh;
+  height: 100%;
   position: relative;
   z-index: 0;
+  margin-top: 2.5rem;
 `
 
 export const DetailCardContainer = styled.div`
@@ -18,6 +19,7 @@ export const DetailCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .card-background {
     width: 100%;
     height: 80vh;
