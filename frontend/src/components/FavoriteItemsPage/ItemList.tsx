@@ -8,6 +8,7 @@ import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
 import ItemLoading from '@/common/ItemLoading'
 import { useNavigate } from 'react-router-dom'
+import useLoginStatus from '@/hooks/useLoginStatus'
 
 const FavoriteItems = [
   {
@@ -38,21 +39,9 @@ const FavoriteItems = [
 
 // TODO 삭제로직 수정
 const ItemList = () => {
-  const navigate = useNavigate()
+  useLoginStatus()
   const [editActive, setEditActive] = useState(false)
-  // const [selectedItems, setSelectedItems] = useState(new Set())
   const [wallet] = useAtom(userAtom)
-
-  useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser')
-    const currentUserData = currentUser ? JSON.parse(currentUser) : null
-    if (currentUserData && currentUserData.walletAddress) {
-      return
-    } else {
-      alert('로그인 후 이용해주세요')
-      navigate('/signin')
-    }
-  }, [navigate])
 
   // 데이터 불러오기
   const { data, error, isLoading } = useQuery({
@@ -71,6 +60,7 @@ const ItemList = () => {
   // 에러 상태 확인
   if (error) {
     console.log(error)
+    alert('error')
     return <div>Error fetching data</div>
   }
   console.log(data.likedItems)
@@ -117,40 +107,45 @@ const ItemList = () => {
   //   // }
   // }
 
-  return data.likedItems.length !== 0 ? (
-    <i.ItemListWrapper>
-      <i.EditContainer>
-        {editActive ? (
-          <div className="disabled">
-            <div onClick={toggleEdit}>취소</div>
-            <div className="delete">
-              <div onClick={deleteSelectedItems}>선택삭제</div>
-              <div onClick={deleteAllItems}>전체삭제</div>
-            </div>
-          </div>
-        ) : (
-          <div className="abled" onClick={toggleEdit}>
-            편집
-          </div>
-        )}
-      </i.EditContainer>
-      <i.ItemContainer>
-        {data.likedItems.map((item, index) => (
-          <i.selectedItemContainer>
-            {editActive && (
-              <input
-                type="checkbox"
-                // checked={selectedItems.has(item.id)}
-                // onChange={() => handleSelectItem(item.id)}
-              />
+  return (
+    <>
+      {/* <useLoginStatus /> */}
+      {data.likedItems.length !== 0 ? (
+        <i.ItemListWrapper>
+          <i.EditContainer>
+            {editActive ? (
+              <div className="disabled">
+                <div onClick={toggleEdit}>취소</div>
+                <div className="delete">
+                  <div onClick={deleteSelectedItems}>선택삭제</div>
+                  <div onClick={deleteAllItems}>전체삭제</div>
+                </div>
+              </div>
+            ) : (
+              <div className="abled" onClick={toggleEdit}>
+                편집
+              </div>
             )}
-            <EstateItemCard key={index} {...item} />
-          </i.selectedItemContainer>
-        ))}
-      </i.ItemContainer>
-    </i.ItemListWrapper>
-  ) : (
-    <NoItems alarmText={'관심 매물이 없어요'} />
+          </i.EditContainer>
+          <i.ItemContainer>
+            {data.likedItems.map((item, index) => (
+              <i.selectedItemContainer>
+                {editActive && (
+                  <input
+                    type="checkbox"
+                    // checked={selectedItems.has(item.id)}
+                    // onChange={() => handleSelectItem(item.id)}
+                  />
+                )}
+                <EstateItemCard key={index} {...item} />
+              </i.selectedItemContainer>
+            ))}
+          </i.ItemContainer>
+        </i.ItemListWrapper>
+      ) : (
+        <NoItems alarmText={'관심 매물이 없어요'} />
+      )}
+    </>
   )
 }
 
