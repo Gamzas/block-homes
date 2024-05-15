@@ -1,6 +1,7 @@
-const useEstateCondition = (condition: string) => {
+const useEstateCondition = (condition: number | string) => {
   const getColor = () => {
     switch (condition) {
+      case 1:
       case 'good':
         return {
           main: '#845BD3',
@@ -8,6 +9,7 @@ const useEstateCondition = (condition: string) => {
           third: '#E8E0F7',
           fourth: '#F3F0F7',
         }
+      case 2:
       case 'normal':
         return {
           main: '#24d0d6',
@@ -15,6 +17,7 @@ const useEstateCondition = (condition: string) => {
           third: '#C8F6F0',
           fourth: '#E9F7F7',
         }
+      case 3:
       case 'bad':
         return {
           main: '#FE754E',
@@ -34,10 +37,13 @@ const useEstateCondition = (condition: string) => {
   }
   const getStatus = () => {
     switch (condition) {
+      case 1:
       case 'good':
         return '우수'
+      case 2:
       case 'normal':
         return '보통'
+      case 3:
       case 'bad':
         return '위험'
     }
