@@ -14,7 +14,7 @@ public class LocalDateTimeUtil {
             throw new DateNotFormattedException();
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(dateStr, formatter).atStartOfDay();
     }
 

@@ -97,7 +97,7 @@ public class RegisterItemReq {
     private Integer itemFloor;
 
     @NotBlank
-    @Schema(description = "입주가능일", example = "yyyy.MM.dd (반드시 지켜야함 ㅠㅠ)")
+    @Schema(description = "입주가능일", example = "yyyy-MM-dd (반드시 지켜야함 ㅠㅠ)")
     private String moveInDate;
 
     @NotNull

@@ -3,7 +3,6 @@ package com.blockhomes.tradings.dto.item.request;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -15,19 +14,19 @@ import lombok.*;
 public class ListItemReq {
 
     @NotNull
-    @Schema(description = "지도 북동쪽 위도")
+    @Schema(description = "지도 북동쪽 위도", example = "지도 북동쪽 위도")
     private Double northEastLatitude;
 
     @NotNull
-    @Schema(description = "지도 북동쪽 경도")
+    @Schema(description = "지도 북동쪽 경도", example = "지도 북동쪽 경도")
     private Double northEastLongitude;
 
     @NotNull
-    @Schema(description = "지도 남서쪽 위도")
+    @Schema(description = "지도 남서쪽 위도", example = "지도 남서쪽 위도")
     private Double southWestLatitude;
 
     @NotNull
-    @Schema(description = "지도 남서쪽 경도")
+    @Schema(description = "지도 남서쪽 경도", example = "지도 남서쪽 위도")
     private Double southWestLongitude;
 
     @Min(0) @Max(4)
