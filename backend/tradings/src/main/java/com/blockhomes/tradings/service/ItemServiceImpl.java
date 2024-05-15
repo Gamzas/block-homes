@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service("itemService")
 @RequiredArgsConstructor
@@ -119,30 +120,37 @@ public class ItemServiceImpl implements ItemService {
             .imageUrl(s3BucketUtil.getFileUrl(mainImageKey, folderName))
             .build();
 
-        // 거실 & 방 이미지 저장
+        boolean isRoomImagesPresent = !Objects.isNull(roomImages);
+        boolean isKitchenToiletImagesPresent = !Objects.isNull(kitchenToiletImages);
+
         List<Image> roomImageEntityList = new ArrayList<>();
         List<String> roomImageKeys = new ArrayList<>();
 
-        for (MultipartFile file : roomImages) {
-            String imageKey = s3BucketUtil.uploadFile(file, folderName);
-            roomImageKeys.add(imageKey);
-
-            roomImageEntityList.add(Image.builder()
-                .imageUrl(s3BucketUtil.getFileUrl(imageKey, folderName))
-                .build());
-        }
-
-        // 주방 & 화장실 이미지 저장
         List<Image> kitchenToiletEntityList = new ArrayList<>();
         List<String> kitchenToiletImageKeys = new ArrayList<>();
 
-        for (MultipartFile file : kitchenToiletImages) {
-            String imageKey = s3BucketUtil.uploadFile(file, folderName);
-            kitchenToiletImageKeys.add(imageKey);
+        // roomImages 있다면 사진 저장
+        if (isRoomImagesPresent) {
+            for (MultipartFile file : roomImages) {
+                String imageKey = s3BucketUtil.uploadFile(file, folderName);
+                roomImageKeys.add(imageKey);
 
-            kitchenToiletEntityList.add(Image.builder()
-                .imageUrl(s3BucketUtil.getFileUrl(imageKey, folderName))
-                .build());
+                roomImageEntityList.add(Image.builder()
+                    .imageUrl(s3BucketUtil.getFileUrl(imageKey, folderName))
+                    .build());
+            }
+        }
+
+        // kitchenToiletImages 있다면 사진 저장
+        if (isKitchenToiletImagesPresent) {
+            for (MultipartFile file : kitchenToiletImages) {
+                String imageKey = s3BucketUtil.uploadFile(file, folderName);
+                kitchenToiletImageKeys.add(imageKey);
+
+                kitchenToiletEntityList.add(Image.builder()
+                    .imageUrl(s3BucketUtil.getFileUrl(imageKey, folderName))
+                    .build());
+            }
         }
 
         List<ItemImage> itemImageList = new ArrayList<>();
@@ -156,7 +164,7 @@ public class ItemServiceImpl implements ItemService {
                 .itemImageCategory(ItemImageCategory.MAIN)
                 .build());
 
-            if (!roomImageEntityList.isEmpty()) {
+            if (isRoomImagesPresent) {
                 List<Image> savedRoomImages = imageRepository.saveAll(roomImageEntityList);
 
                 for (Image image : savedRoomImages) {
@@ -168,7 +176,7 @@ public class ItemServiceImpl implements ItemService {
                 }
             }
 
-            if (!kitchenToiletEntityList.isEmpty()) {
+            if (isKitchenToiletImagesPresent) {
                 List<Image> savedKitchenToiletImages = imageRepository.saveAll(kitchenToiletEntityList);
 
                 for (Image image : savedKitchenToiletImages) {
@@ -188,13 +196,13 @@ public class ItemServiceImpl implements ItemService {
         } catch (Exception e) {
             s3BucketUtil.deleteFile(mainImageKey, folderName);
 
-            if (!roomImageKeys.isEmpty()) {
+            if (isRoomImagesPresent) {
                 for (String key : roomImageKeys) {
                     s3BucketUtil.deleteFile(key, folderName);
                 }
             }
 
-            if (!kitchenToiletImageKeys.isEmpty()) {
+            if (isKitchenToiletImagesPresent) {
                 for (String key : kitchenToiletImageKeys) {
                     s3BucketUtil.deleteFile(key, folderName);
                 }
