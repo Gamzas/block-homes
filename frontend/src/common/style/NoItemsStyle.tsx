@@ -1,24 +1,20 @@
 import styled from 'styled-components'
 
-interface ImageContainerProps {
-  $isSad: boolean
-}
-
 export const NoItemContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 110px);
   padding: 0 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f3f0f7;
+  position: absolute;
 `
 
-export const ImageContainer = styled.div<ImageContainerProps>`
+export const ImageContainer = styled.div`
   width: 15rem;
-  position: absolute;
-  top: ${props => (props.$isSad ? '11.5rem' : '8.5rem')};
+  z-index: 2;
 
   img {
     width: 100%;
@@ -26,6 +22,9 @@ export const ImageContainer = styled.div<ImageContainerProps>`
 `
 
 export const ContentContainer = styled.div`
+  position: relative;
+  top: -3.5rem;
+
   width: 85%;
   display: flex;
   flex-direction: column;
@@ -42,6 +41,8 @@ export const ContentContainer = styled.div`
     font-weight: 600;
     margin: 1rem 0;
   }
+
+  z-index: 1;
 `
 
 export const BtnContainer = styled.div`
