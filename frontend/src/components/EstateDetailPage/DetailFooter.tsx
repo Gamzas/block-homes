@@ -15,8 +15,8 @@ const DetailFooter = () => {
     useState<chatRoomRequestBodyType>()
 
   useEffect(() => {
-    setCreateChatRoomParams({
-      realEstateNo: Number(realEstateNo),
+    setChatRoomRequestData({
+      itemNo: Number(realEstateNo),
       userWalletAddress: user.walletAddress,
     })
   }, [realEstateNo, user])
