@@ -40,7 +40,7 @@ const CurrentStatus = (props: PropsType) => {
   const handlerFilterClick = () => {
     setFilter(!filter)
   }
-
+  
   useEffect(() => {}, [match])
   return (
     <c.CurrentStatusContainer>
