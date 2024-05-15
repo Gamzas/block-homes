@@ -32,7 +32,7 @@ const RealEstateCategory = () => {
   ]
 
   const navigateToCategory = () => {
-    navigate('estate')
+    navigate('/estate')
   }
 
   return (
