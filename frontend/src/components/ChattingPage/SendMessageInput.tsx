@@ -1,6 +1,6 @@
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
 import React, { useState } from 'react'
-import { SendMessageInputPropsType } from '@/types/chatType'
+import { SendMessageInputPropsType } from '@/types/components/chatType'
 import MoreFunctionCollection from '@components/ChattingPage/MoreFunctionCollection'
 
 const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {

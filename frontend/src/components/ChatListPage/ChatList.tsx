@@ -1,6 +1,18 @@
 import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
+import { userAtom } from '@stores/atoms/userStore'
+import { useAtom } from 'jotai'
+import { useQuery } from '@tanstack/react-query'
+import { ChatRoomListType } from '@/types/components/chatRoomType'
+import { fetchChatRooms } from '@apis/chatApi'
 
 const ChatList = () => {
+  const [user] = useAtom(userAtom)
+
+  const { data, isLoading } = useQuery<ChatRoomListType[]>({
+    queryKey: ['fetchChatRooms', user.walletAddress],
+    queryFn: () => fetchChatRooms(user.walletAddress),
+  })
+
   const chatRoomDatas = [
     {
       representativeImage:

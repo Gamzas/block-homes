@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { useAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useParams } from 'react-router-dom'
-import { MessageType } from '@/types/chatType'
+import { MessageType } from '@/types/components/chatType'
 
 const ChattingRoomPage = () => {
   const { chatNo } = useParams()
