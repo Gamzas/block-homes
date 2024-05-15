@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface ImageContainerProps {
+  $isSad: boolean
+}
+
 export const NoItemContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -11,10 +15,10 @@ export const NoItemContainer = styled.div`
   background-color: #f3f0f7;
 `
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.div<ImageContainerProps>`
   width: 15rem;
   position: absolute;
-  top: 11.5rem;
+  top: ${props => (props.$isSad ? '11.5rem' : '8.5rem')};
 
   img {
     width: 100%;
