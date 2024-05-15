@@ -11,7 +11,8 @@ import {
   mapAtom,
 } from '@/stores/atoms/EstateListStore'
 import EstateListMap from './EstateListMap'
-import NoItems from '@common/NoItems'
+import NoEstateItem from './NoEstateItem'
+import { useParams } from 'react-router-dom'
 
 const EstateItemList = () => {
   const { getCurrentLocation } = useCurrentLocation()
@@ -22,34 +23,36 @@ const EstateItemList = () => {
     getCurrentLocation()
   }, [])
 
+  const { category } = useParams()
+  console.log(category)
   return (
     <l.EstateItemListContainer>
       <l.StatusBarContainer>
         <CurrentStatus getCurrentLocation={getCurrentLocation} />
       </l.StatusBarContainer>
-      {menu ? (
-        estateItemList === null || estateItemList.length === 0 ? (
-          // TODO 매물 없을때 컴포넌트 분리해서 완성하기
-          <NoItems
-            src={'/image/image_warning_pig.png'}
-            alarmText={'해당 지역에 매물이 없습니다.'}
-          />
+      <l.EstateItemListContainer>
+        {menu ? (
+          estateItemList === null || estateItemList.length === 0 ? (
+            // TODO 매물 없을때 컴포넌트 분리해서 완성하기
+            <NoEstateItem />
+          ) : (
+            <>
+              {estateItemList.map((item, index) => (
+                <EstateItemCard key={index} itemList={item.itemList[0]} />
+              ))}
+            </>
+          )
         ) : (
-          <>
-            {estateItemList.map((item, index) => (
-              <EstateItemCard key={index} {...item} />
-            ))}
-          </>
-        )
-      ) : (
-        <EstateListMap />
-      )}
-      {filter && (
-        <l.EstateFilterContainer>
-          <EstateItemFilter />
-        </l.EstateFilterContainer>
-      )}
-    </l.EstateItemListContainer>
+          // WARNING
+          <>{/* <EstateListMap /> */}</>
+        )}
+        {filter && (
+          <l.EstateFilterContainer>
+            <EstateItemFilter />
+          </l.EstateFilterContainer>
+        )}
+      </l.EstateItemListContainer>
+    </>
   )
 }
 

@@ -31,8 +31,8 @@ const RealEstateCategory = () => {
     },
   ]
 
-  const navigateToCategory = () => {
-    navigate('/estate')
+  const navigateToCategory = (category: number) => {
+    navigate(`estate/${category+1}`)
   }
 
   return (
@@ -42,7 +42,7 @@ const RealEstateCategory = () => {
       </div>
       <r.RealEstateCategories>
         {realEstateCategoryList.map((realEstateCategory, index) => (
-          <r.CategoryContainer key={index} onClick={navigateToCategory}>
+          <r.CategoryContainer key={index} onClick={() => navigateToCategory(index)}>
             <div className="category-title">{realEstateCategory.title}</div>
             <div className="category-transaction-type">
               {realEstateCategory.transactionType1}

@@ -23,3 +23,6 @@ export const API_WALLET_CHECK = `${API_WALLET}/check`
 export const API_ITEM = `${API_BASE}/item`
 
 export const API_FAVORITE_ITEM = `/item/likes`
+
+// 지도 기반 매물 리스트 조회
+export const API_ESTATE_ITEM = `/item/list`
