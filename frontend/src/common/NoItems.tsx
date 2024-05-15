@@ -10,7 +10,7 @@ const NoItems = ({ src, alarmText }) => {
 
   return (
     <n.NoItemContainer>
-      <n.ImageContainer $isSad={src === 'image/image_sad_pig.png'}>
+      <n.ImageContainer>
         <img src={src} alt="슬픈 돼지" />
       </n.ImageContainer>
       <n.ContentContainer>
