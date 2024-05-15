@@ -7,3 +7,8 @@ export interface ChatRoomListType {
   dangerType: string
   chatRoomNum: number
 }
+
+export interface CreateChatRoomParamsType {
+  realEstateNo: number
+  userWalletAddress: string
+}
