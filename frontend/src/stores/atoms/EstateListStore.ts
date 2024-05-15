@@ -22,7 +22,7 @@ export const mapCenterCoordAtom = atom<CoordType>({
 })
 
 // 사용자 현재 위치
-export const userCoord = atom<CoordType>({
+export const userCoordAtom = atom<CoordType>({
   latitude: 37.365264512305174,
   longitude: 127.10676860117488,
 })
