@@ -5,7 +5,6 @@ import {
   API_HEADERS_FORM_DATA,
   API_ITEM,
 } from '@constants/api'
-import { API_FAVORITE_ITEM, API_ITEM } from '@constants/api'
 import { publicRequest } from '@/hooks/requestMethods'
 
 export const usePostItemRegister = () => {
