@@ -1,17 +1,31 @@
 import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
-import { userAtom } from '@stores/atoms/userStore'
+import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { useQuery } from '@tanstack/react-query'
-import { ChatRoomListType } from '@/types/components/chatRoomType'
+import {
+  ChatRoomListType,
+  fetchChatRoomsRequestType,
+} from '@/types/components/chatRoomType'
 import { fetchChatRooms } from '@apis/chatApi'
 import NoItems from '@common/NoItems'
+import { useEffect, useState } from 'react'
 
 const ChatList = () => {
   const [user] = useAtom(userAtom)
+  const [userType] = useAtom(userTypeAtom)
+  const [chatRoomRequestData, setChatRoomRequestData] =
+    useState<fetchChatRoomsRequestType>()
+
+  useEffect(() => {
+    setChatRoomRequestData({
+      mode: userType.type,
+      value: user.walletAddress,
+    })
+  }, [userType, user])
 
   const { data, isLoading } = useQuery<ChatRoomListType[]>({
-    queryKey: ['fetchChatRooms', user.walletAddress],
-    queryFn: () => fetchChatRooms(user.walletAddress),
+    queryKey: ['fetchChatRooms', chatRoomRequestData],
+    queryFn: () => fetchChatRooms(chatRoomRequestData),
   })
 
   const chatRoomDatas = [
