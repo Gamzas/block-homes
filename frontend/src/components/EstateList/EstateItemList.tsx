@@ -11,7 +11,7 @@ import {
   mapAtom,
 } from '@/stores/atoms/EstateListStore'
 import EstateListMap from './EstateListMap'
-import NoEstateItem from './NoEstateItem'
+import NoItems from '@common/NoItems'
 
 const EstateItemList = () => {
   const { getCurrentLocation } = useCurrentLocation()
@@ -23,32 +23,33 @@ const EstateItemList = () => {
   }, [])
 
   return (
-    <>
+    <l.EstateItemListContainer>
       <l.StatusBarContainer>
         <CurrentStatus getCurrentLocation={getCurrentLocation} />
       </l.StatusBarContainer>
-      <l.EstateItemListContainer>
-        {menu ? (
-          estateItemList === null || estateItemList.length === 0 ? (
-            // TODO 매물 없을때 컴포넌트 분리해서 완성하기
-            <NoEstateItem />
-          ) : (
-            <>
-              {estateItemList.map((item, index) => (
-                <EstateItemCard key={index} {...item} />
-              ))}
-            </>
-          )
+      {menu ? (
+        estateItemList === null || estateItemList.length === 0 ? (
+          // TODO 매물 없을때 컴포넌트 분리해서 완성하기
+          <NoItems
+            src={'/image/image_warning_pig.png'}
+            alarmText={'해당 지역에 매물이 없습니다.'}
+          />
         ) : (
-          <EstateListMap />
-        )}
-        {filter && (
-          <l.EstateFilterContainer>
-            <EstateItemFilter />
-          </l.EstateFilterContainer>
-        )}
-      </l.EstateItemListContainer>
-    </>
+          <>
+            {estateItemList.map((item, index) => (
+              <EstateItemCard key={index} {...item} />
+            ))}
+          </>
+        )
+      ) : (
+        <EstateListMap />
+      )}
+      {filter && (
+        <l.EstateFilterContainer>
+          <EstateItemFilter />
+        </l.EstateFilterContainer>
+      )}
+    </l.EstateItemListContainer>
   )
 }
 
