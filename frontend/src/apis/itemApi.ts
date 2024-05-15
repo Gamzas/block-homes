@@ -12,13 +12,12 @@ export const usePostItemRegister = () => {
 export const getFavoriteItem = async (address: string) => {
   const response = await publicRequest.get(API_FAVORITE_ITEM, {
     params: {
-      userAddress: '0xe0fa92495dfa8e7188e72f593ef2f2988b6b5a87',
+      userAddress: address,
       localDateTime: 'string',
     },
   })
   return response.data
 }
-
 
 export const postFavoriteItem = async (
   itemNo: number,
@@ -32,8 +31,6 @@ export const postFavoriteItem = async (
   })
 }
 
-
-
 export const deleteFavoriteItem = async (
   itemNo: number,
   walletAddress: string,
@@ -45,5 +42,3 @@ export const deleteFavoriteItem = async (
     },
   })
 }
-
-
