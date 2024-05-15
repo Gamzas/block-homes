@@ -9,7 +9,20 @@ export const mapAtom = atom<boolean>(true) // false list true map
 
 export const currentPositonAtom = atom<string>('정자동')
 
+// 마커 좌표
 export const currentCoordAtom = atom<CoordType>({
+  latitude: 37.365264512305174,
+  longitude: 127.10676860117488,
+})
+
+// 지도 중심 좌표
+export const mapCenterCoordAtom = atom<CoordType>({
+  latitude: 37.365264512305174,
+  longitude: 127.10676860117488,
+})
+
+// 사용자 현재 위치
+export const userCoord = atom<CoordType>({
   latitude: 37.365264512305174,
   longitude: 127.10676860117488,
 })
