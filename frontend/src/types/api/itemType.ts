@@ -37,3 +37,38 @@ export interface PostItemRegisterResponses {
   roomImageUrls: string[]
   kitchenToiletUrls: string[]
 }
+
+export interface EstateItemReqType {
+  northEastLatitude: number
+  northEastLongitude: number
+  southWestLatitude: number
+  southWestLongitude: number
+  realEstateType: number
+  reportRank: number
+  transactionType: number
+  minPrice: number
+  maxPrice: number
+  minPyeong: number
+  maxPyeong: number
+}
+
+export interface EstateItemListType {
+  itemNo: number
+  realEstateDID: string
+  roadNameAddress: string
+  transactionType: number
+  realEstateType: number
+  reportRank: number
+  transactionStatus: number
+  area: number
+  pyeong: number
+  price: number
+  monthlyPrice: number
+  administrationCost: number
+  latitude: number
+  longitude: number
+}
+export interface EsetateItemResType {
+  itemList: EstateItemListType[]
+  count: number
+}
