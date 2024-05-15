@@ -28,13 +28,13 @@ const DetailFooter = () => {
       if (checkChatRoomResponse.status === 404) {
         const createChatRoomResult = await createChatRoom(chatRoomRequestData)
         if (createChatRoomResult && createChatRoomResult.chatRoomNo) {
-          navigate(`/chat/${createChatRoomResult.chatRoomNo}`)
+          navigate(`/chatroom/${createChatRoomResult.chatRoomNo}`)
         }
       } else if (
         checkChatRoomResponse.data &&
         checkChatRoomResponse.data.chatRoomNo
       ) {
-        navigate(`/chat/${checkChatRoomResponse.data.chatRoomNo}`)
+        navigate(`/chatroom/${checkChatRoomResponse.data.chatRoomNo}`)
       }
     } catch (error) {
       console.error('Error checking or creating chat room:', error)
