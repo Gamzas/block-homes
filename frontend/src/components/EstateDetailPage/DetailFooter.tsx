@@ -1,30 +1,43 @@
 import * as f from '@components/EstateDetailPage/style/DetailFooterStyle'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { chatRoomRequestBodyType } from '@/types/components/chatRoomType'
+import { chatRoomRequestDataType } from '@/types/components/chatRoomType'
 import { userAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
-import { createChatRoom } from '@apis/chatApi'
+import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
 
 const DetailFooter = () => {
   const { realEstateNo } = useParams()
   const [user] = useAtom(userAtom)
   const [isLiked, setIsLiked] = useState(false)
   const navigate = useNavigate()
-  const [createChatRoomParams, setCreateChatRoomParams] =
-    useState<chatRoomRequestBodyType>()
+  const [chatRoomRequestData, setChatRoomRequestData] =
+    useState<chatRoomRequestDataType>()
 
   useEffect(() => {
-    setCreateChatRoomParams({
-      realEstateNo: Number(realEstateNo),
+    setChatRoomRequestData({
+      itemNo: Number(realEstateNo),
       userWalletAddress: user.walletAddress,
     })
   }, [realEstateNo, user])
 
   const handleBtnClick = async () => {
-    const createChatRoomResult = await createChatRoom(createChatRoomParams)
-    if (createChatRoomResult && createChatRoomResult.chatRoomNo) {
-      navigate(`/chat/${createChatRoomResult.chatRoomNo}`)
+    try {
+      const checkChatRoomResponse =
+        await checkChatRoomExistence(chatRoomRequestData)
+      if (checkChatRoomResponse.status === 404) {
+        const createChatRoomResult = await createChatRoom(chatRoomRequestData)
+        if (createChatRoomResult && createChatRoomResult.chatRoomNo) {
+          navigate(`/chat/${createChatRoomResult.chatRoomNo}`)
+        }
+      } else if (
+        checkChatRoomResponse.data &&
+        checkChatRoomResponse.data.chatRoomNo
+      ) {
+        navigate(`/chat/${checkChatRoomResponse.data.chatRoomNo}`)
+      }
+    } catch (error) {
+      console.error('Error checking or creating chat room:', error)
     }
   }
 
