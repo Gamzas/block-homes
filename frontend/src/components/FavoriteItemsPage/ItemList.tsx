@@ -1,12 +1,13 @@
 import * as i from '@components/FavoriteItemsPage/style/ItemListStyle'
 import NoItems from './NoItems'
 import EstateItemCard from '../EstateList/EstateItemCard'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getFavoriteItem } from '@/apis/itemApi'
 import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
 import ItemLoading from '@/common/ItemLoading'
+import { useNavigate } from 'react-router-dom'
 
 const FavoriteItems = [
   {
@@ -37,10 +38,25 @@ const FavoriteItems = [
 
 // TODO 삭제로직 수정
 const ItemList = () => {
+  const navigate = useNavigate()
   const [editActive, setEditActive] = useState(false)
   // const [selectedItems, setSelectedItems] = useState(new Set())
   const [wallet] = useAtom(userAtom)
 
+  useEffect(() => {
+    // 지갑 주소가 없다면 로그인 페이지로 리디렉션
+    if (!wallet.walletAddress) {
+      if (
+        confirm('로그인 후 사용해주세요. 로그인 페이지로 이동하시겠습니까?')
+      ) {
+        navigate('/signin') // 로그인 페이지로 이동
+      } else {
+        navigate('/')
+      }
+    }
+  }, [wallet.walletAddress, navigate])
+
+  // 데이터 불러오기
   const { data, error, isLoading } = useQuery({
     queryKey: ['favoriteItem'],
     queryFn: () => getFavoriteItem(wallet.walletAddress),
@@ -56,6 +72,7 @@ const ItemList = () => {
 
   // 에러 상태 확인
   if (error) {
+    console.log(error)
     return <div>Error fetching data</div>
   }
 
