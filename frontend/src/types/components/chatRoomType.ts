@@ -10,5 +10,10 @@ export interface ChatRoomListType {
 
 export interface chatRoomRequestBodyType {
   realEstateNo: number
+export interface fetchChatRoomsRequestType {
+  mode: number
+  value: string
+}
+
   userWalletAddress: string
 }
