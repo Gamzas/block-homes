@@ -44,17 +44,18 @@ const ItemList = () => {
   const [wallet] = useAtom(userAtom)
 
   useEffect(() => {
-    // 지갑 주소가 없다면 로그인 페이지로 리디렉션
-    if (!wallet.walletAddress) {
-      if (
-        confirm('로그인 후 사용해주세요. 로그인 페이지로 이동하시겠습니까?')
-      ) {
-        navigate('/signin') // 로그인 페이지로 이동
-      } else {
-        navigate('/') // 취소 시 메인페이지로 이동
-      }
+    // 로컬 스토리지에서 지갑 주소를 불러옵니다.
+    const walletAddressFromStorage = localStorage.getItem('walletAddress')
+
+    // 지갑 주소가 로컬 스토리지에 있으면 상태를 업데이트합니다.
+    if (walletAddressFromStorage) {
+      return
+    } else {
+      // 로컬 스토리지에 지갑 주소가 없으면 로그인 페이지로 리다이렉션합니다.
+      alert('로그인 후 이용해주세요')
+      navigate('/signin')
     }
-  }, [wallet.walletAddress, navigate])
+  }, [navigate])
 
   // 데이터 불러오기
   const { data, error, isLoading } = useQuery({
@@ -75,6 +76,7 @@ const ItemList = () => {
     console.log(error)
     return <div>Error fetching data</div>
   }
+  console.log(data.likedItems)
 
   // TODO 서버 연결 시 찜한 목록 아래 변수 사용하기!
   // const [favoriteItems, setFavoriteItems] = useState(FavoriteItems) // 상태에 초기 아이템 목록을 저장합니다.
