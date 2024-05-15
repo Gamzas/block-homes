@@ -56,12 +56,9 @@ const DetailEstate = ({ detailEstateProps, setDetailEstateProps }) => {
       .map((selected, idx) => (selected ? idx + 1 : null))
       .filter(value => value !== null)
 
-    // 배열을 문자열로 변환하여 상태 업데이트
-    const selectedIndicesString = `[${selectedIndices.join(', ')}]`
-
     setDetailEstateProps(currentParams => ({
       ...currentParams,
-      additionalOptionCategoryList: selectedIndicesString,
+      additionalOptionCategoryList: selectedIndices,
     }))
   }
 
