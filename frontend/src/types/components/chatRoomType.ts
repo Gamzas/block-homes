@@ -17,3 +17,10 @@ export interface chatRoomRequestDataType {
   itemNo: number
   userWalletAddress: string
 }
+
+export interface ChatRoomCheckResponseType {
+  status: number
+  data?: {
+    chatRoomNo?: number
+  }
+}
