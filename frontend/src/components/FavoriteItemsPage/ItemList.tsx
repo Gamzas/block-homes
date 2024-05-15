@@ -109,7 +109,7 @@ const ItemList = () => {
       </i.ItemContainer>
     </i.ItemListWrapper>
   ) : (
-    <NoItems />
+    <NoItems alarmText={'관심 매물이 없어요'} />
   )
 }
 
