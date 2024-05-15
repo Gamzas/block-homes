@@ -1,10 +1,9 @@
 import { publicRequest } from '@hooks/requestMethods'
 import { chatRoomRequestBodyType } from '@/types/components/chatRoomType'
+  fetchChatRoomsRequestType,
 
-export const fetchChatRooms = async (userWalletAddress: string) => {
-  return publicRequest
-    .get(`/chatrooms?type=userWalletAddress&value=${userWalletAddress}`)
-    .then(res => res.data)
+export const fetchChatRooms = async (params: fetchChatRoomsRequestType) => {
+  return publicRequest.get(`/chatrooms`, { params }).then(res => res.data)
 }
 
 export const createChatRoom = async (
