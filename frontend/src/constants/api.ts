@@ -23,3 +23,5 @@ export const API_WALLET_CHECK = `${API_WALLET}/check`
 export const API_ITEM = `${API_BASE}/item`
 
 export const API_FAVORITE_ITEM = `/item/likes`
+
+export const  API_ESTATE_ITEM = `/item/list`
