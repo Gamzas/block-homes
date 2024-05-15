@@ -1,7 +1,9 @@
 import * as c from '@/components/MyPage/style/MemberCardStyle'
+import { userAtom } from '@/stores/atoms/userStore'
+import { useAtom } from 'jotai'
 
 const MemberCard = () => {
-  const userName = '김현지'
+  const [user] = useAtom(userAtom)
   return (
     <c.CardContainer>
       <img className="logo-img" src="image/image_logo.png" alt="로고" />
@@ -15,7 +17,7 @@ const MemberCard = () => {
           />
         </div>
         <div className="user-name">
-          {userName} <span>님</span>
+          {user.name} <span>님</span>
         </div>
       </c.ProfileContainer>
     </c.CardContainer>
