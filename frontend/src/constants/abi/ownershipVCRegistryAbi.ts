@@ -229,9 +229,9 @@ export const OWNERSHIP_VC_REGISTRY_ABI = [
     name: 'verifyCredential',
     outputs: [
       {
-        internalType: 'bool',
+        internalType: 'address',
         name: '',
-        type: 'bool',
+        type: 'address',
       },
     ],
     stateMutability: 'view',
