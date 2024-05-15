@@ -26,26 +26,26 @@ const EstateRegistrationPage = () => {
     area: 33,
   })
   const [detailRegistrationProps, setDetailRegistrationProps] = useState({
-    transactionType: null,
-    price: null,
-    monthlyPrice: null,
-    administrationCost: null,
-    contractMonths: null,
-    administrationFeeCategoryList: null,
-    moveInDate: null,
+    transactionType: undefined,
+    price: undefined,
+    monthlyPrice: undefined,
+    administrationCost: undefined,
+    contractMonths: undefined,
+    administrationFeeCategoryList: undefined,
+    moveInDate: undefined,
   })
   const [detailEstateProps, setDetailEstateProps] = useState({
-    additionalOptionCategoryList: null,
-    roomNumber: null,
-    toiletNumber: null,
-    description: null,
-    buildingFloor: null,
-    itemFloor: null,
-    parkingRate: null,
-    haveElevator: true,
+    additionalOptionCategoryList: undefined,
+    roomNumber: undefined,
+    toiletNumber: undefined,
+    description: undefined,
+    buildingFloor: undefined,
+    itemFloor: undefined,
+    parkingRate: undefined,
+    haveElevator: undefined,
   })
   const [photoRegistrationProps, setPhotoRegistrationProps] = useState({
-    mainImage: null,
+    mainImage: undefined,
     roomImages: [],
     kitchenToiletImages: [],
   })
