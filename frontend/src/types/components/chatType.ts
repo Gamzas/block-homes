@@ -5,7 +5,7 @@ export type MessageType = {
   createdAt: string
   isRead: boolean
   message: string
-  type: string | null
+  type: number | null
   userImage: string | null
   userName: string
   userWalletAddress: string
