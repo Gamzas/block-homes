@@ -1,5 +1,5 @@
 import * as i from '@components/FavoriteItemsPage/style/ItemListStyle'
-import NoItems from './NoItems'
+import NoItems from '@common/NoItems'
 import EstateItemCard from '../EstateList/EstateItemCard'
 import { useState } from 'react'
 

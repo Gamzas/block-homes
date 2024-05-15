@@ -4,7 +4,7 @@ import { useAtom } from 'jotai'
 import { useQuery } from '@tanstack/react-query'
 import { ChatRoomListType } from '@/types/components/chatRoomType'
 import { fetchChatRooms } from '@apis/chatApi'
-import NoItems from '@components/FavoriteItemsPage/NoItems'
+import NoItems from '@common/NoItems'
 
 const ChatList = () => {
   const [user] = useAtom(userAtom)
