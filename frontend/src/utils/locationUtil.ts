@@ -54,3 +54,25 @@ export const getCoord = (
     )
   })
 }
+
+/** 사용 예시
+ *   
+ * 
+ * const [coords, setCoords] = useState({ latitude: 0, longitude: 0 });
+
+  const handleAddressSearch = async (address: string) => {
+    try {
+      const result = await getCoord(address);
+      setCoords(result);
+    } catch (error) {
+      console.error(error.message);
+      alert('좌표를 가져오는데 실패했습니다.');
+    }
+  };
+
+  useEffect(() => {
+    const address = '서울특별시 강남구 역삼동 123-45';
+    handleAddressSearch(address);
+  }, []);
+
+ */
