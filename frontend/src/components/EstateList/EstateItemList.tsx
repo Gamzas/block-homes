@@ -21,6 +21,7 @@ const EstateItemList = () => {
   useEffect(() => {
     getCurrentLocation()
   }, [])
+
   return (
     <>
       <l.StatusBarContainer>
