@@ -1,6 +1,7 @@
 import {
   currentCoordAtom,
   currentPositonAtom,
+  mapCenterCoordAtom,
   matchAtom,
 } from '@/stores/atoms/EstateListStore'
 import { CoordType } from '@/types/components/estateListType'
@@ -21,10 +22,13 @@ const useCurrentLocation = () => {
   // 지도 중심 위치 와 사용자 위치 일지 여부
   const [match, setMatch] = useAtom(matchAtom)
   // 위치 출력을 위한 좌표(지도 이동 시 지도의 센터 좌표값 설정 됨)
-  const [location, setLocation] = useState<CoordType>({
-    latitude: 37.365264512305174,
-    longitude: 127.10676860117488,
-  })
+  // const [location, setLocation] = useState<CoordType>({
+  //   latitude: 37.365264512305174,
+  //   longitude: 127.10676860117488,
+  // })
+
+  const [location, setLocation] = useAtom(mapCenterCoordAtom)
+
 
   // 현재 위치와 지도 중심의 위치를 비교
   const checkCoordinatesMatch = (
