@@ -51,7 +51,7 @@ const ItemList = () => {
       ) {
         navigate('/signin') // 로그인 페이지로 이동
       } else {
-        navigate('/')
+        navigate('/') // 취소 시 메인페이지로 이동
       }
     }
   }, [wallet.walletAddress, navigate])
