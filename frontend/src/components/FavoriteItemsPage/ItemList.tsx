@@ -1,5 +1,5 @@
 import * as i from '@components/FavoriteItemsPage/style/ItemListStyle'
-import NoItems from './NoItems'
+import NoItems from '@common/NoItems'
 import EstateItemCard from '../EstateList/EstateItemCard'
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
@@ -151,7 +151,7 @@ const ItemList = () => {
       </i.ItemContainer>
     </i.ItemListWrapper>
   ) : (
-    <NoItems />
+    <NoItems alarmText={'관심 매물이 없어요'} />
   )
 }
 
