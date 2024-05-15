@@ -1,4 +1,8 @@
-import { SignInButton, SignInError, SignInWrapper } from '@components/SignInPage/style/SignInStyle'
+import {
+  SignInButton,
+  SignInError,
+  SignInWrapper,
+} from '@components/SignInPage/style/SignInStyle'
 import React, { useEffect, useState } from 'react'
 import { useCreateDIDDocument } from '@/abi/userDIDRegistry/createDIDDocument'
 import { useSetAtom } from 'jotai'
@@ -8,11 +12,11 @@ import { ethers } from 'ethers'
 import { useNavigate } from 'react-router-dom'
 
 const EncryptionWallet = ({
-                            name,
-                            phoneNumber,
-                            wallet,
-                            setWallet,
-                          }: {
+  name,
+  phoneNumber,
+  wallet,
+  setWallet,
+}: {
   name: string
   phoneNumber: string
   wallet: ethers.Wallet
@@ -35,7 +39,7 @@ const EncryptionWallet = ({
         setConfirmPassword('')
         // DID 문서 생성 시도
         createDIDDocumentMutate(wallet, {
-          onError: (error) => {
+          onError: error => {
             console.error('DID 문서 생성 실패:', error)
             alert('DID 문서 생성에 실패했습니다. 다시 시도해주세요.')
             return
@@ -43,25 +47,28 @@ const EncryptionWallet = ({
         })
 
         // Wallet 정보 서버에 등록 시도
-        postWalletMutate({
-          walletAddress: wallet.address,
-          encPrivateKey: encryptedWallet,
-          name: name,
-          phoneNumber: phoneNumber,
-        }, {
-          onSuccess: () => {
-            setUserAtom({
-              walletAddress: wallet.address,
-              name: name,
-            })
-            setWallet(null)
-            navigate('/')
+        postWalletMutate(
+          {
+            walletAddress: wallet.address,
+            encPrivateKey: encryptedWallet,
+            name: name,
+            phoneNumber: phoneNumber,
           },
-          onError: (error) => {
-            console.error('Wallet 정보 등록 실패:', error)
-            alert('지갑 정보 등록에 실패했습니다. 다시 시도해주세요.')
+          {
+            onSuccess: () => {
+              setUserAtom({
+                walletAddress: wallet.address,
+                name: name,
+              })
+              setWallet(null)
+              navigate('/')
+            },
+            onError: error => {
+              console.error('Wallet 정보 등록 실패:', error)
+              alert('지갑 정보 등록에 실패했습니다. 다시 시도해주세요.')
+            },
           },
-        })
+        )
       } catch (error) {
         console.error('Wallet 암호화 실패:', error)
         alert('지갑 암호화에 실패했습니다. 다시 시도해주세요.')
@@ -71,7 +78,6 @@ const EncryptionWallet = ({
       alert('비밀번호가 일치하지 않습니다.')
     }
   }
-
 
   useEffect(() => {
     setIsPasswordMatch(password === confirmPassword)

@@ -10,6 +10,12 @@ export const API_HEADERS_JSON = {
   },
 }
 
+export const API_HEADERS_FORM_DATA = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+}
+
 export const API_WALLET = `${API_BASE}/wallet`
 
 export const API_WALLET_CHECK = `${API_WALLET}/check`

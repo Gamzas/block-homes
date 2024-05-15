@@ -56,8 +56,10 @@ const EstateRegistrationPage = () => {
       ...detailRegistrationProps,
       ...detailEstateProps,
     }
-
-    formData.append('req', JSON.stringify(reqData))
+    const blob = new Blob([JSON.stringify(reqData)], {
+      type: 'application/json',
+    })
+    formData.append('req', blob)
 
     if (photoRegistrationProps.mainImage) {
       formData.append('mainImage', photoRegistrationProps.mainImage)
@@ -107,7 +109,8 @@ const EstateRegistrationPage = () => {
         if (
           isDataFilled(detailRegistrationProps) &&
           isDataFilled(photoRegistrationProps) &&
-          isDataFilled(detailEstateProps)
+          isDataFilled(detailEstateProps) &&
+          isValidDateFormat(detailRegistrationProps.moveInDate)
         )
           handleFormSubmit()
         break
@@ -136,7 +139,9 @@ const EstateRegistrationPage = () => {
           <r.NextButton
             onClick={handleNextButtonClick}
             disabled={
-              (openIndex === 1 && !isDataFilled(detailRegistrationProps)) ||
+              (openIndex === 1 &&
+                !isDataFilled(detailRegistrationProps) &&
+                !isValidDateFormat(detailRegistrationProps.moveInDate)) ||
               (openIndex === 2 && !isDataFilled(detailEstateProps)) ||
               (openIndex === 3 && !isDataFilled(photoRegistrationProps))
             }
