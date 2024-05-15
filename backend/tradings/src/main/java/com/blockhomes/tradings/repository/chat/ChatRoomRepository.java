@@ -3,10 +3,10 @@ package com.blockhomes.tradings.repository.chat;
 import com.blockhomes.tradings.entity.chat.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface ChatRoomRepository extends JpaRepository<ChatRoom, Integer> {
+public interface ChatRoomRepository extends JpaRepository<ChatRoom, Integer>, ChatRoomRepositoryCustom {
 
-    List<ChatRoom> getChatRoomByChatRoomId(String chatRoomId);
+    Optional<ChatRoom> getChatRoomByChatRoomNo(Integer chatRoomNo);
 
 }
