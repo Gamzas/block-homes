@@ -43,7 +43,8 @@ const EstateItemList = () => {
             </>
           )
         ) : (
-          <EstateListMap />
+          // WARNING
+          <>{/* <EstateListMap /> */}</>
         )}
         {filter && (
           <l.EstateFilterContainer>

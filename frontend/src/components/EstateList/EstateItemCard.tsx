@@ -38,7 +38,8 @@ const EstateItemCard = (props: PropsType) => {
   const setItem = useSetAtom(selectedItemAtom)
   const goDetail = () => {
     // DELETE 백 통신으로 전환 후 삭제하기
-    setItem(props)
+    // WARNING
+    // setItem(props)
     navigate('/estate-detail')
     // navigate(`/estate-detail/${id}`)
   }

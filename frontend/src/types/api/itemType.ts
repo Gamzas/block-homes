@@ -65,6 +65,7 @@ export interface EstateItemListType {
   price: number
   monthlyPrice: number
   administrationCost: number
+  contractMonths : number
   latitude: number
   longitude: number
 }
