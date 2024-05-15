@@ -20,7 +20,7 @@ const { kakao } = window
 
 const EstateListMap = () => {
   // setLocation => 지도의 중심좌표를 설정하기 위한 함수
-  const { getCurrentLocation, setLocation } = useCurrentLocation()
+  const { setLocation } = useCurrentLocation()
 
   const [coord] = useAtom(currentCoordAtom)
 
@@ -36,7 +36,6 @@ const EstateListMap = () => {
   
   useEffect(() => {
     setItem('not')
-    getCurrentLocation()
   }, [])
 
   useEffect(() => {
