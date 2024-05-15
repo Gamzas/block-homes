@@ -1,4 +1,4 @@
-import * as n from '@components/FavoriteItemsPage/style/NoItemsStyle'
+import * as n from '@common/style/NoItemsStyle'
 import { useNavigate } from 'react-router-dom'
 
 const NoItems = ({ alarmText }) => {
