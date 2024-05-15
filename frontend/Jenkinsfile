@@ -66,7 +66,7 @@ pipeline {
                     try {
                         sh '$SSH_CMD $DOCKER stop $repo_name' // 기존에 실행 중인 컨테이너 정지
                         sh '$SSH_CMD $DOCKER rm $repo_name' // 컨테이너 제거
-                        sh '$SSH_CMD $DOCKER rmi $repository'
+                        sh "${SSH_CMD} ${DOCKER} rmi \$(docker images | awk '\$1 ~ /${repo_name}/ {print \$3}')"
                         sh '$SSH_CMD $DOCKER pull $repository:latest' // 최신 도커 이미지 다운로드
                         sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8090:3000 $repository:latest' // 새 컨테이너 실행
                     } catch (e) {
