@@ -25,8 +25,8 @@ public class ChatProvision extends BaseEntity {
     private ChatRoom chatRoom;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "special_provision_no", nullable = false)
-    private SpecialProvision specialProvision;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "special_provision", nullable = false)
+    private SpecialProvisionCategory specialProvisionCategory;
 
 }
