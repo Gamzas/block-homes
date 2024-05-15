@@ -1,5 +1,6 @@
 package com.blockhomes.tradings.controller;
 
+import com.blockhomes.tradings.dto.BaseResponseBody;
 import com.blockhomes.tradings.dto.wallet.request.CheckWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.GetWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.RegisterWalletReq;
@@ -16,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.OK;
 
 @Tag(name = "Wallet")
@@ -75,6 +77,22 @@ public class WalletController {
         return ResponseEntity
             .status(OK)
             .body(walletService.registerWallet(req));
+    }
+
+    @DeleteMapping("/{walletAddress}")
+    @Operation(
+        summary = "지갑 삭제",
+        description = "지갑 주소에 해당하는 값을 삭제합니다.",
+        responses = {
+            @ApiResponse(responseCode = "202", description = "삭제 완료"),
+            @ApiResponse(responseCode = "404", description = "지갑 정보 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<BaseResponseBody> deleteWallet(@PathVariable String walletAddress) {
+        return ResponseEntity
+            .status(ACCEPTED)
+            .body(walletService.deleteWallet(walletAddress));
     }
 
 }
