@@ -1,8 +1,16 @@
 import * as f from '@components/EstateDetailPage/style/DetailFooterStyle'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const DetailFooter = () => {
   const [isLiked, setIsLiked] = useState(false)
+  const navigate = useNavigate()
+
+  const handleBtnClick = () => {
+    navigate(`/chat/1`)
+    // navigate(`/chat/${realEstateNo}`)
+  }
+
   return (
     <f.FooterContainer>
       <f.LikendBtn onClick={() => setIsLiked(!isLiked)}>
@@ -30,7 +38,7 @@ const DetailFooter = () => {
         </div>
         <div className="location">광주광역시 광산구 장덕동</div>
       </f.InfoContainer>
-      <f.ChatBtn>
+      <f.ChatBtn onClick={handleBtnClick}>
         <div className="name">채팅하기</div>
       </f.ChatBtn>
     </f.FooterContainer>
