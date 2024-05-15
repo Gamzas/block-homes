@@ -1,5 +1,6 @@
 package com.blockhomes.tradings.service;
 
+import com.blockhomes.tradings.dto.BaseResponseBody;
 import com.blockhomes.tradings.dto.wallet.request.CheckWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.GetWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.RegisterWalletReq;
@@ -11,6 +12,7 @@ import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import com.blockhomes.tradings.repository.wallet.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,20 @@ public class WalletServiceImpl implements WalletService {
             .userDID(wallet.getUserDID())
             .encPrivateKey(wallet.getEncPrivateKey())
             .name(wallet.getName())
+            .build();
+    }
+
+    @Override
+    @Transactional
+    public BaseResponseBody deleteWallet(String walletAddress) {
+        Wallet wallet = walletRepository.getWalletByWalletAddress(walletAddress)
+            .orElseThrow(WalletNotFoundException::new);
+
+        walletRepository.delete(wallet);
+
+        return BaseResponseBody.builder()
+            .statusCode(HttpStatus.ACCEPTED)
+            .message("지갑 " + walletAddress + " 삭제 완료")
             .build();
     }
 
