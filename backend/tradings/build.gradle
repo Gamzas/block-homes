@@ -56,6 +56,8 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-reactor-netty"
 	implementation "org.springframework.boot:spring-boot-starter-websocket"
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+	implementation 'org.webjars:sockjs-client:1.1.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.4'
 
