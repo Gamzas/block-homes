@@ -16,9 +16,6 @@ contract LongTermRent {
     struct LongTermRentContract {
         ContractInfo contractInfo;
         bytes32 contractInfoHash;
-
-        bytes landlordSignature; // 임대인의 서명
-        bytes tenantSignature; // 임차인의 서명
     }
 
     LongTermRentContract public rentalContract;
@@ -26,23 +23,32 @@ contract LongTermRent {
     address payable landlordAddress;
     address payable tenantAddress;
 
-    constructor(
-        address payable _landlordAddress,
-        address payable _tenantAddress,
-        string memory _landlordDID,
-        string memory _tenantDID,
+    function toHexString(uint256 value, uint length) private pure returns (string memory) {
+        bytes memory buffer = new bytes(2 * length + 2);
+        buffer[0] = '0';
+        buffer[1] = 'x';
+        for (uint i = 2 * length + 1; i > 1; --i) {
+            buffer[i] = bytes1(uint8(value & 0xf) + (value & 0xf < 10 ? 48 : 87));
+            value >>= 4;
+        }
+        return string(buffer);
+    }
+
+    constructor payable(
+        address _landlordAddress,
+        address _tenantAddress,
         uint16 _leasePeriod,
         uint256 _deposit,
         string memory _propertyDID,
         uint256 _contractDate,
         string[] memory _terms
     ) {
-        landlordAddress = _landlordAddress;
-        tenantAddress = _tenantAddress;
+        landlordAddress = payable(_landlordAddress);
+        tenantAddress = payable(_tenantAddress);
 
         // 계약 정보 초기화
-        rentalContract.contractInfo.landlordDID = _landlordDID;
-        rentalContract.contractInfo.tenantDID = _tenantDID;
+        rentalContract.contractInfo.landlordDID = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(_landlordAddress)), 20)));
+        rentalContract.contractInfo.tenantDID = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(_tenantAddress)), 20)));
         rentalContract.contractInfo.leasePeriod = _leasePeriod;
         rentalContract.contractInfo.deposit = _deposit;
         rentalContract.contractInfo.propertyDID = _propertyDID;
@@ -53,32 +59,6 @@ contract LongTermRent {
         rentalContract.contractInfoHash = keccak256(abi.encode(rentalContract));
     }
 
-    function signContractByLandlord(bytes memory _landlordSignature) external {
-        require(msg.sender == landlordAddress, "Only landlord can sign the contract.");
-        rentalContract.landlordSignature = _landlordSignature;
-    }
-
-    function signContractByTenant(bytes memory _tenantSignature) external {
-        require(msg.sender == tenantAddress, "Only landlord can sign the contract.");
-        rentalContract.tenantSignature = _tenantSignature;
-    }
-
-    // 계약의 유효성 확인
-    function verifyContract() public view returns (bool) {
-        bytes32 hash = keccak256(
-            abi.encode(
-                rentalContract.contractInfo.landlordDID,
-                rentalContract.contractInfo.tenantDID,
-                rentalContract.contractInfo.leasePeriod,
-                rentalContract.contractInfo.deposit,
-                rentalContract.contractInfo.propertyDID,
-                rentalContract.contractInfo.contractDate,
-                rentalContract.contractInfo.terms
-            )
-        );
-
-        return rentalContract.contractInfoHash == hash;
-    }
     
     // 임차인이 이더를 보낼 수 있는 payable 함수
     function payDeposit() public payable {
