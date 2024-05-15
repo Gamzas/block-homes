@@ -3,6 +3,7 @@ import {
   currentPositonAtom,
   mapCenterCoordAtom,
   matchAtom,
+  userCoordAtom,
 } from '@/stores/atoms/EstateListStore'
 import { CoordType } from '@/types/components/estateListType'
 import {
@@ -10,7 +11,7 @@ import {
   KakaoMapsStatus,
 } from '@/types/components/kakaomapType'
 import { useAtom, useSetAtom } from 'jotai'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const { kakao } = window
 
@@ -22,13 +23,10 @@ const useCurrentLocation = () => {
   // 지도 중심 위치 와 사용자 위치 일지 여부
   const [match, setMatch] = useAtom(matchAtom)
   // 위치 출력을 위한 좌표(지도 이동 시 지도의 센터 좌표값 설정 됨)
-  // const [location, setLocation] = useState<CoordType>({
-  //   latitude: 37.365264512305174,
-  //   longitude: 127.10676860117488,
-  // })
-
+  // 지도 중심
   const [location, setLocation] = useAtom(mapCenterCoordAtom)
-
+  // 사용자 현재 위치
+  const [userCoord, setUserCoord] = useAtom(userCoordAtom)
 
   // 현재 위치와 지도 중심의 위치를 비교
   const checkCoordinatesMatch = (
@@ -43,7 +41,8 @@ const useCurrentLocation = () => {
 
   // 현재 위치와 지도 중심의 위치가 바뀔때마다 비교
   useEffect(() => {
-    const isMatch = checkCoordinatesMatch(coord, location)
+    // 지도 중심과 사용자 현재 위치 비교
+    const isMatch = checkCoordinatesMatch(location, userCoord)
     setMatch(isMatch)
   }, [coord, location, setMatch])
 
@@ -59,6 +58,9 @@ const useCurrentLocation = () => {
 
   const successHandler = (res: GeolocationPosition) => {
     const { latitude, longitude } = res.coords
+    // 사용자 현재 위치
+    setUserCoord({ latitude, longitude })
+    // 마커 위치
     setCoord({ latitude, longitude })
   }
   const errorHandler = (err: GeolocationPositionError) => {
