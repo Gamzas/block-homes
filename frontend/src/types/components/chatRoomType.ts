@@ -1,4 +1,4 @@
-export interface ChatComponentProps {
+export interface ChatRoomListType {
   representativeImage: string
   address: string
   transactionType: number
