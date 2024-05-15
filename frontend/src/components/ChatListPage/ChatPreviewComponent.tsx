@@ -1,10 +1,10 @@
 import * as c from '@components/ChatListPage/style/ChatPreviewComponentStyle'
 import React, { useEffect, useState } from 'react'
-import { ChatComponentProps } from '@/types/components/chatRoomType'
+import { ChatRoomListType } from '@/types/components/chatRoomType'
 import { useNavigate } from 'react-router-dom'
 import useEstateCondition from '@hooks/useEstateCondition'
 
-const ChatPreviewComponent: React.FC<ChatComponentProps> = ({
+const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
   representativeImage,
   address,
   transactionType,
