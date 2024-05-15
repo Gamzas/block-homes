@@ -43,38 +43,38 @@ const ItemList = () => {
   // const [selectedItems, setSelectedItems] = useState(new Set())
   const [wallet] = useAtom(userAtom)
 
-  useEffect(() => {
-    // 지갑 주소가 없다면 로그인 페이지로 리디렉션
-    if (!wallet.walletAddress) {
-      if (
-        confirm('로그인 후 사용해주세요. 로그인 페이지로 이동하시겠습니까?')
-      ) {
-        navigate('/signin') // 로그인 페이지로 이동
-      } else {
-        navigate('/') // 취소 시 메인페이지로 이동
-      }
-    }
-  }, [wallet.walletAddress, navigate])
+  // useEffect(() => {
+  //   // 지갑 주소가 없다면 로그인 페이지로 리디렉션
+  //   if (!wallet.walletAddress) {
+  //     if (
+  //       confirm('로그인 후 사용해주세요. 로그인 페이지로 이동하시겠습니까?')
+  //     ) {
+  //       navigate('/signin') // 로그인 페이지로 이동
+  //     } else {
+  //       navigate('/') // 취소 시 메인페이지로 이동
+  //     }
+  //   }
+  // }, [wallet.walletAddress, navigate])
 
   // 데이터 불러오기
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['favoriteItem'],
-    queryFn: () => getFavoriteItem(wallet.walletAddress),
-  })
-  // 데이터 로딩 상태 확인
-  if (isLoading) {
-    return (
-      <i.ItemListWrapper>
-        <ItemLoading />
-      </i.ItemListWrapper>
-    )
-  }
+  // const { data, error, isLoading } = useQuery({
+  //   queryKey: ['favoriteItem'],
+  //   queryFn: () => getFavoriteItem(wallet.walletAddress),
+  // })
+  // // 데이터 로딩 상태 확인
+  // if (isLoading) {
+  //   return (
+  //     <i.ItemListWrapper>
+  //       <ItemLoading />
+  //     </i.ItemListWrapper>
+  //   )
+  // }
 
-  // 에러 상태 확인
-  if (error) {
-    console.log(error)
-    return <div>Error fetching data</div>
-  }
+  // // 에러 상태 확인
+  // if (error) {
+  //   console.log(error)
+  //   return <div>Error fetching data</div>
+  // }
 
   // TODO 서버 연결 시 찜한 목록 아래 변수 사용하기!
   // const [favoriteItems, setFavoriteItems] = useState(FavoriteItems) // 상태에 초기 아이템 목록을 저장합니다.
@@ -118,7 +118,7 @@ const ItemList = () => {
   //   // }
   // }
 
-  return data.likedItems.length !== 0 ? (
+  return FavoriteItems.length !== 0 ? (
     <i.ItemListWrapper>
       <i.EditContainer>
         {editActive ? (
@@ -136,7 +136,7 @@ const ItemList = () => {
         )}
       </i.EditContainer>
       <i.ItemContainer>
-        {data.likedItems.map((item, index) => (
+        {FavoriteItems.map((item, index) => (
           <i.selectedItemContainer>
             {editActive && (
               <input

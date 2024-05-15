@@ -20,7 +20,7 @@ export const getFavoriteItem = async (address: string) => {
 }
 
 
-export const postFavoritItem = async (
+export const postFavoriteItem = async (
   itemNo: number,
   walletAddress: string,
 ) => {
@@ -34,7 +34,7 @@ export const postFavoritItem = async (
 
 
 
-export const deleteFavoritItem = async (
+export const deleteFavoriteItem = async (
   itemNo: number,
   walletAddress: string,
 ) => {
