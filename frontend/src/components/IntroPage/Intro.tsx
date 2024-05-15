@@ -2,7 +2,7 @@ import { IntroContainer } from '@components/IntroPage/style/IntroStyle'
 import { useAtomValue } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@apis/walletApi'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ethers } from 'ethers'
 import { useClaimCredential } from '@/abi/ownershipVCRegistry/claimCredential'
 

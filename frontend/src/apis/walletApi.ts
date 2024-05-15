@@ -1,6 +1,11 @@
 import axios from 'axios'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { API_HEADERS_JSON, API_WALLET, API_WALLET_CHECK } from '@constants/api'
+import {
+  API_HEADERS_FORM_DATA,
+  API_HEADERS_JSON,
+  API_WALLET,
+  API_WALLET_CHECK,
+} from '@constants/api'
 import {
   GetWalletCheckParams,
   GetWalletCheckResponse,
