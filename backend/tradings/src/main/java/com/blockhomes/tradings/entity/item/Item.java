@@ -75,6 +75,10 @@ public class Item extends BaseEntity {
     private Integer administrationCost;
 
     @NotNull
+    @Column(name = "contract_months", nullable = false)
+    private Integer contractMonths;
+
+    @NotNull
     @Column(name = "latitude", nullable = false)
     private Double latitude;
 
@@ -124,6 +128,7 @@ public class Item extends BaseEntity {
         Long price,
         Integer monthlyPrice,
         Integer administrationCost,
+        Integer contractMonths,
         Double latitude,
         Double longitude,
         RealEstateType realEstateType,
@@ -146,6 +151,7 @@ public class Item extends BaseEntity {
         this.price = price;
         this.monthlyPrice = monthlyPrice;
         this.administrationCost = administrationCost;
+        this.contractMonths = contractMonths;
         this.latitude = latitude;
         this.longitude = longitude;
         this.realEstateType = realEstateType;
