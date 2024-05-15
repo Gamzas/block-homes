@@ -12,6 +12,7 @@ import {
 } from '@/stores/atoms/EstateListStore'
 import EstateListMap from './EstateListMap'
 import NoEstateItem from './NoEstateItem'
+import { useParams } from 'react-router-dom'
 
 const EstateItemList = () => {
   const { getCurrentLocation } = useCurrentLocation()
@@ -21,6 +22,9 @@ const EstateItemList = () => {
   useEffect(() => {
     getCurrentLocation()
   }, [])
+
+  const { category } = useParams()
+  console.log(category)
   return (
     <>
       <l.StatusBarContainer>
@@ -34,7 +38,7 @@ const EstateItemList = () => {
           ) : (
             <>
               {estateItemList.map((item, index) => (
-                <EstateItemCard key={index} {...item} />
+                <EstateItemCard key={index} itemList={item.itemList[0]} />
               ))}
             </>
           )
