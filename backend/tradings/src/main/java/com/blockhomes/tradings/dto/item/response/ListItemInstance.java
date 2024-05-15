@@ -24,6 +24,7 @@ public class ListItemInstance {
     private Long price;
     private Integer monthlyPrice;
     private Integer administrationCost;
+    private Integer contractMonths;
     private Double latitude;
     private Double longitude;
 
@@ -40,6 +41,7 @@ public class ListItemInstance {
         Long price,
         Integer monthlyPrice,
         Integer administrationCost,
+        Integer contractMonths,
         Double latitude,
         Double longitude
     ) {
@@ -55,6 +57,7 @@ public class ListItemInstance {
         this.price = price;
         this.monthlyPrice = monthlyPrice;
         this.administrationCost = administrationCost;
+        this.contractMonths = contractMonths;
         this.latitude = latitude;
         this.longitude = longitude;
     }

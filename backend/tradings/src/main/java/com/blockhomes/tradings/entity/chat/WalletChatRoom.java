@@ -1,7 +1,7 @@
-package com.blockhomes.tradings.entity.wallet;
+package com.blockhomes.tradings.entity.chat;
 
-import com.blockhomes.tradings.entity.chat.ChatRoom;
 import com.blockhomes.tradings.entity.common.BaseEntity;
+import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -18,7 +18,7 @@ public class WalletChatRoom extends BaseEntity {
     @Id
     @Column(name = "wallet_chat_room_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer chatRoomNo;
+    private Integer walletChatRoomNo;
 
     @NotNull
     @ManyToOne
@@ -31,7 +31,8 @@ public class WalletChatRoom extends BaseEntity {
     private Wallet wallet;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private Integer role;
+    private RoleCategory roleCategory;
 
 }

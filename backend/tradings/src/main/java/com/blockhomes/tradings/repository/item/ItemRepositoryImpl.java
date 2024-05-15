@@ -97,6 +97,7 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                 qItem.price,
                 qItem.monthlyPrice,
                 qItem.administrationCost,
+                qItem.contractMonths,
                 qItem.latitude,
                 qItem.longitude
             ));
