@@ -8,7 +8,7 @@ export interface ChatRoomListType {
   chatRoomNum: number
 }
 
-export interface CreateChatRoomParamsType {
+export interface chatRoomRequestBodyType {
   realEstateNo: number
   userWalletAddress: string
 }

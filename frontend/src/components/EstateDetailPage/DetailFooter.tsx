@@ -1,7 +1,7 @@
 import * as f from '@components/EstateDetailPage/style/DetailFooterStyle'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CreateChatRoomParamsType } from '@/types/components/chatRoomType'
+import { chatRoomRequestBodyType } from '@/types/components/chatRoomType'
 import { userAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { createChatRoom } from '@apis/chatApi'
@@ -12,7 +12,7 @@ const DetailFooter = () => {
   const [isLiked, setIsLiked] = useState(false)
   const navigate = useNavigate()
   const [createChatRoomParams, setCreateChatRoomParams] =
-    useState<CreateChatRoomParamsType>()
+    useState<chatRoomRequestBodyType>()
 
   useEffect(() => {
     setCreateChatRoomParams({
