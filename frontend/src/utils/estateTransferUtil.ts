@@ -114,6 +114,14 @@ export const numberToKorean = (num: number): string => {
   }
 }
 
-// 예제 사용
-const price = 300000000
-console.log(numberToKorean(price)) // "삼억"
+export const numberToMoney = (num: number): string => {
+  if (num >= 100000000) {
+    return (num / 100000000).toFixed(1).replace(/\.0$/, '') + '억'
+  } else if (num >= 10000) {
+    return (num / 10000).toFixed(1).replace(/\.0$/, '') + '만'
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + '천'
+  } else {
+    return num.toString()
+  }
+}
