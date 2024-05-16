@@ -1,3 +1,5 @@
+import { MessageType } from '@/types/components/chatType'
+
 export interface ChatRoomListType {
   representativeImage: string
   address: string
@@ -25,12 +27,13 @@ export interface ChatRoomCheckResponseType {
   }
 }
 
-export interface FetchChChatRoomResponseType {
-  data?: {
+export interface FetchChatRoomResponseType {
+  data: {
     representativeImage: string
     address: string
     transactionType: number
     price: number
     realEstateNo: number
+    chatList: MessageType[]
   }
 }
