@@ -19,7 +19,6 @@ const EstateItemList = () => {
   const [filter] = useAtom(filterAtom)
   const [menu] = useAtom(mapAtom)
   const [estateItemArr] = useAtom(estateItemListAtom)
-  console.log(estateItemArr)
   const estateItemList: EstateItemListType[] = estateItemArr.itemList
   useEffect(() => {
     getCurrentLocation()
@@ -45,9 +44,7 @@ const EstateItemList = () => {
           </l.EstateItemCardsContainer>
         )
       ) : (
-        <l.EstateListMapContainer>
-          <EstateListMap />
-        </l.EstateListMapContainer>
+        <EstateListMap />
       )}
       {filter && (
         <l.EstateFilterContainer>
