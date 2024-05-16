@@ -22,7 +22,7 @@ const DetailFooter = () => {
     if (id && user.walletAddress) {
       setChatRoomRequestData({
         itemNo: Number(id),
-        userWalletAddress: user.walletAddress,
+        walletAddress: user.walletAddress,
       })
     }
   }, [id, user])
