@@ -10,11 +10,13 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPQLQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 public class ItemRepositoryImpl extends QuerydslRepositorySupport implements ItemRepositoryCustom {
 
     private static final QItem qItem = QItem.item;
@@ -28,15 +30,14 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     @Override
     public List<ListItemInstance> listItemsByFiltering(ListItemReq req) {
         return getListItemsQuery()
-            .where(
-                qItem.transactionStatus.eq(TransactionStatus.READY)
-                    .and(inMap(req.getNorthEastLatitude(), req.getNorthEastLongitude(), req.getSouthWestLatitude(), req.getSouthWestLongitude()))
-                    .and(filterRealEstateType(req.getRealEstateType()))
-                    .and(filterReportRank(req.getReportRank()))
-                    .and(filterTransactionType(req.getTransactionType()))
-                    .and(filterPrice(req.getMinPrice(), req.getMaxPrice()))
-                    .and(filterPyeong(req.getMinPyeong(), req.getMaxPyeong()))
-                    .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
+            .where(inMap(req.getNorthEastLatitude(), req.getNorthEastLongitude(), req.getSouthWestLatitude(), req.getSouthWestLongitude())
+                .and(qItem.transactionStatus.eq(TransactionStatus.READY))
+                .and(filterRealEstateType(req.getRealEstateType()))
+                .and(filterReportRank(req.getReportRank()))
+                .and(filterTransactionType(req.getTransactionType()))
+                .and(filterPrice(req.getMinPrice(), req.getMaxPrice()))
+                .and(filterPyeong(req.getMinPyeong(), req.getMaxPyeong()))
+                .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
             ).fetch();
     }
 
@@ -60,28 +61,28 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
 
     private BooleanExpression filterTransactionType(Integer transactionType) {
         if (Objects.isNull(transactionType) || transactionType == 0) {
-            return qItem.isNotNull();
+            return qItem.transactionType.isNotNull();
         }
-        return qItem.transactionType.eq(Expressions.constant(TransactionType.valueToEnum(transactionType)));
+        return qItem.transactionType.eq(TransactionType.valueToEnum(transactionType));
     }
 
     private BooleanExpression filterReportRank(Integer reportRank) {
         if (Objects.isNull(reportRank) || reportRank == 0) {
-            return qItem.isNotNull();
+            return qItem.reportRank.isNotNull();
         }
-        return qItem.reportRank.eq(Expressions.constant(ReportRank.valueToEnum(reportRank)));
+        return qItem.reportRank.eq(ReportRank.valueToEnum(reportRank));
     }
 
     private BooleanExpression filterRealEstateType(Integer realEstateType) {
         if (Objects.isNull(realEstateType) || realEstateType == 0) {
-            return qItem.isNotNull();
+            return qItem.realEstateType.isNotNull();
         }
-        return qItem.realEstateType.eq(Expressions.constant(RealEstateType.valueToEnum(realEstateType)));
+        return qItem.realEstateType.eq(RealEstateType.valueToEnum(realEstateType));
     }
 
     private BooleanExpression inMap(Double neLat, Double neLng, Double swLat, Double swLng) {
         return qItem.latitude.between(swLat, neLat)
-            .and(qItem.latitude.between(swLng, neLng));
+            .and(qItem.longitude.between(swLng, neLng));
     }
 
     private JPQLQuery<ListItemInstance> getListItemsQuery() {
