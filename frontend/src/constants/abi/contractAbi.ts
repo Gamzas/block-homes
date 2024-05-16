@@ -32,9 +32,9 @@ export const contractABI = [
         type: 'uint256',
       },
       {
-        internalType: 'string[]',
+        internalType: 'string',
         name: '_terms',
-        type: 'string[]',
+        type: 'string',
       },
       {
         internalType: 'bytes32',
@@ -92,9 +92,9 @@ export const contractABI = [
             type: 'uint256',
           },
           {
-            internalType: 'string[]',
+            internalType: 'string',
             name: 'terms',
-            type: 'string[]',
+            type: 'string',
           },
         ],
         internalType: 'struct LongTermRent.ContractInfo',
@@ -184,9 +184,9 @@ export const contractABI = [
     name: 'verifyLandlordSignature',
     outputs: [
       {
-        internalType: 'bool',
+        internalType: 'address',
         name: '',
-        type: 'bool',
+        type: 'address',
       },
     ],
     stateMutability: 'view',
