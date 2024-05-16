@@ -11,6 +11,8 @@ import {
 } from '@/stores/atoms/EstateListStore'
 import EstateItemCard from './EstateItemCard'
 import { EstateItemListType } from '@/types/api/itemType'
+import { publicRequest } from '@/hooks/requestMethods'
+import { API_ESTATE_ITEM } from '@/constants/api'
 
 declare global {
   interface Window {
@@ -39,6 +41,23 @@ const EstateListMap = () => {
 
   useEffect(() => {
     setItem('not')
+    publicRequest
+      .get(`${API_ESTATE_ITEM}`, {
+        params: {
+          northEastLatitude: 35.20793645842205,
+          northEastLongitude: 126.8243731285463,
+          southWestLatitude: 35.167213022923335,
+          southWestLongitude: 126.79021349478826,
+          realEstateType: 0,
+          reportRank: 0,
+          transactionType: 0,
+          minPrice: 0,
+          maxPrice: 0,
+          minPyeong: 0,
+          maxPyeong: 0,
+        },
+      })
+      .then(res => console.log(res))
   }, [])
 
   useEffect(() => {
@@ -74,13 +93,13 @@ const EstateListMap = () => {
       })
       //-----------------------------------
       // 지도의 현재 영역을 얻어옵니다
-      // const bounds = map.getBounds()
-      // // 영역의 남서쪽 좌표를 얻어옵니다
-      // const swLatLng = bounds.getSouthWest()
+      const bounds = map.getBounds()
+      // 영역의 남서쪽 좌표를 얻어옵니다
+      const swLatLng = bounds.getSouthWest()
 
-      // // 영역의 북동쪽 좌표를 얻어옵니다
-      // const neLatLng = bounds.getNorthEast()
-      // console.log(swLatLng, neLatLng)
+      // 영역의 북동쪽 좌표를 얻어옵니다
+      const neLatLng = bounds.getNorthEast()
+      console.log(swLatLng, neLatLng)
       //-----------------------------------
     })
 
