@@ -36,16 +36,24 @@ export const contractABI = [
         name: '_terms',
         type: 'string[]',
       },
+      {
+        internalType: 'bytes32',
+        name: '_r',
+        type: 'bytes32',
+      },
+      {
+        internalType: 'bytes32',
+        name: '_s',
+        type: 'bytes32',
+      },
+      {
+        internalType: 'uint8',
+        name: '_v',
+        type: 'uint8',
+      },
     ],
     stateMutability: 'nonpayable',
     type: 'constructor',
-  },
-  {
-    inputs: [],
-    name: 'payDeposit',
-    outputs: [],
-    stateMutability: 'payable',
-    type: 'function',
   },
   {
     inputs: [],
@@ -94,9 +102,48 @@ export const contractABI = [
         type: 'tuple',
       },
       {
-        internalType: 'bytes32',
-        name: 'contractInfoHash',
-        type: 'bytes32',
+        components: [
+          {
+            internalType: 'bytes32',
+            name: 'r',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'bytes32',
+            name: 's',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'uint8',
+            name: 'v',
+            type: 'uint8',
+          },
+        ],
+        internalType: 'struct LongTermRent.Signature',
+        name: 'tenantSignature',
+        type: 'tuple',
+      },
+      {
+        components: [
+          {
+            internalType: 'bytes32',
+            name: 'r',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'bytes32',
+            name: 's',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'uint8',
+            name: 'v',
+            type: 'uint8',
+          },
+        ],
+        internalType: 'struct LongTermRent.Signature',
+        name: 'landlordSignature',
+        type: 'tuple',
       },
     ],
     stateMutability: 'view',
@@ -110,8 +157,44 @@ export const contractABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'bytes32',
+        name: '_r',
+        type: 'bytes32',
+      },
+      {
+        internalType: 'bytes32',
+        name: '_s',
+        type: 'bytes32',
+      },
+      {
+        internalType: 'uint8',
+        name: '_v',
+        type: 'uint8',
+      },
+    ],
+    name: 'tenantSign',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
     inputs: [],
-    name: 'verifyContract',
+    name: 'verifyLandlordSignature',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'verifyTenantSignature',
     outputs: [
       {
         internalType: 'bool',
