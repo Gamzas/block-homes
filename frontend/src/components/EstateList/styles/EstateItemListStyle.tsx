@@ -36,7 +36,6 @@ export const EstateFilterContainer = styled.div`
 `
 
 export const EstateItemCardsContainer = styled.div`
-  padding-top: 2.5rem;
   padding-bottom: 1rem;
   width: 100%;
 `
