@@ -8,6 +8,8 @@ export const RoomInfoContainer = styled.div`
   justify-content: center;
   width: 100%;
   padding-bottom: 60px;
+  background-color: white;
+  margin-bottom: 1rem;
 `
 
 export const TitleContainer = styled.div`
@@ -60,7 +62,7 @@ export const AdditionalWrapper = styled.div`
 export const AdditionalContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-around;
   .info-box {
     width: 4rem;
     height: 4rem;
