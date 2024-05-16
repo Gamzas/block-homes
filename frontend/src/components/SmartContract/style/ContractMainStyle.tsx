@@ -21,7 +21,7 @@ export const Contract = styled.div`
   .content-box {
     margin-left: 4.7rem;
     display: flex;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     width: 7.5rem;
     height: 1rem;
     font-size: 0.7rem;
@@ -73,5 +73,25 @@ export const Contract = styled.div`
     height: 0.9rem;
     font-size: 0.6rem;
     font-weight: 600;
+  }
+  .content-box7 {
+    display: flex;
+    margin-top: 0.07rem;
+    width: 3rem;
+    margin-left: 17rem;
+    height: 0.9rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    justify-content: space-between;
+  }
+  .content-box8 {
+    display: flex;
+    margin-top: 0.07rem;
+    width: 3rem;
+    margin-left: 11rem;
+    height: 0.9rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    justify-content: space-between;
   }
 `
