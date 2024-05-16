@@ -1,22 +1,22 @@
 import styled from 'styled-components'
 
 interface conditionProps {
-  $condition: string
+  $condition: number
 }
 
-const getOverLayColor = (condition: string) => {
+const getOverLayColor = (condition: number) => {
   switch (condition) {
-    case 'good':
+    case 1:
       return {
         circle: '#845BD3',
         innerCircle: '#D2C5F1',
       }
-    case 'normal':
+    case 2:
       return {
         circle: '#24d0d6',
         innerCircle: '#e9f7f7',
       }
-    case 'bad':
+    case 3:
       return {
         circle: '#FE754E',
         innerCircle: '#FFD8CD',

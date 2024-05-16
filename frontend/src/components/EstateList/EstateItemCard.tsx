@@ -1,33 +1,15 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
 import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
+import { EstateItemListType } from '@/types/api/itemType'
+import { getTransactionType } from '@/utils/estateTransferUtil'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
 import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
+import { numberToKorean } from '@/utils/estateTransferUtil'
+import { getRealEstateType } from '../../utils/estateTransferUtil'
 
-interface PropsType {
-  condition: string
-  address: string
-  infos: string[]
-  leaseType: string
-  price: string
-  roomSize: string
-  roomCount: string
-  createDate: string
-  latitude: number
-  longitude: number
-}
-
-const EstateItemCard = (props: PropsType) => {
-  const {
-    condition,
-    address,
-    infos,
-    leaseType,
-    price,
-    roomSize,
-    roomCount,
-    createDate,
-  } = props
+const EstateItemCard = (props: EstateItemListType) => {
+  const condition = props.reportRank
   const navigate = useNavigate()
   const { getColor, getStatus } = useEstateCondition(condition)
   const mainColor = getColor()?.main
@@ -38,7 +20,7 @@ const EstateItemCard = (props: PropsType) => {
   const setItem = useSetAtom(selectedItemAtom)
   const goDetail = () => {
     // DELETE 백 통신으로 전환 후 삭제하기
-    setItem(props)
+    // setItem(props)
     navigate('/estate-detail')
     // navigate(`/estate-detail/${id}`)
   }
@@ -71,26 +53,36 @@ const EstateItemCard = (props: PropsType) => {
               strokeLinejoin="round"
             />
           </svg>
-          <div className="location-text">{address}</div>
+          <div className="location-text">{props.roadNameAddress}</div>
         </c.LocationContainer>
         <c.ItemImage src="https://i0.wp.com/www.gangnamapt.com/wp-content/uploads/2023/01/20230105_180953_HDR.jpg?resize=480%2C360" />
-
-        <c.ItemInfoContainer $color={mainColor}>
+        {/* <c.ItemInfoContainer $color={mainColor}>
           {infos.map((item, index) => (
             <div key={index} className="info-box">
               {item}
             </div>
           ))}
-        </c.ItemInfoContainer>
+        </c.ItemInfoContainer> */}
         <c.ItemPriceInfoContainer>
           <div className="price-text">
-            {leaseType} {price}
+            {getRealEstateType(props.realEstateType)}
           </div>
-          <div className="info-text">
-            {roomSize} m2 / {roomCount}
-          </div>
+          {props.transactionStatus === 1 ? (
+            <div className="price-text">
+              {getTransactionType(props.transactionType)}
+
+              {numberToKorean(props.price)}
+            </div>
+          ) : (
+            <div className="price-text">
+              {getTransactionType(props.transactionType)}
+              {numberToKorean(props.price)} /{' '}
+              {numberToKorean(props.monthlyPrice)}
+            </div>
+          )}
+          <div className="info-text">{props.area} m2</div>
           <div className="info-text">6층</div>
-          <div className="info-text">등록일자 {createDate}</div>
+          {/* <div className="info-text">등록일자 {createDate}</div> */}
         </c.ItemPriceInfoContainer>
         <c.BackgroundContainer>
           <div className="back-wrapper">

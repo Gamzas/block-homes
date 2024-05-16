@@ -70,7 +70,7 @@ export interface EstateItemListType {
   longitude: number
 }
 
-export interface EsetateItemResType {
+export interface EstateItemResType {
   itemList: EstateItemListType[]
   count: number
 }

@@ -12,12 +12,15 @@ import {
 } from '@/stores/atoms/EstateListStore'
 import EstateListMap from './EstateListMap'
 import NoItems from '@common/NoItems'
+import { EstateItemListType } from '@/types/api/itemType'
 
 const EstateItemList = () => {
   const { getCurrentLocation } = useCurrentLocation()
   const [filter] = useAtom(filterAtom)
   const [menu] = useAtom(mapAtom)
-  const [estateItemList] = useAtom(estateItemListAtom)
+  const [estateItemArr] = useAtom(estateItemListAtom)
+  console.log(estateItemArr)
+  const estateItemList: EstateItemListType[] = estateItemArr.itemList
   useEffect(() => {
     getCurrentLocation()
   }, [])

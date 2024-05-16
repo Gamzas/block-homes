@@ -15,7 +15,7 @@ import CustomModal from '@/common/CustomModal'
 import {
   deployContract,
   getContractInstance,
-  payDeposit,
+  getMessageHash,
 } from '@/abi/userSmartContract/DeployLongTermRentContract'
 import { ethers } from 'ethers'
 import { userAtom } from '@stores/atoms/userStore'
@@ -56,19 +56,20 @@ const SmartContractPage = () => {
   const handleClose = () => setOpen(false)
   const dummyData = {
     // 임대인 지갑주소
-    landlordDID: '0x6A81426736fa17f8d6e4daf982F69969c420347F',
+    landlordDID: '0xeD739565D59219A4bDac5A958A803ec4bdD07b45',
     // 임차인 지갑주소
-    tenantDID: '0x9F9CA159B609bc5d54674d857426e7d5186E513F',
+    tenantDID: '0xdcb514da532854cA22F07920515f275217d15c6e',
     leasePeriod: 12,
     deposit: ethers.utils.parseEther('1.0').toString(), // 1 ETH in wei // 보증금
     propertyDID: 'did:example:abcdef123456789', // 부동산의 분산식 식별자
     contractDate: Math.floor(Date.now() / 1000), // Current Unix timestamp
-    terms: ['No smoking', 'No pets'],
+    terms: [
+      '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다.',
+      '계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다.',
+      '만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다.',
+      '만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다.',
+    ],
   }
-
-  // // 여기 변경 필요
-  // const privateKey =
-  //   '0x094221b92b0197f6eae4952006599011951104c4f48ae7af301ef319b7109e73'
 
   const handlePasswordConfirm = (password: string) => {
     setPassword(password)
@@ -87,6 +88,18 @@ const SmartContractPage = () => {
         getWalletData.data.encPrivateKey,
         password,
       )
+
+      // 1.5서명할 메시지 준비 (예시: "임대 계약 승인")
+
+      const messageHash = getMessageHash(dummyData)
+
+      // 메시지에 대한 서명 생성
+      const signature = await userWallet.signMessage(
+        ethers.utils.arrayify(messageHash),
+      )
+      // 서명을 r, s, v로 분할
+      const sig = ethers.utils.splitSignature(signature)
+
       // 2. 이더리움 네트워크 연결
       const provider = new ethers.providers.JsonRpcProvider(
         BLOCK_CHAIN_ENDPOINT,
@@ -103,6 +116,7 @@ const SmartContractPage = () => {
         dummyData.propertyDID,
         dummyData.contractDate,
         dummyData.terms,
+        sig,
       )
 
       console.log()

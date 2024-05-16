@@ -41,12 +41,15 @@ contract RealEstateDIDRegistry is Ownable {
         string calldata _roadNameAddress,
         string calldata _buildingName,
         uint16  _buildingNumber,
-        uint16  _roomNumber) external onlyOwner {
+        uint16  _roomNumber,
+        bool _isViolated,
+        bool _isNotPermitted,
+        uint8 _estateType,
+        string memory _area,
+        uint16 _date,
+        string memory _purpose) external onlyOwner {
         RealEstateInfo realEstateInfo = new RealEstateInfo(
-        _roadNameAddress,
-        _buildingName,
-        _buildingNumber,
-         _roomNumber);
+        _roadNameAddress,_buildingName, _buildingNumber,_roomNumber,_isViolated,_isNotPermitted,_estateType,_area,_date,_purpose);
         address identifier = address(realEstateInfo);
         DIDDocument memory didDocument;
         didDocument.id = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(identifier)), 20)));
