@@ -5,7 +5,7 @@ export const EstateMapContainer = styled.div`
   height: 100%;
   position: relative;
   z-index: 0;
-  margin-top: 2.5rem;
+  margin-top: 0rem;
 `
 
 export const DetailCardContainer = styled.div`
