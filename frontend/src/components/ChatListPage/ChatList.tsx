@@ -18,10 +18,12 @@ const ChatList = () => {
     useState<fetchChatRoomsRequestType>()
 
   useEffect(() => {
-    setChatRoomRequestData({
-      mode: userType.type + 1,
-      walletAddress: user.walletAddress,
-    })
+    if (user.walletAddress) {
+      setChatRoomRequestData({
+        mode: userType.type + 1,
+        walletAddress: user.walletAddress,
+      })
+    }
   }, [userType, user])
 
   const { data, isLoading } = useQuery<ChatRoomListType[]>({
