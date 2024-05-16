@@ -10,6 +10,8 @@ import { userAtom } from '@stores/atoms/userStore'
 import { usePostWallet } from '@apis/walletApi'
 import { ethers } from 'ethers'
 import { useNavigate } from 'react-router-dom'
+import IsLoading from '@common/IsLoading'
+import SecurityLock from '@assets/lotties/SecurityLock.json'
 
 const EncryptionWallet = ({
   name,
@@ -29,11 +31,13 @@ const EncryptionWallet = ({
   const [isPasswordMatch, setIsPasswordMatch] = useState(true)
   const { mutate: createDIDDocumentMutate } = useCreateDIDDocument()
   const { mutate: postWalletMutate } = usePostWallet()
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleEncryptionWalletButtonClick = async () => {
     if (isPasswordMatch) {
       try {
         // Wallet 암호화 시도
+        setIsLoading(true)
         const encryptedWallet = await wallet.encrypt(password)
         setPassword('')
         setConfirmPassword('')
@@ -114,6 +118,12 @@ const EncryptionWallet = ({
       >
         지갑 암호화
       </SignInButton>
+      {isLoading && (
+        <IsLoading
+          textProps={'입력하신 비밀번호로\n지갑을 **암호화**하는 중입니다.'}
+          lottieProps={SecurityLock}
+        />
+      )}
     </>
   )
 }
