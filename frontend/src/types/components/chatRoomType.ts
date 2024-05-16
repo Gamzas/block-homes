@@ -24,3 +24,13 @@ export interface ChatRoomCheckResponseType {
     chatRoomNo?: number
   }
 }
+
+export interface FetchChChatRoomResponseType {
+  data?: {
+    representativeImage: string
+    address: string
+    transactionType: number
+    price: number
+    realEstateNo: number
+  }
+}
