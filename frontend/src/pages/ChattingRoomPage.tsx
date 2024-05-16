@@ -10,6 +10,8 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
 import { Client } from '@stomp/stompjs'
 import MessageItem from '@components/ChattingPage/MessageItem'
+import { API_BASE_URL } from '@constants/api'
+import SockJS from 'sockjs-client'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -32,15 +34,49 @@ const ChattingRoomPage = () => {
   const [newMessage, setNewMessage] = useState<MessageType>(defaultMessage)
   const scrollRef = useRef<HTMLDivElement>(null)
   const client = useRef<Client | null>(null)
+
   const scrollToBottom = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
   }
 
+  const connectHandler = () => {
+    const SockJs = SockJS(API_BASE_URL + '/ws/chat')
+    client.current = new Client({
+      webSocketFactory: () => SockJs,
+      debug: str => console.log(str),
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        client.current?.subscribe(`/pub/chat.talk.${chatRoomNo}`, msg => {
+          const receivedMessage = JSON.parse(msg.body)
+          setMessages(prevMessages => [
+            ...prevMessages,
+            {
+              chatNo: receivedMessage.chatNo,
+              chatRoomNo: 0,
+              senderWalletAddress: receivedMessage.senderWalletAddress,
+              senderName: user.name,
+              messageType: receivedMessage.messageType,
+              image: '',
+              contractStep: receivedMessage.contractStep,
+              message: receivedMessage.message,
+              createdAt: receivedMessage.createdAt,
+            },
+          ])
+          scrollToBottom()
+        })
+      },
+      onStompError: frame => console.log(frame.headers.message),
+    })
+    client.current?.activate()
+  }
+
   useEffect(() => {
     if (chatRoomNo && user.walletAddress) {
-      setChatRoomNumber(chatRoomNumber)
+      setChatRoomNumber(Number(chatRoomNo))
     }
   }, [chatRoomNo, user])
 
@@ -48,6 +84,14 @@ const ChattingRoomPage = () => {
     queryKey: ['fetchChatRoomDetail', chatRoomNumber],
     queryFn: () => fetchChatRoomDetail(chatRoomNumber),
   })
+
+  useEffect(() => {
+    connectHandler()
+    return () => {
+      client.current?.deactivate()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data])
 
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
@@ -64,6 +108,10 @@ const ChattingRoomPage = () => {
       scrollToBottom()
     }
   }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   return (
     <c.ChattingRoomPageContainer>
