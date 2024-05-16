@@ -106,7 +106,7 @@ const EstateList = [
 ]
 
 // 전체 부동산 매물
-export const estateItemListAtom = atom<EstateItem[] | null>([])
+export const estateItemListAtom = atom<EstateItem[] | null>(EstateList)
 
 // 선택된 부동산 매물
 export const selectedItemAtom = atomWithStorage<EstateItem | 'not'>(
