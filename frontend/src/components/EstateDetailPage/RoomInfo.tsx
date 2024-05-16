@@ -1,36 +1,54 @@
 import * as r from '@components/EstateDetailPage/style/RoomInfoStyle'
 import Location from './Location'
-import { EstateItem } from '@/types/components/estateListType'
+import { DetailItemType } from '@/types/components/estateListType'
 import TransactionProcedure from './TransactionProcedure'
+import { getRealEstateType } from '@/utils/estateTransferUtil'
 
 interface PropsType {
-  info: EstateItem
+  info: DetailItemType
 }
 
-// TODO 매물별 방 정보 출력 수정하기!!
 const RoomInfo = (props: PropsType) => {
   const { latitude, longitude } = props.info
+  const info = props.info
   const infoItems = [
-    { icon: 'count', info: '원룸' },
-    { icon: 'area', info: '방1 화1' },
-    { icon: 'detail', info: '28.75m2' },
-    { icon: 'floor', info: '2층' },
+    { icon: 'count', info: getRealEstateType(info.realEstateType) },
+    { icon: 'area', info: `방 ${info.roomNumber} 화 ${info.toiletNumber}` },
+    { icon: 'detail', info: `${info.area}m2` },
+    {
+      icon: 'floor',
+      info:
+        info.itemFloor !== 0
+          ? `${info.itemFloor} 층 / ${info.buildingFloor} 층`
+          : '단독',
+    },
+    { icon: 'detail', info: `관리비 ${info.administrationCost}` },
+    { icon: 'detail', info: `${info.area}m2` },
+  ]
+
+  const adminFeeInfo = [
+    { icon: 'air', name: '전기' },
+    { icon: 'refrigerator', name: '가스' },
+    { icon: 'washing-machine', name: '수도' },
+    { icon: 'parking', name: '인터넷' },
+    { icon: 'air', name: 'TV' },
   ]
 
   const additionalInfo = [
-    { icon: 'parking', name: '주차 가능' },
-    { icon: 'washing-machine', name: '세탁기' },
-    { icon: 'refrigerator', name: '냉장고' },
     { icon: 'air', name: '에어컨' },
+    { icon: 'refrigerator', name: '냉장고' },
+    { icon: 'washing-machine', name: '세탁기' },
+    { icon: 'parking', name: '가스레인지' },
+    { icon: 'air', name: '인덕션' },
+    { icon: 'air', name: '전자레인지' },
+    { icon: 'air', name: '책상' },
+    { icon: 'air', name: '책장' },
+    { icon: 'air', name: '침대' },
+    { icon: 'air', name: '옷장' },
+    { icon: 'air', name: '신발장' },
+    { icon: 'air', name: '싱크대' },
   ]
 
-  const activateInfo = [true, true, false, true]
-
-  const detailText = `⭐ 특징 ⭐ 
-  - 1룸 오픈형 구조입니다- 화이트톤 깨끗함의 정석~! 올리모델링 
-  ⭐ 위치 ⭐
-  - 신사동 가로수길 블럭입니다- 신사/압구정 도보거리 이용가능
-  `
   return (
     <r.RoomInfoContainer>
       <r.TitleContainer>
@@ -55,28 +73,27 @@ const RoomInfo = (props: PropsType) => {
       </r.TitleContainer>
       <r.AdditionalWrapper>
         <r.AdditionalContainer>
-          {additionalInfo.map(
+          {info.itemAdditionalOptionList.map(
             (info, index) =>
-              activateInfo[index] && (
+              additionalInfo[info - 1] && (
                 <div className="info-box" key={index}>
                   <img
                     className="icon"
-                    src={`/icon/icon_room_info_${info.icon}.png`}
-                    alt={`${info.icon} icon`}
+                    src={`/icon/icon_room_info_${additionalInfo[info - 1].icon}.png`}
+                    alt={`${additionalInfo[info - 1].icon} icon`}
                   />
-                  <div className="name">{info.name}</div>
+                  <div className="name">{additionalInfo[info - 1].name}</div>
                 </div>
               ),
           )}
         </r.AdditionalContainer>
       </r.AdditionalWrapper>
-
       <r.TitleContainer>
         <div className="title">상세 설명</div>
         <hr className="underline" />
       </r.TitleContainer>
       <r.DetailContainer>
-        <p className="detail-text">{detailText}</p>
+        <p className="detail-text">{info.description}</p>
       </r.DetailContainer>
       <r.TitleContainer>
         <div className="title">거래 절차</div>
