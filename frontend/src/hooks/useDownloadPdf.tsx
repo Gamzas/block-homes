@@ -3,7 +3,6 @@ import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 
 const useDownloadPDF = () => {
-  console.log('pdf다운로드')
   const downloadPDF = useCallback(
     async (elementId, fileName = 'download.pdf') => {
       const element = document.getElementById(elementId)
