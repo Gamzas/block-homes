@@ -5,31 +5,38 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract TaxPayment is Ownable {
 
-    address payable private taxAccount;
+    address payable private payerAccount;
 
-    constructor(address _owner) Ownable(_owner) {
-        taxAccount = payable(0xcd48B32650621694240FAFB2D467CdB52fd95795);
+    constructor(address _payerAddress) Ownable(msg.sender) {
+        payerAccount=payable(_payerAddress);
     }
 
+    event PropertyTaxPaid(uint256 klay);
     event AcquisitionTaxPaid(uint256 klay);
     event CapitalGainsTaxPaid(uint256 klay);
 
-    function payAcquisitionTax() external payable onlyOwner {
+    function payPropertyTax() external payable {
         require(msg.value > 0, "You need to send some KLAY");
-        (bool sent, ) = taxAccount.call{value: msg.value}("");
+        require(msg.sender==payerAccount, "Incorrect Contract Address");
+        (bool sent, ) = owner().call{value: msg.value}("");
+        require(sent, "Failed to send KLAY to the tax account");
+        emit PropertyTaxPaid(msg.value);
+    }
+
+    function payAcquisitionTax() external payable {
+        require(msg.value > 0, "You need to send some KLAY");
+        require(msg.sender==payerAccount, "Incorrect Contract Address");
+        (bool sent, ) = owner().call{value: msg.value}("");
         require(sent, "Failed to send KLAY to the tax account");
         emit AcquisitionTaxPaid(msg.value);
     }
 
-    function payCapitalGainsTax() external payable onlyOwner {
+    function payCapitalGainsTax() external payable {
         require(msg.value > 0, "You need to send some KLAY");
-        (bool sent, ) = taxAccount.call{value: msg.value}("");
+        require(msg.sender==payerAccount, "Incorrect Contract Address");
+        (bool sent, ) = owner().call{value: msg.value}("");
         require(sent, "Failed to send KLAY to the tax account");
         emit CapitalGainsTaxPaid(msg.value);
-    }
-
-    function setBankAccount(address payable _newTaxAccount) public onlyOwner {
-        taxAccount = _newTaxAccount;
     }
 
 }
