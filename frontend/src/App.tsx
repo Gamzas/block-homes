@@ -50,7 +50,7 @@ const HomeRoutes = () => (
     <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
     <Route path="/likes" element={<FavoriteItemsPage />} />
     <Route path="/myestate" element={<MyEstatePage />} />
-    <Route path="/test" element={<TestPage />} />
+    <Route path="/test/:testName" element={<TestPage />} />
   </Routes>
 )
 
