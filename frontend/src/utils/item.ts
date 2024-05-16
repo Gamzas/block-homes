@@ -3,15 +3,15 @@ export const itemList = {
     {
       itemNo: 0,
       realEstateDID: 'string',
-      roadNameAddress: '장신로 20번길 13-12',
-      transactionType: 1,
+      roadNameAddress: '광주 광산구 장신로 20번길 13-12',
+      transactionType: 1, // 월세
       realEstateType: 3,
       reportRank: 2,
-      transactionStatus: 2, // 전세
+      transactionStatus: 2,
       area: 37,
       pyeong: 8,
       price: 30000000,
-      monthlyPrice: 0, // 전세라 월세 0
+      monthlyPrice: 100000, // 전세라 월세 0
       administrationCost: 100000,
       contractMonths: 12,
       latitude: 35.1900186143141,
@@ -21,14 +21,14 @@ export const itemList = {
       itemNo: 1,
       realEstateDID: 'string',
       roadNameAddress: '광주 광산구 풍영로229번안길 2-14',
-      transactionType: 1,
+      transactionType: 1, //월세
       realEstateType: 3,
       reportRank: 1,
       transactionStatus: 3,
       area: 37,
       pyeong: 8,
       price: 30000000,
-      monthlyPrice: 0, // 매매라 월세 0
+      monthlyPrice: 200000, // 매매라 월세 0
       administrationCost: 100000,
       contractMonths: 0, // 매매라 계약기간 0
       latitude: 35.1932646047073,
