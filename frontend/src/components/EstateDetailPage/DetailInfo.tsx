@@ -42,8 +42,8 @@ const DetailInfo = () => {
       {selectedItem !== 'not' && (
         <>
           <DetailTabMenu />
-          <ItemSafetyCard condition={selectedItem.condition} />
-          <RoomInfo info={selectedItem} />
+          {/* <ItemSafetyCard condition={selectedItem.reportRank} />
+          <RoomInfo info={selectedItem} /> */}
           <DetailFooter />
         </>
       )}
