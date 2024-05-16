@@ -86,8 +86,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
 
     private JPQLQuery<ListItemInstance> getListItemsQuery() {
         return from(qItem)
-            .innerJoin(qItem, qItemImage.item)
-            .innerJoin(qItemImage.image, qImage)
+            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
+            .innerJoin(qImage).on(qItemImage.image.eq(qImage))
             .select(
             Projections.constructor(ListItemInstance.class,
                 qItem.itemNo,
