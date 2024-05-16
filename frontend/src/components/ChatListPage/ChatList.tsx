@@ -40,6 +40,7 @@ const ChatList = () => {
           src={'image/image_sad_pig.png'}
           alarmText={'현재 진행중인 채팅방이 없어요.'}
         />
+        <UserTypeToggle />
       </c.ChatListContainer>
     )
   }
