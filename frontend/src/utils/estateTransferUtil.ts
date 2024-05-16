@@ -25,9 +25,9 @@ export const getReportRank = (type: number): string => {
     case 1:
       return '안전'
     case 2:
-      return '전세'
+      return '보통'
     case 3:
-      return '매매'
+      return '위험'
   }
 }
 

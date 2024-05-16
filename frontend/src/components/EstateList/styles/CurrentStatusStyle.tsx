@@ -17,9 +17,9 @@ export const CurrentStatusContainer = styled.div`
 `
 export const CurrentLocationContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 5rem;
+  width: 6rem;
+  left: 0.3rem;
   height: 100%;
   flex-shrink: 0;
   position: relative;

@@ -47,6 +47,7 @@ const ItemList = () => {
     queryKey: ['favoriteItem'],
     queryFn: () => getFavoriteItem(wallet.walletAddress),
   })
+
   // 데이터 로딩 상태 확인
   if (isLoading) {
     return (
@@ -62,7 +63,6 @@ const ItemList = () => {
     alert('error')
     return <div>Error fetching data</div>
   }
-  console.log(data.likedItems)
 
   // TODO 서버 연결 시 찜한 목록 아래 변수 사용하기!
   // const [favoriteItems, setFavoriteItems] = useState(FavoriteItems) // 상태에 초기 아이템 목록을 저장합니다.

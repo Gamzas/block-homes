@@ -5,6 +5,7 @@ import { chatRoomRequestDataType } from '@/types/components/chatRoomType'
 import { userAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
+import { useDeleteFavoriteItem, usePostFavoriteItem } from '@/apis/itemApi'
 
 const DetailFooter = () => {
   const { realEstateNo } = useParams()
@@ -13,6 +14,9 @@ const DetailFooter = () => {
   const navigate = useNavigate()
   const [chatRoomRequestData, setChatRoomRequestData] =
     useState<chatRoomRequestDataType>()
+
+  const { mutate: postFavorite } = usePostFavoriteItem()
+  const { mutate: deleteFavorite } = useDeleteFavoriteItem()
 
   useEffect(() => {
     setChatRoomRequestData({
@@ -41,9 +45,24 @@ const DetailFooter = () => {
     }
   }
 
+  const handleLikeBtn = () => {
+    if (isLiked) {
+      deleteFavorite({
+        walletAddress: user.walletAddress,
+        itemNo: 3,
+      })
+    } else {
+      postFavorite({
+        walletAddress: user.walletAddress,
+        itemNo: 3,
+      })
+    }
+    setIsLiked(!isLiked)
+  }
+
   return (
     <f.FooterContainer>
-      <f.LikendBtn onClick={() => setIsLiked(!isLiked)}>
+      <f.LikendBtn onClick={handleLikeBtn}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

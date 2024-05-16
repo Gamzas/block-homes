@@ -65,11 +65,21 @@ export interface EstateItemListType {
   price: number
   monthlyPrice: number
   administrationCost: number
-  contractMonths : number
+  contractMonths: number
   latitude: number
   longitude: number
 }
+
 export interface EsetateItemResType {
   itemList: EstateItemListType[]
   count: number
+}
+
+export interface GetFavoritItemParamsType {
+  userAddress: string
+  localDateTime: string
+}
+export interface PostFavoriteDataType {
+  walletAddress: string
+  itemNo: number
 }
