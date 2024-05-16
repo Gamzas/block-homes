@@ -29,6 +29,7 @@ export const useClaimCredential = () => {
         to: contract.address,
         value: ethers.constants.Zero,
         data: data,
+        gasLimit: ethers.utils.hexlify(200000),
       }
 
       // 트랜잭션 발송 및 수신 확인
@@ -36,5 +37,6 @@ export const useClaimCredential = () => {
       const receipt = await sentTx.wait()
       console.log('receipt', receipt)
     },
+    onError: error => console.error(error),
   })
 }
