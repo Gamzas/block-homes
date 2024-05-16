@@ -24,6 +24,7 @@ import ChattingRoomPage from '@pages/ChattingRoomPage'
 import MyEstatePage from './pages/MyEstatePage'
 import InfoReportPage from '@pages/InfoReportPage'
 import ScrollToTop from '@hooks/ScrollToTop'
+import TestPage from '@pages/TestPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -49,6 +50,7 @@ const HomeRoutes = () => (
     <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
     <Route path="/likes" element={<FavoriteItemsPage />} />
     <Route path="/myestate" element={<MyEstatePage />} />
+    <Route path="/test" element={<TestPage />} />
   </Routes>
 )
 

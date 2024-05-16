@@ -2,10 +2,10 @@ import { useState } from 'react'
 import * as d from '@components/EstateRegistrationPage/style/DetailRegistrationStyle'
 
 const DetailRegistration = ({
-  detailRegistrationProps,
-  setDetailRegistrationProps,
-}) => {
-  const types = ['매매', '전세', '월세']
+                              detailRegistrationProps,
+                              setDetailRegistrationProps,
+                            }) => {
+  const types = ['월세', '전세', '매매']
   const costTypes = ['전기', '가스', '수도', '인터넷', 'TV']
   const [selectedTypeIndex, setSelectedTypeIndex] = useState(null)
   const [selectedTypes, setSelectedTypes] = useState(
