@@ -30,8 +30,8 @@ const MoreFunctionCollection = () => {
 
   return (
     <m.MoreFunctionCollectionContainer>
-      {moreFunctionDatas.map(moreFunctionData => (
-        <m.MoreFunctionData>
+      {moreFunctionDatas.map((moreFunctionData, index) => (
+        <m.MoreFunctionData key={index}>
           <div
             className="more-function-data-image-container"
             onClick={() => {
