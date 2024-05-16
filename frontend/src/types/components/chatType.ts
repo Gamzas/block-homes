@@ -2,13 +2,13 @@ import React from 'react'
 
 export type MessageType = {
   chatNo: number
-  createdAt: string
-  isRead: boolean
+  chatRoomNo: number
+  senderWalletAddress: string
+  senderName: string
+  messageType: number
+  image: string
+  contractStep: number
   message: string
-  type: number | null
-  userImage: string | null
-  userName: string
-  userWalletAddress: string
 }
 
 export interface SendMessageInputPropsType {
