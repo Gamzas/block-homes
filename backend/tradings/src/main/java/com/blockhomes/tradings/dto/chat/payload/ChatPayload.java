@@ -1,5 +1,7 @@
 package com.blockhomes.tradings.dto.chat;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -9,9 +11,14 @@ import lombok.*;
 @AllArgsConstructor
 public class ChatPayload {
 
+    @NotBlank
     private String senderWalletAddress;
+
+    @NotNull
     private Integer senderRole;
+
     private String message;
+
     private String imageBase64;
 
 }
