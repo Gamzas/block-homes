@@ -140,6 +140,5 @@ export const ItemCardWrapper = styled.div`
   height: auto; // 적절히 조정 필요
   display: flex;
   justify-content: center;
-  /* border: 1px solid red; */
   padding-bottom: 0.5rem;
 `
