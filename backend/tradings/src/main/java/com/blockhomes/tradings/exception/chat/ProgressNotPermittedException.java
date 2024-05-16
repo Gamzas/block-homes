@@ -1,7 +1,7 @@
 package com.blockhomes.tradings.exception.chat;
 
 import com.blockhomes.tradings.entity.chat.ContractStep;
-import com.blockhomes.tradings.entity.chat.RoleCategory;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

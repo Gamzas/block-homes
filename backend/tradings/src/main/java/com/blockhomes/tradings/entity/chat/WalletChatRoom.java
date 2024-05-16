@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.entity.chat;
 
 import com.blockhomes.tradings.entity.common.BaseEntity;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

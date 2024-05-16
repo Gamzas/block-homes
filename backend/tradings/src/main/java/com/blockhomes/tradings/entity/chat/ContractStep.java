@@ -1,10 +1,10 @@
 package com.blockhomes.tradings.entity.chat;
 
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
 import java.util.Objects;
 
 @Getter

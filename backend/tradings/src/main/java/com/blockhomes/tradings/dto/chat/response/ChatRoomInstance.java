@@ -1,11 +1,9 @@
 package com.blockhomes.tradings.dto.chat.response;
 
-import com.blockhomes.tradings.entity.chat.RoleCategory;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.item.enums.ReportRank;
 import com.blockhomes.tradings.entity.item.enums.TransactionType;
 import lombok.*;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

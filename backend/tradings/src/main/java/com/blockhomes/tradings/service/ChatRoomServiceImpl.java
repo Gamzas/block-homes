@@ -8,7 +8,7 @@ import com.blockhomes.tradings.dto.chat.response.CreateChatRoomRes;
 import com.blockhomes.tradings.dto.chat.response.DetailChatRoomRes;
 import com.blockhomes.tradings.dto.chat.response.ListChatRoomsRes;
 import com.blockhomes.tradings.entity.chat.ChatRoom;
-import com.blockhomes.tradings.entity.chat.RoleCategory;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.chat.WalletChatRoom;
 import com.blockhomes.tradings.entity.item.Item;
 import com.blockhomes.tradings.entity.wallet.Wallet;
