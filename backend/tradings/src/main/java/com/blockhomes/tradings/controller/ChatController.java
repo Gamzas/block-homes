@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.controller;
 
 import com.blockhomes.tradings.dto.chat.ChatPayload;
+import com.blockhomes.tradings.dto.chat.response.ChatRes;
 import com.blockhomes.tradings.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +20,21 @@ public class ChatController {
     private final RabbitTemplate rabbitTemplate;
 
     @MessageMapping("chat.enter.{chatRoomNo}")
-    public MessageInfo enterUser(@DestinationVariable("chatRoomNo") Integer chatRoomNo,
-                                 @Payload ChatPayload chatPayload) {
-
+    public ChatRes enterUser(@DestinationVariable Integer chatRoomNo, @Payload ChatPayload chatPayload) {
+        return ChatRes.builder().build();
     }
 
+    @MessageMapping("chat.talk.{chatRoomNo}")
+    public ChatRes chatTalk(@DestinationVariable Integer chatRoomNo, @Payload ChatPayload chatPayload) {
+        return ChatRes.builder().build();
+    }
 
+    @MessageMapping("chat.progress.{chatRoomNo}")
+    public ChatRes chatImage(@DestinationVariable Integer chatRoomNo, @Payload ChatPayload chatPayload) {
+        return ChatRes.builder().build();
+    }
+
+//    @MessageMapping("chat.signature.{chatRoomNo}")
 
 
 }
