@@ -1,7 +1,7 @@
 import * as f from '@components/EstateDetailPage/style/DetailFooterStyle'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { chatRoomRequestDataType } from '@/types/components/chatRoomType'
+import { ChatRoomRequestDataType } from '@/types/components/chatRoomType'
 import { userAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
@@ -18,7 +18,7 @@ const DetailFooter = (props: PropsType) => {
   const [isLiked, setIsLiked] = useState(false)
   const navigate = useNavigate()
   const [chatRoomRequestData, setChatRoomRequestData] =
-    useState<chatRoomRequestDataType>()
+    useState<ChatRoomRequestDataType>()
 
   const { mutate: postFavorite } = usePostFavoriteItem()
   const { mutate: deleteFavorite } = useDeleteFavoriteItem()
