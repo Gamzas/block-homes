@@ -29,7 +29,7 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     public List<ListItemInstance> listItemsByFiltering(ListItemReq req) {
         return getListItemsQuery()
             .where(
-                qItem.transactionStatus.eq(Expressions.constant(TransactionStatus.READY))
+                qItem.transactionStatus.eq(TransactionStatus.READY)
                     .and(inMap(req.getNorthEastLatitude(), req.getNorthEastLongitude(), req.getSouthWestLatitude(), req.getSouthWestLongitude()))
                     .and(filterRealEstateType(req.getRealEstateType()))
                     .and(filterReportRank(req.getReportRank()))

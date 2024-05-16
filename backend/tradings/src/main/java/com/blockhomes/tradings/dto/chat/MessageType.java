@@ -8,10 +8,7 @@ import lombok.Getter;
 public enum MessageType {
     ENTER(1),
     TALK(2),
-    SELLER_PROGRESS(3),
-    BUYER_PROGRESS(4),
-    ACCEPT(5),
-    CONTRACT_DEAL(6);
+    INFO(3);
 
     private final Integer value;
 
