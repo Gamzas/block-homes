@@ -10,36 +10,25 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatRes {
+public class ProgressRes {
 
-    private Integer chatNo;
     private Integer chatRoomNo;
-    private String senderWalletAddress;
-    private String senderName;
     private Integer messageType;
-    private String image;
     private Integer contractStep;
+    private String message;
     private LocalDateTime createdAt;
 
     @Builder
-    public ChatRes(
-        Integer chatNo,
+    public ProgressRes(
         Integer chatRoomNo,
-        String senderWalletAddress,
-        String senderName,
         MessageType messageType,
-        String image,
         ContractStep contractStep,
-        LocalDateTime createdAt
-    ) {
-        this.chatNo = chatNo;
+        String message,
+        LocalDateTime createdAt) {
         this.chatRoomNo = chatRoomNo;
-        this.senderWalletAddress = senderWalletAddress;
-        this.senderName = senderName;
         this.messageType = MessageType.enumToValue(messageType);
-        this.image = image;
         this.contractStep = ContractStep.enumToValue(contractStep);
+        this.message = message;
         this.createdAt = createdAt;
     }
-
 }
