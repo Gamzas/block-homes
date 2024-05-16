@@ -74,10 +74,10 @@ const ChattingRoomPage = () => {
       />
       <c.ChattingHeader>
         매물 정보
-        <div>{data.representativeImage}</div>
-        <div>{data.realEstateAddress}</div>
-        <div>{data.transactionType}</div>
-        <div>{data.price}</div>
+        {/*<div>{data.representativeImage}</div>*/}
+        {/*<div>{data.realEstateAddress}</div>*/}
+        {/*<div>{data.transactionType}</div>*/}
+        {/*<div>{data.price}</div>*/}
         <button>매물 레포트 보러가기</button>
         <button>매물 체크리스트 보러가기</button>
         <button>매물 거래 현황 보러가기</button>
