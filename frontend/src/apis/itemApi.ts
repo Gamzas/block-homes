@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import {
+  API_ESTATE_DETAIL,
   API_ESTATE_ITEM,
   API_FAVORITE_ITEM,
   API_HEADERS_FORM_DATA,
@@ -20,10 +21,18 @@ export const usePostItemRegister = () => {
   })
 }
 
-// 등록 된 매물 조회,상세 조회
+// 등록 된 매물 조회
 export const getEstateItems = async (data: EstateItemReqType) => {
   const res = await publicRequest.get(`${API_ESTATE_ITEM}`, { data })
   return res.data
+}
+
+// 매물 상세 조회
+export const useGetDetailItem = (itemNum: number) => {
+  return useQuery({
+    queryKey: ['detailItem'],
+    queryFn: () => publicRequest.get(`${API_ESTATE_DETAIL}/${itemNum}`),
+  })
 }
 
 // 찜 목록 조회
