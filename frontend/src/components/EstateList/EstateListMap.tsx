@@ -10,6 +10,7 @@ import {
   selectedItemAtom,
 } from '@/stores/atoms/EstateListStore'
 import EstateItemCard from './EstateItemCard'
+import { EstateItemListType } from '@/types/api/itemType'
 
 declare global {
   interface Window {
@@ -25,7 +26,9 @@ const EstateListMap = () => {
   const [coord] = useAtom(currentCoordAtom)
 
   // 부동산 매물 리스트
-  const [estateItemList] = useAtom(estateItemListAtom)
+  const [estateItemArr] = useAtom(estateItemListAtom)
+  const estateItemList: EstateItemListType[] = estateItemArr.itemList
+
   // 상세보기 선택한 부동산
   const [item, setItem] = useAtom(selectedItemAtom)
 
@@ -33,7 +36,7 @@ const EstateListMap = () => {
   const handleDetailCardClose = () => {
     setItem('not')
   }
-  
+
   useEffect(() => {
     setItem('not')
   }, [])
@@ -103,10 +106,10 @@ const EstateListMap = () => {
           )
           const overlayDiv = document.createElement('div')
           overlayDiv.innerHTML = renderToString(
-            <CustomOverlay condition={estateItem.condition} />,
+            <CustomOverlay condition={estateItem.reportRank} />,
           )
           const handleOverlayClick = () => {
-            setItem(estateItem)
+            // setItem(estateItem)
           }
 
           const customOverlay = new kakao.maps.CustomOverlay({
@@ -134,7 +137,7 @@ const EstateListMap = () => {
         {item !== 'not' && (
           <e.DetailCardContainer id="card-container">
             <div className="card-background" onClick={handleDetailCardClose} />
-            <EstateItemCard {...item} />
+            {/* <EstateItemCard {...item} /> */}
           </e.DetailCardContainer>
         )}
       </e.EstateMapContainer>
