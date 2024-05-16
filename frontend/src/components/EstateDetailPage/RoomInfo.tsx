@@ -3,6 +3,7 @@ import Location from './Location'
 import { DetailItemType } from '@/types/components/estateListType'
 import TransactionProcedure from './TransactionProcedure'
 import { getRealEstateType } from '@/utils/estateTransferUtil'
+import { numberToMoney } from './../../utils/estateTransferUtil'
 
 interface PropsType {
   info: DetailItemType
@@ -22,7 +23,10 @@ const RoomInfo = (props: PropsType) => {
           ? `${info.itemFloor} 층 / ${info.buildingFloor} 층`
           : '단독',
     },
-    { icon: 'detail', info: `관리비 ${info.administrationCost}` },
+    {
+      icon: 'detail',
+      info: `관리비 ${numberToMoney(info.administrationCost)}`,
+    },
     { icon: 'detail', info: `${info.area}m2` },
   ]
 
@@ -67,8 +71,23 @@ const RoomInfo = (props: PropsType) => {
           </div>
         ))}
       </r.DetailInfoContainer>
+
+      <r.AdminFeeContainer>
+        <hr className="underline" />
+        <div className="price">
+          관리비 : {numberToMoney(info.administrationCost)}
+        </div>
+        <div className="option">
+          {info.itemAdministrationFeeList.map((item, index) => (
+            <div className="txt" key={index}>
+              {adminFeeInfo[item - 1].name}
+            </div>
+          ))}
+        </div>
+        <hr className="underline" />
+      </r.AdminFeeContainer>
       <r.TitleContainer>
-        <div className="title">추가 정보</div>
+        <div className="title">추가 옵션</div>
         <hr className="underline" />
       </r.TitleContainer>
       <r.AdditionalWrapper>

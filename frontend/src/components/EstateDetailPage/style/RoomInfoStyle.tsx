@@ -109,3 +109,34 @@ export const LocationWrapper = styled.div`
   width: 90%;
   height: fit-content;
 `
+
+export const AdminFeeContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 1px solid yellowgreen; */
+  margin-bottom: 1rem;
+  .price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .underline {
+    width: 100%;
+    color: #d7dadd;
+  }
+  .option {
+    display: flex;
+    width: 80%;
+    justify-content: start;
+    margin-top: 0.5rem;
+  }
+  .txt {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+  }
+`
