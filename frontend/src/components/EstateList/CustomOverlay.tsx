@@ -1,19 +1,19 @@
 import * as c from '@components/EstateList/styles/CustomOverlayStyle'
 
 interface PropsType {
-  condition: string
+  condition: number
 }
 
 const CustomOverlay = (props: PropsType) => {
   const { condition } = props
 
-  const getEstateCondition = (condition: string) => {
+  const getEstateCondition = (condition: number) => {
     switch (condition) {
-      case 'good':
+      case 1:
         return '우수'
-      case 'normal':
+      case 2:
         return '보통'
-      case 'bad':
+      case 3:
         return '위험'
     }
   }
