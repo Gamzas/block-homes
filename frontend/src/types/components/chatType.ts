@@ -6,7 +6,6 @@ export type MessageType = {
   isRead: boolean
   message: string
   type: number | null
-  userImage: string | null
   userName: string
   userWalletAddress: string
 }
