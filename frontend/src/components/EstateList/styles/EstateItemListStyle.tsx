@@ -10,6 +10,7 @@ export const StatusBarContainer = styled.div`
 
 export const EstateItemListContainer = styled.div`
   width: 100%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
