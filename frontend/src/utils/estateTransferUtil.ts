@@ -103,20 +103,15 @@ export const getAdditionalOptionCategory = (type: number): string => {
 
 // 가격 단위 변환 함수
 export const numberToKorean = (num: number): string => {
-  const units = ['', '만', '억', '조']
-  let result = ''
-  let unitIndex = 0
-
-  while (num > 0) {
-    const currentUnit = num % 10000
-    if (currentUnit > 0) {
-      result = currentUnit.toString() + units[unitIndex] + result
-    }
-    num = Math.floor(num / 10000)
-    unitIndex++
+  if (num >= 100000000) {
+    return (num / 100000000).toFixed(1).replace(/\.0$/, '') + '억'
+  } else if (num >= 10000) {
+    return (num / 10000).toFixed(1).replace(/\.0$/, '')
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '')
+  } else {
+    return num.toString()
   }
-
-  return result
 }
 
 // 예제 사용
