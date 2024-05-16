@@ -3,22 +3,22 @@ import { userTypeAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 
 const UserTypeToggle = () => {
-  const [currentUser, setCurrentUser] = useAtom(userTypeAtom)
+  const [currentUserType, setCurrentUserType] = useAtom(userTypeAtom)
 
   const toggleUserType = (type: number) => {
-    setCurrentUser({ type: type })
+    setCurrentUserType({ type: type })
   }
 
   return (
     <u.UserTypeToggleContainer>
       <button
-        className={`tenant ${currentUser.type === 0 ? 'active' : ''}`}
+        className={`tenant ${currentUserType.type === 0 ? 'active' : ''}`}
         onClick={() => toggleUserType(0)}
       >
         임차인
       </button>
       <button
-        className={`landlord ${currentUser.type === 1 ? 'active' : ''}`}
+        className={`landlord ${currentUserType.type === 1 ? 'active' : ''}`}
         onClick={() => toggleUserType(1)}
       >
         임대인
