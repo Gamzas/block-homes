@@ -26,7 +26,9 @@ const ChatList = () => {
 
   const { data, isLoading } = useQuery<ChatRoomListType[]>({
     queryKey: ['fetchChatRooms', chatRoomRequestData],
-    queryFn: () => fetchChatRooms(chatRoomRequestData),
+    queryFn: () =>
+      chatRoomRequestData.walletAddress !== '' &&
+      fetchChatRooms(chatRoomRequestData),
   })
 
   return (

@@ -19,10 +19,12 @@ const DetailFooter = () => {
   const { mutate: deleteFavorite } = useDeleteFavoriteItem()
 
   useEffect(() => {
-    setChatRoomRequestData({
-      itemNo: Number(realEstateNo),
-      userWalletAddress: user.walletAddress,
-    })
+    if (realEstateNo && user.walletAddress) {
+      setChatRoomRequestData({
+        itemNo: Number(realEstateNo),
+        userWalletAddress: user.walletAddress,
+      })
+    }
   }, [realEstateNo, user])
 
   const handleBtnClick = async () => {
