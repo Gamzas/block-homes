@@ -4,6 +4,7 @@ export const UserTypeToggleContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
+  z-index: 2;
 
   .tenant,
   .landlord {
