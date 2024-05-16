@@ -2,13 +2,9 @@ import * as d from '@components/EstateDetailPage/style/DetailInfoStyle'
 import { useParams } from 'react-router-dom'
 import DetailTabMenu from './DetailTabMenu'
 import DetailFooter from './DetailFooter'
-import { useEffect } from 'react'
-import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
-import { useAtom } from 'jotai'
 import ItemSafetyCard from './ItemSafetyCard'
 import RoomInfo from './RoomInfo'
-import { useGetDetailItem } from '@/apis/itemApi'
-import { DetailItem, itemList } from '../../utils/item'
+import { DetailItem } from '../../utils/item'
 
 const DetailInfo = () => {
   // DELETE 삭제하기
@@ -24,6 +20,8 @@ const DetailInfo = () => {
   // console.log(detailInfoData)
   // console.log(isError)
   const detailInfoData = DetailItem
+
+
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -52,7 +50,7 @@ const DetailInfo = () => {
         <DetailTabMenu />
         <ItemSafetyCard condition={detailInfoData.reportRank} />
         <RoomInfo info={detailInfoData} />
-        <DetailFooter />
+        <DetailFooter info={detailInfoData} />
       </>
     </d.DetailInfoWrapper>
   )

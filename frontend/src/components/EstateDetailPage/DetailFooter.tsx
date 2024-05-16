@@ -6,8 +6,13 @@ import { userAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
 import { useDeleteFavoriteItem, usePostFavoriteItem } from '@/apis/itemApi'
-
-const DetailFooter = () => {
+import { DetailItemType } from '@/types/components/estateListType'
+import { numberToMoney } from '@/utils/estateTransferUtil'
+interface PropsType {
+  info: DetailItemType
+}
+const DetailFooter = (props: PropsType) => {
+  const { administrationCost, roadNameAddress, price } = props.info
   const { id } = useParams()
   const [user] = useAtom(userAtom)
   const [isLiked, setIsLiked] = useState(false)
@@ -84,10 +89,12 @@ const DetailFooter = () => {
       </f.LikendBtn>
       <f.InfoContainer>
         <div className="price">
-          전세 3억&nbsp;
-          <span className="maintenance">관리비 10</span>
+          전세 {numberToMoney(price)}&nbsp;
+          <span className="maintenance">
+            관리비 {numberToMoney(administrationCost)}
+          </span>
         </div>
-        <div className="location">광주광역시 광산구 장덕동</div>
+        <div className="location">{roadNameAddress}</div>
       </f.InfoContainer>
       <f.ChatBtn onClick={handleBtnClick}>
         <div className="name">채팅하기</div>
