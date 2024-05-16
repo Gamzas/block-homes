@@ -100,3 +100,25 @@ export const getAdditionalOptionCategory = (type: number): string => {
       return '싱크대'
   }
 }
+
+// 가격 단위 변환 함수
+export const numberToKorean = (num: number): string => {
+  const units = ['', '만', '억', '조']
+  let result = ''
+  let unitIndex = 0
+
+  while (num > 0) {
+    const currentUnit = num % 10000
+    if (currentUnit > 0) {
+      result = currentUnit.toString() + units[unitIndex] + result
+    }
+    num = Math.floor(num / 10000)
+    unitIndex++
+  }
+
+  return result
+}
+
+// 예제 사용
+const price = 300000000
+console.log(numberToKorean(price)) // "삼억"
