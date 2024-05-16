@@ -58,10 +58,14 @@ export const getFavoriteItem = async (address: string) => {
 //   })
 // }
 
+// 매물 찜 등록
 export const usePostFavoriteItem = () => {
   return useMutation({
     mutationFn: (data: PostFavoriteDataType) =>
       publicRequest.post(API_FAVORITE_ITEM, data),
+    onSuccess: () => {
+      alert('찜 등록되었습니다.')
+    },
   })
 }
 
@@ -81,6 +85,9 @@ export const deleteFavoriteItem = async (
 export const useDeleteFavoriteItem = () => {
   return useMutation({
     mutationFn: (data: PostFavoriteDataType) =>
-      publicRequest.delete(API_FAVORITE_ITEM, { data }),
+      publicRequest.delete(API_FAVORITE_ITEM, { data: data }),
+    onSuccess: () => {
+      alert('삭제되었습니다.')
+    },
   })
 }
