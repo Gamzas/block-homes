@@ -19,6 +19,7 @@
     "@stomp/stompjs": "^7.0.0",
     "@tanstack/react-query": "^5.35.1",
     "@tanstack/react-query-devtools": "^5.32.0",
+    "@types/sockjs-client": "^1.5.4",
     "apexcharts": "^3.49.0",
     "axios": "^1.6.8",
     "ethers": "^5.7.2",
