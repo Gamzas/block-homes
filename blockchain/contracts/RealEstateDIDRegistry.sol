@@ -46,7 +46,7 @@ contract RealEstateDIDRegistry is Ownable {
         bool _isNotPermitted,
         uint8 _estateType,
         string memory _area,
-        uint16 _date,
+        uint256 _date,
         string memory _purpose) external onlyOwner {
         RealEstateInfo realEstateInfo = new RealEstateInfo(
         _roadNameAddress,_buildingName, _buildingNumber,_roomNumber,_isViolated,_isNotPermitted,_estateType,_area,_date,_purpose);
