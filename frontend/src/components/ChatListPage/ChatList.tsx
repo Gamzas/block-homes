@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import * as c from '@components/ChatListPage/style/ChatListStyle'
 import NoItems from '@common/NoItems'
 import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
+import UserTypeToggle from '@common/UserTypeToggle'
 
 const ChatList = () => {
   const [user] = useAtom(userAtom)
@@ -26,11 +27,9 @@ const ChatList = () => {
     }
   }, [userType, user])
 
-  const { data, isLoading } = useQuery<ChatRoomListType[]>({
+  const { data } = useQuery<ChatRoomListType[]>({
     queryKey: ['fetchChatRooms', chatRoomRequestData],
-    queryFn: () =>
-      chatRoomRequestData.walletAddress !== '' &&
-      fetchChatRooms(chatRoomRequestData),
+    queryFn: () => fetchChatRooms(chatRoomRequestData!),
   })
 
   if (!Array.isArray(data)) {
@@ -47,14 +46,12 @@ const ChatList = () => {
 
   return (
     <c.ChatListContainer>
-      {data && data.length === 0 ? (
-        <NoItems
-          src={'image/image_sad_pig.png'}
-          alarmText={'현재 진행중인 채팅방이 없어요.'}
+      {data.map(ChatRoomData => (
+        <ChatPreviewComponent
+          key={ChatRoomData.chatRoomNum}
+          {...ChatRoomData}
         />
-      ) : (
-        data.map(ChatRoomData => <ChatPreviewComponent {...ChatRoomData} />)
-      )}
+      ))}
     </c.ChatListContainer>
   )
 }
