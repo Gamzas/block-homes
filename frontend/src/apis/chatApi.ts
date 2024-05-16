@@ -33,7 +33,12 @@ export const createChatRoom = async (
 }
 
 export const fetchChatRoomDetail = async (chatRoomNo: number) => {
-  return publicRequest.get(`/chatrooms/${chatRoomNo}`).then(res => {
-    return res.data
-  })
+  try {
+    const response = await publicRequest.get(`/chatrooms/detail/${chatRoomNo}`)
+    const data = response.data
+    return data
+  } catch (error) {
+    console.error('Error fetching chat room detail:', error)
+    throw error
+  }
 }
