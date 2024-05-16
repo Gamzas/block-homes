@@ -107,9 +107,13 @@ export const DetailItem = {
   longitude: 126.814311998746,
   roomNumber: 1,
   toiletNumber: 1,
-  description: '깔끔한 방입니다. 🥔',
-  buildingFloor: 0,
-  itemFloor: 0,
+  description: `⭐ 특징 ⭐ 
+  - 1룸 오픈형 구조입니다- 화이트톤 깨끗함의 정석~! 올리모델링 
+  ⭐ 위치 ⭐
+  - 신사동 가로수길 블럭입니다- 신사/압구정 도보거리 이용가능
+  `,
+  buildingFloor: 7,
+  itemFloor: 3,
   moveInDate: '2024-05-16T10:36:41.088Z',
   parkingRate: 0,
   haveElevator: true,
@@ -120,6 +124,6 @@ export const DetailItem = {
       itemImageCategory: 0,
     },
   ],
-  itemAdministrationFeeList: [0],
-  itemAdditionalOptionList: [0],
+  itemAdministrationFeeList: [1, 2, 3, 4, 5],
+  itemAdditionalOptionList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
 }
