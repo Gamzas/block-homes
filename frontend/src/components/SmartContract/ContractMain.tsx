@@ -27,6 +27,14 @@ const ContractMain = () => {
           <div className="content-box6">
             <p>1000000000</p>
           </div>
+          <div className="content-box7">
+            <p>2021</p>
+            <p>8</p>
+          </div>
+          <div className="content-box8">
+            <p>2021</p>
+            <p>8</p>
+          </div>
         </c.Contract>
         <ContractBoottomSheet></ContractBoottomSheet>
       </c.ContractMainContainer>
