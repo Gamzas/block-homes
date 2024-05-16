@@ -51,10 +51,10 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     private JPQLQuery<ChatRoomInstance> getChatRoomsQuery() {
         return from(qChatRoom)
             .innerJoin(qChatRoom.item, qItem)
-            .innerJoin(qChatRoom, qWalletChatRoom.chatRoom)
+            .innerJoin(qWalletChatRoom).on(qWalletChatRoom.chatRoom.eq(qChatRoom))
             .innerJoin(qWalletChatRoom.wallet, qWallet)
-            .innerJoin(qItem, qItemImage.item)
-            .innerJoin(qItemImage.image, qImage)
+            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
+            .innerJoin(qImage).on(qImage.eq(qItemImage.image))
             .select(Projections.constructor(ChatRoomInstance.class,
                 qChatRoom.chatRoomNo,
                 qItem.itemNo,
@@ -77,9 +77,12 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     private JPQLQuery<String> representativeImageSubQuery() {
+
+        QImage qImageSub = new QImage("qImageSub");
+
         return from(qImage)
-            .innerJoin(qImage, qItemImage.image)
-            .select(qImage.imageUrl)
+            .innerJoin(qItemImage.image, qImageSub)
+            .select(qImageSub.imageUrl)
             .where(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
             .limit(1);
     }
