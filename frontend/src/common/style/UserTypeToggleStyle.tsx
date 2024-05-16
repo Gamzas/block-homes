@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
 export const UserTypeToggleContainer = styled.div`
-  position: absolute;
-  bottom: 4.5rem;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 
   .tenant,
   .landlord {
