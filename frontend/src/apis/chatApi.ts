@@ -2,6 +2,7 @@ import { publicRequest } from '@hooks/requestMethods'
 import {
   ChatRoomCheckResponseType,
   ChatRoomRequestDataType,
+  FetchChatRoomResponseType,
   FetchChatRoomsRequestType,
 } from '@/types/components/chatRoomType'
 
@@ -31,7 +32,9 @@ export const createChatRoom = async (
     .then(res => res.data)
 }
 
-export const fetchChatRoomDetail = async (chatRoomNo: number) => {
+export const fetchChatRoomDetail = async (
+  chatRoomNo: number,
+): Promise<FetchChatRoomResponseType> => {
   try {
     const response = await publicRequest.get(`/chatrooms/detail/${chatRoomNo}`)
     const data = response.data
