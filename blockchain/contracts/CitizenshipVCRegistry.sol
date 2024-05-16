@@ -27,14 +27,12 @@ contract CitizenshipVCRegistry is Ownable{
     event VCdeleted(string id);
 
     function getMessageHash(
-        string memory _issuer, string memory _subject, uint256 _issuanceDate, string memory  _value
-    ) private pure returns (bytes32){
-        return keccak256(abi.encodePacked(_issuer, _subject, _issuanceDate,_value));
+        string memory _subject, uint256 _issuanceDate, string memory  _value) private pure returns (bytes32){
+        return keccak256(abi.encodePacked(_subject, _issuanceDate,_value));
     }
 
     function claimCredential(
-        string calldata _subject, uint256 _issuanceDate, bytes32 _r, bytes32 _s, uint8 _v
-        ) external onlyOwner{
+        string calldata _subject, uint256 _issuanceDate, bytes32 _r, bytes32 _s, uint8 _v) external onlyOwner{
 
         Credential storage newCredential = credentials[_subject];
         newCredential.issuer="did:klay:0x47a54b46770cc839830cbb150f7fa49c90e880ac"; //행정안전부의 DID
@@ -48,14 +46,14 @@ contract CitizenshipVCRegistry is Ownable{
 
     function verifyCredential(string memory _id) public view returns (bool) {
         Credential storage vc = credentials[_id];
-        bytes32 messageHash = getMessageHash(vc.issuer, vc.subject, vc.issuanceDate, vc.value);
+        bytes32 messageHash = getMessageHash(vc.subject, vc.issuanceDate, vc.value);
         bytes32 ethSignedMessageHash = keccak256(
             abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash)
         );
 
         // ecrecover를 사용하여 서명자 주소 복구
         address recoveredSigner = ecrecover(ethSignedMessageHash, vc.proof.v, vc.proof.r, vc.proof.s);
-        return (recoveredSigner == address(bytes20(keccak256(abi.encodePacked(vc.issuer)))));
+        return (recoveredSigner == owner());
     }
 
     function getVC(string calldata id) external view returns (Credential memory) {
