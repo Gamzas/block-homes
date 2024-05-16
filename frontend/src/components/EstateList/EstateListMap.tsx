@@ -33,7 +33,7 @@ const EstateListMap = () => {
   const handleDetailCardClose = () => {
     setItem('not')
   }
-  
+
   useEffect(() => {
     setItem('not')
   }, [])
@@ -129,16 +129,14 @@ const EstateListMap = () => {
   }, [coord, estateItemList])
 
   return (
-    <>
-      <e.EstateMapContainer id="map">
-        {item !== 'not' && (
-          <e.DetailCardContainer id="card-container">
-            <div className="card-background" onClick={handleDetailCardClose} />
-            <EstateItemCard {...item} />
-          </e.DetailCardContainer>
-        )}
-      </e.EstateMapContainer>
-    </>
+    <e.EstateMapContainer id="map">
+      {item !== 'not' && (
+        <e.DetailCardContainer id="card-container">
+          <div className="card-background" onClick={handleDetailCardClose} />
+          <EstateItemCard {...item} />
+        </e.DetailCardContainer>
+      )}
+    </e.EstateMapContainer>
   )
 }
 
