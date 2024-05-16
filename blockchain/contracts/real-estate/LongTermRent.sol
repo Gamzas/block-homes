@@ -16,7 +16,7 @@ contract LongTermRent {
         uint256 deposit; // 전세금
         string propertyDID; // 부동산의 분산식 식별자
         uint256 contractDate; // 계약 날짜 (timestamp)
-        string[] terms; // 계약의 세부 조건들
+        string terms; // 계약의 세부 조건들
     }
 
     struct LongTermRentContract {
@@ -48,12 +48,9 @@ contract LongTermRent {
         uint256 _deposit,
         string memory _propertyDID, 
         uint256 _contractDate,
-        string[] memory _terms) private pure returns (bytes32){
-        bytes memory packedData;
-        for (uint i = 0; i < _terms.length; i++) {
-            packedData = abi.encodePacked(packedData, _terms[i]);
-        }
-        return keccak256(abi.encodePacked(_landlordDID,_tenantDID,_leasePeriod,_deposit,_propertyDID,_contractDate,packedData));
+        string memory _terms) private pure returns (bytes32){
+        
+        return keccak256(abi.encodePacked(_landlordDID,_tenantDID,_leasePeriod,_deposit,_propertyDID,_contractDate,_terms));
     }
 
     constructor (
@@ -63,7 +60,7 @@ contract LongTermRent {
         uint256 _deposit,
         string memory _propertyDID,
         uint256 _contractDate,
-        string[] memory _terms,
+        string memory _terms,
         bytes32 _r, bytes32 _s, uint8 _v
     ) {
         landlordAddress = payable(_landlordAddress);
@@ -125,7 +122,7 @@ contract LongTermRent {
         );
 
         // ecrecover를 사용하여 서명자 주소 복구
-        address recoveredSigner = ecrecover(ethSignedMessageHash, rentalContract.tenantSignature.v, rentalContract.tenantSignature.r, rentalContract.tenantSignature.s);
+        address recoveredSigner = ecrecover(ethSignedMessageHash, rentalContract.landlordSignature.v, rentalContract.landlordSignature.r, rentalContract.landlordSignature.s);
         return (recoveredSigner==landlordAddress);
     }
 

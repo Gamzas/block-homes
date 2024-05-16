@@ -15,7 +15,7 @@ contract RealEstateInfo is Ownable {
         bool isNotPermitted; //무허가건축물 여부
         uint8 estateType; // 주거 유형
         string area; // 면적
-        uint16 date; //등록 일자
+        uint256 date; //등록 일자
         string purpose; //용도
     }
 
@@ -30,7 +30,7 @@ contract RealEstateInfo is Ownable {
         bool _isNotPermitted,
         uint8 _estateType,
         string memory _area,
-        uint16 _date,
+        uint256 _date,
         string memory _purpose
     ) Ownable(msg.sender) {
         basicInfo.roadNameAddress = _roadNameAddress;
