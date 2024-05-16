@@ -136,7 +136,6 @@ const EstateListMap = () => {
       {item !== 'not' && (
         <e.DetailCardContainer id="card-container">
           <div className="card-background" onClick={handleDetailCardClose} />
-          {/* WARNING 주석 해제 후 데이터 재설정 */}
           <EstateItemCard {...item} />
         </e.DetailCardContainer>
       )}
