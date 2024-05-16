@@ -38,7 +38,6 @@ const useSearchLocation = () => {
     geocoder.addressSearch(
       address,
       (result: GeocoderResult[], status: KakaoMapsStatus) => {
-        console.log('상태 코드:', status)
         if (status === kakao.maps.services.Status.OK) {
           // 동명의 동네가 없을 때
           if (result.length === 1) {
