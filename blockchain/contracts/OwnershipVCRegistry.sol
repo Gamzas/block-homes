@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract OwnershipVCRegistry is Ownable{
 
@@ -21,6 +20,7 @@ contract OwnershipVCRegistry is Ownable{
     }
 
     mapping( string => Credential) credentials;
+    mapping( string => string[] ) CredentialsToUser;
     constructor() Ownable(msg.sender) {} 
 
     event VCcreated(string id);
@@ -43,6 +43,8 @@ contract OwnershipVCRegistry is Ownable{
         newCredential.value=_value;
         newCredential.proof=Proof(_r,_s,_v);
 
+        CredentialsToUser[_subject].push(_value);
+
         emit VCcreated(newCredential.value);
     }
     
@@ -63,8 +65,19 @@ contract OwnershipVCRegistry is Ownable{
     }
 
     function deleteVC(string calldata id) external onlyOwner {
+        string[] storage allCredentials = CredentialsToUser[credentials[id].subject];
+        for (uint256 i = 0; i < allCredentials.length; i++) {
+            if(keccak256(abi.encodePacked(allCredentials[i]))==keccak256(abi.encodePacked(id))){
+                allCredentials[i] = allCredentials[allCredentials.length - 1];
+                allCredentials.pop();
+            }
+        }
         delete credentials[id];
         emit VCdeleted(id);
+    }
+
+    function getAllVCofUser(string calldata _userDID) external view returns (string[] memory) {
+        return CredentialsToUser[_userDID];
     }
 
 }

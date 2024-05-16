@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./TaxPayment.sol";
 
 contract UserDIDRegistry is Ownable {
 
@@ -21,9 +20,6 @@ contract UserDIDRegistry is Ownable {
     }
 
     mapping(string => DIDDocument) didDocuments;
-
-    mapping(string => address) taxAddresses;
-    mapping(string => address) loanAddresses;
 
     constructor() Ownable(msg.sender) {}
 
@@ -51,9 +47,6 @@ contract UserDIDRegistry is Ownable {
         didDocument.publicKey.controller = didDocument.id;
         didDocument.publicKey.publicKeyHex = _publicKey;
         didDocument.authentication=didDocument.publicKey.id;
-
-        address taxAddress = address(new TaxPayment(_holderAddress));
-        taxAddresses[didDocument.id] = taxAddress;
 
         didDocuments[didDocument.id] = didDocument;
 

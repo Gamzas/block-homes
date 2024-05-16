@@ -3,6 +3,12 @@ pragma solidity ^0.8.0;
 
 contract LongTermRent {
 
+    struct Signature{
+        bytes32 r;
+        bytes32 s;
+        uint8 v;
+    }
+
     struct ContractInfo {
         string landlordDID; // 임대인의 분산식 식별자
         string tenantDID; // 임차인의 분산식 식별자
@@ -15,7 +21,8 @@ contract LongTermRent {
 
     struct LongTermRentContract {
         ContractInfo contractInfo;
-        bytes32 contractInfoHash;
+        Signature tenantSignature;
+        Signature landlordSignature;
     }
 
     LongTermRentContract public rentalContract;
@@ -34,14 +41,30 @@ contract LongTermRent {
         return string(buffer);
     }
 
-    constructor payable(
+    function getMessageHash(
+        string memory _landlordDID,
+        string memory _tenantDID,
+        uint16 _leasePeriod, 
+        uint256 _deposit,
+        string memory _propertyDID, 
+        uint256 _contractDate,
+        string[] memory _terms) private pure returns (bytes32){
+        bytes memory packedData;
+        for (uint i = 0; i < _terms.length; i++) {
+            packedData = abi.encodePacked(packedData, _terms[i]);
+        }
+        return keccak256(abi.encodePacked(_landlordDID,_tenantDID,_leasePeriod,_deposit,_propertyDID,_contractDate,packedData));
+    }
+
+    constructor (
         address _landlordAddress,
         address _tenantAddress,
         uint16 _leasePeriod,
         uint256 _deposit,
         string memory _propertyDID,
         uint256 _contractDate,
-        string[] memory _terms
+        string[] memory _terms,
+        bytes32 _r, bytes32 _s, uint8 _v
     ) {
         landlordAddress = payable(_landlordAddress);
         tenantAddress = payable(_tenantAddress);
@@ -55,16 +78,18 @@ contract LongTermRent {
         rentalContract.contractInfo.contractDate = _contractDate;
         rentalContract.contractInfo.terms = _terms;
 
-        // 계약 정보의 해시 저장
-        rentalContract.contractInfoHash = keccak256(abi.encode(rentalContract));
+        rentalContract.landlordSignature.r=_r;
+        rentalContract.landlordSignature.s=_s;
+        rentalContract.landlordSignature.v=_v;
     }
 
-    
     // 임차인이 이더를 보낼 수 있는 payable 함수
-    function payDeposit() public payable {
-        require(msg.sender == tenantAddress, "Only the tenant can pay the deposit.");
-        require(msg.value >= rentalContract.contractInfo.deposit, "Deposit amount is not sufficient.");
-
+    function tenantSign(bytes32 _r, bytes32 _s, uint8 _v) public payable {
+        require(msg.sender == tenantAddress, "You are not the tenant.");
+        require(msg.value == rentalContract.contractInfo.deposit, "Less or more than deposit.");
+        rentalContract.tenantSignature.r=_r;
+        rentalContract.tenantSignature.s=_s;
+        rentalContract.tenantSignature.v=_v;
         // 받은 돈을 임대인에게 전송
         landlordAddress.transfer(msg.value);
     }
@@ -80,6 +105,28 @@ contract LongTermRent {
         require(msg.sender == tenantAddress, "Only the tenant can withdraw the deposit.");
         require(block.timestamp >= rentalContract.contractInfo.contractDate + rentalContract.contractInfo.leasePeriod * 30 days, "Lease has not yet expired.");
         tenantAddress.transfer(address(this).balance);
+    }
+
+    function verifyTenantSignature() public view returns (bool) {
+        bytes32 messageHash = getMessageHash(rentalContract.contractInfo.landlordDID,rentalContract.contractInfo.tenantDID,rentalContract.contractInfo.leasePeriod,rentalContract.contractInfo.deposit,rentalContract.contractInfo.propertyDID,rentalContract.contractInfo.contractDate,rentalContract.contractInfo.terms);
+        bytes32 ethSignedMessageHash = keccak256(
+            abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash)
+        );
+
+        // ecrecover를 사용하여 서명자 주소 복구
+        address recoveredSigner = ecrecover(ethSignedMessageHash, rentalContract.tenantSignature.v, rentalContract.tenantSignature.r, rentalContract.tenantSignature.s);
+        return (recoveredSigner==tenantAddress);
+    }
+
+    function verifyLandlordSignature() public view returns (bool) {
+        bytes32 messageHash = getMessageHash(rentalContract.contractInfo.landlordDID,rentalContract.contractInfo.tenantDID,rentalContract.contractInfo.leasePeriod,rentalContract.contractInfo.deposit,rentalContract.contractInfo.propertyDID,rentalContract.contractInfo.contractDate,rentalContract.contractInfo.terms);
+        bytes32 ethSignedMessageHash = keccak256(
+            abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash)
+        );
+
+        // ecrecover를 사용하여 서명자 주소 복구
+        address recoveredSigner = ecrecover(ethSignedMessageHash, rentalContract.tenantSignature.v, rentalContract.tenantSignature.r, rentalContract.tenantSignature.s);
+        return (recoveredSigner==landlordAddress);
     }
 
 }
