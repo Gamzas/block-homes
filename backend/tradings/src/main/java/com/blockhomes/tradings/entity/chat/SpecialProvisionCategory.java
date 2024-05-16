@@ -11,8 +11,7 @@ public enum SpecialProvisionCategory {
     DEPOSIT_UNCONDITIONALLY_RETURN(3), // 계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다
     PETS_ALLOWED(4), // 반려동물을 허용하고 반려동물로 인한 훼손 등은 임차인이 수리한다
     TENANT_RESTORE_DAMAGE(5), // 세입자는 주택의 기본 시설을 훼손했을 경우 원상복구 한다
-    MONTHLY_2_TERMINATION(6), // 월세 2개월 이상 연체 시 계약을 해지 한다
-    ADDITIONAL_PAY_OVERDUE(7); // 별다른 사유없이 임대료 연체 시 법정 이자를 추가해 지급한다
+    MONTHLY_2_TERMINATION(6); // 월세 2개월 이상 연체 시 계약을 해지 한다
 
     private final Integer value;
 

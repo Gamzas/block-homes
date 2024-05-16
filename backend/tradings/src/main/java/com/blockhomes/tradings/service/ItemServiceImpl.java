@@ -9,6 +9,7 @@ import com.blockhomes.tradings.entity.item.enums.*;
 import com.blockhomes.tradings.entity.wallet.Likes;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
+import com.blockhomes.tradings.exception.item.DuplicateLikesException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.item.ItemOwnerNotMatchException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
@@ -388,6 +389,10 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemRepository
             .getItemByItemNo(req.getItemNo())
             .orElseThrow(ItemNotFoundException::new);
+
+        if (likesRepository.getLikesByWalletAndItem(userWallet, item).isPresent()) {
+            throw new DuplicateLikesException(userWallet.getWalletAddress(), item.getItemNo());
+        }
 
         Likes likes = likesRepository.save(Likes.builder()
             .wallet(userWallet)

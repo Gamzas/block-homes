@@ -4,6 +4,7 @@ import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,5 +35,12 @@ public class WalletChatRoom extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private RoleCategory roleCategory;
+
+    @Builder
+    public WalletChatRoom(ChatRoom chatRoom, Wallet wallet, RoleCategory roleCategory) {
+        this.chatRoom = chatRoom;
+        this.wallet = wallet;
+        this.roleCategory = roleCategory;
+    }
 
 }
