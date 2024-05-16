@@ -26,7 +26,13 @@ export const getEstateItems = async (data: EstateItemReqType) => {
   return res.data
 }
 
-
+// 찜 목록 조회
+export const useGetFavoriteItem = (params: GetFavoritItemParamsType) => {
+  return useQuery({
+    queryKey: ['favoriteItem'],
+    queryFn: () => publicRequest.get(API_FAVORITE_ITEM, { params }),
+  })
+}
 
 // 찜 목록 조회
 export const getFavoriteItem = async (address: string) => {
