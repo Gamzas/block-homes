@@ -21,7 +21,7 @@ const EstateItemCard = (props: EstateItemListType) => {
   const goDetail = () => {
     // DELETE 백 통신으로 전환 후 삭제하기
     // setItem(props)
-    navigate('/estate-detail')
+    navigate(`/estate-detail/${props.itemNo}`)
     // navigate(`/estate-detail/${id}`)
   }
   return (
