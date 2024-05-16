@@ -119,18 +119,27 @@ export const ItemPriceInfoContainer = styled.div`
   width: 15rem;
   height: 5rem;
   position: absolute;
-  top: 4.3rem;
+  top: 3rem;
   left: 8.7rem;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .estate-type {
+    color: #555050;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
   .price-text {
     font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
   }
   .info-text {
     font-size: 0.7rem;
     font-weight: 500;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
   }
 `
 
@@ -141,4 +150,20 @@ export const ItemCardWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 0.5rem;
+`
+export const DIDContainer = styled.div`
+  width: fit-content;
+  height: 2rem;
+  border-radius: 0.33419rem;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0.1rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  .address {
+    color: #555050;
+    font-size: 0.4rem;
+    font-weight: 600;
+  }
 `
