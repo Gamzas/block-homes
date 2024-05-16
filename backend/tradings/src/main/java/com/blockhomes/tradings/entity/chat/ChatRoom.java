@@ -34,7 +34,7 @@ public class ChatRoom extends BaseEntity {
     @Builder
     public ChatRoom(Item item) {
         this.item = item;
-        contractStep = ContractStep.CONTRACT_REQUEST;
+        contractStep = ContractStep.CONTRACT_CREATED;
     }
 
 }
