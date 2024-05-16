@@ -27,6 +27,7 @@ public class ListItemInstance {
     private Integer contractMonths;
     private Double latitude;
     private Double longitude;
+    private String imageUrl;
 
     @Builder
     public ListItemInstance(
@@ -43,7 +44,8 @@ public class ListItemInstance {
         Integer administrationCost,
         Integer contractMonths,
         Double latitude,
-        Double longitude
+        Double longitude,
+        String imageUrl
     ) {
         this.itemNo = itemNo;
         this.realEstateDID = realEstateDID;
@@ -60,6 +62,7 @@ public class ListItemInstance {
         this.contractMonths = contractMonths;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.imageUrl = imageUrl;
     }
 
 }

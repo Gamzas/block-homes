@@ -27,27 +27,40 @@ public class ChatController {
 
     @MessageMapping("chat.enter.{chatRoomNo}")
     public ChatRes enterUser(@DestinationVariable Integer chatRoomNo, @Payload @Valid EnterPayload enterPayload) {
-        return chatService.enterUser(chatRoomNo, enterPayload);
+        ChatRes result = chatService.enterUser(chatRoomNo, enterPayload);
+        rabbitTemplate.convertAndSend("chat.exchange", "enter.room." + chatRoomNo, result);
+        return result;
     }
 
     @MessageMapping("chat.talk.{chatRoomNo}")
     public ChatRes chatTalk(@DestinationVariable Integer chatRoomNo, @Payload @Valid ChatPayload chatPayload) {
-        return chatService.chatTalk(chatRoomNo, chatPayload);
+        ChatRes result = chatService.chatTalk(chatRoomNo, chatPayload);
+        rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
+        return result;
     }
 
     @MessageMapping("chat.progress.{chatRoomNo}")
     public ProgressRes progressContract(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProgressPayload progressPayload) {
-        return chatService.progressContract(chatRoomNo, progressPayload);
+        ProgressRes result =  chatService.progressContract(chatRoomNo, progressPayload);
+        rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
+
+        return result;
     }
 
     @MessageMapping("chat.provision.{chatRoomNo}")
     public ProvisionRes createSpecialProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProvisionPayload provisionPayload) {
-        return chatService.createSpecialProvision(chatRoomNo, provisionPayload);
+        ProvisionRes result = chatService.createSpecialProvision(chatRoomNo, provisionPayload);
+        rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
+
+        return result;
     }
 
     @MessageMapping("chat.reject.{chatRoomNo}")
     public ChatRes rejectProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ChatPayload chatPayload) {
-        return chatService.rejectProvision(chatRoomNo, chatPayload);
+        ChatRes result = chatService.rejectProvision(chatRoomNo, chatPayload);
+        rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
+
+        return result;
     }
 
 }
