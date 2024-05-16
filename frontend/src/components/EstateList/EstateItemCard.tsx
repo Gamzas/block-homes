@@ -5,7 +5,8 @@ import { getTransactionType } from '@/utils/estateTransferUtil'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
 import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
-import { numberToKorean } from '../../utils/estateTransferUtil'
+import { numberToKorean } from '@/utils/estateTransferUtil'
+import { getRealEstateType } from '../../utils/estateTransferUtil'
 
 const EstateItemCard = (props: EstateItemListType) => {
   const condition = props.reportRank
@@ -55,7 +56,6 @@ const EstateItemCard = (props: EstateItemListType) => {
           <div className="location-text">{props.roadNameAddress}</div>
         </c.LocationContainer>
         <c.ItemImage src="https://i0.wp.com/www.gangnamapt.com/wp-content/uploads/2023/01/20230105_180953_HDR.jpg?resize=480%2C360" />
-
         {/* <c.ItemInfoContainer $color={mainColor}>
           {infos.map((item, index) => (
             <div key={index} className="info-box">
@@ -65,9 +65,21 @@ const EstateItemCard = (props: EstateItemListType) => {
         </c.ItemInfoContainer> */}
         <c.ItemPriceInfoContainer>
           <div className="price-text">
-            {getTransactionType(props.transactionType)}
-            {numberToKorean(props.price)}
+            {getRealEstateType(props.realEstateType)}
           </div>
+          {props.transactionStatus === 1 ? (
+            <div className="price-text">
+              {getTransactionType(props.transactionType)}
+
+              {numberToKorean(props.price)}
+            </div>
+          ) : (
+            <div className="price-text">
+              {getTransactionType(props.transactionType)}
+              {numberToKorean(props.price)} /{' '}
+              {numberToKorean(props.monthlyPrice)}
+            </div>
+          )}
           <div className="info-text">{props.area} m2</div>
           <div className="info-text">6층</div>
           {/* <div className="info-text">등록일자 {createDate}</div> */}
