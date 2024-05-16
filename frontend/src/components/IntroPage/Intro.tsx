@@ -1,32 +1,93 @@
-import React from 'react'
-import { IntroCanvasWrapper, IntroContainer } from '@components/IntroPage/style/IntroStyle'
-import { Canvas } from '@react-three/fiber'
+import React, { useRef, useState } from 'react'
+import {
+  IntroCanvasWrapper,
+  IntroContainer,
+  IntroRefreshButton,
+} from '@components/IntroPage/style/IntroStyle'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 
-
-const Model = ({ url, position, scale }: {
-  url: string,
-  position: [number, number, number],
+const Model = ({
+  url,
+  scale,
+  isUserInteracting,
+  modelRef,
+}: {
+  url: string
   scale?: [number, number, number]
+  isUserInteracting: boolean
+  modelRef: React.RefObject<any>
 }) => {
   const { scene } = useGLTF(url)
-  return <primitive object={scene} position={position} scale={scale} />
+
+  useFrame(() => {
+    if (modelRef.current && !isUserInteracting) {
+      modelRef.current.rotation.x += 0.005 // x축을 기준으로 회전
+    }
+  })
+
+  return <primitive ref={modelRef} object={scene} scale={scale} />
+}
+
+const Controls = ({
+  setIsUserInteracting,
+  controlsRef,
+}: {
+  setIsUserInteracting: React.Dispatch<React.SetStateAction<boolean>>
+  controlsRef: React.RefObject<any>
+}) => {
+  useFrame(() => {
+    if (controlsRef.current) {
+      controlsRef.current.update()
+    }
+  })
+
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enablePan={false}
+      maxPolarAngle={Math.PI} // x축 회전 허용
+      minPolarAngle={-Math.PI} // x축 회전 허용
+      onStart={() => setIsUserInteracting(true)} // 사용자가 모델을 조작할 때
+      onEnd={() => setIsUserInteracting(false)} // 사용자가 모델 조작을 멈출 때
+    />
+  )
 }
 
 const Intro = () => {
+  const [isUserInteracting, setIsUserInteracting] = useState(false)
+  const initialRotation: [number, number, number] = [0, 0, 0]
+  const modelRef = useRef<any>(null)
+  const controlsRef = useRef<any>(null)
+
+  const handleReset = () => {
+    if (modelRef.current) {
+      modelRef.current.rotation.set(...initialRotation)
+    }
+    if (controlsRef.current) {
+      controlsRef.current.reset() // OrbitControls의 회전 축을 초기화
+    }
+  }
+
   return (
     <IntroContainer>
       <IntroCanvasWrapper>
-        <Canvas camera={{ position: [0, 1000, 0], fov: 75 }}>
+        <Canvas camera={{ position: [0, 100, 0], fov: 75 }}>
           <ambientLight intensity={2} />
-          <directionalLight position={[10000, 10000, 10000]} intensity={2} />
-          <Model url={'/3DIllustrations/blockhomes.glb'} position={[-30, 0, 0]} scale={[60, 60, 60]} />
-          <Model url={'/3DIllustrations/UserDID.glb'} position={[-0.5, 0, 0]} scale={[0.3, 0.3, 0.3]} />
-          <Model url={'/3DIllustrations/Estate.glb'} position={[-0.5, 0, 0]} scale={[0.8, 0.8, 0.8]} />
-          <Model url={'/3DIllustrations/Contract.glb'} position={[-0.5, 0, 0]} scale={[1.0, 1.0, 1.0]} />
-          <OrbitControls />
+          <directionalLight position={[1000, 1000, 1000]} intensity={2} />
+          <Model
+            url={'/3DIllustrations/Intro.glb'}
+            scale={[4.5, 4.5, 4.5]}
+            isUserInteracting={isUserInteracting}
+            modelRef={modelRef}
+          />
+          <Controls
+            setIsUserInteracting={setIsUserInteracting}
+            controlsRef={controlsRef}
+          />
         </Canvas>
       </IntroCanvasWrapper>
+      <IntroRefreshButton onClick={handleReset} />
     </IntroContainer>
   )
 }
