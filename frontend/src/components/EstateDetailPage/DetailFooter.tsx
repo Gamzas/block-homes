@@ -38,14 +38,12 @@ const DetailFooter = (props: PropsType) => {
         await checkChatRoomExistence(chatRoomRequestData)
       if (checkChatRoomResponse.status === 404) {
         const createChatRoomResult = await createChatRoom(chatRoomRequestData)
+
         if (createChatRoomResult && createChatRoomResult.chatRoomNo) {
           navigate(`/chatroom/${createChatRoomResult.chatRoomNo}`)
         }
-      } else if (
-        checkChatRoomResponse.data &&
-        checkChatRoomResponse.data.chatRoomNo
-      ) {
-        navigate(`/chatroom/${checkChatRoomResponse.data.chatRoomNo}`)
+      } else if (checkChatRoomResponse.data) {
+        navigate(`/chatroom/${checkChatRoomResponse.data}`)
       }
     } catch (error) {
       console.error('Error checking or creating chat room:', error)

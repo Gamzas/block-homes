@@ -12,28 +12,32 @@ export const fetchChatRooms = async (params: fetchChatRoomsRequestType) => {
 export const checkChatRoomExistence = async (
   params: chatRoomRequestDataType,
 ): Promise<ChatRoomCheckResponseType> => {
-  return publicRequest
-    .get(`/chatrooms/check`, { params })
-    .then(response => response)
-    .catch(error => {
-      if (error.response && error.response.status === 404) {
-        return { status: 404 }
-      }
-      throw error
-    })
+  try {
+    const response = await publicRequest.get(`/chatrooms/check`, { params })
+    return response
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      return { status: 404 }
+    }
+    throw error
+  }
 }
 
 export const createChatRoom = async (
   chatRoomRequestBody: chatRoomRequestDataType,
 ) => {
-  console.log(chatRoomRequestBody)
   return publicRequest
     .post(`/chatrooms`, chatRoomRequestBody)
     .then(res => res.data)
 }
 
 export const fetchChatRoomDetail = async (chatRoomNo: number) => {
-  return publicRequest.get(`/chatrooms/${chatRoomNo}`).then(res => {
-    return res.data
-  })
+  try {
+    const response = await publicRequest.get(`/chatrooms/detail/${chatRoomNo}`)
+    const data = response.data
+    return data
+  } catch (error) {
+    console.error('Error fetching chat room detail:', error)
+    throw error
+  }
 }
