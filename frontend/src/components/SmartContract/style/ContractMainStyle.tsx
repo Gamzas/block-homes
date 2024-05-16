@@ -21,7 +21,7 @@ export const Contract = styled.div`
   .content-box {
     margin-left: 4.7rem;
     display: flex;
-    margin-top: 1.8rem;
+    margin-top: 2rem;
     width: 7.5rem;
     height: 1rem;
     font-size: 0.7rem;
@@ -30,11 +30,11 @@ export const Contract = styled.div`
   }
   .content-box2 {
     display: flex;
-    margin-top: 1rem;
+    margin-top: 1.34rem;
     margin-left: 3.8rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 600;
-    width: 15rem;
+    width: 18rem;
     height: 0.8rem;
     text-align: center;
   }
@@ -42,28 +42,28 @@ export const Contract = styled.div`
     display: flex;
     justify-content: space-between;
     margin-left: 6.2rem;
-    margin-top: 0.1rem;
+    margin-top: 0.25rem;
     width: 14rem;
     height: 0.83rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box4 {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.1rem;
+    margin-top: 0.25rem;
     width: 16.4rem;
     margin-left: 3.8rem;
     height: 0.9rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box5 {
-    margin-top: 2rem;
+    margin-top: 2.3rem;
     width: 16.4rem;
     margin-left: 5rem;
     height: 0.9rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box6 {
@@ -71,7 +71,7 @@ export const Contract = styled.div`
     width: 16.4rem;
     margin-left: 5rem;
     height: 0.9rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 600;
   }
 `
