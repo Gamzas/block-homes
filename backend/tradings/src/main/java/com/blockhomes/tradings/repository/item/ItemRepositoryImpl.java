@@ -2,11 +2,9 @@ package com.blockhomes.tradings.repository.item;
 
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.response.ListItemInstance;
+import com.blockhomes.tradings.entity.common.QImage;
 import com.blockhomes.tradings.entity.item.*;
-import com.blockhomes.tradings.entity.item.enums.RealEstateType;
-import com.blockhomes.tradings.entity.item.enums.ReportRank;
-import com.blockhomes.tradings.entity.item.enums.TransactionStatus;
-import com.blockhomes.tradings.entity.item.enums.TransactionType;
+import com.blockhomes.tradings.entity.item.enums.*;
 import com.blockhomes.tradings.util.AreaUtil;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -20,6 +18,8 @@ import java.util.Objects;
 public class ItemRepositoryImpl extends QuerydslRepositorySupport implements ItemRepositoryCustom {
 
     private static final QItem qItem = QItem.item;
+    private static final QItemImage qItemImage = QItemImage.itemImage;
+    private static final QImage qImage = QImage.image;
 
     public ItemRepositoryImpl() {
         super(Item.class);
@@ -36,6 +36,7 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                     .and(filterTransactionType(req.getTransactionType()))
                     .and(filterPrice(req.getMinPrice(), req.getMaxPrice()))
                     .and(filterPyeong(req.getMinPyeong(), req.getMaxPyeong()))
+                    .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
             ).fetch();
     }
 
@@ -84,7 +85,10 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     }
 
     private JPQLQuery<ListItemInstance> getListItemsQuery() {
-        return from(qItem).select(
+        return from(qItem)
+            .innerJoin(qItem, qItemImage.item)
+            .innerJoin(qItemImage.image, qImage)
+            .select(
             Projections.constructor(ListItemInstance.class,
                 qItem.itemNo,
                 qItem.realEstateDID,
@@ -99,7 +103,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                 qItem.administrationCost,
                 qItem.contractMonths,
                 qItem.latitude,
-                qItem.longitude
+                qItem.longitude,
+                qImage.imageUrl
             ));
     }
 
