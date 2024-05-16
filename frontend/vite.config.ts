@@ -13,6 +13,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt'], // 정적 파일 목록
+      injectRegister: 'auto',
       manifest: {
         name: 'BLOCK-HOMES',
         short_name: 'BLOCKHOMES',
