@@ -27,18 +27,14 @@ public class ChatRoom extends BaseEntity {
     private Item item;
 
     @NotNull
-    @Column(name = "seller_step", nullable = false)
-    private Integer sellerStep;
-
-    @NotNull
-    @Column(name = "buyer_step", nullable = false)
-    private Integer buyerStep;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "contract_step", nullable = false)
+    private ContractStep contractStep;
 
     @Builder
     public ChatRoom(Item item) {
         this.item = item;
-        this.sellerStep = 1;
-        this.buyerStep = 1;
+        contractStep = ContractStep.CONTRACT_REQUEST;
     }
 
 }

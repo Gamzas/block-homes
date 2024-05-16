@@ -5,6 +5,7 @@ import com.blockhomes.tradings.exception.chat.ChatRoomNotFoundException;
 import com.blockhomes.tradings.exception.common.DateNotFormattedException;
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
+import com.blockhomes.tradings.exception.item.DuplicateLikesException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.item.ItemOwnerNotMatchException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
@@ -115,7 +116,7 @@ public class RestControllerAdvisor {
                 .build());
     }
 
-    @ExceptionHandler(value = {ItemOwnerNotMatchException.class})
+    @ExceptionHandler(value = {ItemOwnerNotMatchException.class, DuplicateLikesException.class})
     public ResponseEntity<BaseResponseBody> conflictError(Exception e) {
         log.error(e.getMessage());
 

@@ -144,6 +144,7 @@ public class ItemController {
             @ApiResponse(responseCode = "201", description = "정상 등록"),
             @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
             @ApiResponse(responseCode = "404", description = "없는 사용자 / 아이템"),
+            @ApiResponse(responseCode = "409", description = "이미 등록된 찜"),
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
