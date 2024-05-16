@@ -34,7 +34,7 @@ const HomeRoutes = () => (
     <Route path="/check-did" element={<CheckDidPage />} />
     <Route path="/self-check-did" element={<SelfCheckDidPage />} />
     <Route path="/estate" element={<RealEstatePage />} />
-    <Route path="/estate-detail" element={<RealEstateDetailPage />} />
+    <Route path="/estate-detail/:id" element={<RealEstateDetailPage />} />
     <Route path="/smart-contract" element={<SmartContractPage />} />
     <Route path="/report" element={<ReportPage />} />
 
