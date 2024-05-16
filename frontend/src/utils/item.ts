@@ -88,3 +88,38 @@ export const itemList = {
   ],
   count: 5,
 }
+
+export const DetailItem = {
+  itemNo: 0,
+  ownerDID: 'string',
+  realEstateDID: 'string',
+  roadNameAddress: '광주 광산구 장신로 20번길 13-12',
+  realEstateType: 3,
+  reportRank: 1,
+  transactionStatus: 2,
+  area: 33,
+  pyeong: 10,
+  price: 2000000,
+  monthlyPrice: 300000,
+  administrationCost: 50000,
+  contractMonths: 12,
+  latitude: 35.1937234411548,
+  longitude: 126.814311998746,
+  roomNumber: 1,
+  toiletNumber: 1,
+  description: '깔끔한 방입니다. 🥔',
+  buildingFloor: 0,
+  itemFloor: 0,
+  moveInDate: '2024-05-16T10:36:41.088Z',
+  parkingRate: 0,
+  haveElevator: true,
+  createdAt: '2024-05-16T10:36:41.088Z',
+  itemImageList: [
+    {
+      imageUrl: 'string',
+      itemImageCategory: 0,
+    },
+  ],
+  itemAdministrationFeeList: [0],
+  itemAdditionalOptionList: [0],
+}

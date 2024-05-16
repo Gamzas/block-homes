@@ -25,3 +25,5 @@ export const API_ITEM = `${API_BASE}/item`
 export const API_FAVORITE_ITEM = `/item/likes`
 
 export const  API_ESTATE_ITEM = `/item/list`
+
+export const API_ESTATE_DETAIL = `/item/detail`
