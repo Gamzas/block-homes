@@ -72,6 +72,16 @@ const EstateListMap = () => {
         latitude: center.Ma,
         longitude: center.La,
       })
+      //-----------------------------------
+      // 지도의 현재 영역을 얻어옵니다
+      // const bounds = map.getBounds()
+      // // 영역의 남서쪽 좌표를 얻어옵니다
+      // const swLatLng = bounds.getSouthWest()
+
+      // // 영역의 북동쪽 좌표를 얻어옵니다
+      // const neLatLng = bounds.getNorthEast()
+      // console.log(swLatLng, neLatLng)
+      //-----------------------------------
     })
 
     //--------------------------------------
