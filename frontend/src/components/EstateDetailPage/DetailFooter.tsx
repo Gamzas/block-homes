@@ -8,7 +8,7 @@ import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
 import { useDeleteFavoriteItem, usePostFavoriteItem } from '@/apis/itemApi'
 
 const DetailFooter = () => {
-  const { realEstateNo } = useParams()
+  const { id } = useParams()
   const [user] = useAtom(userAtom)
   const [isLiked, setIsLiked] = useState(false)
   const navigate = useNavigate()
@@ -19,13 +19,13 @@ const DetailFooter = () => {
   const { mutate: deleteFavorite } = useDeleteFavoriteItem()
 
   useEffect(() => {
-    if (realEstateNo && user.walletAddress) {
+    if (id && user.walletAddress) {
       setChatRoomRequestData({
-        itemNo: Number(realEstateNo),
+        itemNo: Number(id),
         userWalletAddress: user.walletAddress,
       })
     }
-  }, [realEstateNo, user])
+  }, [id, user])
 
   const handleBtnClick = async () => {
     try {
