@@ -5,4 +5,8 @@ export const ChattingRoomPageContainer = styled.div`
   height: 100vh;
   padding-bottom: 60px;
   padding-top: 50px;
+  display: flex;
+  flex-direction: column;
 `
+
+export const ChattingHeader = styled.div``
