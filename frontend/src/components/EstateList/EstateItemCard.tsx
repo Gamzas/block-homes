@@ -64,13 +64,12 @@ const EstateItemCard = (props: EstateItemListType) => {
           ))}
         </c.ItemInfoContainer> */}
         <c.ItemPriceInfoContainer>
-          <div className="price-text">
+          <div className="estate-type">
             {getRealEstateType(props.realEstateType)}
           </div>
           {props.transactionStatus === 1 ? (
             <div className="price-text">
               {getTransactionType(props.transactionType)}
-
               {numberToKorean(props.price)}
             </div>
           ) : (
@@ -81,8 +80,12 @@ const EstateItemCard = (props: EstateItemListType) => {
             </div>
           )}
           <div className="info-text">{props.area} m2</div>
-          <div className="info-text">6층</div>
-          {/* <div className="info-text">등록일자 {createDate}</div> */}
+          <div className="info-text">계약기간 {props.contractMonths}</div>
+          <c.DIDContainer>
+            <div className="address">
+              0x15b84A76cd54E0D086FE0E40Cb3eAc3dB3e9a000
+            </div>
+          </c.DIDContainer>
         </c.ItemPriceInfoContainer>
         <c.BackgroundContainer>
           <div className="back-wrapper">
