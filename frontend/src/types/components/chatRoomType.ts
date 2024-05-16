@@ -15,7 +15,7 @@ export interface fetchChatRoomsRequestType {
 
 export interface chatRoomRequestDataType {
   itemNo: number
-  userWalletAddress: string
+  walletAddress: string
 }
 
 export interface ChatRoomCheckResponseType {
