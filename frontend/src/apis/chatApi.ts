@@ -26,7 +26,6 @@ export const checkChatRoomExistence = async (
 export const createChatRoom = async (
   chatRoomRequestBody: chatRoomRequestDataType,
 ) => {
-  console.log(chatRoomRequestBody)
   return publicRequest
     .post(`/chatrooms`, chatRoomRequestBody)
     .then(res => res.data)
