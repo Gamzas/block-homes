@@ -1,16 +1,16 @@
 import { publicRequest } from '@hooks/requestMethods'
 import {
   ChatRoomCheckResponseType,
-  chatRoomRequestDataType,
-  fetchChatRoomsRequestType,
+  ChatRoomRequestDataType,
+  FetchChatRoomsRequestType,
 } from '@/types/components/chatRoomType'
 
-export const fetchChatRooms = async (params: fetchChatRoomsRequestType) => {
+export const fetchChatRooms = async (params: FetchChatRoomsRequestType) => {
   return publicRequest.get(`/chatrooms`, { params }).then(res => res.data)
 }
 
 export const checkChatRoomExistence = async (
-  params: chatRoomRequestDataType,
+  params: ChatRoomRequestDataType,
 ): Promise<ChatRoomCheckResponseType> => {
   try {
     const response = await publicRequest.get(`/chatrooms/check`, { params })
@@ -24,7 +24,7 @@ export const checkChatRoomExistence = async (
 }
 
 export const createChatRoom = async (
-  chatRoomRequestBody: chatRoomRequestDataType,
+  chatRoomRequestBody: ChatRoomRequestDataType,
 ) => {
   return publicRequest
     .post(`/chatrooms`, chatRoomRequestBody)
@@ -35,6 +35,7 @@ export const fetchChatRoomDetail = async (chatRoomNo: number) => {
   try {
     const response = await publicRequest.get(`/chatrooms/detail/${chatRoomNo}`)
     const data = response.data
+    console.log(data)
     return data
   } catch (error) {
     console.error('Error fetching chat room detail:', error)

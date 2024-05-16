@@ -8,12 +8,12 @@ export interface ChatRoomListType {
   chatRoomNum: number
 }
 
-export interface fetchChatRoomsRequestType {
+export interface FetchChatRoomsRequestType {
   mode: number
   walletAddress: string
 }
 
-export interface chatRoomRequestDataType {
+export interface ChatRoomRequestDataType {
   itemNo: number
   walletAddress: string
 }
