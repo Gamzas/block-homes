@@ -1,0 +1,23 @@
+{
+  "name": "BLOCK-HOMES",
+  "short_name": "BLOCKHOMES",
+  "description": "블록홈즈",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon/icon_main_character_192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon/icon_main_character_512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

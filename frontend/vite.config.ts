@@ -16,8 +16,8 @@ export default defineConfig({
       manifest: {
         name: 'BLOCK-HOMES',
         short_name: 'BLOCKHOMES',
-        description: '',
-        start_url: '',
+        description: '블록홈즈',
+        start_url: '/',
         display: 'standalone',
         orientation: 'portrait',
         theme_color: '#ffffff',
