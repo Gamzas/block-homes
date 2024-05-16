@@ -1,7 +1,7 @@
 package com.blockhomes.tradings.advisor;
 
 import com.blockhomes.tradings.dto.BaseResponseBody;
-import com.blockhomes.tradings.exception.chat.ChatRoomNotFoundException;
+import com.blockhomes.tradings.exception.chat.*;
 import com.blockhomes.tradings.exception.common.DateNotFormattedException;
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;
@@ -32,7 +32,7 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return Error 메세지를 Map에 담은 ResponseEntity 객체
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class, UnsupportedTypeException.class})
     public ResponseEntity<Map<String, String>> requestValidation(final MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach((error)-> {
@@ -57,6 +57,7 @@ public class RestControllerAdvisor {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(BaseResponseBody.builder()
+                .exceptionName(e.getClass().getSimpleName())
                 .message(e.getMessage())
                 .statusCode(HttpStatus.BAD_REQUEST)
                 .build());
@@ -86,13 +87,14 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return 내용과 코드를 포함한 ResponseEntity 객체
      */
-    @ExceptionHandler(value = {WalletNotFoundException.class, ItemNotFoundException.class, ChatRoomNotFoundException.class})
+    @ExceptionHandler(value = {WalletNotFoundException.class, ItemNotFoundException.class, ChatRoomNotFoundException.class, WalletChatRoomNotFoundException.class})
     public ResponseEntity<BaseResponseBody> notFoundError(Exception e) {
         log.error(e.getMessage());
 
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(BaseResponseBody.builder()
+                .exceptionName(e.getClass().getSimpleName())
                 .message(e.getMessage())
                 .statusCode(HttpStatus.NOT_FOUND)
                 .build());
@@ -111,18 +113,25 @@ public class RestControllerAdvisor {
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(BaseResponseBody.builder()
+                .exceptionName(e.getClass().getSimpleName())
                 .message(e.getMessage())
                 .statusCode(HttpStatus.INTERNAL_SERVER_ERROR)
                 .build());
     }
 
-    @ExceptionHandler(value = {ItemOwnerNotMatchException.class, DuplicateLikesException.class})
+    @ExceptionHandler(value = {
+        ItemOwnerNotMatchException.class,
+        DuplicateLikesException.class,
+        RoleWalletNotMatchException.class,
+        ProgressNotPermittedException.class
+    })
     public ResponseEntity<BaseResponseBody> conflictError(Exception e) {
         log.error(e.getMessage());
 
         return ResponseEntity
             .status(HttpStatus.CONFLICT)
             .body(BaseResponseBody.builder()
+                .exceptionName(e.getClass().getSimpleName())
                 .message(e.getMessage())
                 .statusCode(HttpStatus.CONFLICT)
                 .build());

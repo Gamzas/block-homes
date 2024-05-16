@@ -13,4 +13,6 @@ public interface ChatRoomRepositoryCustom {
 
     Integer getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress);
 
+
+
 }

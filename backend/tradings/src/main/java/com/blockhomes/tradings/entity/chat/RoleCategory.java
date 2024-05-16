@@ -5,13 +5,15 @@ import lombok.Getter;
 
 @Getter
 public enum RoleCategory {
-    BUYER(1),
-    SELLER(2);
+    BUYER(1, "구매자"),
+    SELLER(2, "판매자");
 
     private final Integer value;
+    private final String role;
 
-    RoleCategory(Integer value) {
+    RoleCategory(Integer value, String role) {
         this.value = value;
+        this.role = role;
     }
 
     public static RoleCategory valueToEnum(Integer value) {

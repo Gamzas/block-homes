@@ -3,6 +3,7 @@ package com.blockhomes.tradings.entity.chat;
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,5 +29,13 @@ public class ChatProvision extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "special_provision", nullable = false)
     private SpecialProvisionCategory specialProvisionCategory;
+
+    @Builder
+    public ChatProvision(
+        ChatRoom chatRoom,
+        SpecialProvisionCategory specialProvisionCategory) {
+        this.chatRoom = chatRoom;
+        this.specialProvisionCategory = specialProvisionCategory;
+    }
 
 }

@@ -5,9 +5,12 @@ import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -18,6 +21,7 @@ public class Chat extends BaseEntity {
 
     @Id
     @Column(name = "chat_no")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer chatNo;
 
     @NotNull
@@ -35,7 +39,15 @@ public class Chat extends BaseEntity {
     private Image image;
 
     @NotNull
-    @Column(name = "message", nullable = false)
+    @Column(name = "message", nullable = false, length = 500)
     private String message;
+
+    @Builder
+    public Chat(ChatRoom chatRoom, Wallet wallet, Image image, String message) {
+        this.chatRoom = chatRoom;
+        this.wallet = wallet;
+        this.image = image;
+        this.message = message;
+    }
 
 }

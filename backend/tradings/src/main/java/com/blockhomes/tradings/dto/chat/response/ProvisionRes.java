@@ -5,41 +5,37 @@ import com.blockhomes.tradings.entity.chat.ContractStep;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatRes {
+public class ProvisionRes {
 
-    private Integer chatNo;
     private Integer chatRoomNo;
-    private String senderWalletAddress;
-    private String senderName;
+    private List<Integer> provisionList;
     private Integer messageType;
-    private String image;
     private Integer contractStep;
+    private String message;
     private LocalDateTime createdAt;
 
     @Builder
-    public ChatRes(
-        Integer chatNo,
+    public ProvisionRes(
         Integer chatRoomNo,
-        String senderWalletAddress,
-        String senderName,
+        List<Integer> provisionList,
         MessageType messageType,
-        String image,
         ContractStep contractStep,
+        String message,
         LocalDateTime createdAt
     ) {
-        this.chatNo = chatNo;
         this.chatRoomNo = chatRoomNo;
-        this.senderWalletAddress = senderWalletAddress;
-        this.senderName = senderName;
+        this.provisionList = provisionList;
         this.messageType = MessageType.enumToValue(messageType);
-        this.image = image;
         this.contractStep = ContractStep.enumToValue(contractStep);
+        this.message = message;
         this.createdAt = createdAt;
     }
+
 
 }

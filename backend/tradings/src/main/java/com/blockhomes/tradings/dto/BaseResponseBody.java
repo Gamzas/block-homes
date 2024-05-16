@@ -9,11 +9,13 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class BaseResponseBody {
 
+    private String exceptionName;
     private String message;
     private Integer statusCode;
 
     @Builder
-    public BaseResponseBody(String message, HttpStatus statusCode) {
+    public BaseResponseBody(String exceptionName, String message, HttpStatus statusCode) {
+        this.exceptionName = exceptionName;
         this.message = message;
         this.statusCode = statusCode.value();
     }
