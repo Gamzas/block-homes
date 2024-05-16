@@ -1,4 +1,4 @@
-// SmartContractPage.tsx
+// SmartContractPage.tsx s s
 import React, { useEffect, useState } from 'react'
 import * as s from './style/SmartContract'
 import Header from '@/common/Header'
@@ -16,6 +16,7 @@ import {
   deployContract,
   getContractInstance,
   getMessageHash,
+  payDepositAndSign,
 } from '@/abi/userSmartContract/DeployLongTermRentContract'
 import { ethers } from 'ethers'
 import { userAtom } from '@stores/atoms/userStore'
@@ -38,9 +39,12 @@ const SmartContractPage = () => {
 
   // 지갑 불러오기(wallet) 비밀번호 쳐서 여는 로직 필요~~
   const currentUser = useAtomValue(userAtom)
+  console.log('currentUser', currentUser.walletAddress)
+
   const { data: getWalletData } = useGetWallet({
     walletAddress: currentUser.walletAddress,
   })
+
   // 콘솔 확인창
   console.log('getWalletData', getWalletData)
   console.log('password', password)
@@ -56,20 +60,24 @@ const SmartContractPage = () => {
   const handleClose = () => setOpen(false)
   const dummyData = {
     // 임대인 지갑주소
-    landlordDID: '0xeD739565D59219A4bDac5A958A803ec4bdD07b45',
+    landlordDID: '0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
     // 임차인 지갑주소
-    tenantDID: '0xdcb514da532854cA22F07920515f275217d15c6e',
+    tenantDID: '0xa7036441C32731c660ee9a00C4BFFC8578A37533',
+    landlordDID2: 'did:klay:0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
+    tenantDID2: 'did:klay:0xa7036441C32731c660ee9a00C4BFFC8578A37533',
     leasePeriod: 12,
-    deposit: ethers.utils.parseEther('1.0').toString(), // 1 ETH in wei // 보증금
-    propertyDID: 'did:example:abcdef123456789', // 부동산의 분산식 식별자
+    deposit: ethers.utils.parseEther('0.1').toString(), // 1 ETH in wei // 보증금
+    propertyDID: 'did:klay:abcdef123456789', // 부동산의 분산식 식별자
     contractDate: Math.floor(Date.now() / 1000), // Current Unix timestamp
-    terms: [
-      '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다.',
-      '계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다.',
-      '만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다.',
-      '만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다.',
-    ],
+    terms:
+      '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다/계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다',
   }
+
+  // 임차인 지갑주소로 암호호된 지갑주소 불러오기
+  const { data: getWalletData2 } = useGetWallet({
+    walletAddress: dummyData.tenantDID,
+  })
+  console.log('getWalletData2', getWalletData2)
 
   const handlePasswordConfirm = (password: string) => {
     setPassword(password)
@@ -88,17 +96,43 @@ const SmartContractPage = () => {
         getWalletData.data.encPrivateKey,
         password,
       )
+      console.log('userWallet', userWallet)
 
-      // 1.5서명할 메시지 준비 (예시: "임대 계약 승인")
+      // 1.5서명할 메시지 준비 (예시: "임대 계약 승인") 서명하는거 해쉬 만들기!!!!!!
 
-      const messageHash = getMessageHash(dummyData)
-
-      // 메시지에 대한 서명 생성
-      const signature = await userWallet.signMessage(
-        ethers.utils.arrayify(messageHash),
+      const message = ethers.utils.solidityKeccak256(
+        [
+          'string',
+          'string',
+          'uint16',
+          'uint256',
+          'string',
+          'uint256',
+          'string',
+        ],
+        [
+          dummyData.landlordDID2.toLowerCase(),
+          dummyData.tenantDID2.toLowerCase(),
+          dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          dummyData.propertyDID.toLowerCase(),
+          dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          dummyData.terms.toLowerCase(),
+        ],
       )
-      // 서명을 r, s, v로 분할
+      const messageBytes = ethers.utils.arrayify(message)
+      const signature = await userWallet.signMessage(messageBytes)
       const sig = ethers.utils.splitSignature(signature)
+      console.log(sig)
+
+      // const messageHash = getMessageHash(dummyData)
+
+      // // 메시지에 대한 서명 생성
+      // const signature = await userWallet.signMessage(
+      //   ethers.utils.arrayify(messageHash),
+      // )
+      // // 서명을 r, s, v로 분할
+      // const sig = ethers.utils.splitSignature(signature)
 
       // 2. 이더리움 네트워크 연결
       const provider = new ethers.providers.JsonRpcProvider(
@@ -140,43 +174,69 @@ const SmartContractPage = () => {
     }
   }
 
-  // 임차인이 보증금을 지불하는 함수
-  const handlePayDeposit = async () => {
-    // 지갑 데이터와 비밀번호가 있는지 확인
-    if (getWalletData && password) {
-      try {
-        // EncryptedJson을 사용하여 지갑을 복원
-        const tenantWallet = await ethers.Wallet.fromEncryptedJson(
-          getWalletData.data.encPrivateKey,
-          password,
-        )
+  const handleSignAndPayDeposit = async () => {
+    if (!password) {
+      alert('지갑 정보와 비밀번호를 확인해주세요.')
+      return
+    }
+    try {
+      // 1.지갑 복원
+      const tenantWallet = await ethers.Wallet.fromEncryptedJson(
+        getWalletData2.data.encPrivateKey,
+        password,
+      )
 
-        // 이더리움 메인넷에 연결하기 위해 provider 생성
-        const provider = new ethers.providers.JsonRpcProvider(
-          BLOCK_CHAIN_ENDPOINT,
-        )
+      // 2. 이더리움 메인넷에 연결하기 위해 provider 생성
+      const provider = new ethers.providers.JsonRpcProvider(
+        BLOCK_CHAIN_ENDPOINT,
+      )
 
-        // 지갑을 provider에 연결하여 signer 생성
-        const tenantSigner = tenantWallet.connect(provider)
+      // 지갑을 provider에 연결하여 signer 생성
+      const tenantSigner = tenantWallet.connect(provider)
+      console.log('11tenantSigner', tenantSigner)
 
-        // 스마트 계약 인스턴스 생성
-        const contract = getContractInstance(deploymentInfo, tenantSigner)
+      // 3. 스마트 계약 인스턴스 생성
+      const contract = getContractInstance(deploymentInfo, tenantSigner)
+      console.log('22contract', contract)
 
-        // 보증금 지불 트랜잭션 생성
-        const tx = await contract.payDeposit({
-          value: ethers.utils.parseEther('1.0'), // dummyData.deposit을 사용하는 경우 이를 대체
-        })
+      // 메세지 생성 코드작성
 
-        // 트랜잭션이 완료될 때까지 대기
-        await tx.wait()
-        console.log('보증금 지불 성공:', tx)
-        setSnackbarMessage('보증금 지불 성공')
-        setSnackbarOpen(true)
-      } catch (error) {
-        console.error('보증금 지불 실패:', error)
-      }
-    } else {
-      alert('지갑 정보를 불러오거나 비밀번호를 입력하세요.')
+      const message = ethers.utils.solidityKeccak256(
+        [
+          'string',
+          'string',
+          'uint16',
+          'uint256',
+          'string',
+          'uint256',
+          'string',
+        ],
+        [
+          dummyData.landlordDID2.toLowerCase(),
+          dummyData.tenantDID2.toLowerCase(),
+          dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          dummyData.propertyDID.toLowerCase(),
+          dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          dummyData.terms.toLowerCase(),
+        ],
+      )
+      const messageBytes = ethers.utils.arrayify(message)
+      const signature = await tenantWallet.signMessage(messageBytes)
+      const sig = ethers.utils.splitSignature(signature)
+
+      const txResponse = await contract.tenantSign(sig.r, sig.s, sig.v, {
+        value: ethers.utils.parseEther('0.1'),
+      })
+
+      // const receipt = await payDepositAndSign(contract, sig, dummyData.deposit)
+      const receipt = await txResponse.wait()
+
+      console.log('Transaction receipt:', receipt)
+      alert('보증금 지불 및 서명이 성공적으로 처리되었습니다.')
+    } catch (error) {
+      console.error('보증금 지불 및 서명 처리 중 오류 발생:', error)
+      alert('보증금 지불 및 서명 처리 중 오류가 발생했습니다.')
     }
   }
 
@@ -198,7 +258,7 @@ const SmartContractPage = () => {
 
       <Button onClick={() => setPasswordModalOpen(true)}>Enter Password</Button>
       <Button onClick={handleDeploy}>Deploy Contract</Button>
-      <Button onClick={handlePayDeposit}>Pay Deposit</Button>
+      <Button onClick={handleSignAndPayDeposit}>Pay Deposit</Button>
       <CustomModal
         open={open}
         handleClose={handleClose}
@@ -223,3 +283,71 @@ const SmartContractPage = () => {
 }
 
 export default SmartContractPage
+
+// // 임차인이 보증금을 지불하는 함수
+// const handlePayDeposit = async () => {
+//   // 지갑 데이터와 비밀번호가 있는지 확인
+//   if (getWalletData && password) {
+//     try {
+//       // EncryptedJson을 사용하여 임차인 지갑을 복원
+//       const tenantWallet = await ethers.Wallet.fromEncryptedJson(
+//         getWalletData2.data.encPrivateKey,
+//         password,
+//       )
+
+//       // 이더리움 메인넷에 연결하기 위해 provider 생성
+//       const provider = new ethers.providers.JsonRpcProvider(
+//         BLOCK_CHAIN_ENDPOINT,
+//       )
+
+//       // 지갑을 provider에 연결하여 signer 생성
+//       const tenantSigner = tenantWallet.connect(provider)
+//       console.log('###1tenantSigner', tenantSigner)
+
+//       // 스마트 계약 인스턴스 생성
+//       const contract = getContractInstance(deploymentInfo, tenantSigner)
+//       console.log('####2contract', contract)
+
+//       // 메세지 생성 코드작성
+
+//       const message = ethers.utils.solidityKeccak256(
+//         [
+//           'string',
+//           'string',
+//           'uint16',
+//           'uint256',
+//           'string',
+//           'uint256',
+//           'string',
+//         ],
+//         [
+//           dummyData.landlordDID2.toLowerCase(),
+//           dummyData.tenantDID2.toLowerCase(),
+//           dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+//           dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+//           dummyData.propertyDID.toLowerCase(),
+//           dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+//           dummyData.terms.toLowerCase(),
+//         ],
+//       )
+//       const messageBytes = ethers.utils.arrayify(message)
+//       const signature = await tenantWallet.signMessage(messageBytes)
+//       const sig = ethers.utils.splitSignature(signature)
+
+//       // 보증금 지불 트랜잭션 생성
+//       const tx = await contract.payDeposit({
+//         value: ethers.utils.parseEther('1.0'), // dummyData.deposit을 사용하는 경우 이를 대체
+//       })
+
+//       // 트랜잭션이 완료될 때까지 대기
+//       await tx.wait()
+//       console.log('보증금 지불 성공:', tx)
+//       setSnackbarMessage('보증금 지불 성공')
+//       setSnackbarOpen(true)
+//     } catch (error) {
+//       console.error('보증금 지불 실패:', error)
+//     }
+//   } else {
+//     alert('지갑 정보를 불러오거나 비밀번호를 입력하세요.')
+//   }
+// }
