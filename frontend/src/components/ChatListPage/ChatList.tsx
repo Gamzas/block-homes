@@ -19,8 +19,8 @@ const ChatList = () => {
 
   useEffect(() => {
     setChatRoomRequestData({
-      mode: userType.type,
-      value: user.walletAddress,
+      mode: userType.type + 1,
+      walletAddress: user.walletAddress,
     })
   }, [userType, user])
 
@@ -37,7 +37,7 @@ const ChatList = () => {
           alarmText={'현재 진행중인 채팅방이 없어요.'}
         />
       ) : (
-        data.map(chatData => <ChatPreviewComponent {...chatData} />)
+        data.map(ChatRoomData => <ChatPreviewComponent {...ChatRoomData} />)
       )}
     </c.ChatListContainer>
   )
