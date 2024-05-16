@@ -56,12 +56,12 @@ const DetailFooter = (props: PropsType) => {
     if (isLiked) {
       deleteFavorite({
         walletAddress: user.walletAddress,
-        itemNo: 3,
+        itemNo: Number(id),
       })
     } else {
       postFavorite({
         walletAddress: user.walletAddress,
-        itemNo: 3,
+        itemNo: Number(id),
       })
     }
     setIsLiked(!isLiked)
