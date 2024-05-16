@@ -9,6 +9,7 @@ export type MessageType = {
   image: string
   contractStep: number
   message: string
+  createdAt: string
 }
 
 export interface SendMessageInputPropsType {

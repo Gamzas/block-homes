@@ -10,3 +10,5 @@ export const ChattingRoomPageContainer = styled.div`
 `
 
 export const ChattingHeader = styled.div``
+
+export const MessageList = styled.div``

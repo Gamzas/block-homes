@@ -9,6 +9,7 @@ import { MessageType } from '@/types/components/chatType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
 import { Client } from '@stomp/stompjs'
+import MessageItem from '@components/ChattingPage/MessageItem'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -24,6 +25,7 @@ const ChattingRoomPage = () => {
     image: '',
     contractStep: 0,
     message: '',
+    createdAt: '',
   }
 
   const [messages, setMessages] = useState<MessageType[]>([])
@@ -80,7 +82,12 @@ const ChattingRoomPage = () => {
         <button>매물 체크리스트 보러가기</button>
         <button>매물 거래 현황 보러가기</button>
       </c.ChattingHeader>
-      ㄴ
+      <c.MessageList>
+        {messages.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
+        {messages.map(message => (
+          <MessageItem item={message} key={message.chatNo} />
+        ))}
+      </c.MessageList>
       <SendMessageInput
         sendButtonClick={sendTextMessage}
         message={newMessage.message}
