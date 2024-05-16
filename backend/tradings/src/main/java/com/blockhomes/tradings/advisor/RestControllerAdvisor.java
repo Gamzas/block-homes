@@ -123,7 +123,8 @@ public class RestControllerAdvisor {
         ItemOwnerNotMatchException.class,
         DuplicateLikesException.class,
         RoleWalletNotMatchException.class,
-        ProgressNotPermittedException.class
+        ProgressNotPermittedException.class,
+        DuplicateChatRoomException.class
     })
     public ResponseEntity<BaseResponseBody> conflictError(Exception e) {
         log.error(e.getMessage());

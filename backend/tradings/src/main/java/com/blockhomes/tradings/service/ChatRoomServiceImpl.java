@@ -13,6 +13,7 @@ import com.blockhomes.tradings.entity.chat.WalletChatRoom;
 import com.blockhomes.tradings.entity.item.Item;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.chat.ChatRoomNotFoundException;
+import com.blockhomes.tradings.exception.chat.DuplicateChatRoomException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import com.blockhomes.tradings.repository.chat.ChatRoomRepository;
@@ -70,6 +71,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     @Transactional
     public CreateChatRoomRes createChatRoom(CreateChatRoomReq req) {
+
+        if (chatRoomRepository.getChatRoomByItemNoAndWallet(req.getItemNo(), req.getWalletAddress()).describeConstable().isPresent()) {
+            throw new DuplicateChatRoomException(req.getItemNo(), req.getWalletAddress());
+        }
+
         Item item = itemRepository.getItemByItemNo(req.getItemNo())
             .orElseThrow(ItemNotFoundException::new);
 
