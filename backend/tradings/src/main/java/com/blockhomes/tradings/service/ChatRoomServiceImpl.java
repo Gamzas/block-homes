@@ -50,7 +50,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
     @Override
     public Integer checkChatRoom(CheckChatRoomReq req) {
-        Integer result = chatRoomRepository.getChatRoomByItemNoAndWallet(req.getItemNo(), req.getWalletAddress());
+        Integer result = chatRoomRepository.getChatRoomNoByItemNoAndWallet(req.getItemNo(), req.getWalletAddress());
 
         if (result == null || result == 0) {
             throw new ChatRoomNotFoundException();
@@ -72,7 +72,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Transactional
     public CreateChatRoomRes createChatRoom(CreateChatRoomReq req) {
 
-        if (chatRoomRepository.getChatRoomByItemNoAndWallet(req.getItemNo(), req.getWalletAddress()).describeConstable().isPresent()) {
+        if (chatRoomRepository.getChatRoomNoByItemNoAndWallet(req.getItemNo(), req.getWalletAddress()).describeConstable().isPresent()) {
             throw new DuplicateChatRoomException(req.getItemNo(), req.getWalletAddress());
         }
 
