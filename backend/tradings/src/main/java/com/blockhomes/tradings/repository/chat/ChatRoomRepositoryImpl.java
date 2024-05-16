@@ -38,7 +38,7 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     @Override
-    public Integer getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress) {
+    public Integer getChatRoomNoByItemNoAndWallet(Integer itemNo, String walletAddress) {
         return from(qChatRoom)
             .innerJoin(qItem).on(qItem.eq(qChatRoom.item))
             .innerJoin(qWalletChatRoom).on(qWalletChatRoom.chatRoom.eq(qChatRoom))
@@ -47,6 +47,11 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
             .where(qWalletChatRoom.roleCategory.eq(RoleCategory.BUYER)
                 .and(qWallet.walletAddress.eq(walletAddress)))
             .fetchOne();
+    }
+
+    @Override
+    public ChatRoomInstance getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress) {
+        return null;
     }
 
     private JPQLQuery<ChatRoomInstance> getChatRoomsQuery() {

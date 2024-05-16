@@ -9,8 +9,8 @@ public interface ChatRoomRepositoryCustom {
 
     List<ChatRoomInstance> getChatRoomsByWalletAndRole(String walletAddress, RoleCategory roleCategory);
 
-    Integer getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress);
+    Integer getChatRoomNoByItemNoAndWallet(Integer itemNo, String walletAddress);
 
-
+    ChatRoomInstance getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress);
 
 }
