@@ -4,6 +4,7 @@ import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.item.Item;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,24 +22,19 @@ public class ChatRoom extends BaseEntity {
     private Integer chatRoomNo;
 
     @NotNull
-    @Column(name = "chat_room_id", nullable = false, unique = true)
-    private String chatRoomId;
-
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_no", nullable = false)
     private Item item;
 
     @NotNull
-    @Column(name = "seller_step", nullable = false)
-    private Integer sellerStep;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "contract_step", nullable = false)
+    private ContractStep contractStep;
 
-    @NotNull
-    @Column(name = "buyer_step", nullable = false)
-    private Integer buyerStep;
-
-    @NotNull
-    @Column(name = "session_id", nullable = false)
-    private String sessionId;
+    @Builder
+    public ChatRoom(Item item) {
+        this.item = item;
+        contractStep = ContractStep.CONTRACT_REQUEST;
+    }
 
 }

@@ -1,7 +1,38 @@
 package com.blockhomes.tradings.dto.chat;
 
+import com.blockhomes.tradings.entity.chat.RoleCategory;
+import com.blockhomes.tradings.exception.common.EnumNotMatchException;
+import lombok.Getter;
+
+@Getter
 public enum MessageType {
-    ENTER,
-    TALK,
-    LEAVE;
+    ENTER(1),
+    TALK(2),
+    SELLER_PROGRESS(3),
+    BUYER_PROGRESS(4),
+    ACCEPT(5),
+    CONTRACT_DEAL(6);
+
+    private final Integer value;
+
+    MessageType(Integer value) {
+        this.value = value;
+    }
+
+    public static MessageType valueToEnum(Integer value) {
+        for (MessageType m : MessageType.values()) {
+            if (m.getValue().equals(value)) return m;
+        }
+
+        throw new EnumNotMatchException(MessageType.class, value);
+    }
+
+    public static Integer enumToValue(MessageType messageType) {
+        for (MessageType m : MessageType.values()) {
+            if (m.equals(messageType)) return m.getValue();
+        }
+
+        return 0;
+    }
+
 }
