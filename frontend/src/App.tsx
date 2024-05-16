@@ -42,7 +42,7 @@ const HomeRoutes = () => (
     <Route path="/mypage" element={<MyPage />} />
     <Route path="/callback/:result" element={<CallBackPage />} />
     <Route path="/chatroom-list" element={<ChatListPage />} />
-    <Route path="/chatroom/:chatNum" element={<ChattingRoomPage />} />
+    <Route path="/chatroom/:chatRoomNo" element={<ChattingRoomPage />} />
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/info-report" element={<InfoReportPage />} />
