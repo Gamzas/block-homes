@@ -31,6 +31,9 @@ public class ChatRoom extends BaseEntity {
     @Column(name = "contract_step", nullable = false)
     private ContractStep contractStep;
 
+    @Column(name = "temp_contract_address")
+    private String tempContractAddress;
+
     @Builder
     public ChatRoom(Item item) {
         this.item = item;

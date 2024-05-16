@@ -49,6 +49,7 @@ dependencies {
 
 	// Amazon S3
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
 	// Chat
 	implementation "org.springframework.boot:spring-boot-starter-amqp"
@@ -62,6 +63,7 @@ dependencies {
 	implementation 'org.apache.tika:tika-core:1.28.2'
 
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.4'
+
 
 }
 
