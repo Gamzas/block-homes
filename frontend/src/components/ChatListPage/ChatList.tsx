@@ -1,4 +1,3 @@
-import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
 import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { useQuery } from '@tanstack/react-query'
@@ -7,40 +6,52 @@ import {
   fetchChatRoomsRequestType,
 } from '@/types/components/chatRoomType'
 import { fetchChatRooms } from '@apis/chatApi'
-import NoItems from '@common/NoItems'
 import { useEffect, useState } from 'react'
 import * as c from '@components/ChatListPage/style/ChatListStyle'
+import NoItems from '@common/NoItems'
+import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
+import UserTypeToggle from '@common/UserTypeToggle'
 
 const ChatList = () => {
   const [user] = useAtom(userAtom)
   const [userType] = useAtom(userTypeAtom)
   const [chatRoomRequestData, setChatRoomRequestData] =
-    useState<fetchChatRoomsRequestType>()
+    useState<fetchChatRoomsRequestType | null>(null)
 
   useEffect(() => {
-    setChatRoomRequestData({
-      mode: userType.type + 1,
-      walletAddress: user.walletAddress,
-    })
+    if (user.walletAddress) {
+      setChatRoomRequestData({
+        mode: userType.type + 1,
+        walletAddress: user.walletAddress,
+      })
+    }
   }, [userType, user])
 
-  const { data, isLoading } = useQuery<ChatRoomListType[]>({
+  const { data } = useQuery<ChatRoomListType[]>({
     queryKey: ['fetchChatRooms', chatRoomRequestData],
-    queryFn: () =>
-      chatRoomRequestData.walletAddress !== '' &&
-      fetchChatRooms(chatRoomRequestData),
+    queryFn: () => fetchChatRooms(chatRoomRequestData!),
   })
 
-  return (
-    <c.ChatListContainer>
-      {data && data.length === 0 ? (
+  if (!Array.isArray(data)) {
+    return (
+      <c.ChatListContainer>
         <NoItems
           src={'image/image_sad_pig.png'}
           alarmText={'현재 진행중인 채팅방이 없어요.'}
         />
-      ) : (
-        data.map(ChatRoomData => <ChatPreviewComponent {...ChatRoomData} />)
-      )}
+        <UserTypeToggle />
+      </c.ChatListContainer>
+    )
+  }
+
+  return (
+    <c.ChatListContainer>
+      {data.map(ChatRoomData => (
+        <ChatPreviewComponent
+          key={ChatRoomData.chatRoomNum}
+          {...ChatRoomData}
+        />
+      ))}
     </c.ChatListContainer>
   )
 }
