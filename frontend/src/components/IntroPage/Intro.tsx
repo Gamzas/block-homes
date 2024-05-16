@@ -1,72 +1,93 @@
-import { IntroContainer } from '@components/IntroPage/style/IntroStyle'
-import { useAtomValue } from 'jotai'
-import { userAtom } from '@stores/atoms/userStore'
-import { useGetWallet } from '@apis/walletApi'
-import { useState } from 'react'
-import { ethers } from 'ethers'
-import { useClaimCredential } from '@/abi/ownershipVCRegistry/claimCredential'
-import { MOIS_PRIVATE_KEY } from '@constants/abi/MOISPrivateKey'
-import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
+import React, { useRef, useState } from 'react'
+import {
+  IntroCanvasWrapper,
+  IntroContainer,
+  IntroRefreshButton,
+} from '@components/IntroPage/style/IntroStyle'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, useGLTF } from '@react-three/drei'
+
+const Model = ({
+  url,
+  scale,
+  isUserInteracting,
+  modelRef,
+}: {
+  url: string
+  scale?: [number, number, number]
+  isUserInteracting: boolean
+  modelRef: React.RefObject<any>
+}) => {
+  const { scene } = useGLTF(url)
+
+  useFrame(() => {
+    if (modelRef.current && !isUserInteracting) {
+      modelRef.current.rotation.x += 0.005 // x축을 기준으로 회전
+    }
+  })
+
+  return <primitive ref={modelRef} object={scene} scale={scale} />
+}
+
+const Controls = ({
+  setIsUserInteracting,
+  controlsRef,
+}: {
+  setIsUserInteracting: React.Dispatch<React.SetStateAction<boolean>>
+  controlsRef: React.RefObject<any>
+}) => {
+  useFrame(() => {
+    if (controlsRef.current) {
+      controlsRef.current.update()
+    }
+  })
+
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enablePan={false}
+      maxPolarAngle={Math.PI} // x축 회전 허용
+      minPolarAngle={-Math.PI} // x축 회전 허용
+      onStart={() => setIsUserInteracting(true)} // 사용자가 모델을 조작할 때
+      onEnd={() => setIsUserInteracting(false)} // 사용자가 모델 조작을 멈출 때
+    />
+  )
+}
 
 const Intro = () => {
-  const currentUser = useAtomValue(userAtom)
-  const { data: getWalletData } = useGetWallet({
-    walletAddress: currentUser.walletAddress,
-  })
-  const { mutate: claimCredentialMutate } = useClaimCredential()
-  const [userWallet, setUserWallet] = useState(null)
-  const [password, setPassword] = useState('')
+  const [isUserInteracting, setIsUserInteracting] = useState(false)
+  const initialRotation: [number, number, number] = [0, 0, 0]
+  const modelRef = useRef<any>(null)
+  const controlsRef = useRef<any>(null)
 
-  const handleDecryptedWalletButtonClick = () => {
-    if (getWalletData) {
-      ethers.Wallet.fromEncryptedJson(
-        getWalletData.data.encPrivateKey,
-        password,
-      ).then(decryptionWallet => {
-        setUserWallet(decryptionWallet)
-        console.log('decryptionWallet: ', decryptionWallet)
-      })
+  const handleReset = () => {
+    if (modelRef.current) {
+      modelRef.current.rotation.set(...initialRotation)
     }
-  }
-
-  const handleClaimCredentialButtonClick = async () => {
-    const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
-    const MOISWallet = new ethers.Wallet(MOIS_PRIVATE_KEY, provider)
-    const subject = 'did:klay:0x15b84A76cd54E0D086FE0E40Cb3eAc3dB3e9a593'
-    const value = 'did:klay:0x12345'
-    const message = ethers.utils.solidityKeccak256(
-      ['string', 'uint256', 'string'],
-      [subject, Math.floor(Date.now() / 1000), value],
-    )
-    const messageBytes = ethers.utils.arrayify(message)
-    const flatSig = await MOISWallet.signMessage(messageBytes)
-    const sig = ethers.utils.splitSignature(flatSig)
-
-    const params = {
-      _subject: subject,
-      _issuanceDate: Math.floor(Date.now() / 1000),
-      _r: sig.r,
-      _s: sig.s,
-      _v: sig.v,
-      _value: value,
+    if (controlsRef.current) {
+      controlsRef.current.reset() // OrbitControls의 회전 축을 초기화
     }
-    claimCredentialMutate(params)
   }
 
   return (
     <IntroContainer>
-      <div>VC 발급 테스트 중이에요</div>
-      <br />
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="지갑 비밀번호를 입력하세요"
-      />
-      <br />
-      <button onClick={handleDecryptedWalletButtonClick}>지갑 복호화</button>
-      <br />
-      <button onClick={handleClaimCredentialButtonClick}>VC 생성</button>
+      <IntroCanvasWrapper>
+        <Canvas camera={{ position: [0, 100, 0], fov: 75 }}>
+          <ambientLight intensity={2} />
+          <directionalLight position={[1000, 1000, 1000]} intensity={2} />
+          <Model
+            url={'/3DIllustrations/Intro.glb'}
+            scale={[4.5, 4.5, 4.5]}
+            isUserInteracting={isUserInteracting}
+            modelRef={modelRef}
+          />
+          <Controls
+            setIsUserInteracting={setIsUserInteracting}
+            controlsRef={controlsRef}
+          />
+        </Canvas>
+      </IntroCanvasWrapper>
+      <IntroRefreshButton onClick={handleReset} />
     </IntroContainer>
   )
 }
