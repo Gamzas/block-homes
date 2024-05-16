@@ -15,6 +15,7 @@ export const deployContract = async (
   propertyDID, // 부동산의 DID
   contractDate, // 계약 날짜
   terms, // 계약 조건
+  sig, // 서명 객체
 ) => {
   try {
     // Infura를 통해 이더리움 메인넷에 연결
@@ -41,6 +42,9 @@ export const deployContract = async (
       propertyDID,
       contractDate,
       terms,
+      sig.r,
+      sig.s,
+      sig.v,
     )
 
     // 배포가 완료되기를 기다림
@@ -85,15 +89,86 @@ export const payDeposit = async (
   }
 }
 
-// 임의의 메시지에 대한 서명을 생성합니다. 나중에 지갑 있으면 그때 사용하기 암호키 해쉬로 만드는 작업 필요~~~
-// export const generateDummySignature = async (wallet) {
-//   const message = 'Some dummy data to sign'
-//   const messageHash = ethers.utils.id(message)
-//   const signature = await wallet.signMessage(ethers.utils.arrayify(messageHash))
-//   return signature
-// }
+// 계약 상세 정보를 받아 해시를 생성하는 함수
+export const getMessageHash = contractDetails => {
+  const {
+    landlordDID,
+    tenantDID,
+    leasePeriod,
+    deposit,
+    propertyDID,
+    contractDate,
+    terms,
+  } = contractDetails
 
-// 스마트 계약의 생성자 또는 함수가 이러한 서명들을 바이트 배열(bytes)로 요구
-// 유효한 16진수 문자열만 바이트 배열로 변환
-// const landlordSigBytes = ethers.utils.arrayify(landlordSignature)
-// const tenantSigBytes = ethers.utils.arrayify(tenantSignature)
+  // 조건 배열을 하나의 문자열로 결합
+  const combinedTerms = terms.join()
+
+  // 패킹 및 해시 생성 과정
+  const packedData = ethers.utils.defaultAbiCoder.encode(
+    ['string', 'string', 'uint16', 'uint256', 'string', 'uint256', 'string'],
+    [
+      landlordDID,
+      tenantDID,
+      leasePeriod,
+      deposit,
+      propertyDID,
+      contractDate,
+      combinedTerms,
+    ],
+  )
+
+  return ethers.utils.keccak256(packedData)
+}
+
+// // 임차인이 서명하며 보증금을 지불하는 함수
+// export const payDepositAndSign = async (
+//   contractAddress,
+//   signer, // 지갑과 연결된 signer 객체
+//   depositAmount, // 보증금 금액 (예: "1.0" ETH)
+//   terms, // 계약 조건 배열
+//   walletData, // 지갑 정보
+//   password, // 지갑 비밀번호
+// ) => {
+//   try {
+//     // EncryptedJson을 사용하여 지갑을 복원
+//     const tenantWallet = await ethers.Wallet.fromEncryptedJson(
+//       walletData.data.encPrivateKey,
+//       password,
+//     )
+
+//     // 이더리움 네트워크에 연결
+//     const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
+
+//     // 지갑을 provider에 연결하여 signer 생성
+//     const tenantSigner = tenantWallet.connect(provider)
+
+//     // 스마트 계약 인스턴스 생성
+//     const contract = getContractInstance(contractAddress, tenantSigner)
+
+//     // 메시지 해시 생성 (계약 상세 정보를 이용)
+//     const messageHash = getMessageHash({
+//       landlordDID: signer.address,
+//       ...dummyData,
+//     })
+
+//     // 메시지에 대한 서명 생성
+//     const signature = await tenantWallet.signMessage(
+//       ethers.utils.arrayify(messageHash),
+//     )
+//     const { r, s, v } = ethers.utils.splitSignature(signature)
+
+//     // 'tenantSign' 함수 호출 및 보증금 보내기
+//     const txResponse = await contract.tenantSign(r, s, v, {
+//       value: ethers.utils.parseEther(depositAmount),
+//     })
+
+//     // 트랜잭션 영수증을 기다림
+//     const receipt = await txResponse.wait()
+//     console.log('Transaction successful:', receipt)
+//     return receipt
+//   } catch (error) {
+//     console.error('Error during signing and paying deposit:', error)
+//     throw new Error('Failed to sign and pay deposit.')
+//   }
+// }
