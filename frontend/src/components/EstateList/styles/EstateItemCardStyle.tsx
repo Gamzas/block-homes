@@ -11,7 +11,7 @@ export const ItemCardContainer = styled.div<colorType>`
   border-radius: 1.5rem;
   background: ${props => props.$color};
   position: relative;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   z-index: 0;
   overflow: hidden;
 `
@@ -140,4 +140,6 @@ export const ItemCardWrapper = styled.div`
   height: auto; // 적절히 조정 필요
   display: flex;
   justify-content: center;
+  /* border: 1px solid red; */
+  padding-bottom: 0.5rem;
 `
