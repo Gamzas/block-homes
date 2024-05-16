@@ -35,14 +35,16 @@ const EstateItemList = () => {
             alarmText={'해당 지역에 매물이 없습니다.'}
           />
         ) : (
-          <>
+          <l.EstateItemCardsContainer>
             {estateItemList.map((item, index) => (
               <EstateItemCard key={index} {...item} />
             ))}
-          </>
+          </l.EstateItemCardsContainer>
         )
       ) : (
-        <EstateListMap />
+        <l.EstateListMapContainer>
+          <EstateListMap />
+        </l.EstateListMapContainer>
       )}
       {filter && (
         <l.EstateFilterContainer>
