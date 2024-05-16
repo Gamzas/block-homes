@@ -15,7 +15,7 @@ contract OwnershipVCRegistry is Ownable{
         string issuer;
         string subject;
         uint256 issuanceDate;
-        string value; //소유 부동산의 DID 
+        string value; //소유 부동산의 DID
         Proof proof;
     }
 
