@@ -19,17 +19,20 @@ export const LikendBtn = styled.div`
 `
 export const InfoContainer = styled.div`
   margin: 1rem;
+
   .price {
     font-size: 1.4rem;
     font-weight: 700;
     line-height: 28px; /* 127.273% */
   }
+
   .maintenance {
     color: #a0a0a0;
     font-size: 0.9rem;
     font-weight: 500;
     line-height: 28px; /* 233.333% */
   }
+
   .location {
     font-size: 0.9rem;
     font-weight: 400;
@@ -46,6 +49,7 @@ export const ChatBtn = styled.button`
   align-items: center;
   position: absolute;
   right: 1rem;
+
   .name {
     width: 100%;
     color: #fff;
@@ -54,8 +58,7 @@ export const ChatBtn = styled.button`
     font-weight: 500;
   }
 
-  button:active,
-  button:focus {
+  &:focus {
     border: none !important;
     outline: none !important;
   }
