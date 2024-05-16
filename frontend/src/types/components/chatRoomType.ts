@@ -30,10 +30,10 @@ export interface ChatRoomCheckResponseType {
 export interface FetchChatRoomResponseType {
   data: {
     representativeImage: string
-    address: string
+    realEstateAddress: string
     transactionType: number
     price: number
-    realEstateNo: number
+    itemNo: number
     chatList: MessageType[]
   }
 }
