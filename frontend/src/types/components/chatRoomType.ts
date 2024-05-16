@@ -10,7 +10,7 @@ export interface ChatRoomListType {
 
 export interface fetchChatRoomsRequestType {
   mode: number
-  value: string
+  walletAddress: string
 }
 
 export interface chatRoomRequestDataType {

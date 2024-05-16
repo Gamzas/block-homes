@@ -19,6 +19,7 @@ contract UserDIDRegistry is Ownable {
         string authentication;
     }
 
+    mapping(address => address) taxAccount;
     mapping(string => DIDDocument) didDocuments;
 
     constructor() Ownable(msg.sender) {}
@@ -37,7 +38,7 @@ contract UserDIDRegistry is Ownable {
         return string(buffer);
     }
 
-    function createDIDDocument(address _holderAddress, string calldata _publicKey) public {
+    function createDIDDocument(address _holderAddress, string calldata _publicKey, address _taxAddress) public {
         DIDDocument memory didDocument;
         
         didDocument.id = string(abi.encodePacked("did:klay:", toHexString(uint256(uint160(_holderAddress)), 20)));
@@ -49,6 +50,8 @@ contract UserDIDRegistry is Ownable {
         didDocument.authentication=didDocument.publicKey.id;
 
         didDocuments[didDocument.id] = didDocument;
+
+        taxAccount[_holderAddress]=_taxAddress;
 
         emit DIDCreated(didDocument.id);
     }
@@ -62,8 +65,8 @@ contract UserDIDRegistry is Ownable {
         emit DIDDeleted(did);
     }
     
-    function getTaxContractAddress(string calldata did) external view returns (address) {
-        return taxAddresses[did];
+    function getTaxContractAddress(address did) external view returns (address) {
+        return taxAccount[did];
     }
 
 }
