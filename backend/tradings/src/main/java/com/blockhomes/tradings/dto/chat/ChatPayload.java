@@ -10,6 +10,7 @@ import lombok.*;
 public class ChatPayload {
 
     private String senderWalletAddress;
+    private Integer senderRole;
     private String message;
     private String imageBase64;
 
