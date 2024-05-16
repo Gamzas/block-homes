@@ -3,7 +3,7 @@ import { useAtom } from 'jotai'
 import { useQuery } from '@tanstack/react-query'
 import {
   ChatRoomListType,
-  fetchChatRoomsRequestType,
+  FetchChatRoomsRequestType,
 } from '@/types/components/chatRoomType'
 import { fetchChatRooms } from '@apis/chatApi'
 import { useEffect, useState } from 'react'
@@ -16,7 +16,7 @@ const ChatList = () => {
   const [user] = useAtom(userAtom)
   const [userType] = useAtom(userTypeAtom)
   const [chatRoomRequestData, setChatRoomRequestData] =
-    useState<fetchChatRoomsRequestType | null>(null)
+    useState<FetchChatRoomsRequestType | null>(null)
 
   useEffect(() => {
     if (user.walletAddress) {
