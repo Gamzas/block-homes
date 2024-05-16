@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const NoItemContainer = styled.div`
   width: 100%;
+  max-width: 390px;
   height: calc(100vh - 110px);
   padding: 0 5%;
   display: flex;
