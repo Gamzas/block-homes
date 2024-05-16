@@ -10,7 +10,6 @@ export const StatusBarContainer = styled.div`
 
 export const EstateItemListContainer = styled.div`
   width: 100%;
-  height: 94%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,10 +34,15 @@ export const EstateFilterContainer = styled.div`
   background: rgba(130, 130, 130, 0.7);
 `
 
-// DELETE 컨테이너 삭제
-
-export const EstateMapContainer = styled.div`
+export const EstateItemCardsContainer = styled.div`
+  padding-top: 2.5rem;
+  padding-bottom: 1rem;
   width: 100%;
-  height: 2rem;
+`
+
+export const EstateListMapContainer = styled.div`
+  height: 100vh;
+  padding-top: 2.5rem;
+  width: 100%;
   position: relative;
 `
