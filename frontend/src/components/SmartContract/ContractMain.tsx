@@ -1,41 +1,33 @@
 import * as c from './style/ContractMainStyle'
-import html2canvas from 'html2canvas'
-import { jsPDF } from 'jspdf'
 import ContractBoottomSheet from '@/components/SmartContract/ContractBoottomSheet'
 
 const ContractMain = () => {
-  const downloadPDF = async () => {
-    const element = document.getElementById('paperContainer') as HTMLElement
-    // 스크린샷을 캔버스로 생성
-
-    if (element) {
-      const canvas = await html2canvas(element, {
-        scale: 4,
-        logging: true,
-        useCORS: true,
-      })
-
-      const imgData = canvas.toDataURL('image/png')
-      const pdf = new jsPDF({
-        orientation: 'p',
-        unit: 'px',
-        format: [canvas.width, canvas.height],
-      })
-
-      const imgProps = pdf.getImageProperties(imgData)
-      const pdfWidth = pdf.internal.pageSize.getWidth()
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight)
-      // 파일 저장 이름
-      pdf.save('contract.pdf')
-    } else {
-      console.error('Element not found')
-    }
-  }
   return (
     <>
       <c.ContractMainContainer>
-        <c.Contract id="paperContainer"></c.Contract>
+        <c.Contract id="paperContainer">
+          <div className="content-box">
+            <p>오기선</p>
+            <p>김두칠</p>
+          </div>
+          <div className="content-box2">
+            <p>광주광역시 광산구 장덕동 해와달</p>
+          </div>
+          <div className="content-box3">
+            <p>주거용</p>
+            <p>33</p>
+          </div>
+          <div className="content-box4">
+            <p>1층</p>
+            <p>33</p>
+          </div>
+          <div className="content-box5">
+            <p>1000000000</p>
+          </div>
+          <div className="content-box6">
+            <p>1000000000</p>
+          </div>
+        </c.Contract>
         <ContractBoottomSheet></ContractBoottomSheet>
       </c.ContractMainContainer>
     </>
