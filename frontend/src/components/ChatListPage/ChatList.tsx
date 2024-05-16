@@ -1,4 +1,3 @@
-import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
 import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
 import { useAtom } from 'jotai'
 import { useQuery } from '@tanstack/react-query'
@@ -7,15 +6,16 @@ import {
   fetchChatRoomsRequestType,
 } from '@/types/components/chatRoomType'
 import { fetchChatRooms } from '@apis/chatApi'
-import NoItems from '@common/NoItems'
 import { useEffect, useState } from 'react'
 import * as c from '@components/ChatListPage/style/ChatListStyle'
+import NoItems from '@common/NoItems'
+import ChatPreviewComponent from '@components/ChatListPage/ChatPreviewComponent'
 
 const ChatList = () => {
   const [user] = useAtom(userAtom)
   const [userType] = useAtom(userTypeAtom)
   const [chatRoomRequestData, setChatRoomRequestData] =
-    useState<fetchChatRoomsRequestType>()
+    useState<fetchChatRoomsRequestType | null>(null)
 
   useEffect(() => {
     if (user.walletAddress) {
@@ -32,6 +32,17 @@ const ChatList = () => {
       chatRoomRequestData.walletAddress !== '' &&
       fetchChatRooms(chatRoomRequestData),
   })
+
+  if (!Array.isArray(data)) {
+    return (
+      <c.ChatListContainer>
+        <NoItems
+          src={'image/image_sad_pig.png'}
+          alarmText={'현재 진행중인 채팅방이 없어요.'}
+        />
+      </c.ChatListContainer>
+    )
+  }
 
   return (
     <c.ChatListContainer>
