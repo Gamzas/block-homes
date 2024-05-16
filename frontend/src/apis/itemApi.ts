@@ -22,16 +22,40 @@ export const usePostItemRegister = () => {
 }
 
 // 등록 된 매물 조회
-export const getEstateItems = async (data: EstateItemReqType) => {
-  const res = await publicRequest.get(`${API_ESTATE_ITEM}`, { data })
+export const getEstateItems = async () => {
+  const res = await publicRequest.get(`${API_ESTATE_ITEM}`, {
+    data: {
+      northEastLatitude: 35.19611721240724,
+      northEastLongitude: 126.81659138779987,
+      southWestLatitude: 126.8123206738595,
+      southWestLongitude: 35.19102703810346,
+      realEstateType: 3,
+      reportRank: 0,
+      transactionType: 0,
+      minPrice: 0,
+      maxPrice: 0,
+      minPyeong: 0,
+      maxPyeong: 0,
+    },
+  })
   return res.data
 }
 
 // 매물 상세 조회
 export const useGetDetailItem = (itemNum: number) => {
   return useQuery({
-    queryKey: ['detailItem'],
-    queryFn: () => publicRequest.get(`${API_ESTATE_DETAIL}/${itemNum}`),
+    queryKey: ['detailItem', itemNum],
+    queryFn: async () => {
+      try {
+        const res = await publicRequest.get(`${API_ESTATE_DETAIL}/${itemNum}`)
+        return res.data
+      } catch (err) {
+        console.error(err)
+        alert(err.response?.data?.message || '오류가 발생했습니다.')
+        window.location.href = '/'
+        return null
+      }
+    },
   })
 }
 

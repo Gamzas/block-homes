@@ -4,24 +4,28 @@ import DetailTabMenu from './DetailTabMenu'
 import DetailFooter from './DetailFooter'
 import ItemSafetyCard from './ItemSafetyCard'
 import RoomInfo from './RoomInfo'
-import { DetailItem } from '../../utils/item'
+import { useGetDetailItem } from '@/apis/itemApi'
+import ItemLoading from '@/common/ItemLoading'
 
 const DetailInfo = () => {
-  // DELETE 삭제하기
-  // const [selectedItem] = useAtom(selectedItemAtom)
-
   const { id } = useParams()
-  // const {
-  //   data: detailInfoData,
-  //   isLoading,
-  //   isError,
-  //   error,
-  // } = useGetDetailItem(Number(id))
-  // console.log(detailInfoData)
-  // console.log(isError)
-  const detailInfoData = DetailItem
+  const {
+    data: detailInfoData,
+    isLoading,
+    isError,
+    error,
+  } = useGetDetailItem(Number(id))
 
+  if (isLoading) {
+    return <ItemLoading />
+  }
 
+  if (isError) {
+    return <div>Error: {error.message}</div>
+  }
+
+  console.log(detailInfoData)
+  // const detailInfoData = DetailItem
 
   // useEffect(() => {
   //   const fetchData = async () => {
