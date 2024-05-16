@@ -51,7 +51,7 @@ const DetailInfo = () => {
       <>
         <DetailTabMenu />
         <ItemSafetyCard condition={detailInfoData.reportRank} />
-        {/* <RoomInfo info={detailInfoData} /> */}
+        <RoomInfo info={detailInfoData} />
         <DetailFooter />
       </>
     </d.DetailInfoWrapper>
