@@ -2,7 +2,7 @@ import useEstateCondition from '@/hooks/useEstateCondition'
 import * as i from '@components/EstateDetailPage/style/ItemSafetyCardStyle'
 
 interface PropsType {
-  condition: string
+  condition: number
 }
 const ItemSafetyCard = (props: PropsType) => {
   const condition = props.condition
