@@ -1,4 +1,4 @@
-package com.blockhomes.tradings.entity.chat;
+package com.blockhomes.tradings.entity.common;
 
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;

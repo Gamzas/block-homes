@@ -11,6 +11,7 @@ import com.blockhomes.tradings.dto.chat.response.ProgressRes;
 import com.blockhomes.tradings.dto.chat.response.ProvisionRes;
 import com.blockhomes.tradings.entity.chat.*;
 import com.blockhomes.tradings.entity.common.Image;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import com.blockhomes.tradings.exception.chat.*;
 import com.blockhomes.tradings.exception.common.ImageNotSavedException;

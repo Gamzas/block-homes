@@ -3,6 +3,7 @@ package com.blockhomes.tradings.repository.chat;
 import com.blockhomes.tradings.dto.chat.response.ChatRoomInstance;
 import com.blockhomes.tradings.entity.chat.*;
 import com.blockhomes.tradings.entity.common.QImage;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.item.QItem;
 import com.blockhomes.tradings.entity.item.QItemImage;
 import com.blockhomes.tradings.entity.item.enums.ItemImageCategory;
@@ -39,9 +40,9 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     @Override
     public Integer getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress) {
         return from(qChatRoom)
-            .innerJoin(qChatRoom.item, qItem)
-            .innerJoin(qChatRoom, qWalletChatRoom.chatRoom)
-            .innerJoin(qWalletChatRoom.wallet, qWallet)
+            .innerJoin(qItem).on(qItem.eq(qChatRoom.item))
+            .innerJoin(qWalletChatRoom).on(qWalletChatRoom.chatRoom.eq(qChatRoom))
+            .innerJoin(qWallet).on(qWalletChatRoom.wallet.eq(qWallet))
             .select(qChatRoom.chatRoomNo)
             .where(qWalletChatRoom.roleCategory.eq(RoleCategory.BUYER)
                 .and(qWallet.walletAddress.eq(walletAddress)))

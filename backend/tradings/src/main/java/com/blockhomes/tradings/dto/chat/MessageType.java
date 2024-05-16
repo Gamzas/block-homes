@@ -1,6 +1,5 @@
 package com.blockhomes.tradings.dto.chat;
 
-import com.blockhomes.tradings.entity.chat.RoleCategory;
 import com.blockhomes.tradings.exception.common.EnumNotMatchException;
 import lombok.Getter;
 

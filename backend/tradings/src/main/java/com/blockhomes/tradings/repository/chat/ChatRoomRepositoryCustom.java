@@ -1,11 +1,9 @@
 package com.blockhomes.tradings.repository.chat;
 
 import com.blockhomes.tradings.dto.chat.response.ChatRoomInstance;
-import com.blockhomes.tradings.dto.chat.response.ListChatRoomsRes;
-import com.blockhomes.tradings.entity.chat.RoleCategory;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ChatRoomRepositoryCustom {
 

@@ -1,7 +1,7 @@
 package com.blockhomes.tradings.repository.chat;
 
 import com.blockhomes.tradings.entity.chat.ChatRoom;
-import com.blockhomes.tradings.entity.chat.RoleCategory;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.chat.WalletChatRoom;
 import com.blockhomes.tradings.entity.wallet.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
