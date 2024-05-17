@@ -134,10 +134,10 @@ const ChattingRoomPage = () => {
         </div>
         <c.RightContainer>
           <div className="address-container">{data?.realEstateAddress}</div>
-          <div className="transaction-type-container">
-            {data?.transactionType}
+          <div className="transaction-price">
+            <div className="transaction-type-container">{typeOfNumber} </div>
+            <div className="price-container">{stringPrice}</div>
           </div>
-          <div className="price-container">{data?.price}</div>
 
           <c.ButtonContainer>
             <button
