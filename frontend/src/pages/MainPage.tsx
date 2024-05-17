@@ -4,19 +4,34 @@ import TopCard from '@components/MainPage/TopCard'
 import RealEstateCategory from '@components/MainPage/RealEstateCategory'
 import UserTypeToggle from '@common/UserTypeToggle'
 import { useAtom } from 'jotai'
-import { userTypeAtom } from '@stores/atoms/userStore'
+import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
 import OwnEstateDidList from '@components/MainPage/OwnEstateDidList'
 import InfoCardSlider from '@components/MainPage/InfoCardSlider'
+import { useEffect } from 'react'
 
 const MainPage = () => {
   const [currentUserType] = useAtom(userTypeAtom)
+  const [currentUser, setCurrentUser] = useAtom(userAtom)
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser')
+    const currentUserData = currentUser ? JSON.parse(currentUser) : null
+    if (currentUserData && !currentUser) {
+      setCurrentUser(currentUserData)
+    } else if (!currentUserData && currentUser) {
+      localStorage.setItem('currentUser', JSON.stringify(currentUser))
+    }
+  }, [])
   return (
     <h.MainPageContainer>
-      <TopCard />
+      <TopCard currentUser={currentUser} setCurrentUser={setCurrentUser} />
       <InfoCardSlider />
       {currentUserType.type === 0 && <RealEstateCategory />}
-      {currentUserType.type === 1 && <OwnEstateDidList />}
-      <UserTypeToggle />
+      {currentUser &&
+        <>
+          {currentUserType.type === 1 && <OwnEstateDidList currentUser={currentUser} />}
+          <UserTypeToggle />
+        </>
+      }
       <Footer />
     </h.MainPageContainer>
   )

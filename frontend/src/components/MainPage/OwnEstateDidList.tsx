@@ -1,42 +1,45 @@
 import * as o from '@components/MainPage/style/OwnEstateDidListStyle'
-import EstateDidCard from '@common/EstateDidCard'
 import CustomCarousel from '@components/MainPage/CustomCarousel'
+import { useEffect, useState } from 'react'
+import { useGetAllVCofUser } from '@/abi/ownershipVCRegistry/getAllVCofUser'
 import EmptyEstateDidCard from '@components/CheckDidPage/EmptyEstateDidCard'
-import { useState } from 'react'
+import EstateDidCard from '@common/EstateDidCard'
 
-const OwnEstateDidList = () => {
+const OwnEstateDidList = (currentUser) => {
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0)
+  const [cards, setCards] = useState([])
+  const { data: userVCArrayData } = useGetAllVCofUser(currentUser.currentUser.walletAddress)
+
+  useEffect(() => {
+    if (userVCArrayData) {
+      const newCards = userVCArrayData.map((realEstateDID: string, index: number) => ({
+        key: index,
+        content: (
+          <EstateDidCard
+            index={index}
+            currentCenterIndex={currentCenterIndex}
+            realEstateDID={realEstateDID}
+          />
+        ),
+      }))
+
+      newCards.push({
+        key: newCards.length,
+        content: (
+          <EmptyEstateDidCard
+            index={newCards.length}
+            currentCenterIndex={currentCenterIndex}
+          />
+        ),
+      })
+
+      setCards(newCards)
+    }
+  }, [userVCArrayData])
 
   const handleCenterChange = (newIndex: number) => {
     setCurrentCenterIndex(newIndex)
   }
-
-  const cards = [
-    {
-      key: 0,
-      content: (
-        <EstateDidCard index={0} currentCenterIndex={currentCenterIndex} />
-      ),
-    },
-    {
-      key: 1,
-      content: (
-        <EstateDidCard index={1} currentCenterIndex={currentCenterIndex} />
-      ),
-    },
-    {
-      key: 2,
-      content: (
-        <EstateDidCard index={2} currentCenterIndex={currentCenterIndex} />
-      ),
-    },
-    {
-      key: 3,
-      content: (
-        <EmptyEstateDidCard index={3} currentCenterIndex={currentCenterIndex} />
-      ),
-    },
-  ]
 
   return (
     <o.OwnEstateDidListContainer>
