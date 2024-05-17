@@ -13,6 +13,10 @@ import EstateItemCard from './EstateItemCard'
 import { EstateItemListType } from '@/types/api/itemType'
 import { publicRequest } from '@/hooks/requestMethods'
 import { API_ESTATE_ITEM } from '@/constants/api'
+import { useGetEstateItems } from '@/apis/itemApi'
+import ItemLoading from '@/common/ItemLoading'
+import NoItems from '@/common/NoItems'
+import { useParams } from 'react-router-dom'
 
 declare global {
   interface Window {
@@ -28,8 +32,12 @@ const EstateListMap = () => {
   const [coord] = useAtom(currentCoordAtom)
 
   // 부동산 매물 리스트
-  const [estateItemArr] = useAtom(estateItemListAtom)
-  const estateItemList: EstateItemListType[] = estateItemArr.itemList
+  // const [estateItemArr] = useAtom(estateItemListAtom)
+  // const estateItemList: EstateItemListType[] = estateItemArr.itemList
+  const { category } = useParams()
+  const { data, isLoading, error } = useGetEstateItems(Number(category))
+
+  const estateItemList: EstateItemListType[] = data.itemList
 
   // 상세보기 선택한 부동산
   const [item, setItem] = useAtom(selectedItemAtom)
@@ -39,26 +47,26 @@ const EstateListMap = () => {
     setItem('not')
   }
 
-  useEffect(() => {
-    setItem('not')
-    publicRequest
-      .get(`${API_ESTATE_ITEM}`, {
-        params: {
-          northEastLatitude: 35.20793645842205,
-          northEastLongitude: 126.8243731285463,
-          southWestLatitude: 35.167213022923335,
-          southWestLongitude: 126.79021349478826,
-          realEstateType: 0,
-          reportRank: 0,
-          transactionType: 0,
-          minPrice: 0,
-          maxPrice: 0,
-          minPyeong: 0,
-          maxPyeong: 0,
-        },
-      })
-      .then(res => console.log(res))
-  }, [])
+  // useEffect(() => {
+  //   setItem('not')
+  //   publicRequest
+  //     .get(`${API_ESTATE_ITEM}`, {
+  //       params: {
+  //         northEastLatitude: 35.20793645842205,
+  //         northEastLongitude: 126.8243731285463,
+  //         southWestLatitude: 35.167213022923335,
+  //         southWestLongitude: 126.79021349478826,
+  //         realEstateType: 0,
+  //         reportRank: 0,
+  //         transactionType: 0,
+  //         minPrice: 0,
+  //         maxPrice: 0,
+  //         minPyeong: 0,
+  //         maxPyeong: 0,
+  //       },
+  //     })
+  //     .then(res => console.log(res))
+  // }, [])
 
   useEffect(() => {
     // 지도생성
@@ -159,6 +167,19 @@ const EstateListMap = () => {
         })
     }
   }, [coord, estateItemList])
+
+  if (isLoading) {
+    return <ItemLoading />
+  }
+
+  if (error || !data || !data.itemList) {
+    return (
+      <NoItems
+        src={'/image/image_warning_pig.png'}
+        alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
+      />
+    )
+  }
 
   return (
     <e.EstateMapContainer id="map">

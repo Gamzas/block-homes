@@ -67,24 +67,22 @@ const EstateItemCard = (props: EstateItemListType) => {
           <div className="estate-type">
             {getRealEstateType(props.realEstateType)}
           </div>
-          {props.transactionStatus === 1 ? (
+          {props.transactionType === 1 ? (
             <div className="price-text">
               {getTransactionType(props.transactionType)}
-              {numberToKorean(props.price)}
+              {numberToKorean(props.price)}/{' '}
+              {numberToKorean(props.monthlyPrice)}
             </div>
           ) : (
             <div className="price-text">
               {getTransactionType(props.transactionType)}
-              {numberToKorean(props.price)} /{' '}
-              {numberToKorean(props.monthlyPrice)}
+              {numberToKorean(props.price)}
             </div>
           )}
           <div className="info-text">{props.area} m2</div>
           <div className="info-text">계약기간 {props.contractMonths}</div>
           <c.DIDContainer>
-            <div className="address">
-              0x15b84A76cd54E0D086FE0E40Cb3eAc3dB3e9a000
-            </div>
+            <div className="address">{props.realEstateDID}</div>
           </c.DIDContainer>
         </c.ItemPriceInfoContainer>
         <c.BackgroundContainer>
