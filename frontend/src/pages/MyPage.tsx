@@ -11,11 +11,15 @@ const MyPage = () => {
   useLoginStatus()
   return (
     <m.Container>
-      <MemberCard />
-      <MyWallet />
-      <MyVCCard />
-      <MyPageMenu />
-      <Logout />
+      <m.CardWrapper>
+        <MemberCard />
+      </m.CardWrapper>
+      <m.ContentWrapper>
+        <MyWallet />
+        <MyVCCard />
+        <MyPageMenu />
+        <Logout />
+      </m.ContentWrapper>
       <Footer />
     </m.Container>
   )
