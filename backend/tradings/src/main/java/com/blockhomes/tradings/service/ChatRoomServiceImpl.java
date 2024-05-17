@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service("chatRoomService")
 @RequiredArgsConstructor
@@ -68,8 +69,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     @Transactional
     public CreateChatRoomRes createChatRoom(CreateChatRoomReq req) {
-
-        if (chatRoomRepository.getChatRoomNoByItemNoAndWallet(req.getItemNo(), req.getWalletAddress()).describeConstable().isPresent()) {
+        
+        if (Objects.nonNull(chatRoomRepository.getChatRoomNoByItemNoAndWallet(req.getItemNo(), req.getWalletAddress()))) {
             throw new DuplicateChatRoomException(req.getItemNo(), req.getWalletAddress());
         }
 
