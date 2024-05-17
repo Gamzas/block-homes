@@ -2,12 +2,11 @@ import CompletePigContainer from '@/common/CompletePigContainer'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { useNavigate } from 'react-router-dom'
 import { ContractCompleteContainer } from './style/ContractCompleteStyle'
-import Gauge from '../Report/Gauge'
 
 const ContractComplete = () => {
   const navigate = useNavigate()
   const hadleHome = () => {
-    navigate('/')
+    navigate(-1)
   }
   return (
     <ContractCompleteContainer>
