@@ -14,10 +14,7 @@ import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.item.ItemOwnerNotMatchException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import com.blockhomes.tradings.repository.common.ImageRepository;
-import com.blockhomes.tradings.repository.item.ItemAdditionalOptionRepository;
-import com.blockhomes.tradings.repository.item.ItemAdministrationFeeRepository;
-import com.blockhomes.tradings.repository.item.ItemImageRepository;
-import com.blockhomes.tradings.repository.item.ItemRepository;
+import com.blockhomes.tradings.repository.item.*;
 import com.blockhomes.tradings.repository.wallet.LikesRepository;
 import com.blockhomes.tradings.repository.wallet.WalletRepository;
 import com.blockhomes.tradings.util.AreaUtil;
@@ -63,8 +60,8 @@ public class ItemServiceImpl implements ItemService {
 
         // 이미지 제외 아이템 정보 저장
         Item item = itemRepository.save(Item.builder()
-                .ownerWallet(ownerWallet)
                 .realEstateDID(req.getRealEstateDID())
+                .ownerWallet(ownerWallet)
                 .roadNameAddress(req.getRoadNameAddress())
                 .transactionType(TransactionType.valueToEnum(req.getTransactionType()))
                 .area(req.getArea())
@@ -121,8 +118,8 @@ public class ItemServiceImpl implements ItemService {
             .imageUrl(s3BucketUtil.getFileUrl(mainImageKey, folderName))
             .build();
 
-        boolean isRoomImagesPresent = !Objects.isNull(roomImages);
-        boolean isKitchenToiletImagesPresent = !Objects.isNull(kitchenToiletImages);
+        boolean isRoomImagesPresent = Objects.nonNull(roomImages);
+        boolean isKitchenToiletImagesPresent = Objects.nonNull(kitchenToiletImages);
 
         List<Image> roomImageEntityList = new ArrayList<>();
         List<String> roomImageKeys = new ArrayList<>();
@@ -240,7 +237,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public DetailItemRes getDetailItem(Integer itemNo) {
+    public DetailItemRes getDetailItem(Integer itemNo, DetailItemReq req) {
         Item item = itemRepository.getItemByItemNo(itemNo).orElseThrow(ItemNotFoundException::new);
 
         List<ItemImage> itemImages = itemImageRepository.getItemImagesByItem(item);
@@ -248,6 +245,9 @@ public class ItemServiceImpl implements ItemService {
         List<ItemAdditionalOption> itemAdditionalOptions = itemAdditionalOptionRepository.getItemAdditionalOptionsByItem(item);
 
         List<ItemImageInstance> itemImageInstanceList = new ArrayList<>();
+
+        Wallet userWallet = walletRepository.getWalletByWalletAddress(req.getWalletAddress())
+            .orElseThrow(WalletNotFoundException::new);
 
         for (ItemImage itemImage : itemImages) {
             itemImageInstanceList.add(ItemImageInstance.builder()
@@ -266,6 +266,12 @@ public class ItemServiceImpl implements ItemService {
 
         for (ItemAdditionalOption itemAdditionalOption : itemAdditionalOptions) {
             additionalOptionList.add(AdditionalOptionCategory.enumToValue(itemAdditionalOption.getAdditionalOptionCategory()));
+        }
+
+        Boolean isUserLiked = false;
+
+        if (likesRepository.getLikesByWalletAndItem(userWallet, item).isPresent()) {
+            isUserLiked = true;
         }
 
         return DetailItemRes.builder()
@@ -296,6 +302,8 @@ public class ItemServiceImpl implements ItemService {
             .itemImageList(itemImageInstanceList)
             .itemAdministrationFeeList(administrationFeeList)
             .itemAdditionalOptionList(additionalOptionList)
+            .transactionType(TransactionType.enumToValue(item.getTransactionType()))
+            .isUserLiked(isUserLiked)
             .build();
     }
 
@@ -326,6 +334,13 @@ public class ItemServiceImpl implements ItemService {
     public DetailItemRes modifyItem(ModifyItemReq req) {
         Item item = itemRepository.getItemByItemNo(req.getItemNo())
             .orElseThrow(ItemNotFoundException::new);
+
+        Wallet wallet = walletRepository.getWalletByWalletAddress(req.getWalletAddress())
+                .orElseThrow(WalletNotFoundException::new);
+
+        if (!wallet.getWalletAddress().equals(item.getOwnerWallet().getWalletAddress())) {
+            throw new ItemOwnerNotMatchException(item.getRealEstateDID(), wallet.getWalletAddress());
+        }
 
         item.setPrice(req.getPrice());
         item.setMonthlyPrice(req.getMonthlyPrice());
@@ -364,7 +379,7 @@ public class ItemServiceImpl implements ItemService {
 
         itemAdditionalOptionRepository.saveAll(optionEntityList);
 
-        return getDetailItem(item.getItemNo());
+        return getDetailItem(item.getItemNo(), DetailItemReq.builder().walletAddress(req.getWalletAddress()).build());
     }
 
     @Override
