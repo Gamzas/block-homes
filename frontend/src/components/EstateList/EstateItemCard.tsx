@@ -55,7 +55,7 @@ const EstateItemCard = (props: EstateItemListType) => {
           </svg>
           <div className="location-text">{props.roadNameAddress}</div>
         </c.LocationContainer>
-        <c.ItemImage src="https://i0.wp.com/www.gangnamapt.com/wp-content/uploads/2023/01/20230105_180953_HDR.jpg?resize=480%2C360" />
+        <c.ItemImage src={props.imageUrl} />
         {/* <c.ItemInfoContainer $color={mainColor}>
           {infos.map((item, index) => (
             <div key={index} className="info-box">
@@ -80,7 +80,11 @@ const EstateItemCard = (props: EstateItemListType) => {
             </div>
           )}
           <div className="info-text">{props.area} m2</div>
-          <div className="info-text">계약기간 {props.contractMonths}</div>
+          <div className="info-text">
+            {props.contractMonths === 0
+              ? '협의 후 결정'
+              : `계약기간 ${props.contractMonths} 개월`}
+          </div>
           <c.DIDContainer>
             <div className="address">{props.realEstateDID}</div>
           </c.DIDContainer>

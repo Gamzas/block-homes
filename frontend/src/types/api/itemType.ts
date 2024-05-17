@@ -60,6 +60,7 @@ export interface EstateItemListType {
   realEstateType: number
   reportRank: number
   transactionStatus: number
+  imageUrl: string
   area: number
   pyeong: number
   price: number
@@ -82,4 +83,9 @@ export interface GetFavoritItemParamsType {
 export interface PostFavoriteDataType {
   walletAddress: string
   itemNo: number
+}
+
+export interface ImageUrlType {
+  imageUrl: string
+  itemImageCategory: number
 }

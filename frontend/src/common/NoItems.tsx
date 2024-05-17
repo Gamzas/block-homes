@@ -5,7 +5,7 @@ const NoItems = ({ src, alarmText }) => {
   const navigate = useNavigate()
   console.log(src === '/image/image_sad_pig.png')
   const goEstate = () => {
-    navigate('/estate')
+    navigate(`/`)
   }
 
   return (
@@ -17,7 +17,7 @@ const NoItems = ({ src, alarmText }) => {
         <div className="alarm-text">{alarmText}</div>
         {src !== 'image/image_warning_pig.png' && (
           <n.BtnContainer onClick={goEstate}>
-            <div className="title">매물 구경하러 가기</div>
+            <div className="title">다른 매물 구경하러 가기</div>
           </n.BtnContainer>
         )}
       </n.ContentContainer>
