@@ -122,38 +122,46 @@ const ChattingRoomPage = () => {
         rightIconSrc="/icon/icon_safety_card_report.png"
       />
       <c.ChattingHeader>
-        매물 정보
-        {/*<div>{data.representativeImage}</div>*/}
-        {/*<div>{data.realEstateAddress}</div>*/}
-        {/*<div>{data.transactionType}</div>*/}
-        {/*<div>{data.price}</div>*/}
-        <c.ButtonContainer>
-          <button
-            className="chatting-header-button"
-            onClick={() => navigate(`/report/${data.itemNo}`)}
-          >
-            레포트
-          </button>
-          <button
-            className="chatting-header-button"
-            onClick={() => navigate('/estate-checklist')}
-          >
-            체크리스트
-          </button>
-          <button
-            className="chatting-header-button"
-            onClick={() => navigate('/transaction-progress')}
-          >
-            거래 현황 보러가기
-          </button>
-        </c.ButtonContainer>
+        <div className="image-container">
+          <img src={data.representativeImage} />
+        </div>
+        <c.RightContainer>
+          <div className="address-container">{data.realEstateAddress}</div>
+          <div className="transaction-type-container">
+            {' '}
+            {data.transactionType}
+          </div>
+          <div className="price-container">{data.price}</div>
+
+          <c.ButtonContainer>
+            <button
+              className="chatting-header-button"
+              // onClick={() => navigate(`/report/${data.itemNo}`)}
+              onClick={() => navigate(`/report/3`)}
+            >
+              레포트
+            </button>
+            <button
+              className="chatting-header-button"
+              onClick={() => navigate('/estate-checklist')}
+            >
+              체크리스트
+            </button>
+            <button
+              className="chatting-header-button"
+              onClick={() => navigate('/transaction-progress')}
+            >
+              거래 현황 보러가기
+            </button>
+          </c.ButtonContainer>
+        </c.RightContainer>
       </c.ChattingHeader>
-      <c.MessageList>
+      <c.MessageListContainer>
         {messages.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
         {messages.map(message => (
           <MessageItem item={message} key={message.chatNo} />
         ))}
-      </c.MessageList>
+      </c.MessageListContainer>
       <SendMessageInput
         sendButtonClick={sendTextMessage}
         message={newMessage.message}
