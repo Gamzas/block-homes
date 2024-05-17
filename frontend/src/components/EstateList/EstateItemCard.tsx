@@ -1,9 +1,7 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
-import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
 import { EstateItemListType } from '@/types/api/itemType'
 import { getTransactionType, numberToKorean } from '@/utils/estateTransferUtil'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
-import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
 import { getRealEstateType } from '../../utils/estateTransferUtil'
 
@@ -16,12 +14,8 @@ const EstateItemCard = (props: EstateItemListType) => {
   const thirdColor = getColor()?.third
   const fourthColor = getColor()?.fourth
   const status = getStatus()
-  const setItem = useSetAtom(selectedItemAtom)
   const goDetail = () => {
-    // DELETE 백 통신으로 전환 후 삭제하기
-    // setItem(props)
     navigate(`/estate-detail/${props.itemNo}`)
-    // navigate(`/estate-detail/${id}`)
   }
   return (
     <c.ItemCardWrapper>
@@ -55,13 +49,6 @@ const EstateItemCard = (props: EstateItemListType) => {
           <div className="location-text">{props.roadNameAddress}</div>
         </c.LocationContainer>
         <c.ItemImage src={props.imageUrl} />
-        {/* <c.ItemInfoContainer $color={mainColor}>
-          {infos.map((item, index) => (
-            <div key={index} className="info-box">
-              {item}
-            </div>
-          ))}
-        </c.ItemInfoContainer> */}
         <c.ItemPriceInfoContainer>
           <div className="estate-type">
             {getRealEstateType(props.realEstateType)}
