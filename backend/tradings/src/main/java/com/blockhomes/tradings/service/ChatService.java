@@ -10,13 +10,13 @@ import com.blockhomes.tradings.dto.chat.response.ProvisionRes;
 
 public interface ChatService {
 
-    ChatRes enterUser(Integer chatRoomNo, EnterPayload enterPayload);
+    ChatRes enterUser(Integer chatRoomNo, ChatPayload enterPayload);
 
     ChatRes chatTalk(Integer chatRoomNo, ChatPayload chatPayload);
 
-    ChatRes progressContract(Integer chatRoomNo, ProgressPayload progressPayload);
+    ChatRes progressContract(Integer chatRoomNo, ChatPayload progressPayload);
 
-    ChatRes createSpecialProvision(Integer chatRoomNo, ProvisionPayload provisionPayload);
+//    ChatRes createSpecialProvision(Integer chatRoomNo, ChatPayload provisionPayload);
 
     ChatRes rejectProvision(Integer chatRoomNo, ChatPayload chatPayload);
 
