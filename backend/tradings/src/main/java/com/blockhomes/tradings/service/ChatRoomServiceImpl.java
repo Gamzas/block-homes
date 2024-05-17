@@ -61,6 +61,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     public DetailChatRoomRes detailChatRoom(Integer chatRoomNo) {
         DetailChatRoomRes result = chatRoomRepository.getDetailChatRoom(chatRoomNo);
         List<ChatRes> chatResList = chatRoomRepository.getChatResList(chatRoomNo);
+        log.info("{}", chatResList);
         result.setChatList(chatResList);
 
         return result;
