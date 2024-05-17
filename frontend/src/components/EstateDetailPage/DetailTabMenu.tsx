@@ -1,14 +1,22 @@
 import { useRef, useState } from 'react'
 import Slider from 'react-slick'
 import * as t from '@components/EstateDetailPage/style/DetailTabStyle'
-const DetailTabMenu = () => {
+import { ImageUrlType } from '@/types/api/itemType'
+
+interface PropsType {
+  imgUrl: ImageUrlType[]
+}
+
+const DetailTabMenu = (props: PropsType) => {
+  console.log(props.imgUrl)
+
   const [currentTab, clickTab] = useState(0)
   const sliderRef = useRef(null)
   const menuArr = [
     {
       name: 'image',
       content: [
-        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/169087905318351049.jpeg?gif=1&w=480&h=480&c=c&q=80&webp=1',
+        `${props.imgUrl[0].imageUrl}`,
         'https://ms-housing.kr/data/file/residence_gallery/1893533933_JMZkwRQt_7e007afcf36372f893058c91dcc64b65fed06003.jpg',
         'https://cdn.imweb.me/thumbnail/20211222/c0a271a8dfdcf.jpg',
       ],

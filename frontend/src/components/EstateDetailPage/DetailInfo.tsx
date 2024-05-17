@@ -51,7 +51,7 @@ const DetailInfo = () => {
   return (
     <d.DetailInfoWrapper>
       <>
-        <DetailTabMenu />
+        <DetailTabMenu imgUrl={detailInfoData.itemImageList} />
         <ItemSafetyCard condition={detailInfoData.reportRank} />
         <RoomInfo info={detailInfoData} />
         <DetailFooter info={detailInfoData} />
