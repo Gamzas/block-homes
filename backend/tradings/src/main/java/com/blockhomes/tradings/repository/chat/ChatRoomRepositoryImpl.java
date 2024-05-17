@@ -129,13 +129,13 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     private JPQLQuery<String> representativeImageSubQuery() {
-
         QImage qImageSub = new QImage("qImageSub");
 
         return from(qImage)
             .innerJoin(qItemImage.image, qImageSub)
             .select(qImageSub.imageUrl)
             .where(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
+            .orderBy(qImage.createdAt.asc())
             .limit(1);
     }
 
