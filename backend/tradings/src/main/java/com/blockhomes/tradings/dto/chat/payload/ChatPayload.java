@@ -14,9 +14,6 @@ public class ChatPayload {
     @NotBlank
     private String senderWalletAddress;
 
-    @NotNull
-    private Integer senderRole;
-
     private String message;
 
     private String imageBase64;
