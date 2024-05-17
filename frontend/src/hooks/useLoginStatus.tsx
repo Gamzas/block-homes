@@ -13,10 +13,10 @@ const useLoginStatus = () => {
       setUser(currentUserData)
     } else if (!currentUserData && user) {
       localStorage.setItem('currentUser', JSON.stringify(user))
-    } else {
+    } else if (!currentUserData && !user) {
       alert('로그인 후 이용해주세요')
       navigate('/signin')
     }
-  }, [])
+  }, [navigate, user, setUser])
 }
 export default useLoginStatus
