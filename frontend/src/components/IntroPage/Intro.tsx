@@ -1,18 +1,14 @@
 import React, { useRef, useState } from 'react'
-import {
-  IntroCanvasWrapper,
-  IntroContainer,
-  IntroRefreshButton,
-} from '@components/IntroPage/style/IntroStyle'
+import { IntroCanvasWrapper, IntroContainer, IntroRefreshButton } from '@components/IntroPage/style/IntroStyle'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 
 const Model = ({
-  url,
-  scale,
-  isUserInteracting,
-  modelRef,
-}: {
+                 url,
+                 scale,
+                 isUserInteracting,
+                 modelRef,
+               }: {
   url: string
   scale?: [number, number, number]
   isUserInteracting: boolean
@@ -22,7 +18,7 @@ const Model = ({
 
   useFrame(() => {
     if (modelRef.current && !isUserInteracting) {
-      modelRef.current.rotation.x += 0.005 // x축을 기준으로 회전
+      modelRef.current.rotation.y += 0.005 // x축을 기준으로 회전
     }
   })
 
@@ -30,9 +26,9 @@ const Model = ({
 }
 
 const Controls = ({
-  setIsUserInteracting,
-  controlsRef,
-}: {
+                    setIsUserInteracting,
+                    controlsRef,
+                  }: {
   setIsUserInteracting: React.Dispatch<React.SetStateAction<boolean>>
   controlsRef: React.RefObject<any>
 }) => {
@@ -77,7 +73,7 @@ const Intro = () => {
           <directionalLight position={[1000, 1000, 1000]} intensity={2} />
           <Model
             url={'/3DIllustrations/Intro.glb'}
-            scale={[4.5, 4.5, 4.5]}
+            scale={[2, 2, 2]}
             isUserInteracting={isUserInteracting}
             modelRef={modelRef}
           />
