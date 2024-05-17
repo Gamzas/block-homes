@@ -1,17 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import * as e from '@common/style/EstateDidCardStyle'
 import { CustomButtonStyle } from './style/CustomButtonStyle'
 import { useNavigate } from 'react-router-dom'
+import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
 
 const EstateDidCard = ({
-  index,
-  currentCenterIndex,
-  showRegistrationButton = true,
-}) => {
+                         index,
+                         currentCenterIndex,
+                         showRegistrationButton = true,
+                         realEstateDID,
+                       }) => {
   const [isFlipped, setIsFlipped] = useState(false)
   const navigate = useNavigate()
+  const { data: realEstateInfoData } = useGetRealEstateInfo(realEstateDID)
 
+
+  useEffect(() => {
+  }, [realEstateInfoData])
   const toggleCard = () => {
     if (index === currentCenterIndex) {
       setIsFlipped(!isFlipped)
@@ -128,7 +134,7 @@ const EstateDidCard = ({
             </e.BackInfoElement>
             <e.BackInfoElement>
               <div className="element-title">소유자</div>
-              <div className="element-content">이싸피 </div>
+              <div className="element-content">이싸피</div>
             </e.BackInfoElement>
             {/* 등기부 건축물 대장 구현 시 주석 해제 */}
 
