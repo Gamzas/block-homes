@@ -6,9 +6,11 @@ import { ethers } from 'ethers'
 const SignUp = ({
                   name,
                   phoneNumber,
+                  setIsLoading,
                 }: {
   name: string
   phoneNumber: string
+  setIsLoading: (isLoading) => void
 }) => {
   const [wallet, setWallet] = useState<ethers.Wallet | null>(null)
   const [isFirstStep, setIsFirstStep] = useState(true)
@@ -26,6 +28,7 @@ const SignUp = ({
           phoneNumber={phoneNumber}
           wallet={wallet}
           setWallet={setWallet}
+          setIsLoading={setIsLoading}
         />
       )}
     </>

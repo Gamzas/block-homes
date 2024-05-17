@@ -8,7 +8,7 @@ import { useSetAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useNavigate } from 'react-router-dom'
 
-const SignIn = () => {
+const SignIn = ({ setIsLoading }: { setIsLoading: (isLoading) => void }) => {
   const navigate = useNavigate()
   const setUserAtom = useSetAtom(userAtom)
   const [isSignIn, setIsSignIn] = useState(true)
@@ -77,7 +77,7 @@ const SignIn = () => {
           </SignInButton>
         </>
       ) : (
-        <SignUp name={name} phoneNumber={phoneNumber} />
+        <SignUp name={name} phoneNumber={phoneNumber} setIsLoading={setIsLoading} />
       )}
     </k.SignInContainer>
   )
