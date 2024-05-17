@@ -19,13 +19,14 @@ const CustomPasswordModal = ({ open, handleClose, handleConfirm }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 310,
+          width: 320,
           bgcolor: 'background.paper',
           borderRadius: '1rem',
           boxShadow: 24,
           p: 4,
         }}
       >
+        <div>지갑 비밀번호를 입력해주세요</div>
         <TextField
           label="Password"
           type="password"
@@ -34,7 +35,13 @@ const CustomPasswordModal = ({ open, handleClose, handleConfirm }) => {
           fullWidth
           margin="normal"
         />
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '1rem',
+          }}
+        >
           <CustomButtonStyle
             $secondary={true}
             style={{ width: '5rem', height: '2.3rem', marginRight: '1rem' }}

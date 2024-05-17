@@ -93,10 +93,11 @@ const InfoReportList = () => {
         callback={handleJoyrideCallback}
         showProgress
         showSkipButton
+        disableOverlay={true}
         styles={{
           options: {
             zIndex: 10,
-            width: 360, // 툴팁의 너비
+            width: 350, // 툴팁의 너비
             primaryColor: '#845bd3',
           },
           tooltipContent: {
