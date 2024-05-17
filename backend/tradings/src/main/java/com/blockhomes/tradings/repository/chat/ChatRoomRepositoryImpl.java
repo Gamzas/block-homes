@@ -12,6 +12,7 @@ import com.blockhomes.tradings.entity.item.enums.ItemImageCategory;
 import com.blockhomes.tradings.entity.wallet.QWallet;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.slf4j.Slf4j;
@@ -110,11 +111,11 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
 
     @Override
     public List<ChatRes> getChatResList(Integer chatRoomNo) {
-        return from(qChat)
+        JPQLQuery<ChatRes> chatQuery = from(qChat)
             .innerJoin(qChatRoom).on(qChat.chatRoom.eq(qChatRoom))
             .innerJoin(qWalletChatRoom).on(qChatRoom.eq(qWalletChatRoom.chatRoom))
             .innerJoin(qWallet).on(qWalletChatRoom.wallet.eq(qWallet))
-            .innerJoin(qImage).on(qChat.image.eq(qImage))
+            .leftJoin(qImage).on(qChat.image.eq(qImage))
             .select(Projections.constructor(ChatRes.class,
                 qChat.chatNo,
                 qChatRoom.chatRoomNo,
@@ -126,8 +127,11 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
                 qChat.message,
                 qChat.createdAt
                 ))
-            .where(qChatRoom.chatRoomNo.eq(chatRoomNo))
-            .fetch();
+            .where(qChatRoom.chatRoomNo.eq(chatRoomNo));
+
+        log.info("{}", chatQuery);
+
+        return chatQuery.fetch();
     }
 
 }
