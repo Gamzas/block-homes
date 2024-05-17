@@ -33,7 +33,7 @@ const HomeRoutes = () => (
     <Route path="/" element={<MainPage />} />
     <Route path="/check-did" element={<CheckDidPage />} />
     <Route path="/self-check-did" element={<SelfCheckDidPage />} />
-    <Route path="/estate" element={<RealEstatePage />} />
+    <Route path="/estate/:category" element={<RealEstatePage />} />
     <Route path="/estate-detail/:id" element={<RealEstateDetailPage />} />
     <Route path="/smart-contract" element={<SmartContractPage />} />
     <Route path="/report" element={<ReportPage />} />
