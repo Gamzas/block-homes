@@ -20,7 +20,7 @@ export const usePostItemRegister = () => {
   })
 }
 
-// 등록 된 매물 조회
+// 등록 된 매물 조회(필터링 가능)
 export const useGetEstateItems = (category: number) => {
   return useQuery({
     queryKey: ['estateItems'],
@@ -66,6 +66,28 @@ export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
         // window.location.href = '/'
         return null
       }
+    },
+  })
+}
+
+// 부동산 매물 삭제
+export const useDeleteEstateItem = () => {
+  return useMutation({
+    mutationFn: () =>
+      publicRequest
+        .delete(API_ITEM, {
+          data: {
+            itemNo: 24,
+            walletAddress: '0xe0Fa92495DFa8E7188E72F593ef2F2988B6b5A87',
+          },
+        })
+        .then(res => console.log(res))
+        .catch(err => console.log(err)),
+    onSuccess: () => {
+      alert('삭제되었습니다.')
+    },
+    onError: err => {
+      console.log(err)
     },
   })
 }
