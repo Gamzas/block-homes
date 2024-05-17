@@ -43,26 +43,25 @@ const ChattingRoomPage = () => {
   }
 
   const connectHandler = () => {
-    const SockJs = SockJS(API_BASE_URL + '/ws/chat')
+    const sockJs = new SockJS(API_BASE_URL + '/ws/chat') // Fixed capitalization of SockJS
     client.current = new Client({
-      webSocketFactory: () => SockJs,
-      // debug: str => console.log(str),
+      webSocketFactory: () => sockJs,
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: () => {
-        client.current?.subscribe(`/pub/chat.talk.${chatRoomNo}`, msg => {
+        client.current?.subscribe(`/sub/chat.talk.${chatRoomNo}`, msg => {
           const receivedMessage = JSON.parse(msg.body)
-          console.log('받은 메세지:', receivedMessage)
+          console.log('Received message:', receivedMessage)
           setMessages(prevMessages => [
             ...prevMessages,
             {
               chatNo: receivedMessage.chatNo,
-              chatRoomNo: 0,
+              chatRoomNo: receivedMessage.chatRoomNo,
               senderWalletAddress: receivedMessage.senderWalletAddress,
-              senderName: user.name,
+              senderName: receivedMessage.senderName,
               messageType: receivedMessage.messageType,
-              image: '',
+              image: receivedMessage.image,
               contractStep: receivedMessage.contractStep,
               message: receivedMessage.message,
               createdAt: receivedMessage.createdAt,
@@ -95,15 +94,13 @@ const ChattingRoomPage = () => {
     return () => {
       client.current?.deactivate()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
       console.log('Sending message:', newMessage.message)
-      console.log('Destination:', `/sub/chat.enter.${chatRoomNo}`)
-      client.current!.publish({
-        destination: `/sub/chat.talk.${chatRoomNo}`,
+      client.current?.publish({
+        destination: `/pub/chat.talk.${chatRoomNo}`,
         body: JSON.stringify({
           chatRoomNo: chatRoomNo,
           senderWalletAddress: user.walletAddress,
@@ -138,7 +135,6 @@ const ChattingRoomPage = () => {
         <c.RightContainer>
           <div className="address-container">{data?.realEstateAddress}</div>
           <div className="transaction-type-container">
-            {' '}
             {data?.transactionType}
           </div>
           <div className="price-container">{data?.price}</div>
