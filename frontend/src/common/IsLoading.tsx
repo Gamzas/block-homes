@@ -8,10 +8,10 @@ import {
 const parseText = text => {
   const lines = text.split('\n').map((line, i) => {
     const elements = []
-
     let currentIndex = 0
+
     while (currentIndex < line.length) {
-      if (line.startsWith('**', currentIndex)) {
+      if (line.indexOf('**', currentIndex) === currentIndex) {
         const endIndex = line.indexOf('**', currentIndex + 2)
         if (endIndex !== -1) {
           elements.push(
@@ -24,7 +24,7 @@ const parseText = text => {
         }
       }
 
-      if (line.startsWith('_', currentIndex)) {
+      if (line.indexOf('_', currentIndex) === currentIndex) {
         const endIndex = line.indexOf('_', currentIndex + 1)
         if (endIndex !== -1) {
           elements.push(
@@ -37,12 +37,27 @@ const parseText = text => {
         }
       }
 
+      // 다음 특별 문자 위치 찾기
+      const nextHighlightIndex = line.indexOf('**', currentIndex)
+      const nextSmallIndex = line.indexOf('_', currentIndex)
+      let nextSpecialCharIndex = line.length
+
+      if (
+        nextHighlightIndex !== -1 &&
+        nextHighlightIndex < nextSpecialCharIndex
+      ) {
+        nextSpecialCharIndex = nextHighlightIndex
+      }
+      if (nextSmallIndex !== -1 && nextSmallIndex < nextSpecialCharIndex) {
+        nextSpecialCharIndex = nextSmallIndex
+      }
+
       elements.push(
-        <span key={`${i}-large`} className="info-text-large">
-          {line[currentIndex]}
+        <span key={`${i}-text-${currentIndex}`} className="info-text-large">
+          {line.substring(currentIndex, nextSpecialCharIndex)}
         </span>,
       )
-      currentIndex++
+      currentIndex = nextSpecialCharIndex
     }
 
     return <div key={i}>{elements}</div>
@@ -60,10 +75,6 @@ const IsLoading = ({ lottieProps, textProps }) => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   }
-
-  // **이것은 하이라이트 텍스트입니다.**
-  // 이 텍스트는 줄바꿈이 가능합니다.
-  // _이것은 작은 텍스트입니다._
 
   return (
     <IsLoadingContainer>
