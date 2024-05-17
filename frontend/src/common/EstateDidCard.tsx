@@ -1,23 +1,42 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import * as e from '@common/style/EstateDidCardStyle'
 import { CustomButtonStyle } from './style/CustomButtonStyle'
 import { useNavigate } from 'react-router-dom'
 import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
+import { getRealEstateType } from '@/utils/estateTransferUtil'
+import { BigNumber } from 'ethers'
 
 const EstateDidCard = ({
                          index,
                          currentCenterIndex,
                          showRegistrationButton = true,
                          realEstateDID,
+                         currentUser,
                        }) => {
   const [isFlipped, setIsFlipped] = useState(false)
   const navigate = useNavigate()
   const { data: realEstateInfoData } = useGetRealEstateInfo(realEstateDID)
 
+  const formatDateToKoreanTime = (bigNumberDate) => {
+    // BigNumber를 숫자로 변환 (밀리초 단위)
+    const unixTimestamp = BigNumber.from(bigNumberDate).toNumber()
 
-  useEffect(() => {
-  }, [realEstateInfoData])
+    // 유닉스 타임스탬프를 밀리초 단위로 변환하여 Date 객체 생성
+    const date = new Date(unixTimestamp * 1000)
+
+    // 한국 시간대 포맷 설정
+    const koreanFormatter = new Intl.DateTimeFormat('ko-KR', {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    })
+
+    // 한국 시간으로 포맷된 문자열 생성
+    return koreanFormatter.format(date)
+  }
+
   const toggleCard = () => {
     if (index === currentCenterIndex) {
       setIsFlipped(!isFlipped)
@@ -49,96 +68,109 @@ const EstateDidCard = ({
 
   return (
     <>
-      <animated.div style={springStyleFront} onClick={toggleCard}>
-        <e.EstateDidCardContainer>
-          <e.TopContainer>
-            <img
-              alt="국가교통부"
-              className="ministry-of-land-logo"
-              src="/image/image_ministry_of_land_logo.png"
-            />
-            <img
-              alt="건물 3d asset"
-              className="building-type-image"
-              src="/image/image_did_card_villa_or_towroom.png"
-            />
-            <e.BackgroundWaveContainer>
-              <svg
-                className="big-wave"
-                xmlns="http://www.w3.org/2000/svg"
-                width="209"
-                height="53"
-                viewBox="0 0 209 53"
-                fill="none"
-              >
-                <path
-                  d="M60.8357 0.0390186C26.82 1.09297 6.10537 14.1795 0 20.591V53H209V11.896C203.113 15.7975 192.387 34.86 168.808 33.0256C145.228 31.1912 103.355 -1.27842 60.8357 0.0390186Z"
-                  fill="#C8F6F0"
+      {realEstateInfoData && currentUser &&
+        <>
+          <animated.div style={springStyleFront} onClick={toggleCard}>
+            <e.EstateDidCardContainer>
+              <e.TopContainer>
+                <img
+                  alt="국가교통부"
+                  className="ministry-of-land-logo"
+                  src="/image/image_ministry_of_land_logo.png"
                 />
-              </svg>
-              <svg
-                className="small-wave"
-                xmlns="http://www.w3.org/2000/svg"
-                width="209"
-                height="37"
-                viewBox="0 0 209 37"
-                fill="none"
-              >
-                <path
-                  d="M76.825 0.0508788C42.8094 1.13488 6.10537 19.4141 0 26.0084V37H209V15.4565C203.113 19.4693 197.166 22.2879 176.214 23.6089C155.262 24.93 119.345 -1.30413 76.825 0.0508788Z"
-                  fill="#B9E7E7"
+                <img
+                  alt="건물 3d asset"
+                  className="building-type-image"
+                  src="/image/image_did_card_villa_or_towroom.png"
                 />
-              </svg>
-            </e.BackgroundWaveContainer>
-          </e.TopContainer>
-          <e.BottomContainer>
-            <e.InfoElement>
-              <div className="element-title">등기권자</div>
-              <div className="element-content">송강산</div>
-            </e.InfoElement>
-            <e.InfoElement>
-              <div className="element-title">분류</div>
-              <div className="element-content">아파트</div>
-            </e.InfoElement>
-            <e.InfoElement>
-              <div className="element-title"> 주소</div>
-              <div className="element-content">남동길 30번길 13 3층</div>
-            </e.InfoElement>
-            <e.InfoElement>
-              <div className="element-title">등록일자</div>
-              <div className="element-content">2020.03.21</div>
-            </e.InfoElement>
-          </e.BottomContainer>
-        </e.EstateDidCardContainer>
-      </animated.div>
+                <e.BackgroundWaveContainer>
+                  <svg
+                    className="big-wave"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="209"
+                    height="53"
+                    viewBox="0 0 209 53"
+                    fill="none"
+                  >
+                    <path
+                      d="M60.8357 0.0390186C26.82 1.09297 6.10537 14.1795 0 20.591V53H209V11.896C203.113 15.7975 192.387 34.86 168.808 33.0256C145.228 31.1912 103.355 -1.27842 60.8357 0.0390186Z"
+                      fill="#C8F6F0"
+                    />
+                  </svg>
+                  <svg
+                    className="small-wave"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="209"
+                    height="37"
+                    viewBox="0 0 209 37"
+                    fill="none"
+                  >
+                    <path
+                      d="M76.825 0.0508788C42.8094 1.13488 6.10537 19.4141 0 26.0084V37H209V15.4565C203.113 19.4693 197.166 22.2879 176.214 23.6089C155.262 24.93 119.345 -1.30413 76.825 0.0508788Z"
+                      fill="#B9E7E7"
+                    />
+                  </svg>
+                </e.BackgroundWaveContainer>
+              </e.TopContainer>
+              <e.BottomContainer>
+                <e.InfoElement>
+                  <div className="element-title">소유자</div>
+                  <div className="element-content">{currentUser.name}</div>
+                </e.InfoElement>
+                <e.InfoElement>
+                  <div className="element-title">분류</div>
+                  <div className="element-content">{
+                    getRealEstateType(realEstateInfoData.estateType)
+                  }</div>
+                </e.InfoElement>
+                <e.InfoElement>
+                  <div className="element-title"> 주소</div>
+                  <div className="element-content">{realEstateInfoData.roadNameAddress}</div>
+                </e.InfoElement>
+                <e.InfoElement>
+                  <div className="element-title">등록일자</div>
+                  <div className="element-content">{formatDateToKoreanTime(realEstateInfoData.date)}</div>
+                </e.InfoElement>
+              </e.BottomContainer>
+            </e.EstateDidCardContainer>
+          </animated.div>
 
-      <animated.div
-        style={{ ...springStyleBack, position: 'absolute' }}
-        onClick={toggleCard}
-      >
-        <e.EstateDidCardContainer>
-          <e.BackContainer>
-            <e.BackInfoElement>
-              <div className="element-title">분류</div>
-              <div className="element-content">건물 or 집합건물</div>
-            </e.BackInfoElement>
-            <e.BackInfoElement>
-              <div className="element-title">주소</div>
-              <div className="element-content">
-                광주광역시 장덕동 미래동 삼단지
-              </div>
-            </e.BackInfoElement>
-            <e.BackInfoElement>
-              <div className="element-title">등록일자</div>
-              <div className="element-content">2020년 4월 23일</div>
-            </e.BackInfoElement>
-            <e.BackInfoElement>
-              <div className="element-title">소유자</div>
-              <div className="element-content">이싸피</div>
-            </e.BackInfoElement>
-            {/* 등기부 건축물 대장 구현 시 주석 해제 */}
+          <animated.div
+            style={{ ...springStyleBack, position: 'absolute' }}
+            onClick={toggleCard}
+          >
+            <e.EstateDidCardContainer>
+              <e.BackContainer>
+                <e.BackInfoElement>
+                  <div className="element-title">건물명</div>
+                  <div className="element-content">{realEstateInfoData.buildingName}</div>
+                </e.BackInfoElement>
+                <e.BackInfoElement>
+                  <div className="element-title">동 / 호수</div>
+                  <div
+                    className="element-content">{`${realEstateInfoData.buildingNumber} 동 ${realEstateInfoData.roomNumber} 호`}</div>
+                </e.BackInfoElement>
+                <e.BackInfoElement>
+                  <div className="element-title">위법</div>
+                  <div className="element-content">
+                    {`불법 건축물 : ${realEstateInfoData.isViolated ? '위법' : '합법'}`}
+                    <br />
+                    {`무허가 건축물 : ${realEstateInfoData.isNotPermitted ? '위법' : '합법'}`}
+                  </div>
+                </e.BackInfoElement>
+                <e.BackInfoElement>
+                  <div className="element-title">면적</div>
+                  <div
+                    className="element-content">{`${realEstateInfoData.area} 평`}</div>
+                </e.BackInfoElement>
+                <e.BackInfoElement>
+                  <div className="element-title">용도</div>
+                  <div
+                    className="element-content">{`${realEstateInfoData.purpose}`}</div>
+                </e.BackInfoElement>
+                {/* 등기부 건축물 대장 구현 시 주석 해제 */}
 
-            {/* <e.BackInfoElement>
+                {/* <e.BackInfoElement>
             <div className='element-title'>등기사항전부증명서</div>
             <CustomButtonStyle style={{width:'2.7rem',height:'0.9rem',backgroundColor:'#B9E7E7',fontSize:'0.4rem',color:'black',boxShadow: '0px 2.721px 2.721px 0px rgba(0, 0, 0, 0.25)'}}> 조회하기</CustomButtonStyle>
           </e.BackInfoElement>
@@ -146,56 +178,58 @@ const EstateDidCard = ({
             <div className='element-title'>등록일자</div>
             <CustomButtonStyle style={{width:'2.7rem',height:'0.9rem',backgroundColor:'#B9E7E7',fontSize:'0.4rem',color:'black',boxShadow: '0px 2.721px 2.721px 0px rgba(0, 0, 0, 0.25)'}}> 조회하기</CustomButtonStyle>
           </e.BackInfoElement> */}
-            {showRegistrationButton && (
-              <div className="registration-button-box">
-                <CustomButtonStyle
-                  onClick={handleButtonClick}
-                  style={{
-                    width: '8rem',
-                    height: '2rem',
-                    backgroundColor: '#FFF',
-                    fontSize: '0.6rem',
-                    color: 'black',
-                    boxShadow: '0px 2.721px 2.721px 0px rgba(0, 0, 0, 0.25)',
-                  }}
-                >
-                  {' '}
-                  매물로 등록하기
-                </CustomButtonStyle>
-              </div>
-            )}
+                {showRegistrationButton && (
+                  <div className="registration-button-box">
+                    <CustomButtonStyle
+                      onClick={handleButtonClick}
+                      style={{
+                        width: '8rem',
+                        height: '2rem',
+                        backgroundColor: '#FFF',
+                        fontSize: '0.6rem',
+                        color: 'black',
+                        boxShadow: '0px 2.721px 2.721px 0px rgba(0, 0, 0, 0.25)',
+                      }}
+                    >
+                      {' '}
+                      매물로 등록하기
+                    </CustomButtonStyle>
+                  </div>
+                )}
 
-            <e.BackgroundWaveContainer>
-              <svg
-                className="big-wave"
-                xmlns="http://www.w3.org/2000/svg"
-                width="209"
-                height="53"
-                viewBox="0 0 209 53"
-                fill="none"
-              >
-                <path
-                  d="M60.8357 0.0390186C26.82 1.09297 6.10537 14.1795 0 20.591V53H209V11.896C203.113 15.7975 192.387 34.86 168.808 33.0256C145.228 31.1912 103.355 -1.27842 60.8357 0.0390186Z"
-                  fill="#C8F6F0"
-                />
-              </svg>
-              <svg
-                className="small-wave"
-                xmlns="http://www.w3.org/2000/svg"
-                width="209"
-                height="37"
-                viewBox="0 0 209 37"
-                fill="none"
-              >
-                <path
-                  d="M76.825 0.0508788C42.8094 1.13488 6.10537 19.4141 0 26.0084V37H209V15.4565C203.113 19.4693 197.166 22.2879 176.214 23.6089C155.262 24.93 119.345 -1.30413 76.825 0.0508788Z"
-                  fill="#B9E7E7"
-                />
-              </svg>
-            </e.BackgroundWaveContainer>
-          </e.BackContainer>
-        </e.EstateDidCardContainer>
-      </animated.div>
+                <e.BackgroundWaveContainer>
+                  <svg
+                    className="big-wave"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="209"
+                    height="53"
+                    viewBox="0 0 209 53"
+                    fill="none"
+                  >
+                    <path
+                      d="M60.8357 0.0390186C26.82 1.09297 6.10537 14.1795 0 20.591V53H209V11.896C203.113 15.7975 192.387 34.86 168.808 33.0256C145.228 31.1912 103.355 -1.27842 60.8357 0.0390186Z"
+                      fill="#C8F6F0"
+                    />
+                  </svg>
+                  <svg
+                    className="small-wave"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="209"
+                    height="37"
+                    viewBox="0 0 209 37"
+                    fill="none"
+                  >
+                    <path
+                      d="M76.825 0.0508788C42.8094 1.13488 6.10537 19.4141 0 26.0084V37H209V15.4565C203.113 19.4693 197.166 22.2879 176.214 23.6089C155.262 24.93 119.345 -1.30413 76.825 0.0508788Z"
+                      fill="#B9E7E7"
+                    />
+                  </svg>
+                </e.BackgroundWaveContainer>
+              </e.BackContainer>
+            </e.EstateDidCardContainer>
+          </animated.div>
+        </>
+      }
     </>
   )
 }

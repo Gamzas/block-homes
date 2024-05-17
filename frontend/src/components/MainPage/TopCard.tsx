@@ -1,7 +1,7 @@
 import * as t from '@components/MainPage/style/TopCardStyle'
 import { useNavigate } from 'react-router-dom'
 
-const TopCard = ({ currentUser, setCurrentUser }) => {
+const TopCard = ({ currentUser, setCurrentUser, setCurrentUserType }) => {
   const navigate = useNavigate()
 
   return (
@@ -10,17 +10,15 @@ const TopCard = ({ currentUser, setCurrentUser }) => {
         <img alt="로고" className="logo" src="/icon/icon_logo.png" />
         {!currentUser ? <button className="login-btn" onClick={() => navigate('/signin')}>
           로그인
-        </button> : <button className="login-btn" onClick={() => setCurrentUser(null)}>
+        </button> : <button className="login-btn" onClick={() => {
+          setCurrentUserType(0)
+          setCurrentUser(null)
+        }}>
           로그아웃
         </button>}
       </t.TopCardHeader>
       <t.TopCardInfoTextContainer>
-        <div className="main-info-text">
-          로그인하고 <br />
-          안전하고 쉬운 <span className="bold-text">부동산 거래</span>를 <br />
-          시작해보세요!
-        </div>
-        <div className="info-report">매물 안전도 레포트란?</div>
+        {`${currentUser.name}님`}
       </t.TopCardInfoTextContainer>
       <t.CharacterContainer>
         <img

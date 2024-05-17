@@ -6,11 +6,11 @@ import ContractPayment from '@/components/SmartContract/ContractPayment'
 import ContractAgree from '@/components/SmartContract/ContractAgree'
 import ContractMain from '@/components/SmartContract/ContractMain'
 import ContractStart from '@/components/SmartContract/ContractStart'
-import { contractStepAtom, readContractStepAtom } from '@/stores/smartcontract'
+import { contractStepAtom } from '@/stores/smartcontract'
 import { useAtom, useAtomValue } from 'jotai'
 import ContractComplete from '../components/SmartContract/ContractComplete'
 import WaveContainer from '@/common/WaveContainer'
-import { Button } from '@mui/material'
+import { Button, Snackbar } from '@mui/material'
 import CustomModal from '@/common/CustomModal'
 import {
   deployContract,
@@ -22,7 +22,6 @@ import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
-import { Snackbar } from '@mui/material'
 
 const SmartContractPage = () => {
   const [step, setStep] = useAtom(contractStepAtom)
@@ -261,10 +260,10 @@ const SmartContractPage = () => {
         rightIconSrc={step === 2 ? '/icon/icon_download.png' : ''}
         onModal={handleOpen}
       ></Header>
-      {step === 0 && <ContractStart />}
+      {step === 0 && <ContractStart currentUser={currentUser} />}
       {step === 1 && <ContractAgree />}
       {step === 2 && <ContractMain />}
-      {step === 3 && <ContractPayment handlePayment={handleDeploy} />}
+      {step === 3 && <ContractPayment handlePayment={handleDeploy} currentUser={currentUser} />}
       {step === 4 && <ContractComplete />}
       <Button onClick={handleOpen}></Button>
 
