@@ -40,16 +40,16 @@ public class ChatController {
     }
 
     @MessageMapping("chat.progress.{chatRoomNo}")
-    public ProgressRes progressContract(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProgressPayload progressPayload) {
-        ProgressRes result =  chatService.progressContract(chatRoomNo, progressPayload);
+    public ChatRes progressContract(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProgressPayload progressPayload) {
+        ChatRes result =  chatService.progressContract(chatRoomNo, progressPayload);
         rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
 
         return result;
     }
 
     @MessageMapping("chat.provision.{chatRoomNo}")
-    public ProvisionRes createSpecialProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProvisionPayload provisionPayload) {
-        ProvisionRes result = chatService.createSpecialProvision(chatRoomNo, provisionPayload);
+    public ChatRes createSpecialProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProvisionPayload provisionPayload) {
+        ChatRes result = chatService.createSpecialProvision(chatRoomNo, provisionPayload);
         rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
 
         return result;

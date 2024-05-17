@@ -3,10 +3,7 @@ package com.blockhomes.tradings.service;
 import com.blockhomes.tradings.dto.chat.request.CreateChatRoomReq;
 import com.blockhomes.tradings.dto.chat.request.CheckChatRoomReq;
 import com.blockhomes.tradings.dto.chat.request.ListChatRoomsReq;
-import com.blockhomes.tradings.dto.chat.response.ChatRoomInstance;
-import com.blockhomes.tradings.dto.chat.response.CreateChatRoomRes;
-import com.blockhomes.tradings.dto.chat.response.DetailChatRoomRes;
-import com.blockhomes.tradings.dto.chat.response.ListChatRoomsRes;
+import com.blockhomes.tradings.dto.chat.response.*;
 import com.blockhomes.tradings.entity.chat.ChatRoom;
 import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.chat.WalletChatRoom;
@@ -61,11 +58,11 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
     @Override
     public DetailChatRoomRes detailChatRoom(Integer chatRoomNo) {
-        ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(chatRoomNo)
-            .orElseThrow(ChatRoomNotFoundException::new);
+        DetailChatRoomRes result = chatRoomRepository.getDetailChatRoom(chatRoomNo);
+        List<ChatRes> chatResList = chatRoomRepository.getChatResList(chatRoomNo);
+        result.setChatList(chatResList);
 
-        return DetailChatRoomRes.builder()
-            .build();
+        return result;
     }
 
     @Override
