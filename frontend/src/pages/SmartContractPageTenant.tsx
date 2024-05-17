@@ -26,7 +26,7 @@ import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
 import { Snackbar } from '@mui/material'
 
-const SmartContractPage = () => {
+const SmartContractTenantPage = () => {
   const [step, setStep] = useAtom(contractStepAtom)
   const [open, setOpen] = useState(false)
 
@@ -176,7 +176,6 @@ const SmartContractPage = () => {
 
       setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
       setSnackbarOpen(true)
-      setStep(step + 1)
     } catch (error) {
       if (error.message.includes('invalid password')) {
         setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
@@ -251,8 +250,9 @@ const SmartContractPage = () => {
       const receipt = await txResponse.wait()
 
       console.log('Transaction receipt:', receipt)
-      setSnackbarMessage('보증금 지불 및 서명이 성공적으로 처리되었습니다.')
+      setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
       setSnackbarOpen(true)
+      setStep(step + 1)
     } catch (error) {
       console.error('보증금 지불 및 서명 처리 중 오류 발생:', error)
       alert('보증금 지불 및 서명 처리 중 오류가 발생했습니다.')
@@ -271,7 +271,9 @@ const SmartContractPage = () => {
       {step === 0 && <ContractStart />}
       {step === 1 && <ContractAgree />}
       {step === 2 && <ContractMain />}
-      {step === 3 && <ContractPayment handlePayment={handleDeploy} />}
+      {step === 3 && (
+        <ContractPayment handlePayment={handleSignAndPayDeposit} />
+      )}
       {step === 4 && <ContractComplete />}
       <Button onClick={handleOpen}></Button>
 
@@ -302,7 +304,7 @@ const SmartContractPage = () => {
   )
 }
 
-export default SmartContractPage
+export default SmartContractTenantPage
 
 // // 임차인이 보증금을 지불하는 함수
 // const handlePayDeposit = async () => {

@@ -8,13 +8,14 @@ import { useAtom } from 'jotai'
 import ScreenIndicators from './ScreenIndicator'
 import EstateDidCard from '@/common/EstateDidCard'
 
-const ContractPayment = () => {
+const ContractPayment = ({ handlePayment }) => {
   const [step, setStep] = useAtom(contractStepAtom)
   const [screenIndex, setScreenIndex] = useState(0)
   const totalScreens = 2
 
   const handleNext = () => {
-    setStep(step + 1)
+    handlePayment()
+    // setStep(step + 1)
   }
 
   const swipeHandlers = useSwipeable({

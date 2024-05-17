@@ -25,6 +25,7 @@ import MyEstatePage from './pages/MyEstatePage'
 import InfoReportPage from '@pages/InfoReportPage'
 import ScrollToTop from '@hooks/ScrollToTop'
 import TestPage from '@pages/TestPage'
+import SmartContractTenantPage from './pages/SmartContractPageTenant'
 
 const HomeRoutes = () => (
   <Routes>
@@ -36,6 +37,11 @@ const HomeRoutes = () => (
     <Route path="/estate/:category" element={<RealEstatePage />} />
     <Route path="/estate-detail/:id" element={<RealEstateDetailPage />} />
     <Route path="/smart-contract" element={<SmartContractPage />} />
+    <Route
+      path="/smart-contract-tenant"
+      element={<SmartContractTenantPage />}
+    />
+
     <Route path="/report" element={<ReportPage />} />
 
     <Route path="/estate-registration" element={<EstateRegistrationPage />} />
