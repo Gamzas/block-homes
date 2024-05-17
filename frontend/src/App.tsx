@@ -41,9 +41,7 @@ const HomeRoutes = () => (
       path="/smart-contract-tenant"
       element={<SmartContractTenantPage />}
     />
-
-    <Route path="/report" element={<ReportPage />} />
-
+    <Route path="/report/:estateNo" element={<ReportPage />} />
     <Route path="/estate-registration" element={<EstateRegistrationPage />} />
     <Route path="/mypage" element={<MyPage />} />
     <Route path="/callback/:result" element={<CallBackPage />} />
