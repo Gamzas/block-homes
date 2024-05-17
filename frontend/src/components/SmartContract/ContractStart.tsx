@@ -15,6 +15,7 @@ const ContractStart = () => {
         index={1}
         currentCenterIndex={1}
         showRegistrationButton={false}
+        realEstateDID={'did:klay:0x5cf9f8c31624c63759c152d733b46f48f9d37954'}
       />
 
       <div className="button-box">
