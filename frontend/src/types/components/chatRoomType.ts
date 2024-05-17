@@ -2,12 +2,14 @@ import { MessageType } from '@/types/components/chatType'
 
 export interface ChatRoomListType {
   representativeImage: string
-  address: string
+  roadNameAddress: string
   transactionType: number
   price: number
   lastChat: string
-  dangerType: string
-  chatRoomNum: number
+  reportRank: string
+  role: number
+  itemNo: number
+  chatRoomNo: number
 }
 
 export interface FetchChatRoomsRequestType {

@@ -7,7 +7,9 @@ import {
 } from '@/types/components/chatRoomType'
 
 export const fetchChatRooms = async (params: FetchChatRoomsRequestType) => {
-  return publicRequest.get(`/chatrooms`, { params }).then(res => res.data)
+  return publicRequest
+    .get(`/chatrooms`, { params })
+    .then(res => res.data.chatRoomList)
 }
 
 export const checkChatRoomExistence = async (

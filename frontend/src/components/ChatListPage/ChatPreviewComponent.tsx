@@ -6,17 +6,17 @@ import useEstateCondition from '@hooks/useEstateCondition'
 
 const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
   representativeImage,
-  address,
+  roadNameAddress,
   transactionType,
   price,
   lastChat,
-  dangerType,
-  chatRoomNum,
+  reportRank,
+  chatRoomNo,
 }) => {
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
   const navigate = useNavigate()
-  const { getColor } = useEstateCondition(dangerType)
+  const { getColor } = useEstateCondition(reportRank)
   const fourthColor = getColor()?.fourth
 
   const formatPrice = (price: number) => {
@@ -53,7 +53,7 @@ const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
   }, [transactionType, price])
 
   const handleClick = () => {
-    navigate(`/chatroom/${chatRoomNum}`)
+    navigate(`/chatroom/${chatRoomNo}`)
   }
 
   return (
@@ -67,7 +67,7 @@ const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
       </div>
 
       <c.ChatComponentRightContainer>
-        <div className="address">{address}</div>
+        <div className="address">{roadNameAddress}</div>
 
         <div className="price">
           <img src="/icon/icon_chat_preview_coin.png" alt="돈" />
