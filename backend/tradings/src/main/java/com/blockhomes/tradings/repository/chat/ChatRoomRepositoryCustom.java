@@ -13,8 +13,6 @@ public interface ChatRoomRepositoryCustom {
 
     Integer getChatRoomNoByItemNoAndWallet(Integer itemNo, String walletAddress);
 
-    ChatRoomInstance getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress);
-
     DetailChatRoomRes getDetailChatRoom(Integer chatRoomNo);
 
     List<ChatRes> getChatResList(Integer chatRoomNo);

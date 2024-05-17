@@ -12,11 +12,14 @@ import com.blockhomes.tradings.entity.item.enums.ItemImageCategory;
 import com.blockhomes.tradings.entity.wallet.QWallet;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;
 
+@Slf4j
 public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements ChatRoomRepositoryCustom {
 
     private static final QChatRoom qChatRoom = QChatRoom.chatRoom;
@@ -33,7 +36,33 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
 
     @Override
     public List<ChatRoomInstance> getChatRoomsByWalletAndRole(String walletAddress, RoleCategory roleCategory) {
-        return getChatRoomsQuery()
+        return from(qChatRoom)
+            .innerJoin(qItem).on(qChatRoom.item.eq(qItem))
+            .innerJoin(qWalletChatRoom).on(qChatRoom.eq(qWalletChatRoom.chatRoom))
+            .innerJoin(qWallet).on(qWalletChatRoom.wallet.eq(qWallet))
+            .select(Projections.constructor(ChatRoomInstance.class,
+                qChatRoom.chatRoomNo,
+                qItem.itemNo,
+                qWalletChatRoom.roleCategory,
+                (
+                    JPAExpressions.select(qImage.imageUrl)
+                        .from(qImage)
+                        .innerJoin(qItemImage).on(qImage.eq(qItemImage.image))
+                        .where(qItemImage.item.eq(qItem)
+                            .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
+                        .orderBy(qImage.imageNo.asc())
+                        .limit(1)
+                ),
+                qItem.roadNameAddress,
+                qItem.transactionType,
+                qItem.price,
+                JPAExpressions.select(qChat.message)
+                    .from(qChat)
+                    .where(qChat.chatRoom.eq(qChatRoom))
+                    .orderBy(qChat.createdAt.desc())
+                    .limit(1),
+                qItem.reportRank
+            ))
             .where(qWallet.walletAddress.eq(walletAddress)
                 .and(qWalletChatRoom.roleCategory.eq(roleCategory)))
             .fetch();
@@ -52,14 +81,26 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     @Override
-    public ChatRoomInstance getChatRoomByItemNoAndWallet(Integer itemNo, String walletAddress) {
-        return null;
-    }
-
-    @Override
     public DetailChatRoomRes getDetailChatRoom(Integer chatRoomNo) {
-        return getDetailChatRoomQuery()
-            .where(qChatRoom.chatRoomNo.eq(chatRoomNo))
+        return from(qChatRoom)
+            .innerJoin(qItem).on(qChatRoom.item.eq(qItem))
+            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
+            .innerJoin(qImage).on(qImage.eq(qItemImage.image))
+            .select(Projections.constructor(DetailChatRoomRes.class,
+                qItem.itemNo,
+                qChatRoom.chatRoomNo,
+                (
+                    JPAExpressions.select(qImage.imageUrl)
+                        .from(qImage)
+                        .innerJoin(qItemImage).on(qImage.eq(qItemImage.image))
+                        .where(qItemImage.item.eq(qItem)
+                            .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
+                        .orderBy(qImage.imageNo.asc())
+                        .limit(1)
+                ),
+                qItem.roadNameAddress,
+                qItem.transactionType,
+                qItem.price))
             .fetchOne();
     }
 
@@ -83,60 +124,6 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
                 ))
             .where(qChatRoom.chatRoomNo.eq(chatRoomNo))
             .fetch();
-    }
-
-    private JPQLQuery<DetailChatRoomRes> getDetailChatRoomQuery() {
-        return from(qChatRoom)
-            .innerJoin(qChatRoom).on(qChatRoom.item.eq(qItem))
-            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
-            .innerJoin(qImage).on(qImage.eq(qItemImage.image))
-            .select(Projections.constructor(DetailChatRoomRes.class,
-                qItem.itemNo,
-                qChatRoom.chatRoomNo,
-                qImage.imageUrl,
-                qItem.roadNameAddress,
-                qItem.transactionType,
-                qItem.price
-                ));
-    }
-
-    private JPQLQuery<ChatRoomInstance> getChatRoomsQuery() {
-        return from(qChatRoom)
-            .innerJoin(qChatRoom.item, qItem)
-            .innerJoin(qWalletChatRoom).on(qWalletChatRoom.chatRoom.eq(qChatRoom))
-            .innerJoin(qWalletChatRoom.wallet, qWallet)
-            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
-            .innerJoin(qImage).on(qImage.eq(qItemImage.image))
-            .select(Projections.constructor(ChatRoomInstance.class,
-                qChatRoom.chatRoomNo,
-                qItem.itemNo,
-                qWalletChatRoom.roleCategory,
-                ExpressionUtils.as(representativeImageSubQuery(), "representativeImage"),
-                qItem.roadNameAddress,
-                qItem.transactionType,
-                qItem.price,
-                ExpressionUtils.as(latestChatSubQuery(), "lastChat"),
-                qItem.reportRank
-            ));
-    }
-
-    private JPQLQuery<String> latestChatSubQuery() {
-        return from(qChat)
-            .select(qChat.message)
-            .where(qChat.chatRoom.eq(qChatRoom))
-            .orderBy(qChat.createdAt.desc())
-            .limit(1);
-    }
-
-    private JPQLQuery<String> representativeImageSubQuery() {
-        QImage qImageSub = new QImage("qImageSub");
-
-        return from(qImage)
-            .innerJoin(qItemImage.image, qImageSub)
-            .select(qImageSub.imageUrl)
-            .where(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
-            .orderBy(qImage.createdAt.asc())
-            .limit(1);
     }
 
 }
