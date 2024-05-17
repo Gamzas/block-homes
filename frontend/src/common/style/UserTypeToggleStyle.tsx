@@ -3,10 +3,9 @@ import styled from 'styled-components'
 export const UserTypeToggleContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
     z-index: 2;
     position: fixed;
-    bottom: 55px;
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
 
@@ -14,7 +13,6 @@ export const UserTypeToggleContainer = styled.div`
     .landlord {
         font-weight: 300;
         font-size: 0.9rem;
-        padding: 0.3rem 1.2rem;
         cursor: pointer;
         border: 1px #845bd3 solid;
         color: #845bd3;
