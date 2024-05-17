@@ -5,7 +5,7 @@ import SearchBar from '@common/SearchBar'
 import useDownloadPDF from '@/hooks/useDownloadPdf'
 import { useAtom } from 'jotai'
 import { mapAtom } from '@/stores/atoms/EstateListStore'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 //props로 title, isSearch(bool type) rightIconSrc를 넙깁니다.
 // example
@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom'
 //     onModal={handleOpen} (선택)
 // />
 const Header: React.FC<HeaderPropsType> = HeaderProps => {
+  const { estateNo } = useParams()
   const downloadPdf = useDownloadPDF()
   const [menu, setMenu] = useAtom(mapAtom)
   const navigate = useNavigate()
@@ -50,7 +51,7 @@ const Header: React.FC<HeaderPropsType> = HeaderProps => {
             } else if (
               HeaderProps.rightIconSrc === '/icon/icon_safety_card_report.png'
             ) {
-              navigate('/report')
+              navigate(`/report/${estateNo}`)
             } else if (
               HeaderProps.rightIconSrc == '/icon/icon_map.png' ||
               HeaderProps.rightIconSrc == '/icon/icon_list.png'
