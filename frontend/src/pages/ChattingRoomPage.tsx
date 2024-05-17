@@ -5,13 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 import { useAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useNavigate, useParams } from 'react-router-dom'
-import { MessageType } from '@/types/components/chatType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
 import { Client } from '@stomp/stompjs'
 import MessageItem from '@components/ChattingPage/MessageItem'
 import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
+import { MessageType } from '@/types/components/chatType'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -65,33 +65,41 @@ const ChattingRoomPage = () => {
     const sockJs = new SockJS(API_BASE_URL + '/ws/chat')
     client.current = new Client({
       webSocketFactory: () => sockJs,
+      debug: str => console.log(str), // 추가된 디버그 로그
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: () => {
-        client.current?.subscribe(`/sub/chat.talk.${chatRoomNo}`, msg => {
-          const receivedMessage = JSON.parse(msg.body)
-          console.log('Received message:', receivedMessage)
-          setMessages(prevMessages => [
-            ...prevMessages,
-            {
-              chatNo: receivedMessage.chatNo,
-              chatRoomNo: receivedMessage.chatRoomNo,
-              senderWalletAddress: receivedMessage.senderWalletAddress,
-              senderName: receivedMessage.senderName,
-              messageType: receivedMessage.messageType,
-              image: receivedMessage.image,
-              contractStep: receivedMessage.contractStep,
-              message: receivedMessage.message,
-              createdAt: receivedMessage.createdAt,
-            },
-          ])
-          scrollToBottom()
+        console.log('WebSocket connected')
+        client.current.subscribe(`/topic/chat.talk.${chatRoomNo}`, msg => {
+          console.log('Subscribed to topic:', `/topic/chat.talk.${chatRoomNo}`)
+          console.log('Message received:', msg)
+          try {
+            const receivedMessage = JSON.parse(msg.body)
+            console.log('Parsed message:', receivedMessage)
+            setMessages(prevMessages => [
+              ...prevMessages,
+              {
+                chatNo: receivedMessage.chatNo,
+                chatRoomNo: receivedMessage.chatRoomNo,
+                senderWalletAddress: receivedMessage.senderWalletAddress,
+                senderName: receivedMessage.senderName,
+                messageType: receivedMessage.messageType,
+                image: receivedMessage.image,
+                contractStep: receivedMessage.contractStep,
+                message: receivedMessage.message,
+                createdAt: receivedMessage.createdAt,
+              },
+            ])
+            scrollToBottom()
+          } catch (error) {
+            console.error('Error parsing message:', error)
+          }
         })
       },
       onStompError: frame => console.log('STOMP Error:', frame.headers.message),
     })
-    client.current?.activate()
+    client.current.activate()
   }
 
   useEffect(() => {
@@ -138,13 +146,12 @@ const ChattingRoomPage = () => {
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
       console.log('Sending message:', newMessage.message)
-      client.current?.publish({
+      client.current.publish({
         destination: `/pub/chat.talk.${chatRoomNo}`,
         body: JSON.stringify({
-          chatRoomNo: chatRoomNo,
           senderWalletAddress: user.walletAddress,
           message: newMessage.message,
-          messageType: 2,
+          imageBase64: null,
         }),
       })
       setNewMessage(defaultMessage)
@@ -200,9 +207,9 @@ const ChattingRoomPage = () => {
           </c.ButtonContainer>
         </c.RightContainer>
       </c.ChattingHeader>
-      <c.MessageListContainer>
-        {messages.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
-        {messages.map(message => (
+      <c.MessageListContainer ref={scrollRef}>
+        {messages?.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
+        {messages?.map(message => (
           <MessageItem item={message} key={message.chatNo} />
         ))}
       </c.MessageListContainer>
