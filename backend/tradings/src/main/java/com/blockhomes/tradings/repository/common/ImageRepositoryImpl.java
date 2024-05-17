@@ -4,6 +4,7 @@ import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.common.QImage;
 import com.blockhomes.tradings.entity.item.QItem;
 import com.blockhomes.tradings.entity.item.QItemImage;
+import com.blockhomes.tradings.entity.item.enums.ItemImageCategory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.List;
@@ -38,6 +39,28 @@ public class ImageRepositoryImpl extends QuerydslRepositorySupport implements Im
                     .where(qItem.itemNo.eq(itemNo))
             )
         ).execute();
+    }
+
+    @Override
+    public String getMainImageUrlByItemNo(Integer itemNo) {
+        return from(qImage)
+            .innerJoin(qItemImage).on(qImage.eq(qItemImage.image))
+            .innerJoin(qItem).on(qItemImage.item.eq(qItem))
+            .select(qImage.imageUrl)
+            .where(qItem.itemNo.eq(itemNo)
+                .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
+            .fetchOne();
+    }
+
+    @Override
+    public List<String> getImageUrlsByItemNoAndCategory(Integer itemNo, ItemImageCategory itemImageCategory) {
+        return from(qImage)
+            .innerJoin(qItemImage).on(qImage.eq(qItemImage.image))
+            .innerJoin(qItem).on(qItemImage.item.eq(qItem))
+            .select(qImage.imageUrl)
+            .where(qItem.itemNo.eq(itemNo)
+                .and(qItemImage.itemImageCategory.eq(itemImageCategory)))
+            .fetch();
     }
 
 }

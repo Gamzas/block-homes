@@ -1,12 +1,7 @@
 package com.blockhomes.tradings.controller;
 
 import com.blockhomes.tradings.dto.chat.payload.ChatPayload;
-import com.blockhomes.tradings.dto.chat.payload.EnterPayload;
-import com.blockhomes.tradings.dto.chat.payload.ProgressPayload;
-import com.blockhomes.tradings.dto.chat.payload.ProvisionPayload;
 import com.blockhomes.tradings.dto.chat.response.ChatRes;
-import com.blockhomes.tradings.dto.chat.response.ProgressRes;
-import com.blockhomes.tradings.dto.chat.response.ProvisionRes;
 import com.blockhomes.tradings.service.ChatService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +21,8 @@ public class ChatController {
     private final RabbitTemplate rabbitTemplate;
 
     @MessageMapping("chat.enter.{chatRoomNo}")
-    public ChatRes enterUser(@DestinationVariable Integer chatRoomNo, @Payload @Valid EnterPayload enterPayload) {
-        ChatRes result = chatService.enterUser(chatRoomNo, enterPayload);
+    public ChatRes enterUser(@DestinationVariable Integer chatRoomNo, @Payload @Valid ChatPayload chatPayload) {
+        ChatRes result = chatService.enterUser(chatRoomNo, chatPayload);
         rabbitTemplate.convertAndSend("chat.exchange", "enter.room." + chatRoomNo, result);
         return result;
     }
@@ -40,20 +35,20 @@ public class ChatController {
     }
 
     @MessageMapping("chat.progress.{chatRoomNo}")
-    public ChatRes progressContract(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProgressPayload progressPayload) {
-        ChatRes result =  chatService.progressContract(chatRoomNo, progressPayload);
+    public ChatRes progressContract(@DestinationVariable Integer chatRoomNo, @Payload @Valid ChatPayload chatPayload) {
+        ChatRes result =  chatService.progressContract(chatRoomNo, chatPayload);
         rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
 
         return result;
     }
 
-    @MessageMapping("chat.provision.{chatRoomNo}")
-    public ChatRes createSpecialProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ProvisionPayload provisionPayload) {
-        ChatRes result = chatService.createSpecialProvision(chatRoomNo, provisionPayload);
-        rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
-
-        return result;
-    }
+//    @MessageMapping("chat.provision.{chatRoomNo}")
+//    public ChatRes createSpecialProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ChatPayload chatPayload) {
+//        ChatRes result = chatService.createSpecialProvision(chatRoomNo, chatPayload);
+//        rabbitTemplate.convertAndSend("chat.exchange", "*.room." + chatRoomNo, result);
+//
+//        return result;
+//    }
 
     @MessageMapping("chat.reject.{chatRoomNo}")
     public ChatRes rejectProvision(@DestinationVariable Integer chatRoomNo, @Payload @Valid ChatPayload chatPayload) {

@@ -343,7 +343,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public DetailItemRes modifyItem(ModifyItemReq req) {
+    public DetailItemRes modifyItem(ModifyItemReq req, MultipartFile mainImage, MultipartFile[] roomImages, MultipartFile[] kitchenToiletImages) {
         Item item = itemRepository.getItemByItemNo(req.getItemNo())
             .orElseThrow(ItemNotFoundException::new);
 
@@ -390,6 +390,14 @@ public class ItemServiceImpl implements ItemService {
         }
 
         itemAdditionalOptionRepository.saveAll(optionEntityList);
+
+        Integer itemNo = item.getItemNo();
+
+        if (Objects.nonNull(mainImage)) {
+            String imageKey = s3BucketUtil.getFileKey(imageRepository.getMainImageUrlByItemNo(itemNo), itemNo);
+
+
+        }
 
         return getDetailItem(item.getItemNo(), DetailItemReq.builder().walletAddress(req.getWalletAddress()).build());
     }

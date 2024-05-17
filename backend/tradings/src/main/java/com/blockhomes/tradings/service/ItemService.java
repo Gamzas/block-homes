@@ -13,7 +13,7 @@ public interface ItemService {
 
     DetailItemRes getDetailItem(Integer itemNo, DetailItemReq req);
 
-    DetailItemRes modifyItem(ModifyItemReq req);
+    DetailItemRes modifyItem(ModifyItemReq req, MultipartFile mainImage, MultipartFile[] roomImages, MultipartFile[] kitchenToiletImages);
 
     BaseResponseBody deleteItem(DeleteItemReq req);
 
