@@ -87,7 +87,7 @@ const DetailFooter = (props: PropsType) => {
       </f.LikendBtn>
       <f.InfoContainer>
         <div className="price">
-          전세 {numberToMoney(price)}&nbsp;
+          월세 {numberToMoney(price)}&nbsp;
           <span className="maintenance">
             관리비 {numberToMoney(administrationCost)}
           </span>
