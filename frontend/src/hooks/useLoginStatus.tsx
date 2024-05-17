@@ -9,11 +9,11 @@ const useLoginStatus = () => {
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser')
     const currentUserData = currentUser ? JSON.parse(currentUser) : null
-    if (currentUserData && !user) {
+    if (currentUserData && user.name === '') {
       setUser(currentUserData)
-    } else if (!currentUserData && user) {
+    } else if (!currentUserData && user.name !== '') {
       localStorage.setItem('currentUser', JSON.stringify(user))
-    } else if (!currentUserData && !user) {
+    } else if (!currentUserData && user.name === '') {
       alert('로그인 후 이용해주세요')
       navigate('/signin')
     }
