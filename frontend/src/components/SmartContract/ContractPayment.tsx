@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Step from './Step'
 import * as c from './style/ContractPayment'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
@@ -7,15 +7,52 @@ import { contractStepAtom } from '@/stores/smartcontract'
 import { useAtom } from 'jotai'
 import ScreenIndicators from './ScreenIndicator'
 import EstateDidCard from '@/common/EstateDidCard'
+import CustomPasswordModal from './CustomPasswordModal'
+import IsLoading from '@/common/IsLoading'
+import SecurityLock from '@assets/lotties/SecurityLock.json'
 
 const ContractPayment = ({ handlePayment }) => {
-  const [step, setStep] = useAtom(contractStepAtom)
   const [screenIndex, setScreenIndex] = useState(0)
+
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false)
   const totalScreens = 2
 
+  const [isLoading, setIsLoading] = useState(false)
+  const [loadingStage, setLoadingStage] = useState(0)
+
+  const loadingMessages = [
+    '입력하신 비밀번호로\n지갑을 **복원**하는 중입니다.',
+    '블록체인 네트워크에\n접속 중입니다.',
+    '거래를 처리하고\n있습니다. 잠시만 기다려주세요.',
+  ]
+
+  useEffect(() => {
+    let timer
+    if (isLoading) {
+      timer = setTimeout(() => {
+        setLoadingStage(prevStage => {
+          const nextStage = (prevStage + 1) % loadingMessages.length
+          return nextStage
+        })
+      }, 5000) // 5초마다 메시지 변경
+    }
+    return () => clearTimeout(timer)
+  }, [isLoading, loadingStage])
+
   const handleNext = () => {
-    handlePayment()
-    // setStep(step + 1)
+    setPasswordModalOpen(true) // 모달 열기
+  }
+
+  const handlePasswordConfirm = password => {
+    setPasswordModalOpen(false)
+    setIsLoading(true) // 로딩 시작
+    handlePayment(password)
+      .then(() => {
+        setIsLoading(false) // 로딩 종료
+      })
+      .catch(() => {
+        setIsLoading(false) // 로딩 종료
+      })
   }
 
   const swipeHandlers = useSwipeable({
@@ -96,6 +133,18 @@ const ContractPayment = ({ handlePayment }) => {
           </CustomButtonStyle>
         </div>
       </c.ScreenContainer>
+      {/* 비밀번호 모달 */}
+      <CustomPasswordModal
+        open={passwordModalOpen}
+        handleClose={() => setPasswordModalOpen(false)}
+        handleConfirm={handlePasswordConfirm}
+      />
+      {isLoading && (
+        <IsLoading
+          textProps={loadingMessages[loadingStage]}
+          lottieProps={SecurityLock}
+        />
+      )}
     </>
   )
 }
