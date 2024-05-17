@@ -85,7 +85,7 @@ public class ItemController {
             .body(itemService.registerItem(req, mainImage, roomImages, kitchenToiletImages));
     }
 
-    @PatchMapping("/{itemNo}")
+    @PatchMapping(value = "/{itemNo}", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
     @Operation(
         summary = "부동산 매물 수정",
         description = "부동산 매물 정보를 수정합니다. (수정되지 않은 것들은 원래 값 넣어주세요 !!!!!! 아무것도 안 넣으면 다 지워짐)",
@@ -97,10 +97,13 @@ public class ItemController {
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
-    public ResponseEntity<DetailItemRes> modifyItem(@RequestBody @Valid ModifyItemReq req) {
+    public ResponseEntity<DetailItemRes> modifyItem(@RequestPart @Valid ModifyItemReq req,
+                                                    @RequestPart(required = false) MultipartFile mainImage,
+                                                    @RequestPart(required = false) MultipartFile[] roomImages,
+                                                    @RequestPart(required = false) MultipartFile[] kitchenToiletImages) {
         return ResponseEntity
             .status(HttpStatus.ACCEPTED)
-            .body(itemService.modifyItem(req));
+            .body(itemService.modifyItem(req, mainImage, roomImages, kitchenToiletImages));
     }
 
     @PostMapping("status/{itemNo}")

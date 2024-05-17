@@ -67,6 +67,19 @@ public class ChatRoomController {
             .body(chatRoomService.detailChatRoom(chatRoomNo));
     }
 
+//    @PostMapping("/provision")
+//    @Operation(
+//        summary = "특약사항 작성",
+//        description = "특약사항을 작성합니다.",
+//        responses = {
+//            @ApiResponse(responseCode = "200", description = "정상 조회"),
+//            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+//            @ApiResponse(responseCode = "404", description = "채팅방 없음"),
+//            @ApiResponse(responseCode = "500", description = "서버 에러")
+//        }
+//    )
+//    public ResponseEntity<>
+
     @PostMapping()
     public ResponseEntity<CreateChatRoomRes> createChatRoom(@RequestBody @Valid CreateChatRoomReq req) {
         return ResponseEntity
