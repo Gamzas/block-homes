@@ -93,7 +93,10 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
                     JPAExpressions.select(qImage.imageUrl)
                         .from(qImage)
                         .innerJoin(qItemImage).on(qImage.eq(qItemImage.image))
+                        .innerJoin(qItem).on(qItemImage.item.eq(qItem))
+                        .innerJoin(qChatRoom).on(qItem.eq(qChatRoom.item))
                         .where(qItemImage.item.eq(qItem)
+                            .and(qChatRoom.chatRoomNo.eq(chatRoomNo))
                             .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
                         .orderBy(qImage.imageNo.asc())
                         .limit(1)
@@ -101,6 +104,7 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
                 qItem.roadNameAddress,
                 qItem.transactionType,
                 qItem.price))
+            .where(qChatRoom.chatRoomNo.eq(chatRoomNo))
             .fetchOne();
     }
 
