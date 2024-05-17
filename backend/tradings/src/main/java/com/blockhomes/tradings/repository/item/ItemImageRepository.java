@@ -10,4 +10,6 @@ public interface ItemImageRepository extends JpaRepository<ItemImage, Integer> {
 
     List<ItemImage> getItemImagesByItem(Item item);
 
+    void deleteItemImageByItem(Item item);
+
 }

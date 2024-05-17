@@ -321,6 +321,18 @@ public class ItemServiceImpl implements ItemService {
             throw new ItemOwnerNotMatchException(item.getRealEstateDID(), ownerWallet.getWalletAddress());
         }
 
+        Integer itemNo = item.getItemNo();
+
+        List<String> imageKeys = s3BucketUtil.getFileKeyList(imageRepository.getImageUrlsByItemNo(itemNo), itemNo);
+
+        itemImageRepository.deleteItemImageByItem(item);
+        imageRepository.deleteImageByItemNo(itemNo);
+        s3BucketUtil.deleteFiles(imageKeys, BASE_FOLDER_NAME + "/" + itemNo);
+
+        itemAdministrationFeeRepository.deleteAllByItem(item);
+
+        itemAdditionalOptionRepository.deleteAllByItem(item);
+
         itemRepository.delete(item);
 
         return BaseResponseBody.builder()
