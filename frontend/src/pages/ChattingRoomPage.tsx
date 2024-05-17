@@ -62,7 +62,7 @@ const ChattingRoomPage = () => {
   }
 
   const connectHandler = () => {
-    const sockJs = new SockJS(API_BASE_URL + '/ws/chat') // Fixed capitalization of SockJS
+    const sockJs = new SockJS(API_BASE_URL + '/ws/chat')
     client.current = new Client({
       webSocketFactory: () => sockJs,
       reconnectDelay: 5000,
