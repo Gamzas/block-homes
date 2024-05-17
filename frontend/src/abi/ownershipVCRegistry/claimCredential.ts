@@ -1,7 +1,7 @@
 import { ethers } from 'ethers'
 import { useMutation } from '@tanstack/react-query'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
-import { MOIS_PRIVATE_KEY } from '@constants/abi/GovernmentPrivateKey'
+import { MOLIT_PRIVATE_KEY } from '@constants/abi/GovernmentPrivateKey'
 import { baseOwnershipVCRegistryContract } from '@/abi/ownershipVCRegistry/baseOwnershipVCRegistryContract'
 import { ClaimCredentialInputs } from '@/types/abi/ownershipVCRegistryType'
 
@@ -11,8 +11,8 @@ export const useClaimCredential = () => {
       const provider = new ethers.providers.JsonRpcProvider(
         BLOCK_CHAIN_ENDPOINT,
       )
-      const MOISWallet = new ethers.Wallet(MOIS_PRIVATE_KEY, provider)
-      const contract = baseOwnershipVCRegistryContract(MOISWallet)
+      const MOLITWallet = new ethers.Wallet(MOLIT_PRIVATE_KEY, provider)
+      const contract = baseOwnershipVCRegistryContract(MOLITWallet)
 
       // 스마트 계약의 함수 인코딩
       const data = contract.interface.encodeFunctionData('claimCredential', [
@@ -26,15 +26,14 @@ export const useClaimCredential = () => {
 
       // 트랜잭션 객체 구성
       const tx = {
-        from: MOISWallet.address,
+        from: MOLITWallet.address,
         to: contract.address,
         value: ethers.constants.Zero,
         data: data,
-        gasLimit: ethers.utils.hexlify(200000),
       }
 
       // 트랜잭션 발송 및 수신 확인
-      const sentTx = await MOISWallet.sendTransaction(tx)
+      const sentTx = await MOLITWallet.sendTransaction(tx)
       const receipt = await sentTx.wait()
       console.log('receipt', receipt)
     },
