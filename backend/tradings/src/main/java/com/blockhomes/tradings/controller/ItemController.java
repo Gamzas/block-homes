@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -77,6 +79,7 @@ public class ItemController {
                                                         @RequestPart MultipartFile mainImage,
                                                         @RequestPart(required = false) MultipartFile[] roomImages,
                                                         @RequestPart(required = false) MultipartFile[] kitchenToiletImages) {
+        log.info("{} {}", Arrays.toString(roomImages), Arrays.toString(kitchenToiletImages));
         return ResponseEntity
             .status(CREATED)
             .body(itemService.registerItem(req, mainImage, roomImages, kitchenToiletImages));
