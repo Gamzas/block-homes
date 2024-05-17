@@ -1,17 +1,16 @@
-import { ethers } from 'ethers'
 import { useQuery } from '@tanstack/react-query'
 import { baseCitizenshipVCRegistryContract } from '@/abi/citizenshipVCRegistry/baseCitizenshipVCRegistryContract'
 
-export const useGetVC = (wallet: ethers.Wallet) => {
-  const contract = baseCitizenshipVCRegistryContract(wallet)
+export const useGetVC = (walletAddress) => {
+  const contract = baseCitizenshipVCRegistryContract()
   return useQuery({
-    queryKey: ['getVC', wallet.address],
+    queryKey: ['getVC', walletAddress],
     queryFn: async () => {
-      if (!wallet.address) {
-        throw new Error('Missing userWallet or realEstateDID')
+      if (!walletAddress) {
+        throw new Error('Missing walletAddress')
       }
-      return await contract.getVC(wallet.address)
+      return await contract.getVC(walletAddress)
     },
-    enabled: !!wallet.address,
+    enabled: !!walletAddress,
   })
 }

@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import { useClaimCredential } from '@/abi/ownershipVCRegistry/claimCredential'
-import { MOIS_PRIVATE_KEY } from '@constants/abi/GovernmentPrivateKey'
+import { MOLIT_PRIVATE_KEY } from '@constants/abi/GovernmentPrivateKey'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import { TestContainer } from '@components/TestPage/style/TestStyle'
 
@@ -8,17 +8,16 @@ const ClaimCredential = () => {
   const { mutate: claimCredentialMutate } = useClaimCredential()
   const handleClaimCredentialButtonClick = async () => {
     const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
-    const MOISWallet = new ethers.Wallet(MOIS_PRIVATE_KEY, provider)
-    const subject = 'did:klay:0x15b84A76cd54E0D086FE0E40Cb3eAc3dB3e9a593'
-    const value = 'did:klay:0x12345'
+    const MOLITWallet = new ethers.Wallet(MOLIT_PRIVATE_KEY, provider)
+    const subject = 'did:klay:0x68Bdec4DA58ab08cFb72c815Fe695FABac8F2588'
+    const value = 'did:klay:0x0a750ee0800feb821b3e1cd8b9174bc736b65329'
     const message = ethers.utils.solidityKeccak256(
       ['string', 'uint256', 'string'],
       [subject, Math.floor(Date.now() / 1000), value],
     )
     const messageBytes = ethers.utils.arrayify(message)
-    const flatSig = await MOISWallet.signMessage(messageBytes)
+    const flatSig = await MOLITWallet.signMessage(messageBytes)
     const sig = ethers.utils.splitSignature(flatSig)
-    console.log(sig)
 
     const params = {
       _subject: subject,

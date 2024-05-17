@@ -1,18 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
-import { GetDIDDocumentInputs } from '@/types/abi/realEstateDIDRegistryContractType'
 import { baseRealEstateDIDRegistryContract } from '@/abi/realEstateDIDRegistry/baseRealEstateDIDRegistryContract'
 
-export const useGetDIDDocument = (params: GetDIDDocumentInputs) => {
-  const { userWallet, realEstateDID } = params
-  const contract = baseRealEstateDIDRegistryContract(userWallet)
+export const useGetDIDDocument = (realEstateDID: string) => {
+  const contract = baseRealEstateDIDRegistryContract()
   return useQuery({
     queryKey: ['getDIDDocument', realEstateDID],
     queryFn: async () => {
-      if (!userWallet || !realEstateDID) {
+      if (!realEstateDID) {
         throw new Error('Missing userWallet or realEstateDID')
       }
       return await contract.getDIDDocument(realEstateDID)
     },
-    enabled: !!userWallet && !!realEstateDID,
+    enabled: !!realEstateDID,
   })
 }
