@@ -1,10 +1,13 @@
 package com.blockhomes.tradings.repository.item;
 
+import com.blockhomes.tradings.dto.item.request.GetLikeItemsReq;
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
 import com.blockhomes.tradings.dto.item.response.ListItemInstance;
 import com.blockhomes.tradings.entity.common.QImage;
 import com.blockhomes.tradings.entity.item.*;
 import com.blockhomes.tradings.entity.item.enums.*;
+import com.blockhomes.tradings.entity.wallet.QLikes;
+import com.blockhomes.tradings.entity.wallet.QWallet;
 import com.blockhomes.tradings.util.AreaUtil;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -22,6 +25,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     private static final QItem qItem = QItem.item;
     private static final QItemImage qItemImage = QItemImage.itemImage;
     private static final QImage qImage = QImage.image;
+    private static final QLikes qLikes = QLikes.likes;
+    private static final QWallet qWallet = QWallet.wallet;
 
     public ItemRepositoryImpl() {
         super(Item.class);
@@ -39,6 +44,40 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                 .and(filterPyeong(req.getMinPyeong(), req.getMaxPyeong()))
                 .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN))
             ).fetch();
+    }
+
+    @Override
+    public List<ListItemInstance> listItemsByLikes(GetLikeItemsReq req) {
+        JPQLQuery<ListItemInstance> query = getItemWalletLikeQuery()
+            .where(qWallet.walletAddress.eq(req.getUserAddress()));
+
+        log.info("{}", query);
+        return query.fetch();
+    }
+
+    private JPQLQuery<ListItemInstance> getItemWalletLikeQuery() {
+        return from(qItem)
+            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
+            .innerJoin(qImage).on(qItemImage.image.eq(qImage))
+            .innerJoin(qLikes).on(qLikes.item.eq(qItem))
+            .innerJoin(qWallet).on(qWallet.eq(qLikes.wallet))
+            .select(Projections.constructor(ListItemInstance.class,
+                    qItem.itemNo,
+                    qItem.realEstateDID,
+                    qItem.roadNameAddress,
+                    qItem.transactionType,
+                    qItem.realEstateType,
+                    qItem.reportRank,
+                    qItem.transactionStatus,
+                    qItem.area,
+                    qItem.price,
+                    qItem.monthlyPrice,
+                    qItem.administrationCost,
+                    qItem.contractMonths,
+                    qItem.latitude,
+                    qItem.longitude,
+                    qImage.imageUrl
+                ));
     }
 
     private BooleanExpression filterPyeong(Integer minPyeong, Integer maxPyeong) {

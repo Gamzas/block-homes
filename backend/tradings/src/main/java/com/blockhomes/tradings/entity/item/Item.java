@@ -31,7 +31,7 @@ public class Item extends BaseEntity {
     private Wallet ownerWallet;
 
     @NotNull
-    @Column(name = "real_estate_did", unique = true, nullable = false)
+    @Column(name = "real_estate_did", nullable = false)
     private String realEstateDID;
 
     @NotNull
