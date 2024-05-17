@@ -4,7 +4,7 @@ import SendMessageInput from '@components/ChattingPage/SendMessageInput'
 import { useEffect, useRef, useState } from 'react'
 import { useAtom } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { MessageType } from '@/types/components/chatType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
@@ -17,6 +17,7 @@ const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
   const [user] = useAtom(userAtom)
   const [chatRoomNumber, setChatRoomNumber] = useState(Number(chatRoomNo))
+  const navigate = useNavigate()
 
   const defaultMessage = {
     chatNo: 0,
@@ -126,9 +127,26 @@ const ChattingRoomPage = () => {
         {/*<div>{data.realEstateAddress}</div>*/}
         {/*<div>{data.transactionType}</div>*/}
         {/*<div>{data.price}</div>*/}
-        <button>매물 레포트 보러가기</button>
-        <button>매물 체크리스트 보러가기</button>
-        <button>매물 거래 현황 보러가기</button>
+        <c.ButtonContainer>
+          <button
+            className="chatting-header-button"
+            onClick={() => navigate(`/report/${data.itemNo}`)}
+          >
+            레포트
+          </button>
+          <button
+            className="chatting-header-button"
+            onClick={() => navigate('/estate-checklist')}
+          >
+            체크리스트
+          </button>
+          <button
+            className="chatting-header-button"
+            onClick={() => navigate('/transaction-progress')}
+          >
+            거래 현황 보러가기
+          </button>
+        </c.ButtonContainer>
       </c.ChattingHeader>
       <c.MessageList>
         {messages.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
