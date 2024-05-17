@@ -56,18 +56,34 @@ public class S3BucketUtil {
         amazonS3Client.deleteObject(bucket + "/" + folderName, fileName);
     }
 
+    public void deleteFiles(List<String> fileKey, String folderName) {
+        for (String key : fileKey) {
+            amazonS3Client.deleteObject(bucket + "/" + folderName, key);
+        }
+    }
+
     public String getFileUrl(String key, String folderName) {
         return "https://" + bucket + ".s3." + region + ".amazonaws.com/" + folderName + "/" + key;
     }
 
-    public List<String> getFileUrlList(List<String> keys, String folderName) {
-        List<String> urlList = new ArrayList<>();
-
-        for (String key : keys) {
-            urlList.add(getFileUrl(key, folderName));
+    public String getFileKey(String fileUrl, Integer itemNo) {
+        String prefix = "https://" + bucket + ".s3." + region + ".amazonaws.com/items/" + itemNo + "/";
+        
+        if (fileUrl.startsWith(prefix)) {
+            return fileUrl.substring(prefix.length());
         }
 
-        return urlList;
+        throw new IllegalArgumentException(fileUrl);
+    }
+
+    public List<String> getFileKeyList(List<String> fileUrls, Integer itemNo) {
+        List<String> fileKeyList = new ArrayList<>();
+
+        for (String fileUrl : fileUrls) {
+            fileKeyList.add(getFileKey(fileUrl, itemNo));
+        }
+
+        return fileKeyList;
     }
 
 }
