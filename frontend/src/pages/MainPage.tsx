@@ -23,15 +23,21 @@ const MainPage = () => {
   }, [])
   return (
     <h.MainPageContainer>
-      <TopCard currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentUserType={setCurrentUserType} />
+      <TopCard
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        setCurrentUserType={setCurrentUserType}
+      />
       <InfoCardSlider />
       {currentUserType.type === 0 && <RealEstateCategory />}
-      {currentUser &&
+      {currentUser.name !== '' && (
         <>
-          {currentUserType.type === 1 && <OwnEstateDidList currentUser={currentUser} />}
+          {currentUserType.type === 1 && (
+            <OwnEstateDidList currentUser={currentUser} />
+          )}
           <UserTypeToggle />
         </>
-      }
+      )}
       <Footer />
     </h.MainPageContainer>
   )
