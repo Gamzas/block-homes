@@ -26,12 +26,16 @@ declare global {
 const { kakao } = window;
 
 const EstateListMap = () => {
-  // setLocation => 지도의 중심좌표를 설정하기 위한 함수
   const { setLocation } = useCurrentLocation();
   const [filter] = useAtom(estateFilterAtom);
   const [coord] = useAtom(currentCoordAtom);
 
-  const [reqCoord, setReqCoord] = useState<ReqCoordType | null>(null);
+  const [reqCoord, setReqCoord] = useState<ReqCoordType>({
+    northEastLatitude: 0,
+    northEastLongitude: 0,
+    southWestLatitude: 0,
+    southWestLongitude: 0,
+  });
   const [previousCenter, setPreviousCenter] = useState({
     latitude: coord.latitude,
     longitude: coord.longitude,
@@ -41,14 +45,8 @@ const EstateListMap = () => {
   const { data, isLoading, error } = useGetEstateItems(
     Number(category),
     filter,
-    reqCoord || {
-      northEastLatitude: 0,
-      northEastLongitude: 0,
-      southWestLatitude: 0,
-      southWestLongitude: 0,
-    }
+    reqCoord,
   );
-    console.log(data)
   const estateItemList: EstateItemListType[] = data?.itemList || [];
   const [item, setItem] = useAtom(selectedItemAtom);
 
@@ -59,8 +57,9 @@ const EstateListMap = () => {
   };
 
   useEffect(() => {
-    // 지도생성
     const container = document.getElementById('map');
+    if (!container) return; // container가 존재하는지 확인
+
     const options = {
       center: new kakao.maps.LatLng(coord.latitude, coord.longitude),
       level: 3,
@@ -69,10 +68,8 @@ const EstateListMap = () => {
     };
     const map = new kakao.maps.Map(container, options);
 
-    // 지도 확대 최대 레벨 설정
     map.setMaxLevel(10);
 
-    // 지도 줌 컨트롤러
     const zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
@@ -80,18 +77,15 @@ const EstateListMap = () => {
     const imageSize = new kakao.maps.Size(48, 48);
     const imageOption = { offset: new kakao.maps.Point(32, 45) };
 
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
     const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-    // 지도 마커 생성
     const markerPosition = new kakao.maps.LatLng(coord.latitude, coord.longitude);
     const marker = new kakao.maps.Marker({
       position: markerPosition,
-      image: markerImage, // 마커이미지 설정
+      image: markerImage,
     });
     marker.setMap(map);
 
-    // 초기 reqCoord 설정
     const bounds = map.getBounds();
     const swLatLng = bounds.getSouthWest();
     const neLatLng = bounds.getNorthEast();
@@ -102,7 +96,6 @@ const EstateListMap = () => {
       southWestLongitude: swLatLng.La,
     });
 
-    // 지도 중심이 변경될 때 호출되는 이벤트 리스너를 추가합니다.
     kakao.maps.event.addListener(map, 'center_changed', () => {
       const center = map.getCenter();
       const newCenter = { latitude: center.Ma, longitude: center.La };
@@ -120,8 +113,6 @@ const EstateListMap = () => {
         const bounds = map.getBounds();
         const swLatLng = bounds.getSouthWest();
         const neLatLng = bounds.getNorthEast();
-        console.log('new', swLatLng, neLatLng);
-
         setReqCoord({
           northEastLatitude: neLatLng.Ma,
           northEastLongitude: neLatLng.La,
@@ -132,10 +123,12 @@ const EstateListMap = () => {
     });
 
     if (estateItemList.length) {
-      estateItemList.forEach(estateItem => {
+      estateItemList.forEach((estateItem) => {
         const position = new kakao.maps.LatLng(estateItem.latitude, estateItem.longitude);
         const overlayDiv = document.createElement('div');
-        overlayDiv.innerHTML = renderToString(<CustomOverlay condition={estateItem.reportRank} />);
+        overlayDiv.innerHTML = renderToString(
+          <CustomOverlay condition={estateItem.reportRank} />,
+        );
         const handleOverlayClick = () => {
           setItem(estateItem);
         };
@@ -162,14 +155,14 @@ const EstateListMap = () => {
     return <ItemLoading />;
   }
 
-  // if (error || !data || !data.itemList) {
-  //   return (
-  //     <NoItems
-  //       src={'/image/image_warning_pig.png'}
-  //       alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
-  //     />
-  //   );
-  // }
+  if (error || !data || !data.itemList) {
+    return (
+      <NoItems
+        src={'/image/image_warning_pig.png'}
+        alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
+      />
+    );
+  }
 
   return (
     <e.EstateMapContainer id="map">

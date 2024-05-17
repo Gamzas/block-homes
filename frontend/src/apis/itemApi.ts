@@ -14,9 +14,6 @@ import {
 } from '@/types/api/itemType'
 import { FilterType, ReqCoordType } from '@/types/components/estateListType'
 
-
-
-
 export const usePostItemRegister = () => {
   return useMutation({
     mutationFn: (formData: FormData) =>
@@ -31,7 +28,7 @@ export const useGetEstateItems = (
   coord: ReqCoordType,
 ) => {
   return useQuery({
-    queryKey: ['estateItems'],
+    queryKey: ['estateItems', category, filter, coord],
     queryFn: async () => {
       try {
         const res = await publicRequest.get(`${API_ESTATE_ITEM}`, {
@@ -50,7 +47,6 @@ export const useGetEstateItems = (
     },
   })
 }
-
 
 // 매물 상세 조회
 export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
