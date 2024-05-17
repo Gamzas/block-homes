@@ -5,7 +5,7 @@ export const ContractDetailContainer = styled.div`
   height: 6vh;
   border-radius: 0.43rem;
   background: #f9f9f9;
-  box-shadow: 0px 5.972px 5.972px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.25);
   padding: 1rem 0.5rem;
   margin-bottom: 1rem;
   font-weight: 500;
