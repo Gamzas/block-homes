@@ -218,18 +218,18 @@
         177
       ],
       "MinistryDIDRegistry": [
-        2116
+        2153
       ],
       "Ownable": [
         147
       ]
     },
-    "id": 2117,
+    "id": 2154,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1859,
+        "id": 1896,
         "literals": [
           "solidity",
           "^",
@@ -242,10 +242,10 @@
       {
         "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
         "file": "@openzeppelin/contracts/access/Ownable.sol",
-        "id": 1860,
+        "id": 1897,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 2117,
+        "scope": 2154,
         "sourceUnit": 148,
         "src": "60:52:7",
         "symbolAliases": [],
@@ -256,7 +256,7 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 1861,
+              "id": 1898,
               "name": "Ownable",
               "nameLocations": [
                 "148:7:7"
@@ -265,7 +265,7 @@
               "referencedDeclaration": 147,
               "src": "148:7:7"
             },
-            "id": 1862,
+            "id": 1899,
             "nodeType": "InheritanceSpecifier",
             "src": "148:7:7"
           }
@@ -274,9 +274,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 2116,
+        "id": 2153,
         "linearizedBaseContracts": [
-          2116,
+          2153,
           147,
           177
         ],
@@ -286,16 +286,16 @@
         "nodes": [
           {
             "canonicalName": "MinistryDIDRegistry.PublicKey",
-            "id": 1871,
+            "id": 1908,
             "members": [
               {
                 "constant": false,
-                "id": 1864,
+                "id": 1901,
                 "mutability": "mutable",
                 "name": "id",
                 "nameLocation": "200:2:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1871,
+                "scope": 1908,
                 "src": "193:9:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -304,7 +304,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1863,
+                  "id": 1900,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "193:6:7",
@@ -317,12 +317,12 @@
               },
               {
                 "constant": false,
-                "id": 1866,
+                "id": 1903,
                 "mutability": "mutable",
                 "name": "keyType",
                 "nameLocation": "220:7:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1871,
+                "scope": 1908,
                 "src": "213:14:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -331,7 +331,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1865,
+                  "id": 1902,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "213:6:7",
@@ -344,12 +344,12 @@
               },
               {
                 "constant": false,
-                "id": 1868,
+                "id": 1905,
                 "mutability": "mutable",
                 "name": "controller",
                 "nameLocation": "245:10:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1871,
+                "scope": 1908,
                 "src": "238:17:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -358,7 +358,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1867,
+                  "id": 1904,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "238:6:7",
@@ -371,12 +371,12 @@
               },
               {
                 "constant": false,
-                "id": 1870,
+                "id": 1907,
                 "mutability": "mutable",
                 "name": "publicKeyHex",
                 "nameLocation": "273:12:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1871,
+                "scope": 1908,
                 "src": "266:19:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -385,7 +385,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1869,
+                  "id": 1906,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "266:6:7",
@@ -400,22 +400,22 @@
             "name": "PublicKey",
             "nameLocation": "172:9:7",
             "nodeType": "StructDefinition",
-            "scope": 2116,
+            "scope": 2153,
             "src": "165:128:7",
             "visibility": "public"
           },
           {
             "canonicalName": "MinistryDIDRegistry.DIDDocument",
-            "id": 1881,
+            "id": 1918,
             "members": [
               {
                 "constant": false,
-                "id": 1873,
+                "id": 1910,
                 "mutability": "mutable",
                 "name": "context",
                 "nameLocation": "338:7:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1881,
+                "scope": 1918,
                 "src": "331:14:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -424,7 +424,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1872,
+                  "id": 1909,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "331:6:7",
@@ -437,12 +437,12 @@
               },
               {
                 "constant": false,
-                "id": 1875,
+                "id": 1912,
                 "mutability": "mutable",
                 "name": "id",
                 "nameLocation": "363:2:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1881,
+                "scope": 1918,
                 "src": "356:9:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -451,7 +451,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1874,
+                  "id": 1911,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "356:6:7",
@@ -464,36 +464,36 @@
               },
               {
                 "constant": false,
-                "id": 1878,
+                "id": 1915,
                 "mutability": "mutable",
                 "name": "publicKey",
                 "nameLocation": "386:9:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1881,
+                "scope": 1918,
                 "src": "376:19:7",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_PublicKey_$1871_storage_ptr",
+                  "typeIdentifier": "t_struct$_PublicKey_$1908_storage_ptr",
                   "typeString": "struct MinistryDIDRegistry.PublicKey"
                 },
                 "typeName": {
-                  "id": 1877,
+                  "id": 1914,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 1876,
+                    "id": 1913,
                     "name": "PublicKey",
                     "nameLocations": [
                       "376:9:7"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 1871,
+                    "referencedDeclaration": 1908,
                     "src": "376:9:7"
                   },
-                  "referencedDeclaration": 1871,
+                  "referencedDeclaration": 1908,
                   "src": "376:9:7",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_PublicKey_$1871_storage_ptr",
+                    "typeIdentifier": "t_struct$_PublicKey_$1908_storage_ptr",
                     "typeString": "struct MinistryDIDRegistry.PublicKey"
                   }
                 },
@@ -501,12 +501,12 @@
               },
               {
                 "constant": false,
-                "id": 1880,
+                "id": 1917,
                 "mutability": "mutable",
                 "name": "authentication",
                 "nameLocation": "413:14:7",
                 "nodeType": "VariableDeclaration",
-                "scope": 1881,
+                "scope": 1918,
                 "src": "406:21:7",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -515,7 +515,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1879,
+                  "id": 1916,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "406:6:7",
@@ -530,31 +530,31 @@
             "name": "DIDDocument",
             "nameLocation": "308:11:7",
             "nodeType": "StructDefinition",
-            "scope": 2116,
+            "scope": 2153,
             "src": "301:134:7",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 1886,
+            "id": 1923,
             "mutability": "mutable",
             "name": "didDocuments",
             "nameLocation": "474:12:7",
             "nodeType": "VariableDeclaration",
-            "scope": 2116,
+            "scope": 2153,
             "src": "443:43:7",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1881_storage_$",
+              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1918_storage_$",
               "typeString": "mapping(string => struct MinistryDIDRegistry.DIDDocument)"
             },
             "typeName": {
-              "id": 1885,
+              "id": 1922,
               "keyName": "",
               "keyNameLocation": "-1:-1:-1",
               "keyType": {
-                "id": 1882,
+                "id": 1919,
                 "name": "string",
                 "nodeType": "ElementaryTypeName",
                 "src": "451:6:7",
@@ -566,28 +566,28 @@
               "nodeType": "Mapping",
               "src": "443:30:7",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1881_storage_$",
+                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1918_storage_$",
                 "typeString": "mapping(string => struct MinistryDIDRegistry.DIDDocument)"
               },
               "valueName": "",
               "valueNameLocation": "-1:-1:-1",
               "valueType": {
-                "id": 1884,
+                "id": 1921,
                 "nodeType": "UserDefinedTypeName",
                 "pathNode": {
-                  "id": 1883,
+                  "id": 1920,
                   "name": "DIDDocument",
                   "nameLocations": [
                     "461:11:7"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 1881,
+                  "referencedDeclaration": 1918,
                   "src": "461:11:7"
                 },
-                "referencedDeclaration": 1881,
+                "referencedDeclaration": 1918,
                 "src": "461:11:7",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_DIDDocument_$1881_storage_ptr",
+                  "typeIdentifier": "t_struct$_DIDDocument_$1918_storage_ptr",
                   "typeString": "struct MinistryDIDRegistry.DIDDocument"
                 }
               }
@@ -596,12 +596,12 @@
           },
           {
             "body": {
-              "id": 1893,
+              "id": 1930,
               "nodeType": "Block",
               "src": "529:2:7",
               "statements": []
             },
-            "id": 1894,
+            "id": 1931,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -609,7 +609,7 @@
                 "arguments": [
                   {
                     "expression": {
-                      "id": 1889,
+                      "id": 1926,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
@@ -620,7 +620,7 @@
                         "typeString": "msg"
                       }
                     },
-                    "id": 1890,
+                    "id": 1927,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -635,10 +635,10 @@
                     }
                   }
                 ],
-                "id": 1891,
+                "id": 1928,
                 "kind": "baseConstructorSpecifier",
                 "modifierName": {
-                  "id": 1888,
+                  "id": 1925,
                   "name": "Ownable",
                   "nameLocations": [
                     "509:7:7"
@@ -655,18 +655,18 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1887,
+              "id": 1924,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "506:2:7"
             },
             "returnParameters": {
-              "id": 1892,
+              "id": 1929,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "529:0:7"
             },
-            "scope": 2116,
+            "scope": 2153,
             "src": "495:36:7",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -675,23 +675,23 @@
           {
             "anonymous": false,
             "eventSelector": "5fccafd09eeeb6a3dc1c80357ee982c00d7fb00a991274a9b96fe4fd7cb60552",
-            "id": 1898,
+            "id": 1935,
             "name": "DIDCreated",
             "nameLocation": "545:10:7",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1897,
+              "id": 1934,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1896,
+                  "id": 1933,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "did",
                   "nameLocation": "563:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1898,
+                  "scope": 1935,
                   "src": "556:10:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -700,7 +700,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1895,
+                    "id": 1932,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "556:6:7",
@@ -719,23 +719,23 @@
           {
             "anonymous": false,
             "eventSelector": "b24f94d3ff75ed62d7237e14a510a969d70c1d4efdd4cce8ad563aa8ba60a64c",
-            "id": 1902,
+            "id": 1939,
             "name": "DIDDeleted",
             "nameLocation": "580:10:7",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 1901,
+              "id": 1938,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1900,
+                  "id": 1937,
                   "indexed": false,
                   "mutability": "mutable",
                   "name": "did",
                   "nameLocation": "598:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1902,
+                  "scope": 1939,
                   "src": "591:10:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -744,7 +744,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1899,
+                    "id": 1936,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "591:6:7",
@@ -762,23 +762,23 @@
           },
           {
             "body": {
-              "id": 1983,
+              "id": 2020,
               "nodeType": "Block",
               "src": "697:324:7",
               "statements": [
                 {
                   "assignments": [
-                    1912
+                    1949
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1912,
+                      "id": 1949,
                       "mutability": "mutable",
                       "name": "buffer",
                       "nameLocation": "721:6:7",
                       "nodeType": "VariableDeclaration",
-                      "scope": 1983,
+                      "scope": 2020,
                       "src": "708:19:7",
                       "stateVariable": false,
                       "storageLocation": "memory",
@@ -787,7 +787,7 @@
                         "typeString": "bytes"
                       },
                       "typeName": {
-                        "id": 1911,
+                        "id": 1948,
                         "name": "bytes",
                         "nodeType": "ElementaryTypeName",
                         "src": "708:5:7",
@@ -799,7 +799,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1921,
+                  "id": 1958,
                   "initialValue": {
                     "arguments": [
                       {
@@ -807,7 +807,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 1919,
+                        "id": 1956,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -817,14 +817,14 @@
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           },
-                          "id": 1917,
+                          "id": 1954,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
                             "hexValue": "32",
-                            "id": 1915,
+                            "id": 1952,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -841,11 +841,11 @@
                           "nodeType": "BinaryOperation",
                           "operator": "*",
                           "rightExpression": {
-                            "id": 1916,
+                            "id": 1953,
                             "name": "length",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1906,
+                            "referencedDeclaration": 1943,
                             "src": "744:6:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -862,7 +862,7 @@
                         "operator": "+",
                         "rightExpression": {
                           "hexValue": "32",
-                          "id": 1918,
+                          "id": 1955,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -890,7 +890,7 @@
                           "typeString": "uint256"
                         }
                       ],
-                      "id": 1914,
+                      "id": 1951,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -902,7 +902,7 @@
                         "typeString": "function (uint256) pure returns (bytes memory)"
                       },
                       "typeName": {
-                        "id": 1913,
+                        "id": 1950,
                         "name": "bytes",
                         "nodeType": "ElementaryTypeName",
                         "src": "734:5:7",
@@ -912,7 +912,7 @@
                         }
                       }
                     },
-                    "id": 1920,
+                    "id": 1957,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -933,28 +933,28 @@
                 },
                 {
                   "expression": {
-                    "id": 1926,
+                    "id": 1963,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 1922,
+                        "id": 1959,
                         "name": "buffer",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1912,
+                        "referencedDeclaration": 1949,
                         "src": "766:6:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
                           "typeString": "bytes memory"
                         }
                       },
-                      "id": 1924,
+                      "id": 1961,
                       "indexExpression": {
                         "hexValue": "30",
-                        "id": 1923,
+                        "id": 1960,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -983,7 +983,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "30",
-                      "id": 1925,
+                      "id": 1962,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1003,34 +1003,34 @@
                       "typeString": "bytes1"
                     }
                   },
-                  "id": 1927,
+                  "id": 1964,
                   "nodeType": "ExpressionStatement",
                   "src": "766:15:7"
                 },
                 {
                   "expression": {
-                    "id": 1932,
+                    "id": 1969,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 1928,
+                        "id": 1965,
                         "name": "buffer",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1912,
+                        "referencedDeclaration": 1949,
                         "src": "792:6:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
                           "typeString": "bytes memory"
                         }
                       },
-                      "id": 1930,
+                      "id": 1967,
                       "indexExpression": {
                         "hexValue": "31",
-                        "id": 1929,
+                        "id": 1966,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1059,7 +1059,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "78",
-                      "id": 1931,
+                      "id": 1968,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1079,43 +1079,43 @@
                       "typeString": "bytes1"
                     }
                   },
-                  "id": 1933,
+                  "id": 1970,
                   "nodeType": "ExpressionStatement",
                   "src": "792:15:7"
                 },
                 {
                   "body": {
-                    "id": 1976,
+                    "id": 2013,
                     "nodeType": "Block",
                     "src": "860:122:7",
                     "statements": [
                       {
                         "expression": {
-                          "id": 1970,
+                          "id": 2007,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftHandSide": {
                             "baseExpression": {
-                              "id": 1948,
+                              "id": 1985,
                               "name": "buffer",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1912,
+                              "referencedDeclaration": 1949,
                               "src": "875:6:7",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_bytes_memory_ptr",
                                 "typeString": "bytes memory"
                               }
                             },
-                            "id": 1950,
+                            "id": 1987,
                             "indexExpression": {
-                              "id": 1949,
+                              "id": 1986,
                               "name": "i",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 1935,
+                              "referencedDeclaration": 1972,
                               "src": "882:1:7",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -1142,7 +1142,7 @@
                                   "typeIdentifier": "t_uint8",
                                   "typeString": "uint8"
                                 },
-                                "id": 1968,
+                                "id": 2005,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
@@ -1154,17 +1154,17 @@
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
                                       },
-                                      "id": 1957,
+                                      "id": 1994,
                                       "isConstant": false,
                                       "isLValue": false,
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "leftExpression": {
-                                        "id": 1955,
+                                        "id": 1992,
                                         "name": "value",
                                         "nodeType": "Identifier",
                                         "overloadedDeclarations": [],
-                                        "referencedDeclaration": 1904,
+                                        "referencedDeclaration": 1941,
                                         "src": "900:5:7",
                                         "typeDescriptions": {
                                           "typeIdentifier": "t_uint256",
@@ -1175,7 +1175,7 @@
                                       "operator": "&",
                                       "rightExpression": {
                                         "hexValue": "307866",
-                                        "id": 1956,
+                                        "id": 1993,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": true,
@@ -1203,7 +1203,7 @@
                                         "typeString": "uint256"
                                       }
                                     ],
-                                    "id": 1954,
+                                    "id": 1991,
                                     "isConstant": false,
                                     "isLValue": false,
                                     "isPure": true,
@@ -1215,14 +1215,14 @@
                                       "typeString": "type(uint8)"
                                     },
                                     "typeName": {
-                                      "id": 1953,
+                                      "id": 1990,
                                       "name": "uint8",
                                       "nodeType": "ElementaryTypeName",
                                       "src": "894:5:7",
                                       "typeDescriptions": {}
                                     }
                                   },
-                                  "id": 1958,
+                                  "id": 1995,
                                   "isConstant": false,
                                   "isLValue": false,
                                   "isPure": false,
@@ -1248,7 +1248,7 @@
                                           "typeIdentifier": "t_uint256",
                                           "typeString": "uint256"
                                         },
-                                        "id": 1963,
+                                        "id": 2000,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": false,
@@ -1258,17 +1258,17 @@
                                             "typeIdentifier": "t_uint256",
                                             "typeString": "uint256"
                                           },
-                                          "id": 1961,
+                                          "id": 1998,
                                           "isConstant": false,
                                           "isLValue": false,
                                           "isPure": false,
                                           "lValueRequested": false,
                                           "leftExpression": {
-                                            "id": 1959,
+                                            "id": 1996,
                                             "name": "value",
                                             "nodeType": "Identifier",
                                             "overloadedDeclarations": [],
-                                            "referencedDeclaration": 1904,
+                                            "referencedDeclaration": 1941,
                                             "src": "916:5:7",
                                             "typeDescriptions": {
                                               "typeIdentifier": "t_uint256",
@@ -1279,7 +1279,7 @@
                                           "operator": "&",
                                           "rightExpression": {
                                             "hexValue": "307866",
-                                            "id": 1960,
+                                            "id": 1997,
                                             "isConstant": false,
                                             "isLValue": false,
                                             "isPure": true,
@@ -1303,7 +1303,7 @@
                                         "operator": "<",
                                         "rightExpression": {
                                           "hexValue": "3130",
-                                          "id": 1962,
+                                          "id": 1999,
                                           "isConstant": false,
                                           "isLValue": false,
                                           "isPure": true,
@@ -1325,7 +1325,7 @@
                                       },
                                       "falseExpression": {
                                         "hexValue": "3837",
-                                        "id": 1965,
+                                        "id": 2002,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": true,
@@ -1339,7 +1339,7 @@
                                         },
                                         "value": "87"
                                       },
-                                      "id": 1966,
+                                      "id": 2003,
                                       "isConstant": false,
                                       "isLValue": false,
                                       "isPure": false,
@@ -1348,7 +1348,7 @@
                                       "src": "916:26:7",
                                       "trueExpression": {
                                         "hexValue": "3438",
-                                        "id": 1964,
+                                        "id": 2001,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": true,
@@ -1368,7 +1368,7 @@
                                       }
                                     }
                                   ],
-                                  "id": 1967,
+                                  "id": 2004,
                                   "isConstant": false,
                                   "isInlineArray": false,
                                   "isLValue": false,
@@ -1395,7 +1395,7 @@
                                   "typeString": "uint8"
                                 }
                               ],
-                              "id": 1952,
+                              "id": 1989,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -1407,14 +1407,14 @@
                                 "typeString": "type(bytes1)"
                               },
                               "typeName": {
-                                "id": 1951,
+                                "id": 1988,
                                 "name": "bytes1",
                                 "nodeType": "ElementaryTypeName",
                                 "src": "887:6:7",
                                 "typeDescriptions": {}
                               }
                             },
-                            "id": 1969,
+                            "id": 2006,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -1436,23 +1436,23 @@
                             "typeString": "bytes1"
                           }
                         },
-                        "id": 1971,
+                        "id": 2008,
                         "nodeType": "ExpressionStatement",
                         "src": "875:69:7"
                       },
                       {
                         "expression": {
-                          "id": 1974,
+                          "id": 2011,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftHandSide": {
-                            "id": 1972,
+                            "id": 2009,
                             "name": "value",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 1904,
+                            "referencedDeclaration": 1941,
                             "src": "959:5:7",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1463,7 +1463,7 @@
                           "operator": ">>=",
                           "rightHandSide": {
                             "hexValue": "34",
-                            "id": 1973,
+                            "id": 2010,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -1483,7 +1483,7 @@
                             "typeString": "uint256"
                           }
                         },
-                        "id": 1975,
+                        "id": 2012,
                         "nodeType": "ExpressionStatement",
                         "src": "959:11:7"
                       }
@@ -1494,17 +1494,17 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 1944,
+                    "id": 1981,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
-                      "id": 1942,
+                      "id": 1979,
                       "name": "i",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1935,
+                      "referencedDeclaration": 1972,
                       "src": "848:1:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1515,7 +1515,7 @@
                     "operator": ">",
                     "rightExpression": {
                       "hexValue": "31",
-                      "id": 1943,
+                      "id": 1980,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1535,20 +1535,20 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 1977,
+                  "id": 2014,
                   "initializationExpression": {
                     "assignments": [
-                      1935
+                      1972
                     ],
                     "declarations": [
                       {
                         "constant": false,
-                        "id": 1935,
+                        "id": 1972,
                         "mutability": "mutable",
                         "name": "i",
                         "nameLocation": "828:1:7",
                         "nodeType": "VariableDeclaration",
-                        "scope": 1977,
+                        "scope": 2014,
                         "src": "823:6:7",
                         "stateVariable": false,
                         "storageLocation": "default",
@@ -1557,7 +1557,7 @@
                           "typeString": "uint256"
                         },
                         "typeName": {
-                          "id": 1934,
+                          "id": 1971,
                           "name": "uint",
                           "nodeType": "ElementaryTypeName",
                           "src": "823:4:7",
@@ -1569,13 +1569,13 @@
                         "visibility": "internal"
                       }
                     ],
-                    "id": 1941,
+                    "id": 1978,
                     "initialValue": {
                       "commonType": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 1940,
+                      "id": 1977,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1585,14 +1585,14 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 1938,
+                        "id": 1975,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "hexValue": "32",
-                          "id": 1936,
+                          "id": 1973,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1609,11 +1609,11 @@
                         "nodeType": "BinaryOperation",
                         "operator": "*",
                         "rightExpression": {
-                          "id": 1937,
+                          "id": 1974,
                           "name": "length",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1906,
+                          "referencedDeclaration": 1943,
                           "src": "836:6:7",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -1630,7 +1630,7 @@
                       "operator": "+",
                       "rightExpression": {
                         "hexValue": "31",
-                        "id": 1939,
+                        "id": 1976,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1655,7 +1655,7 @@
                   },
                   "loopExpression": {
                     "expression": {
-                      "id": 1946,
+                      "id": 1983,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1665,11 +1665,11 @@
                       "prefix": true,
                       "src": "855:3:7",
                       "subExpression": {
-                        "id": 1945,
+                        "id": 1982,
                         "name": "i",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1935,
+                        "referencedDeclaration": 1972,
                         "src": "857:1:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1681,7 +1681,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 1947,
+                    "id": 1984,
                     "nodeType": "ExpressionStatement",
                     "src": "855:3:7"
                   },
@@ -1692,11 +1692,11 @@
                   "expression": {
                     "arguments": [
                       {
-                        "id": 1980,
+                        "id": 2017,
                         "name": "buffer",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1912,
+                        "referencedDeclaration": 1949,
                         "src": "1006:6:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
@@ -1711,7 +1711,7 @@
                           "typeString": "bytes memory"
                         }
                       ],
-                      "id": 1979,
+                      "id": 2016,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1723,14 +1723,14 @@
                         "typeString": "type(string storage pointer)"
                       },
                       "typeName": {
-                        "id": 1978,
+                        "id": 2015,
                         "name": "string",
                         "nodeType": "ElementaryTypeName",
                         "src": "999:6:7",
                         "typeDescriptions": {}
                       }
                     },
-                    "id": 1981,
+                    "id": 2018,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1746,14 +1746,14 @@
                       "typeString": "string memory"
                     }
                   },
-                  "functionReturnParameters": 1910,
-                  "id": 1982,
+                  "functionReturnParameters": 1947,
+                  "id": 2019,
                   "nodeType": "Return",
                   "src": "992:21:7"
                 }
               ]
             },
-            "id": 1984,
+            "id": 2021,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -1761,17 +1761,17 @@
             "nameLocation": "620:11:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1907,
+              "id": 1944,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1904,
+                  "id": 1941,
                   "mutability": "mutable",
                   "name": "value",
                   "nameLocation": "640:5:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1984,
+                  "scope": 2021,
                   "src": "632:13:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1780,7 +1780,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1903,
+                    "id": 1940,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "632:7:7",
@@ -1793,12 +1793,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1906,
+                  "id": 1943,
                   "mutability": "mutable",
                   "name": "length",
                   "nameLocation": "652:6:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1984,
+                  "scope": 2021,
                   "src": "647:11:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1807,7 +1807,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 1905,
+                    "id": 1942,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "647:4:7",
@@ -1822,17 +1822,17 @@
               "src": "631:28:7"
             },
             "returnParameters": {
-              "id": 1910,
+              "id": 1947,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1909,
+                  "id": 1946,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1984,
+                  "scope": 2021,
                   "src": "682:13:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
@@ -1841,7 +1841,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1908,
+                    "id": 1945,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "682:6:7",
@@ -1855,7 +1855,7 @@
               ],
               "src": "681:15:7"
             },
-            "scope": 2116,
+            "scope": 2153,
             "src": "611:410:7",
             "stateMutability": "pure",
             "virtual": false,
@@ -1863,78 +1863,78 @@
           },
           {
             "body": {
-              "id": 2084,
+              "id": 2121,
               "nodeType": "Block",
               "src": "1115:682:7",
               "statements": [
                 {
                   "assignments": [
-                    1993
+                    2030
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 1993,
+                      "id": 2030,
                       "mutability": "mutable",
                       "name": "didDocument",
                       "nameLocation": "1145:11:7",
                       "nodeType": "VariableDeclaration",
-                      "scope": 2084,
+                      "scope": 2121,
                       "src": "1126:30:7",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                        "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                         "typeString": "struct MinistryDIDRegistry.DIDDocument"
                       },
                       "typeName": {
-                        "id": 1992,
+                        "id": 2029,
                         "nodeType": "UserDefinedTypeName",
                         "pathNode": {
-                          "id": 1991,
+                          "id": 2028,
                           "name": "DIDDocument",
                           "nameLocations": [
                             "1126:11:7"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 1881,
+                          "referencedDeclaration": 1918,
                           "src": "1126:11:7"
                         },
-                        "referencedDeclaration": 1881,
+                        "referencedDeclaration": 1918,
                         "src": "1126:11:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_DIDDocument_$1881_storage_ptr",
+                          "typeIdentifier": "t_struct$_DIDDocument_$1918_storage_ptr",
                           "typeString": "struct MinistryDIDRegistry.DIDDocument"
                         }
                       },
                       "visibility": "internal"
                     }
                   ],
-                  "id": 1994,
+                  "id": 2031,
                   "nodeType": "VariableDeclarationStatement",
                   "src": "1126:30:7"
                 },
                 {
                   "expression": {
-                    "id": 1999,
+                    "id": 2036,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "expression": {
-                        "id": 1995,
+                        "id": 2032,
                         "name": "didDocument",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1993,
+                        "referencedDeclaration": 2030,
                         "src": "1176:11:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                          "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                         }
                       },
-                      "id": 1997,
+                      "id": 2034,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -1942,7 +1942,7 @@
                       "memberLocation": "1188:7:7",
                       "memberName": "context",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1873,
+                      "referencedDeclaration": 1910,
                       "src": "1176:19:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -1953,7 +1953,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "68747470733a2f2f7777772e77332e6f72672f6e732f6469642f7631",
-                      "id": 1998,
+                      "id": 2035,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1973,31 +1973,31 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2000,
+                  "id": 2037,
                   "nodeType": "ExpressionStatement",
                   "src": "1176:52:7"
                 },
                 {
                   "expression": {
-                    "id": 2021,
+                    "id": 2058,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "expression": {
-                        "id": 2001,
+                        "id": 2038,
                         "name": "didDocument",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1993,
+                        "referencedDeclaration": 2030,
                         "src": "1239:11:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                          "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                         }
                       },
-                      "id": 2003,
+                      "id": 2040,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2005,7 +2005,7 @@
                       "memberLocation": "1251:2:7",
                       "memberName": "id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1875,
+                      "referencedDeclaration": 1912,
                       "src": "1239:14:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2020,7 +2020,7 @@
                           "arguments": [
                             {
                               "hexValue": "6469643a6b6c61793a",
-                              "id": 2008,
+                              "id": 2045,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -2041,11 +2041,11 @@
                                     {
                                       "arguments": [
                                         {
-                                          "id": 2014,
+                                          "id": 2051,
                                           "name": "_holderAddress",
                                           "nodeType": "Identifier",
                                           "overloadedDeclarations": [],
-                                          "referencedDeclaration": 1986,
+                                          "referencedDeclaration": 2023,
                                           "src": "1321:14:7",
                                           "typeDescriptions": {
                                             "typeIdentifier": "t_address",
@@ -2060,7 +2060,7 @@
                                             "typeString": "address"
                                           }
                                         ],
-                                        "id": 2013,
+                                        "id": 2050,
                                         "isConstant": false,
                                         "isLValue": false,
                                         "isPure": true,
@@ -2072,14 +2072,14 @@
                                           "typeString": "type(uint160)"
                                         },
                                         "typeName": {
-                                          "id": 2012,
+                                          "id": 2049,
                                           "name": "uint160",
                                           "nodeType": "ElementaryTypeName",
                                           "src": "1313:7:7",
                                           "typeDescriptions": {}
                                         }
                                       },
-                                      "id": 2015,
+                                      "id": 2052,
                                       "isConstant": false,
                                       "isLValue": false,
                                       "isPure": false,
@@ -2103,7 +2103,7 @@
                                         "typeString": "uint160"
                                       }
                                     ],
-                                    "id": 2011,
+                                    "id": 2048,
                                     "isConstant": false,
                                     "isLValue": false,
                                     "isPure": true,
@@ -2115,14 +2115,14 @@
                                       "typeString": "type(uint256)"
                                     },
                                     "typeName": {
-                                      "id": 2010,
+                                      "id": 2047,
                                       "name": "uint256",
                                       "nodeType": "ElementaryTypeName",
                                       "src": "1305:7:7",
                                       "typeDescriptions": {}
                                     }
                                   },
-                                  "id": 2016,
+                                  "id": 2053,
                                   "isConstant": false,
                                   "isLValue": false,
                                   "isPure": false,
@@ -2140,7 +2140,7 @@
                                 },
                                 {
                                   "hexValue": "3230",
-                                  "id": 2017,
+                                  "id": 2054,
                                   "isConstant": false,
                                   "isLValue": false,
                                   "isPure": true,
@@ -2166,18 +2166,18 @@
                                     "typeString": "int_const 20"
                                   }
                                 ],
-                                "id": 2009,
+                                "id": 2046,
                                 "name": "toHexString",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1984,
+                                "referencedDeclaration": 2021,
                                 "src": "1293:11:7",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_string_memory_ptr_$",
                                   "typeString": "function (uint256,uint256) pure returns (string memory)"
                                 }
                               },
-                              "id": 2018,
+                              "id": 2055,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -2206,7 +2206,7 @@
                               }
                             ],
                             "expression": {
-                              "id": 2006,
+                              "id": 2043,
                               "name": "abi",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
@@ -2217,7 +2217,7 @@
                                 "typeString": "abi"
                               }
                             },
-                            "id": 2007,
+                            "id": 2044,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -2231,7 +2231,7 @@
                               "typeString": "function () pure returns (bytes memory)"
                             }
                           },
-                          "id": 2019,
+                          "id": 2056,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2255,7 +2255,7 @@
                             "typeString": "bytes memory"
                           }
                         ],
-                        "id": 2005,
+                        "id": 2042,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2267,14 +2267,14 @@
                           "typeString": "type(string storage pointer)"
                         },
                         "typeName": {
-                          "id": 2004,
+                          "id": 2041,
                           "name": "string",
                           "nodeType": "ElementaryTypeName",
                           "src": "1256:6:7",
                           "typeDescriptions": {}
                         }
                       },
-                      "id": 2020,
+                      "id": 2057,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2296,13 +2296,13 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2022,
+                  "id": 2059,
                   "nodeType": "ExpressionStatement",
                   "src": "1239:105:7"
                 },
                 {
                   "expression": {
-                    "id": 2037,
+                    "id": 2074,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2310,18 +2310,18 @@
                     "leftHandSide": {
                       "expression": {
                         "expression": {
-                          "id": 2023,
+                          "id": 2060,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1355:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2026,
+                        "id": 2063,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2329,14 +2329,14 @@
                         "memberLocation": "1367:9:7",
                         "memberName": "publicKey",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1878,
+                        "referencedDeclaration": 1915,
                         "src": "1355:21:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_PublicKey_$1871_memory_ptr",
+                          "typeIdentifier": "t_struct$_PublicKey_$1908_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.PublicKey memory"
                         }
                       },
-                      "id": 2027,
+                      "id": 2064,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2344,7 +2344,7 @@
                       "memberLocation": "1377:2:7",
                       "memberName": "id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1864,
+                      "referencedDeclaration": 1901,
                       "src": "1355:24:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2359,18 +2359,18 @@
                           "arguments": [
                             {
                               "expression": {
-                                "id": 2032,
+                                "id": 2069,
                                 "name": "didDocument",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 1993,
+                                "referencedDeclaration": 2030,
                                 "src": "1406:11:7",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                                  "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                                   "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                                 }
                               },
-                              "id": 2033,
+                              "id": 2070,
                               "isConstant": false,
                               "isLValue": true,
                               "isPure": false,
@@ -2378,7 +2378,7 @@
                               "memberLocation": "1418:2:7",
                               "memberName": "id",
                               "nodeType": "MemberAccess",
-                              "referencedDeclaration": 1875,
+                              "referencedDeclaration": 1912,
                               "src": "1406:14:7",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_string_memory_ptr",
@@ -2387,7 +2387,7 @@
                             },
                             {
                               "hexValue": "236b6579732d31",
-                              "id": 2034,
+                              "id": 2071,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
@@ -2414,7 +2414,7 @@
                               }
                             ],
                             "expression": {
-                              "id": 2030,
+                              "id": 2067,
                               "name": "abi",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
@@ -2425,7 +2425,7 @@
                                 "typeString": "abi"
                               }
                             },
-                            "id": 2031,
+                            "id": 2068,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
@@ -2439,7 +2439,7 @@
                               "typeString": "function () pure returns (bytes memory)"
                             }
                           },
-                          "id": 2035,
+                          "id": 2072,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2463,7 +2463,7 @@
                             "typeString": "bytes memory"
                           }
                         ],
-                        "id": 2029,
+                        "id": 2066,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2475,14 +2475,14 @@
                           "typeString": "type(string storage pointer)"
                         },
                         "typeName": {
-                          "id": 2028,
+                          "id": 2065,
                           "name": "string",
                           "nodeType": "ElementaryTypeName",
                           "src": "1382:6:7",
                           "typeDescriptions": {}
                         }
                       },
-                      "id": 2036,
+                      "id": 2073,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2504,13 +2504,13 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2038,
+                  "id": 2075,
                   "nodeType": "ExpressionStatement",
                   "src": "1355:77:7"
                 },
                 {
                   "expression": {
-                    "id": 2045,
+                    "id": 2082,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2518,18 +2518,18 @@
                     "leftHandSide": {
                       "expression": {
                         "expression": {
-                          "id": 2039,
+                          "id": 2076,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1443:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2042,
+                        "id": 2079,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2537,14 +2537,14 @@
                         "memberLocation": "1455:9:7",
                         "memberName": "publicKey",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1878,
+                        "referencedDeclaration": 1915,
                         "src": "1443:21:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_PublicKey_$1871_memory_ptr",
+                          "typeIdentifier": "t_struct$_PublicKey_$1908_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.PublicKey memory"
                         }
                       },
-                      "id": 2043,
+                      "id": 2080,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2552,7 +2552,7 @@
                       "memberLocation": "1465:7:7",
                       "memberName": "keyType",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1866,
+                      "referencedDeclaration": 1903,
                       "src": "1443:29:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2563,7 +2563,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "4563647361536563703235366b31566572696669636174696f6e4b657932303139",
-                      "id": 2044,
+                      "id": 2081,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -2583,13 +2583,13 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2046,
+                  "id": 2083,
                   "nodeType": "ExpressionStatement",
                   "src": "1443:67:7"
                 },
                 {
                   "expression": {
-                    "id": 2054,
+                    "id": 2091,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2597,18 +2597,18 @@
                     "leftHandSide": {
                       "expression": {
                         "expression": {
-                          "id": 2047,
+                          "id": 2084,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1521:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2050,
+                        "id": 2087,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2616,14 +2616,14 @@
                         "memberLocation": "1533:9:7",
                         "memberName": "publicKey",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1878,
+                        "referencedDeclaration": 1915,
                         "src": "1521:21:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_PublicKey_$1871_memory_ptr",
+                          "typeIdentifier": "t_struct$_PublicKey_$1908_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.PublicKey memory"
                         }
                       },
-                      "id": 2051,
+                      "id": 2088,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2631,7 +2631,7 @@
                       "memberLocation": "1543:10:7",
                       "memberName": "controller",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1868,
+                      "referencedDeclaration": 1905,
                       "src": "1521:32:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2642,18 +2642,18 @@
                     "operator": "=",
                     "rightHandSide": {
                       "expression": {
-                        "id": 2052,
+                        "id": 2089,
                         "name": "didDocument",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1993,
+                        "referencedDeclaration": 2030,
                         "src": "1556:11:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                          "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                         }
                       },
-                      "id": 2053,
+                      "id": 2090,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2661,7 +2661,7 @@
                       "memberLocation": "1568:2:7",
                       "memberName": "id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1875,
+                      "referencedDeclaration": 1912,
                       "src": "1556:14:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2674,13 +2674,13 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2055,
+                  "id": 2092,
                   "nodeType": "ExpressionStatement",
                   "src": "1521:49:7"
                 },
                 {
                   "expression": {
-                    "id": 2062,
+                    "id": 2099,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2688,18 +2688,18 @@
                     "leftHandSide": {
                       "expression": {
                         "expression": {
-                          "id": 2056,
+                          "id": 2093,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1581:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2059,
+                        "id": 2096,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2707,14 +2707,14 @@
                         "memberLocation": "1593:9:7",
                         "memberName": "publicKey",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1878,
+                        "referencedDeclaration": 1915,
                         "src": "1581:21:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_PublicKey_$1871_memory_ptr",
+                          "typeIdentifier": "t_struct$_PublicKey_$1908_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.PublicKey memory"
                         }
                       },
-                      "id": 2060,
+                      "id": 2097,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2722,7 +2722,7 @@
                       "memberLocation": "1603:12:7",
                       "memberName": "publicKeyHex",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1870,
+                      "referencedDeclaration": 1907,
                       "src": "1581:34:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2732,11 +2732,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 2061,
+                      "id": 2098,
                       "name": "_publicKey",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1988,
+                      "referencedDeclaration": 2025,
                       "src": "1618:10:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_calldata_ptr",
@@ -2749,31 +2749,31 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2063,
+                  "id": 2100,
                   "nodeType": "ExpressionStatement",
                   "src": "1581:47:7"
                 },
                 {
                   "expression": {
-                    "id": 2070,
+                    "id": 2107,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "expression": {
-                        "id": 2064,
+                        "id": 2101,
                         "name": "didDocument",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1993,
+                        "referencedDeclaration": 2030,
                         "src": "1639:11:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                          "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                         }
                       },
-                      "id": 2066,
+                      "id": 2103,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2781,7 +2781,7 @@
                       "memberLocation": "1651:14:7",
                       "memberName": "authentication",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1880,
+                      "referencedDeclaration": 1917,
                       "src": "1639:26:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2793,18 +2793,18 @@
                     "rightHandSide": {
                       "expression": {
                         "expression": {
-                          "id": 2067,
+                          "id": 2104,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1666:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2068,
+                        "id": 2105,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2812,14 +2812,14 @@
                         "memberLocation": "1678:9:7",
                         "memberName": "publicKey",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1878,
+                        "referencedDeclaration": 1915,
                         "src": "1666:21:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_PublicKey_$1871_memory_ptr",
+                          "typeIdentifier": "t_struct$_PublicKey_$1908_memory_ptr",
                           "typeString": "struct MinistryDIDRegistry.PublicKey memory"
                         }
                       },
-                      "id": 2069,
+                      "id": 2106,
                       "isConstant": false,
                       "isLValue": true,
                       "isPure": false,
@@ -2827,7 +2827,7 @@
                       "memberLocation": "1688:2:7",
                       "memberName": "id",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1864,
+                      "referencedDeclaration": 1901,
                       "src": "1666:24:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
@@ -2840,45 +2840,45 @@
                       "typeString": "string memory"
                     }
                   },
-                  "id": 2071,
+                  "id": 2108,
                   "nodeType": "ExpressionStatement",
                   "src": "1639:51:7"
                 },
                 {
                   "expression": {
-                    "id": 2077,
+                    "id": 2114,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "baseExpression": {
-                        "id": 2072,
+                        "id": 2109,
                         "name": "didDocuments",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1886,
+                        "referencedDeclaration": 1923,
                         "src": "1703:12:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1881_storage_$",
+                          "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1918_storage_$",
                           "typeString": "mapping(string memory => struct MinistryDIDRegistry.DIDDocument storage ref)"
                         }
                       },
-                      "id": 2075,
+                      "id": 2112,
                       "indexExpression": {
                         "expression": {
-                          "id": 2073,
+                          "id": 2110,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1716:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2074,
+                        "id": 2111,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2886,7 +2886,7 @@
                         "memberLocation": "1728:2:7",
                         "memberName": "id",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1875,
+                        "referencedDeclaration": 1912,
                         "src": "1716:14:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -2900,31 +2900,31 @@
                       "nodeType": "IndexAccess",
                       "src": "1703:28:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_DIDDocument_$1881_storage",
+                        "typeIdentifier": "t_struct$_DIDDocument_$1918_storage",
                         "typeString": "struct MinistryDIDRegistry.DIDDocument storage ref"
                       }
                     },
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 2076,
+                      "id": 2113,
                       "name": "didDocument",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1993,
+                      "referencedDeclaration": 2030,
                       "src": "1734:11:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                        "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                         "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                       }
                     },
                     "src": "1703:42:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_DIDDocument_$1881_storage",
+                      "typeIdentifier": "t_struct$_DIDDocument_$1918_storage",
                       "typeString": "struct MinistryDIDRegistry.DIDDocument storage ref"
                     }
                   },
-                  "id": 2078,
+                  "id": 2115,
                   "nodeType": "ExpressionStatement",
                   "src": "1703:42:7"
                 },
@@ -2933,18 +2933,18 @@
                     "arguments": [
                       {
                         "expression": {
-                          "id": 2080,
+                          "id": 2117,
                           "name": "didDocument",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1993,
+                          "referencedDeclaration": 2030,
                           "src": "1774:11:7",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                            "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                             "typeString": "struct MinistryDIDRegistry.DIDDocument memory"
                           }
                         },
-                        "id": 2081,
+                        "id": 2118,
                         "isConstant": false,
                         "isLValue": true,
                         "isPure": false,
@@ -2952,7 +2952,7 @@
                         "memberLocation": "1786:2:7",
                         "memberName": "id",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1875,
+                        "referencedDeclaration": 1912,
                         "src": "1774:14:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_memory_ptr",
@@ -2967,18 +2967,18 @@
                           "typeString": "string memory"
                         }
                       ],
-                      "id": 2079,
+                      "id": 2116,
                       "name": "DIDCreated",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1898,
+                      "referencedDeclaration": 1935,
                       "src": "1763:10:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (string memory)"
                       }
                     },
-                    "id": 2082,
+                    "id": 2119,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2994,14 +2994,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2083,
+                  "id": 2120,
                   "nodeType": "EmitStatement",
                   "src": "1758:31:7"
                 }
               ]
             },
             "functionSelector": "114080f6",
-            "id": 2085,
+            "id": 2122,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3009,17 +3009,17 @@
             "nameLocation": "1038:17:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1989,
+              "id": 2026,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1986,
+                  "id": 2023,
                   "mutability": "mutable",
                   "name": "_holderAddress",
                   "nameLocation": "1064:14:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2085,
+                  "scope": 2122,
                   "src": "1056:22:7",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -3028,7 +3028,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1985,
+                    "id": 2022,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1056:7:7",
@@ -3042,12 +3042,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 1988,
+                  "id": 2025,
                   "mutability": "mutable",
                   "name": "_publicKey",
                   "nameLocation": "1096:10:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2085,
+                  "scope": 2122,
                   "src": "1080:26:7",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -3056,7 +3056,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 1987,
+                    "id": 2024,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1080:6:7",
@@ -3071,12 +3071,12 @@
               "src": "1055:52:7"
             },
             "returnParameters": {
-              "id": 1990,
+              "id": 2027,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1115:0:7"
             },
-            "scope": 2116,
+            "scope": 2153,
             "src": "1029:768:7",
             "stateMutability": "nonpayable",
             "virtual": false,
@@ -3084,31 +3084,31 @@
           },
           {
             "body": {
-              "id": 2097,
+              "id": 2134,
               "nodeType": "Block",
               "src": "1893:43:7",
               "statements": [
                 {
                   "expression": {
                     "baseExpression": {
-                      "id": 2093,
+                      "id": 2130,
                       "name": "didDocuments",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1886,
+                      "referencedDeclaration": 1923,
                       "src": "1911:12:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1881_storage_$",
+                        "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1918_storage_$",
                         "typeString": "mapping(string memory => struct MinistryDIDRegistry.DIDDocument storage ref)"
                       }
                     },
-                    "id": 2095,
+                    "id": 2132,
                     "indexExpression": {
-                      "id": 2094,
+                      "id": 2131,
                       "name": "did",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2087,
+                      "referencedDeclaration": 2124,
                       "src": "1924:3:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_calldata_ptr",
@@ -3122,19 +3122,19 @@
                     "nodeType": "IndexAccess",
                     "src": "1911:17:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_DIDDocument_$1881_storage",
+                      "typeIdentifier": "t_struct$_DIDDocument_$1918_storage",
                       "typeString": "struct MinistryDIDRegistry.DIDDocument storage ref"
                     }
                   },
-                  "functionReturnParameters": 2092,
-                  "id": 2096,
+                  "functionReturnParameters": 2129,
+                  "id": 2133,
                   "nodeType": "Return",
                   "src": "1904:24:7"
                 }
               ]
             },
             "functionSelector": "784afc4e",
-            "id": 2098,
+            "id": 2135,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -3142,17 +3142,17 @@
             "nameLocation": "1814:14:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2088,
+              "id": 2125,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2087,
+                  "id": 2124,
                   "mutability": "mutable",
                   "name": "did",
                   "nameLocation": "1845:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2098,
+                  "scope": 2135,
                   "src": "1829:19:7",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -3161,7 +3161,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2086,
+                    "id": 2123,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1829:6:7",
@@ -3176,41 +3176,41 @@
               "src": "1828:21:7"
             },
             "returnParameters": {
-              "id": 2092,
+              "id": 2129,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2091,
+                  "id": 2128,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2098,
+                  "scope": 2135,
                   "src": "1873:18:7",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_DIDDocument_$1881_memory_ptr",
+                    "typeIdentifier": "t_struct$_DIDDocument_$1918_memory_ptr",
                     "typeString": "struct MinistryDIDRegistry.DIDDocument"
                   },
                   "typeName": {
-                    "id": 2090,
+                    "id": 2127,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2089,
+                      "id": 2126,
                       "name": "DIDDocument",
                       "nameLocations": [
                         "1873:11:7"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 1881,
+                      "referencedDeclaration": 1918,
                       "src": "1873:11:7"
                     },
-                    "referencedDeclaration": 1881,
+                    "referencedDeclaration": 1918,
                     "src": "1873:11:7",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_DIDDocument_$1881_storage_ptr",
+                      "typeIdentifier": "t_struct$_DIDDocument_$1918_storage_ptr",
                       "typeString": "struct MinistryDIDRegistry.DIDDocument"
                     }
                   },
@@ -3219,7 +3219,7 @@
               ],
               "src": "1872:20:7"
             },
-            "scope": 2116,
+            "scope": 2153,
             "src": "1805:131:7",
             "stateMutability": "view",
             "virtual": false,
@@ -3227,13 +3227,13 @@
           },
           {
             "body": {
-              "id": 2114,
+              "id": 2151,
               "nodeType": "Block",
               "src": "2011:74:7",
               "statements": [
                 {
                   "expression": {
-                    "id": 2108,
+                    "id": 2145,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3244,24 +3244,24 @@
                     "src": "2022:24:7",
                     "subExpression": {
                       "baseExpression": {
-                        "id": 2105,
+                        "id": 2142,
                         "name": "didDocuments",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1886,
+                        "referencedDeclaration": 1923,
                         "src": "2029:12:7",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1881_storage_$",
+                          "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_DIDDocument_$1918_storage_$",
                           "typeString": "mapping(string memory => struct MinistryDIDRegistry.DIDDocument storage ref)"
                         }
                       },
-                      "id": 2107,
+                      "id": 2144,
                       "indexExpression": {
-                        "id": 2106,
+                        "id": 2143,
                         "name": "did",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2100,
+                        "referencedDeclaration": 2137,
                         "src": "2042:3:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_calldata_ptr",
@@ -3275,7 +3275,7 @@
                       "nodeType": "IndexAccess",
                       "src": "2029:17:7",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_DIDDocument_$1881_storage",
+                        "typeIdentifier": "t_struct$_DIDDocument_$1918_storage",
                         "typeString": "struct MinistryDIDRegistry.DIDDocument storage ref"
                       }
                     },
@@ -3284,7 +3284,7 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2109,
+                  "id": 2146,
                   "nodeType": "ExpressionStatement",
                   "src": "2022:24:7"
                 },
@@ -3292,11 +3292,11 @@
                   "eventCall": {
                     "arguments": [
                       {
-                        "id": 2111,
+                        "id": 2148,
                         "name": "did",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2100,
+                        "referencedDeclaration": 2137,
                         "src": "2073:3:7",
                         "typeDescriptions": {
                           "typeIdentifier": "t_string_calldata_ptr",
@@ -3311,18 +3311,18 @@
                           "typeString": "string calldata"
                         }
                       ],
-                      "id": 2110,
+                      "id": 2147,
                       "name": "DIDDeleted",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1902,
+                      "referencedDeclaration": 1939,
                       "src": "2062:10:7",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (string memory)"
                       }
                     },
-                    "id": 2112,
+                    "id": 2149,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3338,22 +3338,22 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 2113,
+                  "id": 2150,
                   "nodeType": "EmitStatement",
                   "src": "2057:20:7"
                 }
               ]
             },
             "functionSelector": "b9a46384",
-            "id": 2115,
+            "id": 2152,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
-                "id": 2103,
+                "id": 2140,
                 "kind": "modifierInvocation",
                 "modifierName": {
-                  "id": 2102,
+                  "id": 2139,
                   "name": "onlyOwner",
                   "nameLocations": [
                     "2001:9:7"
@@ -3370,17 +3370,17 @@
             "nameLocation": "1953:17:7",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2101,
+              "id": 2138,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2100,
+                  "id": 2137,
                   "mutability": "mutable",
                   "name": "did",
                   "nameLocation": "1987:3:7",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2115,
+                  "scope": 2152,
                   "src": "1971:19:7",
                   "stateVariable": false,
                   "storageLocation": "calldata",
@@ -3389,7 +3389,7 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 2099,
+                    "id": 2136,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
                     "src": "1971:6:7",
@@ -3404,19 +3404,19 @@
               "src": "1970:21:7"
             },
             "returnParameters": {
-              "id": 2104,
+              "id": 2141,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "2011:0:7"
             },
-            "scope": 2116,
+            "scope": 2153,
             "src": "1944:141:7",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2117,
+        "scope": 2154,
         "src": "116:1974:7",
         "usedErrors": [
           13,
@@ -3424,8 +3424,8 @@
         ],
         "usedEvents": [
           24,
-          1898,
-          1902
+          1935,
+          1939
         ]
       }
     ],
@@ -3490,7 +3490,7 @@
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-05-16T06:57:34.604Z",
+  "updatedAt": "2024-05-17T06:44:13.095Z",
   "devdoc": {
     "errors": {
       "OwnableInvalidOwner(address)": [

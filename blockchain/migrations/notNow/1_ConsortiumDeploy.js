@@ -1,5 +1,4 @@
 const consortium = artifacts.require("MinistryDIDRegistry");
-const userDID = artifacts.require("UserDIDRegistry");
 
 module.exports = function (deployer) {
   deployer.deploy(consortium).then(function(consortiumIt){
