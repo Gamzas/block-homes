@@ -33,7 +33,7 @@ export const userCoordAtom = atom<CoordType>({
 export const matchAtom = atom<boolean>(false)
 
 // 전체 부동산 매물
-export const estateItemListAtom = atom<EstateItemResType | null>(itemList)
+export const estateItemListAtom = atom<EstateItemResType | null>(null)
 
 // 선택된 부동산 매물
 export const selectedItemAtom = atom<EstateItemListType | 'not'>('not')
