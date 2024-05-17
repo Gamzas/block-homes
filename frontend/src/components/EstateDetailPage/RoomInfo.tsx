@@ -31,26 +31,26 @@ const RoomInfo = (props: PropsType) => {
   ]
 
   const adminFeeInfo = [
-    { icon: 'air', name: '전기' },
-    { icon: 'refrigerator', name: '가스' },
-    { icon: 'washing-machine', name: '수도' },
-    { icon: 'parking', name: '인터넷' },
-    { icon: 'air', name: 'TV' },
+    { icon: 'elec', name: '전기' },
+    { icon: 'gas', name: '가스' },
+    { icon: 'water', name: '수도' },
+    { icon: 'internet', name: '인터넷' },
+    { icon: 'tv', name: 'TV' },
   ]
 
   const additionalInfo = [
     { icon: 'air', name: '에어컨' },
     { icon: 'refrigerator', name: '냉장고' },
     { icon: 'washing-machine', name: '세탁기' },
-    { icon: 'parking', name: '가스레인지' },
-    { icon: 'air', name: '인덕션' },
-    { icon: 'air', name: '전자레인지' },
-    { icon: 'air', name: '책상' },
-    { icon: 'air', name: '책장' },
-    { icon: 'air', name: '침대' },
-    { icon: 'air', name: '옷장' },
-    { icon: 'air', name: '신발장' },
-    { icon: 'air', name: '싱크대' },
+    { icon: 'gas', name: '가스레인지' },
+    { icon: 'induction', name: '인덕션' },
+    { icon: 'microwave', name: '전자레인지' },
+    { icon: 'desk', name: '책상' },
+    { icon: 'bookshelf', name: '책장' },
+    { icon: 'bed', name: '침대' },
+    { icon: 'closet', name: '옷장' },
+    { icon: 'shoe', name: '신발장' },
+    { icon: 'sink', name: '싱크대' },
   ]
 
   return (
@@ -71,21 +71,6 @@ const RoomInfo = (props: PropsType) => {
           </div>
         ))}
       </r.DetailInfoContainer>
-
-      <r.AdminFeeContainer>
-        <hr className="underline" />
-        <div className="price">
-          관리비 : {numberToMoney(info.administrationCost)}
-        </div>
-        <div className="option">
-          {info.itemAdministrationFeeList.map((item, index) => (
-            <div className="txt" key={index}>
-              {adminFeeInfo[item - 1].name}
-            </div>
-          ))}
-        </div>
-        <hr className="underline" />
-      </r.AdminFeeContainer>
       <r.TitleContainer>
         <div className="title">추가 옵션</div>
         <hr className="underline" />
@@ -106,6 +91,26 @@ const RoomInfo = (props: PropsType) => {
               ),
           )}
         </r.AdditionalContainer>
+      </r.AdditionalWrapper>
+      <r.TitleContainer>
+        <div className="title">관리비 항목</div>
+        <hr className="underline" />
+      </r.TitleContainer>
+      <r.AdditionalWrapper>
+        <r.AdminFeeContainer>
+          {info.itemAdministrationFeeList.map((item, index) => (
+            <div className="info-box">
+              <img
+                className="icon"
+                src={`/icon/icon_room_info_fee_${adminFeeInfo[item - 1].icon}.png`}
+                alt=""
+              />
+              <div className="name" key={index}>
+                {adminFeeInfo[item - 1].name}
+              </div>
+            </div>
+          ))}
+        </r.AdminFeeContainer>
       </r.AdditionalWrapper>
       <r.TitleContainer>
         <div className="title">상세 설명</div>
