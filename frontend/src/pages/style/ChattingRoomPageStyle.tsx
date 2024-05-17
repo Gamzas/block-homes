@@ -11,6 +11,26 @@ export const ChattingRoomPageContainer = styled.div`
 
 export const ChattingHeader = styled.div`
   background: #f3f0f7;
+  display: flex;
+
+  .image-container {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    border: 1rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+`
+
+export const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 6rem);
 `
 
 export const ButtonContainer = styled.div`
@@ -25,5 +45,6 @@ export const ButtonContainer = styled.div`
     border: 1.5px solid #845bd3;
   }
 `
-
-export const MessageList = styled.div``
+export const MessageListContainer = styled.div`
+  margin: 1rem;
+`
