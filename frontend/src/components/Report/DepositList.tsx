@@ -4,9 +4,11 @@ import {
   DepositListContainer,
 } from './style/DepositListStyle'
 
-const DepositList = () => {
+const DepositList = ({ price }) => {
   const [isCharterVisible, setIsCharterVisible] = useState(true)
   const [isAuctionVisible, setIsAuctionVisible] = useState(true)
+  const firstPrice = price * 0.77
+  const secondPrice = price * 0.84
 
   return (
     <DepositListContainer>
@@ -40,7 +42,8 @@ const DepositList = () => {
         <div className="deposit-text">
           <div className="deposit-text-box">
             선순위 채권 없이{' '}
-            <span style={{ color: '#00B2B8' }}>2.57억원 이하</span>의 보증금으로
+            <span style={{ color: '#00B2B8' }}>{firstPrice}억원 이하</span>의
+            보증금으로
             <br /> 전세계약을 권유드립니다.
           </div>
           <svg
@@ -64,7 +67,7 @@ const DepositList = () => {
           className={`deposit-explain ${isCharterVisible ? `` : 'isVisible'}`}
         >
           <div className="text-top">
-            매매시세 평균 <span style={{ color: '#00B2B8' }}>3.63 억원</span>
+            매매시세 평균 <span style={{ color: '#00B2B8' }}>{price} 억원</span>
           </div>
           <div className="text-middle">x</div>
           <div className="text-bottom">
@@ -77,7 +80,8 @@ const DepositList = () => {
         <div className="line"></div>
         <div className="deposit-text">
           <div className="deposit-text-box">
-            보증금이 <span style={{ color: ' #FE754E' }}>3.06억원을 초과</span>
+            보증금이{' '}
+            <span style={{ color: ' #FE754E' }}>{secondPrice}억원을 초과</span>
             하는 경우
             <br /> 경매발생 시 보증금 회수가 어려울 수 있습니다.
           </div>
@@ -102,7 +106,7 @@ const DepositList = () => {
           className={`deposit-explain ${isAuctionVisible ? `` : 'isVisible'}`}
         >
           <div className="text-top">
-            매매시세 평균 <span style={{ color: '#FE754E' }}>3.63 억원</span>
+            매매시세 평균 <span style={{ color: '#FE754E' }}>{price} 억원</span>
           </div>
           <div className="text-middle">x</div>
           <div className="text-bottom">

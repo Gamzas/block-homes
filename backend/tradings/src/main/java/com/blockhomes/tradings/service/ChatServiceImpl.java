@@ -3,12 +3,7 @@ package com.blockhomes.tradings.service;
 import com.blockhomes.tradings.dto.chat.ByteArrayMultipartFile;
 import com.blockhomes.tradings.dto.chat.MessageType;
 import com.blockhomes.tradings.dto.chat.payload.ChatPayload;
-import com.blockhomes.tradings.dto.chat.payload.EnterPayload;
-import com.blockhomes.tradings.dto.chat.payload.ProgressPayload;
-import com.blockhomes.tradings.dto.chat.payload.ProvisionPayload;
 import com.blockhomes.tradings.dto.chat.response.ChatRes;
-import com.blockhomes.tradings.dto.chat.response.ProgressRes;
-import com.blockhomes.tradings.dto.chat.response.ProvisionRes;
 import com.blockhomes.tradings.entity.chat.*;
 import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.common.RoleCategory;
@@ -51,13 +46,13 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     @Transactional
-    public ChatRes enterUser(Integer chatRoomNo, EnterPayload enterPayload) {
+    public ChatRes enterUser(Integer chatRoomNo, ChatPayload chatPayload) {
         ChatRoom chatRoom = chatRoomRepository
             .getChatRoomByChatRoomNo(chatRoomNo)
             .orElseThrow(ChatRoomNotFoundException::new);
 
         Wallet wallet = walletRepository
-            .getWalletByWalletAddress(enterPayload.getSenderWalletAddress())
+            .getWalletByWalletAddress(chatPayload.getSenderWalletAddress())
             .orElseThrow(WalletNotFoundException::new);
 
         WalletChatRoom walletChatRoom = walletChatRoomRepository
@@ -81,6 +76,7 @@ public class ChatServiceImpl implements ChatService {
             .messageType(chat.getMessageType())
             .image("")
             .contractStep(chat.getChatRoom().getContractStep())
+            .message(chat.getMessage())
             .createdAt(chat.getCreatedAt())
             .build();
     }
@@ -98,7 +94,7 @@ public class ChatServiceImpl implements ChatService {
 
         Image image = null;
 
-        if (!chatPayload.getImageBase64().isBlank()) {
+        if (Objects.nonNull(chatPayload.getImageBase64()) && !chatPayload.getImageBase64().isBlank()) {
             String mimeType = new Tika().detect(chatPayload.getImageBase64());
             String fileExtension = getFileExtension(mimeType);
 
@@ -126,13 +122,13 @@ public class ChatServiceImpl implements ChatService {
 
         }
 
-        Chat chat = Chat.builder()
+        Chat chat = chatRepository.save(Chat.builder()
             .chatRoom(chatRoom)
             .message(chatPayload.getMessage())
             .messageType(MessageType.TALK)
             .wallet(wallet)
             .image(image)
-            .build();
+            .build());
 
         log.info("talkUser : {}", chat);
 
@@ -145,6 +141,7 @@ public class ChatServiceImpl implements ChatService {
                 .messageType(chat.getMessageType())
                 .image(chat.getImage().getImageUrl())
                 .contractStep(chat.getChatRoom().getContractStep())
+                .message(chat.getMessage())
                 .createdAt(chat.getCreatedAt())
                 .build();
         } else {
@@ -155,6 +152,7 @@ public class ChatServiceImpl implements ChatService {
                 .senderName(chat.getWallet().getName())
                 .messageType(chat.getMessageType())
                 .contractStep(chat.getChatRoom().getContractStep())
+                .message(chat.getMessage())
                 .createdAt(chat.getCreatedAt())
                 .build();
         }
@@ -163,20 +161,15 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     @Transactional
-    public ChatRes progressContract(Integer chatRoomNo, ProgressPayload progressPayload) {
+    public ChatRes progressContract(Integer chatRoomNo, ChatPayload chatPayload) {
         ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(chatRoomNo)
             .orElseThrow(ChatRoomNotFoundException::new);
 
-        WalletChatRoom walletChatRoom = walletChatRoomRepository
-            .getWalletChatRoomByChatRoomAndRoleCategory(chatRoom,
-                RoleCategory.valueToEnum(progressPayload.getSenderRole()))
-            .orElseThrow(WalletChatRoomNotFoundException::new);
+        Wallet wallet = walletRepository.getWalletByWalletAddress(chatPayload.getSenderWalletAddress())
+            .orElseThrow(WalletNotFoundException::new);
 
-        if (!walletChatRoom.getWallet().getWalletAddress()
-            .equals(progressPayload.getSenderWalletAddress())) {
-            throw new RoleWalletNotMatchException(progressPayload.getSenderWalletAddress(),
-                RoleCategory.valueToEnum(progressPayload.getSenderRole()));
-        }
+        WalletChatRoom walletChatRoom = walletChatRoomRepository.getWalletChatRoomByWalletAndChatRoom(wallet, chatRoom)
+            .orElseThrow(WalletChatRoomNotFoundException::new);
 
         ContractStep contractStep = chatRoom.getContractStep();
 
@@ -207,52 +200,48 @@ public class ChatServiceImpl implements ChatService {
             .build();
     }
 
-    @Override
-    @Transactional
-    public ChatRes createSpecialProvision(Integer chatRoomNo, ProvisionPayload provisionPayload) {
-        ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(chatRoomNo)
-            .orElseThrow(ChatRoomNotFoundException::new);
-
-        WalletChatRoom walletChatRoom = walletChatRoomRepository
-            .getWalletChatRoomByChatRoomAndRoleCategory(chatRoom,
-                RoleCategory.valueToEnum(provisionPayload.getSenderRole()))
-            .orElseThrow(WalletChatRoomNotFoundException::new);
-
-        if (!walletChatRoom.getWallet().getWalletAddress()
-            .equals(provisionPayload.getSenderWalletAddress())) {
-            throw new RoleWalletNotMatchException(provisionPayload.getSenderWalletAddress(),
-                RoleCategory.valueToEnum(provisionPayload.getSenderRole()));
-        }
-
-        ContractStep contractStep = chatRoom.getContractStep();
-
-        if (ContractStep.isProvisionStep(contractStep) && ContractStep.checkRoleStep(walletChatRoom.getRoleCategory(), contractStep)) {
-            chatRoom.setContractStep(ContractStep.getNextContractStep(contractStep));
-        } else {
-            throw new ProgressNotPermittedException(walletChatRoom.getRoleCategory(), contractStep);
-        }
-
-        List<ChatProvision> chatProvisionList = new ArrayList<>();
-
-        for (Integer provision : provisionPayload.getProvisionList()) {
-            chatProvisionList.add(chatProvisionRepository.save(ChatProvision.builder()
-                    .chatRoom(chatRoom)
-                    .specialProvisionCategory(SpecialProvisionCategory.valueToEnum(provision))
-                .build()));
-        }
-
-        List<Integer> provisionValues = new ArrayList<>();
-
-        for (ChatProvision chatProvision : chatProvisionList) {
-            provisionValues.add(chatProvision.getSpecialProvisionCategory().getValue());
-        }
-
-        return progressContract(chatRoomNo,
-            ProgressPayload.builder()
-                .senderWalletAddress(provisionPayload.getSenderWalletAddress())
-                .senderRole(provisionPayload.getSenderRole())
-                .build());
-    }
+//    @Override
+//    @Transactional
+//    public ChatRes createSpecialProvision(Integer chatRoomNo, ChatPayload chatPayload) {
+//        ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(chatRoomNo)
+//            .orElseThrow(ChatRoomNotFoundException::new);
+//
+//        WalletChatRoom walletChatRoom = walletChatRoomRepository
+//            .getWalletChatRoomByChatRoomAndRoleCategory(chatRoom,
+//                RoleCategory.valueToEnum(chatPayload.getSenderRole()))
+//            .orElseThrow(WalletChatRoomNotFoundException::new);
+//
+//        if (!walletChatRoom.getWallet().getWalletAddress()
+//            .equals(chatPayload.getSenderWalletAddress())) {
+//            throw new RoleWalletNotMatchException(chatPayload.getSenderWalletAddress(),
+//                RoleCategory.valueToEnum(chatPayload.getSenderRole()));
+//        }
+//
+//        ContractStep contractStep = chatRoom.getContractStep();
+//
+//        if (ContractStep.isProvisionStep(contractStep) && ContractStep.checkRoleStep(walletChatRoom.getRoleCategory(), contractStep)) {
+//            chatRoom.setContractStep(ContractStep.getNextContractStep(contractStep));
+//        } else {
+//            throw new ProgressNotPermittedException(walletChatRoom.getRoleCategory(), contractStep);
+//        }
+//
+//        List<ChatProvision> chatProvisionList = new ArrayList<>();
+//
+//        for (Integer provision : chatPayload.getProvisionList()) {
+//            chatProvisionList.add(chatProvisionRepository.save(ChatProvision.builder()
+//                    .chatRoom(chatRoom)
+//                    .specialProvisionCategory(SpecialProvisionCategory.valueToEnum(provision))
+//                .build()));
+//        }
+//
+//        List<Integer> provisionValues = new ArrayList<>();
+//
+//        for (ChatProvision chatProvision : chatProvisionList) {
+//            provisionValues.add(chatProvision.getSpecialProvisionCategory().getValue());
+//        }
+//
+//        return progressContract(chatRoomNo, chatPayload);
+//    }
 
     @Override
     public ChatRes rejectProvision(Integer chatRoomNo, ChatPayload chatPayload) {

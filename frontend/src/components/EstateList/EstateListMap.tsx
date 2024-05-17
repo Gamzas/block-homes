@@ -1,175 +1,158 @@
-import { useEffect } from 'react'
-import * as e from '@components/EstateList/styles/EstateListMapStyle'
-import { renderToString } from 'react-dom/server'
-import CustomOverlay from '@components/EstateList/CustomOverlay'
-import useCurrentLocation from '@/hooks/useCurrentLocation'
-import { useAtom } from 'jotai'
+import { useEffect, useState } from 'react';
+import * as e from '@components/EstateList/styles/EstateListMapStyle';
+import { renderToString } from 'react-dom/server';
+import CustomOverlay from '@components/EstateList/CustomOverlay';
+import useCurrentLocation from '@/hooks/useCurrentLocation';
+import { useAtom } from 'jotai';
 import {
   currentCoordAtom,
-  estateItemListAtom,
+  estateFilterAtom,
   selectedItemAtom,
-} from '@/stores/atoms/EstateListStore'
-import EstateItemCard from './EstateItemCard'
-import { EstateItemListType } from '@/types/api/itemType'
-import { publicRequest } from '@/hooks/requestMethods'
-import { API_ESTATE_ITEM } from '@/constants/api'
-import { useGetEstateItems } from '@/apis/itemApi'
-import ItemLoading from '@/common/ItemLoading'
-import NoItems from '@/common/NoItems'
-import { useParams } from 'react-router-dom'
+} from '@/stores/atoms/EstateListStore';
+import EstateItemCard from './EstateItemCard';
+import { EstateItemListType } from '@/types/api/itemType';
+import { useGetEstateItems } from '@/apis/itemApi';
+import ItemLoading from '@/common/ItemLoading';
+import NoItems from '@/common/NoItems';
+import { useParams } from 'react-router-dom';
+import { calculateDistance } from '@/utils/locationUtil';
+import { ReqCoordType } from '@/types/components/estateListType';
 
 declare global {
   interface Window {
-    kakao: any
+    kakao: any;
   }
 }
-const { kakao } = window
+const { kakao } = window;
 
 const EstateListMap = () => {
-  // setLocation => 지도의 중심좌표를 설정하기 위한 함수
-  const { setLocation } = useCurrentLocation()
+  const { setLocation } = useCurrentLocation();
+  const [filter] = useAtom(estateFilterAtom);
+  const [coord] = useAtom(currentCoordAtom);
 
-  const [coord] = useAtom(currentCoordAtom)
+  const [reqCoord, setReqCoord] = useState<ReqCoordType>({
+    northEastLatitude: 0,
+    northEastLongitude: 0,
+    southWestLatitude: 0,
+    southWestLongitude: 0,
+  });
+  const [previousCenter, setPreviousCenter] = useState({
+    latitude: coord.latitude,
+    longitude: coord.longitude,
+  });
 
-  // 부동산 매물 리스트
-  // const [estateItemArr] = useAtom(estateItemListAtom)
-  // const estateItemList: EstateItemListType[] = estateItemArr.itemList
-  const { category } = useParams()
-  const { data, isLoading, error } = useGetEstateItems(Number(category))
+  const { category } = useParams();
+  const { data, isLoading, error } = useGetEstateItems(
+    Number(category),
+    filter,
+    reqCoord,
+  );
+  const estateItemList: EstateItemListType[] = data?.itemList || [];
+  const [item, setItem] = useAtom(selectedItemAtom);
 
-  const estateItemList: EstateItemListType[] = data.itemList
+  const distanceThreshold = 2.5; // 2.5km
 
-  // 상세보기 선택한 부동산
-  const [item, setItem] = useAtom(selectedItemAtom)
-
-  // 닫기 버튼
   const handleDetailCardClose = () => {
-    setItem('not')
-  }
-
-  // useEffect(() => {
-  //   setItem('not')
-  //   publicRequest
-  //     .get(`${API_ESTATE_ITEM}`, {
-  //       params: {
-  //         northEastLatitude: 35.20793645842205,
-  //         northEastLongitude: 126.8243731285463,
-  //         southWestLatitude: 35.167213022923335,
-  //         southWestLongitude: 126.79021349478826,
-  //         realEstateType: 0,
-  //         reportRank: 0,
-  //         transactionType: 0,
-  //         minPrice: 0,
-  //         maxPrice: 0,
-  //         minPyeong: 0,
-  //         maxPyeong: 0,
-  //       },
-  //     })
-  //     .then(res => console.log(res))
-  // }, [])
+    setItem('not');
+  };
 
   useEffect(() => {
-    // 지도생성
-    const container = document.getElementById('map')
+    const container = document.getElementById('map');
+    if (!container) return; // container가 존재하는지 확인
+
     const options = {
       center: new kakao.maps.LatLng(coord.latitude, coord.longitude),
       level: 3,
       animate: true,
       isPanto: true,
-    }
-    const map = new kakao.maps.Map(container, options)
+    };
+    const map = new kakao.maps.Map(container, options);
 
-    // 지도 확대 최대 레벨 설정
-    map.setMaxLevel(10)
+    map.setMaxLevel(10);
 
-    // 지도 줌 컨트롤러
-    const zoomControl = new kakao.maps.ZoomControl()
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
+    const zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-    const imageSrc = '/image/image_location_pin.png', // 마커이미지의 주소입니다
-      imageSize = new kakao.maps.Size(48, 48), // 마커이미지의 크기입니다
-      imageOption = { offset: new kakao.maps.Point(32, 45) } // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    const imageSrc = '/image/image_location_pin.png';
+    const imageSize = new kakao.maps.Size(48, 48);
+    const imageOption = { offset: new kakao.maps.Point(32, 45) };
 
-    //--------------------------------------
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-    // 지도 중심이 변경될 때 호출되는 이벤트 리스너를 추가합니다.
-    kakao.maps.event.addListener(map, 'center_changed', () => {
-      const center = map.getCenter()
-      setLocation({
-        latitude: center.Ma,
-        longitude: center.La,
-      })
-      //-----------------------------------
-      // 지도의 현재 영역을 얻어옵니다
-      const bounds = map.getBounds()
-      // 영역의 남서쪽 좌표를 얻어옵니다
-      const swLatLng = bounds.getSouthWest()
-
-      // 영역의 북동쪽 좌표를 얻어옵니다
-      const neLatLng = bounds.getNorthEast()
-      console.log(swLatLng, neLatLng)
-      //-----------------------------------
-    })
-
-    //--------------------------------------
-
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    const markerImage = new kakao.maps.MarkerImage(
-      imageSrc,
-      imageSize,
-      imageOption,
-    )
-
-    // 지도 마커 생성
-    const markerPosition = new kakao.maps.LatLng(
-      coord.latitude,
-      coord.longitude,
-    )
-
+    const markerPosition = new kakao.maps.LatLng(coord.latitude, coord.longitude);
     const marker = new kakao.maps.Marker({
       position: markerPosition,
-      image: markerImage, // 마커이미지 설정
-    })
-    marker.setMap(map)
+      image: markerImage,
+    });
+    marker.setMap(map);
 
-    // 커스텀 오버레이 렌더링
-    // 오버레이 위치 리스트에 대해 처리
-    {
-      estateItemList !== null &&
-        estateItemList.forEach(estateItem => {
-          const position = new kakao.maps.LatLng(
-            estateItem.latitude,
-            estateItem.longitude,
-          )
-          const overlayDiv = document.createElement('div')
-          overlayDiv.innerHTML = renderToString(
-            <CustomOverlay condition={estateItem.reportRank} />,
-          )
-          const handleOverlayClick = () => {
-            setItem(estateItem)
-          }
+    const bounds = map.getBounds();
+    const swLatLng = bounds.getSouthWest();
+    const neLatLng = bounds.getNorthEast();
+    setReqCoord({
+      northEastLatitude: neLatLng.Ma,
+      northEastLongitude: neLatLng.La,
+      southWestLatitude: swLatLng.Ma,
+      southWestLongitude: swLatLng.La,
+    });
 
-          const customOverlay = new kakao.maps.CustomOverlay({
-            position: position,
-            content: overlayDiv,
-            xAnchor: 0.5,
-            yAnchor: 0.91,
-            clickable: true,
-            zIndex: 4,
-          })
-          const circleElement = overlayDiv.querySelector('.circle')
-          {
-            circleElement &&
-              circleElement.addEventListener('click', handleOverlayClick)
-          }
+    kakao.maps.event.addListener(map, 'center_changed', () => {
+      const center = map.getCenter();
+      const newCenter = { latitude: center.Ma, longitude: center.La };
+      setLocation(newCenter);
 
-          customOverlay.setMap(map)
-        })
+      const distance = calculateDistance(
+        previousCenter.latitude,
+        previousCenter.longitude,
+        newCenter.latitude,
+        newCenter.longitude,
+      );
+
+      if (distance >= distanceThreshold) {
+        setPreviousCenter(newCenter);
+        const bounds = map.getBounds();
+        const swLatLng = bounds.getSouthWest();
+        const neLatLng = bounds.getNorthEast();
+        setReqCoord({
+          northEastLatitude: neLatLng.Ma,
+          northEastLongitude: neLatLng.La,
+          southWestLatitude: swLatLng.Ma,
+          southWestLongitude: swLatLng.La,
+        });
+      }
+    });
+
+    if (estateItemList.length) {
+      estateItemList.forEach((estateItem) => {
+        const position = new kakao.maps.LatLng(estateItem.latitude, estateItem.longitude);
+        const overlayDiv = document.createElement('div');
+        overlayDiv.innerHTML = renderToString(
+          <CustomOverlay condition={estateItem.reportRank} />,
+        );
+        const handleOverlayClick = () => {
+          setItem(estateItem);
+        };
+
+        const customOverlay = new kakao.maps.CustomOverlay({
+          position: position,
+          content: overlayDiv,
+          xAnchor: 0.5,
+          yAnchor: 0.91,
+          clickable: true,
+          zIndex: 4,
+        });
+        const circleElement = overlayDiv.querySelector('.circle');
+        if (circleElement) {
+          circleElement.addEventListener('click', handleOverlayClick);
+        }
+
+        customOverlay.setMap(map);
+      });
     }
-  }, [coord, estateItemList])
+  }, [coord, estateItemList]);
 
   if (isLoading) {
-    return <ItemLoading />
+    return <ItemLoading />;
   }
 
   if (error || !data || !data.itemList) {
@@ -178,7 +161,7 @@ const EstateListMap = () => {
         src={'/image/image_warning_pig.png'}
         alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
       />
-    )
+    );
   }
 
   return (
@@ -190,7 +173,7 @@ const EstateListMap = () => {
         </e.DetailCardContainer>
       )}
     </e.EstateMapContainer>
-  )
-}
+  );
+};
 
-export default EstateListMap
+export default EstateListMap;

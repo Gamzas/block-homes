@@ -321,6 +321,18 @@ public class ItemServiceImpl implements ItemService {
             throw new ItemOwnerNotMatchException(item.getRealEstateDID(), ownerWallet.getWalletAddress());
         }
 
+        Integer itemNo = item.getItemNo();
+
+        List<String> imageKeys = s3BucketUtil.getFileKeyList(imageRepository.getImageUrlsByItemNo(itemNo), itemNo);
+
+        itemImageRepository.deleteItemImageByItem(item);
+        imageRepository.deleteImageByItemNo(itemNo);
+        s3BucketUtil.deleteFiles(imageKeys, BASE_FOLDER_NAME + "/" + itemNo);
+
+        itemAdministrationFeeRepository.deleteAllByItem(item);
+
+        itemAdditionalOptionRepository.deleteAllByItem(item);
+
         itemRepository.delete(item);
 
         return BaseResponseBody.builder()
@@ -331,7 +343,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public DetailItemRes modifyItem(ModifyItemReq req) {
+    public DetailItemRes modifyItem(ModifyItemReq req, MultipartFile mainImage, MultipartFile[] roomImages, MultipartFile[] kitchenToiletImages) {
         Item item = itemRepository.getItemByItemNo(req.getItemNo())
             .orElseThrow(ItemNotFoundException::new);
 
@@ -378,6 +390,14 @@ public class ItemServiceImpl implements ItemService {
         }
 
         itemAdditionalOptionRepository.saveAll(optionEntityList);
+
+        Integer itemNo = item.getItemNo();
+
+        if (Objects.nonNull(mainImage)) {
+            String imageKey = s3BucketUtil.getFileKey(imageRepository.getMainImageUrlByItemNo(itemNo), itemNo);
+
+
+        }
 
         return getDetailItem(item.getItemNo(), DetailItemReq.builder().walletAddress(req.getWalletAddress()).build());
     }

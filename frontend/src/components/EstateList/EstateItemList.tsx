@@ -1,28 +1,64 @@
 import useCurrentLocation from '@/hooks/useCurrentLocation'
 import CurrentStatus from './CurrentStatus'
 import EstateItemCard from './EstateItemCard'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import EstateItemFilter from './EstateItemFilter'
 import * as l from '@components/EstateList/styles/EstateItemListStyle'
 import { useAtom } from 'jotai'
-import { filterAtom, mapAtom } from '@/stores/atoms/EstateListStore'
+import {
+  estateFilterAtom,
+  filterAtom,
+  mapAtom,
+  mapCenterCoordAtom,
+} from '@/stores/atoms/EstateListStore'
 import EstateListMap from './EstateListMap'
 import NoItems from '@common/NoItems'
 import { EstateItemListType } from '@/types/api/itemType'
 import { useParams } from 'react-router-dom'
 import { useGetEstateItems } from '@/apis/itemApi'
 import ItemLoading from '@/common/ItemLoading'
+import { calculateBoundaries } from '@/utils/locationUtil'
+import { ReqCoordType } from '@/types/components/estateListType'
 
 const EstateItemList = () => {
   const { category } = useParams()
   const { getCurrentLocation } = useCurrentLocation()
   const [filter, setFilter] = useAtom(filterAtom)
+  const [itemFilter] = useAtom(estateFilterAtom)
   const [menu] = useAtom(mapAtom)
+  const [markerCoord] = useAtom(mapCenterCoordAtom)
+  console.log('마커', markerCoord)
   useEffect(() => {
     setFilter(false)
     getCurrentLocation()
   }, [])
-  const { data, isLoading, error } = useGetEstateItems(Number(category))
+  const boundaries = calculateBoundaries(
+    markerCoord.latitude,
+    markerCoord.longitude,
+    5,
+  )
+  const [currentBoundary, setCurrentBoundary] =
+    useState<ReqCoordType>(boundaries)
+
+  console.log('현재', currentBoundary)
+  useEffect(() => {
+    console.log('바뀐=마커', markerCoord)
+    const boundary = calculateBoundaries(
+      markerCoord.latitude,
+      markerCoord.longitude,
+      5,
+    )
+    setCurrentBoundary(boundary)
+    console.log(boundary)
+  }, [markerCoord])
+
+  const { data, isLoading, error } = useGetEstateItems(
+    Number(category),
+    itemFilter,
+    currentBoundary,
+  )
+  useEffect(() => {}, [currentBoundary, data])
+
   if (isLoading) {
     return <ItemLoading />
   }
@@ -35,6 +71,8 @@ const EstateItemList = () => {
       />
     )
   }
+
+  console.log(data)
 
   const estateItemList: EstateItemListType[] = data.itemList
   return (

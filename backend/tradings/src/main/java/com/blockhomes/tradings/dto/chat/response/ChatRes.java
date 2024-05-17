@@ -2,6 +2,7 @@ package com.blockhomes.tradings.dto.chat.response;
 
 import com.blockhomes.tradings.dto.chat.MessageType;
 import com.blockhomes.tradings.entity.chat.ContractStep;
+import com.blockhomes.tradings.entity.common.RoleCategory;
 import lombok.*;
 
 import java.time.LocalDateTime;

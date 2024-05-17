@@ -57,10 +57,27 @@ export interface DetailItemType {
   moveInDate: string
   parkingRate: number
   haveElevator: boolean
-  transactionType : number
-  isUserLiked : boolean
+  transactionType: number
+  isUserLiked: boolean
   createdAt: string
   itemImageList: ItemImage[]
   itemAdministrationFeeList: number[]
   itemAdditionalOptionList: number[]
+}
+
+export interface FilterType {
+  // realEstateType: number
+  reportRank: number
+  transactionType: number
+  minPrice: number
+  maxPrice: number
+  minPyeong: number
+  maxPyeong: number
+}
+
+export interface ReqCoordType {
+  northEastLatitude: number
+  northEastLongitude: number
+  southWestLatitude: number
+  southWestLongitude: number
 }

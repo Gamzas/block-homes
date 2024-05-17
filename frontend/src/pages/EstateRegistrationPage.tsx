@@ -15,6 +15,13 @@ const EstateRegistrationPage = () => {
   const realEstateDID = location.state?.realEstateDID
   const realEstateInfoData = location.state?.realEstateInfoData
   const userInfo = useAtomValue(userAtom)
+  const postParams = {
+    ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
+    realEstateDID: 'did:klay:0x0ewfwefqewqfew0',
+    latitude: 35.1900186143141,
+    longitude: 126.813377377676,
+    reportRank: 1,
+  }
   const [openIndex, setOpenIndex] = useState(0)
   const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]) // 각 아코디언의 열림 상태 초기화
   const [isComplete, setIsComplete] = useState(false)
@@ -27,11 +34,9 @@ const EstateRegistrationPage = () => {
     reportRank: undefined,
   })
   const [checkEstateProps, setCheckEstateProps] = useState({
-    roadNameAddress: undefined,
-    realEstateType: undefined,
-    area: undefined,
-    date: undefined,
-    name: undefined,
+    roadNameAddress: '광주광역시 광산구 장신로 20번길 13-12',
+    realEstateType: 1,
+    area: 33,
   })
   const [detailRegistrationProps, setDetailRegistrationProps] = useState({
     transactionType: undefined,
