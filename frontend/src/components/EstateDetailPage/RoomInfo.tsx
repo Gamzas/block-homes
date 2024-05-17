@@ -23,11 +23,11 @@ const RoomInfo = (props: PropsType) => {
           ? `${info.itemFloor} 층 / ${info.buildingFloor} 층`
           : '단독',
     },
-    {
-      icon: 'detail',
-      info: `관리비 ${numberToMoney(info.administrationCost)}`,
-    },
-    { icon: 'detail', info: `${info.area}m2` },
+    // {
+    //   icon: 'detail',
+    //   info: `관리비 ${numberToMoney(info.administrationCost)}`,
+    // },
+    // { icon: 'detail', info: `${info.area}m2` },
   ]
 
   const adminFeeInfo = [
