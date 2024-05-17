@@ -1,25 +1,38 @@
 import * as t from '@components/MainPage/style/TopCardStyle'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const TopCard = ({ currentUser, setCurrentUser, setCurrentUserType }) => {
   const navigate = useNavigate()
 
+  useEffect(() => {
+    console.log(currentUser)
+  }, [currentUser])
   return (
     <t.TopCardContainer>
       <t.TopCardHeader>
         <img alt="로고" className="logo" src="/icon/icon_logo.png" />
-        {!currentUser ? <button className="login-btn" onClick={() => navigate('/signin')}>
-          로그인
-        </button> : <button className="login-btn" onClick={() => {
-          setCurrentUserType(0)
-          setCurrentUser(null)
-        }}>
-          로그아웃
-        </button>}
+        {currentUser.name === '' ? (
+          <button className="login-btn" onClick={() => navigate('/signin')}>
+            로그인
+          </button>
+        ) : (
+          <button
+            className="login-btn"
+            onClick={() => {
+              setCurrentUserType(0)
+              setCurrentUser({ walletAddress: '', name: '' })
+            }}
+          >
+            로그아웃
+          </button>
+        )}
       </t.TopCardHeader>
-      <t.TopCardInfoTextContainer>
-        {`${currentUser.name}님`}
-      </t.TopCardInfoTextContainer>
+      {currentUser.name !== '' && (
+        <t.TopCardInfoTextContainer>
+          {`${currentUser.name}님`}
+        </t.TopCardInfoTextContainer>
+      )}
       <t.CharacterContainer>
         <img
           alt="메인 돼지 캐릭터"
