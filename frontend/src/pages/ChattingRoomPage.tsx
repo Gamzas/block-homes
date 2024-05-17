@@ -18,6 +18,25 @@ const ChattingRoomPage = () => {
   const [user] = useAtom(userAtom)
   const [chatRoomNumber, setChatRoomNumber] = useState(Number(chatRoomNo))
   const navigate = useNavigate()
+  const [typeOfNumber, setTypeOfNumber] = useState('type')
+  const [stringPrice, setStringPrice] = useState('')
+
+  const formatPrice = price => {
+    const units = ['원', '만', '억']
+    let result = ''
+    let unitIndex = 0
+
+    while (price > 0) {
+      const part = price % 10000
+      if (part > 0) {
+        result = part + units[unitIndex] + ' ' + result // 각 단위마다 값을 추가
+      }
+      price = Math.floor(price / 10000)
+      unitIndex++
+    }
+
+    setStringPrice(result.trim())
+  }
 
   const defaultMessage = {
     chatNo: 0,
@@ -96,6 +115,26 @@ const ChattingRoomPage = () => {
     }
   }, [data])
 
+  useEffect(() => {
+    if (data) {
+      switch (data.transactionType) {
+        case 0:
+          setTypeOfNumber('매매')
+          break
+        case 1:
+          setTypeOfNumber('전세')
+          break
+        case 2:
+          setTypeOfNumber('월세')
+          break
+        default:
+          setTypeOfNumber('type')
+      }
+      formatPrice(data.price)
+    }
+    // setMessages(data?.chatList)
+  }, [data])
+
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
       console.log('Sending message:', newMessage.message)
@@ -130,7 +169,7 @@ const ChattingRoomPage = () => {
       />
       <c.ChattingHeader>
         <div className="image-container">
-          <img src={data?.representativeImage} />
+          <img src={data?.representativeImage} alt="매물 이미지" />
         </div>
         <c.RightContainer>
           <div className="address-container">{data?.realEstateAddress}</div>
