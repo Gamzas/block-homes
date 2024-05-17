@@ -3,8 +3,10 @@ import {
   DepositDetailContainer,
   DepositListContainer,
 } from './style/DepositListStyle'
-
-const DepositList = ({ price }) => {
+interface DepositListProps {
+  price?: number | undefined
+}
+const DepositList = ({ price }: DepositListProps) => {
   const [isCharterVisible, setIsCharterVisible] = useState(true)
   const [isAuctionVisible, setIsAuctionVisible] = useState(true)
   const firstPrice = price * 0.77

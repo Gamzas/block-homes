@@ -1,7 +1,9 @@
 import DangerDetail from './DangerDetail'
 import { DangerListContainer } from './style/DangerListStyle'
-
-const DangerList = ({ checkList }) => {
+interface DangerListProps {
+  checkList?: boolean[]
+}
+const DangerList: React.FC<DangerListProps> = ({ checkList }) => {
   return (
     <DangerListContainer>
       <div className="title-container">

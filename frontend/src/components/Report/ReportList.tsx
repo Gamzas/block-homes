@@ -26,9 +26,9 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
   const { estateNo } = useParams()
   const estateNumber = parseInt(estateNo, 10)
   console.log('1.estateNumber', estateNumber)
-  const [falseCount, setFalseCount] = useState(0)
+  const [falseCount, setFalseCount] = useState<any>(0)
 
-  const [checkList, setCheckList] = useState([
+  const [checkList, setCheckList] = useState<any>([
     false,
     false,
     false,
@@ -37,13 +37,13 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
   ])
 
   // did
-  const [realEstateDid, setRealEstateDid] = useState('')
+  const [realEstateDid, setRealEstateDid] = useState<any>('')
   // api 부른정보
-  const [realEstate, setRealEstate] = useState(null)
+  const [realEstate, setRealEstate] = useState<any>(null)
   // did 부른정보
-  const [realEstateDidInfo, setRealEstateDidInfo] = useState(null)
+  const [realEstateDidInfo, setRealEstateDidInfo] = useState<any>(null)
   // 빚 정보
-  const [loanInfo, setLoanInfo] = useState(null)
+  const [loanInfo, setLoanInfo] = useState<any>(null)
   console.log('loanInfo', loanInfo)
 
   const fetchLoanInfo = async () => {
