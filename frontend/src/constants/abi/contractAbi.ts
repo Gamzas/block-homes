@@ -27,9 +27,9 @@ export const contractABI = [
         type: 'string',
       },
       {
-        internalType: 'uint256',
+        internalType: 'string',
         name: '_contractDate',
-        type: 'uint256',
+        type: 'string',
       },
       {
         internalType: 'string',
@@ -87,9 +87,9 @@ export const contractABI = [
             type: 'string',
           },
           {
-            internalType: 'uint256',
+            internalType: 'string',
             name: 'contractDate',
-            type: 'uint256',
+            type: 'string',
           },
           {
             internalType: 'string',
@@ -184,9 +184,9 @@ export const contractABI = [
     name: 'verifyLandlordSignature',
     outputs: [
       {
-        internalType: 'address',
+        internalType: 'bool',
         name: '',
-        type: 'address',
+        type: 'bool',
       },
     ],
     stateMutability: 'view',
