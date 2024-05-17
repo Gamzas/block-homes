@@ -50,7 +50,7 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return 내용과 코드를 포함한 ResponseEntity 객체
      */
-    @ExceptionHandler(value = {DateNotFormattedException.class})
+    @ExceptionHandler(value = {IllegalArgumentException.class, DateNotFormattedException.class})
     public ResponseEntity<BaseResponseBody> badRequestError(Exception e) {
         log.error(e.getMessage());
 
