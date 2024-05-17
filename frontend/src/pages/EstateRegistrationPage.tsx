@@ -12,18 +12,18 @@ const EstateRegistrationPage = () => {
   const userInfo = useAtomValue(userAtom)
   const postParams = {
     ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
-    realEstateDID: 'did:klay:0x001111',
-    latitude: 35.1937234411548,
-    longitude: 126.814311998746,
-    reportRank: 3,
+    realEstateDID: 'did:klay:0x0ewfwefqewqfew0',
+    latitude: 35.1900186143141,
+    longitude: 126.813377377676,
+    reportRank: 1,
   }
   const [openIndex, setOpenIndex] = useState(0)
   const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]) // 각 아코디언의 열림 상태 초기화
   const [isComplete, setIsComplete] = useState(false)
   const [checkEstateProps, setCheckEstateProps] = useState({
-    roadNameAddress: '광주광역시 광산구 장덕로50번길 12-3',
+    roadNameAddress: '광주광역시 광산구 장신로 20번길 13-12',
     realEstateType: 1,
-    area: 60,
+    area: 33,
   })
   const [detailRegistrationProps, setDetailRegistrationProps] = useState({
     transactionType: undefined,
@@ -49,6 +49,7 @@ const EstateRegistrationPage = () => {
     roomImages: [],
     kitchenToiletImages: [],
   })
+
   const { mutate: postItemRegisterMutate } = usePostItemRegister()
 
   const handleOpenIndex = () => {
@@ -77,12 +78,16 @@ const EstateRegistrationPage = () => {
     if (photoRegistrationProps.mainImage) {
       formData.append('mainImage', photoRegistrationProps.mainImage)
     }
-    photoRegistrationProps.roomImages.forEach((file, index) => {
-      formData.append(`roomImages[${index}]`, file)
-    })
-    photoRegistrationProps.kitchenToiletImages.forEach((file, index) => {
-      formData.append(`kitchenToiletImages[${index}]`, file)
-    })
+    if (Array.isArray(photoRegistrationProps.roomImages)) {
+      photoRegistrationProps.roomImages.forEach((file) => {
+        formData.append(`roomImages`, file)
+      })
+    }
+    if (Array.isArray(photoRegistrationProps.kitchenToiletImages)) {
+      photoRegistrationProps.kitchenToiletImages.forEach((file) => {
+        formData.append(`kitchenToiletImages`, file)
+      })
+    }
 
     postItemRegisterMutate(formData, {
       onSuccess: () => setIsComplete(true),
