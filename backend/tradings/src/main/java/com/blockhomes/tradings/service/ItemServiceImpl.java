@@ -425,32 +425,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public GetLikeItemsRes getLikeItems(GetLikeItemsReq req) {
-        Wallet userWallet = walletRepository
-            .getWalletByWalletAddress(req.getUserAddress())
-            .orElseThrow(WalletNotFoundException::new);
-
-        List<Likes> likesList = likesRepository.getLikesByWallet(userWallet);
-
-        List<ListItemInstance> itemInstances = new ArrayList<>();
-
-        for (Likes likes : likesList) {
-            Item item = likes.getItem();
-
-            itemInstances.add(ListItemInstance.builder()
-                    .itemNo(item.getItemNo())
-                    .realEstateDID(item.getRealEstateDID())
-                    .roadNameAddress(item.getRoadNameAddress())
-                    .transactionType(item.getTransactionType())
-                    .realEstateType(item.getRealEstateType())
-                    .reportRank(item.getReportRank())
-                    .area(item.getArea())
-                    .price(item.getPrice())
-                    .monthlyPrice(item.getMonthlyPrice())
-                    .administrationCost(item.getAdministrationCost())
-                    .latitude(item.getLatitude())
-                    .longitude(item.getLongitude())
-                    .build());
-        }
+        List<ListItemInstance> itemInstances = itemRepository.listItemsByLikes(req);
 
         return GetLikeItemsRes.builder()
             .likedItems(itemInstances)

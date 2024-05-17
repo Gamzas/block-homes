@@ -10,5 +10,6 @@ import lombok.*;
 public class DetailChatRoomRes {
 
     private Integer chatRoomNo;
+    private String representativeImage;
 
 }

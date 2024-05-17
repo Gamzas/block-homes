@@ -16,4 +16,5 @@ public interface ChatRoomService {
     DetailChatRoomRes detailChatRoom(Integer chatRoomNo);
 
     Integer checkChatRoom(CheckChatRoomReq req);
+
 }
