@@ -16,9 +16,10 @@ import ItemLoading from '@/common/ItemLoading'
 const EstateItemList = () => {
   const { category } = useParams()
   const { getCurrentLocation } = useCurrentLocation()
-  const [filter] = useAtom(filterAtom)
+  const [filter, setFilter] = useAtom(filterAtom)
   const [menu] = useAtom(mapAtom)
   useEffect(() => {
+    setFilter(false)
     getCurrentLocation()
   }, [])
   const { data, isLoading, error } = useGetEstateItems(Number(category))
@@ -36,7 +37,6 @@ const EstateItemList = () => {
   }
 
   const estateItemList: EstateItemListType[] = data.itemList
-  // console.log(data.itemList)
   return (
     <l.EstateItemListContainer>
       <l.StatusBarContainer>
@@ -44,25 +44,26 @@ const EstateItemList = () => {
       </l.StatusBarContainer>
       {menu ? (
         estateItemList === undefined || estateItemList.length === 0 ? (
-          // TODO 매물 없을때 컴포넌트 분리해서 완성하기
           <NoItems
             src={'/image/image_warning_pig.png'}
             alarmText={'해당 지역에 매물이 없습니다.'}
           />
         ) : (
-          <l.EstateItemCardsContainer>
-            {estateItemList.map((item, index) => (
-              <EstateItemCard key={index} {...item} />
-            ))}
-          </l.EstateItemCardsContainer>
+          <>
+            <l.EstateItemCardsContainer>
+              {estateItemList.map((item, index) => (
+                <EstateItemCard key={index} {...item} />
+              ))}
+            </l.EstateItemCardsContainer>
+            {filter && (
+              <l.EstateFilterContainer>
+                <EstateItemFilter />
+              </l.EstateFilterContainer>
+            )}
+          </>
         )
       ) : (
         <EstateListMap />
-      )}
-      {filter && (
-        <l.EstateFilterContainer>
-          <EstateItemFilter />
-        </l.EstateFilterContainer>
       )}
     </l.EstateItemListContainer>
   )

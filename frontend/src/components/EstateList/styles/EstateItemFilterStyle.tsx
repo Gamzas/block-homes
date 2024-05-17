@@ -97,6 +97,15 @@ export const PriceContainer = styled.div`
     font-size: 0.6rem;
     line-height: 2.2rem;
   }
+  input[type='text'] {
+    background-color: white; /* 배경색을 흰색으로 설정 */
+    color: #757575; /* 텍스트 색상을 검은색으로 설정 */
+    border: 1px solid #ccc; /* 테두리 색상 설정 */
+    padding: 1rem; /* 패딩 설정 */
+    font-size: 1rem; /* 폰트 크기를 16px로 설정 */
+    transform: scale(0.75); /* 폰트 크기를 시각적으로 줄이기 위해 변형 */
+    transform-origin: left; /* 변형 중심을 왼쪽으로 설정 */
+  }
 `
 // 상세조건
 

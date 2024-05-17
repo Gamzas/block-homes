@@ -8,6 +8,15 @@ export const StatusBarContainer = styled.div`
   z-index: 1;
 `
 
+export const NoItemWrapper = styled.div`
+  width: 100%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+`
+
 export const EstateItemListContainer = styled.div`
   width: 100%;
   height: 95%;
@@ -31,7 +40,6 @@ export const EstateFilterContainer = styled.div`
   height: 100%;
   position: absolute;
   z-index: 0;
-  top: 1rem;
   background: rgba(130, 130, 130, 0.7);
 `
 
