@@ -9,7 +9,6 @@ import {
 } from '@constants/api'
 import { publicRequest } from '@/hooks/requestMethods'
 import {
-  EstateItemReqType,
   GetFavoritItemParamsType,
   PostFavoriteDataType,
 } from '@/types/api/itemType'
@@ -89,19 +88,6 @@ export const getFavoriteItem = async (address: string) => {
   })
   return response.data
 }
-
-// 매물 찜 등록
-// export const postFavoriteItem = async (
-//   itemNo: number,
-//   walletAddress: string,
-// ) => {
-//   await publicRequest.post(API_FAVORITE_ITEM, {
-//     data: {
-//       itemNo,
-//       walletAddress,
-//     },
-//   })
-// }
 
 // 매물 찜 등록
 export const usePostFavoriteItem = () => {
