@@ -69,7 +69,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     @Override
     @Transactional
     public CreateChatRoomRes createChatRoom(CreateChatRoomReq req) {
-        
+
         if (Objects.nonNull(chatRoomRepository.getChatRoomNoByItemNoAndWallet(req.getItemNo(), req.getWalletAddress()))) {
             throw new DuplicateChatRoomException(req.getItemNo(), req.getWalletAddress());
         }
