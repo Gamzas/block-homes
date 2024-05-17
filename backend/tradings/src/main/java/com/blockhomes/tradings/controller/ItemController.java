@@ -17,6 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -56,10 +58,10 @@ public class ItemController {
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
-    public ResponseEntity<DetailItemRes> getDetailItem(@PathVariable Integer itemNo) {
+    public ResponseEntity<DetailItemRes> getDetailItem(@PathVariable Integer itemNo, @ModelAttribute @Valid DetailItemReq req) {
         return ResponseEntity
             .status(OK)
-            .body(itemService.getDetailItem(itemNo));
+            .body(itemService.getDetailItem(itemNo, req));
     }
 
     @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
@@ -77,6 +79,7 @@ public class ItemController {
                                                         @RequestPart MultipartFile mainImage,
                                                         @RequestPart(required = false) MultipartFile[] roomImages,
                                                         @RequestPart(required = false) MultipartFile[] kitchenToiletImages) {
+        log.info("{} {}", Arrays.toString(roomImages), Arrays.toString(kitchenToiletImages));
         return ResponseEntity
             .status(CREATED)
             .body(itemService.registerItem(req, mainImage, roomImages, kitchenToiletImages));

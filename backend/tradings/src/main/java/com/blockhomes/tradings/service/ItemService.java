@@ -11,7 +11,7 @@ public interface ItemService {
 
     ListItemRes listItems(ListItemReq req);
 
-    DetailItemRes getDetailItem(Integer itemNo);
+    DetailItemRes getDetailItem(Integer itemNo, DetailItemReq req);
 
     DetailItemRes modifyItem(ModifyItemReq req);
 

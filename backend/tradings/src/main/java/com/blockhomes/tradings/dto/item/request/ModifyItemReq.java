@@ -24,6 +24,9 @@ public class ModifyItemReq {
     @Schema(description = "가격", example = "1000000000")
     private Long price;
 
+    @NotBlank
+    private String walletAddress;
+
     @NotNull
     @Schema(description = "월세", example = "100000 (매매이거나 없으면 0 넣어주세요)")
     private Integer monthlyPrice;
