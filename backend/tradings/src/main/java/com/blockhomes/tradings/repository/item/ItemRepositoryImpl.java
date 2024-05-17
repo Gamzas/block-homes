@@ -48,11 +48,9 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
 
     @Override
     public List<ListItemInstance> listItemsByLikes(GetLikeItemsReq req) {
-        JPQLQuery<ListItemInstance> query = getItemWalletLikeQuery()
-            .where(qWallet.walletAddress.eq(req.getUserAddress()));
-
-        log.info("{}", query);
-        return query.fetch();
+        return getItemWalletLikeQuery()
+            .where(qWallet.walletAddress.eq(req.getUserAddress()))
+            .fetch();
     }
 
     private JPQLQuery<ListItemInstance> getItemWalletLikeQuery() {

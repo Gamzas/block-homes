@@ -14,9 +14,9 @@ public interface ChatService {
 
     ChatRes chatTalk(Integer chatRoomNo, ChatPayload chatPayload);
 
-    ProgressRes progressContract(Integer chatRoomNo, ProgressPayload progressPayload);
+    ChatRes progressContract(Integer chatRoomNo, ProgressPayload progressPayload);
 
-    ProvisionRes createSpecialProvision(Integer chatRoomNo, ProvisionPayload provisionPayload);
+    ChatRes createSpecialProvision(Integer chatRoomNo, ProvisionPayload provisionPayload);
 
     ChatRes rejectProvision(Integer chatRoomNo, ChatPayload chatPayload);
 

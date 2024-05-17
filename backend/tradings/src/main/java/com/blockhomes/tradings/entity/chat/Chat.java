@@ -1,5 +1,6 @@
 package com.blockhomes.tradings.entity.chat;
 
+import com.blockhomes.tradings.dto.chat.MessageType;
 import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.common.Image;
 import com.blockhomes.tradings.entity.wallet.Wallet;
@@ -42,12 +43,18 @@ public class Chat extends BaseEntity {
     @Column(name = "message", nullable = false, length = 500)
     private String message;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "message_type", nullable = false)
+    private MessageType messageType;
+
     @Builder
-    public Chat(ChatRoom chatRoom, Wallet wallet, Image image, String message) {
+    public Chat(ChatRoom chatRoom, Wallet wallet, Image image, String message, MessageType messageType) {
         this.chatRoom = chatRoom;
         this.wallet = wallet;
         this.image = image;
         this.message = message;
+        this.messageType = messageType;
     }
 
 }

@@ -19,6 +19,7 @@ public class ChatRes {
     private Integer messageType;
     private String image;
     private Integer contractStep;
+    private String message;
     private LocalDateTime createdAt;
 
     @Builder
@@ -30,6 +31,7 @@ public class ChatRes {
         MessageType messageType,
         String image,
         ContractStep contractStep,
+        String message,
         LocalDateTime createdAt
     ) {
         this.chatNo = chatNo;
@@ -39,6 +41,7 @@ public class ChatRes {
         this.messageType = MessageType.enumToValue(messageType);
         this.image = image;
         this.contractStep = ContractStep.enumToValue(contractStep);
+        this.message = message;
         this.createdAt = createdAt;
     }
 
