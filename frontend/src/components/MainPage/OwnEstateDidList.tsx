@@ -2,13 +2,12 @@ import * as o from '@components/MainPage/style/OwnEstateDidListStyle'
 import CustomCarousel from '@components/MainPage/CustomCarousel'
 import { useEffect, useState } from 'react'
 import { useGetAllVCofUser } from '@/abi/ownershipVCRegistry/getAllVCofUser'
-import EmptyEstateDidCard from '@components/CheckDidPage/EmptyEstateDidCard'
 import EstateDidCard from '@common/EstateDidCard'
 
-const OwnEstateDidList = (currentUser) => {
+const OwnEstateDidList = ({ currentUser }) => {
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0)
   const [cards, setCards] = useState([])
-  const { data: userVCArrayData } = useGetAllVCofUser(currentUser.currentUser.walletAddress)
+  const { data: userVCArrayData } = useGetAllVCofUser(currentUser.walletAddress)
 
   useEffect(() => {
     if (userVCArrayData) {
@@ -19,19 +18,20 @@ const OwnEstateDidList = (currentUser) => {
             index={index}
             currentCenterIndex={currentCenterIndex}
             realEstateDID={realEstateDID}
+            currentUser={currentUser}
           />
         ),
       }))
 
-      newCards.push({
-        key: newCards.length,
-        content: (
-          <EmptyEstateDidCard
-            index={newCards.length}
-            currentCenterIndex={currentCenterIndex}
-          />
-        ),
-      })
+      // newCards.push({
+      //   key: newCards.length,
+      //   content: (
+      //     <EmptyEstateDidCard
+      //       index={newCards.length}
+      //       currentCenterIndex={currentCenterIndex}
+      //     />
+      //   ),
+      // })
 
       setCards(newCards)
     }

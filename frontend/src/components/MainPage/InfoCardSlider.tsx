@@ -16,7 +16,7 @@ const InfoCardSlider = () => {
     swipeToSlide: true,
     arrows: false,
     autoplay: true,
-    dots: true,
+    dots: false,
   }
 
   return (
