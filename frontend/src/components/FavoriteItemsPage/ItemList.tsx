@@ -85,7 +85,7 @@ const ItemList = () => {
       {/* <useLoginStatus /> */}
       {data.likedItems.length !== 0 ? (
         <i.ItemListWrapper>
-          <i.EditContainer>
+          {/* <i.EditContainer>
             {editActive ? (
               <div className="disabled">
                 <div onClick={toggleEdit}>취소</div>
@@ -99,7 +99,7 @@ const ItemList = () => {
                 편집
               </div>
             )}
-          </i.EditContainer>
+          </i.EditContainer> */}
           <i.ItemContainer>
             {data.likedItems.map((item, index) => (
               <i.selectedItemContainer key={index}>
