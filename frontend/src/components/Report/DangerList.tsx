@@ -1,7 +1,7 @@
 import DangerDetail from './DangerDetail'
 import { DangerListContainer } from './style/DangerListStyle'
 
-const DangerList = () => {
+const DangerList = ({ checkList }) => {
   return (
     <DangerListContainer>
       <div className="title-container">
@@ -26,11 +26,11 @@ const DangerList = () => {
         </svg>
         &nbsp;&nbsp;해당 매물의 위험 요소는 무엇일까요?
       </div>
-      <DangerDetail isDanger={true} dangerIndex={0} />
-      <DangerDetail isDanger={false} dangerIndex={1} />
-      <DangerDetail isDanger={true} dangerIndex={2} />
-      <DangerDetail isDanger={false} dangerIndex={3} />
-      <DangerDetail isDanger={true} dangerIndex={4} />
+      <DangerDetail isDanger={checkList[0]} dangerIndex={0} />
+      <DangerDetail isDanger={checkList[1]} dangerIndex={1} />
+      <DangerDetail isDanger={checkList[2]} dangerIndex={2} />
+      <DangerDetail isDanger={checkList[3]} dangerIndex={3} />
+      <DangerDetail isDanger={checkList[4]} dangerIndex={4} />
     </DangerListContainer>
   )
 }

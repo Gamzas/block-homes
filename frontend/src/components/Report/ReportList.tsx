@@ -2,14 +2,144 @@ import ReportSummary from './ReportSummary'
 import DepositGraph from './DepositGraph'
 import DepositList from './DepositList'
 import DangerList from './DangerList'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Joyride, { STATUS, Step } from 'react-joyride'
+import { getLoanInfo } from '@/abi/Bank/getLoanInfo'
+import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
+import { useGetDetailItem } from '@/apis/itemApi'
+import WalletAddress from '../MyPage/WalletAddress'
+import { useParams } from 'react-router-dom'
+import { useAtomValue } from 'jotai'
+import { userAtom } from '@/stores/atoms/userStore'
 
 type ExtendedStep = Step & {
   placement: 'top' | 'bottom' | 'left' | 'right' | 'auto' | 'center'
 }
 
 const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
+  const currentUser = useAtomValue(userAtom)
+  console.log('1.currentUser', currentUser)
+  console.log('1.currentUser', currentUser.walletAddress)
+  // const walletAddress = '0xed739565d59219a4bdac5a958a803ec4bdd07b45'
+
+  // URL 파라미터에서 부동산 번호 추출
+  const { estateNo } = useParams()
+  const estateNumber = parseInt(estateNo, 10)
+  console.log('1.estateNumber', estateNumber)
+  const [falseCount, setFalseCount] = useState(0)
+
+  const [checkList, setCheckList] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ])
+
+  // did
+  const [realEstateDid, setRealEstateDid] = useState('')
+  // api 부른정보
+  const [realEstate, setRealEstate] = useState(null)
+  // did 부른정보
+  const [realEstateDidInfo, setRealEstateDidInfo] = useState(null)
+  // 빚 정보
+  const [loanInfo, setLoanInfo] = useState(null)
+  console.log('loanInfo', loanInfo)
+
+  const fetchLoanInfo = async () => {
+    try {
+      const info = await getLoanInfo(realEstateDid)
+      setLoanInfo(info)
+      console.log('info', info)
+    } catch (error) {
+      console.error('대출 정보 조회 중 오류 발생:', error)
+    }
+  }
+
+  const { data: itemDetails } = useGetDetailItem(
+    estateNumber,
+    currentUser.walletAddress,
+  )
+  const { data: didestate } = useGetRealEstateInfo(realEstateDid)
+  console.log('itemDetails', itemDetails)
+  console.log('realEstateDid', realEstateDid)
+  console.log('realEstate', realEstate)
+  console.log('realEstateDidInfo', realEstateDidInfo)
+
+  useEffect(() => {
+    if (itemDetails && itemDetails.realEstateDID) {
+      setRealEstateDid(itemDetails.realEstateDID)
+      setRealEstate(itemDetails)
+    }
+    console.log(realEstate)
+  }, [itemDetails])
+
+  useEffect(() => {
+    if (didestate) {
+      setRealEstateDidInfo(didestate)
+      fetchLoanInfo()
+    }
+    console.log('realEstateDidInfo', realEstateDidInfo)
+  }, [didestate])
+
+  // useEffect(() => {
+  //   if (realEstateDidInfo?.isViolated) {
+  //     let copy = [...checkList]
+  //     copy[1] = false
+  //     setCheckList(copy)
+  //   }
+
+  //   if (realEstateDidInfo?.isNotPermitted) {
+  //     let copy = [...checkList]
+  //     copy[2] = false
+  //     setCheckList(copy)
+  //   }
+
+  //   if (loanInfo?.pendingLoanAmount !== '0') {
+  //     let copy = [...checkList]
+  //     copy[3] = false
+  //     setCheckList(copy)
+  //   }
+
+  //   if (realEstateDidInfo?.purpose !== '주거용') {
+  //     let copy = [...checkList]
+  //     copy[4] = false
+  //     setCheckList(copy)
+  //   }
+  //   console.log('checkList', checkList)
+  // }, [realEstateDidInfo, loanInfo])
+
+  useEffect(() => {
+    // 현재 상태를 복사합니다.
+    let copy = [...checkList]
+
+    if (realEstateDidInfo?.isViolated) {
+      copy[1] = true
+    }
+
+    if (realEstateDidInfo?.isNotPermitted) {
+      copy[2] = true
+    }
+
+    if (loanInfo?.pendingLoanAmount !== '0') {
+      copy[3] = true
+    }
+
+    if (realEstateDidInfo?.purpose !== '주거용') {
+      copy[4] = true
+    }
+
+    // 모든 조건을 검사한 후 한 번에 상태를 업데이트합니다.
+    setCheckList(copy)
+    console.log('Updated checkList:', copy)
+  }, [realEstateDidInfo, loanInfo])
+
+  useEffect(() => {
+    let newFalseCount = checkList.filter(item => !item).length
+    setFalseCount(newFalseCount)
+    console.log('Updated checkList:', checkList)
+    console.log('Number of false items:', newFalseCount)
+  }, [checkList])
   const [run, setRun] = useState(false)
 
   const handleGuide = () => {
@@ -140,7 +270,7 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
       </div>
       <div style={{ height: '1rem' }}></div>
       <div className="report-summary" style={{ width: '90%' }}>
-        <ReportSummary />
+        <ReportSummary falseCount={falseCount} />
       </div>
       <div style={{ height: '1rem' }}></div>
       <div className="deposit-graph" style={{ width: '90%' }}>
@@ -148,14 +278,14 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
       </div>
       <div style={{ height: '1rem' }}></div>
       <div className="deposit-list" style={{ width: '90%' }}>
-        <DepositList></DepositList>
+        <DepositList price={realEstate?.price}></DepositList>
       </div>
       <div style={{ height: '1rem' }}></div>
       <div
         className="danger-list"
         style={{ width: '90%', marginBottom: '13rem' }}
       >
-        <DangerList></DangerList>
+        <DangerList checkList={checkList}></DangerList>
       </div>
     </>
   )
