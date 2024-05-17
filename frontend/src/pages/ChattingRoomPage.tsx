@@ -46,13 +46,14 @@ const ChattingRoomPage = () => {
     const SockJs = SockJS(API_BASE_URL + '/ws/chat')
     client.current = new Client({
       webSocketFactory: () => SockJs,
-      debug: str => console.log(str),
+      // debug: str => console.log(str),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: () => {
         client.current?.subscribe(`/pub/chat.talk.${chatRoomNo}`, msg => {
           const receivedMessage = JSON.parse(msg.body)
+          console.log('받은 메세지:', receivedMessage)
           setMessages(prevMessages => [
             ...prevMessages,
             {
@@ -70,7 +71,7 @@ const ChattingRoomPage = () => {
           scrollToBottom()
         })
       },
-      onStompError: frame => console.log(frame.headers.message),
+      onStompError: frame => console.log('STOMP Error:', frame.headers.message),
     })
     client.current?.activate()
   }
@@ -84,6 +85,7 @@ const ChattingRoomPage = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['fetchChatRoomDetail', chatRoomNumber],
     queryFn: () => fetchChatRoomDetail(chatRoomNumber),
+    enabled: !!chatRoomNumber,
   })
 
   useEffect(() => {
@@ -96,13 +98,15 @@ const ChattingRoomPage = () => {
 
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
+      console.log('Sending message:', newMessage.message)
+      console.log('Destination:', `/sub/chat.enter.${chatRoomNo}`)
       client.current!.publish({
         destination: `/sub/chat.talk.${chatRoomNo}`,
         body: JSON.stringify({
           chatRoomNo: chatRoomNo,
           senderWalletAddress: user.walletAddress,
           message: newMessage.message,
-          type: 2,
+          messageType: 2,
         }),
       })
       setNewMessage(defaultMessage)
@@ -114,6 +118,10 @@ const ChattingRoomPage = () => {
     scrollToBottom()
   }, [messages])
 
+  useEffect(() => {
+    console.log('Updated messages useEffect:', messages)
+  }, [messages])
+
   return (
     <c.ChattingRoomPageContainer>
       <Header
@@ -123,21 +131,20 @@ const ChattingRoomPage = () => {
       />
       <c.ChattingHeader>
         <div className="image-container">
-          <img src={data.representativeImage} />
+          <img src={data?.representativeImage} />
         </div>
         <c.RightContainer>
-          <div className="address-container">{data.realEstateAddress}</div>
+          <div className="address-container">{data?.realEstateAddress}</div>
           <div className="transaction-type-container">
             {' '}
-            {data.transactionType}
+            {data?.transactionType}
           </div>
-          <div className="price-container">{data.price}</div>
+          <div className="price-container">{data?.price}</div>
 
           <c.ButtonContainer>
             <button
               className="chatting-header-button"
-              // onClick={() => navigate(`/report/${data.itemNo}`)}
-              onClick={() => navigate(`/report/3`)}
+              onClick={() => navigate(`/report/${data.itemNo}`)}
             >
               레포트
             </button>
