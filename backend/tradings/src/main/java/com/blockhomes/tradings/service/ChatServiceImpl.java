@@ -122,13 +122,13 @@ public class ChatServiceImpl implements ChatService {
 
         }
 
-        Chat chat = Chat.builder()
+        Chat chat = chatRepository.save(Chat.builder()
             .chatRoom(chatRoom)
             .message(chatPayload.getMessage())
             .messageType(MessageType.TALK)
             .wallet(wallet)
             .image(image)
-            .build();
+            .build());
 
         log.info("talkUser : {}", chat);
 
