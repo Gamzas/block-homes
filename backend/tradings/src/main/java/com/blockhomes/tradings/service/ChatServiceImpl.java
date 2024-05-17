@@ -71,6 +71,8 @@ public class ChatServiceImpl implements ChatService {
             .messageType(MessageType.ENTER)
             .build());
 
+        log.info("enterUser : {}", chat);
+
         return ChatRes.builder()
             .chatNo(chat.getChatNo())
             .chatRoomNo(chat.getChatRoom().getChatRoomNo())
@@ -131,6 +133,8 @@ public class ChatServiceImpl implements ChatService {
             .wallet(wallet)
             .image(image)
             .build();
+
+        log.info("talkUser : {}", chat);
 
         if (Objects.nonNull(image)) {
             return ChatRes.builder()
