@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 const MainPage = () => {
   const [currentUserType, setCurrentUserType] = useAtom(userTypeAtom)
   const [currentUser, setCurrentUser] = useAtom(userAtom)
+
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser')
     const currentUserData = currentUser ? JSON.parse(currentUser) : null

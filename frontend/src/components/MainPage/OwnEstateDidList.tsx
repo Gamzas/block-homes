@@ -11,17 +11,19 @@ const OwnEstateDidList = ({ currentUser }) => {
 
   useEffect(() => {
     if (userVCArrayData) {
-      const newCards = userVCArrayData.map((realEstateDID: string, index: number) => ({
-        key: index,
-        content: (
-          <EstateDidCard
-            index={index}
-            currentCenterIndex={currentCenterIndex}
-            realEstateDID={realEstateDID}
-            currentUser={currentUser}
-          />
-        ),
-      }))
+      const newCards = userVCArrayData.map(
+        (realEstateDID: string, index: number) => ({
+          key: index,
+          content: (
+            <EstateDidCard
+              index={index}
+              currentCenterIndex={currentCenterIndex}
+              realEstateDID={realEstateDID}
+              currentUser={currentUser}
+            />
+          ),
+        }),
+      )
 
       // newCards.push({
       //   key: newCards.length,
@@ -35,7 +37,7 @@ const OwnEstateDidList = ({ currentUser }) => {
 
       setCards(newCards)
     }
-  }, [userVCArrayData])
+  }, [userVCArrayData, currentCenterIndex])
 
   const handleCenterChange = (newIndex: number) => {
     setCurrentCenterIndex(newIndex)

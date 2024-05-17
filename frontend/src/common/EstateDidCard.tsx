@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import * as e from '@common/style/EstateDidCardStyle'
 import { CustomButtonStyle } from './style/CustomButtonStyle'
@@ -6,36 +6,18 @@ import { useNavigate } from 'react-router-dom'
 import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
 import { getRealEstateType } from '@/utils/estateTransferUtil'
 import { BigNumber } from 'ethers'
+import { formatDateToKoreanTime } from '@/utils/formatDateToKoreanTime'
 
 const EstateDidCard = ({
-                         index,
-                         currentCenterIndex,
-                         showRegistrationButton = true,
-                         realEstateDID,
-                         currentUser,
-                       }) => {
+  index,
+  currentCenterIndex,
+  showRegistrationButton = true,
+  realEstateDID,
+  currentUser,
+}) => {
   const [isFlipped, setIsFlipped] = useState(false)
   const navigate = useNavigate()
   const { data: realEstateInfoData } = useGetRealEstateInfo(realEstateDID)
-
-  const formatDateToKoreanTime = (bigNumberDate) => {
-    // BigNumber를 숫자로 변환 (밀리초 단위)
-    const unixTimestamp = BigNumber.from(bigNumberDate).toNumber()
-
-    // 유닉스 타임스탬프를 밀리초 단위로 변환하여 Date 객체 생성
-    const date = new Date(unixTimestamp * 1000)
-
-    // 한국 시간대 포맷 설정
-    const koreanFormatter = new Intl.DateTimeFormat('ko-KR', {
-      timeZone: 'Asia/Seoul',
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-    })
-
-    // 한국 시간으로 포맷된 문자열 생성
-    return koreanFormatter.format(date)
-  }
 
   const toggleCard = () => {
     if (index === currentCenterIndex) {
@@ -44,7 +26,12 @@ const EstateDidCard = ({
   }
   const handleButtonClick = e => {
     e.stopPropagation()
-    navigate('estate-registration')
+    navigate('estate-registration', {
+      state: {
+        realEstateDID: realEstateDID,
+        realEstateInfoData: { ...realEstateInfoData },
+      },
+    })
   }
 
   const springStyleFront = useSpring({
@@ -68,7 +55,7 @@ const EstateDidCard = ({
 
   return (
     <>
-      {realEstateInfoData && currentUser &&
+      {realEstateInfoData && currentUser && (
         <>
           <animated.div style={springStyleFront} onClick={toggleCard}>
             <e.EstateDidCardContainer>
@@ -119,17 +106,21 @@ const EstateDidCard = ({
                 </e.InfoElement>
                 <e.InfoElement>
                   <div className="element-title">분류</div>
-                  <div className="element-content">{
-                    getRealEstateType(realEstateInfoData.estateType)
-                  }</div>
+                  <div className="element-content">
+                    {getRealEstateType(realEstateInfoData.estateType)}
+                  </div>
                 </e.InfoElement>
                 <e.InfoElement>
                   <div className="element-title"> 주소</div>
-                  <div className="element-content">{realEstateInfoData.roadNameAddress}</div>
+                  <div className="element-content">
+                    {realEstateInfoData.roadNameAddress}
+                  </div>
                 </e.InfoElement>
                 <e.InfoElement>
                   <div className="element-title">등록일자</div>
-                  <div className="element-content">{formatDateToKoreanTime(realEstateInfoData.date)}</div>
+                  <div className="element-content">
+                    {formatDateToKoreanTime(realEstateInfoData.date)}
+                  </div>
                 </e.InfoElement>
               </e.BottomContainer>
             </e.EstateDidCardContainer>
@@ -143,12 +134,13 @@ const EstateDidCard = ({
               <e.BackContainer>
                 <e.BackInfoElement>
                   <div className="element-title">건물명</div>
-                  <div className="element-content">{realEstateInfoData.buildingName}</div>
+                  <div className="element-content">
+                    {realEstateInfoData.buildingName}
+                  </div>
                 </e.BackInfoElement>
                 <e.BackInfoElement>
                   <div className="element-title">동 / 호수</div>
-                  <div
-                    className="element-content">{`${realEstateInfoData.buildingNumber} 동 ${realEstateInfoData.roomNumber} 호`}</div>
+                  <div className="element-content">{`${realEstateInfoData.buildingNumber} 동 ${realEstateInfoData.roomNumber} 호`}</div>
                 </e.BackInfoElement>
                 <e.BackInfoElement>
                   <div className="element-title">위법</div>
@@ -160,13 +152,11 @@ const EstateDidCard = ({
                 </e.BackInfoElement>
                 <e.BackInfoElement>
                   <div className="element-title">면적</div>
-                  <div
-                    className="element-content">{`${realEstateInfoData.area} 평`}</div>
+                  <div className="element-content">{`${realEstateInfoData.area} 평`}</div>
                 </e.BackInfoElement>
                 <e.BackInfoElement>
                   <div className="element-title">용도</div>
-                  <div
-                    className="element-content">{`${realEstateInfoData.purpose}`}</div>
+                  <div className="element-content">{`${realEstateInfoData.purpose}`}</div>
                 </e.BackInfoElement>
                 {/* 등기부 건축물 대장 구현 시 주석 해제 */}
 
@@ -188,7 +178,8 @@ const EstateDidCard = ({
                         backgroundColor: '#FFF',
                         fontSize: '0.6rem',
                         color: 'black',
-                        boxShadow: '0px 2.721px 2.721px 0px rgba(0, 0, 0, 0.25)',
+                        boxShadow:
+                          '0px 2.721px 2.721px 0px rgba(0, 0, 0, 0.25)',
                       }}
                     >
                       {' '}
@@ -229,7 +220,7 @@ const EstateDidCard = ({
             </e.EstateDidCardContainer>
           </animated.div>
         </>
-      }
+      )}
     </>
   )
 }
