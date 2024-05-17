@@ -6,7 +6,7 @@ export const StepContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 10;
   color: black;
 
   .step-div {
@@ -25,18 +25,19 @@ export const StepContainer = styled.div`
     margin: 0 8px;
   }
   @keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
   }
-  50% {
-    transform: scale(1.1); 
-    opacity: 0.7;
-  }
-}
 
   .pulse-animation {
-    animation: pulse 1.5s infinite; 
+    animation: pulse 1.5s infinite;
   }
 `
 
