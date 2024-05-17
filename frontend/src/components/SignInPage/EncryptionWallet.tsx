@@ -8,6 +8,9 @@ import { ethers } from 'ethers'
 import { useNavigate } from 'react-router-dom'
 import IsLoading from '@common/IsLoading'
 import SecurityLock from '@assets/lotties/SecurityLock.json'
+import FindEmployee from '@assets/lotties/FindEmployee.json'
+import DocumentSetting from '@assets/lotties/DocumentSetting.json'
+import CloudWallet from '@assets/lotties/CloudWallet.json'
 import { useClaimCredential } from '@/abi/citizenshipVCRegistry/claimCredential'
 
 const EncryptionWallet = ({
@@ -35,32 +38,32 @@ const EncryptionWallet = ({
     if (isPasswordMatch) {
       try {
         // Wallet 암호화 시도
-        setIsLoading(1)
+        setIsLoading(['입력하신 비밀번호로\n지갑을 **암호화**하는 중입니다.', SecurityLock])
         const encryptedWallet = await wallet.encrypt(password)
         setPassword('')
         setConfirmPassword('')
         // DID 문서 생성 시도
-        setIsLoading(2)
+        setIsLoading(['사용자의 디지털 신분증\nDID를 **발급**하는 중입니다.', FindEmployee])
         createDIDDocumentMutate(wallet, {
           onError: error => {
             setIsLoading(null)
-            console.error('DID 문서 생성 실패:', error)
-            alert('DID 문서 생성에 실패했습니다. 다시 시도해주세요.')
+            console.error('DID 발급 실패:', error)
+            alert('디지털 신분증 발급 실패했습니다. 다시 시도해주세요.')
             return
           },
         })
-        setIsLoading(3)
+        setIsLoading(['사용자의 디지털 증명서\nVC를 **발급**하는 중입니다.', DocumentSetting])
         claimCredentialMutate({ walletAddress: wallet.address }, {
           onError: error => {
             setIsLoading(null)
             console.error('VC 발급 실패:', error)
-            alert('VC 발급에 실패했습니다. 다시 시도해주세요.')
+            alert('디지털 증명서 발급에 실패했습니다. 다시 시도해주세요.')
             return
           },
         })
 
         // Wallet 정보 서버에 등록 시도
-        setIsLoading(4)
+        setIsLoading(['암호화된 지갑을\n**저장**하는 중입니다.', CloudWallet])
         postWalletMutate(
           {
             walletAddress: wallet.address,
@@ -130,12 +133,7 @@ const EncryptionWallet = ({
       >
         지갑 암호화
       </SignInButton>
-      {isLoading && (
-        <IsLoading
-          textProps={'입력하신 비밀번호로\n지갑을 **암호화**하는 중입니다.'}
-          lottieProps={SecurityLock}
-        />
-      )}
+      {isLoading && <IsLoading textProps={isLoading[0]} lottieProps={isLoading[1]} />}
     </>
   )
 }
