@@ -204,6 +204,7 @@ const DetailEstate = ({ detailEstateProps, setDetailEstateProps }) => {
         <d.DetailEstateOptions>
           {options.map((option, index) => (
             <d.DetailEstateOption
+              key={index}
               $isSelected={selectedOptions[index]}
               onClick={() =>
                 handleAdditionalOptionCategoryListButtonClick(index)
