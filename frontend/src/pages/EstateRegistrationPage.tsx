@@ -1,29 +1,42 @@
 import * as r from '@pages/style/EstateRegistrationPageStyle'
 import Header from '@common/Header'
 import AccordionGroup from '@components/EstateRegistrationPage/AccordionGroup'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import EstateRegistrationComplete from '@components/EstateRegistrationPage/EstateRegistrationComplete'
 import { usePostItemRegister } from '@apis/itemApi'
 import { useAtomValue } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
+import { useLocation } from 'react-router-dom'
+import { getCoord } from '@/utils/locationUtil'
 
 const EstateRegistrationPage = () => {
   const buttonNames = ['다음', '매물 등록하기']
+  const location = useLocation()
+  const realEstateDID = location.state?.realEstateDID
+  const realEstateInfoData = location.state?.realEstateInfoData
   const userInfo = useAtomValue(userAtom)
   const postParams = {
     ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
-    realEstateDID: 'did:klay:0x5ad96781f90dfssd48683e5616a51e665e3f68',
-    latitude: 35.191939946619,
-    longitude: 126.82628755627,
-    reportRank: 3,
+    realEstateDID: 'did:klay:0x0ewfwefqewqfew0',
+    latitude: 35.1900186143141,
+    longitude: 126.813377377676,
+    reportRank: 1,
   }
   const [openIndex, setOpenIndex] = useState(0)
   const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]) // 각 아코디언의 열림 상태 초기화
   const [isComplete, setIsComplete] = useState(false)
+  const [coords, setCoords] = useState({ latitude: 0, longitude: 0 })
+  const [postParams, setPostParams] = useState({
+    ownerWalletDID: undefined,
+    realEstateDID: undefined,
+    latitude: undefined,
+    longitude: undefined,
+    reportRank: undefined,
+  })
   const [checkEstateProps, setCheckEstateProps] = useState({
-    roadNameAddress: '광주광역시 광산구 수완로73번길 40',
+    roadNameAddress: '광주광역시 광산구 장신로 20번길 13-12',
     realEstateType: 1,
-    area: 60,
+    area: 33,
   })
   const [detailRegistrationProps, setDetailRegistrationProps] = useState({
     transactionType: undefined,
@@ -49,8 +62,18 @@ const EstateRegistrationPage = () => {
     roomImages: [],
     kitchenToiletImages: [],
   })
-
+  const [isNoData, setIsNoData] = useState(true)
   const { mutate: postItemRegisterMutate } = usePostItemRegister()
+
+  const handleAddressSearch = async (address: string) => {
+    try {
+      const result = await getCoord(address)
+      setCoords(result)
+    } catch (error) {
+      console.error(error.message)
+      alert('좌표를 가져오는데 실패했습니다.')
+    }
+  }
 
   const handleOpenIndex = () => {
     const newOpenIndex = openIndex + 1
@@ -66,9 +89,11 @@ const EstateRegistrationPage = () => {
     const formData = new FormData()
     const reqData = {
       ...postParams,
-      ...checkEstateProps,
       ...detailRegistrationProps,
       ...detailEstateProps,
+      roadNameAddress: checkEstateProps.roadNameAddress,
+      realEstateType: checkEstateProps.realEstateType,
+      area: checkEstateProps.area,
     }
     const blob = new Blob([JSON.stringify(reqData)], {
       type: 'application/json',
@@ -127,38 +152,65 @@ const EstateRegistrationPage = () => {
     }
   }
 
+  useEffect(() => {
+    if (realEstateInfoData) {
+      handleAddressSearch(realEstateInfoData.roadNameAddress).then(() =>
+        console.log('좌표 가져오기 성공!'),
+      )
+      setPostParams({
+        ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
+        realEstateDID: realEstateDID,
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        reportRank: 1,
+      })
+      setCheckEstateProps({
+        roadNameAddress: realEstateInfoData.roadNameAddress,
+        realEstateType: realEstateInfoData.estateType,
+        area: realEstateInfoData.area,
+        date: realEstateInfoData.date,
+        name: userInfo.name,
+      })
+      setIsNoData(isDataFilled(checkEstateProps))
+    }
+  }, [realEstateInfoData, userInfo])
+
   return (
     <r.EstateRegistrationPageContainer>
-      <Header title={'매물 등록'} isSearch={false} rightIconSrc={null} />
-      {!isComplete ? (
+      {!isNoData && (
         <>
-          <r.AccodionWrapper>
-            <AccordionGroup
-              maxOpenIndex={openIndex}
-              isOpenArray={isOpenArray}
-              setIsOpenArray={setIsOpenArray}
-              checkEstateProps={checkEstateProps}
-              detailRegistrationProps={detailRegistrationProps}
-              setDetailRegistrationProps={setDetailRegistrationProps}
-              detailEstateProps={detailEstateProps}
-              setDetailEstateProps={setDetailEstateProps}
-              photoRegistrationProps={photoRegistrationProps}
-              setPhotoRegistrationProps={setPhotoRegistrationProps}
-            />
-          </r.AccodionWrapper>
-          <r.NextButton
-            onClick={handleNextButtonClick}
-            disabled={
-              (openIndex === 1 && !isDataFilled(detailRegistrationProps)) ||
-              (openIndex === 2 && !isDataFilled(detailEstateProps)) ||
-              (openIndex === 3 && !isDataFilled(photoRegistrationProps))
-            }
-          >
-            {openIndex === 3 ? buttonNames[1] : buttonNames[0]}
-          </r.NextButton>
+          <Header title={'매물 등록'} isSearch={false} rightIconSrc={null} />
+          {!isComplete ? (
+            <>
+              <r.AccodionWrapper>
+                <AccordionGroup
+                  maxOpenIndex={openIndex}
+                  isOpenArray={isOpenArray}
+                  setIsOpenArray={setIsOpenArray}
+                  checkEstateProps={checkEstateProps}
+                  detailRegistrationProps={detailRegistrationProps}
+                  setDetailRegistrationProps={setDetailRegistrationProps}
+                  detailEstateProps={detailEstateProps}
+                  setDetailEstateProps={setDetailEstateProps}
+                  photoRegistrationProps={photoRegistrationProps}
+                  setPhotoRegistrationProps={setPhotoRegistrationProps}
+                />
+              </r.AccodionWrapper>
+              <r.NextButton
+                onClick={handleNextButtonClick}
+                disabled={
+                  (openIndex === 1 && !isDataFilled(detailRegistrationProps)) ||
+                  (openIndex === 2 && !isDataFilled(detailEstateProps)) ||
+                  (openIndex === 3 && !isDataFilled(photoRegistrationProps))
+                }
+              >
+                {openIndex === 3 ? buttonNames[1] : buttonNames[0]}
+              </r.NextButton>
+            </>
+          ) : (
+            <EstateRegistrationComplete />
+          )}
         </>
-      ) : (
-        <EstateRegistrationComplete />
       )}
     </r.EstateRegistrationPageContainer>
   )
