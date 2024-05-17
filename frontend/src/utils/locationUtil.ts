@@ -1,3 +1,4 @@
+import { ReqCoordType } from '@/types/components/estateListType'
 import {
   GeocoderResult,
   KakaoMapsStatus,
@@ -76,3 +77,49 @@ export const getCoord = (
   }, []);
 
  */
+
+// 두 좌표간의 거리를 계산하는 함수
+export const calculateDistance = (
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+): number => {
+  const R = 6371 // 지구의 반경 (km)
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLon = ((lon2 - lon1) * Math.PI) / 180
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  const distance = R * c
+  return distance
+}
+
+export const calculateBoundaries = (
+  lat: number,
+  lng: number,
+  radiusKm: number,
+): ReqCoordType => {
+  const earthRadiusKm = 6371 // 지구 반지름 (km)
+
+  const deltaLat = (radiusKm / earthRadiusKm) * (180 / Math.PI)
+  const deltaLng =
+    (radiusKm / (earthRadiusKm * Math.cos((Math.PI * lat) / 180))) *
+    (180 / Math.PI)
+
+  const northEastLatitude = lat + deltaLat
+  const northEastLongitude = lng + deltaLng
+  const southWestLatitude = lat - deltaLat
+  const southWestLongitude = lng - deltaLng
+
+  return {
+    northEastLatitude,
+    northEastLongitude,
+    southWestLatitude,
+    southWestLongitude,
+  }
+}
