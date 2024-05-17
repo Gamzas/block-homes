@@ -1,8 +1,6 @@
-import { atomWithStorage } from 'jotai/utils'
 import { atom } from 'jotai'
-import { CoordType, EstateItem } from '@/types/components/estateListType'
+import { CoordType, FilterType } from '@/types/components/estateListType'
 import { EstateItemListType, EstateItemResType } from '@/types/api/itemType'
-import { itemList } from '../../utils/item'
 
 export const filterAtom = atom<boolean>(false) // false 필터 닫힘, true 필터 열림
 
@@ -37,3 +35,14 @@ export const estateItemListAtom = atom<EstateItemResType | null>(null)
 
 // 선택된 부동산 매물
 export const selectedItemAtom = atom<EstateItemListType | 'not'>('not')
+
+// 부동산 조회 위한 필터 항목
+export const estateFilterAtom = atom<FilterType>({
+  // realEstateType: 4,
+  reportRank: 0,
+  transactionType: 0,
+  minPrice: 0,
+  maxPrice: 0,
+  minPyeong: 0,
+  maxPyeong: 0,
+})

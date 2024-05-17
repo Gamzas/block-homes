@@ -12,18 +12,18 @@ const EstateRegistrationPage = () => {
   const userInfo = useAtomValue(userAtom)
   const postParams = {
     ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
-    realEstateDID: 'did:klay:0x0ewfwefqewqfew0',
-    latitude: 35.1900186143141,
-    longitude: 126.813377377676,
-    reportRank: 1,
+    realEstateDID: 'did:klay:0x5ad96781f90dfssd48683e5616a51e665e3f68',
+    latitude: 35.191939946619,
+    longitude: 126.82628755627,
+    reportRank: 3,
   }
   const [openIndex, setOpenIndex] = useState(0)
   const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]) // 각 아코디언의 열림 상태 초기화
   const [isComplete, setIsComplete] = useState(false)
   const [checkEstateProps, setCheckEstateProps] = useState({
-    roadNameAddress: '광주광역시 광산구 장신로 20번길 13-12',
+    roadNameAddress: '광주광역시 광산구 수완로73번길 40',
     realEstateType: 1,
-    area: 33,
+    area: 60,
   })
   const [detailRegistrationProps, setDetailRegistrationProps] = useState({
     transactionType: undefined,
@@ -79,12 +79,12 @@ const EstateRegistrationPage = () => {
       formData.append('mainImage', photoRegistrationProps.mainImage)
     }
     if (Array.isArray(photoRegistrationProps.roomImages)) {
-      photoRegistrationProps.roomImages.forEach((file) => {
+      photoRegistrationProps.roomImages.forEach(file => {
         formData.append(`roomImages`, file)
       })
     }
     if (Array.isArray(photoRegistrationProps.kitchenToiletImages)) {
-      photoRegistrationProps.kitchenToiletImages.forEach((file) => {
+      photoRegistrationProps.kitchenToiletImages.forEach(file => {
         formData.append(`kitchenToiletImages`, file)
       })
     }

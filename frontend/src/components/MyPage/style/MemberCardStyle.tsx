@@ -6,6 +6,7 @@ export const CardContainer = styled.div`
   background: rgba(177, 137, 255, 0.26);
   position: relative;
   overflow: hidden;
+  background-color: #ebe3ff;
   .logo-img {
     width: 5.10313rem;
     height: 2.67288rem;

@@ -89,3 +89,17 @@ export interface ImageUrlType {
   imageUrl: string
   itemImageCategory: number
 }
+
+export interface ItemListResType {
+  northEastLatitude: number
+  northEastLongitude: number
+  southWestLatitude: number
+  southWestLongitude: number
+  realEstateType: number
+  reportRank: number
+  transactionType: number
+  minPrice: number
+  maxPrice: number
+  minPyeong: number
+  maxPyeong: number
+}

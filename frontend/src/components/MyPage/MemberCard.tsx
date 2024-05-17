@@ -17,7 +17,10 @@ const MemberCard = () => {
           />
         </div>
         <div className="user-name">
-          {user.name} <span>님</span>
+          {/* <div>안녕하세요!</div> */}
+          <div>
+            {user.name} <span>님</span>
+          </div>
         </div>
       </c.ProfileContainer>
     </c.CardContainer>

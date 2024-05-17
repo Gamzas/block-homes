@@ -12,6 +12,10 @@ import {
   GetFavoritItemParamsType,
   PostFavoriteDataType,
 } from '@/types/api/itemType'
+import { FilterType, ReqCoordType } from '@/types/components/estateListType'
+
+
+
 
 export const usePostItemRegister = () => {
   return useMutation({
@@ -21,24 +25,20 @@ export const usePostItemRegister = () => {
 }
 
 // 등록 된 매물 조회(필터링 가능)
-export const useGetEstateItems = (category: number) => {
+export const useGetEstateItems = (
+  category: number,
+  filter: FilterType,
+  coord: ReqCoordType,
+) => {
   return useQuery({
     queryKey: ['estateItems'],
     queryFn: async () => {
       try {
         const res = await publicRequest.get(`${API_ESTATE_ITEM}`, {
           params: {
-            northEastLatitude: 35.20793645842205,
-            northEastLongitude: 126.8243731285463,
-            southWestLatitude: 35.167213022923335,
-            southWestLongitude: 126.79021349478826,
+            ...coord,
             realEstateType: category,
-            reportRank: 0,
-            transactionType: 0,
-            minPrice: 0,
-            maxPrice: 0,
-            minPyeong: 0,
-            maxPyeong: 0,
+            ...filter,
           },
         })
         return res.data
@@ -50,6 +50,8 @@ export const useGetEstateItems = (category: number) => {
     },
   })
 }
+
+
 // 매물 상세 조회
 export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
   return useQuery({
