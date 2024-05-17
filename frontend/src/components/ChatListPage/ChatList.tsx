@@ -30,9 +30,10 @@ const ChatList = () => {
   const { data } = useQuery<ChatRoomListType[]>({
     queryKey: ['fetchChatRooms', chatRoomRequestData],
     queryFn: () => fetchChatRooms(chatRoomRequestData!),
+    enabled: !!chatRoomRequestData,
   })
 
-  if (!Array.isArray(data)) {
+  if (data && data.length === 0) {
     return (
       <c.ChatListContainer>
         <NoItems
@@ -46,12 +47,13 @@ const ChatList = () => {
 
   return (
     <c.ChatListContainer>
-      {data.map(ChatRoomData => (
-        <ChatPreviewComponent
-          key={ChatRoomData.chatRoomNum}
-          {...ChatRoomData}
-        />
-      ))}
+      {data &&
+        data.map(ChatRoomData => (
+          <ChatPreviewComponent
+            key={ChatRoomData.chatRoomNo}
+            {...ChatRoomData}
+          />
+        ))}
     </c.ChatListContainer>
   )
 }
