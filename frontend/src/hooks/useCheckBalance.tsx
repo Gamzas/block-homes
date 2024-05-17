@@ -17,7 +17,7 @@ const useCheckBalance = () => {
       const balance = await provider.getBalance(address)
       // 잔액을 Ether 단위로 변환
       const balanceInEther = ethers.utils.formatEther(balance)
-      setBalance(balanceInEther)
+      setBalance((balanceInEther))
     } catch (err) {
       setError('Failed to fetch balance. Please check the address.')
       setBalance(null)
