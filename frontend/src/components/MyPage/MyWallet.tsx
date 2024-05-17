@@ -4,15 +4,21 @@ import { useEffect } from 'react'
 
 const MyWallet = () => {
   const { handleCheckBalance, balance } = useCheckBalance()
+  const roundToTwoDecimalPlaces = (num: number): number => {
+    return parseFloat(num.toFixed(2))
+  }
   useEffect(() => {
     handleCheckBalance()
   }, [handleCheckBalance])
+  const myBalance = roundToTwoDecimalPlaces(Number(balance))
+  console.log(typeof balance)
+  console.log(myBalance)
   return (
     <w.WalletWrapper>
       <w.WalletContainer onClick={handleCheckBalance}>
         <w.BalanceBox>
           <div className="title">나의 지갑 잔액</div>
-          <div className="balance">{balance} ETH</div>
+          <div className="balance">{myBalance} ETH</div>
         </w.BalanceBox>
         <img className="wallet" src="image/image_wallet.png" alt="지갑" />
       </w.WalletContainer>
