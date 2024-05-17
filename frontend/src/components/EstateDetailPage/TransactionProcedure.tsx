@@ -72,16 +72,16 @@ const TransactionProcedure = () => {
           <path
             d="M9.99023 14.995H20.9832M9.99023 17.743H20.9832M20.9832 9.49854L18.2347 20.4915L15.4867 9.49854L12.7388 20.4915L9.99023 9.49854"
             stroke="#845BD3"
-            stroke-width="0.937222"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="0.937222"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M15.4865 28.4281C22.9056 28.4281 28.92 22.4137 28.92 14.9946C28.92 7.57543 22.9056 1.56104 15.4865 1.56104C8.06737 1.56104 2.05298 7.57543 2.05298 14.9946C2.05298 22.4137 8.06737 28.4281 15.4865 28.4281Z"
             stroke="#845BD3"
-            stroke-width="0.937222"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="0.937222"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
         <div className="txt">계약금 납입</div>
