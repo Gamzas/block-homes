@@ -15,7 +15,7 @@ contract LongTermRent {
         uint16 leasePeriod; // 임대 기간 (월 단위)
         uint256 deposit; // 전세금
         string propertyDID; // 부동산의 분산식 식별자
-        uint256 contractDate; // 계약 날짜 (timestamp)
+        string contractDate; // 계약 날짜
         string terms; // 계약의 세부 조건들
     }
 
@@ -47,7 +47,7 @@ contract LongTermRent {
         uint16 _leasePeriod, 
         uint256 _deposit,
         string memory _propertyDID, 
-        uint256 _contractDate,
+        string memory _contractDate,
         string memory _terms) private pure returns (bytes32){
         
         return keccak256(abi.encodePacked(_landlordDID,_tenantDID,_leasePeriod,_deposit,_propertyDID,_contractDate,_terms));
@@ -59,7 +59,7 @@ contract LongTermRent {
         uint16 _leasePeriod,
         uint256 _deposit,
         string memory _propertyDID,
-        uint256 _contractDate,
+        string memory _contractDate,
         string memory _terms,
         bytes32 _r, bytes32 _s, uint8 _v
     ) {
@@ -100,7 +100,6 @@ contract LongTermRent {
     // 임차인이 보증금을 인출
     function withdrawDeposit() public {
         require(msg.sender == tenantAddress, "Only the tenant can withdraw the deposit.");
-        require(block.timestamp >= rentalContract.contractInfo.contractDate + rentalContract.contractInfo.leasePeriod * 30 days, "Lease has not yet expired.");
         tenantAddress.transfer(address(this).balance);
     }
 

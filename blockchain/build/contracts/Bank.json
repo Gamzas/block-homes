@@ -1,0 +1,1252 @@
+{
+  "contractName": "Bank",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "mortgage",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "created",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_target",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_mortgage",
+          "type": "string"
+        }
+      ],
+      "name": "createLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_mortgage",
+          "type": "string"
+        }
+      ],
+      "name": "getLoan",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address payable",
+              "name": "target",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "pendingLoanAmount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "pendingLoanMortgage",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct Bank.Loan",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.21+commit.d9974bed\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"mortgage\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"created\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_target\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_mortgage\",\"type\":\"string\"}],\"name\":\"createLoan\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_mortgage\",\"type\":\"string\"}],\"name\":\"getLoan\",\"outputs\":[{\"components\":[{\"internalType\":\"address payable\",\"name\":\"target\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"pendingLoanAmount\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"pendingLoanMortgage\",\"type\":\"string\"}],\"internalType\":\"struct Bank.Loan\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}]},\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Bank.sol\":\"Bank\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6\",\"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12\",\"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF\"]},\"project:/contracts/Bank.sol\":{\"keccak256\":\"0xcc044d510d6114beee38c9cf6555fe0cd11e5296f4ad73743e348f6c17ce2766\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3132ec5cf835e21ccc73a0be214ec199286f320f095ddd8d0a17cca7e8f427fd\",\"dweb:/ipfs/Qma8W9RhQKdBh181F9SmMk3YKpn7m3apzTmRajfDFckG4U\"]}},\"version\":1}",
+  "bytecode": "0x6080604052346200002d57620000146200003d565b6200001e62000033565b610d8d620002588239610d8d90f35b62000039565b60405190565b5f80fd5b6200004833620000bf565b565b90565b60018060a01b031690565b90565b620000746200006e6200007a926200004a565b62000058565b6200004d565b90565b62000088906200005b565b90565b62000096906200004d565b90565b620000a4906200008b565b9052565b9190620000bd905f6020850194019062000099565b565b80620000e0620000d9620000d35f6200007d565b6200008b565b916200008b565b14620000f357620000f190620001ec565b565b62000123620001025f6200007d565b6200010c62000033565b918291631e4fbdf760e01b835260048301620000a8565b0390fd5b5f1c90565b60018060a01b031690565b620001466200014c9162000127565b6200012c565b90565b6200015b905462000137565b90565b5f1b90565b906200017660018060a01b03916200015e565b9181191691161790565b62000199620001936200019f926200004d565b62000058565b6200004d565b90565b620001ad9062000180565b90565b620001bb90620001a2565b90565b90565b90620001db620001d5620001e392620001b0565b620001be565b825462000163565b9055565b5f0190565b620001f75f6200014f565b62000203825f620001c1565b906200023b620002347f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e093620001b0565b91620001b0565b916200024662000033565b806200025281620001e7565b0390a356fe60806040526004361015610013575b6104d7565b61001d5f3561006c565b80633fbb787114610067578063715018a6146100625780638da5cb5b1461005d578063c47d2586146100585763f2fde38b0361000e576104a4565b610451565b610221565b6101cc565b610186565b60e01c90565b60405190565b5f80fd5b5f80fd5b5f80fd5b60018060a01b031690565b61009890610084565b90565b6100a48161008f565b036100ab57565b5f80fd5b905035906100bc8261009b565b565b90565b6100ca816100be565b036100d157565b5f80fd5b905035906100e2826100c1565b565b5f80fd5b5f80fd5b5f80fd5b909182601f8301121561012a5781359167ffffffffffffffff831161012557602001926001830284011161012057565b6100ec565b6100e8565b6100e4565b9160608383031261017c57610146825f85016100af565b9261015483602083016100d5565b92604082013567ffffffffffffffff81116101775761017392016100f0565b9091565b610080565b61007c565b5f0190565b346101b8576101a261019936600461012f565b92919091610ae2565b6101aa610072565b806101b481610181565b0390f35b610078565b5f9103126101c757565b61007c565b346101fa576101dc3660046101bd565b6101e4610578565b6101ec610072565b806101f681610181565b0390f35b610078565b6102089061008f565b9052565b919061021f905f602085019401906101ff565b565b34610251576102313660046101bd565b61024d61023c610510565b610244610072565b9182918261020c565b0390f35b610078565b5f80fd5b601f801991011690565b634e487b7160e01b5f52604160045260245ffd5b906102829061025a565b810190811067ffffffffffffffff82111761029c57604052565b610264565b906102b46102ad610072565b9283610278565b565b67ffffffffffffffff81116102d4576102d060209161025a565b0190565b610264565b90825f939282370152565b909291926102f96102f4826102b6565b6102a1565b9381855260208501908284011161031557610313926102d9565b565b610256565b9080601f8301121561033857816020610335933591016102e4565b90565b6100e4565b9060208282031261036d575f82013567ffffffffffffffff811161036857610365920161031a565b90565b610080565b61007c565b61037b90610084565b90565b61038790610372565b9052565b610394906100be565b9052565b5190565b60209181520190565b5f5b8381106103b7575050905f910152565b8060209183015181850152016103a7565b6103e76103f06020936103f5936103de81610398565b9384809361039c565b958691016103a5565b61025a565b0190565b61043691604060608201926104145f8201515f85019061037e565b6104266020820151602085019061038b565b01519060408184039101526103c8565b90565b61044e9160208201915f8184039101526103f9565b90565b346104815761047d61046c61046736600461033d565b610d38565b610474610072565b91829182610439565b0390f35b610078565b9060208282031261049f5761049c915f016100af565b90565b61007c565b346104d2576104bc6104b7366004610486565b610643565b6104c4610072565b806104ce81610181565b0390f35b610078565b5f80fd5b5f90565b5f1c90565b60018060a01b031690565b6104fb610500916104df565b6104e4565b90565b61050d90546104ef565b90565b6105186104db565b506105225f610503565b90565b61052d610582565b610535610565565b565b90565b90565b61055161054c61055692610537565b61053a565b610084565b90565b6105629061053d565b90565b6105766105715f610559565b6106c5565b565b610580610525565b565b61058a610510565b6105a361059d610598610724565b61008f565b9161008f565b036105aa57565b6105d36105b5610724565b6105bd610072565b91829163118cdaa760e01b83526004830161020c565b0390fd5b6105e8906105e3610582565b6105ea565b565b806106056105ff6105fa5f610559565b61008f565b9161008f565b1461061557610613906106c5565b565b61063f6106215f610559565b610629610072565b918291631e4fbdf760e01b83526004830161020c565b0390fd5b61064c906105d7565b565b5f1b90565b9061066460018060a01b039161064e565b9181191691161790565b61068261067d61068792610084565b61053a565b610084565b90565b6106939061066e565b90565b61069f9061068a565b90565b90565b906106ba6106b56106c192610696565b6106a2565b8254610653565b9055565b6106ce5f610503565b6106d8825f6106a5565b9061070c6107067f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e093610696565b91610696565b91610715610072565b8061071f81610181565b0390a3565b61072c6104db565b503390565b90610745939291610740610582565b610a9a565b565b905090565b90918261075c8161076393610747565b80936102d9565b0190565b90565b61077661077b916100be565b610767565b9052565b61079090602094936107979361074c565b809261076a565b0190565b90916107b2906107a9610072565b9384938461077f565b03902090565b90916107c39261079b565b90565b90565b6107d29061066e565b90565b6107de906107c9565b90565b6107ea906107c9565b90565b90565b9061080561080061080c926107e1565b6107ed565b8254610653565b9055565b9061081c5f199161064e565b9181191691161790565b61083a61083561083f926100be565b61053a565b6100be565b90565b90565b9061085a61085561086192610826565b610842565b8254610810565b9055565b5090565b634e487b7160e01b5f52602260045260245ffd5b906001600283049216801561089d575b602083101461089857565b610869565b91607f169161088d565b5f5260205f2090565b601f602091010490565b1b90565b919060086108d99102916108d35f19846108ba565b926108ba565b9181191691161790565b91906108f96108f461090193610826565b610842565b9083546108be565b9055565b5f90565b61091b91610915610905565b916108e3565b565b5b818110610929575050565b806109365f600193610909565b0161091e565b9190601f811161094c575b505050565b61095861097d936108a7565b906020610964846108b0565b83019310610985575b610976906108b0565b019061091d565b5f8080610947565b91506109768192905061096d565b1c90565b906109a7905f1990600802610993565b191690565b816109b691610997565b906002021790565b916109c99082610865565b9067ffffffffffffffff8211610a88576109ed826109e7855461087d565b8561093c565b5f90601f8311600114610a2057918091610a0f935f92610a14575b50506109ac565b90555b565b90915001355f80610a08565b601f19831691610a2f856108a7565b925f5b818110610a7057509160029391856001969410610a56575b50505002019055610a12565b610a66910135601f841690610997565b90555f8080610a4a565b91936020600181928787013581550195019201610a32565b610264565b90610a9892916109be565b565b91600290610ad8610ae09593610acf610ac7610ac1610abc6001878a916107b8565b6107c6565b976107d5565b5f88016107f0565b60018601610845565b919201610a8d565b565b90610aee939291610731565b565b610afa60606102a1565b90565b5f90565b5f90565b606090565b610b12610af0565b906020808084610b20610afd565b815201610b2b610b01565b815201610b36610b05565b81525050565b610b44610b0a565b90565b610b6c610b6392602092610b5a81610398565b94858093610747565b938491016103a5565b0190565b610b80610b879160209493610b47565b809261076a565b0190565b610b9f610b96610072565b92839283610b70565b03902090565b610bae91610b8b565b90565b60018060a01b031690565b610bc8610bcd916104df565b610bb1565b90565b610bda9054610bbc565b90565b90610be790610372565b9052565b90565b610bfa610bff916104df565b610beb565b90565b610c0c9054610bee565b90565b90610c19906100be565b9052565b905f9291805490610c37610c308361087d565b809461039c565b916001811690815f14610c8e5750600114610c52575b505050565b610c5f91929394506108a7565b915f925b818410610c7657505001905f8080610c4d565b60018160209295939554848601520191019290610c63565b92949550505060ff19168252151560200201905f8080610c4d565b90610cb391610c1d565b90565b90610cd6610ccf92610cc6610072565b93848092610ca9565b0383610278565b565b52565b90610d2a610d216002610cec610af0565b94610d03610cfb5f8301610bd0565b5f8801610bdd565b610d1b610d1260018301610c02565b60208801610c0f565b01610cb6565b60408401610cd8565b565b610d3590610cdb565b90565b610d4f610d5491610d47610b3c565b506001610ba5565b610d2c565b9056fea264697066735822122085ed8e85400e6a43a8586f86b8ef41b7470c88157dfc7c4b5c8a12c281607f5064736f6c63430008150033",
+  "deployedBytecode": "0x60806040526004361015610013575b6104d7565b61001d5f3561006c565b80633fbb787114610067578063715018a6146100625780638da5cb5b1461005d578063c47d2586146100585763f2fde38b0361000e576104a4565b610451565b610221565b6101cc565b610186565b60e01c90565b60405190565b5f80fd5b5f80fd5b5f80fd5b60018060a01b031690565b61009890610084565b90565b6100a48161008f565b036100ab57565b5f80fd5b905035906100bc8261009b565b565b90565b6100ca816100be565b036100d157565b5f80fd5b905035906100e2826100c1565b565b5f80fd5b5f80fd5b5f80fd5b909182601f8301121561012a5781359167ffffffffffffffff831161012557602001926001830284011161012057565b6100ec565b6100e8565b6100e4565b9160608383031261017c57610146825f85016100af565b9261015483602083016100d5565b92604082013567ffffffffffffffff81116101775761017392016100f0565b9091565b610080565b61007c565b5f0190565b346101b8576101a261019936600461012f565b92919091610ae2565b6101aa610072565b806101b481610181565b0390f35b610078565b5f9103126101c757565b61007c565b346101fa576101dc3660046101bd565b6101e4610578565b6101ec610072565b806101f681610181565b0390f35b610078565b6102089061008f565b9052565b919061021f905f602085019401906101ff565b565b34610251576102313660046101bd565b61024d61023c610510565b610244610072565b9182918261020c565b0390f35b610078565b5f80fd5b601f801991011690565b634e487b7160e01b5f52604160045260245ffd5b906102829061025a565b810190811067ffffffffffffffff82111761029c57604052565b610264565b906102b46102ad610072565b9283610278565b565b67ffffffffffffffff81116102d4576102d060209161025a565b0190565b610264565b90825f939282370152565b909291926102f96102f4826102b6565b6102a1565b9381855260208501908284011161031557610313926102d9565b565b610256565b9080601f8301121561033857816020610335933591016102e4565b90565b6100e4565b9060208282031261036d575f82013567ffffffffffffffff811161036857610365920161031a565b90565b610080565b61007c565b61037b90610084565b90565b61038790610372565b9052565b610394906100be565b9052565b5190565b60209181520190565b5f5b8381106103b7575050905f910152565b8060209183015181850152016103a7565b6103e76103f06020936103f5936103de81610398565b9384809361039c565b958691016103a5565b61025a565b0190565b61043691604060608201926104145f8201515f85019061037e565b6104266020820151602085019061038b565b01519060408184039101526103c8565b90565b61044e9160208201915f8184039101526103f9565b90565b346104815761047d61046c61046736600461033d565b610d38565b610474610072565b91829182610439565b0390f35b610078565b9060208282031261049f5761049c915f016100af565b90565b61007c565b346104d2576104bc6104b7366004610486565b610643565b6104c4610072565b806104ce81610181565b0390f35b610078565b5f80fd5b5f90565b5f1c90565b60018060a01b031690565b6104fb610500916104df565b6104e4565b90565b61050d90546104ef565b90565b6105186104db565b506105225f610503565b90565b61052d610582565b610535610565565b565b90565b90565b61055161054c61055692610537565b61053a565b610084565b90565b6105629061053d565b90565b6105766105715f610559565b6106c5565b565b610580610525565b565b61058a610510565b6105a361059d610598610724565b61008f565b9161008f565b036105aa57565b6105d36105b5610724565b6105bd610072565b91829163118cdaa760e01b83526004830161020c565b0390fd5b6105e8906105e3610582565b6105ea565b565b806106056105ff6105fa5f610559565b61008f565b9161008f565b1461061557610613906106c5565b565b61063f6106215f610559565b610629610072565b918291631e4fbdf760e01b83526004830161020c565b0390fd5b61064c906105d7565b565b5f1b90565b9061066460018060a01b039161064e565b9181191691161790565b61068261067d61068792610084565b61053a565b610084565b90565b6106939061066e565b90565b61069f9061068a565b90565b90565b906106ba6106b56106c192610696565b6106a2565b8254610653565b9055565b6106ce5f610503565b6106d8825f6106a5565b9061070c6107067f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e093610696565b91610696565b91610715610072565b8061071f81610181565b0390a3565b61072c6104db565b503390565b90610745939291610740610582565b610a9a565b565b905090565b90918261075c8161076393610747565b80936102d9565b0190565b90565b61077661077b916100be565b610767565b9052565b61079090602094936107979361074c565b809261076a565b0190565b90916107b2906107a9610072565b9384938461077f565b03902090565b90916107c39261079b565b90565b90565b6107d29061066e565b90565b6107de906107c9565b90565b6107ea906107c9565b90565b90565b9061080561080061080c926107e1565b6107ed565b8254610653565b9055565b9061081c5f199161064e565b9181191691161790565b61083a61083561083f926100be565b61053a565b6100be565b90565b90565b9061085a61085561086192610826565b610842565b8254610810565b9055565b5090565b634e487b7160e01b5f52602260045260245ffd5b906001600283049216801561089d575b602083101461089857565b610869565b91607f169161088d565b5f5260205f2090565b601f602091010490565b1b90565b919060086108d99102916108d35f19846108ba565b926108ba565b9181191691161790565b91906108f96108f461090193610826565b610842565b9083546108be565b9055565b5f90565b61091b91610915610905565b916108e3565b565b5b818110610929575050565b806109365f600193610909565b0161091e565b9190601f811161094c575b505050565b61095861097d936108a7565b906020610964846108b0565b83019310610985575b610976906108b0565b019061091d565b5f8080610947565b91506109768192905061096d565b1c90565b906109a7905f1990600802610993565b191690565b816109b691610997565b906002021790565b916109c99082610865565b9067ffffffffffffffff8211610a88576109ed826109e7855461087d565b8561093c565b5f90601f8311600114610a2057918091610a0f935f92610a14575b50506109ac565b90555b565b90915001355f80610a08565b601f19831691610a2f856108a7565b925f5b818110610a7057509160029391856001969410610a56575b50505002019055610a12565b610a66910135601f841690610997565b90555f8080610a4a565b91936020600181928787013581550195019201610a32565b610264565b90610a9892916109be565b565b91600290610ad8610ae09593610acf610ac7610ac1610abc6001878a916107b8565b6107c6565b976107d5565b5f88016107f0565b60018601610845565b919201610a8d565b565b90610aee939291610731565b565b610afa60606102a1565b90565b5f90565b5f90565b606090565b610b12610af0565b906020808084610b20610afd565b815201610b2b610b01565b815201610b36610b05565b81525050565b610b44610b0a565b90565b610b6c610b6392602092610b5a81610398565b94858093610747565b938491016103a5565b0190565b610b80610b879160209493610b47565b809261076a565b0190565b610b9f610b96610072565b92839283610b70565b03902090565b610bae91610b8b565b90565b60018060a01b031690565b610bc8610bcd916104df565b610bb1565b90565b610bda9054610bbc565b90565b90610be790610372565b9052565b90565b610bfa610bff916104df565b610beb565b90565b610c0c9054610bee565b90565b90610c19906100be565b9052565b905f9291805490610c37610c308361087d565b809461039c565b916001811690815f14610c8e5750600114610c52575b505050565b610c5f91929394506108a7565b915f925b818410610c7657505001905f8080610c4d565b60018160209295939554848601520191019290610c63565b92949550505060ff19168252151560200201905f8080610c4d565b90610cb391610c1d565b90565b90610cd6610ccf92610cc6610072565b93848092610ca9565b0383610278565b565b52565b90610d2a610d216002610cec610af0565b94610d03610cfb5f8301610bd0565b5f8801610bdd565b610d1b610d1260018301610c02565b60208801610c0f565b01610cb6565b60408401610cd8565b565b610d3590610cdb565b90565b610d4f610d5491610d47610b3c565b506001610ba5565b610d2c565b9056fea264697066735822122085ed8e85400e6a43a8586f86b8ef41b7470c88157dfc7c4b5c8a12c281607f5064736f6c63430008150033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "116:746:5:-:0;;;;;;;;:::i;:::-;;;:::i;:::-;;;;;;;;;;:::i;:::-;;;;:::o;:::-;;;;382:35;;404:10;382:35;:::i;:::-;:::o;116:746::-;;:::o;:::-;;;;;;;;:::o;:::-;;:::o;:::-;;;;;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;:::i;:::-;:::o;1225:187:0:-;1273:12;:26;;1289:10;1297:1;1289:10;:::i;:::-;1273:26;:::i;:::-;;;:::i;:::-;;1269:95;;1392:12;;;:::i;:::-;1225:187::o;1269:95::-;1322:31;1342:10;1350:1;1342:10;:::i;:::-;1322:31;;:::i;:::-;;;;;;;;;;;;;:::i;:::-;;;;116:746:5;;;;:::o;:::-;;;;;;;;:::o;:::-;;;;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;;:::i;:::-;;:::o;:::-;;;;:::o;:::-;;;;;;;;;;:::i;:::-;;;;;;;;;:::o;:::-;;;;;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;:::o;:::-;;;;;;;:::i;:::-;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;;;:::o;2912:187:0:-;3004:6;;;:::i;:::-;3020:17;3029:8;3020:17;;:::i;:::-;3083:8;3052:40;;;;;:::i;:::-;;;:::i;:::-;;;;:::i;:::-;;;;;:::i;:::-;;;;2912:187::o",
+  "deployedSourceMap": "116:746:5:-:0;;;;;;;;;-1:-1:-1;116:746:5;:::i;:::-;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::i;:::-;;;;:::o;:::-;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;;;:::o;:::-;;;;;;;;;;;;:::i;:::-;:::o;:::-;;:::o;:::-;;;;:::i;:::-;;;;:::o;:::-;;;;;;;;;;;;:::i;:::-;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;:::i;:::-;;:::i;:::-;;:::i;:::-;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;:::i;:::-;;:::i;:::-;;;;:::o;:::-;;;;;;;;;:::i;:::-;;;;;;:::i;:::-;;;:::i;:::-;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;;:::o;:::-;;:::i;:::-;;;;;;;;:::i;:::-;;;:::i;:::-;;;:::i;:::-;;;;;:::i;:::-;;;;;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;:::i;:::-;:::o;:::-;;;;;;;;:::i;:::-;;;;:::i;:::-;;;:::i;:::-;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;:::o;:::-;;:::i;:::-;;;;;:::i;:::-;;;;:::i;:::-;:::o;:::-;;;;;;;;;;:::i;:::-;;;:::o;:::-;;:::i;:::-;;;;;;;;;;:::o;:::-;;;;;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;;:::i;:::-;:::o;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;;:::i;:::-;;:::o;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;:::o;:::-;;:::i;:::-;;:::i;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;;:::o;:::-;;;;:::i;:::-;;;:::o;:::-;;;:::o;:::-;;;;;;;:::o;:::-;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;:::i;:::-;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;:::i;:::-;;:::o;:::-;;;;;;;;;;;;;;;:::i;:::-;;:::o;:::-;;;;;;;;;;:::i;:::-;;:::i;:::-;;;:::i;:::-;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;;;;;;;;;:::i;:::-;;:::o;:::-;;:::i;:::-;;;;;;;;;:::i;:::-;;:::i;:::-;;;:::i;:::-;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;;:::o;:::-;;;;:::o;:::-;;;;;;;;:::o;:::-;;;;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;;:::i;:::-;;:::o;1638:85:0:-;1684:7;;:::i;:::-;1710:6;;;;:::i;:::-;1703:13;:::o;1500:62::-;;;:::i;:::-;1554:1;;:::i;:::-;1500:62::o;116:746:5:-;;:::o;:::-;;:::o;:::-;;;;;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;2293:101:0:-;2376:10;;2384:1;2376:10;:::i;:::-;;:::i;:::-;2293:101::o;:::-;;;:::i;:::-;:::o;1796:162::-;1855:7;;:::i;:::-;:23;;1866:12;;:::i;:::-;1855:23;:::i;:::-;;;:::i;:::-;;1851:101;;1796:162::o;1851:101::-;1901:40;1928:12;;:::i;:::-;1901:40;;:::i;:::-;;;;;;;;;;;;;:::i;:::-;;;;1500:62;1554:1;1500:62;;;:::i;:::-;1554:1;:::i;:::-;1500:62::o;2543:215::-;2627:8;:22;;2639:10;2647:1;2639:10;:::i;:::-;2627:22;:::i;:::-;;;:::i;:::-;;2623:91;;2742:8;;;:::i;:::-;2543:215::o;2623:91::-;2672:31;2692:10;2700:1;2692:10;:::i;:::-;2672:31;;:::i;:::-;;;;;;;;;;;;;:::i;:::-;;;;2543:215;;;;:::i;:::-;:::o;116:746:5:-;;;;:::o;:::-;;;;;;;;;;:::i;:::-;;;;;;;;;:::o;:::-;;;;;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;:::o;:::-;;;;;;;:::i;:::-;;:::i;:::-;;;;:::i;:::-;;;:::o;2912:187:0:-;3004:6;;;:::i;:::-;3020:17;3029:8;3020:17;;:::i;:::-;3083:8;3052:40;;;;;:::i;:::-;;;:::i;:::-;;;;:::i;:::-;;;;;:::i;:::-;;;;2912:187::o;656:96:1:-;709:7;;:::i;:::-;735:10;;728:17;:::o;1500:62:0:-;;1554:1;1500:62;;;;;:::i;:::-;1554:1;:::i;:::-;1500:62::o;116:746:5:-;;;;:::o;:::-;;;;;;;;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;:::o;:::-;;;;;:::i;:::-;;:::i;:::-;;;:::o;:::-;;;;;;;;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;:::o;:::-;;;;;;:::i;:::-;;:::o;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;:::o;:::-;;;;;;;:::i;:::-;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;;;;;;:::i;:::-;;;;;;;;;:::o;:::-;;;;;;:::i;:::-;;:::i;:::-;;:::i;:::-;;:::o;:::-;;:::o;:::-;;;;;;;:::i;:::-;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;:::i;:::-;;;;;;;;;;;;;;:::o;:::-;;;;;;;:::o;:::-;;;:::o;:::-;;;;;;;;;;;;;:::i;:::-;;;:::i;:::-;;;;;;;;;:::o;:::-;;;;;;;;:::i;:::-;;:::i;:::-;;;;;:::i;:::-;;;:::o;:::-;;;:::o;:::-;;;;;:::i;:::-;;;:::i;:::-;:::o;:::-;;;;;;;;;:::o;:::-;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;:::o;:::-;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;;;;;;:::i;:::-;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;:::i;:::-;;;;:::o;:::-;;;;;:::i;:::-;;;;;;:::o;:::-;;;;;;:::i;:::-;;;;;;;;;;;;;:::i;:::-;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;:::i;:::-;:::o;423:301::-;;677:27;423:301;631:35;677:39;423:301;;589:31;604:16;532:46;555:23;:12;568:9;;555:23;;:::i;:::-;532:46;:::i;:::-;612:7;604:16;:::i;:::-;589:14;:7;:14;:31;:::i;:::-;631:25;:7;:25;:35;:::i;:::-;707:9;677:7;:27;:39;:::i;:::-;423:301::o;:::-;;;;;;;:::i;:::-;:::o;116:746::-;;;;:::i;:::-;;:::o;:::-;;;:::o;:::-;;;:::o;:::-;;;:::o;:::-;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;:::o;:::-;;;:::i;:::-;;:::o;:::-;;;;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;:::i;:::-;;;;:::i;:::-;;;:::o;:::-;;;;:::i;:::-;;;;;;:::i;:::-;;;;;:::o;:::-;;;;:::i;:::-;;:::o;:::-;;;;;;;;:::o;:::-;;;;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;;:::i;:::-;;:::o;:::-;;;;;:::i;:::-;;;:::o;:::-;;:::o;:::-;;;;;:::i;:::-;;:::i;:::-;;:::o;:::-;;;;;:::i;:::-;;:::o;:::-;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;:::i;:::-;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;:::o;:::-;;;;;;;:::i;:::-;;;;;;:::i;:::-;;;;:::i;:::-;:::o;:::-;;:::o;:::-;;;;;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;:::i;:::-;;;;;;;:::i;:::-;;;;;:::i;:::-;;;:::i;:::-;;;;;:::i;:::-;:::o;:::-;;;;:::i;:::-;;:::o;732:125::-;825:23;818:31;732:125;794:11;;:::i;:::-;825:12;;:23;:::i;:::-;818:31;:::i;:::-;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\r\n\r\ncontract Bank is Ownable{\r\n\r\n    struct Loan{\r\n        address payable target;\r\n        uint256 pendingLoanAmount;\r\n        string pendingLoanMortgage;\r\n    }\r\n\r\n    event created(string mortgage, uint256 amount);\r\n\r\n    mapping(string => Loan) loanRegistry;\r\n\r\n    constructor() Ownable(msg.sender){}\r\n    function createLoan(address _target,uint256 _amount, string calldata _mortgage) external onlyOwner{\r\n        Loan storage newLoan = loanRegistry[_mortgage];\r\n        newLoan.target=payable(_target);\r\n        newLoan.pendingLoanAmount = _amount;\r\n        newLoan.pendingLoanMortgage = _mortgage;\r\n    }\r\n\r\n    function getLoan(string memory _mortgage) public view returns(Loan memory) {\r\n        return(loanRegistry[_mortgage]);\r\n    }\r\n\r\n}",
+  "sourcePath": "C:\\Users\\SSAFY\\Desktop\\S10P31C203\\blockchain\\contracts\\Bank.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/Bank.sol",
+    "exportedSymbols": {
+      "Bank": [
+        1677
+      ],
+      "Context": [
+        177
+      ],
+      "Ownable": [
+        147
+      ]
+    },
+    "id": 1678,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1593,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:5"
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+        "file": "@openzeppelin/contracts/access/Ownable.sol",
+        "id": 1594,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 1678,
+        "sourceUnit": 148,
+        "src": "60:52:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 1595,
+              "name": "Ownable",
+              "nameLocations": [
+                "133:7:5"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 147,
+              "src": "133:7:5"
+            },
+            "id": 1596,
+            "nodeType": "InheritanceSpecifier",
+            "src": "133:7:5"
+          }
+        ],
+        "canonicalName": "Bank",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 1677,
+        "linearizedBaseContracts": [
+          1677,
+          147,
+          177
+        ],
+        "name": "Bank",
+        "nameLocation": "125:4:5",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Bank.Loan",
+            "id": 1603,
+            "members": [
+              {
+                "constant": false,
+                "id": 1598,
+                "mutability": "mutable",
+                "name": "target",
+                "nameLocation": "187:6:5",
+                "nodeType": "VariableDeclaration",
+                "scope": 1603,
+                "src": "171:22:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address_payable",
+                  "typeString": "address payable"
+                },
+                "typeName": {
+                  "id": 1597,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "171:15:5",
+                  "stateMutability": "payable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1600,
+                "mutability": "mutable",
+                "name": "pendingLoanAmount",
+                "nameLocation": "212:17:5",
+                "nodeType": "VariableDeclaration",
+                "scope": 1603,
+                "src": "204:25:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1599,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "204:7:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1602,
+                "mutability": "mutable",
+                "name": "pendingLoanMortgage",
+                "nameLocation": "247:19:5",
+                "nodeType": "VariableDeclaration",
+                "scope": 1603,
+                "src": "240:26:5",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1601,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "240:6:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Loan",
+            "nameLocation": "156:4:5",
+            "nodeType": "StructDefinition",
+            "scope": 1677,
+            "src": "149:125:5",
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "d0f72bfa5d7ec15b17544840cf7aed796fab0633f5a4ec58920a974ccb10a397",
+            "id": 1609,
+            "name": "created",
+            "nameLocation": "288:7:5",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1608,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1605,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "mortgage",
+                  "nameLocation": "303:8:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1609,
+                  "src": "296:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1604,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "296:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1607,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "321:6:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1609,
+                  "src": "313:14:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1606,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "313:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "295:33:5"
+            },
+            "src": "282:47:5"
+          },
+          {
+            "constant": false,
+            "id": 1614,
+            "mutability": "mutable",
+            "name": "loanRegistry",
+            "nameLocation": "361:12:5",
+            "nodeType": "VariableDeclaration",
+            "scope": 1677,
+            "src": "337:36:5",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Loan_$1603_storage_$",
+              "typeString": "mapping(string => struct Bank.Loan)"
+            },
+            "typeName": {
+              "id": 1613,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 1610,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "345:6:5",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "337:23:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Loan_$1603_storage_$",
+                "typeString": "mapping(string => struct Bank.Loan)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 1612,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 1611,
+                  "name": "Loan",
+                  "nameLocations": [
+                    "355:4:5"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 1603,
+                  "src": "355:4:5"
+                },
+                "referencedDeclaration": 1603,
+                "src": "355:4:5",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                  "typeString": "struct Bank.Loan"
+                }
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1621,
+              "nodeType": "Block",
+              "src": "415:2:5",
+              "statements": []
+            },
+            "id": 1622,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "expression": {
+                      "id": 1617,
+                      "name": "msg",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4294967281,
+                      "src": "404:3:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_message",
+                        "typeString": "msg"
+                      }
+                    },
+                    "id": 1618,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "408:6:5",
+                    "memberName": "sender",
+                    "nodeType": "MemberAccess",
+                    "src": "404:10:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 1619,
+                "kind": "baseConstructorSpecifier",
+                "modifierName": {
+                  "id": 1616,
+                  "name": "Ownable",
+                  "nameLocations": [
+                    "396:7:5"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 147,
+                  "src": "396:7:5"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "396:19:5"
+              }
+            ],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1615,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "393:2:5"
+            },
+            "returnParameters": {
+              "id": 1620,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "415:0:5"
+            },
+            "scope": 1677,
+            "src": "382:35:5",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1661,
+              "nodeType": "Block",
+              "src": "521:203:5",
+              "statements": [
+                {
+                  "assignments": [
+                    1635
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1635,
+                      "mutability": "mutable",
+                      "name": "newLoan",
+                      "nameLocation": "545:7:5",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1661,
+                      "src": "532:20:5",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                        "typeString": "struct Bank.Loan"
+                      },
+                      "typeName": {
+                        "id": 1634,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 1633,
+                          "name": "Loan",
+                          "nameLocations": [
+                            "532:4:5"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 1603,
+                          "src": "532:4:5"
+                        },
+                        "referencedDeclaration": 1603,
+                        "src": "532:4:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                          "typeString": "struct Bank.Loan"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1639,
+                  "initialValue": {
+                    "baseExpression": {
+                      "id": 1636,
+                      "name": "loanRegistry",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1614,
+                      "src": "555:12:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Loan_$1603_storage_$",
+                        "typeString": "mapping(string memory => struct Bank.Loan storage ref)"
+                      }
+                    },
+                    "id": 1638,
+                    "indexExpression": {
+                      "id": 1637,
+                      "name": "_mortgage",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1628,
+                      "src": "568:9:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_calldata_ptr",
+                        "typeString": "string calldata"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "555:23:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Loan_$1603_storage",
+                      "typeString": "struct Bank.Loan storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "532:46:5"
+                },
+                {
+                  "expression": {
+                    "id": 1647,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 1640,
+                        "name": "newLoan",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1635,
+                        "src": "589:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                          "typeString": "struct Bank.Loan storage pointer"
+                        }
+                      },
+                      "id": 1642,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "597:6:5",
+                      "memberName": "target",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1598,
+                      "src": "589:14:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 1645,
+                          "name": "_target",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1624,
+                          "src": "612:7:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 1644,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "604:8:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_payable_$",
+                          "typeString": "type(address payable)"
+                        },
+                        "typeName": {
+                          "id": 1643,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "604:8:5",
+                          "stateMutability": "payable",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 1646,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "604:16:5",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      }
+                    },
+                    "src": "589:31:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "id": 1648,
+                  "nodeType": "ExpressionStatement",
+                  "src": "589:31:5"
+                },
+                {
+                  "expression": {
+                    "id": 1653,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 1649,
+                        "name": "newLoan",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1635,
+                        "src": "631:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                          "typeString": "struct Bank.Loan storage pointer"
+                        }
+                      },
+                      "id": 1651,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "639:17:5",
+                      "memberName": "pendingLoanAmount",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1600,
+                      "src": "631:25:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 1652,
+                      "name": "_amount",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1626,
+                      "src": "659:7:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "631:35:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1654,
+                  "nodeType": "ExpressionStatement",
+                  "src": "631:35:5"
+                },
+                {
+                  "expression": {
+                    "id": 1659,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 1655,
+                        "name": "newLoan",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1635,
+                        "src": "677:7:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                          "typeString": "struct Bank.Loan storage pointer"
+                        }
+                      },
+                      "id": 1657,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "685:19:5",
+                      "memberName": "pendingLoanMortgage",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1602,
+                      "src": "677:27:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 1658,
+                      "name": "_mortgage",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1628,
+                      "src": "707:9:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_calldata_ptr",
+                        "typeString": "string calldata"
+                      }
+                    },
+                    "src": "677:39:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 1660,
+                  "nodeType": "ExpressionStatement",
+                  "src": "677:39:5"
+                }
+              ]
+            },
+            "functionSelector": "3fbb7871",
+            "id": 1662,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 1631,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 1630,
+                  "name": "onlyOwner",
+                  "nameLocations": [
+                    "512:9:5"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 58,
+                  "src": "512:9:5"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "512:9:5"
+              }
+            ],
+            "name": "createLoan",
+            "nameLocation": "432:10:5",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1629,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1624,
+                  "mutability": "mutable",
+                  "name": "_target",
+                  "nameLocation": "451:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1662,
+                  "src": "443:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1623,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "443:7:5",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1626,
+                  "mutability": "mutable",
+                  "name": "_amount",
+                  "nameLocation": "467:7:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1662,
+                  "src": "459:15:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1625,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "459:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1628,
+                  "mutability": "mutable",
+                  "name": "_mortgage",
+                  "nameLocation": "492:9:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1662,
+                  "src": "476:25:5",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1627,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "476:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "442:60:5"
+            },
+            "returnParameters": {
+              "id": 1632,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "521:0:5"
+            },
+            "scope": 1677,
+            "src": "423:301:5",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 1675,
+              "nodeType": "Block",
+              "src": "807:50:5",
+              "statements": [
+                {
+                  "expression": {
+                    "components": [
+                      {
+                        "baseExpression": {
+                          "id": 1670,
+                          "name": "loanRegistry",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1614,
+                          "src": "825:12:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_string_memory_ptr_$_t_struct$_Loan_$1603_storage_$",
+                            "typeString": "mapping(string memory => struct Bank.Loan storage ref)"
+                          }
+                        },
+                        "id": 1672,
+                        "indexExpression": {
+                          "id": 1671,
+                          "name": "_mortgage",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1664,
+                          "src": "838:9:5",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "825:23:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Loan_$1603_storage",
+                          "typeString": "struct Bank.Loan storage ref"
+                        }
+                      }
+                    ],
+                    "id": 1673,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "824:25:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Loan_$1603_storage",
+                      "typeString": "struct Bank.Loan storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 1669,
+                  "id": 1674,
+                  "nodeType": "Return",
+                  "src": "818:31:5"
+                }
+              ]
+            },
+            "functionSelector": "c47d2586",
+            "id": 1676,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getLoan",
+            "nameLocation": "741:7:5",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1665,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1664,
+                  "mutability": "mutable",
+                  "name": "_mortgage",
+                  "nameLocation": "763:9:5",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1676,
+                  "src": "749:23:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1663,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "749:6:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "748:25:5"
+            },
+            "returnParameters": {
+              "id": 1669,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1668,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1676,
+                  "src": "794:11:5",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Loan_$1603_memory_ptr",
+                    "typeString": "struct Bank.Loan"
+                  },
+                  "typeName": {
+                    "id": 1667,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1666,
+                      "name": "Loan",
+                      "nameLocations": [
+                        "794:4:5"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1603,
+                      "src": "794:4:5"
+                    },
+                    "referencedDeclaration": 1603,
+                    "src": "794:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Loan_$1603_storage_ptr",
+                      "typeString": "struct Bank.Loan"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "793:13:5"
+            },
+            "scope": 1677,
+            "src": "732:125:5",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1678,
+        "src": "116:746:5",
+        "usedErrors": [
+          13,
+          18
+        ],
+        "usedEvents": [
+          24,
+          1609
+        ]
+      }
+    ],
+    "src": "33:829:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.21+commit.d9974bed.Emscripten.clang"
+  },
+  "networks": {
+    "1001": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0xd0f72bfa5d7ec15b17544840cf7aed796fab0633f5a4ec58920a974ccb10a397": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "mortgage",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "created",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x3e015796A4D5f42Ad55C0C800C785dA2b1362757",
+      "transactionHash": "0x66ccfeb0fa5d6c99c528929eb032b6248a0957f18354e087e83ff8df2550e4e3"
+    }
+  },
+  "schemaVersion": "3.4.16",
+  "updatedAt": "2024-05-17T06:44:20.858Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

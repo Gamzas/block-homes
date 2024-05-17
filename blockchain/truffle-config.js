@@ -89,6 +89,28 @@ module.exports = {
       gas: "8500000",
       gasPrice: null  // 가스 가격을 null로 설정하여 Klaytn 가스 정책을 따름
     },
+    pass: {
+      provider: () => new HDWalletProvider({
+        privateKeys: [
+          adminMinistryPrivate
+        ],
+        providerOrUrl: "https://api.baobab.klaytn.net:8651",  // Klaytn Baobab 네트워크의 URL
+      }),
+      network_id: "1001",
+      gas: "8500000",
+      gasPrice: null  // 가스 가격을 null로 설정하여 Klaytn 가스 정책을 따름
+    },
+    bank: {
+      provider: () => new HDWalletProvider({
+        privateKeys: [
+          bankPrivate
+        ],
+        providerOrUrl: "https://api.baobab.klaytn.net:8651",  // Klaytn Baobab 네트워크의 URL
+      }),
+      network_id: "1001",
+      gas: "8500000",
+      gasPrice: null  // 가스 가격을 null로 설정하여 Klaytn 가스 정책을 따름
+    },
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache, geth, or parity) in a separate terminal
