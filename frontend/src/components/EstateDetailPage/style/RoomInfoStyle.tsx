@@ -62,16 +62,18 @@ export const AdditionalWrapper = styled.div`
 export const AdditionalContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-bottom: 1rem;
   .info-box {
-    width: 4rem;
-    height: 4rem;
+    width: 3.125rem;
+    height: 3.5rem;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1.2px solid black;
-    margin: 1rem 1rem 1rem 0;
+    border: 0.5px solid #a0a0a0;
+    margin: 1rem 0.5rem 0rem 0;
   }
   .icon {
     width: 2rem;
