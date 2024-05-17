@@ -89,7 +89,9 @@ const ChattingRoomPage = () => {
   })
 
   useEffect(() => {
-    connectHandler()
+    if (data) {
+      connectHandler()
+    }
     return () => {
       client.current?.deactivate()
     }
