@@ -68,6 +68,7 @@ public class ChatServiceImpl implements ChatService {
             .wallet(wallet)
             .chatRoom(chatRoom)
             .message(wallet.getName() + " (" + walletChatRoom.getRoleCategory().getRole() + ") " + "님이 거래 대화방에 입장하셨어요.")
+            .messageType(MessageType.ENTER)
             .build());
 
         return ChatRes.builder()
@@ -75,7 +76,7 @@ public class ChatServiceImpl implements ChatService {
             .chatRoomNo(chat.getChatRoom().getChatRoomNo())
             .senderWalletAddress(chat.getWallet().getWalletAddress())
             .senderName(chat.getWallet().getName())
-            .messageType(MessageType.ENTER)
+            .messageType(chat.getMessageType())
             .image("")
             .contractStep(chat.getChatRoom().getContractStep())
             .createdAt(chat.getCreatedAt())
@@ -126,6 +127,7 @@ public class ChatServiceImpl implements ChatService {
         Chat chat = Chat.builder()
             .chatRoom(chatRoom)
             .message(chatPayload.getMessage())
+            .messageType(MessageType.TALK)
             .wallet(wallet)
             .image(image)
             .build();
@@ -136,7 +138,7 @@ public class ChatServiceImpl implements ChatService {
                 .chatRoomNo(chat.getChatRoom().getChatRoomNo())
                 .senderWalletAddress(chat.getWallet().getWalletAddress())
                 .senderName(chat.getWallet().getName())
-                .messageType(MessageType.TALK)
+                .messageType(chat.getMessageType())
                 .image(chat.getImage().getImageUrl())
                 .contractStep(chat.getChatRoom().getContractStep())
                 .createdAt(chat.getCreatedAt())
@@ -147,7 +149,7 @@ public class ChatServiceImpl implements ChatService {
                 .chatRoomNo(chat.getChatRoom().getChatRoomNo())
                 .senderWalletAddress(chat.getWallet().getWalletAddress())
                 .senderName(chat.getWallet().getName())
-                .messageType(MessageType.TALK)
+                .messageType(chat.getMessageType())
                 .contractStep(chat.getChatRoom().getContractStep())
                 .createdAt(chat.getCreatedAt())
                 .build();
@@ -157,7 +159,7 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     @Transactional
-    public ProgressRes progressContract(Integer chatRoomNo, ProgressPayload progressPayload) {
+    public ChatRes progressContract(Integer chatRoomNo, ProgressPayload progressPayload) {
         ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(chatRoomNo)
             .orElseThrow(ChatRoomNotFoundException::new);
 
@@ -180,18 +182,30 @@ public class ChatServiceImpl implements ChatService {
             throw new ProgressNotPermittedException(walletChatRoom.getRoleCategory(), contractStep);
         }
 
-        return ProgressRes.builder()
-            .chatRoomNo(chatRoom.getChatRoomNo())
-            .messageType(MessageType.INFO)
-            .contractStep(chatRoom.getContractStep())
-            .message(chatRoom.getContractStep().getMessageText())
+        ContractStep nextStep = ContractStep.getNextContractStep(contractStep);
+
+        Chat chat = chatRepository.save(Chat.builder()
+                .chatRoom(chatRoom)
+                .wallet(walletChatRoom.getWallet())
+                .message(nextStep.getMessageText())
+                .messageType(MessageType.INFO)
+            .build());
+
+        return ChatRes.builder()
+            .chatNo(chat.getChatNo())
+            .chatRoomNo(chat.getChatRoom().getChatRoomNo())
+            .senderWalletAddress(chat.getWallet().getWalletAddress())
+            .senderName(chat.getWallet().getName())
+            .messageType(chat.getMessageType())
+            .contractStep(chat.getChatRoom().getContractStep())
+            .message(chat.getMessage())
             .createdAt(LocalDateTime.now())
             .build();
     }
 
     @Override
     @Transactional
-    public ProvisionRes createSpecialProvision(Integer chatRoomNo, ProvisionPayload provisionPayload) {
+    public ChatRes createSpecialProvision(Integer chatRoomNo, ProvisionPayload provisionPayload) {
         ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(chatRoomNo)
             .orElseThrow(ChatRoomNotFoundException::new);
 
@@ -229,19 +243,11 @@ public class ChatServiceImpl implements ChatService {
             provisionValues.add(chatProvision.getSpecialProvisionCategory().getValue());
         }
 
-        ProgressRes progressRes = progressContract(chatRoomNo,
+        return progressContract(chatRoomNo,
             ProgressPayload.builder()
                 .senderWalletAddress(provisionPayload.getSenderWalletAddress())
                 .senderRole(provisionPayload.getSenderRole())
                 .build());
-
-        return ProvisionRes.builder()
-            .chatRoomNo(progressRes.getChatRoomNo())
-            .provisionList(provisionValues)
-            .messageType(MessageType.INFO)
-            .message(progressRes.getMessage())
-            .createdAt(progressRes.getCreatedAt())
-            .build();
     }
 
     @Override
