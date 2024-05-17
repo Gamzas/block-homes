@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { GetDIDDocumentInputs } from '@/types/abi/RealEstateDIDRegistryContractType'
+import { GetDIDDocumentInputs } from '@/types/abi/realEstateDIDRegistryContractType'
 import { baseRealEstateDIDRegistryContract } from '@/abi/realEstateDIDRegistry/baseRealEstateDIDRegistryContract'
 
 export const useGetDIDDocument = (params: GetDIDDocumentInputs) => {
