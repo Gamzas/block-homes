@@ -106,4 +106,5 @@ public class ChatRoomServiceImpl implements ChatRoomService {
             .createdAt(chatRoom.getCreatedAt())
             .build();
     }
+
 }
