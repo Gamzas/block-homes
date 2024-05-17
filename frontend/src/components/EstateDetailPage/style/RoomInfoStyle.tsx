@@ -51,6 +51,7 @@ export const DetailInfoContainer = styled.div`
     position: absolute;
     left: 3.1rem;
     font-weight: 500;
+    font-size: 0.9375rem;
   }
 `
 
@@ -62,16 +63,19 @@ export const AdditionalWrapper = styled.div`
 export const AdditionalContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: start;
+  margin-bottom: 1rem;
   .info-box {
-    width: 4rem;
-    height: 4rem;
+    width: 3.125rem;
+    height: 3.5rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1.2px solid black;
-    margin: 1rem 1rem 1rem 0;
+    border: 0.5px solid #e0e0e0;
+    margin: 1rem 1rem 0rem 0;
   }
   .icon {
     width: 2rem;
@@ -79,7 +83,7 @@ export const AdditionalContainer = styled.div`
   }
   .name {
     text-align: center;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     font-weight: 400;
     margin-top: 0.4rem;
   }
@@ -111,32 +115,30 @@ export const LocationWrapper = styled.div`
 `
 
 export const AdminFeeContainer = styled.div`
-  width: 90%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* border: 1px solid yellowgreen; */
+  flex-wrap: wrap;
+  justify-content: start;
   margin-bottom: 1rem;
-  .price {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .underline {
-    width: 100%;
-    color: #d7dadd;
-  }
-  .option {
+  .info-box {
+    width: 3.125rem;
+    height: 3.5rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
     display: flex;
-    width: 80%;
-    justify-content: start;
-    margin-top: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid #e0e0e0;
+    margin: 1rem 1rem 0rem 0;
   }
-  .txt {
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    margin-right: 0.5rem;
+  .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .name {
+    text-align: center;
+    font-size: 0.5rem;
+    font-weight: 400;
+    margin-top: 0.4rem;
   }
 `
