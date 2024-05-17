@@ -9,34 +9,6 @@ import ItemLoading from '@/common/ItemLoading'
 import useLoginStatus from '@/hooks/useLoginStatus'
 import NoItems from '@common/NoItems'
 
-const FavoriteItems = [
-  {
-    condition: 'normal',
-    address: '남동길 30번길 13 3층',
-    infos: ['남향', '교육시설', '역세권'],
-    leaseType: '전세',
-    price: '3억',
-    roomSize: '37',
-    roomCount: '투룸',
-    createDate: '2024년 3월 21일',
-    latitude: 35.2097245,
-    longitude: 126.7805472,
-  },
-  {
-    condition: 'bad',
-    address: '광주광역시 광산구 오선동',
-    infos: ['남향', '교육시설', '역세권'],
-    leaseType: '매매',
-    price: '3억',
-    roomSize: '37',
-    roomCount: '투룸',
-    createDate: '2024년 3월 21일',
-    latitude: 35.205615,
-    longitude: 126.812546,
-  },
-]
-
-// TODO 삭제로직 수정
 const ItemList = () => {
   useLoginStatus()
   const [editActive, setEditActive] = useState(false)
@@ -63,6 +35,8 @@ const ItemList = () => {
     alert('error')
     return <div>Error fetching data</div>
   }
+
+  console.log(data)
 
   // TODO 서버 연결 시 찜한 목록 아래 변수 사용하기!
   // const [favoriteItems, setFavoriteItems] = useState(FavoriteItems) // 상태에 초기 아이템 목록을 저장합니다.
