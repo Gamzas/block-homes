@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import { useClaimCredential } from '@/abi/ownershipVCRegistry/claimCredential'
-import { MOIS_PRIVATE_KEY } from '@constants/abi/MOISPrivateKey'
+import { MOIS_PRIVATE_KEY } from '@constants/abi/GovernmentPrivateKey'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import { TestContainer } from '@components/TestPage/style/TestStyle'
 

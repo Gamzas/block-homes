@@ -1,8 +1,9 @@
 import { ethers } from 'ethers'
 import { useMutation } from '@tanstack/react-query'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
-import { MOIS_PRIVATE_KEY } from '@constants/abi/MOISPrivateKey'
+import { MOIS_PRIVATE_KEY } from '@constants/abi/GovernmentPrivateKey'
 import { baseOwnershipVCRegistryContract } from '@/abi/ownershipVCRegistry/baseOwnershipVCRegistryContract'
+import { ClaimCredentialInputs } from '@/types/abi/ownershipVCRegistryType'
 
 export const useClaimCredential = () => {
   return useMutation({

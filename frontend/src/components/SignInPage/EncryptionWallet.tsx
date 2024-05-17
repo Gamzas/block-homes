@@ -1,8 +1,4 @@
-import {
-  SignInButton,
-  SignInError,
-  SignInWrapper,
-} from '@components/SignInPage/style/SignInStyle'
+import { SignInButton, SignInError, SignInWrapper } from '@components/SignInPage/style/SignInStyle'
 import React, { useEffect, useState } from 'react'
 import { useCreateDIDDocument } from '@/abi/userDIDRegistry/createDIDDocument'
 import { useSetAtom } from 'jotai'
@@ -12,13 +8,14 @@ import { ethers } from 'ethers'
 import { useNavigate } from 'react-router-dom'
 import IsLoading from '@common/IsLoading'
 import SecurityLock from '@assets/lotties/SecurityLock.json'
+import { useClaimCredential } from '@/abi/citizenshipVCRegistry/claimCredential'
 
 const EncryptionWallet = ({
-  name,
-  phoneNumber,
-  wallet,
-  setWallet,
-}: {
+                            name,
+                            phoneNumber,
+                            wallet,
+                            setWallet,
+                          }: {
   name: string
   phoneNumber: string
   wallet: ethers.Wallet
@@ -30,27 +27,40 @@ const EncryptionWallet = ({
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isPasswordMatch, setIsPasswordMatch] = useState(true)
   const { mutate: createDIDDocumentMutate } = useCreateDIDDocument()
+  const { mutate: claimCredentialMutate } = useClaimCredential()
   const { mutate: postWalletMutate } = usePostWallet()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(null)
 
   const handleEncryptionWalletButtonClick = async () => {
     if (isPasswordMatch) {
       try {
         // Wallet 암호화 시도
-        setIsLoading(true)
+        setIsLoading(1)
         const encryptedWallet = await wallet.encrypt(password)
         setPassword('')
         setConfirmPassword('')
         // DID 문서 생성 시도
+        setIsLoading(2)
         createDIDDocumentMutate(wallet, {
           onError: error => {
+            setIsLoading(null)
             console.error('DID 문서 생성 실패:', error)
             alert('DID 문서 생성에 실패했습니다. 다시 시도해주세요.')
             return
           },
         })
+        setIsLoading(3)
+        claimCredentialMutate({ walletAddress: wallet.address }, {
+          onError: error => {
+            setIsLoading(null)
+            console.error('VC 발급 실패:', error)
+            alert('VC 발급에 실패했습니다. 다시 시도해주세요.')
+            return
+          },
+        })
 
         // Wallet 정보 서버에 등록 시도
+        setIsLoading(4)
         postWalletMutate(
           {
             walletAddress: wallet.address,
@@ -68,12 +78,14 @@ const EncryptionWallet = ({
               navigate('/')
             },
             onError: error => {
+              setIsLoading(null)
               console.error('Wallet 정보 등록 실패:', error)
               alert('지갑 정보 등록에 실패했습니다. 다시 시도해주세요.')
             },
           },
         )
       } catch (error) {
+        setIsLoading(null)
         console.error('Wallet 암호화 실패:', error)
         alert('지갑 암호화에 실패했습니다. 다시 시도해주세요.')
         return
