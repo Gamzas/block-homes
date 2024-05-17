@@ -81,7 +81,6 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
         Wallet buyerWallet = walletRepository.getWalletByWalletAddress(req.getWalletAddress())
             .orElseThrow(WalletNotFoundException::new);
-        Wallet ownerWallet = item.getOwnerWallet();
 
         ChatRoom chatRoom = chatRoomRepository.save(ChatRoom.builder()
             .item(item)
@@ -95,7 +94,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
         WalletChatRoom ownerWalletChatRoom = walletChatRoomRepository.save(WalletChatRoom.builder()
                 .chatRoom(chatRoom)
-                .wallet(ownerWallet)
+                .wallet(item.getOwnerWallet())
                 .roleCategory(RoleCategory.SELLER)
                 .build());
 

@@ -26,7 +26,7 @@ public class Item extends BaseEntity {
     private Integer itemNo;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_wallet_no", nullable = false)
     private Wallet ownerWallet;
 
@@ -120,9 +120,9 @@ public class Item extends BaseEntity {
 
     @Builder
     public Item(
-        Wallet ownerWallet,
         String realEstateDID,
         String roadNameAddress,
+        Wallet ownerWallet,
         TransactionType transactionType,
         Double area,
         Long price,
@@ -143,10 +143,10 @@ public class Item extends BaseEntity {
         Double parkingRate,
         Boolean haveElevator
     ) {
-        this.ownerWallet = ownerWallet;
         this.realEstateDID = realEstateDID;
         this.roadNameAddress = roadNameAddress;
         this.transactionType = transactionType;
+        this.ownerWallet = ownerWallet;
         this.area = area;
         this.price = price;
         this.monthlyPrice = monthlyPrice;

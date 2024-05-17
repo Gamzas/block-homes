@@ -36,6 +36,8 @@ public class DetailItemRes {
     private Double parkingRate;
     private Boolean haveElevator;
     private LocalDateTime createdAt;
+    private Integer transactionType;
+    private Boolean isUserLiked;
 
     private List<ItemImageInstance> itemImageList;
     private List<Integer> itemAdministrationFeeList;

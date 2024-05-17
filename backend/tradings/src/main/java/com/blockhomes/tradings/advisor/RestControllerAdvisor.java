@@ -87,7 +87,12 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return 내용과 코드를 포함한 ResponseEntity 객체
      */
-    @ExceptionHandler(value = {WalletNotFoundException.class, ItemNotFoundException.class, ChatRoomNotFoundException.class, WalletChatRoomNotFoundException.class})
+    @ExceptionHandler(value = {
+        WalletNotFoundException.class,
+        ItemNotFoundException.class,
+        ChatRoomNotFoundException.class,
+        WalletChatRoomNotFoundException.class
+    })
     public ResponseEntity<BaseResponseBody> notFoundError(Exception e) {
         log.error(e.getMessage());
 
