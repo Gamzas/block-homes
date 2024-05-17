@@ -3,7 +3,6 @@ import Location from './Location'
 import { DetailItemType } from '@/types/components/estateListType'
 import TransactionProcedure from './TransactionProcedure'
 import { getRealEstateType } from '@/utils/estateTransferUtil'
-import { numberToMoney } from './../../utils/estateTransferUtil'
 
 interface PropsType {
   info: DetailItemType
@@ -99,7 +98,7 @@ const RoomInfo = (props: PropsType) => {
       <r.AdditionalWrapper>
         <r.AdminFeeContainer>
           {info.itemAdministrationFeeList.map((item, index) => (
-            <div className="info-box">
+            <div className="info-box" key={index}>
               <img
                 className="icon"
                 src={`/icon/icon_room_info_fee_${adminFeeInfo[item - 1].icon}.png`}
