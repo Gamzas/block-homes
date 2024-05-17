@@ -6,7 +6,6 @@ import { userAtom } from '@stores/atoms/userStore'
 import { usePostWallet } from '@apis/walletApi'
 import { ethers } from 'ethers'
 import { useNavigate } from 'react-router-dom'
-import IsLoading from '@common/IsLoading'
 import SecurityLock from '@assets/lotties/SecurityLock.json'
 import FindEmployee from '@assets/lotties/FindEmployee.json'
 import DocumentSetting from '@assets/lotties/DocumentSetting.json'
@@ -18,11 +17,13 @@ const EncryptionWallet = ({
                             phoneNumber,
                             wallet,
                             setWallet,
+                            setIsLoading,
                           }: {
   name: string
   phoneNumber: string
   wallet: ethers.Wallet
   setWallet: (wallet: ethers.Wallet) => void
+  setIsLoading: (isLoading) => void
 }) => {
   const navigate = useNavigate()
   const setUserAtom = useSetAtom(userAtom)
@@ -32,7 +33,6 @@ const EncryptionWallet = ({
   const { mutate: createDIDDocumentMutate } = useCreateDIDDocument()
   const { mutate: claimCredentialMutate } = useClaimCredential()
   const { mutate: postWalletMutate } = usePostWallet()
-  const [isLoading, setIsLoading] = useState(null)
 
   const handleEncryptionWalletButtonClick = async () => {
     if (isPasswordMatch) {
@@ -133,7 +133,6 @@ const EncryptionWallet = ({
       >
         지갑 암호화
       </SignInButton>
-      {isLoading && <IsLoading textProps={isLoading[0]} lottieProps={isLoading[1]} />}
     </>
   )
 }
