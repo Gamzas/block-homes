@@ -128,7 +128,7 @@ const ItemList = () => {
           </i.EditContainer>
           <i.ItemContainer>
             {data.likedItems.map((item, index) => (
-              <i.selectedItemContainer>
+              <i.selectedItemContainer key={index}>
                 {editActive && (
                   <input
                     type="checkbox"
