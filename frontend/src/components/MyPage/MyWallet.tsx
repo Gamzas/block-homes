@@ -11,8 +11,6 @@ const MyWallet = () => {
     handleCheckBalance()
   }, [handleCheckBalance])
   const myBalance = roundToTwoDecimalPlaces(Number(balance))
-  console.log(typeof balance)
-  console.log(myBalance)
   return (
     <w.WalletWrapper>
       <w.WalletContainer onClick={handleCheckBalance}>

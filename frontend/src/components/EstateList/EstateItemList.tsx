@@ -12,7 +12,6 @@ import { EstateItemListType } from '@/types/api/itemType'
 import { useParams } from 'react-router-dom'
 import { useGetEstateItems } from '@/apis/itemApi'
 import ItemLoading from '@/common/ItemLoading'
-import { itemList } from '../../utils/item'
 
 const EstateItemList = () => {
   const { category } = useParams()
@@ -23,7 +22,6 @@ const EstateItemList = () => {
     getCurrentLocation()
   }, [])
   const { data, isLoading, error } = useGetEstateItems(Number(category))
-
   if (isLoading) {
     return <ItemLoading />
   }
@@ -38,7 +36,7 @@ const EstateItemList = () => {
   }
 
   const estateItemList: EstateItemListType[] = data.itemList
-  console.log(data.itemList)
+  // console.log(data.itemList)
   return (
     <l.EstateItemListContainer>
       <l.StatusBarContainer>

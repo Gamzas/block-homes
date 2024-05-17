@@ -8,34 +8,37 @@ interface PropsType {
 }
 
 const DetailTabMenu = (props: PropsType) => {
-  console.log(props.imgUrl)
-
   const [currentTab, clickTab] = useState(0)
   const sliderRef = useRef(null)
+
+  const categoryImage = (index: number) => {
+    const img = props.imgUrl.filter(url => {
+      return url.itemImageCategory === index
+    })
+    return img
+  }
+
   const menuArr = [
     {
       name: 'image',
-      content: [
-        `${props.imgUrl[0].imageUrl}`,
-        'https://ms-housing.kr/data/file/residence_gallery/1893533933_JMZkwRQt_7e007afcf36372f893058c91dcc64b65fed06003.jpg',
-        'https://cdn.imweb.me/thumbnail/20211222/c0a271a8dfdcf.jpg',
-      ],
+      content: categoryImage(1).map(item => item.imageUrl),
     },
     {
       name: 'floor_plan',
-      content: [
-        'https://cdn.bizwatch.co.kr/news/photo/2017/01/09/34f7001900daf6a1d6834b1716c199b8165840.jpg',
-        'https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/projects/165447962465729230.png?gif=1&w=480&h=480&c=c&q=80',
-      ],
+      content:
+        categoryImage(2).length === 0
+          ? ['/image/image_no_img.jpg']
+          : categoryImage(2).map(item => item.imageUrl),
     },
     {
       name: '360',
-      content: [
-        'https://mblogthumb-phinf.pstatic.net/MjAyMDA0MDZfMjI2/MDAxNTg2MTY0MjMyMDg1.rrhT5tfVxYciD0U6Ze4eka95kJtrmSbHKilIQkvZ2KMg.ri446TdMF2fxBzyUlORyT9_E8lwrIlU4DY7Ksh4_JGQg.JPEG.ejejej1775/%EC%95%84%ED%8C%8C%ED%8A%B83d.jpg?type=w800',
-        'https://blog.kakaocdn.net/dn/buOonG/btqOizVak2A/4SNqcJaiiaJYwg655ZokS1/img.png',
-      ],
+      content:
+        categoryImage(3).length === 0
+          ? ['/image/image_no_img.jpg']
+          : categoryImage(3).map(item => item.imageUrl),
     },
   ]
+
   const settings = {
     dots: true,
     infinite: true,
