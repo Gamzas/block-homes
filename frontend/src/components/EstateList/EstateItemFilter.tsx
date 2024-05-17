@@ -25,10 +25,10 @@ const EstateItemFilter = () => {
           <f.OptionContainer>
             <div className="option-title">금액</div>
             <f.PriceContainer>
-              <input className="price-box" />
+              <input type="text" className="price-box" />
               <div className="price-text">만원</div>
               <span className="price-text">ㅡ</span>
-              <input className="price-box" />
+              <input type="text" className="price-box" />
               <div className="price-text">만원</div>
             </f.PriceContainer>
           </f.OptionContainer>
