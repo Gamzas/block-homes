@@ -24,14 +24,14 @@ const TransactionStep = (props: Props) => {
                   r="7"
                   fill="#845BD3"
                   stroke="#845BD3"
-                  stroke-width="2"
+                  strokeWidth="2"
                 />
                 <circle
                   cx="12"
                   cy="12"
                   r="11"
                   stroke="#845BD3"
-                  stroke-width="2"
+                  strokeWidth="2"
                 />
               </svg>
             ) : (
@@ -47,7 +47,7 @@ const TransactionStep = (props: Props) => {
                   cy="8.5"
                   r="7.5"
                   stroke="#845BD3"
-                  stroke-width="2"
+                  strokeWidth="2"
                 />
               </svg>
             )}

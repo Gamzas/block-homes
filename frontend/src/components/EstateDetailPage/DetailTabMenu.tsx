@@ -84,6 +84,7 @@ const DetailTabMenu = (props: PropsType) => {
       <t.TabMenu>
         {menuArr.map((_, index) => (
           <li
+            key={index}
             className={index === currentTab ? 'submenu focused' : 'submenu'}
             onClick={() => selectMenuHandler(index)}
           ></li>
