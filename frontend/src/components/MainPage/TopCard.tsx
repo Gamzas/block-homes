@@ -1,13 +1,9 @@
 import * as t from '@components/MainPage/style/TopCardStyle'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
 
 const TopCard = ({ currentUser, setCurrentUser, setCurrentUserType }) => {
   const navigate = useNavigate()
 
-  useEffect(() => {
-    console.log(currentUser)
-  }, [currentUser])
   return (
     <t.TopCardContainer>
       <t.TopCardHeader>
@@ -20,7 +16,7 @@ const TopCard = ({ currentUser, setCurrentUser, setCurrentUserType }) => {
           <button
             className="login-btn"
             onClick={() => {
-              setCurrentUserType(0)
+              setCurrentUserType({ type: 0 })
               setCurrentUser({ walletAddress: '', name: '' })
             }}
           >
