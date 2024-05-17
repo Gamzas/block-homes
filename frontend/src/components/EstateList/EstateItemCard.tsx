@@ -1,11 +1,10 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
 import { selectedItemAtom } from '@/stores/atoms/EstateListStore'
 import { EstateItemListType } from '@/types/api/itemType'
-import { getTransactionType } from '@/utils/estateTransferUtil'
+import { getTransactionType, numberToKorean } from '@/utils/estateTransferUtil'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
 import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
-import { numberToKorean } from '@/utils/estateTransferUtil'
 import { getRealEstateType } from '../../utils/estateTransferUtil'
 
 const EstateItemCard = (props: EstateItemListType) => {
@@ -104,7 +103,7 @@ const EstateItemCard = (props: EstateItemListType) => {
                   <rect width="356" height="60" rx="24" ry="24" />
                 </clipPath>
               </defs>
-              <g clip-path="url(#roundedClip)">
+              <g clipPath="url(#roundedClip)">
                 <path
                   d="M108.197 0.0351526C32.6032 1.26792 -13.4318 16.5748 -27 24.0741V61.9817H437.469V13.9038C424.385 18.4673 420.208 43.8243 353.336 45.9817C286.464 48.139 202.69 -1.50581 108.197 0.0351526Z"
                   fill={thirdColor}
@@ -124,7 +123,7 @@ const EstateItemCard = (props: EstateItemListType) => {
                   <rect width="356" height="60" rx="24" ry="24" />
                 </clipPath>
               </defs>
-              <g clip-path="url(#roundedClip)">
+              <g clipPath="url(#roundedClip)">
                 <path
                   d="M146.102 0.48166C70.5073 1.71443 11.5682 39.9823 -2 47.4816V59.9816H462.469V35.4817C449.385 40.0452 443.817 41.3243 376.945 43.4817C310.073 45.639 240.594 -1.0593 146.102 0.48166Z"
                   fill={secondColor}
