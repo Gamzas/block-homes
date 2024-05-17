@@ -3,15 +3,13 @@ import Step from './Step'
 import * as c from './style/ContractPayment'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { useSwipeable } from 'react-swipeable'
-import { contractStepAtom } from '@/stores/smartcontract'
-import { useAtom } from 'jotai'
 import ScreenIndicators from './ScreenIndicator'
 import EstateDidCard from '@/common/EstateDidCard'
 import CustomPasswordModal from './CustomPasswordModal'
 import IsLoading from '@/common/IsLoading'
 import SecurityLock from '@assets/lotties/SecurityLock.json'
 
-const ContractPayment = ({ handlePayment }) => {
+const ContractPayment = ({ handlePayment, currentUser }) => {
   const [screenIndex, setScreenIndex] = useState(0)
 
   const [passwordModalOpen, setPasswordModalOpen] = useState(false)
@@ -87,6 +85,7 @@ const ContractPayment = ({ handlePayment }) => {
                 realEstateDID={
                   'did:klay:0x5cf9f8c31624c63759c152d733b46f48f9d37954'
                 } // 수정필요
+                currentUser={currentUser}
               />
               <div>
                 <p

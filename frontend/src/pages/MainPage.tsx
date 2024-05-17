@@ -10,7 +10,7 @@ import InfoCardSlider from '@components/MainPage/InfoCardSlider'
 import { useEffect } from 'react'
 
 const MainPage = () => {
-  const [currentUserType] = useAtom(userTypeAtom)
+  const [currentUserType, setCurrentUserType] = useAtom(userTypeAtom)
   const [currentUser, setCurrentUser] = useAtom(userAtom)
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser')
@@ -23,7 +23,7 @@ const MainPage = () => {
   }, [])
   return (
     <h.MainPageContainer>
-      <TopCard currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <TopCard currentUser={currentUser} setCurrentUser={setCurrentUser} setCurrentUserType={setCurrentUserType} />
       <InfoCardSlider />
       {currentUserType.type === 0 && <RealEstateCategory />}
       {currentUser &&

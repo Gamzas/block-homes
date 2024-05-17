@@ -37,9 +37,6 @@ const RealEstateCategory = () => {
 
   return (
     <r.RealEstateCategoryContainer>
-      <div className="real-estate-category-info-text">
-        어떤 집을 찾고 계세요?
-      </div>
       <r.RealEstateCategories>
         {realEstateCategoryList.map((realEstateCategory, index) => (
           <r.CategoryContainer
