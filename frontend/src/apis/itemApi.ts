@@ -52,17 +52,19 @@ export const useGetEstateItems = (category: number) => {
   })
 }
 // 매물 상세 조회
-export const useGetDetailItem = (itemNum: number) => {
+export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
   return useQuery({
-    queryKey: ['detailItem', itemNum],
+    queryKey: ['detailItem', itemNum, walletAddress],
     queryFn: async () => {
       try {
-        const res = await publicRequest.get(`${API_ESTATE_DETAIL}/${itemNum}`)
+        const res = await publicRequest.get(`${API_ESTATE_DETAIL}/${itemNum}`, {
+          params: { walletAddress },
+        })
         return res.data
       } catch (err) {
-        console.error(err)
-        alert(err.response?.data?.message || '오류가 발생했습니다.')
-        window.location.href = '/'
+        console.log(err)
+        // alert(err.response?.data?.message || '오류가 발생했습니다.')
+        // window.location.href = '/'
         return null
       }
     },

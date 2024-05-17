@@ -6,15 +6,18 @@ import ItemSafetyCard from './ItemSafetyCard'
 import RoomInfo from './RoomInfo'
 import { useGetDetailItem } from '@/apis/itemApi'
 import ItemLoading from '@/common/ItemLoading'
+import { useAtom } from 'jotai'
+import { userAtom } from '@/stores/atoms/userStore'
 
 const DetailInfo = () => {
+  const [user] = useAtom(userAtom)
   const { id } = useParams()
   const {
     data: detailInfoData,
     isLoading,
     isError,
     error,
-  } = useGetDetailItem(Number(id))
+  } = useGetDetailItem(Number(id), user.walletAddress)
 
   if (isLoading) {
     return <ItemLoading />

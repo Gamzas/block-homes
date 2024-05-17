@@ -7,15 +7,17 @@ import { useAtom } from 'jotai'
 import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
 import { useDeleteFavoriteItem, usePostFavoriteItem } from '@/apis/itemApi'
 import { DetailItemType } from '@/types/components/estateListType'
-import { numberToMoney } from '@/utils/estateTransferUtil'
+import { getTransactionType, numberToMoney } from '@/utils/estateTransferUtil'
 interface PropsType {
   info: DetailItemType
 }
 const DetailFooter = (props: PropsType) => {
-  const { administrationCost, roadNameAddress, price } = props.info
+  const { administrationCost, roadNameAddress, price, transactionType, isUserLiked
+  } =
+    props.info
   const { id } = useParams()
   const [user] = useAtom(userAtom)
-  const [isLiked, setIsLiked] = useState(false)
+  const [isLiked, setIsLiked] = useState(isUserLiked)
   const navigate = useNavigate()
   const [chatRoomRequestData, setChatRoomRequestData] =
     useState<ChatRoomRequestDataType>()
@@ -87,7 +89,7 @@ const DetailFooter = (props: PropsType) => {
       </f.LikendBtn>
       <f.InfoContainer>
         <div className="price">
-          월세 {numberToMoney(price)}&nbsp;
+          {getTransactionType(transactionType)} {numberToMoney(price)}&nbsp;
           <span className="maintenance">
             관리비 {numberToMoney(administrationCost)}
           </span>
