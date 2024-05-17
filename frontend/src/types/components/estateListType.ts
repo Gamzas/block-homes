@@ -57,6 +57,8 @@ export interface DetailItemType {
   moveInDate: string
   parkingRate: number
   haveElevator: boolean
+  transactionType : number
+  isUserLiked : boolean
   createdAt: string
   itemImageList: ItemImage[]
   itemAdministrationFeeList: number[]
