@@ -15,13 +15,13 @@ const UserTypeToggle = () => {
         className={`tenant ${currentUserType.type === 0 ? 'active' : ''}`}
         onClick={() => toggleUserType(0)}
       >
-        임차인
+        임차(매수)인
       </button>
       <button
         className={`landlord ${currentUserType.type === 1 ? 'active' : ''}`}
         onClick={() => toggleUserType(1)}
       >
-        임대인
+        임대(매도)인
       </button>
     </u.UserTypeToggleContainer>
   )
