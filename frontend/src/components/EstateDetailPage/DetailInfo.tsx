@@ -31,7 +31,14 @@ const DetailInfo = () => {
     return <div>Error: {error.message}</div>
   }
 
-  console.log(detailInfoData)
+  const accessChat = (): boolean => {
+    const ownerDIDValue = detailInfoData.ownerDID.split('did:klay:')[1]
+    if (user.walletAddress && ownerDIDValue !== user.walletAddress) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   //임시
   const handleDelete = () => {
@@ -44,7 +51,7 @@ const DetailInfo = () => {
         {/* <button onClick={handleDelete}>삭제(임시)</button> */}
         <ItemSafetyCard condition={detailInfoData.reportRank} />
         <RoomInfo info={detailInfoData} />
-        <DetailFooter info={detailInfoData} />
+        <DetailFooter info={detailInfoData} accessChat={accessChat} />
       </>
     </d.DetailInfoWrapper>
   )
