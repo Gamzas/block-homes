@@ -30,7 +30,9 @@ const ProcessDetail = (props: ProcessDetailProps) => {
   }, [])
 
   const handleCloseModal = () => {
+    setIsGoNextStep(true)
     setIsSpecialOpen(false)
+    navigate(-1)
   }
 
   const goNextStep = () => {
@@ -39,7 +41,6 @@ const ProcessDetail = (props: ProcessDetailProps) => {
   }
 
   const openModalAndGoNextStep = () => {
-    setIsGoNextStep(true)
     setIsSpecialOpen(true)
   }
 
@@ -127,8 +128,8 @@ const ProcessDetail = (props: ProcessDetailProps) => {
 
         <div className="button-box">
           {userMode === 2 &&
-            props.currentStep === props.stepIndex &&
-            props.stepIndex === 0 && (
+            props.currentStep === 1 &&
+            props.stepIndex === 1 && (
               <CustomButtonStyle
                 style={{
                   width: '7rem',
@@ -173,8 +174,7 @@ const ProcessDetail = (props: ProcessDetailProps) => {
                   boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                   fontWeight: '600',
                 }}
-                // onClick={openModalAndGoNextStep}
-                onClick={goNextStep}
+                onClick={openModalAndGoNextStep}
               >
                 특약사항 작성하기
               </CustomButtonStyle>
@@ -191,8 +191,7 @@ const ProcessDetail = (props: ProcessDetailProps) => {
                   boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                   fontWeight: '600',
                 }}
-                // onClick={openModalAndGoNextStep}
-                onClick={goNextStep}
+                onClick={openModalAndGoNextStep}
               >
                 특약사항 작성하기
               </CustomButtonStyle>
