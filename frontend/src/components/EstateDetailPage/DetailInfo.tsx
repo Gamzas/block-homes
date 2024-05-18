@@ -18,7 +18,7 @@ const DetailInfo = () => {
     isError,
     error,
   } = useGetDetailItem(Number(id), user.walletAddress)
-
+  // console.log(detailInfoData)
   const { mutate: deleteItem } = useDeleteEstateItem(
     Number(id),
     user.walletAddress,

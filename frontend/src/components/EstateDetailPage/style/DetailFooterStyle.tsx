@@ -18,12 +18,10 @@ export const LikendBtn = styled.div`
   margin-left: 1rem;
 `
 export const InfoContainer = styled.div`
-  margin: 1rem;
-
+  margin: 0.7rem;
   .price {
     font-size: 1.4rem;
     font-weight: 700;
-    line-height: 28px; /* 127.273% */
   }
 
   .maintenance {
@@ -34,7 +32,8 @@ export const InfoContainer = styled.div`
   }
 
   .location {
-    font-size: 0.9rem;
+    width: fit-content;
+    font-size: 0.7rem;
     font-weight: 400;
   }
 `
