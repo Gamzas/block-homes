@@ -43,12 +43,12 @@ const EstateRegistrationPage = () => {
   })
   const [detailEstateProps, setDetailEstateProps] = useState({
     additionalOptionCategoryList: undefined,
-    roomNumber: undefined,
-    toiletNumber: undefined,
+    roomNumber: 1,
+    toiletNumber: 1,
     description: undefined,
     buildingFloor: undefined,
     itemFloor: undefined,
-    parkingRate: undefined,
+    parkingRate: 1,
     haveElevator: true,
   })
   const [photoRegistrationProps, setPhotoRegistrationProps] = useState({
