@@ -8,7 +8,8 @@ const RealEstateCheckListPage = () => {
       <r.RealEstateCheckListPageHeader>
         <div className="check-list-title">매물 체크리스트</div>
         <div className="check-list-info">
-          해당 체크리스트는 임대(매도)인에게도 공유됩니다.
+          고려해야 할 사항을 리스트로 만들어두었어요. <br />
+          손쉽게 매물의 상태를 파악해보세요!
         </div>
         <img
           alt="체크리스트"
