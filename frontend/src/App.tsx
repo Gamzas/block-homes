@@ -51,7 +51,10 @@ const HomeRoutes = () => (
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/info-report" element={<InfoReportPage />} />
     <Route path="/transaction-progress" element={<TransactionProgressPage />} />
-    <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
+    <Route
+      path="/estate-checklist/:chatRoomNo"
+      element={<RealEstateCheckListPage />}
+    />
     <Route path="/likes" element={<FavoriteItemsPage />} />
     <Route path="/myestate" element={<MyEstatePage />} />
     <Route path="/test/:testName" element={<TestPage />} />
