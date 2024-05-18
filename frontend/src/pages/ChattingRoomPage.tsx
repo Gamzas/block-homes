@@ -200,7 +200,7 @@ const ChattingRoomPage = () => {
             </button>
             <button
               className="chatting-header-button"
-              onClick={() => navigate('/estate-checklist')}
+              onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
             >
               체크리스트
             </button>
