@@ -74,5 +74,14 @@ export const ButtonContainer = styled.div`
   }
 `
 export const MessageListContainer = styled.div`
-  margin: 1rem;
+  margin: 1rem 1rem 0 1rem;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `
