@@ -29,17 +29,19 @@ export const usePostItemRegister = () => {
 // 등록 된 매물 조회(필터링 가능)
 export const useGetEstateItems = (
   category: number,
+  report: number,
   filter: FilterType,
   coord: ReqCoordType,
   setItem: (itemList: EstateItemResType) => void,
 ) => {
   return useQuery({
-    queryKey: ['estateItems', category, filter, coord, setItem],
+    queryKey: ['estateItems', category, report, filter, coord, setItem],
     queryFn: async () => {
       try {
         const res = await publicRequest.get(`${API_ESTATE_ITEM}`, {
           params: {
             ...coord,
+            reportRank: report,
             realEstateType: category,
             ...filter,
           },

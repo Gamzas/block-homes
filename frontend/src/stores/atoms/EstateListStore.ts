@@ -49,3 +49,6 @@ export const estateFilterAtom = atom<FilterType>({
   minPyeong: 0,
   maxPyeong: 0,
 })
+
+// 등급별 부동산 조회 위한 항목
+export const reportAtom = atom<number>(0)
