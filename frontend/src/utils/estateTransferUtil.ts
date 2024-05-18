@@ -106,7 +106,7 @@ export const numberToKorean = (num: number): string => {
   if (adjustedNum >= 100000000) {
     return (adjustedNum / 100000000).toFixed(1).replace(/\.0$/, '') + '억'
   } else if (adjustedNum >= 10000) {
-    return (adjustedNum / 10000).toFixed(1).replace(/\.0$/, '') 
+    return (adjustedNum / 10000).toFixed(1).replace(/\.0$/, '') + '만'
   } else if (adjustedNum >= 1000) {
     return (adjustedNum / 1000).toFixed(1).replace(/\.0$/, '') 
   } else {

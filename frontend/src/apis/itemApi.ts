@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import {
   API_ESTATE_DETAIL,
@@ -13,6 +13,8 @@ import {
   PostFavoriteDataType,
 } from '@/types/api/itemType'
 import { FilterType, ReqCoordType } from '@/types/components/estateListType'
+import { useSetAtom } from 'jotai'
+import { estateItemListAtom } from '@/stores/atoms/EstateListStore'
 
 export const usePostItemRegister = () => {
   return useMutation({
@@ -20,6 +22,8 @@ export const usePostItemRegister = () => {
       axios.post(API_ITEM, formData, API_HEADERS_FORM_DATA),
   })
 }
+
+// const setItemList = useSetAtom(estateItemListAtom)
 
 // 등록 된 매물 조회(필터링 가능)
 export const useGetEstateItems = (
@@ -69,27 +73,30 @@ export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
 }
 
 // 부동산 매물 삭제
-export const useDeleteEstateItem = () => {
+export const useDeleteEstateItem = (number: number, walletAddress: string) => {
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: () =>
       publicRequest
         .delete(API_ITEM, {
-          data: {
-            itemNo: 24,
-            walletAddress: '0xe0Fa92495DFa8E7188E72F593ef2F2988B6b5A87',
+          params: {
+            itemNo: number,
+            walletAddress: walletAddress,
           },
         })
         .then(res => console.log(res))
         .catch(err => console.log(err)),
     onSuccess: () => {
       alert('삭제되었습니다.')
+      // window.location.href = `-1`
+      // 매물 리스트 쿼리 무효화
+      queryClient.invalidateQueries({ queryKey: ['estateItems'] })
     },
     onError: err => {
       console.log(err)
     },
   })
 }
-
 // 찜 목록 조회
 export const useGetFavoriteItem = (params: GetFavoritItemParamsType) => {
   return useQuery({

@@ -16,7 +16,7 @@ const MyWallet = () => {
       <w.WalletContainer onClick={handleCheckBalance}>
         <w.BalanceBox>
           <div className="title">나의 지갑 잔액</div>
-          <div className="balance">{myBalance} ETH</div>
+          <div className="balance">{myBalance} KLAY</div>
         </w.BalanceBox>
         <img className="wallet" src="image/image_wallet.png" alt="지갑" />
       </w.WalletContainer>
