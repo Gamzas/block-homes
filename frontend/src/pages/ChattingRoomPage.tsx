@@ -8,6 +8,7 @@ import {
   sellerStepAtom,
   userAtom,
   userModeAtom,
+  userStepAtom,
 } from '@stores/atoms/userStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -30,6 +31,7 @@ const ChattingRoomPage = () => {
   const [sellerStep, setSellerStep] = useAtom(sellerStepAtom)
   const [buyerStep, setBuyerStep] = useAtom(buyerStepAtom)
   const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
+  const [userStep, setUserStep] = useAtom(userStepAtom)
 
   const defaultMessage = {
     chatNo: 0,
@@ -89,21 +91,7 @@ const ChattingRoomPage = () => {
                   createdAt: receivedMessage.createdAt,
                 },
               ])
-              if (
-                receivedMessage.contractStep !== 0 &&
-                receivedMessage.contractStep % 2 === 0
-              ) {
-                console.log('메세지 없데이트 하고 바꾼다?')
-                setSellerStep(receivedMessage.contractStep + 1)
-                setBuyerStep(receivedMessage.contractStep + 2)
-              } else if (
-                receivedMessage.contractStep !== 0 &&
-                receivedMessage.contractStep % 2 === 1
-              ) {
-                console.log('메세지 없데이트 하고 바꾼다?')
-                setSellerStep(receivedMessage.contractStep + 2)
-                setBuyerStep(receivedMessage.contractStep + 1)
-              }
+              setUserStep(receivedMessage.contractStep + 1)
               scrollToBottom()
             } catch (error) {
               console.error('Error parsing message:', error)
@@ -182,16 +170,15 @@ const ChattingRoomPage = () => {
 
   useEffect(() => {
     if (data?.chatList.length > 0) {
-      const lastStep = data.chatList[data.chatList.length - 1].contractStep
-      if (lastStep !== 0 && lastStep % 2 === 0) {
-        setSellerStep(lastStep + 1)
-        setBuyerStep(lastStep + 2)
-      } else if (lastStep !== 0 && lastStep % 2 === 1) {
-        setSellerStep(lastStep + 2)
-        setBuyerStep(lastStep + 1)
-      }
+      setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
+      // if (lastStep !== 0 && lastStep % 2 === 0) {
+      //   setSellerStep(lastStep + 1)
+      //   setBuyerStep(lastStep + 2)
+      // } else if (lastStep !== 0 && lastStep % 2 === 1) {
+      //   setSellerStep(lastStep + 2)
+      //   setBuyerStep(lastStep + 1)
+      // }
     }
-    console.log(sellerStep, buyerStep)
   }, [data, messages])
 
   const sendTextMessage = () => {
@@ -213,21 +200,21 @@ const ChattingRoomPage = () => {
   const sendInfoMessage = () => {
     let infoMessage = ''
 
-    if (sellerStep === 1 && buyerStep === 0) {
+    if (userStep - 1 === 0) {
       infoMessage = '임대(매도)인이 거래 시작 요청을 눌렀습니다.'
-    } else if (sellerStep === 1 && buyerStep === 2) {
+    } else if (userStep - 1 === 1) {
       infoMessage = '임차(매수)인이 거래 수락을 하였습니다.'
-    } else if (sellerStep === 3 && buyerStep === 2) {
+    } else if (userStep - 1 === 2) {
       infoMessage = '임대(매도)인이 특약 사항을 작성했습니다.'
-    } else if (sellerStep === 3 && buyerStep === 4) {
+    } else if (userStep - 1 === 3) {
       infoMessage = '임차(매수)인이 특약 사항을 작성했습니다.'
-    } else if (sellerStep === 5 && buyerStep === 4) {
+    } else if (userStep - 1 === 4) {
       infoMessage = '임대(매도)인이 계약서를 작성했습니다.'
-    } else if (sellerStep === 5 && buyerStep === 6) {
+    } else if (userStep - 1 === 5) {
       infoMessage = '임차(매수)인이 계약서 서명을 완료했습니다.'
-    } else if (sellerStep === 7 && buyerStep === 6) {
+    } else if (userStep - 1 === 6) {
       infoMessage = '거래가 완료되었습니다.'
-    } else if (sellerStep === 7 && buyerStep === 8) {
+    } else if (userStep - 1 === 7) {
       infoMessage = '거래가 완료되었습니다.'
     }
 
