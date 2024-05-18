@@ -4,7 +4,7 @@ import DetailTabMenu from './DetailTabMenu'
 import DetailFooter from './DetailFooter'
 import ItemSafetyCard from './ItemSafetyCard'
 import RoomInfo from './RoomInfo'
-import { useGetDetailItem } from '@/apis/itemApi'
+import { useDeleteEstateItem, useGetDetailItem } from '@/apis/itemApi'
 import ItemLoading from '@/common/ItemLoading'
 import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
@@ -19,6 +19,10 @@ const DetailInfo = () => {
     error,
   } = useGetDetailItem(Number(id), user.walletAddress)
 
+  const { mutate: deleteItem } = useDeleteEstateItem(
+    Number(id),
+    user.walletAddress,
+  )
   if (isLoading) {
     return <ItemLoading />
   }
@@ -28,33 +32,16 @@ const DetailInfo = () => {
   }
 
   console.log(detailInfoData)
-  // const detailInfoData = DetailItem
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // const response = await axios.get(`/api/items/${id}`)
-  //       // setItem(response.data)
-  //       // setLoading(false)
-  //     } catch (error) {
-  //       if (error.response && error.response.status === 404) {
-  //         alert('잘못된 접근입니다.')
-  //       } else {
-  //         alert('오류가 발생했습니다. 다시 시도해주세요')
-  //       }
-  //       // setLoading(false)
-  //     }
-  //   }
-  //   fetchData()
-  // }, [id])
-
-  // if (loading) return <div>Loading...</div>
-  // if (error) return <div>Error: {error}</div>
-
+  //임시
+  const handleDelete = () => {
+    deleteItem()
+  }
   return (
     <d.DetailInfoWrapper>
       <>
         <DetailTabMenu imgUrl={detailInfoData.itemImageList} />
+        <button onClick={handleDelete}>삭제(임시)</button>
         <ItemSafetyCard condition={detailInfoData.reportRank} />
         <RoomInfo info={detailInfoData} />
         <DetailFooter info={detailInfoData} />
