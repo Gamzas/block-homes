@@ -120,10 +120,11 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
 
     @Override
     public List<ChatRes> getChatResList(Integer chatRoomNo) {
+        QChat subChat = new QChat("subChat");
+
         JPQLQuery<ChatRes> chatQuery = from(qChat)
             .innerJoin(qChatRoom).on(qChat.chatRoom.eq(qChatRoom))
-            .innerJoin(qWalletChatRoom).on(qChatRoom.eq(qWalletChatRoom.chatRoom))
-            .innerJoin(qWallet).on(qWalletChatRoom.wallet.eq(qWallet))
+            .innerJoin(qWallet).on(qChat.wallet.eq(qWallet))
             .leftJoin(qImage).on(qChat.image.eq(qImage))
             .select(Projections.constructor(ChatRes.class,
                 qChat.chatNo,
