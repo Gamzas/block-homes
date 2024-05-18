@@ -19,6 +19,12 @@ const EstateDidCard = ({
   const navigate = useNavigate()
   const { data: realEstateInfoData } = useGetRealEstateInfo(realEstateDID)
 
+  useEffect(() => {
+    if (index !== currentCenterIndex) {
+      setIsFlipped(false)
+    }
+  }, [currentCenterIndex])
+
   const toggleCard = () => {
     if (index === currentCenterIndex) {
       setIsFlipped(!isFlipped)
@@ -140,13 +146,17 @@ const EstateDidCard = ({
                 </e.BackInfoElement>
                 <e.BackInfoElement>
                   <div className="element-title">동 / 호수</div>
-                  <div className="element-content">{`${realEstateInfoData.buildingNumber} 동 ${realEstateInfoData.roomNumber} 호`}</div>
+                  <div className="element-content">
+                    {realEstateInfoData.buildingNumber !== 0
+                      ? `${realEstateInfoData.buildingNumber} 동 ${realEstateInfoData.roomNumber} 호`
+                      : `${realEstateInfoData.roomNumber} 호`}
+                  </div>
                 </e.BackInfoElement>
                 <e.BackInfoElement>
                   <div className="element-title">위법</div>
                   <div className="element-content">
                     {`불법 건축물 : ${realEstateInfoData.isViolated ? '위법' : '합법'}`}
-                    <br />
+                    <div style={{ padding: '0.1rem' }} />
                     {`무허가 건축물 : ${realEstateInfoData.isNotPermitted ? '위법' : '합법'}`}
                   </div>
                 </e.BackInfoElement>
