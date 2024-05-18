@@ -24,7 +24,11 @@ export const ProcessDetailContainer = styled.div<ProcessDetailContainerProps>`
   display: flex;
   margin: 0.7rem 0;
   height: ${props =>
-    props.$stepIndex === props.$currentStep ? '13rem' : '10rem'};
+    props.$currentStep === 0
+      ? '10rem'
+      : props.$stepIndex === props.$currentStep
+        ? '13rem'
+        : '10rem'};
 `
 
 export const LeftProcessDetailContainer = styled.div<ProcessDetailContainerProps>`

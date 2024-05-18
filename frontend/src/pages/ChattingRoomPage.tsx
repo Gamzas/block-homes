@@ -17,6 +17,7 @@ import MessageItem from '@components/ChattingPage/MessageItem'
 import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
 import { MessageType } from '@/types/components/chatType'
+import { isGoNextStepAtom } from '@stores/atoms/chat'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -25,26 +26,10 @@ const ChattingRoomPage = () => {
   const navigate = useNavigate()
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
-  const [, setUserMode] = useAtom(userModeAtom)
-  const [, setSellerStep] = useAtom(sellerStepAtom)
-  const [, setBuyerStep] = useAtom(buyerStepAtom)
-
-  const formatPrice = price => {
-    const units = ['원', '만', '억']
-    let result = ''
-    let unitIndex = 0
-
-    while (price > 0) {
-      const part = price % 10000
-      if (part > 0) {
-        result = part + units[unitIndex] + ' ' + result // 각 단위마다 값을 추가
-      }
-      price = Math.floor(price / 10000)
-      unitIndex++
-    }
-
-    setStringPrice(result.trim())
-  }
+  const [userMode, setUserMode] = useAtom(userModeAtom)
+  const [sellerStep, setSellerStep] = useAtom(sellerStepAtom)
+  const [buyerStep, setBuyerStep] = useAtom(buyerStepAtom)
+  const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
 
   const defaultMessage = {
     chatNo: 0,
@@ -73,7 +58,7 @@ const ChattingRoomPage = () => {
     const sockJs = SockJS(API_BASE_URL + '/ws/chat')
     client.current = new Client({
       webSocketFactory: () => sockJs,
-      debug: str => console.log(str), // 추가된 디버그 로그
+      // debug: str => console.log(str),
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
@@ -104,6 +89,21 @@ const ChattingRoomPage = () => {
                   createdAt: receivedMessage.createdAt,
                 },
               ])
+              if (
+                receivedMessage.contractStep !== 0 &&
+                receivedMessage.contractStep % 2 === 0
+              ) {
+                console.log('메세지 없데이트 하고 바꾼다?')
+                setSellerStep(receivedMessage.contractStep + 1)
+                setBuyerStep(receivedMessage.contractStep + 2)
+              } else if (
+                receivedMessage.contractStep !== 0 &&
+                receivedMessage.contractStep % 2 === 1
+              ) {
+                console.log('메세지 없데이트 하고 바꾼다?')
+                setSellerStep(receivedMessage.contractStep + 2)
+                setBuyerStep(receivedMessage.contractStep + 1)
+              }
               scrollToBottom()
             } catch (error) {
               console.error('Error parsing message:', error)
@@ -116,13 +116,30 @@ const ChattingRoomPage = () => {
     client.current.activate()
   }
 
+  const formatPrice = price => {
+    const units = ['원', '만', '억']
+    let result = ''
+    let unitIndex = 0
+
+    while (price > 0) {
+      const part = price % 10000
+      if (part > 0) {
+        result = part + units[unitIndex] + ' ' + result
+      }
+      price = Math.floor(price / 10000)
+      unitIndex++
+    }
+
+    setStringPrice(result.trim())
+  }
+
   useEffect(() => {
     if (chatRoomNo && user.walletAddress) {
       setChatRoomNumber(Number(chatRoomNo))
     }
   }, [chatRoomNo, user])
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ['fetchChatRoomDetail', chatRoomNumber],
     queryFn: () => fetchChatRoomDetail(chatRoomNumber),
     enabled: !!chatRoomNumber,
@@ -161,18 +178,21 @@ const ChattingRoomPage = () => {
     } else {
       setUserMode(1)
     }
+  }, [data])
 
-    if (data?.chatList.length >= 1) {
+  useEffect(() => {
+    if (data?.chatList.length > 0) {
       const lastStep = data.chatList[data.chatList.length - 1].contractStep
-      if (lastStep % 2 === 0) {
-        setBuyerStep(lastStep)
-        setSellerStep(lastStep - 1)
-      } else {
-        setBuyerStep(lastStep - 1)
-        setSellerStep(lastStep)
+      if (lastStep !== 0 && lastStep % 2 === 0) {
+        setSellerStep(lastStep + 1)
+        setBuyerStep(lastStep + 2)
+      } else if (lastStep !== 0 && lastStep % 2 === 1) {
+        setSellerStep(lastStep + 2)
+        setBuyerStep(lastStep + 1)
       }
     }
-  }, [data])
+    console.log(sellerStep, buyerStep)
+  }, [data, messages])
 
   const sendTextMessage = () => {
     if (newMessage.message.trim() !== '') {
@@ -190,21 +210,61 @@ const ChattingRoomPage = () => {
     }
   }
 
+  const sendInfoMessage = () => {
+    let infoMessage = ''
+
+    if (sellerStep === 1 && buyerStep === 0) {
+      infoMessage = '임대(매도)인이 거래 시작 요청을 눌렀습니다.'
+    } else if (sellerStep === 1 && buyerStep === 2) {
+      infoMessage = '임차(매수)인이 거래 수락을 하였습니다.'
+    } else if (sellerStep === 3 && buyerStep === 2) {
+      infoMessage = '임대(매도)인이 특약 사항을 작성했습니다.'
+    } else if (sellerStep === 3 && buyerStep === 4) {
+      infoMessage = '임차(매수)인이 특약 사항을 작성했습니다.'
+    } else if (sellerStep === 5 && buyerStep === 4) {
+      infoMessage = '임대(매도)인이 계약서를 작성했습니다.'
+    } else if (sellerStep === 5 && buyerStep === 6) {
+      infoMessage = '임차(매수)인이 계약서 서명을 완료했습니다.'
+    } else if (sellerStep === 7 && buyerStep === 6) {
+      infoMessage = '거래가 완료되었습니다.'
+    } else if (sellerStep === 7 && buyerStep === 8) {
+      infoMessage = '거래가 완료되었습니다.'
+    }
+
+    if (newMessage) {
+      client.current.publish({
+        destination: `/pub/chat.progress.${chatRoomNo}`,
+        body: JSON.stringify({
+          senderWalletAddress: user.walletAddress,
+          message: infoMessage,
+          imageBase64: null,
+        }),
+      })
+      console.log('Sending info:', newMessage.message)
+      setNewMessage(defaultMessage)
+      if (userMode === 1) {
+        setSellerStep(sellerStep + 2)
+      } else {
+        setBuyerStep(buyerStep + 2)
+      }
+      scrollToBottom()
+    }
+  }
+
   useEffect(() => {
     scrollToBottom()
   }, [messages])
 
   useEffect(() => {
-    console.log('Updated messages useEffect:', messages)
-  }, [messages])
+    if (isGoNextStep) {
+      setTimeout(sendInfoMessage, 1000)
+      setIsGoNextStep(false)
+    }
+  }, [isGoNextStep])
 
   return (
     <c.ChattingRoomPageContainer>
-      <Header
-        title="채팅"
-        isSearch={false}
-        rightIconSrc="/icon/icon_safety_card_report.png"
-      />
+      <Header title="채팅" isSearch={false} rightIconSrc="" />
       <c.ChattingHeader>
         <div className="image-container">
           <img src={data?.representativeImage} alt="매물 이미지" />
@@ -223,12 +283,14 @@ const ChattingRoomPage = () => {
             >
               레포트
             </button>
-            <button
-              className="chatting-header-button"
-              onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
-            >
-              체크리스트
-            </button>
+            {userMode === 1 && (
+              <button
+                className="chatting-header-button"
+                onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
+              >
+                체크리스트
+              </button>
+            )}
             <button
               className="chatting-header-button"
               onClick={() => navigate(`/transaction-progress/${data.itemNo}`)}

@@ -10,10 +10,16 @@ const BuyerProcess = () => {
   return (
     <b.BuyerProcessContainer>
       <ProcessDetail
+        title="거래 시작 대기 중"
+        content=" 판매자가 [[거래]] 요청을 보내기를 기다세요! 판매자의 요청이 있어야 거래를 시작할 수 있습니다."
+        currentStep={buyerStep}
+        stepIndex={0}
+      />
+      <ProcessDetail
         title="[[부동산 거래 요청 승낙]]"
         content=" 판매자가 [[거래]] 요청을 [[보냈습니다]]! 요청을 승낙하고 거래를 계속해 보세요!"
         currentStep={buyerStep}
-        stepIndex={1}
+        stepIndex={2}
       />
       <ProcessDetail
         title="[[특약 사항 작성]]"
@@ -21,7 +27,7 @@ const BuyerProcess = () => {
           집주인과 대화를 통해 특약사항을 조합해
           나갈 수 있습니다."
         currentStep={buyerStep}
-        stepIndex={3}
+        stepIndex={4}
       />
       <ProcessDetail
         title="[[계약서 서명 및 결제]]"
@@ -30,7 +36,7 @@ const BuyerProcess = () => {
           서명 전, 지갑에 거래 금액이 충분히 있는지
           확인하세요!"
         currentStep={buyerStep}
-        stepIndex={5}
+        stepIndex={6}
       />
       <ProcessDetail
         title="[[거래 완료]]"
@@ -38,7 +44,7 @@ const BuyerProcess = () => {
           거래 내역은 블록체인에 자동으로 기록되어
           투명하게 관리되니 걱정마세요!"
         currentStep={buyerStep}
-        stepIndex={7}
+        stepIndex={8}
       />
     </b.BuyerProcessContainer>
   )
