@@ -77,8 +77,8 @@ const OwnEstateDidList = ({ currentUser }) => {
           <div className="icon" />
           <div>
             <span className="large">관련된 </span>
-            <span className="highlight">부동산 카드가 </span>
-            <span className="large">없습니다</span>
+            <span className="highlight">부동산 카드</span>
+            <span className="large">가 없습니다</span>
           </div>
         </o.OwnEstateDidListEmptyContainer>
       )}
