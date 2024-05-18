@@ -1,37 +1,49 @@
 import React, { useRef, useState } from 'react'
-import { IntroCanvasWrapper, IntroContainer, IntroRefreshButton } from '@components/IntroPage/style/IntroStyle'
+import {
+  IntroCanvasWrapper,
+  IntroContainer,
+  IntroHeader,
+} from '@components/IntroPage/style/IntroStyle'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
 
 const Model = ({
-                 url,
-                 scale,
-                 isUserInteracting,
-                 modelRef,
-               }: {
+  url,
+  scale,
+  isUserInteracting,
+  modelRef,
+}: {
   url: string
   scale?: [number, number, number]
   isUserInteracting: boolean
   modelRef: React.RefObject<any>
 }) => {
   const { scene } = useGLTF(url)
-
+  const currentFrame = {
+    frameCount: 0,
+  }
   useFrame(() => {
     if (modelRef.current && !isUserInteracting) {
-      modelRef.current.rotation.y += 0.005 // x축을 기준으로 회전
+      const rotationInDegrees = Math.round(
+        THREE.MathUtils.radToDeg(modelRef.current.rotation.y),
+      )
+      if (rotationInDegrees % 45 !== 0) {
+        modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
+      } else {
+        currentFrame.frameCount += 1
+        if (currentFrame.frameCount > 60) {
+          currentFrame.frameCount = 0
+          modelRef.current.rotation.y += 0.02
+        }
+      }
     }
   })
 
   return <primitive ref={modelRef} object={scene} scale={scale} />
 }
 
-const Controls = ({
-                    setIsUserInteracting,
-                    controlsRef,
-                  }: {
-  setIsUserInteracting: React.Dispatch<React.SetStateAction<boolean>>
-  controlsRef: React.RefObject<any>
-}) => {
+const Controls = ({ setIsUserInteracting, controlsRef }) => {
   useFrame(() => {
     if (controlsRef.current) {
       controlsRef.current.update()
@@ -73,7 +85,7 @@ const Intro = () => {
           <directionalLight position={[1000, 1000, 1000]} intensity={2} />
           <Model
             url={'/3DIllustrations/Intro.glb'}
-            scale={[2, 2, 2]}
+            scale={[3.5, 3.5, 3.5]}
             isUserInteracting={isUserInteracting}
             modelRef={modelRef}
           />
@@ -83,7 +95,11 @@ const Intro = () => {
           />
         </Canvas>
       </IntroCanvasWrapper>
-      <IntroRefreshButton onClick={handleReset} />
+      <IntroHeader>
+        <div className="icon" />
+        손가락을 이용하여 360도 돌려보세요.
+        <div className="refresh-button" onClick={handleReset} />
+      </IntroHeader>
     </IntroContainer>
   )
 }
