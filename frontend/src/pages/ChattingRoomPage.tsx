@@ -156,13 +156,13 @@ const ChattingRoomPage = () => {
     }
     setMessages(data?.chatList)
 
-    if (data.sellerWalletAddress === user.walletAddress) {
+    if (data?.sellerWalletAddress === user.walletAddress) {
       setUserMode(2)
     } else {
       setUserMode(1)
     }
 
-    if (data.chatList.length >= 1) {
+    if (data?.chatList.length >= 1) {
       const lastStep = data.chatList[data.chatList.length - 1].contractStep
       if (lastStep % 2 === 0) {
         setBuyerStep(lastStep)
