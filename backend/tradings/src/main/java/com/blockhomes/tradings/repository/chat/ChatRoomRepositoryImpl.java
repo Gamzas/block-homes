@@ -86,6 +86,7 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
             .innerJoin(qWallet).on(qWalletChatRoom.wallet.eq(qWallet))
             .select(qChatRoom.chatRoomNo)
             .where(qWalletChatRoom.roleCategory.eq(RoleCategory.BUYER)
+                .and(qItem.itemNo.eq(itemNo))
                 .and(qWallet.walletAddress.eq(walletAddress)))
             .fetchOne();
     }
