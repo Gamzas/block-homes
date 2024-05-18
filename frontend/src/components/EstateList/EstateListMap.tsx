@@ -33,13 +33,11 @@ const EstateListMap = forwardRef((props, ref) => {
   const [coord] = useAtom(currentCoordAtom)
   const [location, setLocation] = useAtom(mapCenterCoordAtom)
   const [userCoord] = useAtom(userCoordAtom)
-  console.log('마커', coord)
-  console.log('dbwj', userCoord)
-  console.log('지도 중심', location)
+
   const [filter] = useAtom(filterAtom)
   const { category } = useParams()
   const estateItemList: EstateItemListType[] = []
-
+  const [marker, setMarker] = useState(null)
   const [item, setItem] = useAtom(selectedItemAtom)
   const [previousCenter, setPreviousCenter] = useState({
     latitude: coord.latitude,
@@ -58,7 +56,6 @@ const EstateListMap = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     setCenter: () => {
-      console.log('tlddddddddddddddddddddddfgod')
       if (mapRef.current) {
         const map = mapRef.current
         const moveLatLon = new kakao.maps.LatLng(
@@ -126,16 +123,22 @@ const EstateListMap = forwardRef((props, ref) => {
       coord.latitude,
       coord.longitude,
     )
-    const marker = new kakao.maps.Marker({
+    const initialMarker = new kakao.maps.Marker({
       position: markerPosition,
       image: markerImage,
     })
-    marker.setMap(map)
-  }, [coord, setLocation])
+    initialMarker.setMap(map)
+    setMarker(initialMarker)
+  }, [])
 
   useEffect(() => {
     if (initialLoad.current) return
+
     const map = mapRef.current
+
+    if (marker) {
+      marker.setMap(null) // 기존 마커 제거
+    }
     const markerImage = new kakao.maps.MarkerImage(
       '/image/image_location_pin.png',
       new kakao.maps.Size(48, 48),
@@ -145,11 +148,12 @@ const EstateListMap = forwardRef((props, ref) => {
       coord.latitude,
       coord.longitude,
     )
-    const marker = new kakao.maps.Marker({
+    const newMarker = new kakao.maps.Marker({
       position: markerPosition,
       image: markerImage,
     })
-    marker.setMap(map)
+    newMarker.setMap(map)
+    setMarker(newMarker)
 
     estateItemList.forEach(estateItem => {
       const position = new kakao.maps.LatLng(
@@ -179,13 +183,12 @@ const EstateListMap = forwardRef((props, ref) => {
 
       customOverlay.setMap(map)
     })
-  }, [coord, estateItemList])
+  }, [coord])
 
   useEffect(() => {
     const map = mapRef.current
     const setCenter = () => {
-      // 이동할 위도 경도 위치를 생성합니다
-      console.log('실행되는거임?', location.latitude)
+      // 이동할 위도 경도 위치를 생성
       const moveLatLon = new kakao.maps.LatLng(
         location.latitude,
         location.longitude,
