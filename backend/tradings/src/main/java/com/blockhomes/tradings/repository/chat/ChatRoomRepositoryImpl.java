@@ -12,13 +12,20 @@ import com.blockhomes.tradings.entity.item.enums.ItemImageCategory;
 import com.blockhomes.tradings.entity.wallet.QWallet;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.JPQLQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import static org.hibernate.query.results.Builders.fetch;
 
 @Slf4j
 public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements ChatRoomRepositoryCustom {
@@ -37,36 +44,38 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
 
     @Override
     public List<ChatRoomInstance> getChatRoomsByWalletAndRole(String walletAddress, RoleCategory roleCategory) {
-        return from(qChatRoom)
+        QChat subChat = new QChat("subChat");
+
+        JPQLQuery<ChatRoomInstance> query = from(qChatRoom)
             .innerJoin(qItem).on(qChatRoom.item.eq(qItem))
             .innerJoin(qWalletChatRoom).on(qChatRoom.eq(qWalletChatRoom.chatRoom))
             .innerJoin(qWallet).on(qWalletChatRoom.wallet.eq(qWallet))
+            .leftJoin(qItemImage).on(qItem.eq(qItemImage.item)
+                .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
+            .innerJoin(qImage).on(qItemImage.image.eq(qImage))
+            .leftJoin(qChat).on(qChat.chatRoom.eq(qChatRoom)
+                .and(qChat.createdAt.eq(
+                    JPAExpressions.select(subChat.createdAt.max())
+                        .from(subChat)
+                        .where(subChat.chatRoom.eq(qChatRoom))
+                ))
+            )
             .select(Projections.constructor(ChatRoomInstance.class,
                 qChatRoom.chatRoomNo,
                 qItem.itemNo,
                 qWalletChatRoom.roleCategory,
-                (
-                    JPAExpressions.select(qImage.imageUrl)
-                        .from(qImage)
-                        .innerJoin(qItemImage).on(qImage.eq(qItemImage.image))
-                        .where(qItemImage.item.eq(qItem)
-                            .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
-                        .orderBy(qImage.imageNo.asc())
-                        .limit(1)
-                ),
+                qImage.imageUrl,
                 qItem.roadNameAddress,
                 qItem.transactionType,
                 qItem.price,
-                JPAExpressions.select(qChat.message)
-                    .from(qChat)
-                    .where(qChat.chatRoom.eq(qChatRoom))
-                    .orderBy(qChat.createdAt.desc())
-                    .limit(1),
-                qItem.reportRank
-            ))
+                qChat.message,
+                qItem.reportRank))
             .where(qWallet.walletAddress.eq(walletAddress)
-                .and(qWalletChatRoom.roleCategory.eq(roleCategory)))
-            .fetch();
+                .and(qWalletChatRoom.roleCategory.eq(roleCategory)));
+
+        log.info("{}", query);
+
+        return query.fetch();
     }
 
     @Override
