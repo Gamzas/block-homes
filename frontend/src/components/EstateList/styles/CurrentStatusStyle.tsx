@@ -81,8 +81,8 @@ export const EstateStatusButton = styled.button<ColorProps>`
   font-weight: 400;
   line-height: 30%;
   font-size: 0.8rem;
-  color: ${props => (props.active ? 'white' : props.$color)};
-  background-color: ${props => (props.active ? props.$color : 'white')};
+  color: ${props => (props.$active ? 'white' : props.$color)};
+  background-color: ${props => (props.$active ? props.$color : 'white')};
   cursor: pointer;
   &:hover {
     background-color: ${props => props.$color};
