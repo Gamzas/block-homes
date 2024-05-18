@@ -206,7 +206,7 @@ const ChattingRoomPage = () => {
             </button>
             <button
               className="chatting-header-button"
-              onClick={() => navigate('/transaction-progress')}
+              onClick={() => navigate(`/transaction-progress/${data.itemNo}`)}
             >
               거래 현황 보러가기
             </button>
