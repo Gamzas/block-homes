@@ -96,8 +96,16 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public ListContractRes listContract(ListContractReq req) {
-        List<ListContractInstance> contractLists = contractRepository
-            .getContractListByWalletAddressAndRoleCategory(req.getWalletAddress(), RoleCategory.valueToEnum(req.getMode()));
+        List<ListContractInstance> contractLists;
+
+        if (req.getMode() == 0) {
+            contractLists = contractRepository
+                .getContractListByWalletAddress(req.getWalletAddress());
+
+        } else {
+            contractLists = contractRepository
+                .getContractListByWalletAddressAndRoleCategory(req.getWalletAddress(), RoleCategory.valueToEnum(req.getMode()));
+        }
 
         return ListContractRes.builder()
             .contractLists(contractLists)
