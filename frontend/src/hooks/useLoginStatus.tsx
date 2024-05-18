@@ -11,7 +11,7 @@ const useLoginStatus = () => {
     const currentUserData = currentUser ? JSON.parse(currentUser) : null
     if (currentUserData.name === '' || !currentUserData) {
       alert('로그인 후 이용해주세요')
-      navigate('/')
+      navigate('/intro')
     }
   }, [navigate, user])
 }
