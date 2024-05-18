@@ -4,17 +4,17 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,7 +53,7 @@ public class RabbitConfig {
 
     @Bean
     public Binding binding() {
-        return BindingBuilder.bind(queue()).to(exchange()).with(ROUTING_KEY);
+        return BindingBuilder.bind(this.queue()).to(this.exchange()).with(ROUTING_KEY);
     }
 
     @Bean
@@ -69,7 +69,7 @@ public class RabbitConfig {
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
-//        rabbitTemplate.setRoutingKey(ROUTING_KEY);
+        rabbitTemplate.setRoutingKey(ROUTING_KEY);
 
         return rabbitTemplate;
     }
@@ -81,7 +81,7 @@ public class RabbitConfig {
         connectionFactory.setVirtualHost(virtualHost);
         connectionFactory.setUsername(userName);
         connectionFactory.setPassword(password);
-        connectionFactory.setPort(port);
+        connectionFactory.setPort(5672);
 
         return connectionFactory;
     }
@@ -99,6 +99,21 @@ public class RabbitConfig {
     public Module dateTimeModule() {
         return new JavaTimeModule();
     }
+
+    // RabbitMQ amqpAdmin을 통해 Queue, Exchange, Binding 생성
+//    @Bean
+//    public AmqpAdmin amqpAdmin() {
+//        return new RabbitAdmin(connectionFactory());
+//    }
+//
+//    @Bean
+//    public CommandLineRunner initializeRabbit(AmqpAdmin amqpAdmin) {
+//        return args -> {
+//            amqpAdmin.declareQueue(queue());
+//            amqpAdmin.declareExchange(exchange());
+//            amqpAdmin.declareBinding(binding());
+//        };
+//    }
 
 
 }
