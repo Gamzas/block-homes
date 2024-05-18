@@ -1,13 +1,7 @@
 package com.blockhomes.tradings.service;
 
-import com.blockhomes.tradings.dto.chat.request.CreateChatRoomReq;
-import com.blockhomes.tradings.dto.chat.request.CheckChatRoomReq;
-import com.blockhomes.tradings.dto.chat.request.ListChatRoomsReq;
-import com.blockhomes.tradings.dto.chat.request.RegisterProvisionReq;
-import com.blockhomes.tradings.dto.chat.response.CreateChatRoomRes;
-import com.blockhomes.tradings.dto.chat.response.DetailChatRoomRes;
-import com.blockhomes.tradings.dto.chat.response.ListChatRoomsRes;
-import com.blockhomes.tradings.dto.chat.response.RegisterProvisionRes;
+import com.blockhomes.tradings.dto.chat.request.*;
+import com.blockhomes.tradings.dto.chat.response.*;
 
 public interface ChatRoomService {
 
@@ -20,5 +14,7 @@ public interface ChatRoomService {
     Integer checkChatRoom(CheckChatRoomReq req);
 
     RegisterProvisionRes registerProvision(RegisterProvisionReq req);
+
+    GetProvisionRes getSpecialProvision(GetProvisionReq req);
 
 }

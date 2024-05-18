@@ -1,13 +1,7 @@
 package com.blockhomes.tradings.controller;
 
-import com.blockhomes.tradings.dto.chat.request.CreateChatRoomReq;
-import com.blockhomes.tradings.dto.chat.request.CheckChatRoomReq;
-import com.blockhomes.tradings.dto.chat.request.ListChatRoomsReq;
-import com.blockhomes.tradings.dto.chat.request.RegisterProvisionReq;
-import com.blockhomes.tradings.dto.chat.response.CreateChatRoomRes;
-import com.blockhomes.tradings.dto.chat.response.DetailChatRoomRes;
-import com.blockhomes.tradings.dto.chat.response.ListChatRoomsRes;
-import com.blockhomes.tradings.dto.chat.response.RegisterProvisionRes;
+import com.blockhomes.tradings.dto.chat.request.*;
+import com.blockhomes.tradings.dto.chat.response.*;
 import com.blockhomes.tradings.service.ChatRoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -94,6 +88,23 @@ public class ChatRoomController {
         return ResponseEntity
             .status(OK)
             .body(chatRoomService.registerProvision(req));
+    }
+
+    @GetMapping("/provision")
+    @Operation(
+        summary = "특약사항 조회",
+        description = "특약사항을 조회합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<GetProvisionRes> getSpecialProvision(@RequestBody @Valid GetProvisionReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(chatRoomService.getSpecialProvision(req));
     }
 
     @PostMapping()
