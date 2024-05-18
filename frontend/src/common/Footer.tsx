@@ -1,9 +1,10 @@
 import * as f from '@common/style/FooterStyle'
 import { FooterComponentType } from '@/types/components/footerType'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const FooterComponentList: FooterComponentType[] = [
     {
@@ -35,19 +36,23 @@ const Footer = () => {
 
   return (
     <f.FooterContainer>
-      {FooterComponentList.map((footerComponent, index) => (
-        <f.FooterComponent
-          key={index}
-          onClick={() => navigateTo(footerComponent.routePath)}
-        >
-          <img
-            className="footer-component-icon"
-            alt={`${footerComponent.title}`}
-            src={`${footerComponent.iconSrc}`}
-          />
-          {footerComponent.title}
-        </f.FooterComponent>
-      ))}
+      {FooterComponentList.map((footerComponent, index) => {
+        const isActive = location.pathname === footerComponent.routePath
+        return (
+          <f.FooterComponent
+            key={index}
+            onClick={() => navigateTo(footerComponent.routePath)}
+            $isActive={isActive}
+          >
+            <img
+              className="footer-component-icon"
+              alt={`${footerComponent.title}`}
+              src={`${footerComponent.iconSrc}`}
+            />
+            {footerComponent.title}
+          </f.FooterComponent>
+        )
+      })}
     </f.FooterContainer>
   )
 }

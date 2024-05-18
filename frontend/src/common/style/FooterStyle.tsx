@@ -4,7 +4,7 @@ export const FooterContainer = styled.div`
   border-top: 1px solid #adadad;
   width: 100%;
   max-width: 390px;
-  height: 60px;
+  height: 62px;
   position: fixed;
   bottom: 0;
   z-index: 1000;
@@ -13,16 +13,18 @@ export const FooterContainer = styled.div`
   justify-content: space-around;
 `
 
-export const FooterComponent = styled.div`
+export const FooterComponent = styled.div<{ $isActive: boolean }>`
   display: flex;
   flex-direction: column;
-  width: 15%;
+  width: 25%;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
+  background-color: ${({ $isActive }) => ($isActive ? '#E8E0F7' : '#FFFFFF')};
+  padding-bottom: 7px;
 
   .footer-component-icon {
-    width: 40%;
+    width: 25%;
     padding-bottom: 0.3rem;
   }
 `
