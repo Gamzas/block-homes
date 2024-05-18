@@ -3,8 +3,11 @@ package com.blockhomes.tradings.service;
 import com.blockhomes.tradings.dto.chat.request.CreateChatRoomReq;
 import com.blockhomes.tradings.dto.chat.request.CheckChatRoomReq;
 import com.blockhomes.tradings.dto.chat.request.ListChatRoomsReq;
+import com.blockhomes.tradings.dto.chat.request.RegisterProvisionReq;
 import com.blockhomes.tradings.dto.chat.response.*;
+import com.blockhomes.tradings.entity.chat.ChatProvision;
 import com.blockhomes.tradings.entity.chat.ChatRoom;
+import com.blockhomes.tradings.entity.chat.SpecialProvisionCategory;
 import com.blockhomes.tradings.entity.common.RoleCategory;
 import com.blockhomes.tradings.entity.chat.WalletChatRoom;
 import com.blockhomes.tradings.entity.item.Item;
@@ -13,6 +16,7 @@ import com.blockhomes.tradings.exception.chat.ChatRoomNotFoundException;
 import com.blockhomes.tradings.exception.chat.DuplicateChatRoomException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
+import com.blockhomes.tradings.repository.chat.ChatProvisionRepository;
 import com.blockhomes.tradings.repository.chat.ChatRoomRepository;
 import com.blockhomes.tradings.repository.chat.WalletChatRoomRepository;
 import com.blockhomes.tradings.repository.item.ItemRepository;
@@ -22,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,6 +40,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     private final WalletRepository walletRepository;
     private final ChatRoomRepository chatRoomRepository;
     private final WalletChatRoomRepository walletChatRoomRepository;
+    private final ChatProvisionRepository chatProvisionRepository;
 
     @Override
     public ListChatRoomsRes listChatRooms(ListChatRoomsReq req) {
@@ -55,6 +61,48 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         }
 
         return result;
+    }
+
+    @Override
+    public RegisterProvisionRes registerProvision(RegisterProvisionReq req) {
+        ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(req.getChatRoomNo())
+            .orElseThrow(ChatRoomNotFoundException::new);
+
+        List<ChatProvision> existProvisions = chatProvisionRepository.getChatProvisionsByChatRoom(chatRoom);
+        List<Integer> provisionValueList = req.getProvisionList();
+
+        for (ChatProvision chatProvision : existProvisions) {
+            Integer chatProvisionValue = SpecialProvisionCategory
+                .enumToValue(chatProvision.getSpecialProvisionCategory());
+
+            if (provisionValueList.contains(chatProvisionValue)) {
+                provisionValueList.remove(chatProvisionValue);
+            }
+        }
+
+        List<ChatProvision> chatProvisionEntityList = new ArrayList<>();
+
+        for (Integer provision : provisionValueList) {
+            chatProvisionEntityList.add(ChatProvision.builder()
+                    .chatRoom(chatRoom)
+                    .specialProvisionCategory(SpecialProvisionCategory.valueToEnum(provision))
+                .build());
+        }
+
+        chatProvisionRepository.saveAll(chatProvisionEntityList);
+
+        List<ChatProvision> chatProvisionList = chatProvisionRepository.getChatProvisionsByChatRoom(chatRoom);
+        List<Integer> provisionList = new ArrayList<>();
+
+        for (ChatProvision chatProvision : chatProvisionList) {
+            provisionList.add(SpecialProvisionCategory
+                .enumToValue(chatProvision.getSpecialProvisionCategory()));
+        }
+
+        return RegisterProvisionRes.builder()
+            .chatRoomNo(chatRoom.getChatRoomNo())
+            .provisionList(provisionList)
+            .build();
     }
 
     @Override
