@@ -4,6 +4,7 @@ import com.blockhomes.tradings.entity.common.BaseEntity;
 import com.blockhomes.tradings.entity.common.RoleCategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,5 +35,12 @@ public class WalletContract extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "contract_no", nullable = false)
     private Contract contract;
+
+    @Builder
+    public WalletContract(RoleCategory roleCategory, Wallet wallet, Contract contract) {
+        this.roleCategory = roleCategory;
+        this.wallet = wallet;
+        this.contract = contract;
+    }
 
 }

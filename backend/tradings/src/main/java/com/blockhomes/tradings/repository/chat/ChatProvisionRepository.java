@@ -10,4 +10,6 @@ public interface ChatProvisionRepository extends JpaRepository<ChatProvision, In
 
     List<ChatProvision> getChatProvisionsByChatRoom(ChatRoom chatRoom);
 
+    void deleteAllByChatRoom(ChatRoom chatRoom);
+
 }
