@@ -54,22 +54,22 @@ const EstateListMap = forwardRef((props, ref) => {
     setItem('not')
   }
 
-  useImperativeHandle(ref, () => ({
-    setCenter: () => {
-      if (mapRef.current) {
-        const map = mapRef.current
-        const moveLatLon = new kakao.maps.LatLng(
-          userCoord.latitude,
-          userCoord.longitude,
-        )
-        map.panTo(moveLatLon)
-        // setLocation({
-        //   latitude: moveLatLon.getLat(),
-        //   longitude: moveLatLon.getLng(),
-        // })
-      }
-    },
-  }))
+  // useImperativeHandle(ref, () => ({
+  //   setCenter: () => {
+  //     if (mapRef.current) {
+  //       const map = mapRef.current
+  //       const moveLatLon = new kakao.maps.LatLng(
+  //         userCoord.latitude,
+  //         userCoord.longitude,
+  //       )
+  //       map.panTo(moveLatLon)
+  //       // setLocation({
+  //       //   latitude: moveLatLon.getLat(),
+  //       //   longitude: moveLatLon.getLng(),
+  //       // })
+  //     }
+  //   },
+  // }))
 
   useEffect(() => {
     if (!initialLoad.current) return
