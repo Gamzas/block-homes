@@ -1,10 +1,13 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
 import * as i from '@components/EstateDetailPage/style/ItemSafetyCardStyle'
+import { useNavigate, useParams } from 'react-router-dom'
 
 interface PropsType {
   condition: number
 }
 const ItemSafetyCard = (props: PropsType) => {
+  const { id } = useParams()
+  const navigate = useNavigate()
   const condition = props.condition
   const { getColor, getStatus } = useEstateCondition(condition)
   const mainColor = getColor()?.main
@@ -12,6 +15,9 @@ const ItemSafetyCard = (props: PropsType) => {
   const thirdColor = getColor()?.third
   const fourthColor = getColor()?.fourth
   const status = getStatus()
+  const goReport = () => {
+    navigate(`/report/${id}`)
+  }
   return (
     <i.CardWrapper>
       <i.SafetyCardContainer $color={fourthColor}>
@@ -64,7 +70,7 @@ const ItemSafetyCard = (props: PropsType) => {
             &nbsp;입니다.
           </div>
         </i.InfoTextContainer>
-        <i.ReportBtnContainer>
+        <i.ReportBtnContainer onClick={goReport}>
           <div className="icon-container">
             <img
               className="report-icon"
