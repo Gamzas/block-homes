@@ -17,6 +17,8 @@ public class DetailChatRoomRes {
     private String realEstateAddress;
     private Integer transactionType;
     private Long price;
+    private String sellerWalletAddress;
+    private String buyerWalletAddress;
 
     private List<ChatRes> chatList;
 
