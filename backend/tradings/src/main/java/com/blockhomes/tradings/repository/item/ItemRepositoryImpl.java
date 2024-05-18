@@ -2,6 +2,7 @@ package com.blockhomes.tradings.repository.item;
 
 import com.blockhomes.tradings.dto.item.request.GetLikeItemsReq;
 import com.blockhomes.tradings.dto.item.request.ListItemReq;
+import com.blockhomes.tradings.dto.item.request.OwnerItemReq;
 import com.blockhomes.tradings.dto.item.response.ListItemInstance;
 import com.blockhomes.tradings.entity.common.QImage;
 import com.blockhomes.tradings.entity.item.*;
@@ -50,6 +51,33 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     public List<ListItemInstance> listItemsByLikes(GetLikeItemsReq req) {
         return getItemWalletLikeQuery()
             .where(qWallet.walletAddress.eq(req.getUserAddress()))
+            .fetch();
+    }
+
+    @Override
+    public List<ListItemInstance> listItemsByOwner(OwnerItemReq req) {
+        return from(qItem)
+            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
+            .innerJoin(qImage).on(qItemImage.image.eq(qImage))
+            .innerJoin(qWallet).on(qItem.ownerWallet.eq(qWallet))
+            .select(
+                Projections.constructor(ListItemInstance.class,
+                    qItem.itemNo,
+                    qItem.realEstateDID,
+                    qItem.roadNameAddress,
+                    qItem.transactionType,
+                    qItem.realEstateType,
+                    qItem.reportRank,
+                    qItem.transactionStatus,
+                    qItem.area,
+                    qItem.price,
+                    qItem.monthlyPrice,
+                    qItem.administrationCost,
+                    qItem.contractMonths,
+                    qItem.latitude,
+                    qItem.longitude,
+                    qImage.imageUrl))
+            .where(qWallet.walletAddress.eq(req.getOwnerWallet()))
             .fetch();
     }
 
