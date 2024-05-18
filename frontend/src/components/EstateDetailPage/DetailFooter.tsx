@@ -10,11 +10,16 @@ import { DetailItemType } from '@/types/components/estateListType'
 import { getTransactionType, numberToMoney } from '@/utils/estateTransferUtil'
 interface PropsType {
   info: DetailItemType
+  accessChat: boolean
 }
 const DetailFooter = (props: PropsType) => {
-  const { administrationCost, roadNameAddress, price, transactionType, isUserLiked
-  } =
-    props.info
+  const {
+    administrationCost,
+    roadNameAddress,
+    price,
+    transactionType,
+    isUserLiked,
+  } = props.info
   const { id } = useParams()
   const [user] = useAtom(userAtom)
   const [isLiked, setIsLiked] = useState(isUserLiked)
@@ -96,9 +101,11 @@ const DetailFooter = (props: PropsType) => {
         </div>
         <div className="location">{roadNameAddress}</div>
       </f.InfoContainer>
-      <f.ChatBtn onClick={handleBtnClick}>
-        <div className="name">채팅하기</div>
-      </f.ChatBtn>
+      {!props.accessChat && (
+        <f.ChatBtn onClick={handleBtnClick}>
+          <div className="name">채팅하기</div>
+        </f.ChatBtn>
+      )}
     </f.FooterContainer>
   )
 }

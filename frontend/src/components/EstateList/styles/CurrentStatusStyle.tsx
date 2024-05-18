@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface ColorProps {
   $color: string
+  $active: boolean
 }
 
 export const CurrentStatusContainer = styled.div`
@@ -46,6 +47,31 @@ export const EstateStatusButtonContainer = styled.div`
   right: 3.2rem;
 `
 
+// export const EstateStatusButton = styled.button<ColorProps>`
+//   height: 60%;
+//   padding: 0.5rem 1rem;
+//   margin: 0.2rem;
+//   border-radius: 3rem;
+//   border: 0.15rem solid ${props => props.$color};
+//   font-weight: 400;
+//   line-height: 30%;
+//   font-size: 0.8rem;
+//   color: ${props => props.$color};
+//   background-color: white;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: ${props => props.$color};
+//     border-color: ${props => props.$color};
+//     color: white;
+//   }
+//   &:focus {
+//     background-color: ${props => props.$color};
+//     color: white;
+//     border-color: ${props => props.$color};
+//     outline-color: ${props => props.$color};
+//   }
+// `
+
 export const EstateStatusButton = styled.button<ColorProps>`
   height: 60%;
   padding: 0.5rem 1rem;
@@ -55,8 +81,8 @@ export const EstateStatusButton = styled.button<ColorProps>`
   font-weight: 400;
   line-height: 30%;
   font-size: 0.8rem;
-  color: ${props => props.$color};
-  background-color: white;
+  color: ${props => (props.active ? 'white' : props.$color)};
+  background-color: ${props => (props.active ? props.$color : 'white')};
   cursor: pointer;
   &:hover {
     background-color: ${props => props.$color};
@@ -70,7 +96,6 @@ export const EstateStatusButton = styled.button<ColorProps>`
     outline-color: ${props => props.$color};
   }
 `
-
 export const FilterContainer = styled.div`
   display: flex;
   justify-content: center;
