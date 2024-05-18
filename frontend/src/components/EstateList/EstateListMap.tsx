@@ -123,6 +123,9 @@ const EstateListMap = forwardRef((props, ref) => {
       coord.latitude,
       coord.longitude,
     )
+    if (marker) {
+      marker.setMap(null) // 기존 마커 제거
+    }
     const initialMarker = new kakao.maps.Marker({
       position: markerPosition,
       image: markerImage,
