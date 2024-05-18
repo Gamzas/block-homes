@@ -18,7 +18,6 @@ const EstateRegistrationPage = () => {
   const [openIndex, setOpenIndex] = useState(0)
   const [isOpenArray, setIsOpenArray] = useState([true, false, false, false]) // 각 아코디언의 열림 상태 초기화
   const [isComplete, setIsComplete] = useState(false)
-  const [coords, setCoords] = useState({ latitude: 0, longitude: 0 })
   const [postParams, setPostParams] = useState({
     ownerWalletDID: undefined,
     realEstateDID: undefined,
@@ -59,16 +58,6 @@ const EstateRegistrationPage = () => {
   })
   const [isNoData, setIsNoData] = useState(true)
   const { mutate: postItemRegisterMutate } = usePostItemRegister()
-
-  const handleAddressSearch = async (address: string) => {
-    try {
-      const result = await getCoord(address)
-      setCoords(result)
-    } catch (error) {
-      console.error(error.message)
-      alert('좌표를 가져오는데 실패했습니다.')
-    }
-  }
 
   const handleOpenIndex = () => {
     const newOpenIndex = openIndex + 1
@@ -149,16 +138,15 @@ const EstateRegistrationPage = () => {
 
   useEffect(() => {
     if (realEstateInfoData) {
-      handleAddressSearch(realEstateInfoData.roadNameAddress).then(() =>
-        console.log('좌표 가져오기 성공!'),
+      getCoord(realEstateInfoData.roadNameAddress).then(coords =>
+        setPostParams({
+          ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
+          realEstateDID: realEstateDID,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          reportRank: 1,
+        }),
       )
-      setPostParams({
-        ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
-        realEstateDID: realEstateDID,
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        reportRank: 1,
-      })
       setCheckEstateProps({
         roadNameAddress: realEstateInfoData.roadNameAddress,
         realEstateType: realEstateInfoData.estateType,
