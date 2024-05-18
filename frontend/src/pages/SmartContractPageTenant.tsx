@@ -1,5 +1,5 @@
 // SmartContractPage.tsx s s
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as s from './style/SmartContract'
 import Header from '@/common/Header'
 import ContractPayment from '@/components/SmartContract/ContractPayment'
@@ -14,7 +14,6 @@ import { Button, Snackbar } from '@mui/material'
 import CustomModal from '@/common/CustomModal'
 import {
   deployContract,
-  fetchContractData,
   getContractInstance,
 } from '@/abi/userSmartContract/DeployLongTermRentContract'
 import { ethers } from 'ethers'
@@ -22,8 +21,14 @@ import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
+import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
+import { useGetDetailItem } from '@/apis/itemApi'
+import { DetailItemType } from '@/types/components/contractType'
+import { useQuery } from '@tanstack/react-query'
+import { fetchChatRoomDetail } from '@/apis/chatApi'
+import { convertToDid } from '@/hooks/didMake'
 
-const SmartContractTenantPage = () => {
+const SmartContractPage = () => {
   const [step, setStep] = useAtom(contractStepAtom)
   const [open, setOpen] = useState(false)
 
@@ -37,7 +42,8 @@ const SmartContractTenantPage = () => {
 
   // 지갑 불러오기(wallet) 비밀번호 쳐서 여는 로직 필요~~
   const currentUser = useAtomValue(userAtom)
-  console.log('currentUser', currentUser.walletAddress)
+
+  console.log('currentUser', currentUser)
 
   const { data: getWalletData } = useGetWallet({
     walletAddress: currentUser.walletAddress,
@@ -56,24 +62,100 @@ const SmartContractTenantPage = () => {
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const dummyData = {
-    // 임대인 지갑주소
-    landlordDID: '0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
-    // 임차인 지갑주소
-    tenantDID: '0xa7036441C32731c660ee9a00C4BFFC8578A37533',
-    landlordDID2: 'did:klay:0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
-    tenantDID2: 'did:klay:0xa7036441C32731c660ee9a00C4BFFC8578A37533',
-    leasePeriod: 12,
-    deposit: ethers.utils.parseEther('0.1').toString(), // 1 ETH in wei // 보증금
-    propertyDID: 'did:klay:abcdef123456789', // 부동산의 분산식 식별자
-    contractDate: Math.floor(Date.now() / 1000), // Current Unix timestamp
-    terms:
-      '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다/계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다',
-  }
 
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0') // 월은 0부터 시작하므로 +1
+  const day = String(today.getDate()).padStart(2, '0')
+  const formattedToday = `${year}-${month}-${day}`
+
+  // 더미 추가 공간
+  const [estateNumber, setEstateNumber] = useState(25)
+
+  const { data: itemDetails } = useGetDetailItem(
+    estateNumber,
+    currentUser.walletAddress,
+  )
+
+  const [terms, setTerms] = useState('')
+  const [landlordDID, setLandlordDID] = useState('')
+  const [tenantDID, setTenantDID] = useState('')
+  const [landlordDID2, setLandlordDID2] = useState('')
+  const [tenantDID2, setTenantDID2] = useState('')
+
+  // 유저 지갑 주소로 이름 받아서 계약서에 넘기기 필요
+  // const { data: getWalletData } = useGetWallet({
+  //   walletAddress: currentUser.walletAddress,
+  // })
+
+  // 해결
+  const [contractDate, setContractDate] = useState(formattedToday)
+  const [leasePeriod, setLeasePeriod] = useState(0)
+  const [deposit, setDeposit] = useState('')
+  const [propertyDID, setPropertyDID] = useState('')
+  const [estateInfo, setEstateInfo] = useState<DetailItemType | null>(null)
+
+  useEffect(() => {
+    if (itemDetails) {
+      setLeasePeriod(itemDetails.contractMonths)
+      setDeposit(itemDetails.price)
+      setPropertyDID(itemDetails.realEstateDID)
+      setEstateInfo(itemDetails)
+    }
+  }, [itemDetails])
+
+  console.log('contractDate:', contractDate)
+  console.log('leasePeriod:', leasePeriod)
+  console.log('deposit:', deposit)
+  console.log('propertyDID:', propertyDID)
+  console.log('itemDetails', itemDetails)
+  console.log('estateInfo', estateInfo)
+
+  // 채팅 방 내용으로 주소 받아오기
+  const chatRoomNumber = Number(10)
+
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ['fetchChatRoomDetail', chatRoomNumber],
+    queryFn: () => fetchChatRoomDetail(chatRoomNumber),
+    enabled: !!chatRoomNumber,
+  })
+  useEffect(() => {
+    if (data) {
+      console.log('채팅정보', data)
+      setLandlordDID(data.sellerWalletAddress)
+      setTenantDID(data.buyerWalletAddress)
+      setLandlordDID2(convertToDid(data.sellerWalletAddress))
+      setTenantDID2(convertToDid(data.buyerWalletAddress))
+    }
+  }, [data])
+
+  console.log('andlordDID', landlordDID)
+  console.log('TenantDID', tenantDID)
+  console.log('andlordDID', landlordDID2)
+  console.log('TenantDID', tenantDID2)
+
+  // const dummyData = {
+  //   // 임대인 지갑주소
+  //   landlordDID: '0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
+  //   // 임차인 지갑주소
+  //   tenantDID: '0xa7036441C32731c660ee9a00C4BFFC8578A37533',
+  //   landlordDID2: 'did:klay:0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
+  //   tenantDID2: 'did:klay:0xa7036441C32731c660ee9a00C4BFFC8578A37533',
+  //   leasePeriod: 12,
+  //   deposit: ethers.utils.parseEther('0.1').toString(), // 1 ETH in wei // 보증금
+  //   propertyDID: 'did:klay:abcdef123456789', // 부동산의 분산식 식별자
+  //   contractDate: formattedToday, // Current Unix timestamp
+  //   terms:
+  //     '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다/계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다',
+  // }
+
+  // 계약 시작 날짜를 특정 형식으로 변환
+
+  // console.log('dummyData.tenantDID', dummyData.tenantDID)
+  console.log(contractDate)
   // 임차인 지갑주소로 암호호된 지갑주소 불러오기
   const { data: getWalletData2 } = useGetWallet({
-    walletAddress: dummyData.tenantDID,
+    walletAddress: tenantDID,
   })
   console.log('getWalletData2', getWalletData2)
 
@@ -84,7 +166,7 @@ const SmartContractTenantPage = () => {
 
   /// 조회 액션
   const handlelook = () => {
-    fetchContractData(deploymentInfo)
+    getContractInfo(deploymentInfo)
       .then(data => {
         console.log('Fetched Contract Data:', data)
       })
@@ -93,96 +175,80 @@ const SmartContractTenantPage = () => {
       })
   }
 
-  /// 거래시작 시 버튼 누르는 과정이 필요~~
-  const handleDeploy = async () => {
-    if (!getWalletData && !password) {
-      alert('getWalletData,password')
-      return
-    }
+  // /// 거래시작 시 버튼 누르는 과정이 필요~~
+  // const handleDeploy = async password => {
+  //   if (!getWalletData && !password) {
+  //     alert('getWalletData,password')
+  //     return
+  //   }
 
-    try {
-      // 1.암호화된 지갑 데이터 복원
-      const userWallet = await ethers.Wallet.fromEncryptedJson(
-        getWalletData.data.encPrivateKey,
-        password,
-      )
-      console.log('userWallet', userWallet)
+  //   try {
+  //     // 0.암호화된 지갑 데이터 복원(서명, 계약서 올리기 사용) 사용자 개인키 보관, 트랜잭션 서명
+  //     const userWallet = await ethers.Wallet.fromEncryptedJson(
+  //       getWalletData.data.encPrivateKey,
+  //       password,
+  //     )
 
-      // 1.5서명할 메시지 준비 (예시: "임대 계약 승인") 서명하는거 해쉬 만들기!!!!!!
+  //     // 1.서명할 메시지 준비 (예시: "임대 계약 승인") 서명하는거 해쉬 만들기!!!!!!
 
-      const message = ethers.utils.solidityKeccak256(
-        [
-          'string',
-          'string',
-          'uint16',
-          'uint256',
-          'string',
-          'uint256',
-          'string',
-        ],
-        [
-          dummyData.landlordDID2.toLowerCase(),
-          dummyData.tenantDID2.toLowerCase(),
-          dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          dummyData.propertyDID.toLowerCase(),
-          dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          dummyData.terms.toLowerCase(),
-        ],
-      )
-      const messageBytes = ethers.utils.arrayify(message)
-      const signature = await userWallet.signMessage(messageBytes)
-      const sig = ethers.utils.splitSignature(signature)
-      console.log(sig)
+  //     const message = ethers.utils.solidityKeccak256(
+  //       ['string', 'string', 'uint16', 'uint256', 'string', 'string', 'string'],
+  //       [
+  //         landlordDID2.toLowerCase(),
+  //         tenantDID2.toLowerCase(),
+  //         leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+  //         deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+  //         propertyDID.toLowerCase(),
+  //         contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+  //         terms.toLowerCase(),
+  //       ],
+  //     )
+  //     const messageBytes = ethers.utils.arrayify(message)
+  //     const signature = await userWallet.signMessage(messageBytes)
+  //     const sig = ethers.utils.splitSignature(signature)
+  //     console.log(sig)
 
-      // const messageHash = getMessageHash(dummyData)
+  //     // 2.1 이더리움 네트워크 연결
+  //     const provider = new ethers.providers.JsonRpcProvider(
+  //       BLOCK_CHAIN_ENDPOINT,
+  //     )
+  //     // 2.2 지갑과 프로바이더를 결합
+  //     const signer = userWallet.connect(provider)
 
-      // // 메시지에 대한 서명 생성
-      // const signature = await userWallet.signMessage(
-      //   ethers.utils.arrayify(messageHash),
-      // )
-      // // 서명을 r, s, v로 분할
-      // const sig = ethers.utils.splitSignature(signature)
+  //     // 계약서 넣을 내용과, 지갑 프로바이더 결합, 서명을 보내기
+  //     const result = await deployContract(
+  //       signer,
+  //       landlordDID,
+  //       tenantDID,
+  //       leasePeriod,
+  //       deposit,
+  //       propertyDID,
+  //       contractDate,
+  //       terms,
+  //       sig,
+  //     )
 
-      // 2. 이더리움 네트워크 연결
-      const provider = new ethers.providers.JsonRpcProvider(
-        BLOCK_CHAIN_ENDPOINT,
-      )
-      // 3. 지갑을provider에 연결
-      const signer = userWallet.connect(provider)
+  //     console.log()
+  //     // 1차 완료계약서 주소 저장완료 전역 저장해서 관리하기
+  //     setDeploymentInfo(result)
 
-      const result = await deployContract(
-        signer,
-        dummyData.landlordDID,
-        dummyData.tenantDID,
-        dummyData.leasePeriod,
-        dummyData.deposit,
-        dummyData.propertyDID,
-        dummyData.contractDate,
-        dummyData.terms,
-        sig,
-      )
+  //     console.log('성공요result', result)
 
-      console.log()
-      // 1차 완료계약서 주소 저장완료 전역 저장해서 관리하기
-      setDeploymentInfo(result)
+  //     console.log('성공요deploymentInfo', deploymentInfo)
 
-      console.log('성공요result', result)
-
-      console.log('성공요deploymentInfo', deploymentInfo)
-
-      setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
-      setSnackbarOpen(true)
-    } catch (error) {
-      if (error.message.includes('invalid password')) {
-        setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
-      } else {
-        setSnackbarMessage(`실패: ${error.message}`)
-        console.log('실패요', deploymentInfo)
-      }
-      setSnackbarOpen(true)
-    }
-  }
+  //     setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
+  //     setSnackbarOpen(true)
+  //     setStep(step + 1)
+  //   } catch (error) {
+  //     if (error.message.includes('invalid password')) {
+  //       setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
+  //     } else {
+  //       setSnackbarMessage(`실패: ${error.message}`)
+  //       console.log('실패요', deploymentInfo)
+  //     }
+  //     setSnackbarOpen(true)
+  //   }
+  // }
 
   const handleSignAndPayDeposit = async () => {
     if (!password) {
@@ -190,13 +256,12 @@ const SmartContractTenantPage = () => {
       return
     }
     try {
-      // 1.지갑 복원
+      // 1. 지갑에 개인키와 비밀번호 담아서 트랜잭션 서명 때 쓸 지갑 생성(네트워크 서버와 연결)
       const tenantWallet = await ethers.Wallet.fromEncryptedJson(
         getWalletData2.data.encPrivateKey,
         password,
       )
 
-      // 2. 이더리움 메인넷에 연결하기 위해 provider 생성
       const provider = new ethers.providers.JsonRpcProvider(
         BLOCK_CHAIN_ENDPOINT,
       )
@@ -205,30 +270,22 @@ const SmartContractTenantPage = () => {
       const tenantSigner = tenantWallet.connect(provider)
       console.log('11tenantSigner', tenantSigner)
 
-      // 3. 스마트 계약 인스턴스 생성
+      // 2. 스마트 계약 인스턴스 생성(스마트계약 주소 필요)
       const contract = getContractInstance(deploymentInfo, tenantSigner)
       console.log('22contract', contract)
 
       // 메세지 생성 코드작성
 
       const message = ethers.utils.solidityKeccak256(
+        ['string', 'string', 'uint16', 'uint256', 'string', 'string', 'string'],
         [
-          'string',
-          'string',
-          'uint16',
-          'uint256',
-          'string',
-          'uint256',
-          'string',
-        ],
-        [
-          dummyData.landlordDID2,
-          dummyData.tenantDID2,
-          dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          dummyData.propertyDID,
-          dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          dummyData.terms,
+          landlordDID2.toLowerCase(),
+          tenantDID2.toLowerCase(),
+          leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          propertyDID.toLowerCase(),
+          contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          terms.toLowerCase(),
         ],
       )
       // const userWallet = await ethers.Wallet.fromEncryptedJson(
@@ -239,6 +296,8 @@ const SmartContractTenantPage = () => {
       const signature = await tenantWallet.signMessage(messageBytes)
       const sig = ethers.utils.splitSignature(signature)
 
+      // 트랜잭션 같이 보내기 서명과 보증금 보내서~~
+
       const txResponse = await contract.tenantSign(sig.r, sig.s, sig.v, {
         value: ethers.utils.parseEther('0.1'),
       })
@@ -247,7 +306,7 @@ const SmartContractTenantPage = () => {
       const receipt = await txResponse.wait()
 
       console.log('Transaction receipt:', receipt)
-      setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
+      setSnackbarMessage('보증금 지불 및 서명이 성공적으로 처리되었습니다.')
       setSnackbarOpen(true)
       setStep(step + 1)
     } catch (error) {
@@ -265,17 +324,23 @@ const SmartContractTenantPage = () => {
         rightIconSrc={step === 2 ? '/icon/icon_download.png' : ''}
         onModal={handleOpen}
       ></Header>
-      {step === 0 && <ContractStart currentUser={currentUser} />}
+      {step === 0 && (
+        <ContractStart currentUser={currentUser} propertyDID={propertyDID} />
+      )}
       {step === 1 && <ContractAgree />}
-      {step === 2 && <ContractMain />}
+      {step === 2 && <ContractMain estateInfo={estateInfo} />}
       {step === 3 && (
-        <ContractPayment handlePayment={handleSignAndPayDeposit} currentUser={currentUser} />
+        <ContractPayment
+          handlePayment={handleSignAndPayDeposit}
+          currentUser={currentUser}
+          propertyDID={propertyDID}
+        />
       )}
       {step === 4 && <ContractComplete />}
       <Button onClick={handleOpen}></Button>
 
       <Button onClick={() => setPasswordModalOpen(true)}>Enter Password</Button>
-      <Button onClick={handleDeploy}>Deploy Contract</Button>
+      {/* <Button onClick={handleDeploy}>Deploy Contract</Button> */}
       <Button onClick={handleSignAndPayDeposit}>Pay Deposit</Button>
       <Button onClick={handlelook}>handlelook</Button>
       <CustomModal
@@ -301,72 +366,4 @@ const SmartContractTenantPage = () => {
   )
 }
 
-export default SmartContractTenantPage
-
-// // 임차인이 보증금을 지불하는 함수
-// const handlePayDeposit = async () => {
-//   // 지갑 데이터와 비밀번호가 있는지 확인
-//   if (getWalletData && password) {
-//     try {
-//       // EncryptedJson을 사용하여 임차인 지갑을 복원
-//       const tenantWallet = await ethers.Wallet.fromEncryptedJson(
-//         getWalletData2.data.encPrivateKey,
-//         password,
-//       )
-
-//       // 이더리움 메인넷에 연결하기 위해 provider 생성
-//       const provider = new ethers.providers.JsonRpcProvider(
-//         BLOCK_CHAIN_ENDPOINT,
-//       )
-
-//       // 지갑을 provider에 연결하여 signer 생성
-//       const tenantSigner = tenantWallet.connect(provider)
-//       console.log('###1tenantSigner', tenantSigner)
-
-//       // 스마트 계약 인스턴스 생성
-//       const contract = getContractInstance(deploymentInfo, tenantSigner)
-//       console.log('####2contract', contract)
-
-//       // 메세지 생성 코드작성
-
-//       const message = ethers.utils.solidityKeccak256(
-//         [
-//           'string',
-//           'string',
-//           'uint16',
-//           'uint256',
-//           'string',
-//           'uint256',
-//           'string',
-//         ],
-//         [
-//           dummyData.landlordDID2.toLowerCase(),
-//           dummyData.tenantDID2.toLowerCase(),
-//           dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-//           dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-//           dummyData.propertyDID.toLowerCase(),
-//           dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-//           dummyData.terms.toLowerCase(),
-//         ],
-//       )
-//       const messageBytes = ethers.utils.arrayify(message)
-//       const signature = await tenantWallet.signMessage(messageBytes)
-//       const sig = ethers.utils.splitSignature(signature)
-
-//       // 보증금 지불 트랜잭션 생성
-//       const tx = await contract.payDeposit({
-//         value: ethers.utils.parseEther('1.0'), // dummyData.deposit을 사용하는 경우 이를 대체
-//       })
-
-//       // 트랜잭션이 완료될 때까지 대기
-//       await tx.wait()
-//       console.log('보증금 지불 성공:', tx)
-//       setSnackbarMessage('보증금 지불 성공')
-//       setSnackbarOpen(true)
-//     } catch (error) {
-//       console.error('보증금 지불 실패:', error)
-//     }
-//   } else {
-//     alert('지갑 정보를 불러오거나 비밀번호를 입력하세요.')
-//   }
-// }
+export default SmartContractPage
