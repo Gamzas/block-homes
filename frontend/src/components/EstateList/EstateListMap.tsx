@@ -1,168 +1,201 @@
-import { useEffect, useState } from 'react';
-import * as e from '@components/EstateList/styles/EstateListMapStyle';
-import { renderToString } from 'react-dom/server';
-import CustomOverlay from '@components/EstateList/CustomOverlay';
-import useCurrentLocation from '@/hooks/useCurrentLocation';
-import { useAtom } from 'jotai';
 import {
-  currentCoordAtom,
-  estateFilterAtom,
+  useEffect,
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
+import * as e from '@components/EstateList/styles/EstateListMapStyle'
+import { renderToString } from 'react-dom/server'
+import CustomOverlay from '@components/EstateList/CustomOverlay'
+import useCurrentLocation from '@/hooks/useCurrentLocation'
+import { useAtom } from 'jotai'
+import {
   selectedItemAtom,
-} from '@/stores/atoms/EstateListStore';
-import EstateItemCard from './EstateItemCard';
-import { EstateItemListType } from '@/types/api/itemType';
-import { useGetEstateItems } from '@/apis/itemApi';
-import ItemLoading from '@/common/ItemLoading';
-import NoItems from '@/common/NoItems';
-import { useParams } from 'react-router-dom';
-import { calculateDistance } from '@/utils/locationUtil';
-import { ReqCoordType } from '@/types/components/estateListType';
+  currentCoordAtom,
+  filterAtom,
+  mapCenterCoordAtom,
+  userCoordAtom,
+} from '@/stores/atoms/EstateListStore'
+import EstateItemCard from './EstateItemCard'
+import { EstateItemListType } from '@/types/api/itemType'
+import { useParams } from 'react-router-dom'
 
 declare global {
   interface Window {
-    kakao: any;
+    kakao: any
   }
 }
-const { kakao } = window;
+const { kakao } = window
 
-const EstateListMap = () => {
-  const { setLocation } = useCurrentLocation();
-  const [filter] = useAtom(estateFilterAtom);
-  const [coord] = useAtom(currentCoordAtom);
+const EstateListMap = forwardRef((props, ref) => {
+  const { match } = useCurrentLocation()
+  const [coord] = useAtom(currentCoordAtom)
+  const [location, setLocation] = useAtom(mapCenterCoordAtom)
+  const [userCoord] = useAtom(userCoordAtom)
+  console.log('마커', coord)
+  console.log('dbwj', userCoord)
+  console.log('지도 중심', location)
+  const [filter] = useAtom(filterAtom)
+  const { category } = useParams()
+  const estateItemList: EstateItemListType[] = []
 
-  const [reqCoord, setReqCoord] = useState<ReqCoordType>({
-    northEastLatitude: 0,
-    northEastLongitude: 0,
-    southWestLatitude: 0,
-    southWestLongitude: 0,
-  });
+  const [item, setItem] = useAtom(selectedItemAtom)
   const [previousCenter, setPreviousCenter] = useState({
     latitude: coord.latitude,
     longitude: coord.longitude,
-  });
+  })
 
-  const { category } = useParams();
-  const { data, isLoading, error } = useGetEstateItems(
-    Number(category),
-    filter,
-    reqCoord,
-  );
-  const estateItemList: EstateItemListType[] = data?.itemList || [];
-  const [item, setItem] = useAtom(selectedItemAtom);
+  const mapRef = useRef(null)
 
-  const distanceThreshold = 2.5; // 2.5km
+  const distanceThreshold = 2.5 // 2500m
+  const initialLoad = useRef(true)
+  const centerChangeTimeout = useRef(null)
 
   const handleDetailCardClose = () => {
-    setItem('not');
-  };
+    setItem('not')
+  }
+
+  useImperativeHandle(ref, () => ({
+    setCenter: () => {
+      console.log('tlddddddddddddddddddddddfgod')
+      if (mapRef.current) {
+        const map = mapRef.current
+        const moveLatLon = new kakao.maps.LatLng(
+          userCoord.latitude,
+          userCoord.longitude,
+        )
+        map.panTo(moveLatLon)
+        // setLocation({
+        //   latitude: moveLatLon.getLat(),
+        //   longitude: moveLatLon.getLng(),
+        // })
+      }
+    },
+  }))
 
   useEffect(() => {
-    const container = document.getElementById('map');
-    if (!container) return; // container가 존재하는지 확인
+    if (!initialLoad.current) return
+    console.log('렌더링!')
 
+    const container = document.getElementById('map')
     const options = {
-      center: new kakao.maps.LatLng(coord.latitude, coord.longitude),
+      center: new kakao.maps.LatLng(userCoord.latitude, userCoord.longitude),
       level: 3,
       animate: true,
       isPanto: true,
-    };
-    const map = new kakao.maps.Map(container, options);
+    }
 
-    map.setMaxLevel(10);
+    const map = new kakao.maps.Map(container, options)
+    mapRef.current = map
+    initialLoad.current = false
 
-    const zoomControl = new kakao.maps.ZoomControl();
-    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    map.setMaxLevel(10)
+    const zoomControl = new kakao.maps.ZoomControl()
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT)
 
-    const imageSrc = '/image/image_location_pin.png';
-    const imageSize = new kakao.maps.Size(48, 48);
-    const imageOption = { offset: new kakao.maps.Point(32, 45) };
+    const imageSrc = '/image/image_location_pin.png'
+    const imageSize = new kakao.maps.Size(48, 48)
+    const imageOption = { offset: new kakao.maps.Point(32, 45) }
 
-    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    // kakao.maps.event.addListener(map, 'center_changed', () => {
+    //   const center = map.getCenter()
+    //   const newCenter = { latitude: center.Ma, longitude: center.La }
+    //   setLocation(newCenter)
+    // })
 
-    const markerPosition = new kakao.maps.LatLng(coord.latitude, coord.longitude);
+    kakao.maps.event.addListener(map, 'center_changed', () => {
+      if (centerChangeTimeout.current) {
+        clearTimeout(centerChangeTimeout.current)
+      }
+      centerChangeTimeout.current = setTimeout(() => {
+        const center = map.getCenter()
+        setLocation({
+          latitude: center.Ma,
+          longitude: center.La,
+        })
+      }, 100) // 300ms 타임아웃
+    })
+
+    const markerImage = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption,
+    )
+    const markerPosition = new kakao.maps.LatLng(
+      coord.latitude,
+      coord.longitude,
+    )
     const marker = new kakao.maps.Marker({
       position: markerPosition,
       image: markerImage,
-    });
-    marker.setMap(map);
+    })
+    marker.setMap(map)
+  }, [coord, setLocation])
 
-    const bounds = map.getBounds();
-    const swLatLng = bounds.getSouthWest();
-    const neLatLng = bounds.getNorthEast();
-    setReqCoord({
-      northEastLatitude: neLatLng.Ma,
-      northEastLongitude: neLatLng.La,
-      southWestLatitude: swLatLng.Ma,
-      southWestLongitude: swLatLng.La,
-    });
+  useEffect(() => {
+    if (initialLoad.current) return
+    const map = mapRef.current
+    const markerImage = new kakao.maps.MarkerImage(
+      '/image/image_location_pin.png',
+      new kakao.maps.Size(48, 48),
+      { offset: new kakao.maps.Point(32, 45) },
+    )
+    const markerPosition = new kakao.maps.LatLng(
+      coord.latitude,
+      coord.longitude,
+    )
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+      image: markerImage,
+    })
+    marker.setMap(map)
 
-    kakao.maps.event.addListener(map, 'center_changed', () => {
-      const center = map.getCenter();
-      const newCenter = { latitude: center.Ma, longitude: center.La };
-      setLocation(newCenter);
-
-      const distance = calculateDistance(
-        previousCenter.latitude,
-        previousCenter.longitude,
-        newCenter.latitude,
-        newCenter.longitude,
-      );
-
-      if (distance >= distanceThreshold) {
-        setPreviousCenter(newCenter);
-        const bounds = map.getBounds();
-        const swLatLng = bounds.getSouthWest();
-        const neLatLng = bounds.getNorthEast();
-        setReqCoord({
-          northEastLatitude: neLatLng.Ma,
-          northEastLongitude: neLatLng.La,
-          southWestLatitude: swLatLng.Ma,
-          southWestLongitude: swLatLng.La,
-        });
+    estateItemList.forEach(estateItem => {
+      const position = new kakao.maps.LatLng(
+        estateItem.latitude,
+        estateItem.longitude,
+      )
+      const overlayDiv = document.createElement('div')
+      overlayDiv.innerHTML = renderToString(
+        <CustomOverlay condition={estateItem.reportRank} />,
+      )
+      const handleOverlayClick = () => {
+        setItem(estateItem)
       }
-    });
 
-    if (estateItemList.length) {
-      estateItemList.forEach((estateItem) => {
-        const position = new kakao.maps.LatLng(estateItem.latitude, estateItem.longitude);
-        const overlayDiv = document.createElement('div');
-        overlayDiv.innerHTML = renderToString(
-          <CustomOverlay condition={estateItem.reportRank} />,
-        );
-        const handleOverlayClick = () => {
-          setItem(estateItem);
-        };
+      const customOverlay = new kakao.maps.CustomOverlay({
+        position: position,
+        content: overlayDiv,
+        xAnchor: 0.5,
+        yAnchor: 0.91,
+        clickable: true,
+        zIndex: 4,
+      })
+      const circleElement = overlayDiv.querySelector('.circle')
+      if (circleElement) {
+        circleElement.addEventListener('click', handleOverlayClick)
+      }
 
-        const customOverlay = new kakao.maps.CustomOverlay({
-          position: position,
-          content: overlayDiv,
-          xAnchor: 0.5,
-          yAnchor: 0.91,
-          clickable: true,
-          zIndex: 4,
-        });
-        const circleElement = overlayDiv.querySelector('.circle');
-        if (circleElement) {
-          circleElement.addEventListener('click', handleOverlayClick);
-        }
+      customOverlay.setMap(map)
+    })
+  }, [coord, estateItemList])
 
-        customOverlay.setMap(map);
-      });
+  useEffect(() => {
+    const map = mapRef.current
+    const setCenter = () => {
+      // 이동할 위도 경도 위치를 생성합니다
+      console.log('실행되는거임?', location.latitude)
+      const moveLatLon = new kakao.maps.LatLng(
+        location.latitude,
+        location.longitude,
+      )
+
+      // 지도 중심을 이동 시킵니다
+      map.panTo(moveLatLon)
     }
-  }, [coord, estateItemList]);
-
-  if (isLoading) {
-    return <ItemLoading />;
-  }
-
-  if (error || !data || !data.itemList) {
-    return (
-      <NoItems
-        src={'/image/image_warning_pig.png'}
-        alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
-      />
-    );
-  }
+    setCenter()
+  }, [location])
 
   return (
     <e.EstateMapContainer id="map">
@@ -173,7 +206,7 @@ const EstateListMap = () => {
         </e.DetailCardContainer>
       )}
     </e.EstateMapContainer>
-  );
-};
+  )
+})
 
-export default EstateListMap;
+export default EstateListMap
