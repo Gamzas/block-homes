@@ -14,6 +14,14 @@ export const IntroCanvasWrapper = styled.div`
 
   width: 100%;
   height: 180%;
+
+  .three-loading {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const IntroHeader = styled.div`
@@ -27,14 +35,9 @@ export const IntroHeader = styled.div`
   justify-content: space-around;
   align-items: center;
 
-  .icon {
+  .lottie {
     width: 50px;
     height: 100%;
-
-    background-image: url('/icon/icon_360.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
   }
 
   .refresh-button {
