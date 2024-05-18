@@ -12,7 +12,6 @@ const MessageItem = ({ item }: { item: MessageType }) => {
       const pad = n => (n < 10 ? '0' + n : n)
       return `${pad(date[3])}:${pad(date[4])}`
     } else {
-      console.log(date)
       const time = date.split('T')[1]
       const hour = time.split(':')[0]
       const minute = time.split(':')[1]
