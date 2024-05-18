@@ -85,17 +85,18 @@ export const EstateStatusButton = styled.button<ColorProps>`
   background-color: ${props => (props.$active ? props.$color : 'white')};
   cursor: pointer;
   &:hover {
-    background-color: ${props => props.$color};
+    /* background-color: ${props => props.$color}; */
     border-color: ${props => props.$color};
-    color: white;
+    /* color: white; */
   }
   &:focus {
-    background-color: ${props => props.$color};
-    color: white;
+    /* background-color: ${props => props.$color}; */
+    /* color: white; */
     border-color: ${props => props.$color};
     outline-color: ${props => props.$color};
   }
 `
+
 export const FilterContainer = styled.div`
   display: flex;
   justify-content: center;
