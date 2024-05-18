@@ -1,46 +1,56 @@
+import useCurrentLocation from '@/hooks/useCurrentLocation'
 import {
   currentPositonAtom,
+  estateItemListAtom,
   filterAtom,
   matchAtom,
+  selectedItemAtom,
 } from '@/stores/atoms/EstateListStore'
 import { RealEstateStatusType } from '@/types/components/estateListType'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 
 interface PropsType {
   getCurrentLocation: () => void
 }
+const EstateStatusList: RealEstateStatusType[] = [
+  {
+    condition: '우수',
+    color1: '#845BD3',
+  },
+  {
+    condition: '보통',
+    color1: '#24D0D6',
+  },
+  {
+    condition: '위험',
+    color1: '#FE754E',
+  },
+]
 
-const CurrentStatus = (props: PropsType) => {
-  const { getCurrentLocation } = props
+const CurrentStatus = ({handleLocationClick}) => {
+  // const { getCurrentLocation } = props
+  const { getCurrentLocation } = useCurrentLocation()
+  const setItem = useSetAtom(estateItemListAtom)
   const [match] = useAtom(matchAtom)
   const [currentPostion] = useAtom(currentPositonAtom)
   useEffect(() => {}, [currentPostion])
   const [filter, setFilter] = useAtom(filterAtom)
-  const EstateStatusList: RealEstateStatusType[] = [
-    {
-      condition: '우수',
-      color1: '#845BD3',
-    },
-    {
-      condition: '보통',
-      color1: '#24D0D6',
-    },
-    {
-      condition: '위험',
-      color1: '#FE754E',
-    },
-  ]
 
-  const handleLocationClick = () => {
+  useEffect(() => {
     getCurrentLocation()
-  }
+  }, [])
+
+  // 현재 위치로 돌아오기
+  // const handleLocationClick = () => {
+  //   getCurrentLocation()
+  // }
   // 필터 토글
   const handlerFilterClick = () => {
     setFilter(!filter)
   }
-  
+
   useEffect(() => {}, [match])
   return (
     <c.CurrentStatusContainer>

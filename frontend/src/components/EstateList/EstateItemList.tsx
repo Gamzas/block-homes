@@ -1,12 +1,13 @@
 import useCurrentLocation from '@/hooks/useCurrentLocation'
 import CurrentStatus from './CurrentStatus'
 import EstateItemCard from './EstateItemCard'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import EstateItemFilter from './EstateItemFilter'
 import * as l from '@components/EstateList/styles/EstateItemListStyle'
-import { useAtom } from 'jotai'
+import { useAtom, useSetAtom } from 'jotai'
 import {
   estateFilterAtom,
+  estateItemListAtom,
   filterAtom,
   mapAtom,
   mapCenterCoordAtom,
@@ -27,11 +28,12 @@ const EstateItemList = () => {
   const [itemFilter] = useAtom(estateFilterAtom)
   const [menu] = useAtom(mapAtom)
   const [markerCoord] = useAtom(mapCenterCoordAtom)
-  console.log('마커', markerCoord)
+
   useEffect(() => {
     setFilter(false)
-    getCurrentLocation()
-  }, [])
+    // getCurrentLocation()
+  }, [setFilter])
+
   const boundaries = calculateBoundaries(
     markerCoord.latitude,
     markerCoord.longitude,
@@ -40,45 +42,58 @@ const EstateItemList = () => {
   const [currentBoundary, setCurrentBoundary] =
     useState<ReqCoordType>(boundaries)
 
-  console.log('현재', currentBoundary)
   useEffect(() => {
-    console.log('바뀐=마커', markerCoord)
     const boundary = calculateBoundaries(
       markerCoord.latitude,
       markerCoord.longitude,
       5,
     )
     setCurrentBoundary(boundary)
-    console.log(boundary)
   }, [markerCoord])
 
-  const { data, isLoading, error } = useGetEstateItems(
-    Number(category),
-    itemFilter,
-    currentBoundary,
-  )
-  useEffect(() => {}, [currentBoundary, data])
+  const setMapCenterToUserLocation = useRef(null)
 
-  if (isLoading) {
-    return <ItemLoading />
+  const handleLocationClick = () => {
+    getCurrentLocation()
+    if (setMapCenterToUserLocation.current) {
+      setMapCenterToUserLocation.current.setCenter()
+    }
   }
 
-  if (error || !data || !data.itemList) {
-    return (
-      <NoItems
-        src={'/image/image_warning_pig.png'}
-        alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
-      />
-    )
-  }
+  // const { data, isLoading, error } = useGetEstateItems(
+  //   Number(category),
+  //   itemFilter,
+  //   {
+  //     northEastLatitude: 35.20793645842205,
+  //     northEastLongitude: 126.8243731285463,
+  //     southWestLatitude: 35.167213022923335,
+  //     southWestLongitude: 126.79021349478826,
+  //   },
+  // )
 
-  console.log(data)
+  // if (isLoading) {
+  //   return <ItemLoading />
+  // }
 
-  const estateItemList: EstateItemListType[] = data.itemList
+  // if (error || !data || !data.itemList) {
+  //   return (
+  //     <NoItems
+  //       src={'/image/image_warning_pig.png'}
+  //       alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
+  //     />
+  //   )
+  // }
+
+  // console.log(data)
+  console.log('리스트 렌더링')
+
+  // const estateItemList: EstateItemListType[] = data.itemList
+
+  const estateItemList: EstateItemListType[] = []
   return (
     <l.EstateItemListContainer>
       <l.StatusBarContainer>
-        <CurrentStatus getCurrentLocation={getCurrentLocation} />
+        <CurrentStatus handleLocationClick={handleLocationClick} />
       </l.StatusBarContainer>
       {menu ? (
         estateItemList === undefined || estateItemList.length === 0 ? (

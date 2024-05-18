@@ -6,6 +6,7 @@ export const LogoutContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
   .txt {
     width: 90%;
     color: #5c5c5c;
