@@ -1,19 +1,28 @@
+import { useGetEstateItems } from '@/apis/itemApi'
+import ItemLoading from '@/common/ItemLoading'
+import NoItems from '@/common/NoItems'
 import useCurrentLocation from '@/hooks/useCurrentLocation'
 import {
+  currentCoordAtom,
   currentPositonAtom,
+  estateFilterAtom,
   estateItemListAtom,
   filterAtom,
+  mapCenterCoordAtom,
   matchAtom,
   selectedItemAtom,
+  userCoordAtom,
 } from '@/stores/atoms/EstateListStore'
-import { RealEstateStatusType } from '@/types/components/estateListType'
+import {
+  RealEstateStatusType,
+  ReqCoordType,
+} from '@/types/components/estateListType'
+import { calculateBoundaries, calculateDistance } from '@/utils/locationUtil'
 import * as c from '@components/EstateList/styles/CurrentStatusStyle'
 import { useAtom, useSetAtom } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-interface PropsType {
-  getCurrentLocation: () => void
-}
 const EstateStatusList: RealEstateStatusType[] = [
   {
     condition: '우수',
@@ -29,29 +38,134 @@ const EstateStatusList: RealEstateStatusType[] = [
   },
 ]
 
-const CurrentStatus = ({handleLocationClick}) => {
-  // const { getCurrentLocation } = props
+const CurrentStatus = ({ handleLocationClick }) => {
+  const { category } = useParams()
+  // 현재 위치 호출하는 함수
   const { getCurrentLocation } = useCurrentLocation()
+  // 해당하는 범위의 부동산 매물 조회 함수
   const setItem = useSetAtom(estateItemListAtom)
+  // 지도 중심과 사용자 현재 위치 일치 여부 확인
   const [match] = useAtom(matchAtom)
+  // 사용자 현재 위치
+  const [userCoord] = useAtom(userCoordAtom)
+  // 지도 중심 좌표
+  const [mapCenterCoord] = useAtom(mapCenterCoordAtom)
+  // 마커 좌표
+  const [markerCoord] = useAtom(currentCoordAtom)
+  // 필터 항목
+  const [itemFilter] = useAtom(estateFilterAtom)
+  const boundaries = calculateBoundaries(
+    markerCoord.latitude,
+    markerCoord.longitude,
+    5,
+  )
+  const [currentBoundary, setCurrentBoundary] =
+    useState<ReqCoordType>(boundaries)
+  const initialCenterRef = useRef({
+    latitude: markerCoord.latitude,
+    longitude: markerCoord.longitude,
+  })
+  const [distanceMoved, setDistanceMoved] = useState(0)
+
+  useEffect(() => {
+    const boundary = calculateBoundaries(
+      markerCoord.latitude,
+      markerCoord.longitude,
+      5,
+    )
+    setCurrentBoundary(boundary)
+  }, [mapCenterCoord])
+  //-------------------------------------------------------------------------------------
+  // const { data, isLoading, error } = useGetEstateItems(
+  //   Number(category),
+  //   itemFilter,
+  //   {
+  //     northEastLatitude: 35.20793645842205,
+  //     northEastLongitude: 126.8243731285463,
+  //     southWestLatitude: 35.167213022923335,
+  //     southWestLongitude: 126.79021349478826,
+  //   },
+  // )
+
+  // if (isLoading) {
+  //   return <ItemLoading />
+  // }
+
+  // if (error || !data || !data.itemList) {
+  //   return (
+  //     <NoItems
+  //       src={'/image/image_warning_pig.png'}
+  //       alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
+  //     />
+  //   )
+  // }
+
+  // console.log(data)
+
+  // const estateItemList: EstateItemListType[] = data.itemList
+
+  //-----------------------------------------------------
+  // 현재 위치 이름
   const [currentPostion] = useAtom(currentPositonAtom)
   useEffect(() => {}, [currentPostion])
   const [filter, setFilter] = useAtom(filterAtom)
 
+  // status 초기 렌더링 시 사용자 위치 가져오기
   useEffect(() => {
     getCurrentLocation()
   }, [])
+  useEffect(() => {}, [match])
 
-  // 현재 위치로 돌아오기
-  // const handleLocationClick = () => {
-  //   getCurrentLocation()
-  // }
   // 필터 토글
   const handlerFilterClick = () => {
     setFilter(!filter)
   }
 
-  useEffect(() => {}, [match])
+  useEffect(() => {
+    const distance = calculateDistance(
+      initialCenterRef.current.latitude,
+      initialCenterRef.current.longitude,
+      mapCenterCoord.latitude,
+      mapCenterCoord.longitude,
+    )
+    setDistanceMoved(distance)
+    if (distance >= 2.5) {
+      const newBoundary = calculateBoundaries(
+        mapCenterCoord.latitude,
+        mapCenterCoord.longitude,
+        5,
+      )
+      setCurrentBoundary(newBoundary)
+      initialCenterRef.current = { ...mapCenterCoord }
+    }
+  }, [mapCenterCoord])
+
+  const { data, isLoading, error } = useGetEstateItems(
+    Number(category),
+    itemFilter,
+    currentBoundary,
+    setItem,
+    // {
+    //   northEastLatitude: 35.20793645842205,
+    //   northEastLongitude: 126.8243731285463,
+    //   southWestLatitude: 35.167213022923335,
+    //   southWestLongitude: 126.79021349478826,
+    // },
+  )
+
+  if (isLoading) {
+    return <ItemLoading />
+  }
+
+  if (error || !data || !data.itemList) {
+    return (
+      <NoItems
+        src={'/image/image_warning_pig.png'}
+        alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
+      />
+    )
+  }
+
   return (
     <c.CurrentStatusContainer>
       <c.CurrentLocationContainer>

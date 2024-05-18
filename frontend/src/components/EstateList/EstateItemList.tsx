@@ -22,34 +22,16 @@ import { calculateBoundaries } from '@/utils/locationUtil'
 import { ReqCoordType } from '@/types/components/estateListType'
 
 const EstateItemList = () => {
-  const { category } = useParams()
   const { getCurrentLocation } = useCurrentLocation()
   const [filter, setFilter] = useAtom(filterAtom)
   const [itemFilter] = useAtom(estateFilterAtom)
   const [menu] = useAtom(mapAtom)
-  const [markerCoord] = useAtom(mapCenterCoordAtom)
+  const [items] = useAtom(estateItemListAtom)
 
   useEffect(() => {
     setFilter(false)
     // getCurrentLocation()
   }, [setFilter])
-
-  const boundaries = calculateBoundaries(
-    markerCoord.latitude,
-    markerCoord.longitude,
-    5,
-  )
-  const [currentBoundary, setCurrentBoundary] =
-    useState<ReqCoordType>(boundaries)
-
-  useEffect(() => {
-    const boundary = calculateBoundaries(
-      markerCoord.latitude,
-      markerCoord.longitude,
-      5,
-    )
-    setCurrentBoundary(boundary)
-  }, [markerCoord])
 
   const setMapCenterToUserLocation = useRef(null)
 
@@ -60,36 +42,7 @@ const EstateItemList = () => {
     }
   }
 
-  // const { data, isLoading, error } = useGetEstateItems(
-  //   Number(category),
-  //   itemFilter,
-  //   {
-  //     northEastLatitude: 35.20793645842205,
-  //     northEastLongitude: 126.8243731285463,
-  //     southWestLatitude: 35.167213022923335,
-  //     southWestLongitude: 126.79021349478826,
-  //   },
-  // )
-
-  // if (isLoading) {
-  //   return <ItemLoading />
-  // }
-
-  // if (error || !data || !data.itemList) {
-  //   return (
-  //     <NoItems
-  //       src={'/image/image_warning_pig.png'}
-  //       alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
-  //     />
-  //   )
-  // }
-
-  // console.log(data)
-  console.log('리스트 렌더링')
-
-  // const estateItemList: EstateItemListType[] = data.itemList
-
-  const estateItemList: EstateItemListType[] = []
+  const estateItemList: EstateItemListType[] = items.itemList || []
   return (
     <l.EstateItemListContainer>
       <l.StatusBarContainer>
