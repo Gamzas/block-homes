@@ -18,7 +18,7 @@ import MessageItem from '@components/ChattingPage/MessageItem'
 import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
 import { MessageType } from '@/types/components/chatType'
-import { isGoNextStepAtom } from '@stores/atoms/chat'
+import { chatRoomNoAtom, isGoNextStepAtom } from '@stores/atoms/chat'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -32,6 +32,7 @@ const ChattingRoomPage = () => {
   const [buyerStep, setBuyerStep] = useAtom(buyerStepAtom)
   const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const [userStep, setUserStep] = useAtom(userStepAtom)
+  const [, setChatRoomNum] = useAtom(chatRoomNoAtom)
 
   const defaultMessage = {
     chatNo: 0,
@@ -166,6 +167,8 @@ const ChattingRoomPage = () => {
     } else {
       setUserMode(1)
     }
+
+    setChatRoomNum(Number(chatRoomNo))
   }, [data])
 
   useEffect(() => {

@@ -9,6 +9,7 @@ export const ContractDetailContainer = styled.div`
   padding: 1rem 0.5rem;
   margin-bottom: 1rem;
   font-weight: 500;
+  cursor: pointer;
 
   .title {
     font-size: 1rem;
