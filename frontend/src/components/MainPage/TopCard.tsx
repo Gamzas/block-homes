@@ -1,7 +1,12 @@
 import * as t from '@components/MainPage/style/TopCardStyle'
 import { useNavigate } from 'react-router-dom'
 
-const TopCard = ({ currentUser, setCurrentUser, setCurrentUserType }) => {
+const TopCard = ({
+  currentUser,
+  setCurrentUser,
+  currentUserType,
+  setCurrentUserType,
+}) => {
   const navigate = useNavigate()
 
   return (
@@ -24,9 +29,25 @@ const TopCard = ({ currentUser, setCurrentUser, setCurrentUserType }) => {
           </button>
         )}
       </t.TopCardHeader>
-      {currentUser.name !== '' && (
+      {currentUserType.type === 0 ? (
         <t.TopCardInfoTextContainer>
-          {`${currentUser.name}님`}
+          <div className="large">원하는 매물을 찾아</div>
+          <div className="large">
+            <span className="highlight">안전</span>
+            <span className="large">하고</span>
+            <span className="highlight">간편</span>
+            <span className="large">한</span>
+          </div>
+          <div className="large">거래를 시작해 보세요!</div>
+        </t.TopCardInfoTextContainer>
+      ) : (
+        <t.TopCardInfoTextContainer>
+          <div>
+            <span className="highlight">{currentUser.name}</span>
+            <span className="large">님</span>
+          </div>
+          <div className="large">부동산 카드를</div>
+          <div className="large">클릭해 보세요!</div>
         </t.TopCardInfoTextContainer>
       )}
       <t.CharacterContainer>
