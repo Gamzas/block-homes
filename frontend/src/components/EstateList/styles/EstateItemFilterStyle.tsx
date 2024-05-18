@@ -32,6 +32,9 @@ export const FilterContainer = styled.div`
   padding: 2rem;
   transition: height 0.3s ease-in-out;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 // 거래형태 및 옵션
@@ -56,8 +59,13 @@ export const TransactionContainer = styled.div`
   width: 100%;
   height: 2rem;
   font-size: 0.8rem;
+  .option-box.selected,
+  .option-box2.selected,
+  .option-box3.selected {
+    background-color: #d1c4e9; /* 선택된 아이템의 배경색을 변경 */
+    color: white; /* 선택된 아이템의 글자색을 변경 */
+  }
   .option-box {
-    background-color: #e8e0f7;
     border-top-left-radius: 0.8rem;
     border-bottom-left-radius: 0.8rem;
     width: 100%;
@@ -68,13 +76,13 @@ export const TransactionContainer = styled.div`
     border-right: 1.5px solid #845bd3;
     border-left: 0.1rem solid #845bd3;
     width: 100%;
-    height: 1.5rem;
+    height: 2rem;
+    padding: 0.25rem 0 0.25rem;
     line-height: 1.5rem;
   }
   .option-box3 {
     border-top-right-radius: 0.8rem;
     border-bottom-right-radius: 0.8rem;
-    background-color: #e8e0f7;
     width: 100%;
     height: 2rem;
     line-height: 2rem;
@@ -122,4 +130,21 @@ export const DetailOptionBtn = styled.div<FilterPropsType>`
   border: 1px solid #845bd3;
   background: ${props => (props.$isActive ? `#FFFFFF` : `#f3f0f7`)};
   margin-right: 0.5rem;
+`
+// 적용 버튼
+export const SelectBtnContainer = styled.div`
+  width: 10rem;
+  height: 3rem;
+  border-radius: 0.875rem;
+  background: #845bd3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  .search {
+    color: #fff;
+    font-feature-settings: 'calt' off;
+    font-size: 1rem;
+    font-weight: 600;
+  }
 `

@@ -67,7 +67,7 @@ export interface DetailItemType {
 
 export interface FilterType {
   // realEstateType: number
-  reportRank: number
+  // reportRank: number
   transactionType: number
   minPrice: number
   maxPrice: number
