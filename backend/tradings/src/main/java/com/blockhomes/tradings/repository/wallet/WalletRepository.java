@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface WalletRepository extends JpaRepository<Wallet, Integer>, WalletRepositoryCustom {
+public interface WalletRepository extends JpaRepository<Wallet, Integer> {
 
     Optional<Wallet> getWalletByNameAndPhoneNumber(String name, String phoneNumber);
 
