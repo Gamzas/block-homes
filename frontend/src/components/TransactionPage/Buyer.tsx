@@ -7,24 +7,22 @@ import SpecialContract from './SpecialContract'
 
 const Buyer = () => {
   const [currentindex, setCurrentIndex] = useState(0)
-
-
-  const [isSpecialOpen, setIsSpecialOpenOpen] = useState(false);
+  const [isSpecialOpen, setIsSpecialOpenOpen] = useState(false)
 
   const handleOpenModal = () => {
-    setIsSpecialOpenOpen(true);
-  };
+    setIsSpecialOpenOpen(true)
+  }
 
   const handleCloseModal = () => {
-    setIsSpecialOpenOpen(false);
-  };
+    setIsSpecialOpenOpen(false)
+  }
 
   return (
     <b.BuyMainContainer>
       {/* 확인용 버튼 삭제 필요 */}
       <div className="ex">
         <CustomButtonStyle
-          style={{ width: '2rem', height: '1rem' ,backgroundColor:'red'}}
+          style={{ width: '2rem', height: '1rem', backgroundColor: 'red' }}
           onClick={() => {
             setCurrentIndex(currentindex + 1)
           }}
@@ -107,7 +105,7 @@ const Buyer = () => {
                 fontWeight: '500',
                 boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
-              onClick={handleOpenModal} 
+              onClick={handleOpenModal}
             >
               요청 승낙 하기
             </CustomButtonStyle>
@@ -137,13 +135,11 @@ const Buyer = () => {
               계약서 서명 및 작성
             </CustomButtonStyle>
           )}
-
-
         </div>
         <SpecialContract
-                 open={isSpecialOpen} // 모달 열림 상태
-                 handleClose={handleCloseModal} // 모달 닫기 함수 전달
-                 />
+          open={isSpecialOpen} // 모달 열림 상태
+          handleClose={handleCloseModal} // 모달 닫기 함수 전달
+        />
 
         <ProcessDetail
           title="[[거래 완료]]"
