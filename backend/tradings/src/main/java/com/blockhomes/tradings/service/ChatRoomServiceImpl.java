@@ -1,9 +1,6 @@
 package com.blockhomes.tradings.service;
 
-import com.blockhomes.tradings.dto.chat.request.CreateChatRoomReq;
-import com.blockhomes.tradings.dto.chat.request.CheckChatRoomReq;
-import com.blockhomes.tradings.dto.chat.request.ListChatRoomsReq;
-import com.blockhomes.tradings.dto.chat.request.RegisterProvisionReq;
+import com.blockhomes.tradings.dto.chat.request.*;
 import com.blockhomes.tradings.dto.chat.response.*;
 import com.blockhomes.tradings.entity.chat.ChatProvision;
 import com.blockhomes.tradings.entity.chat.ChatRoom;
@@ -102,6 +99,24 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         return RegisterProvisionRes.builder()
             .chatRoomNo(chatRoom.getChatRoomNo())
             .provisionList(provisionList)
+            .build();
+    }
+
+    @Override
+    public GetProvisionRes getSpecialProvision(GetProvisionReq req) {
+        ChatRoom chatRoom = chatRoomRepository.getChatRoomByChatRoomNo(req.getChatRoomNo())
+            .orElseThrow(ChatRoomNotFoundException::new);
+
+        List<ChatProvision> chatProvisionList = chatProvisionRepository.getChatProvisionsByChatRoom(chatRoom);
+
+        List<Integer> specialProvisionList = new ArrayList<>();
+        for (ChatProvision chatProvision : chatProvisionList) {
+            specialProvisionList.add(SpecialProvisionCategory.enumToValue(chatProvision.getSpecialProvisionCategory()));
+        }
+
+        return GetProvisionRes.builder()
+            .chatRoomNo(chatRoom.getChatRoomNo())
+            .specialProvisionList(specialProvisionList)
             .build();
     }
 
