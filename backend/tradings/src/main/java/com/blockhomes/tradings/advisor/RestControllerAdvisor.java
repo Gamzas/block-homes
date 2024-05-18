@@ -8,6 +8,8 @@ import com.blockhomes.tradings.exception.common.ImageNotSavedException;
 import com.blockhomes.tradings.exception.item.DuplicateLikesException;
 import com.blockhomes.tradings.exception.item.ItemNotFoundException;
 import com.blockhomes.tradings.exception.item.ItemOwnerNotMatchException;
+import com.blockhomes.tradings.exception.wallet.ContractNotFoundException;
+import com.blockhomes.tradings.exception.wallet.WalletContractNotFoundException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -91,7 +93,9 @@ public class RestControllerAdvisor {
         WalletNotFoundException.class,
         ItemNotFoundException.class,
         ChatRoomNotFoundException.class,
-        WalletChatRoomNotFoundException.class
+        WalletChatRoomNotFoundException.class,
+        ContractNotFoundException.class,
+        WalletContractNotFoundException.class
     })
     public ResponseEntity<BaseResponseBody> notFoundError(Exception e) {
         log.error(e.getMessage());
