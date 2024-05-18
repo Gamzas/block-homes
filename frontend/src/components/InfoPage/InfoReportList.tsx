@@ -1,9 +1,9 @@
-import ReportSummary from '@components/Report/ReportSummary'
-import DepositGraph from '@components/Report/DepositGraph'
-import DepositList from '@components/Report/DepositList'
-import DangerList from '@components/Report/DangerList'
 import { useState } from 'react'
 import Joyride, { STATUS, Step } from 'react-joyride'
+import { ExampleDangerList } from '../Report/ExampleReport/ExampleDangerList'
+import ExampleDepositList from '../Report/ExampleReport/ExampleDepositList'
+import ExampleDepositGraph from '../Report/ExampleReport/ExampleDepositGraph'
+import ExampleReportSummary from '../Report/ExampleReport/ExampleReportSummary'
 
 type ExtendedStep = Step & {
   placement: 'top' | 'bottom' | 'left' | 'right' | 'auto' | 'center'
@@ -97,7 +97,7 @@ const InfoReportList = () => {
         styles={{
           options: {
             zIndex: 10,
-            width: 350, // 툴팁의 너비
+            width: 335, // 툴팁의 너비
             primaryColor: '#845bd3',
           },
           tooltipContent: {
@@ -115,22 +115,22 @@ const InfoReportList = () => {
       />
       <div style={{ height: '1rem' }}></div>
       <div className="report-summary" style={{ width: '90%' }}>
-        <ReportSummary />
+        <ExampleReportSummary />
       </div>
       <div style={{ height: '1rem' }}></div>
       <div className="deposit-graph" style={{ width: '90%' }}>
-        <DepositGraph />
+        <ExampleDepositGraph />
       </div>
       <div style={{ height: '1rem' }}></div>
       <div className="deposit-list" style={{ width: '90%' }}>
-        <DepositList />
+        <ExampleDepositList />
       </div>
       <div style={{ height: '1rem' }}></div>
       <div
         className="danger-list"
         style={{ width: '90%', marginBottom: '2rem' }}
       >
-        <DangerList />
+        <ExampleDangerList />
       </div>
     </>
   )
