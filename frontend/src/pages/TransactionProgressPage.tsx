@@ -1,15 +1,17 @@
 import TransactionProcessHeader from '@/components/TransactionPage/TransactionProcessHeader'
 import * as t from './style/TransactionProgressStyle'
-import { useState } from 'react'
 import BuyerProcess from '@components/TransactionPage/BuyerProcess'
 import SellerProcess from '@components/TransactionPage/SellerProcess'
+import { useAtom } from 'jotai'
+import { userModeAtom } from '@stores/atoms/userStore'
 
 const TransactionProgressPage = () => {
-  const [buyer] = useState(false)
+  const [userMode] = useAtom(userModeAtom)
+
   return (
     <t.TransactionProcessPageContainer>
       <TransactionProcessHeader />
-      {buyer ? <BuyerProcess /> : <SellerProcess />}
+      {userMode === 1 ? <BuyerProcess /> : <SellerProcess />}
     </t.TransactionProcessPageContainer>
   )
 }
