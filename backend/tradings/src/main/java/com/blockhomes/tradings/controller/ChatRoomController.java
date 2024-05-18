@@ -204,7 +204,8 @@ public class ChatRoomController {
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
-    public ResponseEntity<WalletsRes> getWallets(@ModelAttribute Integer chatRoomNo) {
+    public ResponseEntity<WalletsRes> getWallets(@RequestParam Integer chatRoomNo) {
+        log.info("getWallets : {}", chatRoomNo);
         return ResponseEntity
             .status(OK)
             .body(chatRoomService.getWallets(chatRoomNo));
