@@ -7,7 +7,6 @@ import Joyride, { STATUS, Step } from 'react-joyride'
 import { getLoanInfo } from '@/abi/Bank/getLoanInfo'
 import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
 import { useGetDetailItem } from '@/apis/itemApi'
-import WalletAddress from '../MyPage/WalletAddress'
 import { useParams } from 'react-router-dom'
 import { useAtomValue } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
@@ -20,7 +19,6 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
   const currentUser = useAtomValue(userAtom)
   console.log('1.currentUser', currentUser)
   console.log('1.currentUser', currentUser.walletAddress)
-  // const walletAddress = '0xed739565d59219a4bdac5a958a803ec4bdd07b45'
 
   // URL 파라미터에서 부동산 번호 추출
   const { estateNo } = useParams()
@@ -82,35 +80,7 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
     console.log('realEstateDidInfo', realEstateDidInfo)
   }, [didestate])
 
-  // useEffect(() => {
-  //   if (realEstateDidInfo?.isViolated) {
-  //     let copy = [...checkList]
-  //     copy[1] = false
-  //     setCheckList(copy)
-  //   }
-
-  //   if (realEstateDidInfo?.isNotPermitted) {
-  //     let copy = [...checkList]
-  //     copy[2] = false
-  //     setCheckList(copy)
-  //   }
-
-  //   if (loanInfo?.pendingLoanAmount !== '0') {
-  //     let copy = [...checkList]
-  //     copy[3] = false
-  //     setCheckList(copy)
-  //   }
-
-  //   if (realEstateDidInfo?.purpose !== '주거용') {
-  //     let copy = [...checkList]
-  //     copy[4] = false
-  //     setCheckList(copy)
-  //   }
-  //   console.log('checkList', checkList)
-  // }, [realEstateDidInfo, loanInfo])
-
   useEffect(() => {
-    // 현재 상태를 복사합니다.
     let copy = [...checkList]
 
     if (realEstateDidInfo?.isViolated) {
@@ -129,7 +99,6 @@ const ReportList = ({ onShowHeader, onHideHeader, isHeaderVisible }) => {
       copy[4] = true
     }
 
-    // 모든 조건을 검사한 후 한 번에 상태를 업데이트합니다.
     setCheckList(copy)
     console.log('Updated checkList:', copy)
   }, [realEstateDidInfo, loanInfo])
