@@ -38,7 +38,6 @@ const DetailFooter = (props: PropsType) => {
       })
     }
   }, [id, user])
-
   const handleBtnClick = async () => {
     try {
       const checkChatRoomResponse =
@@ -101,7 +100,7 @@ const DetailFooter = (props: PropsType) => {
         </div>
         <div className="location">{roadNameAddress}</div>
       </f.InfoContainer>
-      {!props.accessChat && (
+      {props.accessChat() && (
         <f.ChatBtn onClick={handleBtnClick}>
           <div className="name">채팅하기</div>
         </f.ChatBtn>
