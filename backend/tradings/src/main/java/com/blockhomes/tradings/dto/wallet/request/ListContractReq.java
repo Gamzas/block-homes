@@ -15,8 +15,8 @@ import lombok.*;
 public class ListContractReq {
 
     @NotNull
-    @Min(1) @Max(2)
-    @Schema(description = "사용자 모드 (구매자 / 판매자)", example = "1 : 판매자, 2 : 구매자")
+    @Min(0) @Max(2)
+    @Schema(description = "사용자 모드 (구매자 / 판매자)", example = "0 : 전체, 1 : 판매자, 2 : 구매자")
     private Integer mode;
 
     @NotBlank

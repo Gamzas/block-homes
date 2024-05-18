@@ -9,6 +9,8 @@ import java.util.List;
 @NoRepositoryBean
 public interface ContractRepositoryCustom {
 
+    List<ListContractInstance> getContractListByWalletAddress(String walletAddress);
+
     List<ListContractInstance> getContractListByWalletAddressAndRoleCategory(String walletAddress, RoleCategory roleCategory);
 
 }

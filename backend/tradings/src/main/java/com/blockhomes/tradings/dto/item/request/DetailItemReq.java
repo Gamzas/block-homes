@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 public class DetailItemReq {
 
-    @NotBlank
     private String walletAddress;
 
 }
