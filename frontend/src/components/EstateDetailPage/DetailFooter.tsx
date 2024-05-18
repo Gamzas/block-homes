@@ -10,7 +10,7 @@ import { DetailItemType } from '@/types/components/estateListType'
 import { getTransactionType, numberToMoney } from '@/utils/estateTransferUtil'
 interface PropsType {
   info: DetailItemType
-  accessChat: boolean
+  accessChat: () => boolean
 }
 const DetailFooter = (props: PropsType) => {
   const {
