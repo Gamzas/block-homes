@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const TransactionProcessPageContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f3f0f7;
 `
 export const TransactionProcessFooter = styled.div`

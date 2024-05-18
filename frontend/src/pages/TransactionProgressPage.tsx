@@ -1,16 +1,15 @@
 import TransactionProcessHeader from '@/components/TransactionPage/TransactionProcessHeader'
 import * as t from './style/TransactionProgressStyle'
 import { useState } from 'react'
-import Seller from '@/components/TransactionPage/Seller'
 import BuyerProcess from '@components/TransactionPage/BuyerProcess'
+import SellerProcess from '@components/TransactionPage/SellerProcess'
 
 const TransactionProgressPage = () => {
-  // buyer 판매자 구매자 화면 전환 ^
-  const [buyer] = useState(true)
+  const [buyer] = useState(false)
   return (
     <t.TransactionProcessPageContainer>
       <TransactionProcessHeader />
-      {buyer ? <BuyerProcess /> : <Seller />}
+      {buyer ? <BuyerProcess /> : <SellerProcess />}
     </t.TransactionProcessPageContainer>
   )
 }
