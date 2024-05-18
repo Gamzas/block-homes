@@ -50,7 +50,7 @@ const useCurrentLocation = () => {
     const { latitude, longitude } = res.coords
     setUserCoord({ latitude, longitude }) // 사용자 위치
     setCoord({ latitude, longitude }) // 마커 위치
-    // setLocation({ latitude, longitude }) // 지도 중심을 사용자의 위치로 설정
+    setLocation({ latitude, longitude }) // 지도 중심을 사용자의 위치로 설정
   }
 
   const errorHandler = (err: GeolocationPositionError) => {

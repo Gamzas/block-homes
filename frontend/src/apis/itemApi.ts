@@ -9,6 +9,7 @@ import {
 } from '@constants/api'
 import { publicRequest } from '@/hooks/requestMethods'
 import {
+  EstateItemResType,
   GetFavoritItemParamsType,
   PostFavoriteDataType,
 } from '@/types/api/itemType'
@@ -30,9 +31,10 @@ export const useGetEstateItems = (
   category: number,
   filter: FilterType,
   coord: ReqCoordType,
+  setItem: (itemList: EstateItemResType) => void,
 ) => {
   return useQuery({
-    queryKey: ['estateItems', category, filter, coord],
+    queryKey: ['estateItems', category, filter, coord, setItem],
     queryFn: async () => {
       try {
         const res = await publicRequest.get(`${API_ESTATE_ITEM}`, {
@@ -42,6 +44,7 @@ export const useGetEstateItems = (
             ...filter,
           },
         })
+        setItem(res.data)
         return res.data
       } catch (err) {
         console.error(err)
