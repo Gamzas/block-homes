@@ -22,6 +22,17 @@ public class ContractRepositoryImpl extends QuerydslRepositorySupport implements
     }
 
     @Override
+    public List<ListContractInstance> getContractListByWalletAddress(String walletAddress) {
+        return from(qContract)
+            .innerJoin(qWalletContract).on(qContract.eq(qWalletContract.contract))
+            .innerJoin(qWallet).on(qWalletContract.wallet.eq(qWallet))
+            .select(Projections.constructor(ListContractInstance.class,
+                qContract.contractNo, qContract.contractAddress, qContract.createdAt))
+            .where(qWallet.walletAddress.eq(walletAddress))
+            .fetch();
+    }
+
+    @Override
     public List<ListContractInstance> getContractListByWalletAddressAndRoleCategory(String walletAddress, RoleCategory roleCategory) {
         return from(qContract)
             .innerJoin(qWalletContract).on(qContract.eq(qWalletContract.contract))
