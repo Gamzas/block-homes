@@ -17,7 +17,7 @@ import CallBackPage from '@pages/CallBackPage'
 import ChatListPage from '@pages/ChatListPage'
 import InfoProcessPage from '@pages/InfoProcessPage'
 import InfoSafePage from '@pages/InfoSafePage'
-import TransactionProgress from './pages/TransactionProgress'
+import TransactionProgressPage from '@pages/TransactionProgressPage'
 import RealEstateCheckListPage from '@pages/RealEstateCheckListPage'
 import FavoriteItemsPage from '@pages/FavoriteItemsPage'
 import ChattingRoomPage from '@pages/ChattingRoomPage'
@@ -50,7 +50,7 @@ const HomeRoutes = () => (
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/info-report" element={<InfoReportPage />} />
-    <Route path="/transaction-progress" element={<TransactionProgress />} />
+    <Route path="/transaction-progress" element={<TransactionProgressPage />} />
     <Route path="/estate-checklist" element={<RealEstateCheckListPage />} />
     <Route path="/likes" element={<FavoriteItemsPage />} />
     <Route path="/myestate" element={<MyEstatePage />} />

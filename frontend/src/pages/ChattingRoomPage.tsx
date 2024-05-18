@@ -62,7 +62,7 @@ const ChattingRoomPage = () => {
   }
 
   const connectHandler = () => {
-    const sockJs = new SockJS(API_BASE_URL + '/ws/chat')
+    const sockJs = SockJS(API_BASE_URL + '/ws/chat')
     client.current = new Client({
       webSocketFactory: () => sockJs,
       debug: str => console.log(str), // 추가된 디버그 로그
@@ -71,31 +71,37 @@ const ChattingRoomPage = () => {
       heartbeatOutgoing: 4000,
       onConnect: () => {
         console.log('WebSocket connected')
-        client.current.subscribe(`/topic/chat.talk.${chatRoomNo}`, msg => {
-          console.log('Subscribed to topic:', `/topic/chat.talk.${chatRoomNo}`)
-          console.log('Message received:', msg)
-          try {
-            const receivedMessage = JSON.parse(msg.body)
-            console.log('Parsed message:', receivedMessage)
-            setMessages(prevMessages => [
-              ...prevMessages,
-              {
-                chatNo: receivedMessage.chatNo,
-                chatRoomNo: receivedMessage.chatRoomNo,
-                senderWalletAddress: receivedMessage.senderWalletAddress,
-                senderName: receivedMessage.senderName,
-                messageType: receivedMessage.messageType,
-                image: receivedMessage.image,
-                contractStep: receivedMessage.contractStep,
-                message: receivedMessage.message,
-                createdAt: receivedMessage.createdAt,
-              },
-            ])
-            scrollToBottom()
-          } catch (error) {
-            console.error('Error parsing message:', error)
-          }
-        })
+        client.current.subscribe(
+          `/exchange/chat.exchange/room.${chatRoomNo}`,
+          msg => {
+            console.log(
+              'Subscribed to topic:',
+              `/exchange/chat.exchange/room.${chatRoomNo}`,
+            )
+            console.log('Message received:', msg)
+            try {
+              const receivedMessage = JSON.parse(msg.body)
+              console.log('Parsed message:', receivedMessage)
+              setMessages(prevMessages => [
+                ...prevMessages,
+                {
+                  chatNo: receivedMessage.chatNo,
+                  chatRoomNo: receivedMessage.chatRoomNo,
+                  senderWalletAddress: receivedMessage.senderWalletAddress,
+                  senderName: receivedMessage.senderName,
+                  messageType: receivedMessage.messageType,
+                  image: receivedMessage.image,
+                  contractStep: receivedMessage.contractStep,
+                  message: receivedMessage.message,
+                  createdAt: receivedMessage.createdAt,
+                },
+              ])
+              scrollToBottom()
+            } catch (error) {
+              console.error('Error parsing message:', error)
+            }
+          },
+        )
       },
       onStompError: frame => console.log('STOMP Error:', frame.headers.message),
     })
