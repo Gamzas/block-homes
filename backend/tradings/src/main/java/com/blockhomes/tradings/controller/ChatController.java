@@ -6,6 +6,7 @@ import com.blockhomes.tradings.service.ChatService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -57,5 +58,11 @@ public class ChatController {
 
         return result;
     }
+
+    @RabbitListener(queues = "chat.queue")
+    public void receiveMessage(ChatPayload chatPayload) {
+        log.info("received : {}", chatPayload);
+    }
+
 
 }
