@@ -145,19 +145,14 @@ const CurrentStatus = ({ handleLocationClick }) => {
     itemFilter,
     currentBoundary,
     setItem,
-    // {
-    //   northEastLatitude: 35.20793645842205,
-    //   northEastLongitude: 126.8243731285463,
-    //   southWestLatitude: 35.167213022923335,
-    //   southWestLongitude: 126.79021349478826,
-    // },
+
   )
 
   if (isLoading) {
     return <ItemLoading />
   }
 
-  if (error || !data || !data.itemList) {
+  if (error || !data) {
     return (
       <NoItems
         src={'/image/image_warning_pig.png'}
