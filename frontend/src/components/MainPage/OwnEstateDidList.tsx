@@ -45,7 +45,6 @@ const OwnEstateDidList = ({ currentUser }) => {
 
   return (
     <o.OwnEstateDidListContainer>
-      <div className="estate-did-info-text">내 소유 부동산 목록</div>
       <CustomCarousel
         cards={cards}
         offset={100}

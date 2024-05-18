@@ -27,6 +27,7 @@ const MainPage = () => {
       <TopCard
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
+        currentUserType={currentUserType}
         setCurrentUserType={setCurrentUserType}
       />
       <InfoCardSlider />
