@@ -49,7 +49,10 @@ const HomeRoutes = () => (
     <Route path="/info-transaction-process" element={<InfoProcessPage />} />
     <Route path="/info-how-safe" element={<InfoSafePage />} />
     <Route path="/info-report" element={<InfoReportPage />} />
-    <Route path="/transaction-progress" element={<TransactionProgressPage />} />
+    <Route
+      path="/transaction-progress/:chatRoomNo"
+      element={<TransactionProgressPage />}
+    />
     <Route
       path="/estate-checklist/:chatRoomNo"
       element={<RealEstateCheckListPage />}
