@@ -22,4 +22,4 @@ export const userModeAtom = atom(0)
 
 export const sellerStepAtom = atom(1)
 
-export const buyerStepAtom = atom(2)
+export const buyerStepAtom = atom(0)
