@@ -6,6 +6,7 @@ import {
   API_FAVORITE_ITEM,
   API_HEADERS_FORM_DATA,
   API_ITEM,
+  API_MY_ESTATE_ITEM,
 } from '@constants/api'
 import { publicRequest } from '@/hooks/requestMethods'
 import {
@@ -14,8 +15,6 @@ import {
   PostFavoriteDataType,
 } from '@/types/api/itemType'
 import { FilterType, ReqCoordType } from '@/types/components/estateListType'
-import { useSetAtom } from 'jotai'
-import { estateItemListAtom } from '@/stores/atoms/EstateListStore'
 
 export const usePostItemRegister = () => {
   return useMutation({
@@ -81,24 +80,35 @@ export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
 }
 
 // 부동산 매물 삭제
-export const useDeleteEstateItem = (number: number, walletAddress: string) => {
+export const useDeleteEstateItem = (walletAddress: string) => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: () =>
+    mutationFn: (itemNo: number) =>
       publicRequest
         .delete(API_ITEM, {
           params: {
-            itemNo: number,
+            itemNo: itemNo,
             walletAddress: walletAddress,
           },
         })
-        .then(res => console.log(res))
-        .catch(err => console.log(err)),
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            alert('삭제되었습니다.')
+            window.location.href = '/myEstate'
+          }
+        })
+        .catch(err => {
+          if (err.response.status) {
+            console.log(err)
+            alert(err.response.data.message)
+            window.location.href = '/myEstate'
+          }
+        }),
     onSuccess: () => {
-      alert('삭제되었습니다.')
-      // window.location.href = `-1`
-      // 매물 리스트 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ['estateItems'] })
+      queryClient.invalidateQueries({
+        queryKey: ['estateItems', 'myEstateItem'],
+      })
     },
     onError: err => {
       console.log(err)
@@ -154,6 +164,33 @@ export const useDeleteFavoriteItem = () => {
       publicRequest.delete(API_FAVORITE_ITEM, { params: data }),
     onSuccess: () => {
       alert('삭제되었습니다.')
+    },
+  })
+}
+
+// 내가 등록 한 매물 조회
+
+export const useGetMyEstate = (walletAddress: string) => {
+  return useQuery({
+    queryKey: ['myEstateItem', walletAddress],
+    queryFn: async () => {
+      try {
+        console.log(`Requesting estate item for wallet: ${walletAddress}`)
+        const res = await publicRequest.get(`${API_MY_ESTATE_ITEM}`, {
+          params: {
+            ownerWallet: walletAddress,
+          },
+        })
+        // console.log('Response data:', res.data)
+        return res.data
+      } catch (err) {
+        if (err.response && err.response.status === 400) {
+          console.error('400 error:', err.response.data)
+        } else {
+          console.error('Request failed:', err)
+        }
+        throw err // or return a default value like `null` or an empty object if you want to handle errors differently
+      }
     },
   })
 }
