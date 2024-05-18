@@ -1,40 +1,38 @@
 import * as r from '@components/RealEstateCheckListPage/style/RealEstateCheckListStyle'
 import { useAtom } from 'jotai'
 import {
-  checkListState,
+  createCheckListStateAtom,
   selectedCheckListTypeIndex,
 } from '@stores/atoms/checkListStore'
+import { useParams } from 'react-router-dom'
+import React from 'react'
 
 const RealEstateCheckList = () => {
+  const { chatRoomNo } = useParams()
   const [selectedCheckListType] = useAtom(selectedCheckListTypeIndex)
-  const [checkListResult, setCheckListResult] = useAtom(checkListState)
+  const checkListStateAtom = React.useMemo(
+    () => createCheckListStateAtom(Number(chatRoomNo)),
+    [chatRoomNo],
+  )
+  const [checkListState, setCheckListState] = useAtom(checkListStateAtom)
 
-  const updateCheckListResult = (
-    sectionIndex: number,
-    itemIndex: number,
-    isChecked: boolean,
-  ) => {
-    const newCheckList = [...checkListResult]
-    newCheckList[sectionIndex].content[itemIndex].checked = isChecked
-    setCheckListResult(newCheckList)
+  const handleCheck = (sectionIndex: number, questionIndex: number) => {
+    const updatedState = [...checkListState]
+    updatedState[sectionIndex].content[questionIndex].checked =
+      !updatedState[sectionIndex].content[questionIndex].checked
+    setCheckListState(updatedState)
   }
 
   return (
     <r.RealEstateCheckListContainer>
-      {checkListResult[selectedCheckListType].content.map(
+      {checkListState[selectedCheckListType].content.map(
         (realEstateCheckListContent, index) => (
           <r.RealEstateCheckListContentContainer key={index}>
             <input
               className="checklist-button"
               type="checkbox"
               checked={realEstateCheckListContent.checked}
-              onChange={e =>
-                updateCheckListResult(
-                  selectedCheckListType,
-                  index,
-                  e.target.checked,
-                )
-              }
+              onChange={() => handleCheck(selectedCheckListType, index)}
             />
             <label className="checklist-content">
               {realEstateCheckListContent.question}
