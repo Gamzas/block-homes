@@ -32,6 +32,12 @@ import { DetailItemType } from '@/types/components/contractType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@/apis/chatApi'
 import { convertToDid } from '@/hooks/didMake'
+import {
+  fetchTempContractAddress,
+  useRegisterContractAddress,
+  useSaveContractAddress,
+} from '@/apis/contractApi'
+import { useParams } from 'react-router-dom'
 
 const SmartContractPage = () => {
   const setContractMonths = useSetAtom(contractMonthsAtom)
@@ -39,6 +45,19 @@ const SmartContractPage = () => {
   const setTenant = useSetAtom(tenantAtom)
   const [step, setStep] = useAtom(contractStepAtom)
   const [open, setOpen] = useState(false)
+
+  const { chatRoomNo } = useParams()
+  // console.log('chatRoomNo', chatRoomNo)
+  const chatRoomNumber = Number(chatRoomNo)
+
+  //삭제 코드
+  const { data: contractAddress } = useQuery({
+    queryKey: ['fetchTempContractAddress', chatRoomNumber],
+    queryFn: () => fetchTempContractAddress(chatRoomNumber),
+    enabled: !!chatRoomNumber,
+  })
+
+  console.log('@@@@@@@@@@@@@@@@@@@@miiii', contractAddress)
 
   // 비밀번호 오류 컴포넌트
   const [snackbarOpen, setSnackbarOpen] = useState(false)
@@ -51,8 +70,6 @@ const SmartContractPage = () => {
   // 지갑 불러오기(wallet) 비밀번호 쳐서 여는 로직 필요~~
   const currentUser = useAtomValue(userAtom)
 
-  console.log('currentUser', currentUser)
-
   const { data: getWalletData } = useGetWallet({
     walletAddress: currentUser.walletAddress,
   })
@@ -63,6 +80,7 @@ const SmartContractPage = () => {
 
   // 계약서 주소
   const [deploymentInfo, setDeploymentInfo] = useState('')
+  console.log('deploymentInfo', deploymentInfo)
 
   useEffect(() => {
     setStep(0)
@@ -107,7 +125,9 @@ const SmartContractPage = () => {
   useEffect(() => {
     if (itemDetails) {
       setLeasePeriod(itemDetails.contractMonths)
-      setDeposit(itemDetails.price)
+      setDeposit(
+        ethers.utils.parseEther(itemDetails.price.toString()).toString(),
+      )
       setPropertyDID(itemDetails.realEstateDID)
       setEstateInfo(itemDetails)
       setContractMonths(itemDetails.contractMonths)
@@ -122,7 +142,9 @@ const SmartContractPage = () => {
   console.log('estateInfo', estateInfo)
 
   // 채팅 방 내용으로 주소 받아오기
-  const chatRoomNumber = Number(17)
+  // 계약서 등록
+  // const registerContractAddress = useRegisterContractAddress()
+  const registerSaveContractAddress = useSaveContractAddress()
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['fetchChatRoomDetail', chatRoomNumber],
@@ -280,6 +302,18 @@ const SmartContractPage = () => {
       setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
       setSnackbarOpen(true)
       setStep(step + 1)
+      // 계약서 주소 서버에 등록
+      console.log(chatRoomNumber, result, '이게들어가유')
+
+      // registerContractAddress.mutate({
+      //   chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
+      //   contractAddress: result,
+      // })
+
+      registerSaveContractAddress.mutate({
+        chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
+        contractAddress: result,
+      })
     } catch (error) {
       if (error.message.includes('invalid password')) {
         setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
