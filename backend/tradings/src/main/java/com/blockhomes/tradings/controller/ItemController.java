@@ -47,6 +47,22 @@ public class ItemController {
             .body(itemService.listItems(req));
     }
 
+    @GetMapping("/owner-list")
+    @Operation(
+        summary = "내가 등록한 매물 모아보기",
+        description = "내가 등록한 매물 리스트를 조회합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "조회 완료"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<ListItemRes> listOwnerItems(@ModelAttribute @Valid OwnerItemReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(itemService.listOwnerItems(req));
+    }
+
     @GetMapping("/detail/{itemNo}")
     @Operation(
         summary = "매물 상세보기",
@@ -118,7 +134,7 @@ public class ItemController {
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
-    public ResponseEntity<BaseResponseBody> processTransaction(@PathVariable Integer itemNo, @ModelAttribute @NotNull Integer process) {
+    public ResponseEntity<BaseResponseBody> processTransaction(@PathVariable Integer itemNo, @RequestBody @NotNull Integer process) {
         return ResponseEntity
             .status(OK)
             .body(itemService.processTransaction(itemNo, process));

@@ -25,5 +25,6 @@ public interface ItemService {
 
     BaseResponseBody deleteLikes(DeleteLikesReq req);
 
-
+    ListItemRes listOwnerItems(OwnerItemReq req);
+    
 }

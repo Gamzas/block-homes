@@ -221,7 +221,22 @@ public class ItemServiceImpl implements ItemService {
     public ListItemRes listItems(ListItemReq req) {
         List<ListItemInstance> itemsList = itemRepository.listItemsByFiltering(req);
 
-        log.info("ItemService : {}", itemsList);
+        if (itemsList.isEmpty()) {
+            return ListItemRes.builder()
+                .itemList(List.of())
+                .count(0)
+                .build();
+        }
+
+        return ListItemRes.builder()
+            .itemList(itemsList)
+            .count(itemsList.size())
+            .build();
+    }
+
+    @Override
+    public ListItemRes listOwnerItems(OwnerItemReq req) {
+        List<ListItemInstance> itemsList = itemRepository.listItemsByOwner(req);
 
         if (itemsList.isEmpty()) {
             return ListItemRes.builder()
