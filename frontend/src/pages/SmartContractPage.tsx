@@ -14,7 +14,6 @@ import { Button, Snackbar } from '@mui/material'
 import CustomModal from '@/common/CustomModal'
 import {
   deployContract,
-  fetchContractData,
   getContractInstance,
 } from '@/abi/userSmartContract/DeployLongTermRentContract'
 import { ethers } from 'ethers'
@@ -22,6 +21,7 @@ import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
+import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
 
 const SmartContractPage = () => {
   const [step, setStep] = useAtom(contractStepAtom)
@@ -95,7 +95,7 @@ const SmartContractPage = () => {
 
   /// 조회 액션
   const handlelook = () => {
-    fetchContractData(deploymentInfo)
+    getContractInfo(deploymentInfo)
       .then(data => {
         console.log('Fetched Contract Data:', data)
       })
@@ -112,14 +112,13 @@ const SmartContractPage = () => {
     }
 
     try {
-      // 1.암호화된 지갑 데이터 복원
+      // 0.암호화된 지갑 데이터 복원(서명, 계약서 올리기 사용) 사용자 개인키 보관, 트랜잭션 서명
       const userWallet = await ethers.Wallet.fromEncryptedJson(
         getWalletData.data.encPrivateKey,
         password,
       )
-      console.log('userWallet', userWallet)
 
-      // 1.5서명할 메시지 준비 (예시: "임대 계약 승인") 서명하는거 해쉬 만들기!!!!!!
+      // 1.서명할 메시지 준비 (예시: "임대 계약 승인") 서명하는거 해쉬 만들기!!!!!!
 
       const message = ethers.utils.solidityKeccak256(
         ['string', 'string', 'uint16', 'uint256', 'string', 'string', 'string'],
@@ -138,22 +137,14 @@ const SmartContractPage = () => {
       const sig = ethers.utils.splitSignature(signature)
       console.log(sig)
 
-      // const messageHash = getMessageHash(dummyData)
-
-      // // 메시지에 대한 서명 생성
-      // const signature = await userWallet.signMessage(
-      //   ethers.utils.arrayify(messageHash),
-      // )
-      // // 서명을 r, s, v로 분할
-      // const sig = ethers.utils.splitSignature(signature)
-
-      // 2. 이더리움 네트워크 연결
+      // 2.1 이더리움 네트워크 연결
       const provider = new ethers.providers.JsonRpcProvider(
         BLOCK_CHAIN_ENDPOINT,
       )
-      // 3. 지갑을provider에 연결
+      // 2.2 지갑과 프로바이더를 결합
       const signer = userWallet.connect(provider)
 
+      // 계약서 넣을 내용과, 지갑 프로바이더 결합, 서명을 보내기
       const result = await deployContract(
         signer,
         dummyData.landlordDID,
@@ -194,13 +185,12 @@ const SmartContractPage = () => {
       return
     }
     try {
-      // 1.지갑 복원
+      // 1. 지갑에 개인키와 비밀번호 담아서 트랜잭션 서명 때 쓸 지갑 생성(네트워크 서버와 연결)
       const tenantWallet = await ethers.Wallet.fromEncryptedJson(
         getWalletData2.data.encPrivateKey,
         password,
       )
 
-      // 2. 이더리움 메인넷에 연결하기 위해 provider 생성
       const provider = new ethers.providers.JsonRpcProvider(
         BLOCK_CHAIN_ENDPOINT,
       )
@@ -209,7 +199,7 @@ const SmartContractPage = () => {
       const tenantSigner = tenantWallet.connect(provider)
       console.log('11tenantSigner', tenantSigner)
 
-      // 3. 스마트 계약 인스턴스 생성
+      // 2. 스마트 계약 인스턴스 생성(스마트계약 주소 필요)
       const contract = getContractInstance(deploymentInfo, tenantSigner)
       console.log('22contract', contract)
 
@@ -234,6 +224,8 @@ const SmartContractPage = () => {
       const messageBytes = ethers.utils.arrayify(message)
       const signature = await tenantWallet.signMessage(messageBytes)
       const sig = ethers.utils.splitSignature(signature)
+
+      // 트랜잭션 같이 보내기 서명과 보증금 보내서~~
 
       const txResponse = await contract.tenantSign(sig.r, sig.s, sig.v, {
         value: ethers.utils.parseEther('0.1'),
@@ -263,7 +255,12 @@ const SmartContractPage = () => {
       {step === 0 && <ContractStart currentUser={currentUser} />}
       {step === 1 && <ContractAgree />}
       {step === 2 && <ContractMain />}
-      {step === 3 && <ContractPayment handlePayment={handleDeploy} currentUser={currentUser} />}
+      {step === 3 && (
+        <ContractPayment
+          handlePayment={handleDeploy}
+          currentUser={currentUser}
+        />
+      )}
       {step === 4 && <ContractComplete />}
       <Button onClick={handleOpen}></Button>
 
