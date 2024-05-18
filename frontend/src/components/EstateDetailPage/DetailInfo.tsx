@@ -19,10 +19,7 @@ const DetailInfo = () => {
     error,
   } = useGetDetailItem(Number(id), user.walletAddress)
   // console.log(detailInfoData)
-  const { mutate: deleteItem } = useDeleteEstateItem(
-    Number(id),
-    user.walletAddress,
-  )
+
   if (isLoading) {
     return <ItemLoading />
   }
@@ -41,9 +38,7 @@ const DetailInfo = () => {
   }
 
   //임시
-  const handleDelete = () => {
-    deleteItem()
-  }
+
   return (
     <d.DetailInfoWrapper>
       <>
