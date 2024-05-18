@@ -181,7 +181,7 @@ const EstateRegistrationPage = () => {
       {!isNoData && (
         <>
           <Header title={'매물 등록'} isSearch={false} rightIconSrc={null} />
-          {!isComplete ? (
+          {isComplete ? (
             <>
               <r.AccodionWrapper>
                 <AccordionGroup
