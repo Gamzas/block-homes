@@ -23,6 +23,7 @@ const TopCard = ({
             onClick={() => {
               setCurrentUserType({ type: 0 })
               setCurrentUser({ walletAddress: '', name: '' })
+              navigate('/intro')
             }}
           >
             로그아웃
