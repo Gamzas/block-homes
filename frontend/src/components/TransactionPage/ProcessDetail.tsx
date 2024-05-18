@@ -89,7 +89,7 @@ const ProcessDetail = (props: ProcessDetailProps) => {
         </p.ProcessContentContainer>
 
         <div className="button-box">
-          {props.currentStep === props.stepIndex && props.stepIndex === 0 && (
+          {props.currentStep === props.stepIndex && props.stepIndex === 1 && (
             <CustomButtonStyle
               $secondary={true}
               style={{
@@ -105,7 +105,8 @@ const ProcessDetail = (props: ProcessDetailProps) => {
               요청 거절하기
             </CustomButtonStyle>
           )}
-          {props.currentStep === props.stepIndex && props.stepIndex === 0 && (
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 1 && (
             <CustomButtonStyle
               style={{
                 width: '7rem',
@@ -120,7 +121,22 @@ const ProcessDetail = (props: ProcessDetailProps) => {
             </CustomButtonStyle>
           )}
 
-          {props.currentStep === props.stepIndex && props.stepIndex === 1 && (
+          {props.currentStep === props.stepIndex && props.stepIndex === 2 && (
+            <CustomButtonStyle
+              style={{
+                width: '7rem',
+                height: '2.5rem',
+                fontSize: '0.8rem',
+                marginLeft: '0.5rem',
+                fontWeight: '500',
+                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+              }}
+            >
+              요청 보내기
+            </CustomButtonStyle>
+          )}
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 3 && (
             <CustomButtonStyle
               style={{
                 width: '8rem',
@@ -134,11 +150,25 @@ const ProcessDetail = (props: ProcessDetailProps) => {
             </CustomButtonStyle>
           )}
 
-          {props.currentStep === props.stepIndex && props.stepIndex === 2 && (
+          {props.currentStep === props.stepIndex && props.stepIndex === 4 && (
+            <CustomButtonStyle
+              style={{
+                width: '8rem',
+                height: '2.5rem',
+                fontSize: '0.8rem',
+                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontWeight: '600',
+              }}
+            >
+              특약사항 작성하기
+            </CustomButtonStyle>
+          )}
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 5 && (
             <CustomButtonStyle
               $secondary={true}
               style={{
-                width: '7rem',
+                width: '8rem',
                 height: '2.5rem',
                 fontSize: '0.8rem',
                 boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
@@ -147,14 +177,15 @@ const ProcessDetail = (props: ProcessDetailProps) => {
                 color: '#B0B0B0',
               }}
             >
-              요청 거절하기
+              서명 거절하기
             </CustomButtonStyle>
           )}
-          {props.currentStep === props.stepIndex && props.stepIndex === 2 && (
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 5 && (
             <CustomButtonStyle
               onClick={handleOpenModal}
               style={{
-                width: '7rem',
+                width: '8rem',
                 height: '2.5rem',
                 fontSize: '0.8rem',
                 marginLeft: '0.5rem',
@@ -162,37 +193,49 @@ const ProcessDetail = (props: ProcessDetailProps) => {
                 boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
               }}
             >
-              요청 승낙 하기
+              서명 및 결제 하기
             </CustomButtonStyle>
           )}
-          {props.currentStep === props.stepIndex && props.stepIndex === 3 && (
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 6 && (
             <CustomButtonStyle
-              $secondary={true}
               style={{
-                width: '7rem',
+                width: '9rem',
                 height: '2.5rem',
                 fontSize: '0.8rem',
                 boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
-                backgroundColor: '#E8E8E8',
                 fontWeight: '600',
-                color: '#B0B0B0',
               }}
             >
-              요청 거절하기
+              계약서 생성 및 서명
             </CustomButtonStyle>
           )}
-          {props.currentStep === props.stepIndex && props.stepIndex === 3 && (
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 7 && (
             <CustomButtonStyle
               style={{
-                width: '7rem',
+                width: '9rem',
                 height: '2.5rem',
                 fontSize: '0.8rem',
-                marginLeft: '0.5rem',
-                fontWeight: '500',
                 boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontWeight: '600',
               }}
             >
-              요청 승낙 하기
+              홈으로 돌아가기
+            </CustomButtonStyle>
+          )}
+
+          {props.currentStep === props.stepIndex && props.stepIndex === 8 && (
+            <CustomButtonStyle
+              style={{
+                width: '9rem',
+                height: '2.5rem',
+                fontSize: '0.8rem',
+                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+                fontWeight: '600',
+              }}
+            >
+              홈으로 돌아가기
             </CustomButtonStyle>
           )}
         </div>
