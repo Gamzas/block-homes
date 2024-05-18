@@ -34,7 +34,7 @@ public class RestControllerAdvisor {
      * @param e 발생한 Exception 객체
      * @return Error 메세지를 Map에 담은 ResponseEntity 객체
      */
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class, UnsupportedTypeException.class})
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class, UnsupportedTypeException.class, InvalidContractStepException.class})
     public ResponseEntity<Map<String, String>> requestValidation(final MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach((error)-> {
