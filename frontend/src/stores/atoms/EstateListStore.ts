@@ -42,7 +42,7 @@ export const selectedItemAtom = atom<EstateItemListType | 'not'>('not')
 // 부동산 조회 위한 필터 항목
 export const estateFilterAtom = atom<FilterType>({
   // realEstateType: 4,
-  reportRank: 0,
+  // reportRank: 0,
   transactionType: 0,
   minPrice: 0,
   maxPrice: 0,

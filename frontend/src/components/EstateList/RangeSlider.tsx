@@ -1,7 +1,7 @@
 import * as r from '@components/EstateList/styles/RangeSliderStyle'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const RangeSlider = () => {
+const RangeSlider = ({ minPyeong, maxPyeong, setMinPyeong, setMaxPyeong }) => {
   const [minValue, setMinValue] = useState(10)
   const [maxValue, setMaxValue] = useState(60)
   const [minPercent, setMinPercent] = useState(0)
@@ -15,6 +15,24 @@ const RangeSlider = () => {
     </div>
   ))
 
+  useEffect(() => {
+    if (minValue == 10 && maxValue == 60) {
+      setMinPyeong(0)
+      setMaxPyeong(0)
+    } else if (minValue == 10 && maxValue == 10) {
+      setMinPyeong(0)
+      setMaxPyeong(maxValue)
+    } else if (minValue == 60 && maxValue == 60) {
+      setMinPyeong(60)
+      setMaxPyeong(0)
+    } else {
+      setMinPyeong(minValue)
+      setMaxPyeong(maxValue)
+    }
+    setMinPercent(((minValue - 10) / 50) * 100)
+    setMaxPercent(((60 - maxValue) / 50) * 100)
+  }, [minValue, maxValue])
+
   const areaMinRangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value)
     setMinValue(value)
@@ -27,9 +45,7 @@ const RangeSlider = () => {
   }
 
   // 최댓값, 최솟값 역전 방지
-  const RangeHandler = () => {
-
-  }
+  const RangeHandler = () => {}
 
   return (
     <>
