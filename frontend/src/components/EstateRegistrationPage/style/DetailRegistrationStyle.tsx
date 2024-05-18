@@ -55,7 +55,7 @@ export const DetailRegistrationWrapperInput = styled.div`
   height: fit-content;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   padding: 0.4rem 0;
 `
@@ -64,18 +64,18 @@ export const DetailRegistrationInputNumber = styled.div`
   width: 45%;
   height: fit-content;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   .title {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     width: fit-content;
     height: fit-content;
   }
 
   .input-wrapper {
-    width: 55%;
+    width: 64%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -84,7 +84,7 @@ export const DetailRegistrationInputNumber = styled.div`
   }
 
   .input-number {
-    width: 57%;
+    width: 65%;
     height: fit-content;
     border: none;
     color: #808080;
@@ -96,21 +96,23 @@ export const DetailRegistrationInputNumber = styled.div`
     width: fit-content;
     height: fit-content;
     margin-left: auto;
-    margin-right: 7%;
+    margin-right: 5%;
   }
 `
 
 export const DetailRegistrationCheckBox = styled.div`
-  width: 48%;
+  width: 45%;
   height: fit-content;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
+  padding: 3% 0;
 
   .check-box {
-    border: 1px solid #000000;
-    border-radius: 1px;
-    margin-right: 5%;
+    width: 20px;
+    height: 20px;
+    margin-left: 5%;
+    accent-color: #845bd3;
   }
 `
 
