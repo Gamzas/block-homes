@@ -74,7 +74,7 @@ public class ItemController {
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
-    public ResponseEntity<DetailItemRes> getDetailItem(@PathVariable Integer itemNo, @ModelAttribute @Valid DetailItemReq req) {
+    public ResponseEntity<DetailItemRes> getDetailItem(@PathVariable Integer itemNo, @ModelAttribute DetailItemReq req) {
         return ResponseEntity
             .status(OK)
             .body(itemService.getDetailItem(itemNo, req));

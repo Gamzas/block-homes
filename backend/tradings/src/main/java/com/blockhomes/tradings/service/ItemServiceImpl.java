@@ -261,9 +261,6 @@ public class ItemServiceImpl implements ItemService {
 
         List<ItemImageInstance> itemImageInstanceList = new ArrayList<>();
 
-        Wallet userWallet = walletRepository.getWalletByWalletAddress(req.getWalletAddress())
-            .orElseThrow(WalletNotFoundException::new);
-
         for (ItemImage itemImage : itemImages) {
             itemImageInstanceList.add(ItemImageInstance.builder()
                     .imageUrl(itemImage.getImage().getImageUrl())
@@ -285,9 +282,15 @@ public class ItemServiceImpl implements ItemService {
 
         Boolean isUserLiked = false;
 
-        if (likesRepository.getLikesByWalletAndItem(userWallet, item).isPresent()) {
-            isUserLiked = true;
+        if (Objects.nonNull(req.getWalletAddress())) {
+            Wallet userWallet = walletRepository.getWalletByWalletAddress(req.getWalletAddress())
+                .orElseThrow(WalletNotFoundException::new);
+
+            if (likesRepository.getLikesByWalletAndItem(userWallet, item).isPresent()) {
+                isUserLiked = true;
+            }
         }
+
 
         return DetailItemRes.builder()
             .itemNo(item.getItemNo())
