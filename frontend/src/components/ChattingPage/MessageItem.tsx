@@ -8,15 +8,16 @@ const MessageItem = ({ item }: { item: MessageType }) => {
   const [user] = useAtom(userAtom)
 
   const extractTime = (date: string) => {
-    if (!date) {
-      const currentDate = new Date()
-      const hour = currentDate.getHours().toString().padStart(2, '0') // 시
-      const minute = currentDate.getMinutes().toString().padStart(2, '0') // 분
+    if (Array.isArray(date)) {
+      const pad = n => (n < 10 ? '0' + n : n)
+      return `${pad(date[3])}:${pad(date[4])}`
+    } else {
+      console.log(date)
+      const time = date.split('T')[1]
+      const hour = time.split(':')[0]
+      const minute = time.split(':')[1]
       return `${hour}:${minute}`
     }
-    const time = date.split(' ')[1]
-    const [hour, minute] = time.split(':')
-    return `${hour}:${minute}`
   }
 
   return (
