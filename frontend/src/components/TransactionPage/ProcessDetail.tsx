@@ -4,7 +4,7 @@ import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { useEffect, useState } from 'react'
 import SpecialContract from '@components/TransactionPage/SpecialContract'
 import { useAtom } from 'jotai/index'
-import { isGoNextStepAtom } from '@stores/atoms/chat'
+import { isGoNextStepAtom, chatRoomNoAtom } from '@stores/atoms/chat'
 import { useNavigate } from 'react-router-dom'
 import { userModeAtom, userStepAtom } from '@stores/atoms/userStore'
 
@@ -16,6 +16,7 @@ interface ProcessDetailProps {
 }
 
 const ProcessDetail = (props: ProcessDetailProps) => {
+  const [chatRoomNum, setChatRoomNum] = useAtom(chatRoomNoAtom)
   const navigate = useNavigate()
   const [isSpecialOpen, setIsSpecialOpen] = useState(false)
   const [, setIsGoNextStep] = useAtom(isGoNextStepAtom)
@@ -38,6 +39,16 @@ const ProcessDetail = (props: ProcessDetailProps) => {
   const goNextStep = () => {
     setIsGoNextStep(true)
     navigate(-1)
+  }
+
+  const goSmartContact = () => {
+    setIsGoNextStep(true)
+    navigate(`/smart-contract/${chatRoomNum}`)
+  }
+
+  const goSmartContactTenant = () => {
+    setIsGoNextStep(true)
+    navigate(`/smart-contract-tenant/${chatRoomNum}`)
   }
 
   const openModalAndGoNextStep = () => {
@@ -209,7 +220,7 @@ const ProcessDetail = (props: ProcessDetailProps) => {
                   fontWeight: '600',
                 }}
                 //계약서 서명 페이지로 이동
-                onClick={goNextStep}
+                onClick={goSmartContact}
               >
                 계약서 생성 및 서명
               </CustomButtonStyle>
@@ -228,7 +239,7 @@ const ProcessDetail = (props: ProcessDetailProps) => {
                   fontWeight: '500',
                   boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
                 }}
-                onClick={goNextStep}
+                onClick={goSmartContactTenant}
               >
                 서명 및 결제 하기
               </CustomButtonStyle>
