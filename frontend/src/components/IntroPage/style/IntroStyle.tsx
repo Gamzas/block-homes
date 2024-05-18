@@ -5,6 +5,7 @@ export const IntroContainer = styled.div`
   height: 100%;
 
   position: relative;
+  overflow: hidden;
 `
 
 export const IntroCanvasWrapper = styled.div`

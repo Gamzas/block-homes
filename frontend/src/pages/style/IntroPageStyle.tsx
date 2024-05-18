@@ -10,7 +10,7 @@ export const IntroPageContainer = styled.div`
 
 export const SignInButton = styled(CustomButtonStyle)`
   position: fixed;
-  bottom: 7vh;
+  bottom: 9vh;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
@@ -23,7 +23,7 @@ export const SignInButton = styled(CustomButtonStyle)`
 
 export const NotSignInButton = styled.div`
   position: fixed;
-  bottom: 4vh;
+  bottom: 5vh;
   left: 50%;
   transform: translateX(-50%);
   text-shadow: 0 4px 8px rgba(255, 255, 255, 0.5);
