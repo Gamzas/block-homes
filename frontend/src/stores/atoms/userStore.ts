@@ -20,6 +20,8 @@ export const userAtom = atomWithStorage<UserType>('currentUser', currentUser)
 
 export const userModeAtom = atom(0)
 
+export const userStepAtom = atom(0)
+
 export const sellerStepAtom = atom(1)
 
 export const buyerStepAtom = atom(0)
