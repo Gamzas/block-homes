@@ -60,8 +60,8 @@ public class ChatController {
     }
 
     @RabbitListener(queues = "chat.queue")
-    public void receiveMessage(ChatPayload chatPayload) {
-        log.info("received : {}", chatPayload);
+    public void receiveMessage(ChatRes chatRes) {
+        log.info("received : {}", chatRes);
     }
 
 
