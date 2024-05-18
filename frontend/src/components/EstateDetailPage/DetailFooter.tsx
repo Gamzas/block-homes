@@ -38,7 +38,6 @@ const DetailFooter = (props: PropsType) => {
       })
     }
   }, [id, user])
-  console.log(props.accessChat())
   const handleBtnClick = async () => {
     try {
       const checkChatRoomResponse =
