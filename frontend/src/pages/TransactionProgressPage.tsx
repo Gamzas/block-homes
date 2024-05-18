@@ -11,7 +11,6 @@ const TransactionProgressPage = () => {
     <t.TransactionProcessPageContainer>
       <TransactionProcessHeader />
       {buyer ? <Buyer /> : <Seller />}
-      <t.TransactionProcessFooter />
     </t.TransactionProcessPageContainer>
   )
 }
