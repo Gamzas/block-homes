@@ -20,7 +20,7 @@ const InfoCardSlider = () => {
   }
 
   return (
-    <i.SliderContainer className="slider-container">
+    <i.SliderContainer>
       <Slider {...settings}>
         <InfoCardProcess />
         <InfoCardReport />
