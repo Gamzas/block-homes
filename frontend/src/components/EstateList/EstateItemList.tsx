@@ -4,7 +4,7 @@ import EstateItemCard from './EstateItemCard'
 import { useEffect, useRef } from 'react'
 import EstateItemFilter from './EstateItemFilter'
 import * as l from '@components/EstateList/styles/EstateItemListStyle'
-import { useAtom,  } from 'jotai'
+import { useAtom } from 'jotai'
 import {
   estateItemListAtom,
   filterAtom,
@@ -17,14 +17,11 @@ import { EstateItemListType } from '@/types/api/itemType'
 const EstateItemList = () => {
   const { getCurrentLocation } = useCurrentLocation()
   const [filter, setFilter] = useAtom(filterAtom)
-  // const [itemFilter] = useAtom(estateFilterAtom)
   const [menu] = useAtom(mapAtom)
   const [items] = useAtom(estateItemListAtom)
   useEffect(() => {
     setFilter(false)
-    // getCurrentLocation()
   }, [setFilter])
-
   const setMapCenterToUserLocation = useRef(null)
 
   const handleLocationClick = () => {
