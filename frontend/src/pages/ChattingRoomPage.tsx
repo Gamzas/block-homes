@@ -146,7 +146,7 @@ const ChattingRoomPage = () => {
       }
       formatPrice(data.price)
     }
-    // setMessages(data?.chatList)
+    setMessages(data?.chatList)
   }, [data])
 
   const sendTextMessage = () => {
