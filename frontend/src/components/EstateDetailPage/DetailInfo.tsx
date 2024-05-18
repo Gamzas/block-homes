@@ -41,7 +41,7 @@ const DetailInfo = () => {
     <d.DetailInfoWrapper>
       <>
         <DetailTabMenu imgUrl={detailInfoData.itemImageList} />
-        <button onClick={handleDelete}>삭제(임시)</button>
+        {/* <button onClick={handleDelete}>삭제(임시)</button> */}
         <ItemSafetyCard condition={detailInfoData.reportRank} />
         <RoomInfo info={detailInfoData} />
         <DetailFooter info={detailInfoData} />
