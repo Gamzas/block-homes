@@ -10,6 +10,7 @@ import {
   filterAtom,
   mapCenterCoordAtom,
   matchAtom,
+  reportAtom,
   selectedItemAtom,
   userCoordAtom,
 } from '@/stores/atoms/EstateListStore'
@@ -54,6 +55,9 @@ const CurrentStatus = ({ handleLocationClick }) => {
   const [markerCoord] = useAtom(currentCoordAtom)
   // 필터 항목
   const [itemFilter] = useAtom(estateFilterAtom)
+  // 레포트 필터 항목
+  const [reportFilter, setReportFilter] = useAtom(reportAtom)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const boundaries = calculateBoundaries(
     markerCoord.latitude,
     markerCoord.longitude,
@@ -87,24 +91,6 @@ const CurrentStatus = ({ handleLocationClick }) => {
   //   },
   // )
 
-  // if (isLoading) {
-  //   return <ItemLoading />
-  // }
-
-  // if (error || !data || !data.itemList) {
-  //   return (
-  //     <NoItems
-  //       src={'/image/image_warning_pig.png'}
-  //       alarmText={'데이터를 불러오는 중 오류가 발생했습니다.'}
-  //     />
-  //   )
-  // }
-
-  // console.log(data)
-
-  // const estateItemList: EstateItemListType[] = data.itemList
-
-  //-----------------------------------------------------
   // 현재 위치 이름
   const [currentPostion] = useAtom(currentPositonAtom)
   useEffect(() => {}, [currentPostion])
@@ -119,6 +105,17 @@ const CurrentStatus = ({ handleLocationClick }) => {
   // 필터 토글
   const handlerFilterClick = () => {
     setFilter(!filter)
+  }
+
+  // 레포트 등급별 출력
+  const reportFiltering = (index: number) => {
+    if (activeIndex === index) {
+      setActiveIndex(null)
+      setReportFilter(0)
+    } else {
+      setActiveIndex(index)
+      setReportFilter(index + 1)
+    }
   }
 
   useEffect(() => {
@@ -142,10 +139,10 @@ const CurrentStatus = ({ handleLocationClick }) => {
 
   const { data, isLoading, error } = useGetEstateItems(
     Number(category),
+    reportFilter,
     itemFilter,
     currentBoundary,
     setItem,
-
   )
 
   if (isLoading) {
@@ -160,7 +157,7 @@ const CurrentStatus = ({ handleLocationClick }) => {
       />
     )
   }
-
+  console.log(data)
   return (
     <c.CurrentStatusContainer>
       <c.CurrentLocationContainer>
@@ -182,7 +179,12 @@ const CurrentStatus = ({ handleLocationClick }) => {
       </c.CurrentLocationContainer>
       <c.EstateStatusButtonContainer>
         {EstateStatusList.map((item, index) => (
-          <c.EstateStatusButton key={index} $color={item.color1}>
+          <c.EstateStatusButton
+            key={index}
+            $color={item.color1}
+            $active={activeIndex === index}
+            onClick={() => reportFiltering(index)}
+          >
             {item.condition}
           </c.EstateStatusButton>
         ))}
