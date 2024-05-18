@@ -8,6 +8,8 @@ export const ReportContainer = styled.div`
   flex-direction: column;
   align-items: center;
   .question-box {
+    margin-left: -0.6rem;
+    /* padding-right: 1rem; */
     position: fixed;
     top: 1.6%;
     transform: translateX(455%);
