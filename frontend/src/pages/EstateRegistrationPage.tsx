@@ -36,8 +36,8 @@ const EstateRegistrationPage = () => {
     transactionType: undefined,
     price: undefined,
     monthlyPrice: undefined,
-    administrationCost: undefined,
     contractMonths: undefined,
+    administrationCost: undefined,
     administrationFeeCategoryList: undefined,
     moveInDate: undefined,
   })
