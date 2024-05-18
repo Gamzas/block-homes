@@ -71,7 +71,9 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
                 qChat.message,
                 qItem.reportRank))
             .where(qWallet.walletAddress.eq(walletAddress)
-                .and(qWalletChatRoom.roleCategory.eq(roleCategory)));
+                .and(qWalletChatRoom.roleCategory.eq(roleCategory)))
+            .orderBy(qChat.createdAt.desc())
+            ;
 
         log.info("{}", query);
 
