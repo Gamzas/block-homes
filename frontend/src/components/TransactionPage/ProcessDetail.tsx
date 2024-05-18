@@ -1,7 +1,7 @@
 import TextWithBold from '@/hooks/useTextBold'
 import { ProcessDetailContainer } from './style/ProcessDetailStyle'
 
-type Props = {
+interface ProcessDetailProps {
   title: string
   content: string
   currentStep: number
