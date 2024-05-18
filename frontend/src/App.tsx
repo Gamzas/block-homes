@@ -23,7 +23,6 @@ import FavoriteItemsPage from '@pages/FavoriteItemsPage'
 import ChattingRoomPage from '@pages/ChattingRoomPage'
 import MyEstatePage from './pages/MyEstatePage'
 import InfoReportPage from '@pages/InfoReportPage'
-import ScrollToTop from '@hooks/ScrollToTop'
 import TestPage from '@pages/TestPage'
 import SmartContractTenantPage from './pages/SmartContractPageTenant'
 
@@ -66,7 +65,7 @@ function App() {
     <>
       <GlobalStyle />
       <BrowserRouter>
-        <ScrollToTop />
+        {/*<ScrollToTop />*/}
         <HomeRoutes />
         <ReactQueryDevtools initialIsOpen={false} />
       </BrowserRouter>

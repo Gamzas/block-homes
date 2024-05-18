@@ -35,5 +35,7 @@ export interface FetchChatRoomResponseType {
   transactionType: number
   price: number
   itemNo: number
+  sellerWalletAddress: string
+  buyerWalletAddress: string
   chatList: MessageType[]
 }
