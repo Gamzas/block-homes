@@ -32,12 +32,11 @@ export const DetailEstateWrapperInput = styled.div`
   height: fit-content;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 `
-
 export const DetailEstateInputNumber = styled.div`
-  width: 27%;
+  width: 30%;
   height: fit-content;
   display: flex;
   justify-content: space-between;
@@ -51,9 +50,9 @@ export const DetailEstateInputNumber = styled.div`
   }
 
   .input-wrapper {
-    width: 50%;
+    width: 55%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid #c3c3c3;
     border-radius: 3px;
@@ -65,6 +64,7 @@ export const DetailEstateInputNumber = styled.div`
     border: none;
     color: #808080;
     padding: 9%;
+    text-align: end;
   }
 
   .label {
@@ -72,6 +72,51 @@ export const DetailEstateInputNumber = styled.div`
     height: fit-content;
     margin-left: auto;
     margin-right: 7%;
+  }
+`
+
+export const DetailEstateClickNumberWrapper = styled.div`
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  .title {
+    font-size: 1rem;
+    font-weight: bold;
+    width: fit-content;
+    margin-right: 9%;
+  }
+  .wrapper {
+    width: 80%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+`
+
+export const DetailEstateClickNumber = styled.div`
+  width: 58%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+
+  .minimize,
+  .add {
+    width: 21px;
+    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+  }
+  .minimize {
+    background-image: url('/icon/icon_minimize.png');
+  }
+  .add {
+    background-image: url('/icon/icon_add.png');
   }
 `
 
@@ -120,15 +165,17 @@ export const DetailEstateBigInput = styled.textarea`
   overflow: hidden;
 `
 export const DetailEstateCheckBox = styled.div`
-  width: 48%;
+  width: 45%;
   height: fit-content;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
+  padding: 3% 0;
 
   .check-box {
-    border: 1px solid #000000;
-    border-radius: 1px;
-    margin-right: 5%;
+    width: 20px;
+    height: 20px;
+    margin-left: 5%;
+    accent-color: #845bd3;
   }
 `

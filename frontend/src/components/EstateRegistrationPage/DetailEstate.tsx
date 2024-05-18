@@ -1,5 +1,6 @@
 import * as d from '@components/EstateRegistrationPage/style/DetailEstateStyle'
 import { useState } from 'react'
+import { DetailEstateInputNumber } from '@components/EstateRegistrationPage/style/DetailEstateStyle'
 
 const DetailEstate = ({ detailEstateProps, setDetailEstateProps }) => {
   const options = [
@@ -62,6 +63,37 @@ const DetailEstate = ({ detailEstateProps, setDetailEstateProps }) => {
     }))
   }
 
+  const roomNumberChange = type => {
+    const roomNumber = { value: 1 }
+    if (!type && detailEstateProps.roomNumber > 1)
+      roomNumber.value = detailEstateProps.roomNumber - 1
+    else if (type) roomNumber.value = detailEstateProps.roomNumber + 1
+    setDetailEstateProps(currentParams => ({
+      ...currentParams,
+      roomNumber: roomNumber.value,
+    }))
+  }
+
+  const toiletNumberChange = type => {
+    const toiletNumber = { value: 1 }
+    if (!type && detailEstateProps.toiletNumber > 1)
+      toiletNumber.value = detailEstateProps.toiletNumber - 1
+    else if (type) toiletNumber.value = detailEstateProps.toiletNumber + 1
+    setDetailEstateProps(currentParams => ({
+      ...currentParams,
+      toiletNumber: toiletNumber.value,
+    }))
+  }
+  const parkingRateChange = type => {
+    const parkingRate = { value: 1 }
+    if (!type && detailEstateProps.parkingRate > 1)
+      parkingRate.value = detailEstateProps.parkingRate - 1
+    else if (type) parkingRate.value = detailEstateProps.parkingRate + 1
+    setDetailEstateProps(currentParams => ({
+      ...currentParams,
+      parkingRate: parkingRate.value,
+    }))
+  }
   return (
     <d.DetailEstateContainer>
       <d.DetailEstateSession>
@@ -124,78 +156,63 @@ const DetailEstate = ({ detailEstateProps, setDetailEstateProps }) => {
       <d.DetailEstateSession>
         <div className="title">방 / 화장실 개수</div>
         <d.DetailEstateWrapperInput>
-          <d.DetailEstateInputNumber>
-            <div className="title">방</div>
-            <div className="input-wrapper">
-              <input
-                className="input-number"
-                type="number"
-                min="1"
-                max="99"
-                value={detailEstateProps.roomNumber}
-                onChange={e =>
-                  setDetailEstateProps(currentParams => ({
-                    ...currentParams,
-                    roomNumber: e.target.value,
-                  }))
-                }
-              />
-              <div className="label">개</div>
+          <d.DetailEstateClickNumberWrapper>
+            <div className="wrapper">
+              <div className="title">방</div>
+              <d.DetailEstateClickNumber>
+                <div
+                  className="minimize"
+                  onClick={() => roomNumberChange(false)}
+                />
+                {`${detailEstateProps.roomNumber}개`}
+                <div className="add" onClick={() => roomNumberChange(true)} />
+              </d.DetailEstateClickNumber>
             </div>
-          </d.DetailEstateInputNumber>
-          <d.DetailEstateInputNumber>
-            <div className="title">욕실</div>
-            <div className="input-wrapper">
-              <input
-                className="input-number"
-                type="number"
-                min="1"
-                max="99"
-                value={detailEstateProps.toiletNumber}
-                onChange={e =>
-                  setDetailEstateProps(currentParams => ({
-                    ...currentParams,
-                    toiletNumber: e.target.value,
-                  }))
-                }
-              />
-              <div className="label">개</div>
+          </d.DetailEstateClickNumberWrapper>
+          <d.DetailEstateClickNumberWrapper>
+            <div className="wrapper">
+              <div className="title">화장실</div>
+              <d.DetailEstateClickNumber>
+                <div
+                  className="minimize"
+                  onClick={() => toiletNumberChange(false)}
+                />
+                {`${detailEstateProps.toiletNumber ?? ''}개`}
+                <div className="add" onClick={() => toiletNumberChange(true)} />
+              </d.DetailEstateClickNumber>
             </div>
-          </d.DetailEstateInputNumber>
+          </d.DetailEstateClickNumberWrapper>
         </d.DetailEstateWrapperInput>
       </d.DetailEstateSession>
       <d.DetailEstateSession>
         <div className="title">세대당 주차 대수</div>
 
         <d.DetailEstateWrapperInput>
-          {!isNoParkngRate && (
-            <d.DetailEstateInputNumber>
-              <div className="input-wrapper">
-                <input
-                  className="input-number"
-                  type="number"
-                  min="1"
-                  max="99"
-                  value={detailEstateProps.parkingRate}
-                  onChange={e =>
-                    setDetailEstateProps(currentParams => ({
-                      ...currentParams,
-                      parkingRate: e.target.value,
-                    }))
-                  }
-                />
-                <div className="label">대</div>
+          <d.DetailEstateClickNumberWrapper>
+            {!isNoParkngRate && (
+              <div className="wrapper">
+                <d.DetailEstateClickNumber>
+                  <div
+                    className="minimize"
+                    onClick={() => parkingRateChange(false)}
+                  />
+                  {`${detailEstateProps.parkingRate}대`}
+                  <div
+                    className="add"
+                    onClick={() => parkingRateChange(true)}
+                  />
+                </d.DetailEstateClickNumber>
               </div>
-            </d.DetailEstateInputNumber>
-          )}
+            )}
+          </d.DetailEstateClickNumberWrapper>
           <d.DetailEstateCheckBox>
+            주차 불가
             <input
               className="check-box"
               type="checkbox"
               checked={isNoParkngRate}
               onChange={handleHaveElevatorChange}
             />
-            주차 불가
           </d.DetailEstateCheckBox>
         </d.DetailEstateWrapperInput>
       </d.DetailEstateSession>
@@ -218,7 +235,7 @@ const DetailEstate = ({ detailEstateProps, setDetailEstateProps }) => {
       <d.DetailEstateSession>
         <div className="title">상세 설명</div>
         <d.DetailEstateBigInput
-          placeholder="매물의 구조, 특징, 주변 시설 등 홍보할 메시지를 입력해주세요."
+          placeholder="매물의 특징, 주변 시설 등 홍보할 메시지를 입력해주세요."
           onInput={adjustHeight}
           value={detailEstateProps.description}
           onChange={e =>
