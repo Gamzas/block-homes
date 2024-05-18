@@ -95,8 +95,6 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
     public DetailChatRoomRes getDetailChatRoom(Integer chatRoomNo) {
         return from(qChatRoom)
             .innerJoin(qItem).on(qChatRoom.item.eq(qItem))
-            .innerJoin(qItemImage).on(qItemImage.item.eq(qItem))
-            .innerJoin(qImage).on(qImage.eq(qItemImage.image))
             .select(Projections.constructor(DetailChatRoomRes.class,
                 qItem.itemNo,
                 qChatRoom.chatRoomNo,
@@ -109,8 +107,6 @@ public class ChatRoomRepositoryImpl extends QuerydslRepositorySupport implements
                         .where(qItemImage.item.eq(qItem)
                             .and(qChatRoom.chatRoomNo.eq(chatRoomNo))
                             .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
-                        .orderBy(qImage.imageNo.asc())
-                        .limit(1)
                 ),
                 qItem.roadNameAddress,
                 qItem.transactionType,
