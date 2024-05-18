@@ -1,5 +1,6 @@
 import TextWithBold from '@/hooks/useTextBold'
 import { ProcessDetailContainer } from './style/ProcessDetailStyle'
+
 type Props = {
   title: string
   content: string

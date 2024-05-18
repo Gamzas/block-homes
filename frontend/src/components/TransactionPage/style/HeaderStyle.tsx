@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const ProcessHeaderContainer = styled.div`
   display: flex;
   align-items: center;
+
   .header-text {
     width: 13.875rem;
     height: 1.4375rem;
