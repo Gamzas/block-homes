@@ -26,8 +26,8 @@ const ChattingRoomPage = () => {
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
   const [, setUserMode] = useAtom(userModeAtom)
-  const [sellerStep, setSellerStep] = useAtom(sellerStepAtom)
-  const [buyerStep, setBuyerStep] = useAtom(buyerStepAtom)
+  const [, setSellerStep] = useAtom(sellerStepAtom)
+  const [, setBuyerStep] = useAtom(buyerStepAtom)
 
   const formatPrice = price => {
     const units = ['원', '만', '억']
