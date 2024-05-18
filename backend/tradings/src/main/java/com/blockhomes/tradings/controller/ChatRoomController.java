@@ -1,5 +1,6 @@
 package com.blockhomes.tradings.controller;
 
+import com.blockhomes.tradings.dto.BaseResponseBody;
 import com.blockhomes.tradings.dto.chat.request.*;
 import com.blockhomes.tradings.dto.chat.response.*;
 import com.blockhomes.tradings.service.ChatRoomService;
@@ -56,6 +57,23 @@ public class ChatRoomController {
             .body(chatRoomService.checkChatRoom(req));
     }
 
+    @PostMapping()
+    @Operation(
+        summary = "거래진행방 생성",
+        description = "거래를 진행하기 위한 진행방을 생성합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "지갑 / 매물 번호 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<CreateChatRoomRes> createChatRoom(@RequestBody @Valid CreateChatRoomReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(chatRoomService.createChatRoom(req));
+    }
+
     @GetMapping("/detail/{chatRoomNo}")
     @Operation(
         summary = "채팅방 정보 조회",
@@ -101,17 +119,95 @@ public class ChatRoomController {
             @ApiResponse(responseCode = "500", description = "서버 에러")
         }
     )
-    public ResponseEntity<GetProvisionRes> getSpecialProvision(@RequestBody @Valid GetProvisionReq req) {
+    public ResponseEntity<GetProvisionRes> getSpecialProvision(@ModelAttribute @Valid GetProvisionReq req) {
         return ResponseEntity
             .status(OK)
             .body(chatRoomService.getSpecialProvision(req));
     }
 
-    @PostMapping()
-    public ResponseEntity<CreateChatRoomRes> createChatRoom(@RequestBody @Valid CreateChatRoomReq req) {
+    @DeleteMapping("/provision")
+    @Operation(
+        summary = "특약사항 삭제",
+        description = "해당 거래 진행방 번호에 해당하는 특약사항들을 삭제합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<BaseResponseBody> deleteSpecialProvision(@ModelAttribute Integer chatRoomNo) {
         return ResponseEntity
             .status(OK)
-            .body(chatRoomService.createChatRoom(req));
+            .body(chatRoomService.deleteSpecialProvision(chatRoomNo));
+    }
+
+    @PatchMapping("/contract")
+    @Operation(
+        summary = "계약서 주소 임시 등록 / 수정",
+        description = "계약서의 주소를 임시 등록 / 수정합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<TempContractRes> registerTemporaryContract(@RequestBody @Valid RegisterContractReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(chatRoomService.registerTemporaryContract(req));
+    }
+
+    @GetMapping("/contract")
+    @Operation(
+        summary = "임시 계약서 주소 조회",
+        description = "계약서의 주소를 임시 등록합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<TempContractRes> getTemporaryContract(@ModelAttribute @Valid GetContractReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(chatRoomService.getTemporaryContract(req));
+    }
+
+    @PostMapping("/contract")
+    @Operation(
+        summary = "계약서 주소 최종 등록",
+        description = "계약서의 주소를 최종 등록합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<ContractRes> registerFinalContract(@RequestBody @Valid RegisterContractReq req) {
+        return ResponseEntity
+            .status(OK)
+            .body(chatRoomService.registerFinalContract(req));
+    }
+
+    @GetMapping("wallets")
+    @Operation(
+        summary = "구매자와 판매자의 지갑 주소 조회",
+        description = "계약서 서명을 위한 구매자와 판매자의 지갑 주소를 조회합니다.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "정상 조회"),
+            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+            @ApiResponse(responseCode = "500", description = "서버 에러")
+        }
+    )
+    public ResponseEntity<WalletsRes> getWallets(@ModelAttribute Integer chatRoomNo) {
+        return ResponseEntity
+            .status(OK)
+            .body(chatRoomService.getWallets(chatRoomNo));
     }
 
 }
