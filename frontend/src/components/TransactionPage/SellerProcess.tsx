@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as b from '@components/TransactionPage/style/BuyerProcessStyle'
 import ProcessDetail from '@components/TransactionPage/ProcessDetail'
+import { useAtom } from 'jotai/index'
+import { sellerStepAtom } from '@stores/atoms/userStore'
 
 const SellerProcess = () => {
-  const [currentindex, setCurrentIndex] = useState(8)
+  const [sellerStep] = useAtom(sellerStepAtom)
 
   return (
     <div>
@@ -11,7 +13,7 @@ const SellerProcess = () => {
         <ProcessDetail
           title="[[부동산 거래 요청]]"
           content="구매자에게 거래 요청을 보내고 거래를 시작하세요"
-          currentStep={currentindex}
+          currentStep={sellerStep}
           stepIndex={2}
         />
         <ProcessDetail
@@ -19,14 +21,14 @@ const SellerProcess = () => {
           content="원하는 [[특약사항]]을 추가해보세요!
           집주인과 대화를 통해 특약사항을 조합해
           나갈 수 있습니다."
-          currentStep={currentindex}
+          currentStep={sellerStep}
           stepIndex={4}
         />
         <ProcessDetail
           title="[[계약서 블록체인 등록 및 서명]]"
           content="블록체인에 스마트 컨트랙트를 배포 후 서명을 해주세요.
 거래가 완료된 이후 지갑에 돈이 자동으로 입금 되어집니다!  !"
-          currentStep={currentindex}
+          currentStep={sellerStep}
           stepIndex={6}
         />
         <ProcessDetail
@@ -34,7 +36,7 @@ const SellerProcess = () => {
           content="거래가 완료되었습니다.
           거래 내역은 블록체인에 자동으로 기록되어
           투명하게 관리되니 걱정마세요!"
-          currentStep={currentindex}
+          currentStep={sellerStep}
           stepIndex={8}
         />
       </b.BuyerProcessContainer>

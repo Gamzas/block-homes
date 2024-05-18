@@ -3,7 +3,12 @@ import Header from '@common/Header'
 import SendMessageInput from '@components/ChattingPage/SendMessageInput'
 import { useEffect, useRef, useState } from 'react'
 import { useAtom } from 'jotai'
-import { userAtom } from '@stores/atoms/userStore'
+import {
+  buyerStepAtom,
+  sellerStepAtom,
+  userAtom,
+  userModeAtom,
+} from '@stores/atoms/userStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
@@ -20,6 +25,9 @@ const ChattingRoomPage = () => {
   const navigate = useNavigate()
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
+  const [, setUserMode] = useAtom(userModeAtom)
+  const [, setSellerStep] = useAtom(sellerStepAtom)
+  const [, setBuyerStep] = useAtom(buyerStepAtom)
 
   const formatPrice = price => {
     const units = ['원', '만', '억']
@@ -147,6 +155,23 @@ const ChattingRoomPage = () => {
       formatPrice(data.price)
     }
     setMessages(data?.chatList)
+
+    if (data.sellerWalletAddress === user.walletAddress) {
+      setUserMode(2)
+    } else {
+      setUserMode(1)
+    }
+
+    if (data.chatList.length >= 1) {
+      const lastStep = data.chatList[data.chatList.length - 1].contractStep
+      if (lastStep % 2 === 0) {
+        setBuyerStep(lastStep)
+        setSellerStep(lastStep - 1)
+      } else {
+        setBuyerStep(lastStep - 1)
+        setSellerStep(lastStep)
+      }
+    }
   }, [data])
 
   const sendTextMessage = () => {
