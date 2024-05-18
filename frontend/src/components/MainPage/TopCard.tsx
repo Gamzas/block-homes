@@ -8,27 +8,21 @@ const TopCard = ({
   setCurrentUserType,
 }) => {
   const navigate = useNavigate()
-
+  const signInButtonClick = () => {
+    if (currentUser.name === '') navigate('/signin')
+    else {
+      setCurrentUserType({ type: 0 })
+      setCurrentUser({ walletAddress: '', name: '' })
+      navigate('/intro')
+    }
+  }
   return (
     <t.TopCardContainer>
       <t.TopCardHeader>
         <img alt="로고" className="logo" src="/icon/icon_logo.png" />
-        {currentUser.name === '' ? (
-          <button className="login-btn" onClick={() => navigate('/signin')}>
-            로그인
-          </button>
-        ) : (
-          <button
-            className="login-btn"
-            onClick={() => {
-              setCurrentUserType({ type: 0 })
-              setCurrentUser({ walletAddress: '', name: '' })
-              navigate('/intro')
-            }}
-          >
-            로그아웃
-          </button>
-        )}
+        <button className="login-btn" onClick={signInButtonClick}>
+          {currentUser.name === '' ? '로그인' : '로그아웃'}
+        </button>
       </t.TopCardHeader>
       {currentUserType.type === 0 ? (
         <t.TopCardInfoTextContainer>

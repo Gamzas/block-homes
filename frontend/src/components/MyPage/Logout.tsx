@@ -9,7 +9,7 @@ const Logout = () => {
 
   const logout = () => {
     setUser({ walletAddress: '', name: '' })
-    navigate('/')
+    navigate('/intro')
   }
   return (
     <l.LogoutWrapper>
