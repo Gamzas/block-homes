@@ -63,9 +63,12 @@ export const useGetDetailItem = (itemNum: number, walletAddress: string) => {
     queryKey: ['detailItem', itemNum, walletAddress],
     queryFn: async () => {
       try {
-        const res = await publicRequest.get(`${API_ESTATE_DETAIL}/${itemNum}`, {
-          params: { walletAddress },
-        })
+        const res = await publicRequest.get(
+          `${API_ESTATE_DETAIL}/${itemNum}`,
+          walletAddress !== '' && {
+            params: { walletAddress },
+          },
+        )
         return res.data
       } catch (err) {
         console.log(err)
