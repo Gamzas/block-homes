@@ -1,20 +1,29 @@
 package com.blockhomes.tradings.service;
 
 import com.blockhomes.tradings.dto.BaseResponseBody;
+import com.blockhomes.tradings.dto.chat.response.ContractRes;
 import com.blockhomes.tradings.dto.wallet.request.CheckWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.GetWalletReq;
+import com.blockhomes.tradings.dto.wallet.request.ListContractReq;
 import com.blockhomes.tradings.dto.wallet.request.RegisterWalletReq;
-import com.blockhomes.tradings.dto.wallet.response.CheckWalletRes;
-import com.blockhomes.tradings.dto.wallet.response.GetWalletRes;
-import com.blockhomes.tradings.dto.wallet.response.RegisterWalletRes;
+import com.blockhomes.tradings.dto.wallet.response.*;
+import com.blockhomes.tradings.entity.common.RoleCategory;
+import com.blockhomes.tradings.entity.wallet.Contract;
 import com.blockhomes.tradings.entity.wallet.Wallet;
+import com.blockhomes.tradings.entity.wallet.WalletContract;
+import com.blockhomes.tradings.exception.wallet.ContractNotFoundException;
+import com.blockhomes.tradings.exception.wallet.WalletContractNotFoundException;
 import com.blockhomes.tradings.exception.wallet.WalletNotFoundException;
+import com.blockhomes.tradings.repository.wallet.ContractRepository;
+import com.blockhomes.tradings.repository.wallet.WalletContractRepository;
 import com.blockhomes.tradings.repository.wallet.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("walletService")
 @RequiredArgsConstructor
@@ -23,6 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class WalletServiceImpl implements WalletService {
 
     private final WalletRepository walletRepository;
+    private final ContractRepository contractRepository;
+    private final WalletContractRepository walletContractRepository;
 
     @Override
     public CheckWalletRes checkWallet(CheckWalletReq req) {
@@ -80,6 +91,39 @@ public class WalletServiceImpl implements WalletService {
             .name(registeredWallet.getName())
             .phoneNumber(registeredWallet.getPhoneNumber())
             .createdAt(registeredWallet.getCreatedAt())
+            .build();
+    }
+
+    @Override
+    public ListContractRes listContract(ListContractReq req) {
+        List<ListContractInstance> contractLists = contractRepository
+            .getContractListByWalletAddressAndRoleCategory(req.getWalletAddress(), RoleCategory.valueToEnum(req.getMode()));
+
+        return ListContractRes.builder()
+            .contractLists(contractLists)
+            .count(contractLists.size())
+            .build();
+    }
+
+    @Override
+    public ContractRes detailContract(Integer contractNo) {
+        Contract contract = contractRepository.getContractByContractNo(contractNo)
+            .orElseThrow(ContractNotFoundException::new);
+
+        WalletContract buyerWalletContract = walletContractRepository
+            .getWalletContractByContractAndRoleCategory(contract, RoleCategory.BUYER)
+            .orElseThrow(WalletContractNotFoundException::new);
+
+        WalletContract sellerWalletContract = walletContractRepository
+            .getWalletContractByContractAndRoleCategory(contract, RoleCategory.SELLER)
+            .orElseThrow(WalletContractNotFoundException::new);
+
+        return ContractRes.builder()
+            .contractNo(contract.getContractNo())
+            .contractAddress(contract.getContractAddress())
+            .buyerWalletAddress(buyerWalletContract.getWallet().getWalletAddress())
+            .sellerWalletAddress(sellerWalletContract.getWallet().getWalletAddress())
+            .createdAt(contract.getCreatedAt())
             .build();
     }
 
