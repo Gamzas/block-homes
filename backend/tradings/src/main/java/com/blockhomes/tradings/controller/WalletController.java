@@ -1,6 +1,7 @@
 package com.blockhomes.tradings.controller;
 
 import com.blockhomes.tradings.dto.BaseResponseBody;
+import com.blockhomes.tradings.dto.chat.response.ContractRes;
 import com.blockhomes.tradings.dto.wallet.request.CheckWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.GetWalletReq;
 import com.blockhomes.tradings.dto.wallet.request.RegisterWalletReq;
@@ -94,5 +95,34 @@ public class WalletController {
             .status(ACCEPTED)
             .body(walletService.deleteWallet(walletAddress));
     }
+
+//    @GetMapping("/contracts")
+//    @Operation(
+//        summary = "내가 계약한 계약서 목록 조회",
+//        description = "내가 계약한 계약서의 목록을 조회합니다.",
+//        responses = {
+//            @ApiResponse(responseCode = "200", description = "정상 조회"),
+//            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+//            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+//            @ApiResponse(responseCode = "500", description = "서버 에러")
+//        }
+//    )
+//    public ResponseEntity<ListContractRes> listContracts(@ModelAttribute ListContractReq req) {
+//
+//    }
+
+
+//    @GetMapping("/contract/final")
+//    @Operation(
+//        summary = "최종 계약서 주소 조회",
+//        description = "최종 계약서를 조회합니다.",
+//        responses = {
+//            @ApiResponse(responseCode = "200", description = "정상 조회"),
+//            @ApiResponse(responseCode = "400", description = "요청 매개변수 오류"),
+//            @ApiResponse(responseCode = "404", description = "거래 진행방이 존재하지 않음"),
+//            @ApiResponse(responseCode = "500", description = "서버 에러")
+//        }
+//    )
+//    public ResponseEntity<ContractRes> getFinalContract(@ModelAttribute @Valid )
 
 }
