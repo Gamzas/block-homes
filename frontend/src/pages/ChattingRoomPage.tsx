@@ -72,11 +72,11 @@ const ChattingRoomPage = () => {
       onConnect: () => {
         console.log('WebSocket connected')
         client.current.subscribe(
-          `/exchange/chat.exchange/room.${chatRoomNo}`,
+          `/exchange/chat.exchange/*.room.${chatRoomNo}`,
           msg => {
             console.log(
               'Subscribed to topic:',
-              `/exchange/chat.exchange/room.${chatRoomNo}`,
+              `/exchange/chat.exchange/*.room.${chatRoomNo}`,
             )
             console.log('Message received:', msg)
             try {
