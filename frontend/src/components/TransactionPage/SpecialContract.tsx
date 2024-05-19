@@ -6,12 +6,12 @@ import ContractDetail from './ContractDetail'
 import { fetchProvision } from '@apis/chatApi'
 import { useAtom } from 'jotai/index'
 import {
+  chatRoomNoAtom,
   provisionIsCancelAtomFamily,
   provisionsAtomFamily,
 } from '@stores/atoms/chat'
 import { publicRequest } from '@hooks/requestMethods'
 import { userAtom } from '@stores/atoms/userStore'
-import { useParams } from 'react-router-dom'
 
 interface SpecialContractProps {
   open: boolean
@@ -22,7 +22,7 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
   open,
   handleClose,
 }) => {
-  const { chatRoomNo } = useParams()
+  const [chatRoomNo] = useAtom(chatRoomNoAtom)
   const [provisions, setProvisions] = useAtom(
     provisionsAtomFamily(Number(chatRoomNo)),
   )
@@ -60,10 +60,10 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
       .map((value, index) => (value ? index + 1 : null))
       .filter(index => index !== null)
 
-    console.log(selectedIndices)
+    console.log(chatRoomNo)
 
     const postProvisionProps = {
-      chatRoomNo: Number(chatRoomNo),
+      chatRoomNo: chatRoomNo,
       provisionList: selectedIndices,
       walletAddress: user.walletAddress,
     }
