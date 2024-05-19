@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const ChattingRoomPageContainer = styled.div`
   max-width: 390px;
-  height: 100vh;
   padding-bottom: 60px;
   padding-top: 50px;
   display: flex;
@@ -87,7 +86,6 @@ export const ButtonContainer = styled.div`
 
 export const MessageListScrollWrapper = styled.div`
   width: 100%;
-  height: 100%;
   overflow-y: auto;
 
   ::-webkit-scrollbar {

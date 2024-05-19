@@ -1,11 +1,11 @@
 import * as s from '@components/ChattingPage/style/SendMessageInputStyle'
-import React, { useState } from 'react'
+import React from 'react'
 import { SendMessageInputPropsType } from '@/types/components/chatType'
-import MoreFunctionCollection from '@components/ChattingPage/MoreFunctionCollection'
+// import MoreFunctionCollection from '@components/ChattingPage/MoreFunctionCollection'
 
 const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
   const { sendButtonClick, message, onChange } = SendMessageInputProps
-  const [isShowMoreFunction, setIsShowMoreFunction] = useState(false)
+  // const [isShowMoreFunction, setIsShowMoreFunction] = useState(false)
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -14,23 +14,23 @@ const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
     }
   }
 
-  const clickIsShowMoreFunction = () => {
-    setIsShowMoreFunction(!isShowMoreFunction)
-  }
+  // const clickIsShowMoreFunction = () => {
+  //   setIsShowMoreFunction(!isShowMoreFunction)
+  // }
 
   return (
     <s.SendMessageInputContainer>
       <s.SendMessageInputWrap>
-        <s.PlusButtonContainer
-          onClick={clickIsShowMoreFunction}
-          $isShowMoreFunction={isShowMoreFunction}
-        >
-          <img
-            className="plus-button"
-            alt="더보기"
-            src="/icon/icon_plus_gray.png"
-          />
-        </s.PlusButtonContainer>
+        {/*<s.PlusButtonContainer*/}
+        {/*  onClick={clickIsShowMoreFunction}*/}
+        {/*  $isShowMoreFunction={isShowMoreFunction}*/}
+        {/*>*/}
+        {/*  <img*/}
+        {/*    className="plus-button"*/}
+        {/*    alt="더보기"*/}
+        {/*    src="/icon/icon_plus_gray.png"*/}
+        {/*  />*/}
+        {/*</s.PlusButtonContainer>*/}
         <input
           className="message-input"
           value={message}
@@ -46,11 +46,11 @@ const SendMessageInput = (SendMessageInputProps: SendMessageInputPropsType) => {
           />
         </s.SendButtonContainer>
       </s.SendMessageInputWrap>
-      <s.MoreFunctionCollectionContainer
-        $isShowMoreFunction={isShowMoreFunction}
-      >
-        <MoreFunctionCollection />
-      </s.MoreFunctionCollectionContainer>
+      {/*<s.MoreFunctionCollectionContainer*/}
+      {/*  $isShowMoreFunction={isShowMoreFunction}*/}
+      {/*>*/}
+      {/*  <MoreFunctionCollection />*/}
+      {/*</s.MoreFunctionCollectionContainer>*/}
     </s.SendMessageInputContainer>
   )
 }
