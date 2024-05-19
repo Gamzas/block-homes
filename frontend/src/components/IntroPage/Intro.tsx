@@ -76,12 +76,13 @@ const Intro = () => {
   const modelRef = useRef<any>(null)
   const controlsRef = useRef<any>(null)
   const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (loading) {
         console.log('랜더링 오류 페이지를 새로고침합니다.')
-        window.location.reload()
+        setLoadError(true)
       }
     }, 10000)
 
@@ -90,6 +91,9 @@ const Intro = () => {
   }, [loading]) // 로딩 상태가 변경될 때마다 이 효과를 다시 실행
 
   const handleReset = () => {
+    if (loading) {
+      window.location.reload()
+    }
     if (modelRef.current) {
       modelRef.current.rotation.set(...initialRotation)
     }
@@ -117,7 +121,7 @@ const Intro = () => {
   return (
     <IntroContainer>
       <IntroCanvasWrapper>
-        {loading && (
+        {(loading || loadError) && (
           <div className="three-loading">
             <Lottie
               options={loadingLottieOptions}
@@ -130,13 +134,23 @@ const Intro = () => {
         <Canvas camera={{ position: [0, 5, 0], fov: 75 }}>
           <ambientLight intensity={2} />
           <directionalLight position={[50, 50, 50]} intensity={2} />
-          <Model
-            url={'/3DIllustrations/Intro.glb'}
-            scale={[3.5, 3.5, 3.5]}
-            isUserInteracting={isUserInteracting}
-            modelRef={modelRef}
-            setLoading={setLoading}
-          />
+          {loadError ? (
+            <Model
+              url={'/3DIllustrations/Intro_no_pig.glb'}
+              scale={[3.5, 3.5, 3.5]}
+              isUserInteracting={isUserInteracting}
+              modelRef={modelRef}
+              setLoading={setLoading}
+            />
+          ) : (
+            <Model
+              url={'/3DIllustrations/Intro.glb'}
+              scale={[3.5, 3.5, 3.5]}
+              isUserInteracting={isUserInteracting}
+              modelRef={modelRef}
+              setLoading={setLoading}
+            />
+          )}
           <Controls
             setIsUserInteracting={setIsUserInteracting}
             controlsRef={controlsRef}
