@@ -19,9 +19,11 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
   const [contractInfo, setContractInfo] = useState<LeaseContractType | null>(
     null,
   )
-  console.log(contractInfo)
   const [propertyDID, setPropertyDID] = useState<string | null>(null)
+  // 부동산 계약서 토글
+  const [showContract, setShowContract] = useState<boolean>(false)
 
+  // 계약 정보
   useEffect(() => {
     const fetchContractInfo = async () => {
       try {
@@ -35,19 +37,22 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
 
     fetchContractInfo()
   }, [contractAddress])
-
+  //  부동산 정보
   const { data: realEstateInfoData, isLoading: realEstateLoading } =
     useGetRealEstateInfo(propertyDID || '')
 
   if (!contractInfo || realEstateLoading) {
     return <ItemLoading />
   }
-
+  // console.log(realEstateInfoData)
   const lordDID = getDIDValue(contractInfo.landlordDID)
+  if (!propertyDID) {
+    return null
+  }
 
   return (
     <c.InfoWrapper>
-      <c.MyEstateCardContainer>
+      <c.MyEstateCardContainer onClick={() => setShowContract(!showContract)}>
         <div className="info-wrapper">
           <c.IconContainer>
             <img src="/image/image_my_estate_trading.png" alt="이미지" />
@@ -60,7 +65,7 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
             <div className="address">{realEstateInfoData.roadNameAddress}</div>
           </c.InfoContainer>
         </div>
-        <c.DetailBtnContainer>
+        <c.DetailBtnContainer onClick={() => setShowContract(!showContract)}>
           <div className="detail">매물 상세 정보</div>
           <img
             className="arrow-icon"
@@ -69,7 +74,7 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
           />
         </c.DetailBtnContainer>
       </c.MyEstateCardContainer>
-      <c.DetailCard>
+      {/* <c.DetailCard>
         <div>계약 상세 내용</div>
         <div>부동산 DID {getDIDValue(contractInfo.propertyDID)}</div>
         <div>계약상대 DID {getDIDValue(contractInfo.tenantDID)}</div>
@@ -82,8 +87,18 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
         </div>
         <div>계약날짜 {contractInfo.contractDate}</div>
         <div>계약조건 {contractInfo.terms}</div>
-      </c.DetailCard>
-      <ContractDetailCard />
+      </c.DetailCard> */}
+      {showContract && (
+        <c.ModalOverlay onClick={() => setShowContract(false)}>
+          {/* <c.DetailCard onClick={e => e.stopPropagation()}> */}
+          <ContractDetailCard
+            contractInfo={contractInfo}
+            estateInfo={realEstateInfoData}
+            setShowContract={setShowContract}
+          />
+          {/* </c.DetailCard> */}
+        </c.ModalOverlay>
+      )}
     </c.InfoWrapper>
   )
 }
