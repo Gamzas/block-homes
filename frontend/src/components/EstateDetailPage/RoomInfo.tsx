@@ -12,6 +12,13 @@ const RoomInfo = (props: PropsType) => {
   const { latitude, longitude } = props.info
   const info = props.info
   console.log(info)
+  function removeTAndTime(dateTime: string): string {
+    const indexOfT = dateTime.indexOf('T')
+    if (indexOfT !== -1) {
+      return dateTime.substring(0, indexOfT)
+    }
+    return dateTime
+  }
   const infoItems = [
     { icon: 'count', info: getRealEstateType(info.realEstateType) },
     { icon: 'area', info: `방 ${info.roomNumber} 화 ${info.toiletNumber}` },
@@ -25,6 +32,13 @@ const RoomInfo = (props: PropsType) => {
     },
     { icon: 'elevator', info: info.haveElevator ? '있음' : '없음' },
     { icon: 'contract', info: `계약기간  ${info.contractMonths} 개월` },
+    { icon: 'parking', info: `주차대수  ${info.parkingRate} 개월` },
+    {
+      icon: 'house',
+      info: `
+      입주가능일 \n 
+      ${removeTAndTime(info.moveInDate)}`,
+    },
 
     // {
     //   icon: 'detail',
