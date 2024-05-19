@@ -6,6 +6,7 @@ export const ChattingRoomPageContainer = styled.div`
   padding-top: 50px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `
 
 export const ChattingHeaderWrapper = styled.div`
