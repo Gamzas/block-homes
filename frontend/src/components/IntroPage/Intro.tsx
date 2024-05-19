@@ -95,7 +95,7 @@ const Intro = () => {
       modelRef.current.rotation.set(...initialRotation)
     }
     if (controlsRef.current) {
-      controlsRef.current.reset() // OrbitControls의 회전 축을 초기화
+      controlsRef.current.reset()
     }
   }
   const headerLottieOptions = {
@@ -128,9 +128,9 @@ const Intro = () => {
             />
           </div>
         )}
-        <Canvas camera={{ position: [0, 100, 0], fov: 75 }}>
+        <Canvas camera={{ position: [0, 5, 0], fov: 75 }}>
           <ambientLight intensity={2} />
-          <directionalLight position={[1000, 1000, 1000]} intensity={2} />
+          <directionalLight position={[50, 50, 50]} intensity={2} />
           <Model url={'/3DIllustrations/Intro.glb'} scale={[3.5, 3.5, 3.5]} />
           <Controls />
         </Canvas>
