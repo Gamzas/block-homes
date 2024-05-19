@@ -67,7 +67,7 @@ const ProcessDetail = (props: ProcessDetailProps) => {
       $currentStep={props.currentStep}
       $stepIndex={props.stepIndex}
     >
-      <SpecialContract open={true} handleClose={handleCloseModal} />
+      <SpecialContract open={isSpecialOpen} handleClose={handleCloseModal} />
       <p.LeftProcessDetailContainer
         $currentStep={props.currentStep}
         $stepIndex={props.stepIndex}

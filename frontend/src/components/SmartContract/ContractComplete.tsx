@@ -2,11 +2,15 @@ import CompletePigContainer from '@/common/CompletePigContainer'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
 import { useNavigate } from 'react-router-dom'
 import { ContractCompleteContainer } from './style/ContractCompleteStyle'
+import { useAtom } from 'jotai'
+import { isGoNextStepAtom } from '@/stores/atoms/chat'
 
 const ContractComplete = () => {
+  const [, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const navigate = useNavigate()
   const hadleHome = () => {
-    navigate(-1)
+    navigate(-2)
+    setIsGoNextStep(true)
   }
   return (
     <ContractCompleteContainer>
