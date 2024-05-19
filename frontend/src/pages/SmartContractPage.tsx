@@ -28,7 +28,6 @@ import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
 import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
 import { useGetDetailItem } from '@/apis/itemApi'
-import { DetailItemType } from '@/types/components/contractType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@/apis/chatApi'
 import { convertToDid } from '@/hooks/didMake'
@@ -38,6 +37,7 @@ import {
   useSaveContractAddress,
 } from '@/apis/contractApi'
 import { useParams } from 'react-router-dom'
+import { DetailItemType } from '@/types/components/estateContractType'
 
 const SmartContractPage = () => {
   const setContractMonths = useSetAtom(contractMonthsAtom)
