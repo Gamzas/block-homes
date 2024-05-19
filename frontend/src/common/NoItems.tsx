@@ -1,10 +1,14 @@
+import { userTypeAtom } from '@/stores/atoms/userStore'
 import * as n from '@common/style/NoItemsStyle'
+import { useSetAtom } from 'jotai'
 import { useNavigate } from 'react-router-dom'
 
 const NoItems = ({ src, alarmText }) => {
   const navigate = useNavigate()
+  const setUserType = useSetAtom(userTypeAtom)
   console.log(src === '/image/image_sad_pig.png')
   const goEstate = () => {
+    setUserType({ type: 0 })
     navigate(`/`)
   }
 
