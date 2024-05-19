@@ -71,11 +71,15 @@ const EstateRegistrationPage = () => {
     setIsOpenArray(newIsOpenArray)
   }
   const handleFormSubmit = () => {
+    const newPrice = { value: detailRegistrationProps.price }
+    if (detailRegistrationProps.transactionType !== 0)
+      newPrice.value = Math.round(detailRegistrationProps.price / 1000)
     const formData = new FormData()
     const reqData = {
       ...postParams,
       ...detailRegistrationProps,
       ...detailEstateProps,
+      price: newPrice,
       roadNameAddress: checkEstateProps.roadNameAddress,
       realEstateType: checkEstateProps.realEstateType,
       area: checkEstateProps.area,
