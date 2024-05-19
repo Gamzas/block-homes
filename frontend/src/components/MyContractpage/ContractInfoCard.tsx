@@ -4,7 +4,6 @@ import { userAtom } from '@/stores/atoms/userStore'
 import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
 import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
 import { getDIDValue } from '@/utils/didUtils'
-import ItemLoading from '@/common/ItemLoading'
 import * as c from '@components/MyContractpage/style/ContractInfoCardStyle'
 import { convertBigNumber, convertKlayToKRW } from '@/utils/conversionUtils'
 import { LeaseContractType } from '@/types/components/estateContractType'
@@ -51,13 +50,16 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
     return null
   }
 
+
   return (
     <c.InfoWrapper>
       <c.MyEstateCardContainer onClick={() => setShowContract(!showContract)}>
         <div className="info-wrapper">
           <c.IconContainer>
             <img src="/image/image_my_estate_trading.png" alt="이미지" />
-            <div>{lordDID === user.walletAddress ? '임대' : '임차'}</div>
+            <div>
+              {lordDID === user.walletAddress.toLowerCase() ? '임대' : '임차'}
+            </div>
           </c.IconContainer>
           <c.InfoContainer>
             <div className="amount">
@@ -67,7 +69,7 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
           </c.InfoContainer>
         </div>
         <c.DetailBtnContainer onClick={() => setShowContract(!showContract)}>
-          <div className="detail">매물 상세 정보</div>
+          <div className="detail">계약서 보기</div>
           <img
             className="arrow-icon"
             src="/icon/icon_vertical_arrow.png"
