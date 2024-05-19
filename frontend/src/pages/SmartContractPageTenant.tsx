@@ -17,16 +17,12 @@ import ContractComplete from '../components/SmartContract/ContractComplete'
 import WaveContainer from '@/common/WaveContainer'
 import { Button, Snackbar } from '@mui/material'
 import CustomModal from '@/common/CustomModal'
-import {
-  deployContract,
-  getContractInstance,
-} from '@/abi/userSmartContract/DeployLongTermRentContract'
+import { getContractInstance } from '@/abi/userSmartContract/DeployLongTermRentContract'
 import { ethers } from 'ethers'
 import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
-import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
 import { useGetDetailItem } from '@/apis/itemApi'
 import { DetailItemType } from '@/types/components/estateContractType'
 import { useQuery } from '@tanstack/react-query'
@@ -35,7 +31,6 @@ import { convertToDid } from '@/hooks/didMake'
 import {
   fetchTempContractAddress,
   useRegisterContractAddress,
-  useSaveContractAddress,
 } from '@/apis/contractApi'
 import { useParams } from 'react-router-dom'
 
@@ -45,6 +40,9 @@ const SmartContractPage = () => {
   const setTenant = useSetAtom(tenantAtom)
   const [step, setStep] = useAtom(contractStepAtom)
   const [open, setOpen] = useState(false)
+  const tenantData = useAtomValue(tenantAtom)
+  const landLordData = useAtomValue(landLordAtom)
+  console.log(tenantData, landLordData, '데이터보소잉')
 
   const { chatRoomNo } = useParams()
   // console.log('chatRoomNo', chatRoomNo)
@@ -57,7 +55,7 @@ const SmartContractPage = () => {
     enabled: !!chatRoomNumber,
   })
 
-  console.log('@@@@@@@@@@@@@@@@@@@@miiii', contractAddress)
+  console.log('contractAddress', contractAddress)
 
   // 비밀번호 오류 컴포넌트
   const [snackbarOpen, setSnackbarOpen] = useState(false)
@@ -69,6 +67,7 @@ const SmartContractPage = () => {
 
   // 지갑 불러오기(wallet) 비밀번호 쳐서 여는 로직 필요~~
   const currentUser = useAtomValue(userAtom)
+  console.log('$!#$!#!@', currentUser)
 
   const { data: getWalletData } = useGetWallet({
     walletAddress: currentUser.walletAddress,
@@ -110,11 +109,6 @@ const SmartContractPage = () => {
   const [landlordDID2, setLandlordDID2] = useState('')
   const [tenantDID2, setTenantDID2] = useState('')
 
-  // 유저 지갑 주소로 이름 받아서 계약서에 넘기기 필요
-  // const { data: getWalletData } = useGetWallet({
-  //   walletAddress: currentUser.walletAddress,
-  // })
-
   // 해결
   const [contractDate, setContractDate] = useState(formattedToday)
   const [leasePeriod, setLeasePeriod] = useState(0)
@@ -149,9 +143,8 @@ const SmartContractPage = () => {
   // 채팅 방 내용으로 주소 받아오기
   // 계약서 등록
   const registerContractAddress = useRegisterContractAddress()
-  const registerSaveContractAddress = useSaveContractAddress()
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ['fetchChatRoomDetail', chatRoomNumber],
     queryFn: () => fetchChatRoomDetail(chatRoomNumber),
     enabled: !!chatRoomNumber,
@@ -213,103 +206,6 @@ const SmartContractPage = () => {
     setPasswordModalOpen(false)
   }
 
-  /// 조회 액션
-  const handlelook = () => {
-    getContractInfo(deploymentInfo)
-      .then(data => {
-        console.log('Fetched Contract Data:', data)
-      })
-      .catch(error => {
-        console.error('Failed to fetch contract data:', error)
-      })
-  }
-
-  /// 거래시작 시 버튼 누르는 과정이 필요~~
-  const handleDeploy = async password => {
-    if (!getWalletData && !password) {
-      alert('getWalletData,password')
-      return
-    }
-
-    try {
-      // 0.암호화된 지갑 데이터 복원(서명, 계약서 올리기 사용) 사용자 개인키 보관, 트랜잭션 서명
-      const userWallet = await ethers.Wallet.fromEncryptedJson(
-        getWalletData.data.encPrivateKey,
-        password,
-      )
-
-      // 1.서명할 메시지 준비 (예시: "임대 계약 승인") 서명하는거 해쉬 만들기!!!!!!
-
-      const message = ethers.utils.solidityKeccak256(
-        ['string', 'string', 'uint16', 'uint256', 'string', 'string', 'string'],
-        [
-          landlordDID2.toLowerCase(),
-          tenantDID2.toLowerCase(),
-          leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          klayDeposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          propertyDID.toLowerCase(),
-          contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          terms.toLowerCase(),
-        ],
-      )
-      const messageBytes = ethers.utils.arrayify(message)
-      const signature = await userWallet.signMessage(messageBytes)
-      const sig = ethers.utils.splitSignature(signature)
-      console.log(sig)
-
-      // 2.1 이더리움 네트워크 연결
-      const provider = new ethers.providers.JsonRpcProvider(
-        BLOCK_CHAIN_ENDPOINT,
-      )
-      // 2.2 지갑과 프로바이더를 결합
-      const signer = userWallet.connect(provider)
-
-      // 계약서 넣을 내용과, 지갑 프로바이더 결합, 서명을 보내기
-      const result = await deployContract(
-        signer,
-        landlordDID,
-        tenantDID,
-        leasePeriod,
-        klayDeposit,
-        propertyDID,
-        contractDate,
-        terms,
-        sig,
-      )
-
-      // 1차 완료계약서 주소 저장완료 전역 저장해서 관리하기
-      setDeploymentInfo(result)
-
-      console.log('성공요result', result)
-
-      console.log('성공요deploymentInfo', deploymentInfo)
-
-      setSnackbarMessage('계약서가 성공적으로 블록체인에 등록되었습니다.')
-      setSnackbarOpen(true)
-      setStep(step + 1)
-      // 계약서 주소 서버에 등록
-      console.log(chatRoomNumber, result, '이게들어가유')
-
-      // registerContractAddress.mutate({
-      //   chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
-      //   contractAddress: result,
-      // })
-
-      registerSaveContractAddress.mutate({
-        chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
-        contractAddress: result,
-      })
-    } catch (error) {
-      if (error.message.includes('invalid password')) {
-        setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
-      } else {
-        setSnackbarMessage(`실패: ${error.message}`)
-        console.log('실패요', deploymentInfo)
-      }
-      setSnackbarOpen(true)
-    }
-  }
-
   console.log('klayDeposit', klayDeposit)
 
   console.log(
@@ -369,20 +265,25 @@ const SmartContractPage = () => {
         value: ethers.utils.parseEther(deposit),
       })
 
-      // const receipt = await payDepositAndSign(contract, sig, dummyData.deposit)
       const receipt = await txResponse.wait()
 
       console.log('Transaction receipt:', receipt)
       setSnackbarMessage('보증금 지불 및 서명이 성공적으로 처리되었습니다.')
       setSnackbarOpen(true)
+      setStep(step + 1)
 
       registerContractAddress.mutate({
         chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
         contractAddress: contractAddress?.tempContractAddress,
       })
     } catch (error) {
-      console.error('보증금 지불 및 서명 처리 중 오류 발생:', error)
-      alert('보증금 지불 및 서명 처리 중 오류가 발생했습니다.')
+      if (error.message.includes('invalid password')) {
+        setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
+      } else {
+        setSnackbarMessage(`실패: ${error.message}`)
+        console.log('실패요', deploymentInfo)
+      }
+      setSnackbarOpen(true)
     }
   }
 
@@ -396,14 +297,14 @@ const SmartContractPage = () => {
         onModal={handleOpen}
       ></Header>
       {step === 0 && (
-        <ContractStart currentUser={currentUser} propertyDID={propertyDID} />
+        <ContractStart currentUser={tenantData} propertyDID={propertyDID} />
       )}
       {step === 1 && <ContractAgree />}
       {step === 2 && <ContractMain estateInfo={estateInfo} />}
       {step === 3 && (
         <ContractPayment
           handlePayment={handleSignAndPayDeposit}
-          currentUser={currentUser}
+          currentUser={tenantData}
           propertyDID={propertyDID}
           estateInfo={estateInfo}
         />
@@ -411,10 +312,6 @@ const SmartContractPage = () => {
       {step === 4 && <ContractComplete />}
       <Button onClick={handleOpen}></Button>
 
-      <Button onClick={() => setPasswordModalOpen(true)}>Enter Password</Button>
-      <Button onClick={handleDeploy}>Deploy Contract</Button>
-      {/* <Button onClick={handleSignAndPayDeposit}>Pay Deposit</Button> */}
-      <Button onClick={handlelook}>handlelook</Button>
       <CustomModal
         open={open}
         handleClose={handleClose}
