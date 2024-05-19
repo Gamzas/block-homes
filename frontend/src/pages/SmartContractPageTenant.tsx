@@ -28,6 +28,7 @@ import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
 import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
 import { useGetDetailItem } from '@/apis/itemApi'
+import { DetailItemType } from '@/types/components/estateContractType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@/apis/chatApi'
 import { convertToDid } from '@/hooks/didMake'
@@ -37,7 +38,6 @@ import {
   useSaveContractAddress,
 } from '@/apis/contractApi'
 import { useParams } from 'react-router-dom'
-import { DetailItemType } from '@/types/components/estateContractType'
 
 const SmartContractPage = () => {
   const setContractMonths = useSetAtom(contractMonthsAtom)
@@ -119,13 +119,18 @@ const SmartContractPage = () => {
   const [contractDate, setContractDate] = useState(formattedToday)
   const [leasePeriod, setLeasePeriod] = useState(0)
   const [deposit, setDeposit] = useState('')
+  const [klayDeposit, setKlayDeposit] = useState('')
   const [propertyDID, setPropertyDID] = useState('')
   const [estateInfo, setEstateInfo] = useState<DetailItemType | null>(null)
 
   useEffect(() => {
     if (itemDetails) {
       setLeasePeriod(itemDetails.contractMonths)
-      setDeposit(
+      // setDeposit(
+      //   ethers.utils.parseEther(itemDetails.price.toString()).toString(),
+      // )
+      setDeposit(itemDetails.price.toString())
+      setKlayDeposit(
         ethers.utils.parseEther(itemDetails.price.toString()).toString(),
       )
       setPropertyDID(itemDetails.realEstateDID)
@@ -241,7 +246,7 @@ const SmartContractPage = () => {
           landlordDID2.toLowerCase(),
           tenantDID2.toLowerCase(),
           leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          klayDeposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
           propertyDID.toLowerCase(),
           contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
           terms.toLowerCase(),
@@ -265,7 +270,7 @@ const SmartContractPage = () => {
         landlordDID,
         tenantDID,
         leasePeriod,
-        deposit,
+        klayDeposit,
         propertyDID,
         contractDate,
         terms,
@@ -305,7 +310,7 @@ const SmartContractPage = () => {
     }
   }
 
-  console.log('deposit', deposit)
+  console.log('klayDeposit', klayDeposit)
 
   console.log(
     '@@@@@@@@@@@@@ contractAddress?.tempContractAddress',
@@ -348,16 +353,12 @@ const SmartContractPage = () => {
           landlordDID2.toLowerCase(),
           tenantDID2.toLowerCase(),
           leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-          deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
+          klayDeposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
           propertyDID.toLowerCase(),
           contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
           terms.toLowerCase(),
         ],
       )
-      // const userWallet = await ethers.Wallet.fromEncryptedJson(
-      //   getWalletData.data.encPrivateKey,
-      //   password,
-      // )
       const messageBytes = ethers.utils.arrayify(message)
       const signature = await tenantWallet.signMessage(messageBytes)
       const sig = ethers.utils.splitSignature(signature)
