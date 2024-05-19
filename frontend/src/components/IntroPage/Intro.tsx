@@ -11,73 +11,72 @@ import * as THREE from 'three'
 import ThreeRotate from '@assets/lotties/3DRotate.json'
 import CandyCaneLoader from '@assets/lotties/CandyCaneLoader.json'
 
+const Model = ({
+  url,
+  scale,
+  isUserInteracting,
+  modelRef,
+  setLoading,
+}: {
+  url: string
+  scale?: [number, number, number]
+  isUserInteracting: boolean
+  modelRef: React.RefObject<any>
+  setLoading: (loading: boolean) => void
+}) => {
+  const { scene } = useGLTF(url, true, undefined, loader => {
+    loader.manager.onStart = () => setLoading(true)
+    loader.manager.onLoad = () => setLoading(false)
+  })
+  const currentFrame = {
+    frameCount: 0,
+  }
+  useFrame(() => {
+    if (modelRef.current && !isUserInteracting) {
+      const rotationInDegrees = Math.round(
+        THREE.MathUtils.radToDeg(modelRef.current.rotation.y),
+      )
+      if (rotationInDegrees % 45 !== 0) {
+        modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
+      } else {
+        currentFrame.frameCount += 1
+        if (currentFrame.frameCount > 60) {
+          currentFrame.frameCount = 0
+          modelRef.current.rotation.y += 0.02
+        }
+      }
+    }
+  })
+
+  return <primitive ref={modelRef} object={scene} scale={scale} />
+}
+
+const Controls = ({ setIsUserInteracting, controlsRef }) => {
+  useFrame(() => {
+    if (controlsRef.current) {
+      controlsRef.current.update()
+    }
+  })
+
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enablePan={false}
+      maxPolarAngle={Math.PI} // x축 회전 허용
+      minPolarAngle={-Math.PI} // x축 회전 허용
+      onStart={() => setIsUserInteracting(true)} // 사용자가 모델을 조작할 때
+      onEnd={() => setIsUserInteracting(false)} // 사용자가 모델 조작을 멈출 때
+    />
+  )
+}
+
 const Intro = () => {
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
   const modelRef = useRef<any>(null)
   const controlsRef = useRef<any>(null)
   const [loading, setLoading] = useState(true)
-  const Model = ({
-    url,
-    scale,
-  }: {
-    url: string
-    scale?: [number, number, number]
-  }) => {
-    const { scene } = useGLTF(url, true, undefined, loader => {
-      loader.manager.onStart = () => {
-        console.log('GLTF 로딩 시작')
-      }
-      loader.manager.onLoad = () => {
-        console.log('GLTF 로딩 완료')
-        setLoading(false)
-      }
-      loader.manager.onError = url => {
-        console.error(`GLTF 로딩 오류: ${url}`)
-        setLoading(false)
-      }
-    })
-    const currentFrame = {
-      frameCount: 0,
-    }
-    useFrame(() => {
-      if (modelRef.current && !isUserInteracting) {
-        const rotationInDegrees = Math.round(
-          THREE.MathUtils.radToDeg(modelRef.current.rotation.y),
-        )
-        if (rotationInDegrees % 45 !== 0) {
-          modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
-        } else {
-          currentFrame.frameCount += 1
-          if (currentFrame.frameCount > 60) {
-            currentFrame.frameCount = 0
-            modelRef.current.rotation.y += 0.02
-          }
-        }
-      }
-    })
 
-    return <primitive ref={modelRef} object={scene} scale={scale} />
-  }
-
-  const Controls = () => {
-    useFrame(() => {
-      if (controlsRef.current) {
-        controlsRef.current.update()
-      }
-    })
-
-    return (
-      <OrbitControls
-        ref={controlsRef}
-        enablePan={false}
-        maxPolarAngle={Math.PI} // x축 회전 허용
-        minPolarAngle={-Math.PI} // x축 회전 허용
-        onStart={() => setIsUserInteracting(true)} // 사용자가 모델을 조작할 때
-        onEnd={() => setIsUserInteracting(false)} // 사용자가 모델 조작을 멈출 때
-      />
-    )
-  }
   useEffect(() => {
     const timer = setTimeout(() => {
       if (loading) {
@@ -131,8 +130,17 @@ const Intro = () => {
         <Canvas camera={{ position: [0, 5, 0], fov: 75 }}>
           <ambientLight intensity={2} />
           <directionalLight position={[50, 50, 50]} intensity={2} />
-          <Model url={'/3DIllustrations/Intro.glb'} scale={[3.5, 3.5, 3.5]} />
-          <Controls />
+          <Model
+            url={'/3DIllustrations/Intro.glb'}
+            scale={[3.5, 3.5, 3.5]}
+            isUserInteracting={isUserInteracting}
+            modelRef={modelRef}
+            setLoading={setLoading}
+          />
+          <Controls
+            setIsUserInteracting={setIsUserInteracting}
+            controlsRef={controlsRef}
+          />
         </Canvas>
       </IntroCanvasWrapper>
       <IntroHeader>
