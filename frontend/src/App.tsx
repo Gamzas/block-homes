@@ -25,6 +25,7 @@ import MyEstatePage from './pages/MyEstatePage'
 import InfoReportPage from '@pages/InfoReportPage'
 import TestPage from '@pages/TestPage'
 import SmartContractTenantPage from './pages/SmartContractPageTenant'
+import MyContractPage from './pages/MyContractPage'
 
 const HomeRoutes = () => (
   <Routes>
@@ -59,6 +60,7 @@ const HomeRoutes = () => (
     />
     <Route path="/likes" element={<FavoriteItemsPage />} />
     <Route path="/myestate" element={<MyEstatePage />} />
+    <Route path="/mycontract" element={<MyContractPage />} />
     <Route path="/test/:testName" element={<TestPage />} />
   </Routes>
 )
