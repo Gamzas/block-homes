@@ -6,7 +6,7 @@ import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
 import { getDIDValue } from '@/utils/didUtils'
 import ItemLoading from '@/common/ItemLoading'
 import * as c from '@components/MyContractpage/style/ContractInfoCardStyle'
-import { convertBigNumber } from '@/utils/conversionUtils'
+import { convertBigNumber, convertKlayToKRW } from '@/utils/conversionUtils'
 import { LeaseContractType } from '@/types/components/estateContractType'
 import ContractDetailCard from './ContractDetailCard'
 
@@ -61,7 +61,7 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
           </c.IconContainer>
           <c.InfoContainer>
             <div className="amount">
-              {convertBigNumber(contractInfo.deposit._hex)} KLAY
+              {convertKlayToKRW(convertBigNumber(contractInfo.deposit._hex))}{' '}
             </div>
             <div className="address">{realEstateInfoData.roadNameAddress}</div>
           </c.InfoContainer>
@@ -82,6 +82,7 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
         <div>
           {lordDID === user.walletAddress ? '임대' : '임차'} 기간 :{' '}
           {contractInfo.leasePeriod}
+          1000000000000000000
         </div>
         <div>
           보증금, 월세 {convertBigNumber(contractInfo.deposit._hex)} KLAY
