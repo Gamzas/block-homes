@@ -8,6 +8,7 @@ import ItemLoading from '@/common/ItemLoading'
 import * as c from '@components/MyContractpage/style/ContractInfoCardStyle'
 import { convertBigNumber } from '@/utils/conversionUtils'
 import { LeaseContractType } from '@/types/components/estateContractType'
+import ContractDetailCard from './ContractDetailCard'
 
 interface PropsType {
   contractAddress: string
@@ -82,6 +83,7 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
         <div>계약날짜 {contractInfo.contractDate}</div>
         <div>계약조건 {contractInfo.terms}</div>
       </c.DetailCard>
+      <ContractDetailCard />
     </c.InfoWrapper>
   )
 }
