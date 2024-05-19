@@ -11,36 +11,38 @@ const DetailTabMenu = ({ imgUrl }: PropsType) => {
   const [currentTab, clickTab] = useState(0)
   const [images, setImages] = useState<string[]>([])
   const sliderRef = useRef(null)
+  const getCategoryImages = (index: number) => {
+    return imgUrl
+      .filter(url => url.itemImageCategory === index)
+      .map(item => item.imageUrl)
+  }
+  useEffect(() => {
+    const initializeImages = () => {
+      const initialImages = getCategoryImages(1)
+      setImages(initialImages)
+    }
+    initializeImages()
+  }, [imgUrl])
 
   useEffect(() => {
-    const categoryImage = (index: number) => {
-      return imgUrl.filter(url => url.itemImageCategory === index)
+    const updateImages = () => {
+      const menuArr = [
+        getCategoryImages(1),
+        getCategoryImages(2).length === 0
+          ? ['/image/image_no_img.jpg']
+          : getCategoryImages(2),
+        getCategoryImages(3).length === 0
+          ? ['/image/image_no_img.jpg']
+          : getCategoryImages(3),
+      ]
+      setImages(menuArr[currentTab])
     }
 
-    const menuArr = [
-      {
-        name: 'image',
-        content: categoryImage(1).map(item => item.imageUrl),
-      },
-      {
-        name: 'floor_plan',
-        content:
-          categoryImage(2).length === 0
-            ? ['/image/image_no_img.jpg']
-            : categoryImage(2).map(item => item.imageUrl),
-      },
-      {
-        name: '360',
-        content:
-          categoryImage(3).length === 0
-            ? ['/image/image_no_img.jpg']
-            : categoryImage(3).map(item => item.imageUrl),
-      },
-    ]
-
-    setImages(menuArr[currentTab].content)
+    if (sliderRef.current) {
+      sliderRef.current.slickGoTo(0) // 슬라이더를 첫 번째 슬라이드로 이동
+    }
+    updateImages()
   }, [currentTab, imgUrl])
-
   const settings = {
     dots: true,
     infinite: true,
