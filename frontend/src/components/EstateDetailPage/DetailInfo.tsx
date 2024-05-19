@@ -4,7 +4,7 @@ import DetailTabMenu from './DetailTabMenu'
 import DetailFooter from './DetailFooter'
 import ItemSafetyCard from './ItemSafetyCard'
 import RoomInfo from './RoomInfo'
-import { useDeleteEstateItem, useGetDetailItem } from '@/apis/itemApi'
+import { useGetDetailItem } from '@/apis/itemApi'
 import ItemLoading from '@/common/ItemLoading'
 import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
@@ -28,6 +28,7 @@ const DetailInfo = () => {
     return <div>Error: {error.message}</div>
   }
 
+  console.log(detailInfoData)
   const accessChat = (): boolean => {
     const ownerDIDValue = detailInfoData.ownerDID.split('did:klay:')[1]
     if (user.walletAddress && ownerDIDValue !== user.walletAddress) {
