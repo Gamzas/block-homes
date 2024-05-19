@@ -22,11 +22,12 @@ export const Contract = styled.div`
   .content-box {
     margin-left: 4.7rem;
     display: flex;
-    margin-top: 8%;
+    margin-top: 10%;
     width: 7.5rem;
     height: 3.4%;
     font-size: 0.7rem;
     font-weight: 600;
+    /* border: 1px solid black; */
     justify-content: space-between;
   }
   .content-box2 {
@@ -52,7 +53,7 @@ export const Contract = styled.div`
   .content-box4 {
     display: flex;
     justify-content: space-between;
-    margin-top: 2.3%;
+    margin-top: 4%;
     width: 16.4rem;
     margin-left: 3.8rem;
     height: 2%;
