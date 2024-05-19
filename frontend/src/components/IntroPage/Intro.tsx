@@ -74,9 +74,9 @@ const Controls = ({ setIsUserInteracting, controlsRef }) => {
 
 const Intro = () => {
   const models = [
-    '/3DIllustrations/Intro_logo.glb',
+    // '/3DIllustrations/Intro_logo.glb',
     '/3DIllustrations/Intro_no_pig.glb',
-    '/3DIllustrations/Intro.glb',
+    // '/3DIllustrations/Intro.glb',
   ]
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
