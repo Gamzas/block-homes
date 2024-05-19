@@ -9,11 +9,22 @@ export const ChattingRoomPageContainer = styled.div`
   flex-direction: column;
 `
 
+export const ChattingHeaderWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 390px;
+`
+
 export const ChattingHeader = styled.div`
   background: #f3f0f7;
   display: flex;
   height: 6rem;
   align-items: center;
+  margin-top: 50px;
 
   .image-container {
     width: 5rem;
@@ -76,6 +87,7 @@ export const ButtonContainer = styled.div`
 export const MessageListContainer = styled.div`
   margin: 1rem 1rem 0 1rem;
   overflow-y: auto;
+  padding-top: 6rem;
 
   ::-webkit-scrollbar {
     width: 0;
