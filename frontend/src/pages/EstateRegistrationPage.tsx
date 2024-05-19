@@ -72,18 +72,19 @@ const EstateRegistrationPage = () => {
   }
   const handleFormSubmit = () => {
     const newPrice = { value: detailRegistrationProps.price }
-    if (detailRegistrationProps.transactionType !== 0)
+    if (detailRegistrationProps.transactionType !== 0 && newPrice.value > 999)
       newPrice.value = Math.round(detailRegistrationProps.price / 1000)
     const formData = new FormData()
     const reqData = {
       ...postParams,
       ...detailRegistrationProps,
       ...detailEstateProps,
-      price: newPrice,
+      price: newPrice.value,
       roadNameAddress: checkEstateProps.roadNameAddress,
       realEstateType: checkEstateProps.realEstateType,
       area: checkEstateProps.area,
     }
+    console.log(reqData)
     const blob = new Blob([JSON.stringify(reqData)], {
       type: 'application/json',
     })
