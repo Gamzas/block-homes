@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Slider from 'react-slick'
 import * as t from '@components/EstateDetailPage/style/DetailTabStyle'
 import { ImageUrlType } from '@/types/api/itemType'
@@ -7,38 +7,39 @@ interface PropsType {
   imgUrl: ImageUrlType[]
 }
 
-const DetailTabMenu = (props: PropsType) => {
+const DetailTabMenu = ({ imgUrl }: PropsType) => {
   const [currentTab, clickTab] = useState(0)
+  const [images, setImages] = useState<string[]>([])
   const sliderRef = useRef(null)
 
-  const categoryImage = (index: number) => {
-    const img = props.imgUrl.filter(url => {
-      return url.itemImageCategory === index
-    })
-    return img
-  }
+  useEffect(() => {
+    const categoryImage = (index: number) => {
+      return imgUrl.filter(url => url.itemImageCategory === index)
+    }
 
-  console.log(props.imgUrl)
-  const menuArr = [
-    {
-      name: 'image',
-      content: categoryImage(1).map(item => item.imageUrl),
-    },
-    {
-      name: 'floor_plan',
-      content:
-        categoryImage(2).length === 0
-          ? ['/image/image_no_img.jpg']
-          : categoryImage(2).map(item => item.imageUrl),
-    },
-    {
-      name: '360',
-      content:
-        categoryImage(3).length === 0
-          ? ['/image/image_no_img.jpg']
-          : categoryImage(3).map(item => item.imageUrl),
-    },
-  ]
+    const menuArr = [
+      {
+        name: 'image',
+        content: categoryImage(1).map(item => item.imageUrl),
+      },
+      {
+        name: 'floor_plan',
+        content:
+          categoryImage(2).length === 0
+            ? ['/image/image_no_img.jpg']
+            : categoryImage(2).map(item => item.imageUrl),
+      },
+      {
+        name: '360',
+        content:
+          categoryImage(3).length === 0
+            ? ['/image/image_no_img.jpg']
+            : categoryImage(3).map(item => item.imageUrl),
+      },
+    ]
+
+    setImages(menuArr[currentTab].content)
+  }, [currentTab, imgUrl])
 
   const settings = {
     dots: true,
@@ -70,15 +71,15 @@ const DetailTabMenu = (props: PropsType) => {
     <div>
       <t.Desc>
         <Slider ref={sliderRef} {...settings}>
-          {menuArr[currentTab].content.map((image, index) => (
+          {images.map((image, index) => (
             <div key={index}>
               <img
                 className="desc-img"
                 src={image}
                 alt={`Slide ${index}`}
-                onError={handleImageError}
-              />{' '}
-              {/* // 이미지 로드 오류 시 대체 이미지 설정 */}
+                onError={handleImageError} // 이미지 로드 오류 시 대체 이미지 설정
+                // style={{ width: '100%', height: 'auto' }}
+              />
             </div>
           ))}
         </Slider>
@@ -99,7 +100,7 @@ const DetailTabMenu = (props: PropsType) => {
         ))}
       </t.TabMenuImgContainer>
       <t.TabMenu>
-        {menuArr.map((_, index) => (
+        {tabMenuArr.map((_, index) => (
           <li
             key={index}
             className={index === currentTab ? 'submenu focused' : 'submenu'}
