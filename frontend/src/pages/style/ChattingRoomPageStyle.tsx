@@ -12,7 +12,7 @@ export const ChattingRoomPageContainer = styled.div`
 `
 
 export const ChattingHeaderWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -89,19 +89,16 @@ export const ButtonContainer = styled.div`
 `
 
 export const MessageListScrollWrapper = styled.div`
-  flex: 1;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
 
   ::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+    display: none;
   }
 
   -ms-overflow-style: none;
   scrollbar-width: none;
-
-  scroll-behavior: smooth;
 `
 export const MessageListContainer = styled.div`
   margin: 1rem 1rem 0 1rem;
