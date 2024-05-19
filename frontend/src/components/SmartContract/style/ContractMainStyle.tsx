@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const ContractMainContainer = styled.div`
   width: 100%;
   height: 85vh;
+  border: 1px solid;
 `
 export const Contract = styled.div`
   position: relative;
@@ -21,72 +22,72 @@ export const Contract = styled.div`
   .content-box {
     margin-left: 4.7rem;
     display: flex;
-    margin-top: 2.5rem;
+    margin-top: 8%;
     width: 7.5rem;
-    height: 1rem;
+    height: 3.4%;
     font-size: 0.7rem;
     font-weight: 600;
     justify-content: space-between;
   }
   .content-box2 {
     display: flex;
-    margin-top: 1.34rem;
+    margin-top: 4%;
     margin-left: 3.8rem;
     font-size: 0.6rem;
     font-weight: 600;
     width: 18rem;
-    height: 0.8rem;
+    height: 3%;
     text-align: center;
   }
   .content-box3 {
     display: flex;
     justify-content: space-between;
     margin-left: 6.2rem;
-    margin-top: 0.25rem;
+    margin-top: 1%;
     width: 14rem;
-    height: 0.83rem;
+    height: 1%;
     font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box4 {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.25rem;
+    margin-top: 2.3%;
     width: 16.4rem;
     margin-left: 3.8rem;
-    height: 0.9rem;
+    height: 2%;
     font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box5 {
-    margin-top: 2.3rem;
+    margin-top: 10%;
     width: 16.4rem;
     margin-left: 5rem;
-    height: 0.9rem;
+    height: 3%;
     font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box6 {
-    margin-top: 0.07rem;
+    margin-top: 0.2%;
     width: 16.4rem;
     margin-left: 5rem;
-    height: 0.9rem;
+    height: 1%;
     font-size: 0.6rem;
     font-weight: 600;
   }
   .content-box7 {
     display: flex;
-    margin-top: 0.07rem;
+    margin-top: 3%;
     width: 5rem;
-    margin-left: 17rem;
-    height: 0.9rem;
+    margin-left: 17.5rem;
+    height: 1%;
     font-size: 0.6rem;
     font-weight: 600;
     justify-content: space-between;
   }
   .content-box8 {
     display: flex;
-    margin-top: 0.07rem;
+    margin-top: 1.5%;
     width: 5rem;
     margin-left: 11rem;
     height: 0.9rem;
