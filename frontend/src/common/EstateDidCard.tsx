@@ -59,6 +59,18 @@ const EstateDidCard = ({
     left: 0, // 좌측 정렬
   })
 
+  const estateTypeImage = type => {
+    switch (type) {
+      case 1:
+        return '/image/image_did_card_apartment.png'
+      case 2:
+        return '/image/image_did_card_villa_or_towroom.png'
+      case 3:
+        return '/image/image_did_card_one_room.png'
+      case 4:
+        return '/image/image_did_card_officetels.png'
+    }
+  }
   return (
     <>
       {realEstateInfoData && currentUser && (
@@ -74,7 +86,7 @@ const EstateDidCard = ({
                 <img
                   alt="건물 3d asset"
                   className="building-type-image"
-                  src="/image/image_did_card_villa_or_towroom.png"
+                  src={estateTypeImage(realEstateInfoData.estateType)}
                 />
                 <e.BackgroundWaveContainer>
                   <svg
