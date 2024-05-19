@@ -1,3 +1,4 @@
+import { color } from '@mui/system'
 import styled, { css, keyframes } from 'styled-components'
 
 interface IconContainerProps {
@@ -23,6 +24,9 @@ export const StepRoadContainer = styled.div`
   justify-content: center;
   position: relative;
 `
+export const IconWrapper = styled.div`
+  flex-direction: column;
+`
 
 export const IconContainer = styled.div<IconContainerProps>`
   width: 3rem;
@@ -34,7 +38,17 @@ export const IconContainer = styled.div<IconContainerProps>`
   justify-content: center;
   align-items: center;
   position: absolute;
-
+  .txt {
+    position: absolute;
+    /* border: 1px solid red; */
+    text-align: center;
+    width: 10rem;
+    bottom: -1.5rem;
+    color: ${props => (props.$isSelected ? '#4613a5' : '#845bd3')};
+    font-size: ${props => (props.$isSelected ? '0.9rem' : '0.8rem')};
+    font-weight: ${props => (props.$isSelected ? 900 : 600)};
+    /* margin-left: 1rem; */
+  }
   img {
     width: 1.9rem;
     height: 1.9rem;

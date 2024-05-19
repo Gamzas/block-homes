@@ -47,6 +47,7 @@ const InfoProcessContent = () => {
               className={`icon${index + 1}`}
             >
               <img src={transactionStep.src} alt={transactionStep.title} />
+              <div className="txt">{transactionStep.title}</div>
             </i.IconContainer>
           ),
         )}
