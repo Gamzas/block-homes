@@ -84,10 +84,11 @@ export const ButtonContainer = styled.div`
     font-weight: 300;
   }
 `
-export const MessageListContainer = styled.div`
-  margin: 1rem 1rem 0 1rem;
+
+export const MessageListScrollWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
-  padding-top: 6rem;
 
   ::-webkit-scrollbar {
     width: 0;
@@ -96,4 +97,10 @@ export const MessageListContainer = styled.div`
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  scroll-behavior: smooth;
+`
+export const MessageListContainer = styled.div`
+  margin: 1rem 1rem 0 1rem;
+  padding-top: 6rem;
 `
