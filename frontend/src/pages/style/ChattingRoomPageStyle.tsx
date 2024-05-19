@@ -17,6 +17,7 @@ export const ChattingHeaderWrapper = styled.div`
 
   width: 100%;
   max-width: 390px;
+  z-index: 100;
 `
 
 export const ChattingHeader = styled.div`
@@ -86,6 +87,7 @@ export const ButtonContainer = styled.div`
 `
 
 export const MessageListScrollWrapper = styled.div`
+  flex: 1;
   width: 100%;
   overflow-y: auto;
 
