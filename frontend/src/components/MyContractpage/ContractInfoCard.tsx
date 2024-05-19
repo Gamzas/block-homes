@@ -7,7 +7,7 @@ import { getDIDValue } from '@/utils/didUtils'
 import ItemLoading from '@/common/ItemLoading'
 import * as c from '@components/MyContractpage/style/ContractInfoCardStyle'
 import { convertBigNumber } from '@/utils/conversionUtils'
-import { LeaseContractType } from '@/types/components/contractType'
+import { LeaseContractType } from '@/types/components/estateContractType'
 
 interface PropsType {
   contractAddress: string

@@ -6,7 +6,8 @@ import {
   todayAtom,
   contractEndDateAtom,
 } from '@/stores/smartcontract'
-import { DetailItemType } from '@/types/components/contractType'
+import { DetailItemType } from '@/types/components/estateContractType'
+// import { DetailItemType } from '@/types/components/contractType'
 import { useAtomValue } from 'jotai'
 
 interface ContractMainProps {

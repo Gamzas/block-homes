@@ -3,7 +3,7 @@ import { ContractStartContainer } from './style/ContractStart'
 import { useAtom } from 'jotai'
 import { contractStepAtom } from '@/stores/smartcontract'
 import EstateDidCard from '@/common/EstateDidCard'
-import { User } from '@/types/components/contractType'
+import { User } from '@/types/components/estateContractType'
 
 interface ContractStartProps {
   currentUser: User

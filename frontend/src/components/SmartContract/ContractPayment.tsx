@@ -15,7 +15,7 @@ import {
   contractEndDateAtom,
 } from '@/stores/smartcontract'
 import { useAtomValue } from 'jotai'
-import { DetailItemType } from '@/types/components/contractType'
+import { DetailItemType } from '@/types/components/estateContractType'
 
 interface ContractPaymentProps {
   handlePayment: (password: any) => Promise<void>
