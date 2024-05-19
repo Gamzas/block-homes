@@ -18,6 +18,7 @@ const DetailTabMenu = (props: PropsType) => {
     return img
   }
 
+  console.log(props.imgUrl)
   const menuArr = [
     {
       name: 'image',
@@ -58,13 +59,26 @@ const DetailTabMenu = (props: PropsType) => {
     clickTab(index)
   }
 
+  // 이미지 로드 오류 핸들러
+  const handleImageError = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>,
+  ) => {
+    event.currentTarget.src = '/image/image_no_img.jpg'
+  }
+
   return (
     <div>
       <t.Desc>
         <Slider ref={sliderRef} {...settings}>
           {menuArr[currentTab].content.map((image, index) => (
             <div key={index}>
-              <img className="desc-img" src={image} alt={`Slide ${index}`} />
+              <img
+                className="desc-img"
+                src={image}
+                alt={`Slide ${index}`}
+                onError={handleImageError}
+              />{' '}
+              {/* // 이미지 로드 오류 시 대체 이미지 설정 */}
             </div>
           ))}
         </Slider>
