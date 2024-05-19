@@ -25,3 +25,7 @@ export const userStepAtom = atom(0)
 export const sellerStepAtom = atom(1)
 
 export const buyerStepAtom = atom(0)
+
+export const isFirstOpenAtom = atomWithStorage('isFirstOpen', {
+  isFirstOpen: true,
+})
