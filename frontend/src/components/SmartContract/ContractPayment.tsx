@@ -143,7 +143,7 @@ const ContractPayment: React.FC<ContractPaymentProps> = ({
             </c.Cell>
             <c.Cell>
               <c.Label>보증금</c.Label>
-              <c.Value>{estateInfo?.price} 만 원</c.Value>
+              <c.Value>{estateInfo?.price} 천만 원</c.Value>
             </c.Cell>
             <c.Cell>
               <c.Label>월세금</c.Label>
