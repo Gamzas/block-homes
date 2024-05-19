@@ -21,7 +21,7 @@ const NoItems = ({ src, alarmText }) => {
         <div className="alarm-text">{alarmText}</div>
         {src !== 'image/image_warning_pig.png' && (
           <n.BtnContainer onClick={goEstate}>
-            <div className="title">다른 매물 구경하러 가기</div>
+            <div className="title">메인페이지로 이동하기</div>
           </n.BtnContainer>
         )}
       </n.ContentContainer>
