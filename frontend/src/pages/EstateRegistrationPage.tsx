@@ -109,8 +109,12 @@ const EstateRegistrationPage = () => {
   }
 
   const isDataFilled = data => {
-    return Object.values(data).every(value => {
-      return value !== null && value !== '' && value !== undefined
+    return Object.entries(data).every(([key, value]) => {
+      if (key === 'roomImages' || key === 'kitchenToiletImages') {
+        return Array.isArray(value) && value.length !== 0
+      } else {
+        return value !== null && value !== '' && value !== undefined
+      }
     })
   }
 
@@ -181,7 +185,7 @@ const EstateRegistrationPage = () => {
       {!isNoData && (
         <>
           <Header title={'매물 등록'} isSearch={false} rightIconSrc={null} />
-          {isComplete ? (
+          {!isComplete ? (
             <>
               <r.AccodionWrapper>
                 <AccordionGroup
