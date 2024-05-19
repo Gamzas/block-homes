@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ContractDetailContainer } from './style/ContractDetailStyle'
 import { useAtom } from 'jotai/index'
 import { chatRoomNoAtom, provisionsAtomFamily } from '@stores/atoms/chat'
@@ -7,29 +7,17 @@ type Props = { isSelect: boolean; content: string; index: number }
 
 const ContractDetail = (props: Props) => {
   const [chatRoomNo] = useAtom(chatRoomNoAtom)
-  const [, setProvisions] = useAtom(provisionsAtomFamily(chatRoomNo))
+  const [provisions, setProvisions] = useAtom(provisionsAtomFamily(chatRoomNo))
   const [isSelect, setIsSelect] = useState(props.isSelect)
   const iconColor = isSelect ? '#43C259' : '#D9D9D9'
 
   const handleSelect = () => {
-    setProvisions(prevProvisions => {
-      const newProvisions = [...prevProvisions]
-      newProvisions[props.index] = !isSelect
-      console.log(newProvisions)
-      return newProvisions
-    })
+    const newProvisions = [...provisions]
+    newProvisions[props.index] = !provisions[props.index]
+    console.log(newProvisions)
+    setProvisions(newProvisions)
     setIsSelect(!isSelect)
   }
-
-  useEffect(() => {
-    setIsSelect(props.isSelect)
-    setProvisions(prevProvisions => {
-      const newProvisions = [...prevProvisions]
-      newProvisions[props.index] = !isSelect
-      console.log(newProvisions)
-      return newProvisions
-    })
-  }, [props.isSelect])
 
   return (
     <ContractDetailContainer onClick={() => handleSelect()}>
