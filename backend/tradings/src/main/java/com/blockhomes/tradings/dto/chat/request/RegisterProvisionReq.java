@@ -18,7 +18,4 @@ public class RegisterProvisionReq {
     @NotNull
     List<Integer> provisionList;
 
-    @NotNull
-    String walletAddress;
-
 }
