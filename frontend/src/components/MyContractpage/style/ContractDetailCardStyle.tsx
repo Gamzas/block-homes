@@ -12,6 +12,7 @@ export const DetailCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 1rem;
+  overflow-x: hidden;
   overflow-y: scroll;
   /* 스크롤바 숨기기를 위한 스타일 */
   ::-webkit-scrollbar {
