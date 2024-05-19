@@ -45,6 +45,11 @@ export const EstateStatusButtonContainer = styled.div`
   height: 100%;
   position: absolute;
   right: 3.2rem;
+  .reset {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 1rem;
+  }
 `
 
 // export const EstateStatusButton = styled.button<ColorProps>`
