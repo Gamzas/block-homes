@@ -7,15 +7,14 @@ export const convertBigNumber = (value: string): number => {
 }
 
 export const transformData = (input: string): string[] => {
+  if (input.trim() === '') {
+    return []
+  }
+
   // Split the input string by '/'
   const items = input.split('/')
 
   // Trim each item and add a numbered list
-  // const numberedList = items
-  //   .map((item, index) => `${index + 1}. ${item.trim()}`)
-  //   .join('\n')
-
-  // return numberedList
   const numberedList = items.map(
     (item, index) => `${index + 1}. ${item.trim()}`,
   )
