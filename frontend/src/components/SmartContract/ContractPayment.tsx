@@ -8,8 +8,28 @@ import EstateDidCard from '@/common/EstateDidCard'
 import CustomPasswordModal from './CustomPasswordModal'
 import IsLoading from '@/common/IsLoading'
 import SecurityLock from '@assets/lotties/SecurityLock.json'
+import {
+  landLordAtom,
+  tenantAtom,
+  todayAtom,
+  contractEndDateAtom,
+} from '@/stores/smartcontract'
+import { useAtomValue } from 'jotai'
+import { DetailItemType } from '@/types/components/contractType'
 
-const ContractPayment = ({ handlePayment, currentUser }) => {
+interface ContractPaymentProps {
+  handlePayment: (password: any) => Promise<void>
+  currentUser: any
+  propertyDID: string // 여기에 propertyDID 추가
+  estateInfo?: DetailItemType
+}
+
+const ContractPayment: React.FC<ContractPaymentProps> = ({
+  handlePayment,
+  currentUser,
+  propertyDID,
+  estateInfo,
+}) => {
   const [screenIndex, setScreenIndex] = useState(0)
 
   const [passwordModalOpen, setPasswordModalOpen] = useState(false)
@@ -17,6 +37,11 @@ const ContractPayment = ({ handlePayment, currentUser }) => {
 
   const [isLoading, setIsLoading] = useState(false)
   const [loadingStage, setLoadingStage] = useState(0)
+  const landLordData = useAtomValue(landLordAtom)
+  const tenantData = useAtomValue(tenantAtom)
+
+  const formattedToday = useAtomValue(todayAtom)
+  const contractEndDate = useAtomValue(contractEndDateAtom)
 
   const loadingMessages = [
     '입력하신 비밀번호로\n지갑을 **복원**하는 중입니다.',
@@ -82,9 +107,7 @@ const ContractPayment = ({ handlePayment, currentUser }) => {
                 index={1}
                 currentCenterIndex={1}
                 showRegistrationButton={false}
-                realEstateDID={
-                  'did:klay:0x5cf9f8c31624c63759c152d733b46f48f9d37954'
-                } // 수정필요
+                realEstateDID={propertyDID}
                 currentUser={currentUser}
               />
               <div>
@@ -108,23 +131,23 @@ const ContractPayment = ({ handlePayment, currentUser }) => {
           <c.GridContainer>
             <c.Cell>
               <c.Label>임대인</c.Label>
-              <c.Value>오기선</c.Value>
+              <c.Value>{landLordData.name}</c.Value>
             </c.Cell>
             <c.Cell>
               <c.Label>임차인</c.Label>
-              <c.Value>송강산</c.Value>
+              <c.Value>{tenantData.name}</c.Value>
             </c.Cell>
             <c.Cell>
               <c.Label>계약일자</c.Label>
-              <c.Value>2024.04.03</c.Value>
+              <c.Value>{formattedToday}</c.Value>
             </c.Cell>
             <c.Cell>
               <c.Label>보증금</c.Label>
-              <c.Value>2,000,000,000</c.Value>
+              <c.Value>{estateInfo?.price} 만 원</c.Value>
             </c.Cell>
             <c.Cell>
               <c.Label>월세금</c.Label>
-              <c.Value>300,000</c.Value>
+              <c.Value>{estateInfo?.monthlyPrice} 만 원</c.Value>
             </c.Cell>
           </c.GridContainer>
         )}

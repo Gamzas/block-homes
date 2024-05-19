@@ -77,7 +77,7 @@ export const Contract = styled.div`
   .content-box7 {
     display: flex;
     margin-top: 0.07rem;
-    width: 3rem;
+    width: 5rem;
     margin-left: 17rem;
     height: 0.9rem;
     font-size: 0.6rem;
@@ -87,7 +87,7 @@ export const Contract = styled.div`
   .content-box8 {
     display: flex;
     margin-top: 0.07rem;
-    width: 3rem;
+    width: 5rem;
     margin-left: 11rem;
     height: 0.9rem;
     font-size: 0.6rem;

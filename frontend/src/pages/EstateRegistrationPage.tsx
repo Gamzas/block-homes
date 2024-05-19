@@ -8,6 +8,7 @@ import { useAtomValue } from 'jotai'
 import { userAtom } from '@stores/atoms/userStore'
 import { useLocation } from 'react-router-dom'
 import { getCoord } from '@/utils/locationUtil'
+import { getLoanInfo } from '@/abi/Bank/getLoanInfo'
 
 const EstateRegistrationPage = () => {
   const buttonNames = ['다음', '매물 등록하기']
@@ -136,17 +137,34 @@ const EstateRegistrationPage = () => {
     }
   }
 
+  const getStatusMessage = steps => {
+    if (steps <= 2) return 3
+    if (steps <= 4) return 2
+    return 1
+  }
+
   useEffect(() => {
-    if (realEstateInfoData) {
+    if (realEstateInfoData && realEstateDID && userInfo) {
       getCoord(realEstateInfoData.roadNameAddress).then(coords =>
-        setPostParams({
+        setPostParams(currentParams => ({
+          ...currentParams,
           ownerWalletDID: `did:klay:${userInfo.walletAddress}`,
           realEstateDID: realEstateDID,
           latitude: coords.latitude,
           longitude: coords.longitude,
-          reportRank: 1,
-        }),
+        })),
       )
+      getLoanInfo(realEstateDID).then(loanInfo => {
+        const dangerCount = { value: 0 }
+        if (loanInfo.pendingLoanAmount !== '0') dangerCount.value += 1
+        if (realEstateInfoData.isViolated) dangerCount.value += 1
+        if (realEstateInfoData.isNotPermitted) dangerCount.value += 1
+        if (realEstateInfoData.purpose !== '주거용') dangerCount.value += 1
+        setPostParams(currentParams => ({
+          ...currentParams,
+          reportRank: getStatusMessage(dangerCount),
+        }))
+      })
       setCheckEstateProps({
         roadNameAddress: realEstateInfoData.roadNameAddress,
         realEstateType: realEstateInfoData.estateType,
@@ -156,14 +174,14 @@ const EstateRegistrationPage = () => {
       })
       setIsNoData(isDataFilled(checkEstateProps))
     }
-  }, [realEstateInfoData, userInfo])
+  }, [realEstateInfoData, userInfo, realEstateDID])
 
   return (
     <r.EstateRegistrationPageContainer>
       {!isNoData && (
         <>
           <Header title={'매물 등록'} isSearch={false} rightIconSrc={null} />
-          {!isComplete ? (
+          {isComplete ? (
             <>
               <r.AccodionWrapper>
                 <AccordionGroup

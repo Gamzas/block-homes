@@ -47,3 +47,9 @@ export const fetchChatRoomDetail = async (
     throw error
   }
 }
+
+export const fetchProvision = (chatRoomNo: number) => {
+  return publicRequest
+    .get(`/chatrooms/provision?chatRoomNo=${chatRoomNo}`)
+    .then(res => res.data)
+}
