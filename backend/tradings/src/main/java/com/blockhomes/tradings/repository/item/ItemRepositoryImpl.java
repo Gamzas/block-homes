@@ -78,7 +78,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                     qItem.latitude,
                     qItem.longitude,
                     qImage.imageUrl))
-            .where(qWallet.walletAddress.eq(req.getOwnerWallet()))
+            .where(qWallet.walletAddress.eq(req.getOwnerWallet())
+                .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
             .fetch();
     }
 
