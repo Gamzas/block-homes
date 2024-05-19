@@ -41,7 +41,7 @@ const ContractMain: React.FC<ContractMainProps> = ({ estateInfo }) => {
             <p>{estateInfo?.pyeong}</p>
           </div>
           <div className="content-box5">
-            <p>{estateInfo?.price}</p>
+            <p>{estateInfo?.price}천만 원</p>
           </div>
           <div className="content-box6">
             <p>{estateInfo?.monthlyPrice}</p>

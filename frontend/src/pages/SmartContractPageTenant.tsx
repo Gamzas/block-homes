@@ -23,7 +23,8 @@ import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
-import { useDeleteEstateItem, useGetDetailItem } from '@/apis/itemApi'
+import { useGetDetailItem } from '@/apis/itemApi'
+// import { useDeleteEstateItem, useGetDetailItem } from '@/apis/itemApi'
 import { DetailItemType } from '@/types/components/estateContractType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@/apis/chatApi'
@@ -118,7 +119,7 @@ const SmartContractPage = () => {
 
   //삭제 코드
 
-  const { mutate: deletItem } = useDeleteEstateItem(landlordDID)
+  // const { mutate: deletItem } = useDeleteEstateItem(landlordDID)
   useEffect(() => {
     if (itemDetails) {
       setLeasePeriod(itemDetails.contractMonths)
@@ -279,7 +280,7 @@ const SmartContractPage = () => {
         contractAddress: contractAddress?.tempContractAddress,
       })
 
-      deletItem(itemDetails?.itemNo)
+      // deletItem(itemDetails?.itemNo)
     } catch (error) {
       if (error.message.includes('invalid password')) {
         setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
