@@ -23,7 +23,7 @@ const ContractList = () => {
 
   const contractList = data?.contractLists || []
 
-  return contractList.length == 0 ? (
+  return contractList.length !== 0 ? (
     <c.ContractListContainer>
       {/* {contractList.map((contract, index) => (
         <ContractInfoCard
