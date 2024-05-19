@@ -6,14 +6,12 @@ import { useAtom } from 'jotai'
 import {
   selectedItemAtom,
   currentCoordAtom,
-  filterAtom,
   mapCenterCoordAtom,
   userCoordAtom,
   estateItemListAtom,
 } from '@/stores/atoms/EstateListStore'
 import EstateItemCard from './EstateItemCard'
 import { EstateItemListType } from '@/types/api/itemType'
-import { useParams } from 'react-router-dom'
 
 declare global {
   interface Window {
@@ -28,7 +26,6 @@ const EstateListMap = forwardRef((props, ref) => {
   const [userCoord] = useAtom(userCoordAtom)
   const [items] = useAtom(estateItemListAtom)
 
-  const [filter] = useAtom(filterAtom)
   const estateItemList: EstateItemListType[] = items.itemList || []
   const [marker, setMarker] = useState(null)
   const [item, setItem] = useAtom(selectedItemAtom)
@@ -44,6 +41,9 @@ const EstateListMap = forwardRef((props, ref) => {
 
   useEffect(() => {
     if (!initialLoad.current) return
+    if (marker) {
+      marker.setMap(null) // 기존 마커 제거
+    }
     const container = document.getElementById('map')
     const options = {
       center: new kakao.maps.LatLng(userCoord.latitude, userCoord.longitude),
@@ -163,6 +163,9 @@ const EstateListMap = forwardRef((props, ref) => {
 
   useEffect(() => {
     const map = mapRef.current
+    if (marker) {
+      marker.setMap(null) // 기존 마커 제거
+    }
     if (!isUserInteraction.current) {
       const setCenter = () => {
         const moveLatLon = new kakao.maps.LatLng(
