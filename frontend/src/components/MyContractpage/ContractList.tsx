@@ -6,13 +6,14 @@ import * as c from '@components/MyContractpage/style/ContractListStyle'
 import ContractInfoCard from './ContractInfoCard'
 import useLoginStatus from '@/hooks/useLoginStatus'
 import NoContract from './NoContract'
+import { useState } from 'react'
 
 const ContractList = () => {
   useLoginStatus()
   const [user] = useAtom(userAtom)
+  const [mode, setMode] = useState<number>(1)
   const walletAddress = user.walletAddress
-  const { data, isLoading, error } = useGetMyContract(0, walletAddress)
-
+  const { data, isLoading, error } = useGetMyContract(mode, walletAddress)
   if (isLoading) {
     return <ItemLoading />
   }
@@ -25,20 +26,38 @@ const ContractList = () => {
 
   const contractList = data?.contractLists || []
 
-  return contractList.length !== 0 ? (
-    <c.ContractListContainer>
-      {contractList.map((contract, index) => (
-        <ContractInfoCard
-          key={index}
-          contractAddress={contract.contractAddress}
-        />
-      ))}
-      {/* <ContractInfoCard
+  return (
+    <>
+      <c.UserTypeToggleContainer>
+        <button
+          className={`tenant ${mode === 1 ? 'active' : ''}`}
+          onClick={() => setMode(1)}
+        >
+          임차 | 매수
+        </button>
+        <button
+          className={`landlord ${mode === 2 ? 'active' : ''}`}
+          onClick={() => setMode(2)}
+        >
+          임대 | 매도
+        </button>
+      </c.UserTypeToggleContainer>
+      {contractList.length !== 0 ? (
+        <c.ContractListContainer>
+          {contractList.map((contract, index) => (
+            <ContractInfoCard
+              key={index}
+              contractAddress={contract.contractAddress}
+            />
+          ))}
+          {/* <ContractInfoCard
         contractAddress={'0x59Adae45A0B14AFE1fe63A82F87a8DCc5AA318B8'}
       /> */}
-    </c.ContractListContainer>
-  ) : (
-    <NoContract />
+        </c.ContractListContainer>
+      ) : (
+        <NoContract />
+      )}
+    </>
   )
 }
 
