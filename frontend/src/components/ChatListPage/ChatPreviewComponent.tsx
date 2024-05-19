@@ -8,33 +8,33 @@ const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
   representativeImage,
   roadNameAddress,
   transactionType,
-  price,
+  // price,
   lastChat,
   reportRank,
   chatRoomNo,
 }) => {
   const [typeOfNumber, setTypeOfNumber] = useState('type')
-  const [stringPrice, setStringPrice] = useState('')
+  // const [stringPrice, setStringPrice] = useState('')
   const navigate = useNavigate()
   const { getColor } = useEstateCondition(reportRank)
   const fourthColor = getColor()?.fourth
 
-  const formatPrice = (price: number) => {
-    const units = ['원', '만', '억']
-    let result = ''
-    let unitIndex = 0
-
-    while (price > 0) {
-      const part = price % 10000
-      if (part > 0) {
-        result = part + units[unitIndex] + ' ' + result // 각 단위마다 값을 추가
-      }
-      price = Math.floor(price / 10000)
-      unitIndex++
-    }
-
-    setStringPrice(result.trim()) // 마지막 공백 제거
-  }
+  // const formatPrice = (price: number) => {
+  //   const units = ['원', '천만', '억']
+  //   let result = ''
+  //   let unitIndex = 0
+  //
+  //   while (price > 0) {
+  //     const part = price % 10
+  //     if (part > 0) {
+  //       result = part + units[unitIndex] + ' ' + result // 각 단위마다 값을 추가
+  //     }
+  //     price = Math.floor(price / 10)
+  //     unitIndex++
+  //   }
+  //
+  //   setStringPrice(result.trim()) // 마지막 공백 제거
+  // }
 
   useEffect(() => {
     switch (transactionType) {
@@ -49,8 +49,8 @@ const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
         break
     }
 
-    formatPrice(price)
-  }, [transactionType, price])
+    // formatPrice(price)
+  }, [transactionType])
 
   const handleClick = () => {
     navigate(`/chatroom/${chatRoomNo}`)
@@ -72,7 +72,7 @@ const ChatPreviewComponent: React.FC<ChatRoomListType> = ({
         <div className="price">
           <img src="/icon/icon_chat_preview_coin.png" alt="돈" />
           <div className="type">{typeOfNumber}</div>
-          &nbsp;{stringPrice} 원
+          {/*&nbsp;{stringPrice}*/}
         </div>
         <div className="last-chat">
           <img src="/icon/icon_chat_preview_message.png" alt="채팅" />

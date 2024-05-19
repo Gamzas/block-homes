@@ -268,7 +268,7 @@ const ChattingRoomPage = () => {
             <div className="address-container">{data?.realEstateAddress}</div>
             <div className="transaction-price">
               <div className="transaction-type-container">{typeOfNumber} </div>
-              <div className="price-container">{stringPrice}</div>
+              {/*<div className="price-container">{stringPrice}</div>*/}
             </div>
 
             <c.ButtonContainer>
