@@ -35,18 +35,7 @@ const Model = ({
   }
   useFrame(() => {
     if (modelRef.current && !isUserInteracting) {
-      const rotationInDegrees = Math.round(
-        THREE.MathUtils.radToDeg(modelRef.current.rotation.y),
-      )
-      if (rotationInDegrees % 45 !== 0) {
-        modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
-      } else {
-        currentFrame.frameCount += 1
-        if (currentFrame.frameCount > 60) {
-          currentFrame.frameCount = 0
-          modelRef.current.rotation.y += 0.02
-        }
-      }
+      modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
     }
   })
 
@@ -75,8 +64,9 @@ const Controls = ({ setIsUserInteracting, controlsRef }) => {
 const Intro = () => {
   const models = [
     // '/3DIllustrations/Intro_logo.glb',
-    '/3DIllustrations/Intro_no_pig.glb',
+    // '/3DIllustrations/Intro_no_pig.glb',
     // '/3DIllustrations/Intro.glb',
+    'https://blockhomes-bucket.s3.ap-northeast-2.amazonaws.com/assets/Intro.glb',
   ]
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
