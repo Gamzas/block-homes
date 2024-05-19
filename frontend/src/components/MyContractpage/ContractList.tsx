@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
 import { userAtom } from '@/stores/atoms/userStore'
 import { useGetMyContract } from '@/apis/contractApi'
@@ -6,6 +5,7 @@ import ItemLoading from '@/common/ItemLoading'
 import * as c from '@components/MyContractpage/style/ContractListStyle'
 import ContractInfoCard from './ContractInfoCard'
 import useLoginStatus from '@/hooks/useLoginStatus'
+import NoContract from './NoContract'
 
 const ContractList = () => {
   useLoginStatus()
@@ -23,7 +23,7 @@ const ContractList = () => {
 
   const contractList = data?.contractLists || []
 
-  return contractList.length !== 0 ? (
+  return contractList.length == 0 ? (
     <c.ContractListContainer>
       {/* {contractList.map((contract, index) => (
         <ContractInfoCard
@@ -36,7 +36,7 @@ const ContractList = () => {
       />
     </c.ContractListContainer>
   ) : (
-    <c.ContractListContainer>없지롱..</c.ContractListContainer>
+    <NoContract />
   )
 }
 
