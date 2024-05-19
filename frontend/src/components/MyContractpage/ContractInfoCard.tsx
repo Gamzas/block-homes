@@ -6,8 +6,8 @@ import { useGetRealEstateInfo } from '@/abi/realEstateInfo/getRealEstateInfo'
 import { getDIDValue } from '@/utils/didUtils'
 import ItemLoading from '@/common/ItemLoading'
 import * as c from '@components/MyContractpage/style/ContractInfoCardStyle'
-import { LeaseContractType } from '@/types/components/ContractType'
 import { convertBigNumber } from '@/utils/conversionUtils'
+import { LeaseContractType } from '@/types/components/contractType'
 
 interface PropsType {
   contractAddress: string
