@@ -146,9 +146,9 @@ const EstateRegistrationPage = () => {
   }
 
   const getStatusMessage = steps => {
-    if (steps <= 2) return 3
-    if (steps <= 4) return 2
-    return 1
+    if (steps <= 1) return 1
+    if (steps <= 3) return 2
+    return 3
   }
 
   useEffect(() => {
@@ -180,10 +180,15 @@ const EstateRegistrationPage = () => {
         date: realEstateInfoData.date,
         name: userInfo.name,
       })
-      setIsNoData(isDataFilled(checkEstateProps))
+      if (isNoData) {
+        setIsNoData(isDataFilled(checkEstateProps))
+      }
     }
   }, [realEstateInfoData, userInfo, realEstateDID])
 
+  useEffect(() => {
+    console.log(isNoData)
+  }, [isNoData])
   return (
     <r.EstateRegistrationPageContainer>
       {!isNoData && (
