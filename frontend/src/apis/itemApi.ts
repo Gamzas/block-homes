@@ -49,7 +49,8 @@ export const useGetEstateItems = (
         return res.data
       } catch (err) {
         console.error(err)
-        // alert(err.response?.data?.message || '오류가 발생했습니다.')
+        alert(err.response?.data?.message || '잘못된접근입니다.')
+        window.location.href = '/'
         return null
       }
     },

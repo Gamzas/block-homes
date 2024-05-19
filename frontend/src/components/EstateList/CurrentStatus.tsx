@@ -157,7 +157,6 @@ const CurrentStatus = ({ handleLocationClick }) => {
       />
     )
   }
-  console.log(data)
   return (
     <c.CurrentStatusContainer>
       <c.CurrentLocationContainer>
