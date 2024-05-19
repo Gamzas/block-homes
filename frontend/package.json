@@ -22,6 +22,7 @@
     "@types/sockjs-client": "^1.5.4",
     "apexcharts": "^3.49.0",
     "axios": "^1.6.8",
+    "bignumber.js": "^4.0.4",
     "ethers": "^5.7.2",
     "html2canvas": "^1.4.1",
     "jotai": "^2.8.0",
