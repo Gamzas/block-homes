@@ -9,8 +9,8 @@ const ContractComplete = () => {
   const [, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const navigate = useNavigate()
   const hadleHome = () => {
-    navigate(-2)
     setIsGoNextStep(true)
+    navigate(-2)
   }
   return (
     <ContractCompleteContainer>

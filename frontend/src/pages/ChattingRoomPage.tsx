@@ -38,6 +38,14 @@ const ChattingRoomPage = () => {
   const [userStep, setUserStep] = useAtom(userStepAtom)
   const [isCancel] = useAtom(provisionIsCancelAtomFamily(Number(chatRoomNo)))
 
+  const setUserStepAsync = step => {
+    return new Promise(resolve => {
+      setUserStep(step)
+      resolve(step)
+      console.log(userStep)
+    })
+  }
+
   const defaultMessage = {
     chatNo: 0,
     chatRoomNo: 0,
@@ -73,7 +81,7 @@ const ChattingRoomPage = () => {
         console.log('WebSocket connected')
         client.current.subscribe(
           `/exchange/chat.exchange/*.room.${chatRoomNo}`,
-          msg => {
+          async msg => {
             console.log(
               'Subscribed to topic:',
               `/exchange/chat.exchange/*.room.${chatRoomNo}`,
@@ -96,7 +104,7 @@ const ChattingRoomPage = () => {
                   createdAt: receivedMessage.createdAt,
                 },
               ])
-              setUserStep(receivedMessage.contractStep + 1)
+              await setUserStepAsync(receivedMessage.contractStep + 1)
               scrollToBottom()
             } catch (error) {
               console.error('Error parsing message:', error)
@@ -177,7 +185,7 @@ const ChattingRoomPage = () => {
 
   useEffect(() => {
     if (data?.chatList.length > 0) {
-      setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
+      // setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
       // if (lastStep !== 0 && lastStep % 2 === 0) {
       //   setSellerStep(lastStep + 1)
       //   setBuyerStep(lastStep + 2)
