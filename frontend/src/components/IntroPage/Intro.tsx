@@ -10,6 +10,7 @@ import { OrbitControls, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 import ThreeRotate from '@assets/lotties/3DRotate.json'
 import CandyCaneLoader from '@assets/lotties/CandyCaneLoader.json'
+import isLoading from '@common/IsLoading'
 
 const Model = ({
   url,
@@ -17,16 +18,17 @@ const Model = ({
   isUserInteracting,
   modelRef,
   setLoading,
+  index,
 }: {
   url: string
   scale?: [number, number, number]
   isUserInteracting: boolean
   modelRef: React.RefObject<any>
-  setLoading: (loading: boolean) => void
+  setLoading: (loading: number) => void
+  index: number
 }) => {
   const { scene } = useGLTF(url, true, undefined, loader => {
-    loader.manager.onStart = () => setLoading(true)
-    loader.manager.onLoad = () => setLoading(false)
+    loader.manager.onLoad = () => setLoading(index + 1)
   })
   const currentFrame = {
     frameCount: 0,
@@ -71,27 +73,19 @@ const Controls = ({ setIsUserInteracting, controlsRef }) => {
 }
 
 const Intro = () => {
+  const models = [
+    '/3DIllustrations/Intro_logo.glb',
+    '/3DIllustrations/Intro_no_pig.glb',
+    '/3DIllustrations/Intro.glb',
+  ]
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
   const modelRef = useRef<any>(null)
   const controlsRef = useRef<any>(null)
-  const [loading, setLoading] = useState(true)
-  const [loadError, setLoadError] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (loading) {
-        console.log('랜더링 오류 페이지를 새로고침합니다.')
-        setLoadError(true)
-      }
-    }, 10000)
-
-    // 컴포넌트가 언마운트되거나 로딩 상태가 변경될 때 타이머를 정리
-    return () => clearTimeout(timer)
-  }, [loading]) // 로딩 상태가 변경될 때마다 이 효과를 다시 실행
+  const [loading, setLoading] = useState(0)
 
   const handleReset = () => {
-    if (loading) {
+    if (!loading) {
       window.location.reload()
     }
     if (modelRef.current) {
@@ -117,11 +111,13 @@ const Intro = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   }
-
+  useEffect(() => {
+    console.log(loading)
+  }, [loading])
   return (
     <IntroContainer>
       <IntroCanvasWrapper>
-        {(loading || loadError) && (
+        {!loading && (
           <div className="three-loading">
             <Lottie
               options={loadingLottieOptions}
@@ -134,22 +130,18 @@ const Intro = () => {
         <Canvas camera={{ position: [0, 5, 0], fov: 75 }}>
           <ambientLight intensity={2} />
           <directionalLight position={[50, 50, 50]} intensity={2} />
-          {loadError ? (
-            <Model
-              url={'/3DIllustrations/Intro_no_pig.glb'}
-              scale={[3.5, 3.5, 3.5]}
-              isUserInteracting={isUserInteracting}
-              modelRef={modelRef}
-              setLoading={setLoading}
-            />
-          ) : (
-            <Model
-              url={'/3DIllustrations/Intro.glb'}
-              scale={[3.5, 3.5, 3.5]}
-              isUserInteracting={isUserInteracting}
-              modelRef={modelRef}
-              setLoading={setLoading}
-            />
+          {models.map(
+            (model, index) =>
+              (loading === index || loading === index + 1) && (
+                <Model
+                  url={model}
+                  scale={[3.5, 3.5, 3.5]}
+                  isUserInteracting={isUserInteracting}
+                  modelRef={modelRef}
+                  setLoading={setLoading}
+                  index={index}
+                />
+              ),
           )}
           <Controls
             setIsUserInteracting={setIsUserInteracting}
