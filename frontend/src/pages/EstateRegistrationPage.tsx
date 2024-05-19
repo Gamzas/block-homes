@@ -84,7 +84,6 @@ const EstateRegistrationPage = () => {
       realEstateType: checkEstateProps.realEstateType,
       area: checkEstateProps.area,
     }
-    console.log(reqData)
     const blob = new Blob([JSON.stringify(reqData)], {
       type: 'application/json',
     })

@@ -1,9 +1,16 @@
+import React, { useEffect, useRef, useState } from 'react'
 import * as p from '@components/EstateRegistrationPage/style/PhotoRegistrationStyle'
 
 const PhotoRegistration = ({
   photoRegistrationProps,
   setPhotoRegistrationProps,
 }) => {
+  const fileInputRefs = {
+    mainImage: useRef(null),
+    roomImages: useRef(null),
+    kitchenToiletImages: useRef(null),
+  }
+
   const photoSessions = [
     {
       title: '거실 / 방 사진',
@@ -62,6 +69,10 @@ const PhotoRegistration = ({
     }
   }
 
+  useEffect(() => {
+    console.log(photoRegistrationProps)
+  }, [photoRegistrationProps])
+
   const removeImage = (sessionIndex, imageIndex) => {
     setPhotoRegistrationProps(currentParams => {
       if (sessionIndex === 0) {
@@ -69,6 +80,7 @@ const PhotoRegistration = ({
         const updatedRoomImages = currentParams.roomImages.filter(
           (_, index) => index !== imageIndex,
         )
+        fileInputRefs.roomImages.current.value = null // 파일 입력 요소 값 초기화
         return {
           ...currentParams,
           roomImages: updatedRoomImages,
@@ -79,6 +91,7 @@ const PhotoRegistration = ({
           currentParams.kitchenToiletImages.filter(
             (_, index) => index !== imageIndex,
           )
+        fileInputRefs.kitchenToiletImages.current.value = null // 파일 입력 요소 값 초기화
         return {
           ...currentParams,
           kitchenToiletImages: updatedKitchenToiletImages,
@@ -86,6 +99,14 @@ const PhotoRegistration = ({
       }
       return currentParams // 기본 경우, 변화 없음
     })
+  }
+
+  const handleMainImageCancel = () => {
+    setPhotoRegistrationProps(currentParams => ({
+      ...currentParams,
+      mainImage: '',
+    }))
+    fileInputRefs.mainImage.current.value = null // 파일 입력 요소 값 초기화
   }
 
   return (
@@ -103,12 +124,7 @@ const PhotoRegistration = ({
               />
               <img
                 className="cancel"
-                onClick={() =>
-                  setPhotoRegistrationProps(currentParams => ({
-                    ...currentParams,
-                    mainImage: '',
-                  }))
-                }
+                onClick={handleMainImageCancel}
                 src="/icon/icon_cancel.png"
                 alt="Cancel Icon"
               />
@@ -119,6 +135,7 @@ const PhotoRegistration = ({
                 type="file"
                 accept="image/*"
                 onChange={handleMainImageChange}
+                ref={fileInputRefs.mainImage}
               />
               <img
                 className="plus"
@@ -137,10 +154,9 @@ const PhotoRegistration = ({
           <p.PhotoRegistrationImages>
             <div className="images-wrapper">
               {session.images.map((image, imgIndex) => (
-                <p.PhotoRegistrationPhotoSub key={sessionIndex}>
+                <p.PhotoRegistrationPhotoSub key={imgIndex}>
                   <img
                     className="upload"
-                    key={sessionIndex}
                     src={URL.createObjectURL(image)}
                     alt={`Uploaded ${imgIndex}`}
                   />
@@ -157,6 +173,11 @@ const PhotoRegistration = ({
                   type="file"
                   accept="image/*"
                   onChange={e => handleImageChange(e, sessionIndex)}
+                  ref={
+                    sessionIndex === 0
+                      ? fileInputRefs.roomImages
+                      : fileInputRefs.kitchenToiletImages
+                  }
                 />
                 <img
                   className="plus"
