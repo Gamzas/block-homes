@@ -10,6 +10,7 @@ export const SendMessageInputContainer = styled.div`
   max-width: 390px;
   bottom: 0;
   z-index: 100;
+  background-color: #ffffff;
 `
 
 export const SendMessageInputWrap = styled.div`

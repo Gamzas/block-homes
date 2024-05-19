@@ -304,12 +304,16 @@ const ChattingRoomPage = () => {
           </c.RightContainer>
         </c.ChattingHeader>
       </c.ChattingHeaderWrapper>
-      <c.MessageListContainer ref={scrollRef}>
-        {messages?.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
-        {messages?.map(message => (
-          <MessageItem item={message} key={message.chatNo} />
-        ))}
-      </c.MessageListContainer>
+      <c.MessageListScrollWrapper>
+        <c.MessageListContainer ref={scrollRef}>
+          {messages?.length === 0 && (
+            <div>메세지를 보내 대화를 시작해보세요</div>
+          )}
+          {messages?.map(message => (
+            <MessageItem item={message} key={message.chatNo} />
+          ))}
+        </c.MessageListContainer>
+      </c.MessageListScrollWrapper>
       <SendMessageInput
         sendButtonClick={sendTextMessage}
         message={newMessage.message}
