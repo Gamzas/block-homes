@@ -54,7 +54,7 @@ const DetailTabMenu = ({ imgUrl }: PropsType) => {
     dotsClass: 'slick-dots',
     arrows: false,
   }
-  const tabMenuArr = ['image', 'floor_plan', '360']
+  const tabMenuArr = ['image', 'room', 'kitchen']
   const selectMenuHandler = (index: number) => {
     if (sliderRef.current) {
       sliderRef.current.slickGoTo(0) // 슬라이더를 첫 번째 슬라이드로 이동

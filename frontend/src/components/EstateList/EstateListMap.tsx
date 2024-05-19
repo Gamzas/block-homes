@@ -9,6 +9,7 @@ import {
   mapCenterCoordAtom,
   userCoordAtom,
   estateItemListAtom,
+  estateFilterAtom,
 } from '@/stores/atoms/EstateListStore'
 import EstateItemCard from './EstateItemCard'
 import { EstateItemListType } from '@/types/api/itemType'
@@ -25,10 +26,12 @@ const EstateListMap = forwardRef((props, ref) => {
   const [location, setLocation] = useAtom(mapCenterCoordAtom)
   const [userCoord] = useAtom(userCoordAtom)
   const [items] = useAtom(estateItemListAtom)
-
-  const estateItemList: EstateItemListType[] = items.itemList || []
+  console.log(items)
+  const [filter] = useAtom(estateFilterAtom)
+  const estateItemList: EstateItemListType[] = items.itemList
   const [marker, setMarker] = useState(null)
   const [item, setItem] = useAtom(selectedItemAtom)
+  const [overlays, setOverlays] = useState([]) // 오버레이 추적
 
   const mapRef = useRef(null)
   const initialLoad = useRef(true)
@@ -112,6 +115,10 @@ const EstateListMap = forwardRef((props, ref) => {
 
     const map = mapRef.current
 
+    // 기존 오버레이 제거
+    overlays.forEach(overlay => overlay.setMap(null))
+    setOverlays([])
+
     if (marker) {
       marker.setMap(null) // 기존 마커 제거
     }
@@ -131,7 +138,7 @@ const EstateListMap = forwardRef((props, ref) => {
     newMarker.setMap(map)
     setMarker(newMarker)
 
-    estateItemList.forEach(estateItem => {
+    const newOverlays = estateItemList.map(estateItem => {
       const position = new kakao.maps.LatLng(
         estateItem.latitude,
         estateItem.longitude,
@@ -158,8 +165,10 @@ const EstateListMap = forwardRef((props, ref) => {
       }
 
       customOverlay.setMap(map)
+      return customOverlay
     })
-  }, [coord])
+    setOverlays(newOverlays)
+  }, [coord, items, filter])
 
   useEffect(() => {
     const map = mapRef.current

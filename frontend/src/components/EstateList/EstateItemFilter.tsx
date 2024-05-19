@@ -18,7 +18,6 @@ const EstateItemFilter = () => {
     maxPyeong: 0,
   })
 
-  console.log(selectedOptions)
   const handleOptionClick = (optionType, value) => {
     setSelectedOptions(prevState => ({
       ...prevState,
