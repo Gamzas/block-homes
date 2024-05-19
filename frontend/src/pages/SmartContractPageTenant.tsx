@@ -23,7 +23,7 @@ import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
-import { useGetDetailItem } from '@/apis/itemApi'
+import { useDeleteEstateItem, useGetDetailItem } from '@/apis/itemApi'
 import { DetailItemType } from '@/types/components/estateContractType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@/apis/chatApi'
@@ -48,7 +48,6 @@ const SmartContractPage = () => {
   // console.log('chatRoomNo', chatRoomNo)
   const chatRoomNumber = Number(chatRoomNo)
 
-  //삭제 코드
   const { data: contractAddress } = useQuery({
     queryKey: ['fetchTempContractAddress', chatRoomNumber],
     queryFn: () => fetchTempContractAddress(chatRoomNumber),
@@ -117,6 +116,9 @@ const SmartContractPage = () => {
   const [propertyDID, setPropertyDID] = useState('')
   const [estateInfo, setEstateInfo] = useState<DetailItemType | null>(null)
 
+  //삭제 코드
+
+  const { mutate: deletItem } = useDeleteEstateItem(landlordDID)
   useEffect(() => {
     if (itemDetails) {
       setLeasePeriod(itemDetails.contractMonths)
@@ -276,6 +278,8 @@ const SmartContractPage = () => {
         chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
         contractAddress: contractAddress?.tempContractAddress,
       })
+
+      deletItem(itemDetails?.itemNo)
     } catch (error) {
       if (error.message.includes('invalid password')) {
         setSnackbarMessage('잘못된 비밀번호입니다. 다시 시도하세요.')
