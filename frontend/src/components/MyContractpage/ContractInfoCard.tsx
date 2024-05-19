@@ -42,7 +42,8 @@ const ContractInfoCard = ({ contractAddress }: PropsType) => {
     useGetRealEstateInfo(propertyDID || '')
 
   if (!contractInfo || realEstateLoading) {
-    return <ItemLoading />
+    // return <ItemLoading />
+    return null
   }
   // console.log(realEstateInfoData)
   const lordDID = getDIDValue(contractInfo.landlordDID)
