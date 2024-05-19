@@ -1,17 +1,23 @@
-import { LeaseContractType } from '@/types/components/estateContractType'
-import { transformData } from '@/utils/conversionUtils'
+import {
+  LeaseContractType,
+  RealEstateInfoType,
+} from '@/types/components/estateContractType'
+import { convertBigNumber, transformData } from '@/utils/conversionUtils'
+import { getDIDValue } from '@/utils/didUtils'
+import { getRealEstateType } from '@/utils/estateTransferUtil'
 import * as d from '@components/MyContractpage/style/ContractDetailCardStyle'
 
 interface PropType {
-  ContractInfo: LeaseContractType
+  contractInfo: LeaseContractType
+  estateInfo: RealEstateInfoType
+  setShowContract: (show: boolean) => void
 }
-const ContractDetailCard = () => {
-  const data =
-    '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다/ 계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다/ 만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다/ 만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다.'
-  const result = transformData(data)
-
-  console.log(result)
-
+const ContractDetailCard = (props: PropType) => {
+  // const data =
+  //   '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다/ 계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다/ 만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다/ 만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다.'
+  const { contractInfo, estateInfo, setShowContract } = props
+  const result = transformData(contractInfo.terms)
+  // console.log(estateInfo)
   return (
     <d.DetailCardContainer>
       <img
@@ -24,13 +30,31 @@ const ContractDetailCard = () => {
         <img src="/image/image_oneroom.png" alt="집" />
         <div className="content-box">
           <div className="title">부동산 정보</div>
-          <div className="did">0x15b84A76cd54E0D086FE0E40Cb3eAc3dB3e9a000</div>
+          <div className="did">{getDIDValue(contractInfo.propertyDID)}</div>
         </div>
       </d.EstateInfoContainer>
       <d.InfoWrapper>
         <d.InfoContainer>
           <div className="title">소재지</div>
-          <div className="detail">광주광역시 광산구 장신로 20번길 13-12</div>
+          <div className="detail">{estateInfo.roadNameAddress}</div>
+        </d.InfoContainer>
+        <d.InfoContainer>
+          <div className="title">건물명</div>
+          <div className="detail">{estateInfo.buildingName}</div>
+        </d.InfoContainer>
+        <d.InfoContainer>
+          <div className="title">세부정보</div>
+          <div className="detail">{estateInfo.roomNumber}호</div>
+        </d.InfoContainer>
+        <d.InfoContainer>
+          <div className="title">매물 용도</div>
+          <div className="detail">{estateInfo.purpose}</div>
+        </d.InfoContainer>
+        <d.InfoContainer>
+          <div className="title">매물 타입</div>
+          <div className="detail">
+            {getRealEstateType(estateInfo.estateType)}
+          </div>
         </d.InfoContainer>
       </d.InfoWrapper>
       <d.EstateInfoContainer>
@@ -42,28 +66,33 @@ const ContractDetailCard = () => {
       <d.InfoWrapper>
         <d.InfoContainer>
           <div className="title">계약인</div>
-          <div className="did">0x15b84A76cd54E0D086FE0E40Cb3eAc3dB3e9a000</div>
+          <div className="did">{getDIDValue(contractInfo.tenantDID)}</div>
         </d.InfoContainer>
         <d.InfoContainer>
           <div className="title">임대기간</div>
-          <div className="detail">6 년</div>
+          <div className="detail">{contractInfo.leasePeriod} 년</div>
         </d.InfoContainer>
         <d.InfoContainer>
           <div className="title">보증금 및 월세</div>
-          <div className="detail">2억</div>
+          <div className="detail">
+            {' '}
+            {convertBigNumber(contractInfo.deposit._hex)}{' '}
+          </div>
         </d.InfoContainer>
         <d.InfoContainer>
           <div className="title">계약 날짜</div>
-          <div className="detail">2024-05-17</div>
+          <div className="detail">{contractInfo.contractDate}</div>
         </d.InfoContainer>
-        <d.TermsBox>
-          <div className="title">특약사항</div>
-          {result.map(term => (
-            <div className="terms">{term}</div>
-          ))}
-        </d.TermsBox>
+        {result.length !== 0 && (
+          <d.TermsBox>
+            <div className="title">특약사항</div>
+            {result.map(term => (
+              <div className="terms">{term}</div>
+            ))}
+          </d.TermsBox>
+        )}
       </d.InfoWrapper>
-      <d.CloseBtn>닫기</d.CloseBtn>
+      <d.CloseBtn onClick={() => setShowContract(false)}>닫기</d.CloseBtn>
     </d.DetailCardContainer>
   )
 }

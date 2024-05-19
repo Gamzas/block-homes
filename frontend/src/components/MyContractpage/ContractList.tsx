@@ -21,19 +21,21 @@ const ContractList = () => {
     return <div>An error has occurred: {error.message}</div>
   }
 
+  // console.log(data)
+
   const contractList = data?.contractLists || []
 
   return contractList.length !== 0 ? (
     <c.ContractListContainer>
-      {/* {contractList.map((contract, index) => (
+      {contractList.map((contract, index) => (
         <ContractInfoCard
           key={index}
           contractAddress={contract.contractAddress}
         />
-      ))} */}
-      <ContractInfoCard
+      ))}
+      {/* <ContractInfoCard
         contractAddress={'0x59Adae45A0B14AFE1fe63A82F87a8DCc5AA318B8'}
-      />
+      /> */}
     </c.ContractListContainer>
   ) : (
     <NoContract />

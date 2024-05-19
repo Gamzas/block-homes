@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js"
+
 export interface User {
   walletAddress: string
   name: string
@@ -56,4 +58,17 @@ export interface LeaseContractType {
   propertyDID: string // 부동산 did 주소
   tenantDID: string // 임차인 did 주소
   terms: string // 특약사항
+}
+
+export interface RealEstateInfoType {
+  area: string
+  buildingName: string
+  buildingNumber: number
+  date: BigNumber
+  estateType: number
+  isNotPermitted: boolean
+  isViolated: boolean
+  purpose: string
+  roadNameAddress: string
+  roomNumber: number
 }

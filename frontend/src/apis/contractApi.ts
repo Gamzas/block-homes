@@ -64,7 +64,7 @@ export const useGetMyContract = (mode: number, walletAddress: string) => {
             walletAddress,
           },
         })
-        console.log(res)
+        // console.log(res)
         return res.data
       } catch (err) {
         console.log(err)
