@@ -5,7 +5,7 @@ interface IsShowMoreFunctionProps {
 }
 
 export const SendMessageInputContainer = styled.div`
-  position: fixed;
+  position: absolute;
   width: 100%;
   max-width: 390px;
   bottom: 0;

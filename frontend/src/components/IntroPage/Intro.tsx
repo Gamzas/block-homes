@@ -30,9 +30,6 @@ const Model = ({
   const { scene } = useGLTF(url, true, undefined, loader => {
     loader.manager.onLoad = () => setLoading(index + 1)
   })
-  const currentFrame = {
-    frameCount: 0,
-  }
   useFrame(() => {
     if (modelRef.current && !isUserInteracting) {
       modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
@@ -65,7 +62,7 @@ const Intro = () => {
   const models = [
     // '/3DIllustrations/Intro_logo.glb',
     '/3DIllustrations/Intro_no_pig.glb',
-    'https://blockhomes-bucket.s3.ap-northeast-2.amazonaws.com/assets/Intro.glb',
+    // 'https://blockhomes-bucket.s3.ap-northeast-2.amazonaws.com/assets/Intro.glb',
   ]
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
