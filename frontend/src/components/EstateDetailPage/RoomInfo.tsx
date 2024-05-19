@@ -22,7 +22,7 @@ const RoomInfo = (props: PropsType) => {
   const infoItems = [
     { icon: 'count', info: getRealEstateType(info.realEstateType) },
     { icon: 'area', info: `방 ${info.roomNumber} 화 ${info.toiletNumber}` },
-    { icon: 'detail', info: `${info.area}m2` },
+    { icon: 'detail', info: `${info.area}m2 (${info.pyeong} 평)` },
     {
       icon: 'floor',
       info:
@@ -32,7 +32,7 @@ const RoomInfo = (props: PropsType) => {
     },
     { icon: 'elevator', info: info.haveElevator ? '있음' : '없음' },
     { icon: 'contract', info: `계약기간  ${info.contractMonths} 개월` },
-    { icon: 'parking', info: `주차대수  ${info.parkingRate} 개월` },
+    { icon: 'parking', info: `주차대수  ${info.parkingRate} 대` },
     {
       icon: 'house',
       info: `
