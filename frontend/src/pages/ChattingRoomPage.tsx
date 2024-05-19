@@ -19,6 +19,7 @@ import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
 import { MessageType } from '@/types/components/chatType'
 import {
+  chatRoomNoAtom,
   isGoNextStepAtom,
   provisionIsCancelAtomFamily,
 } from '@stores/atoms/chat'
@@ -26,7 +27,7 @@ import {
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
   const [user] = useAtom(userAtom)
-  const [chatRoomNumber, setChatRoomNumber] = useState(Number(chatRoomNo))
+  const [chatRoomNumber, setChatRoomNumber] = useAtom(chatRoomNoAtom)
   const navigate = useNavigate()
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
