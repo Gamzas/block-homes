@@ -18,7 +18,10 @@ import MessageItem from '@components/ChattingPage/MessageItem'
 import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
 import { MessageType } from '@/types/components/chatType'
-import { chatRoomNoAtom, isGoNextStepAtom } from '@stores/atoms/chat'
+import {
+  isGoNextStepAtom,
+  provisionIsCancelAtomFamily,
+} from '@stores/atoms/chat'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -32,7 +35,7 @@ const ChattingRoomPage = () => {
   const [buyerStep, setBuyerStep] = useAtom(buyerStepAtom)
   const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const [userStep, setUserStep] = useAtom(userStepAtom)
-  const [, setChatRoomNum] = useAtom(chatRoomNoAtom)
+  const [isCancel] = useAtom(provisionIsCancelAtomFamily(Number(chatRoomNo)))
 
   const defaultMessage = {
     chatNo: 0,
@@ -168,7 +171,7 @@ const ChattingRoomPage = () => {
       setUserMode(1)
     }
 
-    setChatRoomNum(Number(chatRoomNo))
+    setChatRoomNumber(Number(chatRoomNo))
   }, [data])
 
   useEffect(() => {
@@ -221,7 +224,7 @@ const ChattingRoomPage = () => {
       infoMessage = '거래가 완료되었습니다.'
     }
 
-    if (newMessage) {
+    if (isGoNextStep && !isCancel) {
       client.current.publish({
         destination: `/pub/chat.progress.${chatRoomNo}`,
         body: JSON.stringify({
@@ -283,7 +286,7 @@ const ChattingRoomPage = () => {
             )}
             <button
               className="chatting-header-button"
-              onClick={() => navigate(`/transaction-progress/${data.itemNo}`)}
+              onClick={() => navigate(`/transaction-progress/${chatRoomNo}`)}
             >
               거래 현황 보러가기
             </button>
