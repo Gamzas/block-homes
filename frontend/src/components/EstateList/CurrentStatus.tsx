@@ -57,6 +57,8 @@ const CurrentStatus = ({ handleLocationClick }) => {
   const [itemFilter] = useAtom(estateFilterAtom)
   // 레포트 필터 항목
   const [reportFilter, setReportFilter] = useAtom(reportAtom)
+  const setItemFilter = useSetAtom(estateFilterAtom)
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const boundaries = calculateBoundaries(
     markerCoord.latitude,
@@ -116,6 +118,18 @@ const CurrentStatus = ({ handleLocationClick }) => {
       setActiveIndex(index)
       setReportFilter(index + 1)
     }
+  }
+
+  const reset = () => {
+    setItemFilter({
+      transactionType: 0,
+      minPrice: 0,
+      maxPrice: 0,
+      minPyeong: 0,
+      maxPyeong: 0,
+    })
+    setReportFilter(0)
+    setActiveIndex(null)
   }
 
   useEffect(() => {
@@ -187,6 +201,12 @@ const CurrentStatus = ({ handleLocationClick }) => {
             {item.condition}
           </c.EstateStatusButton>
         ))}
+        <img
+          className="reset"
+          src="/icon/icon_reset.png"
+          alt="리셋"
+          onClick={reset}
+        />
       </c.EstateStatusButtonContainer>
       <c.FilterContainer onClick={handlerFilterClick}>
         <img className="filter-icon" src="/icon/icon_filter.png" />
