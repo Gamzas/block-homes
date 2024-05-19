@@ -4,23 +4,25 @@ import TopCard from '@components/MainPage/TopCard'
 import RealEstateCategory from '@components/MainPage/RealEstateCategory'
 import UserTypeToggle from '@common/UserTypeToggle'
 import { useAtom } from 'jotai'
-import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
+import {
+  isFirstOpenAtom,
+  userAtom,
+  userTypeAtom,
+} from '@stores/atoms/userStore'
 import OwnEstateDidList from '@components/MainPage/OwnEstateDidList'
 import InfoCardSlider from '@components/MainPage/InfoCardSlider'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const MainPage = () => {
+  const navigate = useNavigate()
   const [currentUserType, setCurrentUserType] = useAtom(userTypeAtom)
   const [currentUser, setCurrentUser] = useAtom(userAtom)
+  const [isFirstOpen, setIsFirstOpen] = useAtom(isFirstOpenAtom)
 
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser')
-    const currentUserData = currentUser ? JSON.parse(currentUser) : null
-    if (currentUserData && !currentUser) {
-      setCurrentUser(currentUserData)
-    } else if (!currentUserData && currentUser) {
-      localStorage.setItem('currentUser', JSON.stringify(currentUser))
-    }
+    if (currentUser.name === '' && isFirstOpen.isFirstOpen) navigate('/intro')
+    setIsFirstOpen({ isFirstOpen: false })
   }, [])
   return (
     <h.MainPageContainer>
