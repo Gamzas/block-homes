@@ -58,7 +58,8 @@ const CurrentStatus = ({ handleLocationClick }) => {
   // 레포트 필터 항목
   const [reportFilter, setReportFilter] = useAtom(reportAtom)
   const setItemFilter = useSetAtom(estateFilterAtom)
-
+  // 필터 토글
+  const setFilterToggle = useSetAtom(filterAtom)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const boundaries = calculateBoundaries(
     markerCoord.latitude,
@@ -130,6 +131,7 @@ const CurrentStatus = ({ handleLocationClick }) => {
     })
     setReportFilter(0)
     setActiveIndex(null)
+    setFilterToggle(false)
   }
 
   useEffect(() => {

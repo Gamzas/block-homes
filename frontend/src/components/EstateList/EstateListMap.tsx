@@ -25,7 +25,7 @@ const EstateListMap = forwardRef((props, ref) => {
   const [location, setLocation] = useAtom(mapCenterCoordAtom)
   const [userCoord] = useAtom(userCoordAtom)
   const [items] = useAtom(estateItemListAtom)
-
+  console.log(items)
   const estateItemList: EstateItemListType[] = items.itemList || []
   const [marker, setMarker] = useState(null)
   const [item, setItem] = useAtom(selectedItemAtom)
@@ -159,7 +159,7 @@ const EstateListMap = forwardRef((props, ref) => {
 
       customOverlay.setMap(map)
     })
-  }, [coord])
+  }, [coord, items])
 
   useEffect(() => {
     const map = mapRef.current
