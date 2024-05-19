@@ -7,7 +7,7 @@ import House from '@assets/lotties/House.json'
 const EstateRegistrationComplete = () => {
   const navigate = useNavigate()
   const hadleHome = () => {
-    navigate('/')
+    navigate('/', { replace: true })
   }
   const defaultOptions = {
     loop: true,
