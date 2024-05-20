@@ -1,25 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Lottie from 'react-lottie'
-import {
-  IntroCanvasWrapper,
-  IntroContainer,
-  IntroHeader,
-} from '@components/IntroPage/style/IntroStyle'
+import { IntroCanvasWrapper, IntroContainer, IntroHeader } from '@components/IntroPage/style/IntroStyle'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
 import ThreeRotate from '@assets/lotties/3DRotate.json'
 import CandyCaneLoader from '@assets/lotties/CandyCaneLoader.json'
-import isLoading from '@common/IsLoading'
 
 const Model = ({
-  url,
-  scale,
-  isUserInteracting,
-  modelRef,
-  setLoading,
-  index,
-}: {
+                 url,
+                 scale,
+                 isUserInteracting,
+                 modelRef,
+                 setLoading,
+                 index,
+               }: {
   url: string
   scale?: [number, number, number]
   isUserInteracting: boolean
@@ -61,8 +55,8 @@ const Controls = ({ setIsUserInteracting, controlsRef }) => {
 const Intro = () => {
   const models = [
     // '/3DIllustrations/Intro_logo.glb',
-    '/3DIllustrations/Intro_no_pig.glb',
-    // 'https://blockhomes-bucket.s3.ap-northeast-2.amazonaws.com/assets/Intro.glb',
+    // '/3DIllustrations/Intro_no_pig.glb',
+    'https://blockhomes-bucket.s3.ap-northeast-2.amazonaws.com/assets/Intro.glb',
   ]
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
