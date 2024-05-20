@@ -254,7 +254,7 @@ const ChattingRoomPage = () => {
       setIsGoNextStep(false)
     }
   }, [isGoNextStep])
-  
+
   useEffect(() => {
     const updateViewportHeight = () => setViewportHeight(window.visualViewport.height)
     window.visualViewport.addEventListener('resize', updateViewportHeight)
@@ -266,62 +266,64 @@ const ChattingRoomPage = () => {
   }, [])
 
   return (
-    <c.ChattingRoomPageContainer style={{ height: viewportHeight }}>
-      <c.ChattingHeaderWrapper>
-        <Header title="채팅" isSearch={false} rightIconSrc="" />
-        <c.ChattingHeader>
-          <div className="image-container">
-            <img src={data?.representativeImage} alt="매물 이미지" />
-          </div>
-          <c.RightContainer>
-            <div className="address-container">{data?.realEstateAddress}</div>
-            <div className="transaction-price">
-              <div className="transaction-type-container">{typeOfNumber} </div>
-              {/*<div className="price-container">{stringPrice}</div>*/}
+    <c.ChattingRoomPageContainer>
+      <c.ChattingRoomPageWrapper style={{ height: viewportHeight }}>
+        <c.ChattingHeaderWrapper>
+          <Header title="채팅" isSearch={false} rightIconSrc="" />
+          <c.ChattingHeader>
+            <div className="image-container">
+              <img src={data?.representativeImage} alt="매물 이미지" />
             </div>
+            <c.RightContainer>
+              <div className="address-container">{data?.realEstateAddress}</div>
+              <div className="transaction-price">
+                <div className="transaction-type-container">{typeOfNumber} </div>
+                {/*<div className="price-container">{stringPrice}</div>*/}
+              </div>
 
-            <c.ButtonContainer>
-              <button
-                className="chatting-header-button"
-                onClick={() => navigate(`/report/${data.itemNo}`)}
-              >
-                레포트
-              </button>
-              {userMode === 1 && (
+              <c.ButtonContainer>
                 <button
                   className="chatting-header-button"
-                  onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
+                  onClick={() => navigate(`/report/${data.itemNo}`)}
                 >
-                  체크리스트
+                  레포트
                 </button>
-              )}
-              <button
-                className="chatting-header-button"
-                onClick={() => navigate(`/transaction-progress/${chatRoomNo}`)}
-              >
-                거래 현황 보러가기
-              </button>
-            </c.ButtonContainer>
-          </c.RightContainer>
-        </c.ChattingHeader>
-      </c.ChattingHeaderWrapper>
-      <c.MessageListScrollWrapper>
-        <c.MessageListContainer ref={scrollRef}>
-          {messages?.length === 0 && (
-            <div>메세지를 보내 대화를 시작해보세요</div>
-          )}
-          {messages?.map(message => (
-            <MessageItem item={message} key={message.chatNo} />
-          ))}
-        </c.MessageListContainer>
-      </c.MessageListScrollWrapper>
-      <SendMessageInput
-        sendButtonClick={sendTextMessage}
-        message={newMessage.message}
-        onChange={e =>
-          setNewMessage(prev => ({ ...prev, message: e.target.value }))
-        }
-      />
+                {userMode === 1 && (
+                  <button
+                    className="chatting-header-button"
+                    onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
+                  >
+                    체크리스트
+                  </button>
+                )}
+                <button
+                  className="chatting-header-button"
+                  onClick={() => navigate(`/transaction-progress/${chatRoomNo}`)}
+                >
+                  거래 현황 보러가기
+                </button>
+              </c.ButtonContainer>
+            </c.RightContainer>
+          </c.ChattingHeader>
+        </c.ChattingHeaderWrapper>
+        <c.MessageListScrollWrapper>
+          <c.MessageListContainer ref={scrollRef}>
+            {messages?.length === 0 && (
+              <div>메세지를 보내 대화를 시작해보세요</div>
+            )}
+            {messages?.map(message => (
+              <MessageItem item={message} key={message.chatNo} />
+            ))}
+          </c.MessageListContainer>
+        </c.MessageListScrollWrapper>
+        <SendMessageInput
+          sendButtonClick={sendTextMessage}
+          message={newMessage.message}
+          onChange={e =>
+            setNewMessage(prev => ({ ...prev, message: e.target.value }))
+          }
+        />
+      </c.ChattingRoomPageWrapper>
     </c.ChattingRoomPageContainer>
   )
 }
