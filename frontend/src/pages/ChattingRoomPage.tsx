@@ -27,7 +27,6 @@ const ChattingRoomPage = () => {
   const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const [userStep, setUserStep] = useAtom(userStepAtom)
   const [isCancel] = useAtom(provisionIsCancelAtomFamily(Number(chatRoomNo)))
-  const [viewportHeight, setViewportHeight] = useState(window.visualViewport.height)
 
   const setUserStepAsync = step => {
     return new Promise(resolve => {
@@ -243,6 +242,7 @@ const ChattingRoomPage = () => {
       scrollToBottom()
     }
   }
+
   useEffect(() => {
     scrollToBottom()
   }, [messages])
@@ -254,23 +254,8 @@ const ChattingRoomPage = () => {
     }
   }, [isGoNextStep])
 
-  useEffect(() => {
-    const handleResizeAndScroll = () => {
-      setViewportHeight(window.visualViewport.height)
-      window.scrollTo(0, 0)
-    }
-
-    window.visualViewport.addEventListener('resize', handleResizeAndScroll)
-    window.visualViewport.addEventListener('scroll', handleResizeAndScroll)
-
-    return () => {
-      window.visualViewport.removeEventListener('resize', handleResizeAndScroll)
-      window.visualViewport.removeEventListener('scroll', handleResizeAndScroll)
-    }
-  }, [])
-
   return (
-    <c.ChattingRoomPageContainer style={{ height: viewportHeight }}>
+    <c.ChattingRoomPageContainer>
       <c.ChattingHeaderWrapper>
         <Header title="채팅" isSearch={false} rightIconSrc="" />
         <c.ChattingHeader>
