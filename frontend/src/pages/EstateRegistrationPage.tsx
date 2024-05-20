@@ -170,7 +170,7 @@ const EstateRegistrationPage = () => {
         if (realEstateInfoData.purpose !== '주거용') dangerCount.value += 1
         setPostParams(currentParams => ({
           ...currentParams,
-          reportRank: getStatusMessage(dangerCount),
+          reportRank: getStatusMessage(dangerCount.value),
         }))
       })
       setCheckEstateProps({
