@@ -1,6 +1,6 @@
 import useEstateCondition from '@/hooks/useEstateCondition'
 import { EstateItemListType } from '@/types/api/itemType'
-import { getTransactionType, numberToKorean } from '@/utils/estateTransferUtil'
+import { getTransactionType, numberToKorean, numberToKorean2 } from '@/utils/estateTransferUtil'
 import * as c from '@components/EstateList/styles/EstateItemCardStyle'
 import { useNavigate } from 'react-router-dom'
 import { getRealEstateType } from '../../utils/estateTransferUtil'
@@ -62,7 +62,7 @@ const EstateItemCard = (props: EstateItemListType) => {
           ) : (
             <div className="price-text">
               {getTransactionType(props.transactionType)}
-              {numberToKorean(props.price)}
+              {numberToKorean2(props.price)}
             </div>
           )}
           <div className="info-text">{props.area} m2</div>
