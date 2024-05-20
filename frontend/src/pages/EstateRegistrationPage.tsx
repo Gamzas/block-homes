@@ -146,7 +146,7 @@ const EstateRegistrationPage = () => {
   }
 
   const getStatusMessage = steps => {
-    if (steps <= 1) return 1
+    if (steps <= 0) return 1
     if (steps <= 2) return 2
     return 3
   }
