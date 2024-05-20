@@ -243,6 +243,16 @@ const ChattingRoomPage = () => {
       scrollToBottom()
     }
   }
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  useEffect(() => {
+    if (isGoNextStep) {
+      setTimeout(sendInfoMessage, 1000)
+      setIsGoNextStep(false)
+    }
+  }, [isGoNextStep])
 
   useEffect(() => {
     const handleResizeAndScroll = () => {
