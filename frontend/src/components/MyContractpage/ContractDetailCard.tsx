@@ -78,7 +78,7 @@ const ContractDetailCard = (props: PropType) => {
         </d.InfoContainer>
         <d.InfoContainer>
           <div className="title">임대기간</div>
-          <div className="detail">{contractInfo.leasePeriod} 년</div>
+          <div className="detail">{contractInfo.leasePeriod} 개월</div>
         </d.InfoContainer>
         <d.InfoContainer>
           <div className="title">보증금</div>
