@@ -2,7 +2,11 @@ import {
   LeaseContractType,
   RealEstateInfoType,
 } from '@/types/components/estateContractType'
-import { convertBigNumber, transformData } from '@/utils/conversionUtils'
+import {
+  convertBigNumber,
+  convertKlayToKRW,
+  transformData,
+} from '@/utils/conversionUtils'
 import { getDIDValue } from '@/utils/didUtils'
 import { getRealEstateType } from '@/utils/estateTransferUtil'
 import * as d from '@components/MyContractpage/style/ContractDetailCardStyle'
@@ -69,14 +73,18 @@ const ContractDetailCard = (props: PropType) => {
           <div className="did">{getDIDValue(contractInfo.tenantDID)}</div>
         </d.InfoContainer>
         <d.InfoContainer>
-          <div className="title">임대기간</div>
-          <div className="detail">{contractInfo.leasePeriod} 년</div>
+          <div className="title">계약타입</div>
+          <div className="detail">전세</div>
         </d.InfoContainer>
         <d.InfoContainer>
-          <div className="title">보증금 및 월세</div>
+          <div className="title">임대기간</div>
+          <div className="detail">{contractInfo.leasePeriod} 개월</div>
+        </d.InfoContainer>
+        <d.InfoContainer>
+          <div className="title">보증금</div>
           <div className="detail">
             {' '}
-            {convertBigNumber(contractInfo.deposit._hex)}{' '}
+            {convertKlayToKRW(convertBigNumber(contractInfo.deposit._hex))}{' '}
           </div>
         </d.InfoContainer>
         <d.InfoContainer>
