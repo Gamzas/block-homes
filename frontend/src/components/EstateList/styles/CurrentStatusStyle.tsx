@@ -41,7 +41,7 @@ export const EstateStatusButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 14rem;
+  width: auto;
   height: 100%;
   position: absolute;
   right: 3.2rem;
@@ -79,7 +79,6 @@ export const EstateStatusButtonContainer = styled.div`
 
 export const EstateStatusButton = styled.button<ColorProps>`
   height: 60%;
-  width: 100%;
   padding: 0.5rem 1rem;
   margin: 0.2rem;
   border-radius: 3rem;
@@ -90,6 +89,7 @@ export const EstateStatusButton = styled.button<ColorProps>`
   color: ${props => (props.$active ? 'white' : props.$color)};
   background-color: ${props => (props.$active ? props.$color : 'white')};
   cursor: pointer;
+  white-space: nowrap;
   &:hover {
     /* background-color: ${props => props.$color}; */
     border-color: ${props => props.$color};
