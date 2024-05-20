@@ -11,7 +11,7 @@ export const ChattingRoomPageContainer = styled.div`
 `
 
 export const ChattingHeaderWrapper = styled.div`
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
