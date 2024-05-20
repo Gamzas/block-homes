@@ -2,13 +2,6 @@ import styled from 'styled-components'
 
 export const ChattingRoomPageContainer = styled.div`
     max-width: 390px;
-    height: fit-content;
-    width: 100%;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-`
-export const ChattingRoomPageWrapper = styled.div`
     padding-bottom: 60px;
     padding-top: 50px;
     display: flex;
@@ -16,6 +9,7 @@ export const ChattingRoomPageWrapper = styled.div`
     overflow: hidden;
     position: relative;
 `
+
 export const ChattingHeaderWrapper = styled.div`
     position: absolute;
     top: 0;
