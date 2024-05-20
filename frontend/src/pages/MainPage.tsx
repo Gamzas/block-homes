@@ -4,11 +4,7 @@ import TopCard from '@components/MainPage/TopCard'
 import RealEstateCategory from '@components/MainPage/RealEstateCategory'
 import UserTypeToggle from '@common/UserTypeToggle'
 import { useAtom } from 'jotai'
-import {
-  isFirstOpenAtom,
-  userAtom,
-  userTypeAtom,
-} from '@stores/atoms/userStore'
+import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
 import OwnEstateDidList from '@components/MainPage/OwnEstateDidList'
 import InfoCardSlider from '@components/MainPage/InfoCardSlider'
 import { useEffect } from 'react'
@@ -18,11 +14,9 @@ const MainPage = () => {
   const navigate = useNavigate()
   const [currentUserType, setCurrentUserType] = useAtom(userTypeAtom)
   const [currentUser, setCurrentUser] = useAtom(userAtom)
-  const [isFirstOpen, setIsFirstOpen] = useAtom(isFirstOpenAtom)
 
   useEffect(() => {
-    if (currentUser.name === '' && isFirstOpen.isFirstOpen) navigate('/intro')
-    setIsFirstOpen({ isFirstOpen: false })
+    if (currentUser.name === '') navigate('/intro')
   }, [])
   return (
     <h.MainPageContainer>
