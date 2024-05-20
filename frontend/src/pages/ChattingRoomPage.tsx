@@ -3,13 +3,7 @@ import Header from '@common/Header'
 import SendMessageInput from '@components/ChattingPage/SendMessageInput'
 import { useEffect, useRef, useState } from 'react'
 import { useAtom } from 'jotai'
-import {
-  buyerStepAtom,
-  sellerStepAtom,
-  userAtom,
-  userModeAtom,
-  userStepAtom,
-} from '@stores/atoms/userStore'
+import { buyerStepAtom, sellerStepAtom, userAtom, userModeAtom, userStepAtom } from '@stores/atoms/userStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
@@ -18,11 +12,7 @@ import MessageItem from '@components/ChattingPage/MessageItem'
 import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
 import { MessageType } from '@/types/components/chatType'
-import {
-  chatRoomNoAtom,
-  isGoNextStepAtom,
-  provisionIsCancelAtomFamily,
-} from '@stores/atoms/chat'
+import { chatRoomNoAtom, isGoNextStepAtom, provisionIsCancelAtomFamily } from '@stores/atoms/chat'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
@@ -37,6 +27,7 @@ const ChattingRoomPage = () => {
   const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const [userStep, setUserStep] = useAtom(userStepAtom)
   const [isCancel] = useAtom(provisionIsCancelAtomFamily(Number(chatRoomNo)))
+  const [viewportHeight, setViewportHeight] = useState(window.visualViewport.height)
 
   const setUserStepAsync = step => {
     return new Promise(resolve => {
@@ -263,9 +254,19 @@ const ChattingRoomPage = () => {
       setIsGoNextStep(false)
     }
   }, [isGoNextStep])
+  
+  useEffect(() => {
+    const updateViewportHeight = () => setViewportHeight(window.visualViewport.height)
+    window.visualViewport.addEventListener('resize', updateViewportHeight)
+    window.visualViewport.addEventListener('scroll', updateViewportHeight)
+    return () => {
+      window.visualViewport.removeEventListener('resize', updateViewportHeight)
+      window.visualViewport.removeEventListener('scroll', updateViewportHeight)
+    }
+  }, [])
 
   return (
-    <c.ChattingRoomPageContainer>
+    <c.ChattingRoomPageContainer style={{ height: viewportHeight }}>
       <c.ChattingHeaderWrapper>
         <Header title="채팅" isSearch={false} rightIconSrc="" />
         <c.ChattingHeader>
