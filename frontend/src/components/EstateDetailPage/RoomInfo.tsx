@@ -31,8 +31,20 @@ const RoomInfo = (props: PropsType) => {
           : '단독',
     },
     { icon: 'elevator', info: info.haveElevator ? '있음' : '없음' },
-    { icon: 'contract', info: `계약기간  ${info.contractMonths} 개월` },
-    { icon: 'parking', info: `주차대수  ${info.parkingRate} 대` },
+    {
+      icon: 'contract',
+      info:
+        info.transactionType === 3
+          ? `계약기간  ${info.contractMonths} 개월`
+          : '매매',
+    },
+    {
+      icon: 'parking',
+      info:
+        info.parkingRate === 0
+          ? '주차불가'
+          : `주차대수  ${info.parkingRate} 대`,
+    },
     {
       icon: 'house',
       info: `
