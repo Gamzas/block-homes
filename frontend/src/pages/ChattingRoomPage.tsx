@@ -245,17 +245,6 @@ const ChattingRoomPage = () => {
   }
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
-
-  useEffect(() => {
-    if (isGoNextStep) {
-      setTimeout(sendInfoMessage, 1000)
-      setIsGoNextStep(false)
-    }
-  }, [isGoNextStep])
-
-  useEffect(() => {
     const handleResizeAndScroll = () => {
       setViewportHeight(window.visualViewport.height)
       window.scrollTo(0, 0)
@@ -264,9 +253,25 @@ const ChattingRoomPage = () => {
     window.visualViewport.addEventListener('resize', handleResizeAndScroll)
     window.visualViewport.addEventListener('scroll', handleResizeAndScroll)
 
+    // Prevent scroll by CSS
+    document.body.style.overflow = 'hidden'
+
+    // Prevent scroll by JavaScript
+    const preventScroll = e => {
+      e.preventDefault()
+      e.stopPropagation()
+      return false
+    }
+
+    window.addEventListener('scroll', preventScroll, { passive: false })
+    window.addEventListener('touchmove', preventScroll, { passive: false })
+
     return () => {
       window.visualViewport.removeEventListener('resize', handleResizeAndScroll)
       window.visualViewport.removeEventListener('scroll', handleResizeAndScroll)
+      document.body.style.overflow = 'auto'
+      window.removeEventListener('scroll', preventScroll)
+      window.removeEventListener('touchmove', preventScroll)
     }
   }, [])
 
