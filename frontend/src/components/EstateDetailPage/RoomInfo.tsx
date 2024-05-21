@@ -11,10 +11,18 @@ interface PropsType {
 const RoomInfo = (props: PropsType) => {
   const { latitude, longitude } = props.info
   const info = props.info
+  console.log(info)
+  function removeTAndTime(dateTime: string): string {
+    const indexOfT = dateTime.indexOf('T')
+    if (indexOfT !== -1) {
+      return dateTime.substring(0, indexOfT)
+    }
+    return dateTime
+  }
   const infoItems = [
     { icon: 'count', info: getRealEstateType(info.realEstateType) },
     { icon: 'area', info: `방 ${info.roomNumber} 화 ${info.toiletNumber}` },
-    { icon: 'detail', info: `${info.area}m2` },
+    { icon: 'detail', info: `${info.area}m2 (${info.pyeong} 평)` },
     {
       icon: 'floor',
       info:
@@ -22,6 +30,28 @@ const RoomInfo = (props: PropsType) => {
           ? `${info.itemFloor} 층 / ${info.buildingFloor} 층`
           : '단독',
     },
+    { icon: 'elevator', info: info.haveElevator ? '있음' : '없음' },
+    {
+      icon: 'contract',
+      info:
+        info.transactionType === 3
+          ? `계약기간  ${info.contractMonths} 개월`
+          : '매매',
+    },
+    {
+      icon: 'parking',
+      info:
+        info.parkingRate === 0
+          ? '주차불가'
+          : `주차대수  ${info.parkingRate} 대`,
+    },
+    {
+      icon: 'house',
+      info: `
+      입주가능일 \n 
+      ${removeTAndTime(info.moveInDate)}`,
+    },
+
     // {
     //   icon: 'detail',
     //   info: `관리비 ${numberToMoney(info.administrationCost)}`,
@@ -91,26 +121,30 @@ const RoomInfo = (props: PropsType) => {
           )}
         </r.AdditionalContainer>
       </r.AdditionalWrapper>
-      <r.TitleContainer>
-        <div className="title">관리비 항목</div>
-        <hr className="underline" />
-      </r.TitleContainer>
-      <r.AdditionalWrapper>
-        <r.AdminFeeContainer>
-          {info.itemAdministrationFeeList.map((item, index) => (
-            <div className="info-box" key={index}>
-              <img
-                className="icon"
-                src={`/icon/icon_room_info_fee_${adminFeeInfo[item - 1].icon}.png`}
-                alt=""
-              />
-              <div className="name" key={index}>
-                {adminFeeInfo[item - 1].name}
-              </div>
-            </div>
-          ))}
-        </r.AdminFeeContainer>
-      </r.AdditionalWrapper>
+      {info.administrationCost !== 0 && (
+        <>
+          <r.TitleContainer>
+            <div className="title">관리비 항목</div>
+            <hr className="underline" />
+          </r.TitleContainer>
+          <r.AdditionalWrapper>
+            <r.AdminFeeContainer>
+              {info.itemAdministrationFeeList.map((item, index) => (
+                <div className="info-box" key={index}>
+                  <img
+                    className="icon"
+                    src={`/icon/icon_room_info_fee_${adminFeeInfo[item - 1].icon}.png`}
+                    alt=""
+                  />
+                  <div className="name" key={index}>
+                    {adminFeeInfo[item - 1].name}
+                  </div>
+                </div>
+              ))}
+            </r.AdminFeeContainer>
+          </r.AdditionalWrapper>
+        </>
+      )}
       <r.TitleContainer>
         <div className="title">상세 설명</div>
         <hr className="underline" />

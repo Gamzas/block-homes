@@ -9,8 +9,8 @@ const ClaimCredential = () => {
   const handleClaimCredentialButtonClick = async () => {
     const provider = new ethers.providers.JsonRpcProvider(BLOCK_CHAIN_ENDPOINT)
     const MOLITWallet = new ethers.Wallet(MOLIT_PRIVATE_KEY, provider)
-    const subject = 'did:klay:0x68Bdec4DA58ab08cFb72c815Fe695FABac8F2588'
-    const value = 'did:klay:0x0a750ee0800feb821b3e1cd8b9174bc736b65329'
+    const subject = 'did:klay:0x54062c97Fc04FbcA1b33b8A4194DAe5703040c63'
+    const value = 'did:klay:0x2051df4bb5b096d68C68647138250dC64A21D6d4'
     const message = ethers.utils.solidityKeccak256(
       ['string', 'uint256', 'string'],
       [subject, Math.floor(Date.now() / 1000), value],

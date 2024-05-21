@@ -91,15 +91,9 @@ contract LongTermRent {
         landlordAddress.transfer(msg.value);
     }
 
-    // 임대인이 보증금을 컨트랙트에 입금
-    function returnDeposit() public payable {
-        require(msg.sender == landlordAddress, "Only the landlord can deposit.");
-        require(msg.value >= rentalContract.contractInfo.deposit, "Insufficient funds to cover the deposit.");
-    }
-
-    // 임차인이 보증금을 인출
-    function withdrawDeposit() public {
-        require(msg.sender == tenantAddress, "Only the tenant can withdraw the deposit.");
+    // 계약기간이 끝났을 때 보증금 반환
+    function withdrawDeposit() public payable {
+        require(msg.sender == landlordAddress, "You are not the landlord");
         tenantAddress.transfer(address(this).balance);
     }
 

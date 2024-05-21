@@ -1,10 +1,14 @@
 import TextWithBold from '@/hooks/useTextBold'
 import * as p from './style/ProcessDetailStyle'
 import { CustomButtonStyle } from '@common/style/CustomButtonStyle'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SpecialContract from '@components/TransactionPage/SpecialContract'
 import { useAtom } from 'jotai/index'
-import { isGoNextStepAtom, chatRoomNoAtom } from '@stores/atoms/chat'
+import {
+  chatRoomNoAtom,
+  isGoNextStepAtom,
+  provisionIsCancelAtomFamily,
+} from '@stores/atoms/chat'
 import { useNavigate } from 'react-router-dom'
 import { userModeAtom, userStepAtom } from '@stores/atoms/userStore'
 
@@ -16,7 +20,7 @@ interface ProcessDetailProps {
 }
 
 const ProcessDetail = (props: ProcessDetailProps) => {
-  const [chatRoomNum, setChatRoomNum] = useAtom(chatRoomNoAtom)
+  const [chatRoomNum] = useAtom(chatRoomNoAtom)
   const navigate = useNavigate()
   const [isSpecialOpen, setIsSpecialOpen] = useState(false)
   const [, setIsGoNextStep] = useAtom(isGoNextStepAtom)
@@ -24,14 +28,17 @@ const ProcessDetail = (props: ProcessDetailProps) => {
   // const [buyerStep] = useAtom(buyerStepAtom)
   const [userMode] = useAtom(userModeAtom)
   const [userStep] = useAtom(userStepAtom)
+  const [isCancel] = useAtom(provisionIsCancelAtomFamily(chatRoomNum))
+
   console.log(userStep)
 
-  useEffect(() => {
-    console.log(userStep)
-  }, [])
-
   const handleCloseModal = () => {
-    setIsGoNextStep(true)
+    console.log(isCancel)
+    if (!isCancel) {
+      setIsGoNextStep(true)
+    } else {
+      setIsGoNextStep(false)
+    }
     setIsSpecialOpen(false)
     navigate(-1)
   }

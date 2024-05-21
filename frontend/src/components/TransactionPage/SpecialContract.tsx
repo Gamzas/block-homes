@@ -5,7 +5,11 @@ import { CustomButtonStyle } from '@/common/style/CustomButtonStyle'
 import ContractDetail from './ContractDetail'
 import { fetchProvision } from '@apis/chatApi'
 import { useAtom } from 'jotai/index'
-import { chatRoomNoAtom, provisionsAtom } from '@stores/atoms/chat'
+import {
+  chatRoomNoAtom,
+  provisionIsCancelAtomFamily,
+  provisionsAtomFamily,
+} from '@stores/atoms/chat'
 import { publicRequest } from '@hooks/requestMethods'
 import { userAtom } from '@stores/atoms/userStore'
 
@@ -18,14 +22,20 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
   open,
   handleClose,
 }) => {
-  const [provisions, setProvisions] = useAtom(provisionsAtom)
   const [chatRoomNo] = useAtom(chatRoomNoAtom)
+  const [provisions, setProvisions] = useAtom(
+    provisionsAtomFamily(Number(chatRoomNo)),
+  )
   const [user] = useAtom(userAtom)
+  const [, setIsCancel] = useAtom(
+    provisionIsCancelAtomFamily(Number(chatRoomNo)),
+  )
 
   useEffect(() => {
-    if (open) {
-      fetchProvision(chatRoomNo)
+    if (open && Number(chatRoomNo) !== 0) {
+      fetchProvision(Number(chatRoomNo))
         .then(data => {
+          console.log(data)
           console.log(data.specialPreovisionList)
           if (data) {
             const newProvisions = [...provisions]
@@ -34,6 +44,7 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
                 newProvisions[index - 1] = true
               }
             })
+            console.log(newProvisions)
             setProvisions(newProvisions)
           }
         })
@@ -44,11 +55,12 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
   }, [open, chatRoomNo])
 
   const handleSubmit = () => {
+    console.log(provisions)
     const selectedIndices = provisions
       .map((value, index) => (value ? index + 1 : null))
       .filter(index => index !== null)
 
-    console.log(selectedIndices)
+    console.log(chatRoomNo)
 
     const postProvisionProps = {
       chatRoomNo: chatRoomNo,
@@ -63,6 +75,11 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
       .catch(error => {
         console.error('Error posting provisions:', error)
       })
+  }
+
+  const handleCancel = () => {
+    setIsCancel(true)
+    handleClose()
   }
 
   return (
@@ -135,7 +152,7 @@ const SpecialContract: React.FC<SpecialContractProps> = ({
                 width: '14rem',
                 marginBottom: '0.6rem',
               }}
-              onClick={handleClose}
+              onClick={handleCancel}
             >
               취소
             </CustomButtonStyle>

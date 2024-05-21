@@ -50,7 +50,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
     @Override
     public List<ListItemInstance> listItemsByLikes(GetLikeItemsReq req) {
         return getItemWalletLikeQuery()
-            .where(qWallet.walletAddress.eq(req.getUserAddress()))
+            .where(qWallet.walletAddress.eq(req.getUserAddress())
+                .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
             .fetch();
     }
 
@@ -77,7 +78,8 @@ public class ItemRepositoryImpl extends QuerydslRepositorySupport implements Ite
                     qItem.latitude,
                     qItem.longitude,
                     qImage.imageUrl))
-            .where(qWallet.walletAddress.eq(req.getOwnerWallet()))
+            .where(qWallet.walletAddress.eq(req.getOwnerWallet())
+                .and(qItemImage.itemImageCategory.eq(ItemImageCategory.MAIN)))
             .fetch();
     }
 
