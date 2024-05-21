@@ -198,6 +198,7 @@ const ChattingRoomPage = () => {
         }),
       })
       setNewMessage(defaultMessage)
+      scrollToBottom()
     }
   }
 
@@ -238,6 +239,7 @@ const ChattingRoomPage = () => {
       } else {
         setBuyerStep(buyerStep + 2)
       }
+      scrollToBottom()
     }
   }
 
