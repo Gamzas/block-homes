@@ -174,13 +174,6 @@ const ChattingRoomPage = () => {
   useEffect(() => {
     if (data?.chatList.length > 0) {
       setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
-      // if (lastStep !== 0 && lastStep % 2 === 0) {
-      //   setSellerStep(lastStep + 1)
-      //   setBuyerStep(lastStep + 2)
-      // } else if (lastStep !== 0 && lastStep % 2 === 1) {
-      //   setSellerStep(lastStep + 2)
-      //   setBuyerStep(lastStep + 1)
-      // }
     }
   }, [data, messages])
 
@@ -196,7 +189,6 @@ const ChattingRoomPage = () => {
         }),
       })
       setNewMessage(defaultMessage)
-      scrollToBottom()
     }
   }
 
@@ -237,7 +229,6 @@ const ChattingRoomPage = () => {
       } else {
         setBuyerStep(buyerStep + 2)
       }
-      scrollToBottom()
     }
   }
 
@@ -297,7 +288,10 @@ const ChattingRoomPage = () => {
         ))}
       </c.MessageListContainer>
       <SendMessageInput
-        sendButtonClick={sendTextMessage}
+        sendButtonClick={() => {
+          sendTextMessage()
+          scrollToBottom()
+        }}
         message={newMessage.message}
         onChange={e =>
           setNewMessage(prev => ({ ...prev, message: e.target.value }))
