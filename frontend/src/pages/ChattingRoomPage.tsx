@@ -198,7 +198,6 @@ const ChattingRoomPage = () => {
         }),
       })
       setNewMessage(defaultMessage)
-      scrollToBottom()
     }
   }
 
@@ -239,7 +238,6 @@ const ChattingRoomPage = () => {
       } else {
         setBuyerStep(buyerStep + 2)
       }
-      scrollToBottom()
     }
   }
 
@@ -305,7 +303,10 @@ const ChattingRoomPage = () => {
         </c.MessageListContainer>
       </c.MessageListScrollWrapper>
       <SendMessageInput
-        sendButtonClick={sendTextMessage}
+        sendButtonClick={() => {
+          sendTextMessage()
+          scrollToBottom()
+        }}
         message={newMessage.message}
         onChange={e =>
           setNewMessage(prev => ({ ...prev, message: e.target.value }))
