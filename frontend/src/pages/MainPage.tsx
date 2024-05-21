@@ -8,19 +8,15 @@ import { userAtom, userTypeAtom } from '@stores/atoms/userStore'
 import OwnEstateDidList from '@components/MainPage/OwnEstateDidList'
 import InfoCardSlider from '@components/MainPage/InfoCardSlider'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const MainPage = () => {
+  const navigate = useNavigate()
   const [currentUserType, setCurrentUserType] = useAtom(userTypeAtom)
   const [currentUser, setCurrentUser] = useAtom(userAtom)
 
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser')
-    const currentUserData = currentUser ? JSON.parse(currentUser) : null
-    if (currentUserData && !currentUser) {
-      setCurrentUser(currentUserData)
-    } else if (!currentUserData && currentUser) {
-      localStorage.setItem('currentUser', JSON.stringify(currentUser))
-    }
+    if (currentUser.name === '') navigate('/intro')
   }, [])
   return (
     <h.MainPageContainer>

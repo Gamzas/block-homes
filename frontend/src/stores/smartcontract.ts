@@ -1,5 +1,5 @@
+import { WalletData } from '@/types/components/estateContractType'
 import { atom } from 'jotai'
-import { WalletData } from '@/types/components/contractType'
 
 export const contractStepAtom = atom<number>(0)
 

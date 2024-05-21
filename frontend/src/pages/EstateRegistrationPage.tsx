@@ -71,11 +71,15 @@ const EstateRegistrationPage = () => {
     setIsOpenArray(newIsOpenArray)
   }
   const handleFormSubmit = () => {
+    const newPrice = { value: detailRegistrationProps.price }
+    if (detailRegistrationProps.transactionType !== 0 && newPrice.value > 999)
+      newPrice.value = Math.round(detailRegistrationProps.price / 1000)
     const formData = new FormData()
     const reqData = {
       ...postParams,
       ...detailRegistrationProps,
       ...detailEstateProps,
+      price: newPrice.value,
       roadNameAddress: checkEstateProps.roadNameAddress,
       realEstateType: checkEstateProps.realEstateType,
       area: checkEstateProps.area,
@@ -142,9 +146,9 @@ const EstateRegistrationPage = () => {
   }
 
   const getStatusMessage = steps => {
-    if (steps <= 2) return 3
-    if (steps <= 4) return 2
-    return 1
+    if (steps <= 0) return 1
+    if (steps <= 2) return 2
+    return 3
   }
 
   useEffect(() => {
@@ -166,7 +170,7 @@ const EstateRegistrationPage = () => {
         if (realEstateInfoData.purpose !== '주거용') dangerCount.value += 1
         setPostParams(currentParams => ({
           ...currentParams,
-          reportRank: getStatusMessage(dangerCount),
+          reportRank: getStatusMessage(dangerCount.value),
         }))
       })
       setCheckEstateProps({
@@ -176,10 +180,15 @@ const EstateRegistrationPage = () => {
         date: realEstateInfoData.date,
         name: userInfo.name,
       })
-      setIsNoData(isDataFilled(checkEstateProps))
+      if (isNoData) {
+        setIsNoData(isDataFilled(checkEstateProps))
+      }
     }
   }, [realEstateInfoData, userInfo, realEstateDID])
 
+  useEffect(() => {
+    console.log(isNoData)
+  }, [isNoData])
   return (
     <r.EstateRegistrationPageContainer>
       {!isNoData && (

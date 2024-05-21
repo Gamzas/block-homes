@@ -1,50 +1,32 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Lottie from 'react-lottie'
-import {
-  IntroCanvasWrapper,
-  IntroContainer,
-  IntroHeader,
-} from '@components/IntroPage/style/IntroStyle'
+import { IntroCanvasWrapper, IntroContainer, IntroHeader } from '@components/IntroPage/style/IntroStyle'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
 import ThreeRotate from '@assets/lotties/3DRotate.json'
 import CandyCaneLoader from '@assets/lotties/CandyCaneLoader.json'
 
 const Model = ({
-  url,
-  scale,
-  isUserInteracting,
-  modelRef,
-  setLoading,
-}: {
+                 url,
+                 scale,
+                 isUserInteracting,
+                 modelRef,
+                 setLoading,
+                 index,
+               }: {
   url: string
   scale?: [number, number, number]
   isUserInteracting: boolean
   modelRef: React.RefObject<any>
-  setLoading: (loading: boolean) => void
+  setLoading: (loading: number) => void
+  index: number
 }) => {
   const { scene } = useGLTF(url, true, undefined, loader => {
-    loader.manager.onStart = () => setLoading(true)
-    loader.manager.onLoad = () => setLoading(false)
+    loader.manager.onLoad = () => setLoading(index + 1)
   })
-  const currentFrame = {
-    frameCount: 0,
-  }
   useFrame(() => {
     if (modelRef.current && !isUserInteracting) {
-      const rotationInDegrees = Math.round(
-        THREE.MathUtils.radToDeg(modelRef.current.rotation.y),
-      )
-      if (rotationInDegrees % 45 !== 0) {
-        modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
-      } else {
-        currentFrame.frameCount += 1
-        if (currentFrame.frameCount > 60) {
-          currentFrame.frameCount = 0
-          modelRef.current.rotation.y += 0.02
-        }
-      }
+      modelRef.current.rotation.y += 0.004 // x축을 기준으로 회전
     }
   })
 
@@ -71,21 +53,28 @@ const Controls = ({ setIsUserInteracting, controlsRef }) => {
 }
 
 const Intro = () => {
+  const models = [
+    // '/3DIllustrations/Intro_logo.glb',
+    // '/3DIllustrations/Intro_no_pig.glb',
+    'https://blockhomes-bucket.s3.ap-northeast-2.amazonaws.com/assets/Intro.glb',
+  ]
   const [isUserInteracting, setIsUserInteracting] = useState(false)
   const initialRotation: [number, number, number] = [0, 0, 0]
   const modelRef = useRef<any>(null)
   const controlsRef = useRef<any>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(0)
 
   const handleReset = () => {
+    if (!loading) {
+      window.location.reload()
+    }
     if (modelRef.current) {
       modelRef.current.rotation.set(...initialRotation)
     }
     if (controlsRef.current) {
-      controlsRef.current.reset() // OrbitControls의 회전 축을 초기화
+      controlsRef.current.reset()
     }
   }
-
   const headerLottieOptions = {
     loop: true,
     autoplay: true,
@@ -102,11 +91,13 @@ const Intro = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   }
-
+  useEffect(() => {
+    console.log(loading)
+  }, [loading])
   return (
     <IntroContainer>
       <IntroCanvasWrapper>
-        {loading && (
+        {!loading && (
           <div className="three-loading">
             <Lottie
               options={loadingLottieOptions}
@@ -116,16 +107,22 @@ const Intro = () => {
             />
           </div>
         )}
-        <Canvas camera={{ position: [0, 100, 0], fov: 75 }}>
+        <Canvas camera={{ position: [0, 5, 0], fov: 75 }}>
           <ambientLight intensity={2} />
-          <directionalLight position={[1000, 1000, 1000]} intensity={2} />
-          <Model
-            url={'/3DIllustrations/Intro.glb'}
-            scale={[3.5, 3.5, 3.5]}
-            isUserInteracting={isUserInteracting}
-            modelRef={modelRef}
-            setLoading={setLoading}
-          />
+          <directionalLight position={[50, 50, 50]} intensity={2} />
+          {models.map(
+            (model, index) =>
+              (loading === index || loading === index + 1) && (
+                <Model
+                  url={model}
+                  scale={[3.5, 3.5, 3.5]}
+                  isUserInteracting={isUserInteracting}
+                  modelRef={modelRef}
+                  setLoading={setLoading}
+                  index={index}
+                />
+              ),
+          )}
           <Controls
             setIsUserInteracting={setIsUserInteracting}
             controlsRef={controlsRef}

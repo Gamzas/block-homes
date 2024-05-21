@@ -7,7 +7,11 @@ import { useAtom } from 'jotai'
 import { checkChatRoomExistence, createChatRoom } from '@apis/chatApi'
 import { useDeleteFavoriteItem, usePostFavoriteItem } from '@/apis/itemApi'
 import { DetailItemType } from '@/types/components/estateListType'
-import { getTransactionType, numberToMoney } from '@/utils/estateTransferUtil'
+import {
+  getTransactionType,
+  numberToKorean2,
+  numberToMoney,
+} from '@/utils/estateTransferUtil'
 interface PropsType {
   info: DetailItemType
   accessChat: () => boolean
@@ -94,7 +98,11 @@ const DetailFooter = (props: PropsType) => {
       )}
       <f.InfoContainer>
         <div className="price">
-          {getTransactionType(transactionType)} {numberToMoney(price)}&nbsp;
+          {getTransactionType(transactionType)}{' '}
+          {transactionType === 1
+            ? numberToMoney(price)
+            : numberToKorean2(price)}
+          &nbsp;
           <span className="maintenance">
             관리비 {numberToMoney(administrationCost)}
           </span>

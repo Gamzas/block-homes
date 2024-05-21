@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StepContainer = styled.div`
-  width: 390px;
+  width: 23rem;
   height: 90px;
   display: flex;
   align-items: center;
