@@ -93,6 +93,7 @@ const ChattingRoomPage = () => {
                 },
               ])
               setUserStep(receivedMessage.contractStep + 1)
+              scrollToBottom()
             } catch (error) {
               console.error('Error parsing message:', error)
             }
@@ -173,6 +174,13 @@ const ChattingRoomPage = () => {
   useEffect(() => {
     if (data?.chatList.length > 0) {
       setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
+      // if (lastStep !== 0 && lastStep % 2 === 0) {
+      //   setSellerStep(lastStep + 1)
+      //   setBuyerStep(lastStep + 2)
+      // } else if (lastStep !== 0 && lastStep % 2 === 1) {
+      //   setSellerStep(lastStep + 2)
+      //   setBuyerStep(lastStep + 1)
+      // }
     }
   }, [data, messages])
 
@@ -188,6 +196,7 @@ const ChattingRoomPage = () => {
         }),
       })
       setNewMessage(defaultMessage)
+      scrollToBottom()
     }
   }
 
@@ -228,6 +237,7 @@ const ChattingRoomPage = () => {
       } else {
         setBuyerStep(buyerStep + 2)
       }
+      scrollToBottom()
     }
   }
 
