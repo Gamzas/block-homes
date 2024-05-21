@@ -17,24 +17,19 @@ import ContractComplete from '../components/SmartContract/ContractComplete'
 import WaveContainer from '@/common/WaveContainer'
 import { Button, Snackbar } from '@mui/material'
 import CustomModal from '@/common/CustomModal'
-import {
-  deployContract,
-  getContractInstance,
-} from '@/abi/userSmartContract/DeployLongTermRentContract'
+import { deployContract } from '@/abi/userSmartContract/DeployLongTermRentContract'
 import { ethers } from 'ethers'
 import { userAtom } from '@stores/atoms/userStore'
 import { useGetWallet } from '@/apis/walletApi'
 import { BLOCK_CHAIN_ENDPOINT } from '@constants/abi/abi'
 import CustomPasswordModal from '@/components/SmartContract/CustomPasswordModal'
-import { getContractInfo } from '@/abi/userSmartContract/getContractInfo'
 import { useGetDetailItem } from '@/apis/itemApi'
-import { DetailItemType } from '@/types/components/contractType'
+import { DetailItemType } from '@/types/components/estateContractType'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@/apis/chatApi'
 import { convertToDid } from '@/hooks/didMake'
 import {
   fetchTempContractAddress,
-  useRegisterContractAddress,
   useSaveContractAddress,
 } from '@/apis/contractApi'
 import { useParams } from 'react-router-dom'
@@ -42,12 +37,15 @@ import { useParams } from 'react-router-dom'
 const SmartContractPage = () => {
   const setContractMonths = useSetAtom(contractMonthsAtom)
   const setLandLord = useSetAtom(landLordAtom)
+  const tenantData = useAtomValue(tenantAtom)
+  const landLordData = useAtomValue(landLordAtom)
+  console.log(tenantData, landLordData, '데이터체크')
+
   const setTenant = useSetAtom(tenantAtom)
   const [step, setStep] = useAtom(contractStepAtom)
   const [open, setOpen] = useState(false)
 
   const { chatRoomNo } = useParams()
-  // console.log('chatRoomNo', chatRoomNo)
   const chatRoomNumber = Number(chatRoomNo)
 
   //삭제 코드
@@ -57,7 +55,7 @@ const SmartContractPage = () => {
     enabled: !!chatRoomNumber,
   })
 
-  console.log('@@@@@@@@@@@@@@@@@@@@miiii', contractAddress)
+  console.log('contractAddress', contractAddress)
 
   // 비밀번호 오류 컴포넌트
   const [snackbarOpen, setSnackbarOpen] = useState(false)
@@ -110,11 +108,6 @@ const SmartContractPage = () => {
   const [landlordDID2, setLandlordDID2] = useState('')
   const [tenantDID2, setTenantDID2] = useState('')
 
-  // 유저 지갑 주소로 이름 받아서 계약서에 넘기기 필요
-  // const { data: getWalletData } = useGetWallet({
-  //   walletAddress: currentUser.walletAddress,
-  // })
-
   // 해결
   const [contractDate, setContractDate] = useState(formattedToday)
   const [leasePeriod, setLeasePeriod] = useState(0)
@@ -131,6 +124,7 @@ const SmartContractPage = () => {
       setPropertyDID(itemDetails.realEstateDID)
       setEstateInfo(itemDetails)
       setContractMonths(itemDetails.contractMonths)
+      console.log('deposit:', deposit)
     }
   }, [itemDetails])
 
@@ -143,10 +137,9 @@ const SmartContractPage = () => {
 
   // 채팅 방 내용으로 주소 받아오기
   // 계약서 등록
-  // const registerContractAddress = useRegisterContractAddress()
   const registerSaveContractAddress = useSaveContractAddress()
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ['fetchChatRoomDetail', chatRoomNumber],
     queryFn: () => fetchChatRoomDetail(chatRoomNumber),
     enabled: !!chatRoomNumber,
@@ -201,42 +194,11 @@ const SmartContractPage = () => {
     }
   }, [getWalletData3])
 
-  // const dummyData = {
-  //   // 임대인 지갑주소
-  //   landlordDID: '0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
-  //   // 임차인 지갑주소
-  //   tenantDID: '0xa7036441C32731c660ee9a00C4BFFC8578A37533',
-  //   landlordDID2: 'did:klay:0x0655bB0C1A760BbC6bC0970eDe5d9C8f687185f3',
-  //   tenantDID2: 'did:klay:0xa7036441C32731c660ee9a00C4BFFC8578A37533',
-  //   leasePeriod: 12,
-  //   deposit: ethers.utils.parseEther('0.1').toString(), // 1 ETH in wei // 보증금
-  //   propertyDID: 'did:klay:abcdef123456789', // 부동산의 분산식 식별자
-  //   contractDate: formattedToday, // Current Unix timestamp
-  //   terms:
-  //     '잔금일까지 해당 주택에 근저당 추가 설정하지 않는다/계약기간이 만료되면 새 임차인을 구하는 여부와 관계 없이 만료일에 보증금을 반환해준다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다/만기전 퇴거 시 새 임차인의 중개보수를 임차인이 부담한다',
-  // }
-
-  // 계약 시작 날짜를 특정 형식으로 변환
-
-  // console.log('dummyData.tenantDID', dummyData.tenantDID)
-  // console.log('111', contractDate)
-
   console.log('getWalletData2', getWalletData2)
 
   const handlePasswordConfirm = (password: string) => {
     setPassword(password)
     setPasswordModalOpen(false)
-  }
-
-  /// 조회 액션
-  const handlelook = () => {
-    getContractInfo(deploymentInfo)
-      .then(data => {
-        console.log('Fetched Contract Data:', data)
-      })
-      .catch(error => {
-        console.error('Failed to fetch contract data:', error)
-      })
   }
 
   /// 거래시작 시 버튼 누르는 과정이 필요~~
@@ -305,11 +267,6 @@ const SmartContractPage = () => {
       // 계약서 주소 서버에 등록
       console.log(chatRoomNumber, result, '이게들어가유')
 
-      // registerContractAddress.mutate({
-      //   chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
-      //   contractAddress: result,
-      // })
-
       registerSaveContractAddress.mutate({
         chatRoomNo: chatRoomNumber, // 여기에 채팅 방 번호를 사용하세요
         contractAddress: result,
@@ -324,70 +281,6 @@ const SmartContractPage = () => {
       setSnackbarOpen(true)
     }
   }
-
-  // const handleSignAndPayDeposit = async () => {
-  //   if (!password) {
-  //     alert('지갑 정보와 비밀번호를 확인해주세요.')
-  //     return
-  //   }
-  //   try {
-  //     // 1. 지갑에 개인키와 비밀번호 담아서 트랜잭션 서명 때 쓸 지갑 생성(네트워크 서버와 연결)
-  //     const tenantWallet = await ethers.Wallet.fromEncryptedJson(
-  //       getWalletData2.data.encPrivateKey,
-  //       password,
-  //     )
-
-  //     const provider = new ethers.providers.JsonRpcProvider(
-  //       BLOCK_CHAIN_ENDPOINT,
-  //     )
-
-  //     // 지갑을 provider에 연결하여 signer 생성
-  //     const tenantSigner = tenantWallet.connect(provider)
-  //     console.log('11tenantSigner', tenantSigner)
-
-  //     // 2. 스마트 계약 인스턴스 생성(스마트계약 주소 필요)
-  //     const contract = getContractInstance(deploymentInfo, tenantSigner)
-  //     console.log('22contract', contract)
-
-  //     // 메세지 생성 코드작성
-
-  //     const message = ethers.utils.solidityKeccak256(
-  //       ['string', 'string', 'uint16', 'uint256', 'string', 'string', 'string'],
-  //       [
-  //         dummyData.landlordDID2.toLowerCase(),
-  //         dummyData.tenantDID2.toLowerCase(),
-  //         dummyData.leasePeriod, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-  //         dummyData.deposit, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-  //         dummyData.propertyDID.toLowerCase(),
-  //         dummyData.contractDate, // 숫자형 데이터는 toLowerCase() 적용 필요 없음
-  //         dummyData.terms.toLowerCase(),
-  //       ],
-  //     )
-  //     // const userWallet = await ethers.Wallet.fromEncryptedJson(
-  //     //   getWalletData.data.encPrivateKey,
-  //     //   password,
-  //     // )
-  //     const messageBytes = ethers.utils.arrayify(message)
-  //     const signature = await tenantWallet.signMessage(messageBytes)
-  //     const sig = ethers.utils.splitSignature(signature)
-
-  //     // 트랜잭션 같이 보내기 서명과 보증금 보내서~~
-
-  //     const txResponse = await contract.tenantSign(sig.r, sig.s, sig.v, {
-  //       value: ethers.utils.parseEther('0.1'),
-  //     })
-
-  //     // const receipt = await payDepositAndSign(contract, sig, dummyData.deposit)
-  //     const receipt = await txResponse.wait()
-
-  //     console.log('Transaction receipt:', receipt)
-  //     setSnackbarMessage('보증금 지불 및 서명이 성공적으로 처리되었습니다.')
-  //     setSnackbarOpen(true)
-  //   } catch (error) {
-  //     console.error('보증금 지불 및 서명 처리 중 오류 발생:', error)
-  //     alert('보증금 지불 및 서명 처리 중 오류가 발생했습니다.')
-  //   }
-  // }
 
   return (
     <s.ContractContainer>
@@ -406,7 +299,7 @@ const SmartContractPage = () => {
       {step === 3 && (
         <ContractPayment
           handlePayment={handleDeploy}
-          currentUser={currentUser}
+          currentUser={tenantData}
           propertyDID={propertyDID}
           estateInfo={estateInfo}
         />
@@ -414,10 +307,6 @@ const SmartContractPage = () => {
       {step === 4 && <ContractComplete />}
       <Button onClick={handleOpen}></Button>
 
-      <Button onClick={() => setPasswordModalOpen(true)}>Enter Password</Button>
-      <Button onClick={handleDeploy}>Deploy Contract</Button>
-      {/* <Button onClick={handleSignAndPayDeposit}>Pay Deposit</Button> */}
-      <Button onClick={handlelook}>handlelook</Button>
       <CustomModal
         open={open}
         handleClose={handleClose}

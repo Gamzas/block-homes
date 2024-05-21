@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const completePigContainer = styled.div`
-  width: 390px;
+  width: 23rem;
   height: 250px;
   position: relative;
   overflow: hidden;

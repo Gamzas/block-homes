@@ -75,6 +75,7 @@ const useCurrentLocation = () => {
     getAddress(location.latitude, location.longitude)
 
     // Update the address only if the location has changed significantly
+    // 위치가 약 100m 이상 변경되었을 때만 주소를 업데이트
     const distanceChanged = (
       loc1: CoordType,
       loc2: CoordType,

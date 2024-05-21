@@ -6,6 +6,8 @@ import { userStepAtom } from '@stores/atoms/userStore'
 const SellerProcess = () => {
   const [userStep] = useAtom(userStepAtom)
 
+  console.log('userStep', userStep)
+
   return (
     <div>
       <b.BuyerProcessContainer>

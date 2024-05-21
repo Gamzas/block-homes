@@ -3,13 +3,7 @@ import Header from '@common/Header'
 import SendMessageInput from '@components/ChattingPage/SendMessageInput'
 import { useEffect, useRef, useState } from 'react'
 import { useAtom } from 'jotai'
-import {
-  buyerStepAtom,
-  sellerStepAtom,
-  userAtom,
-  userModeAtom,
-  userStepAtom,
-} from '@stores/atoms/userStore'
+import { buyerStepAtom, sellerStepAtom, userAtom, userModeAtom, userStepAtom } from '@stores/atoms/userStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { fetchChatRoomDetail } from '@apis/chatApi'
@@ -18,12 +12,12 @@ import MessageItem from '@components/ChattingPage/MessageItem'
 import { API_BASE_URL } from '@constants/api'
 import SockJS from 'sockjs-client'
 import { MessageType } from '@/types/components/chatType'
-import { chatRoomNoAtom, isGoNextStepAtom } from '@stores/atoms/chat'
+import { chatRoomNoAtom, isGoNextStepAtom, provisionIsCancelAtomFamily } from '@stores/atoms/chat'
 
 const ChattingRoomPage = () => {
   const { chatRoomNo } = useParams()
   const [user] = useAtom(userAtom)
-  const [chatRoomNumber, setChatRoomNumber] = useState(Number(chatRoomNo))
+  const [chatRoomNumber, setChatRoomNumber] = useAtom(chatRoomNoAtom)
   const navigate = useNavigate()
   const [typeOfNumber, setTypeOfNumber] = useState('type')
   const [stringPrice, setStringPrice] = useState('')
@@ -32,7 +26,15 @@ const ChattingRoomPage = () => {
   const [buyerStep, setBuyerStep] = useAtom(buyerStepAtom)
   const [isGoNextStep, setIsGoNextStep] = useAtom(isGoNextStepAtom)
   const [userStep, setUserStep] = useAtom(userStepAtom)
-  const [, setChatRoomNum] = useAtom(chatRoomNoAtom)
+  const [isCancel] = useAtom(provisionIsCancelAtomFamily(Number(chatRoomNo)))
+
+  const setUserStepAsync = step => {
+    return new Promise(resolve => {
+      setUserStep(step)
+      resolve(step)
+      console.log(userStep)
+    })
+  }
 
   const defaultMessage = {
     chatNo: 0,
@@ -69,7 +71,7 @@ const ChattingRoomPage = () => {
         console.log('WebSocket connected')
         client.current.subscribe(
           `/exchange/chat.exchange/*.room.${chatRoomNo}`,
-          msg => {
+          async msg => {
             console.log(
               'Subscribed to topic:',
               `/exchange/chat.exchange/*.room.${chatRoomNo}`,
@@ -92,7 +94,8 @@ const ChattingRoomPage = () => {
                   createdAt: receivedMessage.createdAt,
                 },
               ])
-              setUserStep(receivedMessage.contractStep + 1)
+              await setUserStepAsync(receivedMessage.contractStep + 1)
+              scrollToBottom()
             } catch (error) {
               console.error('Error parsing message:', error)
             }
@@ -167,12 +170,19 @@ const ChattingRoomPage = () => {
       setUserMode(1)
     }
 
-    setChatRoomNum(Number(chatRoomNo))
+    setChatRoomNumber(Number(chatRoomNo))
   }, [data])
 
   useEffect(() => {
     if (data?.chatList.length > 0) {
-      setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
+      // setUserStep(data.chatList[data.chatList.length - 1].contractStep + 1)
+      // if (lastStep !== 0 && lastStep % 2 === 0) {
+      //   setSellerStep(lastStep + 1)
+      //   setBuyerStep(lastStep + 2)
+      // } else if (lastStep !== 0 && lastStep % 2 === 1) {
+      //   setSellerStep(lastStep + 2)
+      //   setBuyerStep(lastStep + 1)
+      // }
     }
   }, [data, messages])
 
@@ -212,7 +222,7 @@ const ChattingRoomPage = () => {
       infoMessage = '거래가 완료되었습니다.'
     }
 
-    if (newMessage) {
+    if (isGoNextStep && !isCancel) {
       client.current.publish({
         destination: `/pub/chat.progress.${chatRoomNo}`,
         body: JSON.stringify({
@@ -244,50 +254,59 @@ const ChattingRoomPage = () => {
 
   return (
     <c.ChattingRoomPageContainer>
-      <Header title="채팅" isSearch={false} rightIconSrc="" />
-      <c.ChattingHeader>
-        <div className="image-container">
-          <img src={data?.representativeImage} alt="매물 이미지" />
-        </div>
-        <c.RightContainer>
-          <div className="address-container">{data?.realEstateAddress}</div>
-          <div className="transaction-price">
-            <div className="transaction-type-container">{typeOfNumber} </div>
-            <div className="price-container">{stringPrice}</div>
+      <c.ChattingHeaderWrapper>
+        <Header title="채팅" isSearch={false} rightIconSrc="" />
+        <c.ChattingHeader>
+          <div className="image-container">
+            <img src={data?.representativeImage} alt="매물 이미지" />
           </div>
+          <c.RightContainer>
+            <div className="address-container">{data?.realEstateAddress}</div>
+            <div className="transaction-price">
+              <div className="transaction-type-container">{typeOfNumber} </div>
+              {/*<div className="price-container">{stringPrice}</div>*/}
+            </div>
 
-          <c.ButtonContainer>
-            <button
-              className="chatting-header-button"
-              onClick={() => navigate(`/report/${data.itemNo}`)}
-            >
-              레포트
-            </button>
-            {userMode === 1 && (
+            <c.ButtonContainer>
               <button
                 className="chatting-header-button"
-                onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
+                onClick={() => navigate(`/report/${data.itemNo}`)}
               >
-                체크리스트
+                레포트
               </button>
-            )}
-            <button
-              className="chatting-header-button"
-              onClick={() => navigate(`/transaction-progress/${data.itemNo}`)}
-            >
-              거래 현황 보러가기
-            </button>
-          </c.ButtonContainer>
-        </c.RightContainer>
-      </c.ChattingHeader>
-      <c.MessageListContainer ref={scrollRef}>
-        {messages?.length === 0 && <div>메세지를 보내 대화를 시작해보세요</div>}
-        {messages?.map(message => (
-          <MessageItem item={message} key={message.chatNo} />
-        ))}
-      </c.MessageListContainer>
+              {userMode === 1 && (
+                <button
+                  className="chatting-header-button"
+                  onClick={() => navigate(`/estate-checklist/${data.itemNo}`)}
+                >
+                  체크리스트
+                </button>
+              )}
+              <button
+                className="chatting-header-button"
+                onClick={() => navigate(`/transaction-progress/${chatRoomNo}`)}
+              >
+                거래 현황 보러가기
+              </button>
+            </c.ButtonContainer>
+          </c.RightContainer>
+        </c.ChattingHeader>
+      </c.ChattingHeaderWrapper>
+      <c.MessageListScrollWrapper>
+        <c.MessageListContainer ref={scrollRef}>
+          {messages?.length === 0 && (
+            <div>메세지를 보내 대화를 시작해보세요</div>
+          )}
+          {messages?.map(message => (
+            <MessageItem item={message} key={message.chatNo} />
+          ))}
+        </c.MessageListContainer>
+      </c.MessageListScrollWrapper>
       <SendMessageInput
-        sendButtonClick={sendTextMessage}
+        sendButtonClick={() => {
+          sendTextMessage()
+          scrollToBottom()
+        }}
         message={newMessage.message}
         onChange={e =>
           setNewMessage(prev => ({ ...prev, message: e.target.value }))

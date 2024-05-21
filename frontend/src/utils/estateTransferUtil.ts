@@ -102,20 +102,32 @@ export const getAdditionalOptionCategory = (type: number): string => {
 }
 
 export const numberToKorean = (num: number): string => {
-  const adjustedNum = num * 10000; // Convert the base unit to 원
+  const adjustedNum = num * 10000 // Convert the base unit to 원
   if (adjustedNum >= 100000000) {
     return (adjustedNum / 100000000).toFixed(1).replace(/\.0$/, '') + '억'
   } else if (adjustedNum >= 10000) {
     return (adjustedNum / 10000).toFixed(1).replace(/\.0$/, '') + '만'
   } else if (adjustedNum >= 1000) {
-    return (adjustedNum / 1000).toFixed(1).replace(/\.0$/, '') 
+    return (adjustedNum / 1000).toFixed(1).replace(/\.0$/, '')
+  } else {
+    return adjustedNum.toString()
+  }
+}
+export const numberToKorean2 = (num: number): string => {
+  const adjustedNum = num * 10000000 // Convert the base unit to 원
+  if (adjustedNum >= 100000000) {
+    return (adjustedNum / 100000000).toFixed(1).replace(/\.0$/, '') + '억'
+  } else if (adjustedNum >= 10000) {
+    return (adjustedNum / 10000).toFixed(1).replace(/\.0$/, '') + '만'
+  } else if (adjustedNum >= 1000) {
+    return (adjustedNum / 1000).toFixed(1).replace(/\.0$/, '')
   } else {
     return adjustedNum.toString()
   }
 }
 
 export const numberToMoney = (num: number): string => {
-  const adjustedNum = num * 10000; // Convert the base unit to 원
+  const adjustedNum = num * 10000 // Convert the base unit to 원
   if (adjustedNum >= 100000000) {
     return (adjustedNum / 100000000).toFixed(1).replace(/\.0$/, '') + '억'
   } else if (adjustedNum >= 10000) {

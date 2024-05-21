@@ -30,9 +30,12 @@ export const TabMenu = styled.div`
 `
 export const Desc = styled.div`
   text-align: center;
+  background-repeat: no-repeat;
+
   .desc-img {
     width: 100%;
     height: 16rem;
+    background-repeat: no-repeat;
   }
 
   .slick-dots {
