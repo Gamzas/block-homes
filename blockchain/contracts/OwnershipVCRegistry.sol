@@ -58,7 +58,7 @@ contract OwnershipVCRegistry is Ownable{
         // ecrecover를 사용하여 서명자 주소 복구
         address recoveredSigner = ecrecover(ethSignedMessageHash, vc.proof.v, vc.proof.r, vc.proof.s);
         return (recoveredSigner==owner());
-    }
+    }s
 
     function getVC(string calldata id) external view returns (Credential memory) {
         return credentials[id];
