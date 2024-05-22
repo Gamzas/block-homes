@@ -1,0 +1,107 @@
+pipeline {
+    agent any // 어떤 노드에서도 실행 가능
+
+    environment {
+        AWS_PUBLIC_IP = '3.34.135.180'
+        SSH_CMD = 'ssh -i /var/jenkins_home/.ssh/id_rsa ubuntu@k10c203.p.ssafy.io -o StrictHostKeyChecking=no' // SSH 명령어 설정
+        DOCKER = 'sudo DOCKER_BUILDKIT=1 docker' // Docker BuildKit을 활성화하여 docker 명령어 설정
+        repository = "sejinnnnnn/blockhomes-frontend" // Docker Hub ID와 Repository 이름
+        repo_name = "blockhomes-frontend"
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-token') // Jenkins에 등록된 Docker Hub 인증 정보
+        dockerImage = '' // 빌드된 도커 이미지를 저장할 변수
+        REPO = "s10-final/S10P31C203"
+    }
+    
+    stages {
+
+        //stage('SonarQube') {
+        //
+        //}
+        
+        stage('Install') {
+            steps {
+                dir('./frontend') {
+                    script {
+                        sh 'cp /home/wallet-private-key/GovernmentPrivateKey.ts ./src/constants/abi'
+                        sh 'npm install' // npm 패키지 설치
+                        sh 'npm run build' // 프론트엔드 빌드 실행
+                    }
+                }
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                script {
+                    dir('./frontend') {
+                        dockerImage = docker.build repository // 도커 이미지 빌드
+                    }
+                }
+            }
+        }
+
+        stage('Login') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+            }
+        }
+
+        stage('Push image') {
+            steps {
+                script {
+                    sh 'docker push $repository' // 빌드된 도커 이미지를 Docker Hub에 푸시
+                }
+            }
+        }
+
+        stage('Clean image') {
+            steps {
+                sh 'docker rmi $repository' // Jenkins 컨테이너에서 도커 이미지 제거
+            }
+        }
+
+
+        stage('Deployment') {
+            steps {
+                script {
+                    try {
+                        sh '$SSH_CMD $DOCKER stop $repo_name' // 기존에 실행 중인 컨테이너 정지
+                        sh '$SSH_CMD $DOCKER rm $repo_name' // 컨테이너 제거
+                        sh "${SSH_CMD} ${DOCKER} rmi \$(docker images | awk '\$1 ~ /${repo_name}/ {print \$3}')"
+                        sh '$SSH_CMD $DOCKER pull $repository:latest' // 최신 도커 이미지 다운로드
+                        sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8090:3000 $repository:latest' // 새 컨테이너 실행
+                    } catch (e) {
+                        echo "Deployment failed with error: ${e.getMessage()}" // 배포 실패 시 에러 메시지 출력
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim() // Git 커밋 작성자 ID 추출
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim() // Git 커밋 작성자 이메일 추출
+                mattermostSend (color: 'good',
+                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)",
+                endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c',
+                channel: 'C203_Jenkins'
+                ) // 빌드 성공 시 Mattermost에 메시지 전송
+            }
+        }
+
+        failure {
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim() // Git 커밋 작성자 ID 추출
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim() // Git 커밋 작성자 이메일 추출
+                mattermostSend (color: 'danger',
+                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)",
+                endpoint: 'https://meeting.ssafy.com/hooks/pmihfakcctb78faaaz4x8jq91c',
+                channel: 'C203_Jenkins'
+                ) // 빌드 실패 시 Mattermost에 메시지 전송
+            }
+        }
+    }
+}
+
