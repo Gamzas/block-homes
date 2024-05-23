@@ -1,4 +1,6 @@
-# 🏠 Block Homes : 분산 원장 기술 (Distributed Ledger Technology) 기반 부동산 P2P 직거래 BApp
+# 🏠 Block Homes
+
+> 분산 원장 기술 (Distributed Ledger Technology) 기반 부동산 P2P 직거래 BApp
 
 메인 사진 넣기
 
