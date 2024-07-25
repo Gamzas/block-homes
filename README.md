@@ -142,7 +142,7 @@
    <img src="assets/main_function_2.gif">
 <br />
 <br />
-   <img src="assets/main_function_3.png">
+   <img src="assets/main_function_3.PNG">
 
 ## ✨ 서비스 화면
 
